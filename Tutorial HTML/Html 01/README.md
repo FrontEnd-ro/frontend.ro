@@ -3,32 +3,38 @@
 
 ![HACKED.io: Hands on FirefoxOS](https://arcturus.github.io/firefoxos-hackedio/img/html5_css_javascript.png)
 
-Orice aplicatie web acesibila intr-un browser foloseste o combinatie de 3 limbaje pentru a ajunge la forma sa finala (HTML + CSS + JavaScript). 
-Pentru a continua ne este indeajuns sa intelegem pe scurt rolul fiecarui limbaj intr-o aplicatie
-Nu ne vom arunca prea mult inca in detalii la acest punct.
+O aplicatie web foloseste o combinatie de cele 3 limbaje pentru a ajunge la forma sa finala (HTML + CSS + JavaScript). 
+Pentru a continua e indeajuns sa intelegem pe scurt rolul fiecarui limbaj intr-o aplicatie
 
-- *Am adaugat un link catre wikipedia cu niste explicatii, pentru cei care doresc insa acest lucru.*
+- *Am adaugat un link catre MDN cu niste explicatii, pentru cei care doresc mai multe detalii.*
 
 #### - HTML ( Hyper text markup language )
-[HTML Wikipedia](https://ro.wikipedia.org/wiki/HyperText_Markup_Language)
+[HTML MDN](https://developer.mozilla.org/en-US/docs/Web/HTML)
 Este folosit pentru a crea pagini web simple ce pot fi afișate într-un browser.
 Scopul HTML este  in general prezentarea informațiilor – paragrafe fonturi, tabele ș.a.m.d si este limitat la acest lucru de unul singur.
 
 #### - CSS ( Cascading Style Sheets )
-[CSS Wikipedia](https://ro.wikipedia.org/wiki/Cascading_Style_Sheets)
- CSS formateaza HTML-ul scris, si cu ajutorul unui set de prorietati se pot pozitiona elemente in pagina, se pot face animatii, ș.a.m.d
+[CSS MDN](https://developer.mozilla.org/en-US/docs/Web/CSS)
+CSS este folosit pentru stilizarea paginilor Web. Este un limbaj extrem de puternic, cu care putem crea niste pagini cu adevarat WOW
 
 #### - JS (JavaScript)
  ##### A nu se confunda cu Java ("Java is to JavaScript what car is to carpet")
 
-[JS Wikipedia](https://ro.wikipedia.org/wiki/JavaScript)
+[JS MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
  Este un limbaj de programare ce poate fi folosit pentru realizarea logicii unei pagini web ( formulare autentificare, ce se intampla cand apesi un buton, ș.a.m.d) precum si diverse aplicatii, jocuri, animatii  ș.a.m.d.
 
-Aceste 3 lucruri combinate pot avea ca rezultat o [aplicatie web](https://ro.wikipedia.org/wiki/Aplica%C8%9Bie_web)
+Aceste 3 lucruri combinate pot avea ca rezultat o [aplicatie web]([https://ro.wikipedia.org/wiki/Aplica%C8%9Bie_web](https://ro.wikipedia.org/wiki/Aplica%C8%9Bie_web))
+
+## Editor de cod
+
+Pe parcursul tutorialului vei avea nevoie de un editor de cod.
+El iti permite sa creezi o structura a fisierelor intrun proiect mai usor si sa editezi fisiere text, pe langa multe alte chestii pe care le poate face cu ajutorul unor pluginuri. (traducere text, encodare, decodare text, formatare cod, etc)
+
+In tutorialul acesta folosim [Visual studio Code](https://code.visualstudio.com/)
 
 ## HTML
 
-O aplicatie web nu poate functiona fara macar o boaba de HTML asa ca vom incepe cu acest lucru.
+O aplicatie web nu poate functiona fara HTML asa ca vom incepe cu acest lucru.
 
 - Sa presupunem ca dorim sa creeam o pagina web care sa contina poezii
 Avem asignata cate o poezie pentru fiecare pagina, si deasemenea dorim sa afisam un tabel cu date despre fiecare poezie pe pagina ei
@@ -37,10 +43,9 @@ Deasemenea vom dori ca aceasta pagina web sa contina o sectiune ce va permite na
 HTML este un limbaj de interpretare.
 Acest lucru ne spune ca HTML e un format de text cu anumite componente ce sunt interpretate de browser pentru a fi afisate in mod corespunzator.
 
-De exemplu ne putem gandi aici la relatia dintre un cititor si un poet.
-Poetul scrie o poezie de sucess cu gandul la dragoste, si fericire, dintr-o experienta trecuta.
-Vine citirorul, se apuca de citit si datorita experientelor sale diferite acesta interpreteaza poezia ca fiind una trista, si o povesteste mai departe ca atare.
-In cazul de fata cititorul nostru este browserul, iar scriitorul fiind cel care creaza o pagina web
+Interpretorul practic traduce codul pe care il scriem noi, in elemente Html.
+De exemplu `<a href='google.ro'>google</a>` va fi interpretat de browser astfel [google](google.ro)
+Cu alte cuvinte un text albastru pe care daca apesi te redirectioneaza la google.ro
 
 Un fisier HTML contine comunica cu browserul prin taguri *(mai corect spus browserul ia aceste taguri si le interpreteaza ca atare)* 
 
@@ -80,6 +85,70 @@ In interiorul acestui tag vom pune de exemplu un paragraf (`<p>paragraf</p>`) cu
     		<p>Hello world !</p>
     	</body>
     </html>
-De aceasta data la deschiderea fisierului in browser vom vedea afisat pe ecram textul `Hello world !`.
-Felicitari  ! Tocmai ati creat prima dumneavoastra pagina web.
+Acum la deschiderea fisierului in browser vom vedea  `Hello world !`.
+Felicitari  ! 
+Tocmai ai creat prima ta pagina web :D 
+
+Acum insa putem vrea ca o portiune a acestui text sa fie **`boldat`**. Pentru asta vom folosi tagul `<b>text</b>`sau daca vrem sa fie *`italic`* vom folosi tagul `<i>text</i>`
+Deci 
+
+     <html>
+    	<body>
+    		<p><i>Hello</i> <b>world</b> !</p>
+    	</body>
+    </html>
+
+Acestea sunt taguri de formatare si aveti aici o lista cu acestea cu care puteti experimenta
+
+-   `<b>`  - Text Bold
+-   `<strong>`  - Important text
+-   `<i>`  - Text italic
+-   `<em>`  - Text accentuat
+-   `<mark>`  - Text marcat
+-   `<small>`  - Text mai mic
+-   `<del>`  - Text sters
+-   `<ins>`  - Text inserat
+-   `<sub>`  - Subscript text
+-   `<sup>`  - Superscript text
+
+O lista mai completa cu toate tagurile HTML si explicatii pentru acestea le gasiti [aici]([http://www.competentedigitale.ro/html/taguri.html](http://www.competentedigitale.ro/html/taguri.html)).
+
+### Rezolvam problema 
+
+*- Sa presupunem ca dorim sa creeam o pagina web care sa contina poezii
+Avem asignata cate o poezie pentru fiecare pagina, si deasemenea dorim sa afisam un tabel cu date despre fiecare poezie pe pagina ei
+Deasemenea vom dori ca aceasta pagina web sa contina o sectiune ce va permite navigarea intre poezii,*
+
+Plecam de la fisierul de baza
+
+     <html>
+    	<body>
+    		<p><i>Hello</i> <b>world</b> !</p>
+    	</body>
+    </html>
+
+Am ales ca poezie pentru prima pagina [Doina]([https://ro.wikisource.org/wiki/Doina_(variant%C4%83_Alecsandri)) de Vasile Alecsandri
+Incepem prin a pune fiecare rand din poezie intrun `paragraf (<p></p>)`
+
+    <p>Doina, doiniţă!</p>
+    <p>De-aş avea o puiculiţă,</p>
+    <p>Cu flori galbene-n cosiţă,</p>
+    <p>Cu flori roşii pe guriţă!</p>
+    
+   IIn momentul asta am terminat de scris o strofa si vrem sa lasam un rand liber pentru o formatare corecta.
+   Pentru asta putem folosi tagul `<br> </br>` ce poate fi scris si de forma `<br />` 
+   Acesta specifica browserului sa sa lase un rand liber pe pozitia sa. (`a break`)
+
+    <p>Doina, doiniţă!</p>
+    <p>De-aş avea o puiculiţă,</p>
+    <p>Cu flori galbene-n cosiţă,</p>
+    <p>Cu flori roşii pe guriţă!</p>
+    <br  />
+    <p>De-aş avea o mândrulică</p>
+    <p>Cu-ochişori de porumbică</p>
+    <p>Şi cu suflet de voinică!</p>
+    <br  />
+    <p>De-aş avea o bălăioară</p>
+    <p>Naltă, veselă, uşoară,</p>
+    <p>Ca un pui de căprioară!</p>
 

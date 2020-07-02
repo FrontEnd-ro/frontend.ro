@@ -10,21 +10,21 @@ Nu ne vom arunca prea mult inca in detalii la acest punct.
 - *Am adaugat un link catre wikipedia cu niste explicatii, pentru cei care doresc insa acest lucru.*
 
 #### - HTML ( Hyper text markup language )
-[HTML Wikipedia]([https://ro.wikipedia.org/wiki/HyperText_Markup_Language](https://ro.wikipedia.org/wiki/HyperText_Markup_Language))
+[HTML Wikipedia](https://ro.wikipedia.org/wiki/HyperText_Markup_Language)
 Este folosit pentru a crea pagini web simple ce pot fi afișate într-un browser.
 Scopul HTML este  in general prezentarea informațiilor – paragrafe fonturi, tabele ș.a.m.d si este limitat la acest lucru de unul singur.
 
 #### - CSS ( Cascading Style Sheets )
-[CSS Wikipedia]([https://ro.wikipedia.org/wiki/Cascading_Style_Sheets](https://ro.wikipedia.org/wiki/Cascading_Style_Sheets))
+[CSS Wikipedia](https://ro.wikipedia.org/wiki/Cascading_Style_Sheets)
  CSS formateaza HTML-ul scris, si cu ajutorul unui set de prorietati se pot pozitiona elemente in pagina, se pot face animatii, ș.a.m.d
 
 #### - JS (JavaScript)
  ##### A nu se confunda cu Java ("Java is to JavaScript what car is to carpet")
 
-[JS Wikipedia]([https://ro.wikipedia.org/wiki/JavaScript](https://ro.wikipedia.org/wiki/JavaScript))
+[JS Wikipedia](https://ro.wikipedia.org/wiki/JavaScript)
  Este un limbaj de programare ce poate fi folosit pentru realizarea logicii unei pagini web ( formulare autentificare, ce se intampla cand apesi un buton, ș.a.m.d) precum si diverse aplicatii, jocuri, animatii  ș.a.m.d.
 
-Aceste 3 lucruri combinate pot avea ca rezultat o [aplicatie web]([https://ro.wikipedia.org/wiki/Aplica%C8%9Bie_web](https://ro.wikipedia.org/wiki/Aplica%C8%9Bie_web))
+Aceste 3 lucruri combinate pot avea ca rezultat o [aplicatie web](https://ro.wikipedia.org/wiki/Aplica%C8%9Bie_web)
 
 ## HTML
 

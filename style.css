@@ -1,0 +1,211 @@
+:root {
+    --white: #fff;
+    --darker-white: #f8f8f8;
+    --black: #1b1b15;
+    --green: #58af58;
+    --grey: #77838b;
+    --silver: #bcc2c6;
+    --yellow: #f7df1e;
+    --red: #eb4d4b;
+    --blue: #2980b9;
+    --react: #61dafb;
+    --purple: #663399;
+    --max-width: 1000px;
+}
+
+body {
+    height: 100vh;
+    font-size: 16px;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+body * {
+    box-sizing: inherit;
+}
+
+blockquote {
+    marin: 0 3em;
+    font-size: 2em;
+    font-style: italic;
+    color: var(--grey);
+    text-align: center;
+}
+
+blockquote::before {
+    content: '"';
+    font-size: 2em;
+    font-style: italic;
+    margin: 0;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    height: calc(100% - 3.3em);
+}
+
+aside {
+    width: 20em;
+    position: relative;
+    background: var(--white);
+}
+
+aside::after {
+    content: "";
+    height: 1em;
+    transform: rotate(-90deg);
+    transform-origin: top right;
+    width: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: 0 center repeat-x
+        url('data:image/svg+xml;utf-8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="9px" height="6px" viewBox="0 0 9 6" enable-background="new 0 0 9 6" xml:space="preserve"><polygon opacity="1" fill="%23BCC2C6" points="4.5,4.5 0,0 0,1.208 4.5,5.708 9,1.208 9,0 "/></svg>');
+}
+
+aside ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+aside li::after {
+    content: "";
+    display: block;
+    width: calc(100% + 0.4em);
+    height: 1em;
+    background: 0 center repeat-x
+        url('data:image/svg+xml;utf-8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="9px" height="6px" viewBox="0 0 9 6" enable-background="new 0 0 9 6" xml:space="preserve"><polygon opacity="1" fill="%23BCC2C6" points="4.5,4.5 0,0 0,1.208 4.5,5.708 9,1.208 9,0 "/></svg>');
+    /* border-bottom: 1px solid var(--silver); */
+}
+
+aside li:hover::after {
+    background: 0 center repeat-x
+        url('data:image/svg+xml;utf-8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="9px" height="6px" viewBox="0 0 9 6" enable-background="new 0 0 9 6" xml:space="preserve"><polygon opacity="1" fill="%232980b9" points="4.5,4.5 0,0 0,1.208 4.5,5.708 9,1.208 9,0 "/></svg>');
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+h1 a {
+    border: none;
+}
+
+aside ul a {
+    padding: 1em;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+aside ul a:hover {
+    color: var(--white);
+    background: var(--blue);
+}
+
+aside ul a:hover::before {
+    color: var(--white);
+}
+
+aside ul a::before {
+    content: "#";
+    color: var(--blue);
+    font-weight: bold;
+    margin-right: 0.5em;
+    font-size: 2em;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+}
+
+main {
+    padding: 2em;
+    height: 100%;
+    overflow: auto;
+    width: calc(100% - 20em);
+}
+
+.main-content {
+    font-size: 1.2em;
+}
+
+footer {
+    position: relative;
+    color: var(--white);
+    background: var(--blue);
+}
+
+.main-content,
+.footer-content {
+    margin: 0 auto;
+    padding: 0 2em;
+    max-width: var(--max-width);
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 900px) {
+    aside {
+        position: absolute;
+        transform: translateX(calc(-100% - 1em));
+    }
+
+    main {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .footer-content {
+        padding-bottom: 0.5em;
+        flex-flow: column nowrap;
+    }
+}
+
+/* Utility classes */
+.text-red {
+    color: var(--red);
+}
+
+.text-2x {
+    font-size: 2em;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.cursive {
+    font-family: "Indie Flower", cursive;
+}
+
+.dots {
+    text-align: center;
+    line-height: 0;
+    margin: 1.5em 0 2em 0;
+    font-size: 4em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.tldr {
+    margin: 0 -2em;
+    padding: 1em;
+    background: #f07a79;
+    color: var(--white);
+}

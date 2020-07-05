@@ -1,51 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Tutoriale FrontEnd </title>
-    <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-        }
-
-        .dots {
-            font-size: 3em;
-            line-height: 0;
-            margin: 1em 0;
-        }
-
-        ul {
-            font-size: 2em;
-            list-style: none;
-        }
-
-        li::before {
-            content: '✅';
-        }
-
-        p {
-            font-size: 1.5em;
-        }
-    </style>
+    <meta name="description"
+        content="Învață bazele FrontEnd-ului alături de o comunitate de developeri dornici sa dea mai departe." />
+    <title> FrontEnd.ro </title>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <h1> OMG, avem domeniul 😍!!!! </h1>
 
-    <div class="dots">...</div>
+    <div class="main-wrapper">
+        <aside>
+            <nav>
+                <h1>
+                    <a href="https://frontend.ro" class="text-center"> FrontEnd.ro </a>
+                </h1>
+                <ul>
+                    <li>
+                        <a href="#learn">Vreau să învăț</a>
+                    </li>
+                    <li>
+                        <a href="#help"> Cum ajut? [în curând] </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <div class="main-content">
+                <section>
+                    <p class="text-2x text-bold"> Hey, </p>
+                    <p>
+                        Eu sunt <a href="https://iampava.com">Păvă</a> și bine ai venit pe <em>FrontEnd.ro</em> . Dacă
+                        ești la început de
+                        drum în programare și cauți resurse de unde să înveți să faci site-uri și aplicatii Web, te
+                        invit
+                        să continui să
+                        citești <a href="#learn">secțiunea de mai jos</a>.
 
-    <h2>Planul pe scurt e sa facem aici cele mai bune tutoriale de front-end pentru absolut incepatori din ROMANIA!
-    </h2>
-    <ul>
-        <li> Open-source</li>
-        <li> Community driven</li>
-    </ul>
-    <div class="dots">...</div>
-    <p> Pana reusesc sa ma organizez si sa dau mai multe detalii, eu sunt Păvă si-mi puteti scrie aici: <a
-            href="mailto:pava@iampava.com">pava@iampava.com</a></p>
-</body>
+                    </p>
+                    <p>
+                        Dacă ești developer, designer sau o companie tech și ai vrea să ajuți acest proiect, te
+                        aștept în secțiunea <a href="#help">Cum ajut?</a>
+                    </p>
+                    <p class="text-2x cursive">
+                        Ne vedem acolo!
+                    </p>
+                </section>
+                <div class="dots"> ... </div>
+                <section id="learn">
+                    <h2>
+                        Vreau sa invăț
+                    </h2>
+                    <p> Super! Ai venit în locul potrivit, doar că puțin cam devreme... </p>
+                    <p>
+                        Planul e să facem din site-ul ăsta cea mai bună resursă de învățat FrontEnd de la zero din
+                        ROMANIA! Nu o să fie ușor și nu o s-o facem peste noapte, dar chiar cred că e posibil și e
+                        nevoie. Visul e ca peste câțiva ani, când cineva va intreba de unde să învețe FrontEnd de la
+                        zero, site-ul ăsta să fie pe buzelor majorității.
+                    </p>
+                    <p>
+                        Tutorialele vor fi despre bazele HTML, CSS și JavaScript. Adică limbajele de care ai nevoie
+                        pentru a crea site-uri și aplicații Web. Nu-ți trebuie deloc experiență, doar puțină pasiune și
+                        determinare. Pasiunea o să mai apară pe parcurs, dar determinarea ne așteptăm să o ai, pentru că
+                        nu o sa-ți dăm chiar <em>mură-în-gură</em>.
+                    </p>
+                    <blockquote>
+                        Lecțiile vor fi puțin diferite, cu mult focus pe exerciții și feedback, pentru că nu contează la
+                        câte tutoriale te uiți ci cât de mult codezi.
+                    </blockquote>
+                    <p>
+                        În lecțiile scrise îți vom explica pe scurt noile concepte, apoi îți vom da linkuri către
+                        resurse externe de unde poți afla mai mult. Fiecare lecție se va termina cu o serie de
+                        exerciții pe care ni le vei trimite iar noi o să-ți dăm feedback pe ele.
+                    </p>
+                    <p>
+                        Deși o să încercăm să le facem cât mai interesante, focusul va fi pe a simula situații reale cu
+                        care te vei confrunta la job. Multe lucruri pe care noi le implementăm zi-de-zi sunt într-adevăr
+                        faine, dar
+                        unele, din păcate. sunt plicticoase. Însă le facem si pe astea... </p>
+                    <p>La fel și tu va trebui să faci
+                        chiar și exercițiile mai puțin interesante. Te rugăm să ai încredere în noi, dacă e pus acolo,
+                        înseamnă că are un rost.
+                    </p>
+                    <p>
+                        De asemenea, e extrem de important să ai răbdare și să rezolvi toate exercițiile până la capăt.
+                        S-ar putea
+                        ca feedback-ul nostru sa nu fie din prima pozitiv, să te rugăm să schimbi câteva lucruri. Apoi
+                        să-l trimiți din nou și iar să nu fie 100% bine. E perfect normal. Ai răbdare și încredere în
+                        proces, iar până la final nu o să-ți vină să crezi cât de multe lucruri ai învățat.
+                    </p>
+
+                    <p>Bun, astea fiind zise mai rămân două lucruri de adresat: </p>
+
+                    <ul>
+                        <li>
+                            <p> De ce vorbesc la plural?</p>
+                            <p> Ei bine, pentru că-mi doresc ca acest site să fie un efort de
+                                comunitate, cu mulți developeri de peste tot care să contribuie cu lecții, dar și mai
+                                important cu feedback vouă, participanților. Codul împreună cu exercițiile este și va
+                                rămâne open-source <a href="https://github.com/iampava/frontend.ro">pe GitHub</a>.
+                            </p>
+                        </li>
+                        <li>
+                            <p> Când va fi live? </p>
+                            <p> Îmi doresc cât mai repede, însă realist vorbind cred că o să mai dureze câteva luni. O
+                                să mergem <em>start-up style</em>, adică o să lansăm mai întâi un MVP cu 10 tutoriale
+                                pentru
+                                HTML ca să
+                                luăm feedback de la voi despre lecții, exerciții si proces. Apoi ne ajustăm și
+                                continuăm cu celelalte. </p>
+                        </li>
+                    </ul>
+
+                    <p>
+                        Great! Păi mai rămâne să te rugăm să le spui și prietenilor despre asta și ne vedem cât mai
+                        curând.
+                        Spor! </p>
+                    <p class="tldr">
+                        <span class="text-bold"> TL;DR: </span>
+                        bazele HTML, CSS și JavaScript. Focus pe exerciții și feedback de la comunitate. Hope you're
+                        excited. We are! 🔥
+                    </p>
+                </section>
+                <section id="help">
+                    <h2> Cum ajut? </h2>
+                    <p>
+                        [ În curând ]
+                    </p>
+                </section>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p> Made with <span class="text-red">❤</span> by the community</p>
+            <a href="https://github.com/iampava/frontend.ro"> Source on GitHub </a>
+        </div>
+    </footer>
 
 </html>

@@ -14,7 +14,6 @@
 }
 
 body {
-    height: 100vh;
     font-size: 16px;
     margin: 0;
     box-sizing: border-box;
@@ -27,7 +26,7 @@ body * {
 }
 
 blockquote {
-    marin: 0 3em;
+    margin: 0 3em;
     font-size: 2em;
     font-style: italic;
     color: var(--grey);
@@ -41,15 +40,9 @@ blockquote::before {
     margin: 0;
 }
 
-.main-wrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    height: calc(100% - 3.3em);
-}
-
 aside {
     width: 20em;
-    position: relative;
+    position: fixed;
     background: var(--white);
 }
 
@@ -126,9 +119,13 @@ a {
     border-bottom: 1px solid currentColor;
 }
 
+p {
+    font-size: 1em;
+}
+
 main {
-    padding: 2em;
     height: 100%;
+    margin-left: 20em;
     overflow: auto;
     width: calc(100% - 20em);
 }
@@ -157,6 +154,40 @@ footer {
     justify-content: space-between;
 }
 
+form {
+    margin: 0 -2em;
+    color: var(--white);
+    padding: 0.75em 1em;
+    border-radius: 0.5em;
+    background: var(--blue);
+}
+form > div {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+label {
+    display: block;
+    width: 40%;
+}
+
+label span {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.25em;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5em;
+}
+
+form button {
+    margin-top: 1em;
+}
+
 @media screen and (max-width: 900px) {
     aside {
         position: absolute;
@@ -165,6 +196,21 @@ footer {
 
     main {
         width: 100%;
+        margin-left: 0;
+    }
+    blockquote {
+        font-size: 1.35em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    form > div {
+        flex-flow: column nowrap;
+    }
+
+    label {
+        width: 100%;
+        margin-bottom: 1em;
     }
 }
 
@@ -173,6 +219,25 @@ footer {
         padding-bottom: 0.5em;
         flex-flow: column nowrap;
     }
+}
+
+.btn {
+    cursor: pointer;
+    padding: 0.5em;
+    font-size: 1em;
+    border-radius: 0.5em;
+    background: none;
+    border: 1px solid var(--white);
+    color: var(--white);
+}
+.btn:disabled {
+    opacity: 0.5;
+    cursor: initial;
+}
+
+.btn:hover {
+    color: var(--blue);
+    background: var(--white);
 }
 
 /* Utility classes */
@@ -208,4 +273,18 @@ footer {
     padding: 1em;
     background: #f07a79;
     color: var(--white);
+}
+
+.error {
+    font-weight: bold;
+    color: var(--white);
+}
+
+.error::before {
+    content: "⚠";
+    margin-right: 0.5em;
+}
+
+.d-none {
+    display: none;
 }

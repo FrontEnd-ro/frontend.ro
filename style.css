@@ -25,20 +25,7 @@ body * {
     box-sizing: inherit;
 }
 
-blockquote {
-    margin: 0 3em;
-    font-size: 2em;
-    font-style: italic;
-    color: var(--grey);
-    text-align: center;
-}
-
-blockquote::before {
-    content: '"';
-    font-size: 2em;
-    font-style: italic;
-    margin: 0;
-}
+/* Aside links */
 
 aside {
     width: 20em;
@@ -80,15 +67,6 @@ aside li:hover::after {
         url('data:image/svg+xml;utf-8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="9px" height="6px" viewBox="0 0 9 6" enable-background="new 0 0 9 6" xml:space="preserve"><polygon opacity="1" fill="%232980b9" points="4.5,4.5 0,0 0,1.208 4.5,5.708 9,1.208 9,0 "/></svg>');
 }
 
-h1 {
-    text-align: center;
-    font-size: 1.5em;
-}
-
-h1 a {
-    border: none;
-}
-
 aside ul a {
     padding: 1em;
     border: none;
@@ -113,16 +91,16 @@ aside ul a::before {
     font-size: 2em;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
+h1 {
+    text-align: center;
+    font-size: 1.5em;
 }
 
-p {
-    font-size: 1em;
+h1 a {
+    border: none;
 }
 
+/* Main content & footer */
 main {
     height: 100%;
     margin-left: 20em;
@@ -153,6 +131,8 @@ footer {
     flex-flow: row nowrap;
     justify-content: space-between;
 }
+
+/* Subscription form */
 
 form {
     margin: 0 -2em;
@@ -188,37 +168,37 @@ form button {
     margin-top: 1em;
 }
 
-@media screen and (max-width: 900px) {
-    aside {
-        position: absolute;
-        transform: translateX(calc(-100% - 1em));
-    }
+/* Generic styling for HTML elements & some classes */
 
-    main {
-        width: 100%;
-        margin-left: 0;
-    }
-    blockquote {
-        font-size: 1.35em;
-    }
+blockquote {
+    margin: 0 3em;
+    font-size: 2em;
+    font-style: italic;
+    color: var(--grey);
+    text-align: center;
 }
 
-@media screen and (max-width: 600px) {
-    form > div {
-        flex-flow: column nowrap;
-    }
-
-    label {
-        width: 100%;
-        margin-bottom: 1em;
-    }
+blockquote::before {
+    content: '"';
+    font-size: 2em;
+    font-style: italic;
+    margin: 0;
 }
 
-@media screen and (max-width: 450px) {
-    .footer-content {
-        padding-bottom: 0.5em;
-        flex-flow: column nowrap;
-    }
+a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+}
+
+p {
+    font-size: 1em;
+}
+
+img {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
 }
 
 .btn {
@@ -240,6 +220,18 @@ form button {
     background: var(--white);
 }
 
+.section-link {
+    font-weight: bold;
+    font-size: 1.5em;
+    position: relative;
+    color: var(--blue);
+    right: 0.5em;
+    top: 0.1em;
+    border-bottom: 0;
+}
+
+/* Utility classes */
+
 /* Utility classes */
 .text-red {
     color: var(--red);
@@ -254,7 +246,7 @@ form button {
 }
 
 .cursive {
-    font-family: "Indie Flower", cursive;
+    font-family: "Permanent Marker", cursive;
 }
 
 .dots {
@@ -287,4 +279,38 @@ form button {
 
 .d-none {
     display: none;
+}
+
+/* Media queries */
+@media screen and (max-width: 900px) {
+    aside {
+        position: absolute;
+        transform: translateX(calc(-100% - 1em));
+    }
+
+    main {
+        width: 100%;
+        margin-left: 0;
+    }
+    blockquote {
+        font-size: 1.35em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    form > div {
+        flex-flow: column nowrap;
+    }
+
+    label {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .footer-content {
+        padding-bottom: 0.5em;
+        flex-flow: column nowrap;
+    }
 }

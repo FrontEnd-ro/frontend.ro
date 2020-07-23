@@ -132,6 +132,15 @@ footer {
     justify-content: space-between;
 }
 
+.social-links {
+    display: flex;
+}
+
+.social-links a {
+    border: 0;
+    margin-right: 1em;
+}
+
 /* Subscription form */
 
 form {
@@ -308,9 +317,13 @@ img {
     }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 650px) {
     .footer-content {
         padding-bottom: 0.5em;
         flex-flow: column nowrap;
+    }
+
+    .footer-content > :nth-child(2) {
+        margin-bottom: 1.5em;
     }
 }

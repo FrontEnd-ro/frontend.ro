@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+
+.editor {
+  height: 300px;
+  border: 1px solid color(light-grey);
+  box-shadow: 0 2px 4px 0 color(light-grey);
+  padding: 1em;
+  background-color: color(white);
+
+  p {
+    margin: 0;
+  }
+}

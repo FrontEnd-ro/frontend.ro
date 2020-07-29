@@ -1,4 +1,4 @@
-![frontend.ro social banner](https://frontend.ro/assets/frontend.ro-social-banner-en.jpg)
+![frontend.ro social banner](https://raw.githubusercontent.com/iampava/frontend.ro/master/assets/frontend.ro-social-banner-en.jpg)
 
 ## FrontEnd.ro's open-source codebase and curriculum
 

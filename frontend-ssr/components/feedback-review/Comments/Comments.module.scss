@@ -1,0 +1,23 @@
+@import '../../../styles/variables';
+
+.comments {
+  border-top: 1px solid color(light-grey);
+  margin-top: 2em;
+
+  button:first-of-type {
+    margin-right: 1em;
+  }
+
+  @media screen and (min-width: 768px) {
+    > header {
+      display: flex;
+      align-items: center;
+      padding-top: 1em;
+  
+      h3 {
+        margin: 0;
+        flex: 1;
+      }
+    }
+  }
+}

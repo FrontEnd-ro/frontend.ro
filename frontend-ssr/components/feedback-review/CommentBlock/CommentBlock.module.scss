@@ -1,0 +1,54 @@
+@import '../../../styles/variables';
+
+.comment {
+  background-color: color(white);
+  box-shadow: 0 2px 4px 0 color(light-grey);
+  border-radius: 0 0 5px 5px;
+  margin: 2em 0;
+
+  > header {
+    padding: .4em 1em;
+    background-color: lighten(color(blue), 45);
+    border-radius: 5px 5px 0 0;
+
+    h4 {
+      font-weight: 400;
+      font-size: 14px;
+      margin: 0 0 0.5em;
+      flex: 1;
+
+      a {
+        color: color(blue);
+        text-decoration: none;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      display: flex;
+      align-items: center;
+
+      h4 {
+        margin: 0;
+      }
+    }
+
+    button {
+      margin: 0 0.25em;
+      font-size: 18px;
+      cursor: pointer;
+
+      svg {
+        width: 18px;
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+    padding: 1em;
+  }
+}

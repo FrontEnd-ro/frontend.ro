@@ -1,0 +1,15 @@
+@import "../../styles/variables";
+
+.page {
+  font-size: 1rem;
+  margin: 0 auto;
+  width: $width;
+  max-width: $max-width;
+  padding: 2em 0;
+  min-height: calc(100% - 3.3em);
+
+  h1 {
+    margin-top: 0;
+    font-size: calc(30px + 2vw);
+  }
+}

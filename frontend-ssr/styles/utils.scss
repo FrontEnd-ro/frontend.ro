@@ -36,6 +36,9 @@
 .no-underline {
   text-decoration: none;
 }
+.hover\:underline:hover {
+  text-decoration: underline;
+}
 .text-bold {
   font-weight: bold;
 }

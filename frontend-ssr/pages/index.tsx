@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -11,7 +11,8 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Bine ai venit pe <strong>Frontend.ro</strong>
+          Bine ai venit pe
+          <strong>Frontend.ro</strong>
         </h1>
 
         <div className="grid">
@@ -46,10 +47,12 @@ export default function Home() {
       </main>
 
       <footer>
-        Copyright {new Date().getFullYear()}
+        Copyright
+        {new Date().getFullYear()}
       </footer>
 
-      <style jsx>{`
+      <style jsx>
+        {`
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -178,9 +181,11 @@ export default function Home() {
             flex-direction: column;
           }
         }
-      `}</style>
+      `}
+      </style>
 
-      <style jsx global>{`
+      <style jsx global>
+        {`
         html,
         body {
           padding: 0;
@@ -193,7 +198,8 @@ export default function Home() {
         * {
           box-sizing: border-box;
         }
-      `}</style>
+      `}
+      </style>
     </div>
-  )
+  );
 }

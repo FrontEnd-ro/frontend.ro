@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
 import styles from '../styles/pages/default-page.module.scss';
 
@@ -16,13 +16,14 @@ export default function Exercises() {
           Lectii Javascript
         </h1>
         <Link href="/">
-          <a>Back to home</a>
+          Back to home
         </Link>
       </main>
 
       <footer>
-        Copyright {new Date().getFullYear()}
+        Copyright
+        {new Date().getFullYear()}
       </footer>
     </div>
-  )
+  );
 }

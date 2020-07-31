@@ -1,51 +1,52 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Head from 'next/head';
 import Link from 'next/link';
 
+import { dummyIncrement, dummyDecrement } from '../redux/dummy/dummy-reducer';
+
 import styles from '../styles/pages/default-page.module.scss';
 
-export default class JavaScript extends React.Component<any, any, any> {
-  constructor(props) {
-    super(props);
+function JavaScript(props : any) {
+  const { count, dispatch } = props;
 
-    this.state = {
-      count: 2,
-    };
-  }
+  return (
+    <div className={styles.page}>
+      <Head>
+        <title>Javascript</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-      increaseCount = () => {
-        this.setState((prevState) => ({
-          count: prevState.count,
-        }));
-      }
+      <main>
+        <h1 className={styles.title}>
+          Lectii Javascript
+        </h1>
+        <Link href="/">
+          <a>Back to home</a>
+        </Link>
+      </main>
 
-      render() {
-        const { count } = this.state;
-        return (
-          <div className={styles.page}>
-            <Head>
-              <title>Javascript</title>
-              <link rel="icon" href="/favicon.ico" />
-            </Head>
+      <h3>
+        Dummy count:
+        {count}
+      </h3>
+      <button type="button" onClick={() => dispatch(dummyIncrement())}> Increase </button>
+      &nbsp;
+      <button type="button" onClick={() => dispatch(dummyDecrement())}> Decrease </button>
 
-            <main>
-              <h1 className={styles.title}>
-                Lectii Javascript
-              </h1>
-              <Link href="/">
-                <a>Back to home</a>
-              </Link>
-            </main>
-
-            {count}
-            <button type="button" onClick={this.increaseCount}> Increase </button>
-
-            <footer>
-              Copyright
-              {' '}
-              {new Date().getFullYear()}
-            </footer>
-          </div>
-        );
-      }
+      <footer>
+        Copyright
+        {' '}
+        {new Date().getFullYear()}
+      </footer>
+    </div>
+  );
 }
+
+function mapStateToProps(state) {
+  return {
+    count: state.dummy,
+  };
+}
+
+export default connect(mapStateToProps)(JavaScript);

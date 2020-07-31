@@ -17,8 +17,14 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'import/extensions': 'off',
   },
   plugins: [
     '@typescript-eslint',
   ],
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
+  },
 };

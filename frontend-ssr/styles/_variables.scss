@@ -1,8 +1,53 @@
 $colors: (
     white: #fff,
+    darker-white: #f8f8f8,
     black: #1b1b15,
+    red: #eb4d4b,
 );
+
+$width: 90%;
+$max-width: 1000px;
+$cubic: cubic-bezier(0.18, 0.89, 0.32, 1.28);
 
 @function color($x) {
     @return map-get($colors, $x);
+}
+
+
+/** BACKGROUNDS **/
+%gradientBackground {
+    background-size: 150% auto;
+    background-position: left center;
+}
+
+%blackGradientBackground {
+    color: color(white);
+    background-image: linear-gradient(to right, color(black) 0%, lighten(color(black), 10%) 51%, color(black) 100%);
+}
+
+%redGradientBackground {
+    background-image: linear-gradient(to right, #c0392b 0%, #eb4d4b 51%, #c0392b 100%);
+}
+
+%greenGradientBackground {
+    color: color(white);
+    background-image: linear-gradient(to right, #27ae60 0%, #2ecc71 51%, #27ae60 100%);
+}
+
+%blueGradientBackground {
+    color: color(white);
+    background-image: linear-gradient(to right, #2980b9 0%, #3aa3e9 51%, #2980b9 100%);
+}
+
+%yellowGradientBackground {
+    color: color(black);
+    background-image: linear-gradient(to right, #f39c12 0%, #f1c40f 51%, #f39c12 100%);
+}
+
+%greyGradientBackground {
+    background-image: linear-gradient(to right, color(grey) 0%, color(silver) 51%, color(grey) 100%);
+}
+
+%purpleGradientBackground {
+    background-image: linear-gradient(to right, #663399 0%, #8547c3 51%, #663399 100%);
 }

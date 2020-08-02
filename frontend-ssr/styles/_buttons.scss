@@ -1,0 +1,146 @@
+@import 'variables';
+
+.btn {
+    @extend %gradientBackground;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.1em 0.75em;
+    border-radius: 5px;
+    min-width: 6em;
+    min-height: 2.25em;
+    border: 0;
+    transition: background 0.5s;
+    color: color(white);
+    cursor: pointer;
+
+    &:hover {
+        background-position: right center;
+    }
+
+    &:active {
+        background-position: left center;
+    }
+
+    &.btn--default {
+        background-image: linear-gradient(to right, #1b1b15 0%, #3d3d3d 51%, #1b1b15 100%);
+    }
+
+    &.btn--light {
+        color: color(black);
+        border: 1px solid color(black);
+        background-image: linear-gradient(to right, #ecf0f1 0%, #fff 51%, #ecf0f1 100%);
+    }
+
+    &.btn--success {
+        @extend %greenGradientBackground;
+    }
+
+    &.btn--danger {
+        @extend %redGradientBackground;
+    }
+
+    &.btn--blue {
+        @extend %blueGradientBackground;
+    }
+
+    &.btn--yellow {
+        @extend %yellowGradientBackground;
+    }
+
+    &.btn--grey {
+        @extend %greyGradientBackground;
+    }
+
+    &.btn--bouncy {
+        transition: transform 0.25s $cubic;
+        &:active {
+            transform: scale(1.1);
+        }
+    }
+
+    &.btn--with-icon {
+        & > * {
+            vertical-align: middle;
+        }
+
+        [class^='icon-'],
+        [class*=' icon-'] {
+            margin-right: 0.5em;
+        }
+    }
+
+    &.btn--outline {
+        background: none;
+        border: 1px solid color(black);
+
+        &.btn--danger {
+            color: color(danger);
+            border-color: color(danger);
+
+            &:hover {
+                color: color(white);
+                @extend %redGradientBackground;
+            }
+        }
+    }
+}
+
+.btn--transparent {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    min-width: initial;
+    min-height: initial;
+    color: inherit;
+    text-transform: capitalize;
+    text-transform: none;
+}
+
+.btn--loading {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0.4em;
+        width: 50%;
+        transform-origin: right;
+        border-top: 1.5px solid;
+        animation: 1.5s ease-in-out btnLoading infinite;
+    }
+}
+
+.btn:disabled,
+.btn--transparent:disabled {
+    cursor: initial;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.icon-btn {
+    border-radius: 0.5em;
+    background-color: color(white);
+    border: 1px solid color(silver);
+    text-align: center;
+    font-size: 2em;
+}
+
+@keyframes btnLoading {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    50% {
+        transform: translateX(150%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}

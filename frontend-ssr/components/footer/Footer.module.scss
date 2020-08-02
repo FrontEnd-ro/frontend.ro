@@ -1,0 +1,31 @@
+@import '../../styles/variables';
+
+.footer {
+    display: flex;
+    padding-bottom: 1em;
+    color: color(black);
+    border-top: 1px solid color(silver);
+    background-color: color(darker-white);
+
+
+    &>section {
+        flex: 1;
+        text-align: center;
+
+        h5 {
+            font-size: 18px;
+            display: inline-block;
+            border-bottom: 1px solid color(silver);
+        }
+    }
+
+    a {
+        color: inherit;
+        border-bottom: 1px solid currentColor;
+        text-decoration: none;
+    }
+
+    @media screen and (max-width: 550px) {
+        display: block;
+    }
+}

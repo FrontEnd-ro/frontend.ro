@@ -8,7 +8,7 @@
         input[type='password']:invalid,
         input[type='email']:invalid,
         textarea:invalid {
-            border-color: color(danger) !important;
+            border-color: color(red) !important;
         }
 
         input:invalid ~ .error {
@@ -16,7 +16,7 @@
         }
 
         input[type='checkbox']:required:invalid ~ .control-message {
-            color: color(danger);
+            color: color(red);
         }
     }
 
@@ -119,7 +119,7 @@
         padding: 0.25em 0.5em;
 
         &.input-icon--error {
-            color: color(danger);
+            color: color(red);
         }
 
         &.input-icon--success {

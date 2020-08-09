@@ -21,9 +21,8 @@ export default class Html extends React.Component {
 
   render() {
     const { name = 'Not John Doe' } = this.state;
-    let expressionToMatch = 'Hello World';
-    let arrayToMatch = ['Hello React.js', 'something', 'something else', 'i love react', '21'];
-
+    let expressionToMatch = ['hello'];
+  
     return (
       <div className={styles.page}>
         <Head>
@@ -44,8 +43,7 @@ export default class Html extends React.Component {
           </h3>
 
           <MatchWords 
-            defaultText={expressionToMatch}
-            defaultArray={arrayToMatch} />
+            defaultValue={expressionToMatch} />
         </main>
 
         <footer>

@@ -5,31 +5,27 @@ class MatchWords extends React.Component {
         super(props);
 
         this.state = {
-            value: '',
             message: '',
         }
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleMatch = this.handleMatch.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleSubmit(event) {
+
+    handleSubmit = (event) => {
         event.preventDefault();
-    }
-    handleInputChange(event) {
-        this.setState({
-            value: event.target.value
-        });
-    }
 
-    handleMatch() {
-        let inputValue = this.state.value;
-        let defaultValue = this.props.defaultText;
-        let defaultValues = this.props.defaultArray;
+        const inputValue = document.querySelector('[name="input_text"]').value;
+        const {defaultValue} = this.props;
 
-        let result = defaultValues.some(currentValue => currentValue.toLowerCase() === inputValue.toLowerCase());
-        
-        if(inputValue.trim().toLowerCase() === defaultValue.toLowerCase() || result) {
+        if (Array.isArray(defaultValue)) {
+            var result = defaultValue.some(
+                currentValue => currentValue.toLowerCase() === inputValue.trim().toLowerCase()
+            );
+        }
+
+        if (typeof defaultValue === 'string') {
+           var wordToMatch = inputValue.trim().toLowerCase() === defaultValue.toLowerCase();
+        }
+
+        if (result || wordToMatch) {
             this.setState({
                 message: 'you guess it'
             });
@@ -39,22 +35,22 @@ class MatchWords extends React.Component {
             });
         }
     }
-    
+
+
     render() {
+        const { message } = this.state;
         return (
             <form onSubmit={this.handleSubmit}>
-                <input 
-                    type="text" 
-                    value={this.state.value}
-                    onChange={this.handleInputChange}
+                <input
+                    type="text"
+                    name="input_text"
                     required />
-                    <br />
-                <button type="submit"
-                    onClick={this.handleMatch}>
+                <br />
+                <button type="submit">
                     See the result
                 </button>
                 <br />
-                {this.state.message}
+                {message}
             </form>
         )
     }

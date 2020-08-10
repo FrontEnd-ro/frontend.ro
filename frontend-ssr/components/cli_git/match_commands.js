@@ -1,19 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class MatchWords extends React.Component {
-    constructor(props) {
-        super(props);
+// class MatchWords extends React.Component {
+//     constructor(props) {
+//         super(props);
 
-        this.state = {
-            message: '',
-        }
-    }
+//         this.state = {
+//             message: '',
+//         }
+//     }
 
-    handleSubmit = (event) => {
+//     handleSubmit = (event) => {
+//         event.preventDefault();
+
+//         const inputValue = document.querySelector('[name="input_text"]').value;
+//         const {defaultValue} = this.props;
+
+//         if (Array.isArray(defaultValue)) {
+//             var result = defaultValue.some(
+//                 currentValue => currentValue.toLowerCase() === inputValue.trim().toLowerCase()
+//             );
+//         }
+
+//         if (typeof defaultValue === 'string') {
+//            var wordToMatch = inputValue.trim().toLowerCase() === defaultValue.toLowerCase();
+//         }
+
+//         if (result || wordToMatch) {
+//             this.setState({
+//                 message: 'you guess it'
+//             });
+//         } else {
+//             this.setState({
+//                 message: 'try again'
+//             });
+//         }
+//     }
+
+
+//     render() {
+//         const { message } = this.state;
+//         return (
+//             <form onSubmit={this.handleSubmit}>
+//                 <input
+//                     type="text"
+//                     name="input_text"
+//                     required />
+//                 <br />
+//                 <button type="submit">
+//                     See the result
+//                 </button>
+//                 <br />
+//                 {message}
+//             </form>
+//         )
+//     }
+// }
+
+function MatchWords(props) {
+    let [message, setMessage] = useState('');
+
+    function handleSubmit(event) {
         event.preventDefault();
 
         const inputValue = document.querySelector('[name="input_text"]').value;
-        const {defaultValue} = this.props;
+        const { defaultValue } = props;
 
         if (Array.isArray(defaultValue)) {
             var result = defaultValue.some(
@@ -22,38 +72,29 @@ class MatchWords extends React.Component {
         }
 
         if (typeof defaultValue === 'string') {
-           var wordToMatch = inputValue.trim().toLowerCase() === defaultValue.toLowerCase();
+            var wordToMatch = inputValue.trim().toLowerCase() === defaultValue.toLowerCase();
         }
 
         if (result || wordToMatch) {
-            this.setState({
-                message: 'you guess it'
-            });
+            setMessage(message = 'you guess it!')
         } else {
-            this.setState({
-                message: 'try again'
-            });
+            setMessage(message = 'try again!')
         }
     }
-
-
-    render() {
-        const { message } = this.state;
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <input
-                    type="text"
-                    name="input_text"
-                    required />
-                <br />
-                <button type="submit">
-                    See the result
+    return (
+        <form onSubmit={(event) => handleSubmit(event)}>
+            <input
+                type="text"
+                name="input_text"
+                required />
+            <br />
+            <button type="submit">
+                See the result
                 </button>
-                <br />
-                {message}
-            </form>
-        )
-    }
+            <br />
+            {message}
+        </form>
+    )
 }
 
 export default MatchWords;

@@ -21,6 +21,7 @@
     "lint": "eslint pages/**/*.js pages/**/*.tsx components/**/*.tsx"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-brands-svg-icons": "^5.14.0",
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
@@ -38,6 +39,14 @@
     "mongoose": "^5.10.11",
     "mongoose-unique-validator": "^2.0.3",
     "next": "^10.0.2",
+=======
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.28",
+    "next": "9.4.4",
+>>>>>>> 03137ef...  Adding routes for login, register, check and a middleware to check the jwt token
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "^7.2.1",
@@ -47,8 +56,11 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@types/cookie": "^0.4.0",
     "@types/lodash": "^4.14.164",
+=======
+>>>>>>> 03137ef...  Adding routes for login, register, check and a middleware to check the jwt token
     "@types/mongoose": "^5.7.36",
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.43",

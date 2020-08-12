@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import MatchWords from '../components/cli_git/match_commands';
+import MatchWordsFC from '../components/cli_git/git_commands_fc';
 
 import styles from '../styles/pages/default-page.module.scss';
 
@@ -42,7 +42,7 @@ export default class Html extends React.Component {
             {name}
           </h3>
 
-          <MatchWords 
+          <MatchWordsFC 
             defaultValue={expressionToMatch} />
         </main>
 

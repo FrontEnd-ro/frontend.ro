@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function MatchWordsFC(props) {
+export default function MatchCommandFunctionalComponent(props) {
     let [message, setMessage] = useState('');
 
     function handleSubmit(event) {
@@ -9,18 +9,18 @@ export default function MatchWordsFC(props) {
         const git_command = event.target[name="git_command"].value;
         const { defaultValue } = props;
 
-        let wordToMatch;
+        let match_command;
         if (Array.isArray(defaultValue)) {
-            wordToMatch = defaultValue.some(
+            match_command = defaultValue.some(
                 currentValue => currentValue.toLowerCase() === git_command.trim().toLowerCase()
             );
         }
 
         if (typeof defaultValue === 'string') {
-            wordToMatch = git_command.trim().toLowerCase() === defaultValue.toLowerCase();
+            match_command = git_command.trim().toLowerCase() === defaultValue.toLowerCase();
         }
 
-        if (wordToMatch) {
+        if (match_command) {
             setMessage(message = 'you guess it!')
         } else {
             setMessage(message = 'try again!')

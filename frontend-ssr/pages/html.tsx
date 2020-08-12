@@ -4,6 +4,7 @@ import Link from 'next/link';
 import MatchWordsFC from '../components/cli_git/git_commands_fc';
 
 import styles from '../styles/pages/default-page.module.scss';
+import MatchCommandClassComponent from '../components/cli_git/git_commands_fc';
 
 export default class Html extends React.Component {
   constructor(props) {
@@ -42,7 +43,7 @@ export default class Html extends React.Component {
             {name}
           </h3>
 
-          <MatchWordsFC 
+          <MatchCommandClassComponent 
             defaultValue={expressionToMatch} />
         </main>
 

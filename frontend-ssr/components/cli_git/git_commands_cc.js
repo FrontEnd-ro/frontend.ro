@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class MatchWordsCC extends React.Component {
+export default class MatchCommandClassComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -15,18 +15,18 @@ export default class MatchWordsCC extends React.Component {
         const git_command = event.target[name="git_command"].value;
         const {defaultValue} = this.props;
            
-        let wordToMatch;
+        let match_command;
         if (Array.isArray(defaultValue)) {
-             wordToMatch = defaultValue.some(
+             match_command = defaultValue.some(
                 currentValue => currentValue.toLowerCase() === git_command.trim().toLowerCase()
             );
         }
 
         if (typeof defaultValue === 'string') {
-            wordToMatch = git_command.trim().toLowerCase() === defaultValue.toLowerCase();
+            match_command = git_command.trim().toLowerCase() === defaultValue.toLowerCase();
         }
 
-        if (wordToMatch) {
+        if (match_command) {
             this.setState({
                 message: 'you guess it'
             });

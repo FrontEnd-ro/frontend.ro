@@ -22,25 +22,22 @@ export default function Home() {
               <p>Descriere lectii HTML</p>
             </a>
           </Link>
-
-          <Link href="/css">
+          <Link href="/bob" prefetch={false}>
             <a className="card">
-              <h3>CSS &rarr;</h3>
-              <p>Descriere lectii CSS</p>
+              <h3>User profile</h3>
+              <p>Profilul unui utilizator</p>
             </a>
           </Link>
-
-          <Link href="/javascript">
+          <Link href="/jon-doe" prefetch={false}>
             <a className="card">
-              <h3>Javascript &rarr;</h3>
-              <p>Descriere lectii JS</p>
+              <h3>404 User Profile</h3>
+              <p>Profilul unui utilizator inexistent</p>
             </a>
           </Link>
-
-          <Link href="/exercises">
+          <Link href="/error" prefetch={false}>
             <a className="card">
-              <h3>Exercitii &rarr;</h3>
-              <p>Descriere Exercitii</p>
+              <h3>500 User Profile</h3>
+              <p>Profilul unui utilizator inexistent</p>
             </a>
           </Link>
         </div>

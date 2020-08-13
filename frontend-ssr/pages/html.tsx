@@ -1,8 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import MatchWordsFC from '../components/cli_git/git_commands_fc';
 
 import styles from '../styles/pages/default-page.module.scss';
+import MatchCommandClassComponent from '../components/cli_git/git_commands_fc';
 
 export default class Html extends React.Component {
   constructor(props) {
@@ -20,7 +22,8 @@ export default class Html extends React.Component {
 
   render() {
     const { name = 'Not John Doe' } = this.state;
-
+    let expressionToMatch = ['hello'];
+  
     return (
       <div className={styles.page}>
         <Head>
@@ -39,6 +42,9 @@ export default class Html extends React.Component {
           <h3>
             {name}
           </h3>
+
+          <MatchCommandClassComponent 
+            defaultValue={expressionToMatch} />
         </main>
 
         <footer>

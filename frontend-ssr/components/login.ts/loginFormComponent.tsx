@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React,{Component} from "react";
 import PasswordReveal from "./passwordReveal";
 import loginStyle from "./LoginPage.module.scss";
@@ -138,10 +139,58 @@ class Login extends React.Component<MyProps, MyState> {
 =======
     clearTimeout(this.timeoutId);
 >>>>>>> 2f3a38f... Uncommited changes
+=======
+import React from 'react';
+
+// import store from 'Redux/store';
+// import { loginUserSuccess } from 'Redux/user/user.actions';
+// import AuthService from 'Services/Auth.service';
+
+import Form from './form';
+import PasswordReveal from './passwordReveal';
+import loginStyle from "~/styles/pages/login/LoginPage.module.scss";
+import formStyle from "~/styles/pages/login/Form.module.scss"
+const formRef=React.createRef();
+interface MyProps{
+    className?:string;
+};
+interface MyState{
+    register:boolean;
+    loading:boolean;
+    username:string;
+    usernameAvailability:any;
+    reason:any;
+    usernameError:any;
+};
+class Login extends React.Component<MyProps,MyState> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      register: false,
+      loading: false,
+      username: "",
+      usernameAvailability: undefined,
+      reason: false,
+      usernameError: false,
+    };
+
+    // this.formRef = React.createRef();
+
+    this.clearServerError = this.clearServerError.bind(this);
+    this.login = this.login.bind(this);
+    this.register = this.register.bind(this);
+    this.onUsernameChange = this.onUsernameChange.bind(this);
+  }
+
+  componentWillUnmount() {
+    // clearTimeout(this.timeoutId);
+>>>>>>> 55eb138...  Change in front, look over the git review
   }
 
   clearServerError() {
     this.setState({
+<<<<<<< HEAD
 <<<<<<< HEAD
       password_error:false,
       username_error:false,
@@ -155,10 +204,14 @@ class Login extends React.Component<MyProps, MyState> {
       username_error:false,
       email_error:false
 >>>>>>> 2f3a38f... Uncommited changes
+=======
+      reason: null,
+>>>>>>> 55eb138...  Change in front, look over the git review
     });
   }
 
   login(data) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     if ("preventDefault" in data) {
@@ -281,6 +334,35 @@ class Login extends React.Component<MyProps, MyState> {
       })
     }
 <<<<<<< HEAD
+=======
+    if ('preventDefault' in data) {
+      data.preventDefault();
+    }
+
+    if (this.state.register) {
+      this.setState({ register: false, reason: null });
+    } else {
+      this.sendRequest('LOGIN', data);
+    }
+  }
+
+  register(data) {
+    if ('preventDefault' in data) {
+      data.preventDefault();
+    }
+
+    if (!this.state.register) {
+      this.setState({ register: true, reason: null });
+    } else {
+      this.sendRequest('REGISTER', data);
+    }
+  }
+
+  sendRequest(type, data) {
+    if (this.state.register && this.state.usernameAvailability !== true) {
+      return;
+    }
+>>>>>>> 55eb138...  Change in front, look over the git review
     // const API_TO_CALL = type === 'LOGIN' ? AuthService.login : AuthService.register;
 
     this.setState({ loading: true });
@@ -303,13 +385,17 @@ class Login extends React.Component<MyProps, MyState> {
     //       loading: false,
     //     });
     //   });
+<<<<<<< HEAD
 >>>>>>> 8ebc8c2... Merge
 =======
 >>>>>>> 2f3a38f... Uncommited changes
+=======
+>>>>>>> 55eb138...  Change in front, look over the git review
   }
 
   onUsernameChange(e) {
     const username = e.target.value;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -571,11 +657,40 @@ class Login extends React.Component<MyProps, MyState> {
     .catch(error=>{
       console.log(error)
     })
+=======
+    // clearTimeout(this.timeoutId);
+
+    this.setState({
+      username,
+      usernameAvailability: null,
+    });
+
+    if (username) {
+    //   this.timeoutId = setTimeout(() => {
+    //     this.setState({
+    //       usernameAvailability: 'LOADING',
+    //     });
+    //     AuthService.checkUsernameAvailability(encodeURI(username))
+    //       .then((resp) => {
+    //         this.setState({
+    //           usernameAvailability: false,
+    //           usernameError: 'The username is so cool that somebody else took it!',
+    //         });
+    //       })
+    //       .catch((err) => {
+    //         this.setState({
+    //           usernameAvailability: err.status === 404,
+    //           usernameError: err.status === 404 ? '' : err.reason,
+    //         });
+    //       });
+    //   }, 300);
+>>>>>>> 55eb138...  Change in front, look over the git review
     }
   }
 
   render() {
     const {
+<<<<<<< HEAD
       name_error,
       email_error,
       username_error,
@@ -626,12 +741,38 @@ class Login extends React.Component<MyProps, MyState> {
         <div
           className={`${formStyle["form__group"]} ${loginStyle["show-on-register"]}`}>
 >>>>>>> 2f3a38f... Uncommited changes
+=======
+      loading, register, reason, usernameAvailability, usernameError,
+    } = {...this.state};
+    // console.log(loading, register, reason, usernameAvailability, usernameError)
+    console.log(loginStyle,formStyle)
+      return (
+      <Form
+        // ref={formRef}
+        className={`${this.props.className || ''} ${loginStyle["login-form"]} ${register ? loginStyle['login-form--register'] : ''}`}
+        onSubmit={register ? this.register : this.login}
+        onInput={this.clearServerError}
+      >
+        <label className={formStyle["form-control--text"]}>
+          <span className={formStyle["label"]}>
+            {register && 'Email address'}
+            {!register && 'Email address or username'}
+          </span>
+          <input autoCapitalize="none" type="text" required name="email" />
+          <span className={formStyle["error"]}>
+            {register &&reason? '🧙‍ You shall not pass without an email!' :null}
+            {!register &&reason?  '🧙‍ You shall not pass without a username or email!' :null}
+          </span>
+        </label>
+        <div className={formStyle["form__group"]+" "+loginStyle["show-on-register"]}>
+>>>>>>> 55eb138...  Change in front, look over the git review
           <label className={formStyle["form-control--text"]}>
             <span className={formStyle["label"]}> Username </span>
             <input
               tabIndex={register ? 0 : -1}
               className={formStyle["form__input"]}
               type="text"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
               name="username"
@@ -647,6 +788,8 @@ class Login extends React.Component<MyProps, MyState> {
 
           </label>
 =======
+=======
+>>>>>>> 55eb138...  Change in front, look over the git review
               required={register}
               onInput={this.onUsernameChange}
               name="username"
@@ -665,6 +808,7 @@ class Login extends React.Component<MyProps, MyState> {
             )}
             {reason ?<span className={formStyle["error"]}>🧙‍ You shall not pass without a username!</span>
           :null}</label>
+<<<<<<< HEAD
 >>>>>>> 8ebc8c2... Merge
 =======
               onInput={this.onUsernameChange}
@@ -675,10 +819,13 @@ class Login extends React.Component<MyProps, MyState> {
 
           </label>
 >>>>>>> 2f3a38f... Uncommited changes
+=======
+>>>>>>> 55eb138...  Change in front, look over the git review
         </div>
         <div className={formStyle["form__group"]}>
           <label className={formStyle["form-control--text"]}>
             <span className={formStyle["label"]}> Password </span>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             <PasswordReveal value={password} password_error={password_error} onChange={this.onChange} />
@@ -747,11 +894,38 @@ class Login extends React.Component<MyProps, MyState> {
 =======
             onClick={register ? this.login_submit : () => {}}
 >>>>>>> 2f3a38f... Uncommited changes
+=======
+            <PasswordReveal reason={reason}/>
+          </label>
+        </div>
+        <label className={formStyle["form-control--checkbox"] +" "+ loginStyle["show-on-register block"]}>
+          <input type="checkbox" required={register} />
+          <span className="control-indicator" />
+          {register? <span className="control-message">
+            I have read and agree to the
+            {' '}
+            {' '}
+            <a href="/privacy" className="link">
+              Terms & Conditions
+            </a>
+          </span> : null}
+        </label>
+        <p className={formStyle["error"] + " "+formStyle[" error--custom"]}>{reason}</p>
+        <div className="form__controls form__group">
+          <button
+          style={{width:"100%"}}
+
+            type={register ? 'button' : 'submit'}
+            className={`login-btn btn  ${register ? 'btn--light' : 'btn--blue'} ${loading && !register ? 'btn--loading' : ''}`}
+            disabled={loading}
+            onClick={register ? this.login : () => {}}
+>>>>>>> 55eb138...  Change in front, look over the git review
           >
             Sign in
           </button>
           <p className={formStyle["form__separator"]}> or </p>
           <button
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             type={register ? "submit" : "button"}
@@ -784,6 +958,18 @@ class Login extends React.Component<MyProps, MyState> {
 =======
       </form>
 >>>>>>> 2f3a38f... Uncommited changes
+=======
+          style={{width:"100%"}}
+            type={register ? 'submit' : 'button'}
+            className={`register-btn btn ${register ? 'btn--blue' : 'btn--light'} ${loading && register ? 'btn--loading' : ''}`}
+            disabled={loading}
+            onClick={register ? () => {} : this.register}
+          >
+            Register for free
+          </button>
+        </div>
+      </Form>
+>>>>>>> 55eb138...  Change in front, look over the git review
     );
   }
 }

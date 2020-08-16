@@ -9,22 +9,22 @@ const { loginValidation } = require("~/utils/validation/userValidation");
 dbConnect();
 
 //Vars
-const email_username_does_not_exists_error = {
+const EMAIL_USERNAME_DOES_NOT_EXISTS_ERROR = {
   status: "fail",
   message: "Email or Username does not exists",
 };
 
-const bad_form_submition_error = {
+const BAD_FORM_SUBMITION_ERROR = {
   status: "fail",
   message: "Invalid form submision",
 };
 
-const bad_password_error = {
+const BAD_PASSWORD_ERROR = {
   status: "fail",
   message: "Incorect password ",
 };
 
-const update_last_login_error = {
+const UPDATE_LAST_LOGIN_ERROR = {
   status: "fail",
   message: "Something went wrong. Please try again",
 };
@@ -38,17 +38,17 @@ export default async (req, res) => {
       let { email, password } = body;
       let { error } = loginValidation({ email, password });
       //Check valid form
-      if (error) return res.status(400).json(bad_form_submition_error);
+      if (error) return res.status(400).json(BAD_FORM_SUBMITION_ERROR);
       //Check user base on username or email
       try {
         let user = await User.findOne({
           $or: [{ username: email }, { email: email }],
         });
         if (!user)
-          return res.status(400).json(email_username_does_not_exists_error);
+          return res.status(400).json(EMAIL_USERNAME_DOES_NOT_EXISTS_ERROR);
         //User exists => Check password
         const validPass = await bcrypt.compare(password, user.password);
-        if (!validPass) return res.status(400).json(bad_password_error);
+        if (!validPass) return res.status(400).json(BAD_PASSWORD_ERROR);
         //After checking password update the last login
         let new_entry = await User.findOneAndUpdate(
           { _id: user._id },
@@ -62,7 +62,7 @@ export default async (req, res) => {
         });
         res.json({ status: "success", auth_token: token });
       } catch (err) {
-        res.status(500).json(update_last_login_error);
+        res.status(500).json(UPDATE_LAST_LOGIN_ERROR);
       }
       break;
     default:

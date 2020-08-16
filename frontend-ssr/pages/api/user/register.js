@@ -7,8 +7,8 @@ dbConnect();
 const { registerValidation } = require("~//utils/validation/userValidation");
 // import UserRequests from "../../../utils/user.requests";
 //Vars
-const email_exists_error = { email: "Email already exists" };
-const username_exists_error = { username: "Username already exists" };
+const EMAIL_EXISTS_ERROR = { email: "Email already exists" };
+const USERNAME_EXISTS_ERROR = { username: "Username already exists" };
 
 export default async (req, res) => {
   let { method, body } = req;
@@ -25,6 +25,18 @@ export default async (req, res) => {
       const salt = await bcrypt.genSalt(10);
       const hash_password = await bcrypt.hash(password, salt);
       try {
+        //Check if the email and username already exists
+        const emailExists = await User.findOne({ email: body.email });
+        if (emailExists) {
+          errors.push(EMAIL_EXISTS_ERROR);
+        }
+        const usernameExists = await User.findOne({ username: body.username });
+        if (usernameExists) {
+          errors.push(USERNAME_EXISTS_ERROR);
+        }
+        if (errors.length > 0)
+          return res.status(400).json({ status: "fail", errors: errors });
+        //Try to save the user into the database
         //Create the user for the database
         let created_user = new User({
           name: name,
@@ -33,18 +45,6 @@ export default async (req, res) => {
           email: email,
           password: hash_password,
         });
-        //Check if the email and username already exists
-        const emailExists = await User.findOne({ email: body.email });
-        if (emailExists) {
-          errors.push(email_exists_error);
-        }
-        const usernameExists = await User.findOne({ username: body.username });
-        if (usernameExists) {
-          errors.push(username_exists_error);
-        }
-        if (errors.length > 0)
-          return res.status(400).json({ status: "fail", errors: errors });
-        //Try to save the user into the database
         let user = await created_user.save();
         res.json(user);
       } catch (err) {

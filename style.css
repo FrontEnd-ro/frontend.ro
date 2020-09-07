@@ -112,6 +112,23 @@ main {
     font-size: 1.2em;
 }
 
+.contribuors-table {
+    margin: 2em 0 3em 0;
+    display: flex;
+}
+
+.contribuors-table > a {
+    padding: 0.5em;
+    margin-right: 1em;
+    border-radius: 0.25em;
+    border: 1px solid var(--blue);
+}
+
+.contribuors-table > a:hover {
+    color: var(--white);
+    background: var(--blue);
+}
+
 footer {
     position: relative;
     color: var(--white);
@@ -238,8 +255,6 @@ img {
     top: 0.1em;
     border-bottom: 0;
 }
-
-/* Utility classes */
 
 /* Utility classes */
 .text-red {

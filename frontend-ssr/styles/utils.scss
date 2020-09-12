@@ -3,6 +3,54 @@
   * without adding custom styles.
 */
 
+/** Colors */
 .text-red {
-    color: color(red);
+  color: color(red);
+}
+
+.text-white {
+  color: color(white);
+}
+
+.text-black {
+  color: color(black);
+}
+
+.bg-black {
+  background: color(black);
+}
+
+/** Alignement */
+.text-center {
+  text-align: center;
+}
+
+/** Text */
+.line-through {
+  text-decoration: line-through;
+}
+.text-bold {
+  font-weight: bold;
+}
+
+/** Sizes */
+.h-100 {
+  height: 100%;
+}
+
+/** Display */
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.outline-none {
+  outline: 0;
 }

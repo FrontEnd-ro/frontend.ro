@@ -1,12 +1,13 @@
 @import "variables";
 @import "utils";
-@import "buttons";
+@import "common";
 @import "animations";
 
 html,
 body {
     padding: 0;
     margin: 0;
+    scroll-behavior: smooth;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
         Helvetica Neue, sans-serif;
     color: color(black);
@@ -16,6 +17,10 @@ html,
 body,
 #__next {
     height: 100%;
+}
+
+body {
+    font-size: 1.25em;
 }
 
 * {

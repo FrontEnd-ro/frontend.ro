@@ -1,0 +1,25 @@
+ul, 
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ol.with--count {
+    counter-reset: ol;
+    
+    li {
+        margin-bottom: 2em;
+    
+        &::before {
+            counter-increment: ol; 
+            content: "#" counter(ol) " ";
+            
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 0.5em;
+            display: inline-block;
+            transform: rotate(-11deg);
+        }
+    }
+}

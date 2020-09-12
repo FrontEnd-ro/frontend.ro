@@ -1,0 +1,72 @@
+@import '../../styles/variables';
+
+.lesson {
+    --aside-width: 18em;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    aside {
+        z-index: 1;
+        height: 100%;
+        position: fixed;
+        width: var(--aside-width);
+        transition: transform 0.25s ease-out;
+    }
+
+    :global aside.is--open {
+        transform: translateX(0);
+    }
+
+    main {
+        position: relative;
+        left: var(--aside-width);
+        width: calc(100% - var(--aside-width));
+
+        :global header .ceva {
+            display: none;
+        }
+    }
+
+    article {
+        width: $width;
+        max-width: $max-width;
+        position: relative;
+        margin: 0 auto;
+
+        h1 {
+            font-size: 2.25em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+    }
+
+    @media screen and (max-width: 1400px) {
+        aside {
+            transform: translateX(-100%);
+        }
+        main {
+            left: 0;
+            width: 100%;
+
+            :global header .ceva {
+                display: block;
+            }
+        }
+    }
+
+}
+
+.cover {
+    padding: 1em;
+    border-radius: 1em;
+    border: 1px solid color(silver);
+}
+
+.contributors {
+    right: 0;
+    top: 0.75em;
+    position: absolute;
+}

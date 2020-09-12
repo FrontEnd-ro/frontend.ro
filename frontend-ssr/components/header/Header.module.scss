@@ -3,13 +3,19 @@
 .header {
     display: flex;
     height: 3.3em;
-    z-index: 11;
     align-items: center;
-    padding: 0 8vw;
+    padding: 0 5vw;
     position: relative;
     justify-content: space-between;
     background-color: color(darker-white);
     border-bottom: 1px solid color(silver);
+}
+
+.menu {
+    padding: 0;
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
 }
 
 .logo {

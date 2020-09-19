@@ -6,6 +6,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Header from '~/components/header/Header.component';
 import Footer from '~/components/footer/Footer.component';
 import LessonContributors from '~/components/lesson-contributors/LessonContributors';
+import TableOfContents from '~/components/tableOfContents/TableOfContents';
+
 import { useOutsideClick } from '~/services/Hooks';
 
 import styles from './lesson-0.module.scss';
@@ -18,6 +20,17 @@ const contributors = [{
   avatarSrc: 'https://iampava.com/dist/assets/images/pava.png',
   url: 'https://iampava.com',
 }];
+
+let chapters = [
+  { title: 'Ce e FrontEnd.ro', id: 'about' },
+  { title: 'De ce e FrontEnd.ro diferit?', id: 'why-are-we-different' },
+  { title: 'De ce e FrontEnd.ro gratuit?', id: 'why-are-we-free' },
+  { title: 'Cum pot sa ajut?', id: 'how-can-i-help' },
+  { title: 'Skill-uri si concepte', id: 'skills-and-concepts' },
+  { title: 'Cum sa folosesti platforma', id: 'how-to-use-platform' },
+  { title: 'Tool-uri necesare', id: 'tools' },
+  { title: 'Resurse recomandate', id: 'recommended-resources' },
+];
 
 export default function Lesson0() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,7 +66,7 @@ export default function Lesson0() {
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
-          {/* Menu */}
+          <TableOfContents chapters={chapters} />
         </aside>
 
         <main>

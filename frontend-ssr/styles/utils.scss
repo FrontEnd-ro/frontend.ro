@@ -12,6 +12,10 @@
   color: color(white);
 }
 
+.text-black {
+    color: color(black);
+}
+
 .bg-black {
   background: color(black);
 }
@@ -41,4 +45,8 @@
 
 .align-items-center {
   align-items: center;
+}
+
+.outline-none {
+    outline: 0;
 }

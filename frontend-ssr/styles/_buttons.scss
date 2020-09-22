@@ -112,7 +112,7 @@
         width: 50%;
         transform-origin: right;
         border-top: 1.5px solid;
-        animation: 1.5s ease-in-out btnLoading infinite;
+        animation: btnLoading 1.5s ease-in-out infinite;
     }
 }
 

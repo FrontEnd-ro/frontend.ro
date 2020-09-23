@@ -7,7 +7,7 @@ import Header from '~/components/header/Header.component';
 import styles from '../../styles/pages/default-page.module.scss';
 import MatchCommandClassComponent from '../../components/cli_git/GitCli_CC';
 import AddPostForm from '../../redux/crud_redux/AddPostForm';
-import PostList from '../../redux/crud_redux/PostsList';
+import PostsList from '../../redux/crud_redux/PostsList';
 
 export default class Html extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class Html extends React.Component {
             commands={expressionToMatch}
           />
           <AddPostForm />
-          <PostList />
+          <PostsList />
         </main>
 
         <Footer />

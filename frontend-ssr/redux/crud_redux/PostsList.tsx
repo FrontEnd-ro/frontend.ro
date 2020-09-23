@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Post from './Post';
 import EditPostForm from './EditPostForm';
 
-function ListPosts(props: { posts: any;}) {
+function PostsList(props: { posts: any;}) {
   const { posts } = props;
 
   return (
@@ -37,4 +37,4 @@ const mapStateToProps = (state: any) => ({
   posts: state,
 });
 
-export default connect(mapStateToProps)(ListPosts);
+export default connect(mapStateToProps)(PostsList);

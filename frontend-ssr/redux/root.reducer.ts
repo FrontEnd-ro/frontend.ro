@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import { dummy } from './dummy/dummy-reducer';
-import { postReducer } from './crud_redux/reducers/post-reducer';
+import { submissionReducer } from './exercise-submissions/submissions.reducer';
 
 const rootReducer = combineReducers({
-  dummy,
-  postReducer,
+  submissionReducer,
 });
 
 export default rootReducer;

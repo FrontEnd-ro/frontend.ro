@@ -6,8 +6,8 @@ import Header from '~/components/header/Header.component';
 
 import styles from '../../styles/pages/default-page.module.scss';
 import MatchCommandClassComponent from '../../components/cli_git/GitCli_CC';
-import AddPostForm from '../../redux/crud_redux/AddPostForm';
-import PostsList from '../../redux/crud_redux/PostsList';
+import ExerciseSubmissionsList from '~/components/exercise-submissions/ExerciseSubmissionsList';
+import AddSubmissionForm from '../../components/exercise-submissions/AddSubmissionForm';
 
 export default class Html extends React.Component {
   constructor(props) {
@@ -29,6 +29,7 @@ export default class Html extends React.Component {
       { command: 'git commit -m "something to commit"', message: 'you successfully committed your files with the message //' },
       { command: /^git push$/, message: 'you successfully pushed your files into master' },
     ];
+
     return (
       <>
         <Head>
@@ -46,8 +47,8 @@ export default class Html extends React.Component {
           <MatchCommandClassComponent
             commands={expressionToMatch}
           />
-          <AddPostForm />
-          <PostsList />
+          <ExerciseSubmissionsList />
+          <AddSubmissionForm />
         </main>
 
         <Footer />

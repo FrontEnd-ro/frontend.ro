@@ -1,19 +1,17 @@
 import React from 'react';
-import { withRouter, SingletonRouter } from 'next/router';
 import styles from './TableOfContents.module.scss';
 
 interface State {
-    activeChapterId: string,
+  activeChapterId: string;
 }
 
 interface Props {
-    chapters: Chapters[],
-    router?: SingletonRouter,
+  chapters: Chapters[];
 }
 
 interface Chapters {
-    title: string,
-    id: string,
+    title: string;
+    id: string;
 }
 
 const SCROLL_DURATION = 2000;
@@ -64,7 +62,6 @@ class TableOfContents extends React.Component<Props, State> {
   };
 
   changeNav = (entries) => {
-    const { router } = this.props;
     const { activeChapterId } = this.state;
     entries.some((entry) => {
       if (entry.intersectionRatio <= 0.5) {
@@ -72,7 +69,14 @@ class TableOfContents extends React.Component<Props, State> {
       }
 
       if (entry.target.id !== activeChapterId) {
-        router.replace(`/intro/lesson-0#${entry.target.id}`);
+        /**
+         * Using the NextRouter `replace` method is buggy on Firefox, triggering
+         * a scroll when it intersects an element.
+         *
+         * This is reproducing only when using a Mouse, not the touchpad on laptop.
+         */
+        window.history.replaceState(null, '', `/intro/lesson-0#${entry.target.id}`);
+
         this.setState({
           activeChapterId: entry.target.id,
         });
@@ -135,4 +139,4 @@ class TableOfContents extends React.Component<Props, State> {
     );
   }
 }
-export default withRouter(TableOfContents);
+export default TableOfContents;

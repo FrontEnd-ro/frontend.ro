@@ -29,7 +29,7 @@
     }
 
     :global aside.is--open {
-        transform: translateX(0);
+        transform: translateX(100%);
     }
 
     main {
@@ -59,7 +59,7 @@
 
     @media screen and (max-width: 1400px) {
         aside {
-            transform: translateX(-100%);
+            left: -18em;
         }
 
         :global .aside-header button,
@@ -85,4 +85,11 @@
     right: 0;
     top: 0.75em;
     position: absolute;
+
+    @media screen and (max-width: 400px) {
+      position: relative;
+      top: initial;
+      bottom: 1.75em;
+      float: right;
+    }
 }

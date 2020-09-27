@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,36 +8,46 @@ import Header from '~/components/header/Header.component';
 import Footer from '~/components/footer/Footer.component';
 import LessonContributors from '~/components/lesson-contributors/LessonContributors';
 import TableOfContents from '~/components/tableOfContents/TableOfContents';
+import { ShareButton } from '~/components/social-media-buttons/SocialMediaButtons';
 
 import { useOutsideClick } from '~/services/Hooks';
 
 import styles from './lesson-0.module.scss';
+import SEOTags from '~/components/SEOTags';
 
 // TS missed `ResizeObserver` definitions: https://github.com/Microsoft/TypeScript/issues/28502
 declare let ResizeObserver: any;
 
 const contributors = [{
   name: 'Păvă',
-  avatarSrc: 'https://iampava.com/dist/assets/images/pava.png',
+  avatarSrc: '/images/contributors/iampava.png',
   url: 'https://iampava.com',
+}, {
+  name: 'Ira',
+  avatarSrc: '/images/contributors/iramelnic.jpg',
+  url: 'https://www.facebook.com/melnic.ira',
 }];
 
 let chapters = [
-  { title: 'Ce e FrontEnd.ro', id: 'about' },
+  { title: 'Ce e FrontEnd.ro?', id: 'about' },
   { title: 'De ce e FrontEnd.ro diferit?', id: 'why-are-we-different' },
   { title: 'De ce e FrontEnd.ro gratuit?', id: 'why-are-we-free' },
-  { title: 'Cum pot sa ajut?', id: 'how-can-i-help' },
-  { title: 'Skill-uri si concepte', id: 'skills-and-concepts' },
-  { title: 'Cum sa folosesti platforma', id: 'how-to-use-platform' },
+  { title: 'Cum pot să ajut?', id: 'how-can-i-help' },
+  { title: 'Skill-uri și concepte', id: 'skills-and-concepts' },
+  { title: 'Cum să folosești platforma', id: 'how-to-use-platform' },
   { title: 'Tool-uri necesare', id: 'tools' },
   { title: 'Resurse recomandate', id: 'recommended-resources' },
 ];
 
 export default function Lesson0() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [urlToShare, setUrlToShare] = useState(router.pathname);
   const [coverWrapperRef, coverSvgRef, asideRef] = [useRef(null), useRef(null), useRef(null)];
 
   useEffect(() => {
+    setUrlToShare(`${window.location.origin}${router.pathname}`);
+
     const resizeObserver = new ResizeObserver(([entry]) => {
       if (entry.contentRect.width < 400) {
         coverSvgRef.current.setAttribute('viewBox', '100 0 869.99994 520.13854');
@@ -55,8 +66,13 @@ export default function Lesson0() {
   return (
     <>
       <Head>
-        <title> Introduction | FrontEnd.ro</title>
+        <title> Introducere | FrontEnd.ro</title>
         <link rel="icon" href="/favicon.ico" />
+        <SEOTags
+          title="Introducere | FrontEnd.ro"
+          description="Detalii despre noi, despre platformă și cum vom lucra împreună."
+          url="https://FrontEnd.ro/intro/lesson-0"
+        />
       </Head>
       <div className={styles.lesson}>
         <aside ref={asideRef} className={`bg-black text-white${isMenuOpen ? ' is--open' : ''}`}>
@@ -106,21 +122,21 @@ export default function Lesson0() {
             <section>
               <h2 className="heading-with-href" id="about">
                 <a href="#about">#</a>
-                Ce e FrontEnd.ro
+                Ce e FrontEnd.ro?
               </h2>
               <p>
-                FrontEnd.ro este o comunitate de oameni ce invata Front-end de la zero.
+                FrontEnd.ro este o comunitate de oameni ce învață FrontEnd de la zero.
               </p>
               <p>
-                Comunitatea graviteaza in jurul unei serii de lectii si exercitii
-                gratuite ce constuie - in opinia noastra - fundamentele unei cariere moderne
-                in Front-end Development. Desi abia la
+                Comunitatea gravitează în jurul unei serii de lecții și exerciții
+                gratuite ce constituie - în opinia noastră - fundamentele unei cariere moderne
+                în FrontEnd Development. Deși abia la
                 {' '}
                 <span className="line-through">prima</span>
                 {' '}
-                a doua iteratie, acestea vor fi
-                re-scrise, re-re-scrise si re-re-re-scrise in functie de feedback-ul vostru
-                pana cand vor ajunge una din cele mai calitative resurse de acest fel din Romania.
+                a doua iterație, acestea vor fi
+                re-scrise, re-re-scrise și re-re-re-scrise în funcție de feedback-ul vostru
+                până când vor ajunge una din cele mai calitative resurse de acest fel din România.
               </p>
             </section>
             <section>
@@ -129,15 +145,15 @@ export default function Lesson0() {
                 De ce e FrontEnd.ro diferit?
               </h2>
               <p>
-                Noi suntem convinsi ca:
+                Noi suntem convinși că:
               </p>
               <blockquote className="is--center">
-                Nu conteaza la cate tutoriale te uiti, ci cat de mult codezi
+                Nu contează la câte tutoriale te uiți, ci cât de mult codezi
               </blockquote>
               <p>
-                Insa cand codezi singur poate fi putin mai greu sa-ti dai seama daca rezolvarea
-                gasita de tine este cea mai buna. Asa ca ne vei trimite aici rezolvarile
-                la exercitii, iar noi - developeri cu experienta din comunitate -  iti
+                Însă când înveți singur e puțin mai greu să-ți dai seama dacă rezolvarea
+                găsită de tine este cea mai bună. Așa că ne vei trimite aici rezolvările
+                la exerciții, iar noi - developeri cu experiență din comunitate -  îți
                 vom da feedback pentru fiecare.
               </p>
             </section>
@@ -147,192 +163,205 @@ export default function Lesson0() {
                 De ce e FrontEnd.ro gratuit?
               </h2>
               <p>
-                De la inceput ne-am dorit ca FrontEnd.ro sa fie un
+                De la început ne-am dorit ca FrontEnd.ro să fie un
                 {' '}
                 <strong>
                   efort de comunitate,
                   pentru comunitate
                 </strong>
-                . Lectiile, exercitiile, acest site cat si feedback-ul
-                pe care voi il veti primi reprezinta o contributie voluntara a unor
-                developeri cu inima mare din Romania.
+                . Lecțiile, exercițiile, acest site cât și feedback-ul
+                pe care voi îl veți primi reprezintă o contribuție voluntară a unor
+                developeri cu inimă mare din România.
               </p>
               <p>
-                Vrem sa oferim sansa cator
-                mai multi oameni sa invete si sa lucreze in acest domeniu, unul din cele mai
-                faine din lume, de aceea nu vom pune un pret pe aceasta experienta.
+                Vrem să oferim șansa la cât
+                mai mulți oameni să învețe și să lucreze în acest domeniu, unul din cele mai
+                faine din lume, de aceea nu vom pune un preț pe această experiență.
               </p>
             </section>
             <section>
               <h2 className="heading-with-href" id="how-can-i-help">
                 <a href="#how-can-i-help">#</a>
-                Cum pot sa ajut?
+                Cum pot să ajut?
               </h2>
               <p>
-                Daca folosesti platforma sa
+                Dacă folosești platforma să
                 {' '}
-                <strong>inveti Front-end</strong>
+                <strong>înveți FrontEnd</strong>
                 {' '}
-                si iti place ce ai gasit aici,
-                te rugam sa impartasesti acest site cu prietenii si colegii tai. Asta ne ajuta
-                sa ajungem la mai multi oameni, si sa avem un impact si mai mare.
+                și simți că te-a ajutat, atunci s-ar putea să fie de folos și prietenilor
+                tăi. Am aprecia mult un share, așa putem avea un impact cât mai mare:
+              </p>
+              <div className="d-flex justify-content-center my-5">
+                <ShareButton
+                  url={urlToShare}
+                  config={{
+                    copy: true,
+                    facebook: true,
+                    whatsapp: true,
+                    linkedin: true,
+                  }}
+                />
+              </div>
+              <p>
+                Iar după ce avansezi în skill'uri și capeți mai multă experiență, chiar ne-am bucura
+                dacă vei reveni aici, de data aceasta din postura de mentor și să oferi
+                înapoi comunității :)
               </p>
               <p>
-                Iar dupa ce te angajezi si capeti ceva experienta, chiar ne-am bucura
-                daca vei reveni aici, de data aceasta din postura de mentor si sa oferi
-                inapoi comunitatii :)
-              </p>
-              <p>
-                Daca
+                Dacă
                 {' '}
-                <strong>esti Front-end Developer</strong>
-                , atunci ne poti ajuta prin oferirea de
-                feedback studentilor, crearea de exercitii si lectii  sau dezvoltarea
-                platformei efective. Mai mult despre acest proces gasesti in capitolul
+                <strong>ești FrontEnd Developer</strong>
+                , atunci ne poți ajuta prin oferirea de
+                feedback cursanților, crearea de exerciții și lecții sau dezvoltarea
+                acestei platforme al cărei cod este
+                {' '}
+                <a target="_blank" rel="noreferrer" href="https://github.com/iampava/frontend.ro">open-source pe GitHub</a>
+                .
+                {/* Mai mult despre acest proces gasesti in capitolul
                 {' '}
                 <a href="/intro/how-to-help">Cum ajut</a>
-                .
+                . */}
               </p>
               <p>
-                Iar daca
+                Iar dacă
                 {' '}
-                <strong>esti o firma tech si-ti place ce incercam sa facem aici</strong>
+                <strong>ești o firmă tech și-ți place ce încercăm să facem aici</strong>
                 ,
-                poate gasim un mod sa colaboram si sa ne ajutam reciproc si comunitatea
-                in acelasi timp. Arunca un ochi
+                poate găsim un mod să colaborăm și să ne ajutăm reciproc și comunitatea
+                în același timp. Aruncă un ochi
                 {' '}
                 <a href="/intro/how-to-help">aici</a>
                 {' '}
-                si pentru mai multe detalii.
+                pentru mai multe detalii.
               </p>
             </section>
             <div className="dots" />
             <section>
               <h2 className="heading-with-href" id="skills-and-concepts">
                 <a href="#skills-and-concepts">#</a>
-                Skill-uri si concepte
+                Skill-uri și concepte
               </h2>
               <p>
-                Front-end'ul, de fapt programarea in general, este un domeniu in continua
-                dezvoltare si schimbare.
-                In fiecare luna apar lucruri noi, iar in cativa ani tool-urile pe care
+                FrontEnd'ul, de fapt programarea în general, este un domeniu în continuă
+                dezvoltare și schimbare.
+                În fiecare lună apar lucruri noi, iar în cațiva ani tool-urile pe care
                 noi le folosim pot fi complet diferite. Ceea ce face
-                lucrurile extrem de interesante,
-                insa si putin complicate cand vrei sa inveti acest domeniu...
+                lucrurile extrem de interesante, dar și puțin complicate
+                când vrei să înveți acest domeniu...
               </p>
 
               <p>
-                Insa fundamentele front-end'ului nu se schimba, si le vei folosi fie ca
-                construiesti un site de prezentare, un magazin online sau urmatorul
-                Instagram. De aceea, aici ne vom ocupa de aceste fundamente ale celor
-                3 limbaje de programare ce compun Front-end'ul:
+                Totuși, fundamentele FrontEnd'ului nu se schimbă, și le vei folosi fie că
+                construiești un site de prezentare, un magazin online sau următorul
+                Instagram. De aceea, aici ne vom ocupa de fundamentele celor
+                3 limbaje de programare ce compun FrontEnd'ul:
                 {' '}
                 <strong>HTML</strong>
                 ,
                 {' '}
                 <strong>CSS</strong>
                 {' '}
-                si
+                și
                 {' '}
                 <strong>JavaScript</strong>
-                . Deocamdata avem lectii si exercitii doar pentru
-                primul, cel de HTML, insa dupa o runda de feedback de la
-                comunitate vom continua si cu celelalte doua.
+                . Deocamdată avem lecții și exerciții doar pentru
+                primul, cel de HTML, însa după o rundă de feedback de la
+                comunitate vom continua și cu celelalte două.
               </p>
             </section>
             <div className="dots" />
             <section>
               <h2 className="heading-with-href" id="how-to-use-platform">
                 <a href="#how-to-use-platform">#</a>
-                Cum sa folosesti platforma
+                Cum să folosești platforma
               </h2>
               <p>
-                Focusul nostru este pe exercitii si feedback, acolo investim cel
-                mai mult timp. Exista deja o multime de articole si tutoriale
-                extrem de bune pe internet, asa ca am decis ca lectiile sa reprezinte
+                Focusul nostru este pe exerciții și feedback, acolo investim cel
+                mai mult timp. Există deja o mulțime de articole și tutoriale
+                extrem de bune pe internet, așa că am decis ca lecțiile să reprezinte
                 doar un
                 {' '}
                 <strong>scurt rezumat</strong>
                 ,  care la final va avea
                 {' '}
                 <strong>
-                  linkuri catre resurse
+                  link-uri către resurse
                   mai detaliate
                 </strong>
-                . Din aceasta cauza, principala responsabilitate
-                la partea de invatare este a ta.
+                . Din această cauză, principala responsabilitate
+                la partea de învățare este a ta.
                 {' '}
               </p>
               <blockquote>
-                Ne asteptam sa fii motivat
-                si autodidact, sa poti intelege in mare conceptele de unul singur.
+                Ne așteptăm să fii motivat
+                și autodidact, să poți înțelege în mare conceptele de unul singur.
               </blockquote>
               <p>
-                Pentru a invata cat mai mult, incepe cu lectia 0 (cea pe care o citesti acum)
-                si continua pe rand cu fiecare noua lectie. Citeste rezumatul nostru, iar
-                apoi arunca un ochi pe resursele suplimentare, inainte sa te apuci
-                de exercitii.
+                Pentru a învăța cât mai mult, începe cu lecția 0 (cea pe care o citești acum)
+                și continuă pe rând cu fiecare lecție nouă. Citește rezumatul nostru, iar
+                apoi aruncă un ochi pe resursele suplimentare, înainte să te apuci
+                de exerciții.
                 {' '}
               </p>
               <p>
                 <strong>
-                  Este foarte important sa rezolvi toate exercitiile
-                  de la fiecare lectie.
+                  Este foarte important să rezolvi toate exercițiile
+                  de la fiecare lecție.
                 </strong>
                 {' '}
-                Ai rabdare si incredere in noi, nu am incarcat site-ul cu exercitii inutile.
+                Ai răbdare și încredere în noi, nu am incărcat site-ul cu exerciții inutile.
               </p>
               <p>
-                Apoi, dupa ce ne trimiti solutia ta vom ajunge la
+                Apoi, după ce ne trimiți soluția ta vom ajunge la
                 {' '}
                 <strong>partea de feedback</strong>
                 .
-                Fiind incepator probabil vor fi undeva la 3-4-5 runde,
-                in care-ti vom explica de ce anumite lucruri nu sunt
-                bune si te vom ruga sa le schimbi.
+                Fiind începător probabil vor fi undeva la 3-4-5 runde,
+                în care-ți vom explica de ce anumite lucruri nu sunt
+                bune și te vom ruga să le schimbi.
               </p>
               <p>
                 E extrem de important
-                sa
+                să
                 {' '}
-                <strong>ai rabdare cu acest proces, si sa nu fii prea dur cu tine</strong>
+                <strong>ai răbdare cu acest proces, și să nu fii prea dur cu tine</strong>
                 .
-                Bucura-te ca ai pe cineva care-ti face Code Review si de la
-                care poti sa inveti. Multi dintre noi nu am avut sansa asta.
-                Si din nou: .
+                Bucură-te că ai pe cineva care-ți face Code Review și de la
+                care poți să înveți. Mulți dintre noi nu am avut șansa asta.
+                Și din nou:
               </p>
               <blockquote className="is--center">
                 Don't be too hard on yourself.
                 Don't take it personal.
-                Noi suntem aici sa te ajutam :)
+                Noi suntem aici să te ajutăm :)
               </blockquote>
             </section>
-            <div className="dots" />
             <section>
               <h2 className="heading-with-href" id="tools">
                 <a href="#tools">#</a>
                 Tool-uri necesare
               </h2>
               <p>
-                Unul din cele mai faine lucruri la Front-end development
-                este faptul ca nu avem nevoie de prea multe lucruri inainte sa incepem.
-                In primul rand, un
+                Unul dintre cele mai faine lucruri la FrontEnd development
+                este faptul că nu avem nevoie de prea multe lucruri înainte să începem.
+                În primul rând, un
                 {' '}
                 <strong>calculator</strong>
                 {' '}
-                si o
+                și o
                 {' '}
                 <strong>conexiune la internet</strong>
                 .
               </p>
-              <p> Apoi, specific pentru acest domeniu, ai nevoie de:</p>
+              <p> Apoi, specific pentru acest domeniu ai nevoie de:</p>
               <ol className="with--count">
                 <li>
-                  <strong>un browser modern si cross-platform </strong>
-                  (adica care poate fi instalat pe
-                  Windows, MacOS si Linux).
+                  <strong>un browser modern și cross-platform </strong>
+                  (ce poate fi instalat pe
+                  Windows, MacOS și Linux).
                   <p>
-                    Noi recomandam unul dintre
+                    Noi recomandăm unul dintre
                     {' '}
                     <a target="_blank" rel="noreferrer" href="https://www.google.com/chrome/">
                       Google Chrome
@@ -346,7 +375,7 @@ export default function Lesson0() {
                     <a target="_blank" rel="noreferrer" href="https://www.microsoft.com/en-us/edge">Microsoft Edge</a>
                     .
                     {' '}
-                    Nu prea conteaza pe care din cele 3 il instalezi, toate sunt bune.
+                    Nu prea contează pe care din cele 3 îl instalezi, toate sunt bune.
                   </p>
                 </li>
                 <li>
@@ -356,13 +385,13 @@ export default function Lesson0() {
                   <p>
                     {' '}
                     Acest editor este
-                    extrem de popular printre developeri, asa ca hai sa-l folosim chiar de la
-                    inceput pentru a ne familiariza cu el.
-                    De asemenea, inainte sa incepi
+                    extrem de popular printre developeri, așa că hai să-l folosim chiar de la
+                    început pentru a ne familiariza cu el.
+                    De asemenea, înainte să începi
                     {' '}
-                    <a href="/html/lesson-1">Lectia 1</a>
+                    <a href="/html/lesson-1">Lecția 1</a>
                     {' '}
-                    te invitam sa arunci un ochi pe acest
+                    te invităm să arunci un ochi pe acest
                     {' '}
                     <a href="/intro/vs-code">mini-tutorial despre VSCode</a>
                     .
@@ -377,65 +406,64 @@ export default function Lesson0() {
                 Resurse recomandate
               </h2>
               <p>
-                Pe partea de resurse, vom adauga la finalul fiecarei lectii linkuri de
-                unde poti invata mai multe. Totusi, nu putem sa nu mentionam doua site-uri extrem de
-                utile si fara de care job-ul de Front-end developer ar fi mult mult mai frustrant:
+                Pe partea de resurse, vom adăuga la finalul fiecărei lecții link-uri de
+                unde poți învăța mai multe. Totuși, nu putem să nu menționăm două site-uri extrem de
+                utile și fără de care job-ul de FrontEnd developer ar fi mult mai frustrant:
               </p>
               <ol className="with--count">
                 <li>
                   <a target="_blank" rel="noreferrer" href="https://developer.mozilla.org/en-US/" className="text-bold">MDN - Mozilla Developer Network</a>
                   {' '}
-                  este locul unde gasim cele mai calitative si detaliate documentatii despre HTML,
-                  CSS si JavaScript, cele 3 limbaje ce compun Front-end development-ul.
+                  este locul unde găsim cele mai calitative și detaliate documentații despre HTML,
+                  CSS și JavaScript - cele 3 limbaje ce compun FrontEnd development-ul.
                   <p>
-                    Domeniul e atat de complex incat e perfect normal sa nu tinem minte totul.
-                    Eu de multe ori uit lucruri de sintaxa, adica stiu ce vreau sa
-                    fac doar ca nu mai stiu care e bucata de cod pe care trebuie sa
-                    o scriu pentru asta.
+                    Domeniul e atât de complex încât e perfect normal să nu ținem minte totul.
+                    E mult mai comun decât ai crede ca developeri cu experiență să uite
+                    lucruri de sintaxă, adică ce bucată de cod trebuie să folosească pentru
+                    a ajunge la un anumit rezultat.
                   </p>
                   <p>
-                    De exemplu, poate am uitat cum schimb culoarea de fundal
-                    a unui element din pagina, caz in care voi cauta
+                    De exemplu, poate am uitat cum schimbăm culoarea de fundal
+                    a unui element din pagină, caz în care vom căuta
                     {' '}
                     <span className="formatted">background color MDN</span>
                     .
-                    Pun “MDN” la final pentru a ma asigura ca pagina pe care
-                    o vreau este chiar prima, ca in imaginea de mai jos.
+                    Recomandăm să pui “MDN” la final pentru ca pagina căutată
+                    să apară printre primele rezultate.
                   </p>
                   <figure className="with--border">
                     <img src="/images/lesson-0__google-search.png" alt="Searching 'background color MDN' on Google Search" />
-                    <figcaption> Docs about `background-color` on MDN </figcaption>
+                    <figcaption> Cautând `background-color MDN` pe Google  </figcaption>
                   </figure>
                   <p>
-                    And voilà! Am ajuns la documentatie,
-                    unde putem vedea toate optiunile posibile si cum le putem folosi:
+                    And voilà! Am ajuns la documentație,
+                    unde putem vedea toate opțiunile posibile și cum le putem folosi:
                   </p>
                   <figure className="with--border">
                     <img src="/images/lesson-0__mdn.png" alt="Docs about `background-color` on MDN" />
-                    <figcaption> Docs about `background-color` on MDN </figcaption>
+                    <figcaption> Documentația `background-color` pe MDN </figcaption>
                   </figure>
                 </li>
                 <li>
                   <a target="_blank" rel="noreferrer" href="https://stackoverflow.com/" className="text-bold">Stack Overflow</a>
                   {' '}
-                  este o comunitate de developeri ce invata si codeaza impreuna.
+                  este o comunitate de developeri ce învață și codează împreună.
                   <p>
-                    Mai exact, este cea mai populara platforma de intrebari si
-                    raspunsuri de programare, folosita de toti developerii din lume.
-                    Fara acest site ne-ar lua mult
-                    mai mult timp sa gasim solutiile la diversele
-                    buguri/probleme pe care le intalnim cand codam.
+                    Mai exact, este cea mai populară platformă de întrebări și
+                    răspunsuri de programare, folosită de mai toți developerii din lume.
+                    Fără acest site ne-ar lua mult
+                    mai mult timp să gasim soluții la diversele
+                    buguri/probleme pe care le întâlnim când codăm.
                   </p>
                   <p>
                     {' '}
-                    Iar daca esti curios, poti arunca un ochi pe ultimele intrebari adaugate pentru
-                    limbajele ce le vom invata aici:
+                    Iar dacă ești curios, poți arunca un ochi pe ultimele întrebări adăugate pentru
+                    limbajele ce le vom învăța aici:
                     {' '}
                     <a target="_blank" rel="noreferrer" href="https://stackoverflow.com/questions/tagged/html">HTML</a>
                     ,
                     {' '}
                     <a target="_blank" rel="noreferrer" href="https://stackoverflow.com/questions/tagged/css">CSS</a>
-                    {' '}
                     {' '}
                     si
                     {' '}
@@ -445,6 +473,15 @@ export default function Lesson0() {
                 </li>
               </ol>
             </section>
+            <div className="text-center my-5">
+              <a href="/" className="cta-button">
+                Să continuăm cu prima lecție
+                {' '}
+                <br />
+                {' '}
+                despre HTML
+              </a>
+            </div>
           </article>
           <Footer />
         </main>

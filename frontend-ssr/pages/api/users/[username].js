@@ -1,13 +1,13 @@
 import { getDbClient } from '../../../services/Utils';
 
 const { DB_URI } = process.env;
-// eslint-disable-next-line consistent-return
 // no model created for user since it's in another PR
+// eslint-disable-next-line consistent-return
 export default async (req, res) => {
   if (req.method === 'GET') {
     const { username } = req.query;
     const db = await getDbClient(DB_URI, 'users');
-    const user = await db.findOne({ username });
+    const user = await db.findOne({ username }); // add projection in future (for pw and salt)
 
     return user ? res.status(200).json(user) : res.status(404).end();
   }

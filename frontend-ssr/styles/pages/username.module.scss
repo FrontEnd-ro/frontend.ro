@@ -1,0 +1,51 @@
+@import "../variables";
+
+.page {
+  text-align: center;
+  height: 70%;
+  width: 40%;
+  margin: 0 auto;
+  display: block;
+
+  img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-top: 10%;
+  }
+
+  input {
+    width: 100%;
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin: 0 auto;
+    border: 1px solid color(grey); // use variable
+  }
+
+  label {
+    text-align: left;
+    display: block;
+
+    b {
+      margin-bottom: 5px;
+      display: block;
+    }
+  }
+
+  .inputRequired {
+    border: 1px solid color(red);
+  }
+
+  .updateDetailsBtn {
+    padding: 10px;
+  }
+
+  .validationMessageContainer {
+    font-size: 0.8em;
+    color: color(red);
+  }
+}
+
+

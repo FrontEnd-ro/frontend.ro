@@ -1,13 +1,43 @@
-export default (req, res) => {
-  const { username } = req.query;
+import { getDbClient } from '../../../services/Utils';
 
-  if (username === 'bob') {
-    res.statusCode = 200;
-    res.json({ name: 'Bob Doe' });
-  } else if (username === 'error') {
-    throw 'DANGER!';
-  } else {
-    res.statusCode = 404;
-    res.end();
+const { DB_URI } = process.env;
+// eslint-disable-next-line consistent-return
+export default async (req, res) => {
+  if (req.method === 'GET') {
+    const { username } = req.query;
+    const db = await getDbClient(DB_URI, 'users');
+    const user = await db.findOne({ username });
+
+    return user ? res.status(200).json(user) : res.status(404).end();
+  }
+
+  if (req.method === 'PUT') {
+    const { username } = req.query;
+    const { username: updatedUsername, email, name } = JSON.parse(req.body);
+    const db = await getDbClient(DB_URI, 'users');
+
+    try {
+      await db.findOneAndUpdate({ username }, {
+        $set: {
+          username: updatedUsername,
+          email,
+          name,
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+      });
+    } catch (err) {
+      if (err.codeName === 'DuplicateKey') {
+        const [duplicatedKey] = Object.keys(err.keyPattern);
+        return res.status(200).json({
+          success: false,
+          duplicatedKey,
+        });
+      }
+
+      return res.status(404).json({}).end();
+    }
   }
 };

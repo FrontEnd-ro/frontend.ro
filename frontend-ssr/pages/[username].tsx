@@ -1,5 +1,7 @@
 import React from 'react';
 import NotFoundPage from './404';
+import store from '~/redux/store';
+import { storeUserDetails } from '~/redux/actions/username';
 import UserProfile from '~/components/user-profile/UserProfile';
 
 export async function getServerSideProps({ res, params }) {
@@ -25,5 +27,11 @@ export async function getServerSideProps({ res, params }) {
 
 export default function Username(props: any) {
   const { user } = props;
-  return user ? <UserProfile {...props} /> : <NotFoundPage />;
+  const { dispatch } = store;
+  if (user) {
+    dispatch(storeUserDetails(user));
+    return <UserProfile {...props} />;
+  }
+
+  return <NotFoundPage />;
 }

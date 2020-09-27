@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
 import { connect } from 'react-redux';
 import Header from '~/components/header/Header.component';
 import store from '~/redux/store';
 import {
-  updateField, storeUserDetails, duplicatedKeyError, reqInProgress,
+  updateField, duplicatedKeyError, reqInProgress,
 } from '~/redux/actions/username';
 import styles from '~/styles/pages/username.module.scss';
 
 const { dispatch } = store;
-const OPTIONAL_FIELDS = ['avatar', '_id'];
+const OPTIONAL_FIELDS = ['avatar', '_id']; // project fields on server side
 const DEFAULT_USER_IMG_SRC = 'https://www.timeshighereducation.com/sites/default/files/byline_photos/anonymous-user-gravatar_0.png'; // get the link from S3
 const fieldsErrorMessages = {
   name: 'Please add your name',
@@ -38,14 +38,9 @@ interface MyProps {
   dispatch:any;
 }
 
-class UserProfile extends React.Component<MyProps> {
-  componentDidMount = () => {
-    const { user } = this.props;
-    dispatch(storeUserDetails(user));
-  }
-
+class UserProfile extends PureComponent<MyProps> {
   updateField = (value: any, field: string) => {
-    if (field === 'avatar') {
+    if (field === 'TODO') {
       const data = new FormData();
       data.append('file', value);
       // eslint-disable-next-line no-param-reassign
@@ -178,19 +173,12 @@ class UserProfile extends React.Component<MyProps> {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  userDetails: state.username.userDetails || ownProps.user,
+const mapStateToProps = (state) => ({
+  userDetails: state.username.userDetails,
   userProgress: state.username.userProgress,
   usernameAlreadyInUse: state.username.usernameAlreadyInUse,
   emailAreadyInUse: state.username.emailAreadyInUse,
   requestInProgress: state.username.requestInProgress,
 });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   dispatchUpdateFields: (value: any, field: string) => dispatch(updateField(value, field)),
-//   dispatchStoreUserDetails: (user: any) => dispatch(storeUserDetails(user)),
-//   dispatchDuplicatedKeyError: (key) => dispatch(duplicatedKeyError(key)),
-//   dispatchRequestInProgress: () => dispatch(reqInProgress()),
-// });
 
 export default withRouter(connect(mapStateToProps, null)(UserProfile));

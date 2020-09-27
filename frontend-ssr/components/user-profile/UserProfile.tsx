@@ -1,15 +1,16 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
 import { connect } from 'react-redux';
 import Header from '~/components/header/Header.component';
+import store from '~/redux/store';
 import {
   updateField, storeUserDetails, duplicatedKeyError, reqInProgress,
 } from '~/redux/actions/username';
 import styles from '~/styles/pages/username.module.scss';
 
+const { dispatch } = store;
 const OPTIONAL_FIELDS = ['avatar', '_id'];
 const DEFAULT_USER_IMG_SRC = 'https://www.timeshighereducation.com/sites/default/files/byline_photos/anonymous-user-gravatar_0.png'; // get the link from S3
 const fieldsErrorMessages = {
@@ -26,28 +27,38 @@ const isFormValidForSubmission = (userDetails) => {
   return formKeys.some((key) => !userDetails[key]);
 };
 
-class UserProfile extends React.Component {
+interface MyProps {
+  user:any;
+  userDetails:any;
+  userProgress:any;
+  usernameAlreadyInUse:boolean;
+  emailAreadyInUse:boolean;
+  requestInProgress:boolean;
+  router:any;
+  dispatch:any;
+}
+
+class UserProfile extends React.Component<MyProps> {
   componentDidMount = () => {
-    const { dispatchStoreUserDetails, user } = this.props;
-    dispatchStoreUserDetails(user);
+    const { user } = this.props;
+    dispatch(storeUserDetails(user));
   }
 
   updateField = (value: any, field: string) => {
-    const { dispatchUpdateFields } = this.props;
     if (field === 'avatar') {
       const data = new FormData();
       data.append('file', value);
       // eslint-disable-next-line no-param-reassign
       value = data;
     }
-    return dispatchUpdateFields(value, field);
+    return dispatch(updateField(value, field));
   }
 
   updateUserDetails = async () => {
     const {
-      userDetails, dispatchDuplicatedKeyError, dispatchRequestInProgress, router,
+      userDetails, router,
     } = this.props;
-    dispatchRequestInProgress();
+    dispatch(reqInProgress());
     const existingUsername = router.query.username;
     const newUsername = userDetails.username;
     const updateUserResponse = await fetch(`/api/users/${router.query.username}`, {
@@ -58,14 +69,14 @@ class UserProfile extends React.Component {
     const isKeyDuplicated = !res.success && res.duplicatedKey;
 
     if (isKeyDuplicated) {
-      dispatchDuplicatedKeyError(res.duplicatedKey);
+      dispatch(duplicatedKeyError(res.duplicatedKey));
     }
 
     if (existingUsername !== newUsername && !isKeyDuplicated) {
       router.push(`/${newUsername}`);
     }
 
-    return dispatchRequestInProgress();
+    return dispatch(reqInProgress());
   }
 
   render() {
@@ -175,11 +186,11 @@ const mapStateToProps = (state, ownProps) => ({
   requestInProgress: state.username.requestInProgress,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatchUpdateFields: (value: any, field: string) => dispatch(updateField(value, field)),
-  dispatchStoreUserDetails: (user: any) => dispatch(storeUserDetails(user)),
-  dispatchDuplicatedKeyError: (key) => dispatch(duplicatedKeyError(key)),
-  dispatchRequestInProgress: () => dispatch(reqInProgress()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   dispatchUpdateFields: (value: any, field: string) => dispatch(updateField(value, field)),
+//   dispatchStoreUserDetails: (user: any) => dispatch(storeUserDetails(user)),
+//   dispatchDuplicatedKeyError: (key) => dispatch(duplicatedKeyError(key)),
+//   dispatchRequestInProgress: () => dispatch(reqInProgress()),
+// });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserProfile));
+export default withRouter(connect(mapStateToProps, null)(UserProfile));

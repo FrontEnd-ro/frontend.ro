@@ -2,6 +2,7 @@ import { getDbClient } from '../../../services/Utils';
 
 const { DB_URI } = process.env;
 // eslint-disable-next-line consistent-return
+// no model created for user since it's in another PR
 export default async (req, res) => {
   if (req.method === 'GET') {
     const { username } = req.query;

@@ -22,7 +22,7 @@
     pointer-events: none;
     transition: opacity 0.5s ease-out;
   }
-  
+
   li {
     opacity: 0;
     padding: 0.5em 1em;
@@ -47,7 +47,7 @@
   }
 
   li:nth-child(5) {
-    transition-delay: #{$transition-delay * 4 }s;
+    transition-delay: #{$transition-delay * 4}s;
     transform: translateY(#{$transform-distance * 5});
   }
 }

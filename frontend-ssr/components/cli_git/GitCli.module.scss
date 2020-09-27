@@ -1,62 +1,60 @@
-@import '../../styles/variables';
-@import '../../styles/buttons';
-@import '../../styles/animations';
+@import "../../styles/variables";
+@import "../../styles/buttons";
+@import "../../styles/animations";
 
 .commands {
-    width: 100%;
+  width: 100%;
 
-    .commands__cli {
-        height: 100%;
-        overflow: auto;
-        padding: 2em 1em;
-        @extend %gradientBackground, %blackGradientBackground;
+  .commands__cli {
+    height: 100%;
+    overflow: auto;
+    padding: 2em 1em;
+    @extend %gradientBackground, %blackGradientBackground;
 
-        .command {
-            color: color(blue);
-        }
-        .success {
-            color: color(green);
-        }
-        .error {
-            color: color(red);
-        }
-        p {
-            margin: 0;
-            span {
-                &:last-child{
-                    margin-left: 15px;
-                }
-            }
-        }
+    .command {
+      color: color(blue);
     }
+    .success {
+      color: color(green);
+    }
+    .error {
+      color: color(red);
+    }
+    p {
+      margin: 0;
+      span {
+        &:last-child {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
 }
 .form {
-    position: relative;
+  position: relative;
 
-    input[type='text'] {
-        width: 100%;
-        background-color: color(grey);
-        color: color(white);
-        margin-bottom: 20px;
-        padding: 1em;
-        border: none;
-        &:focus ~ .blinking__cursor::after {
-            width: 0;
-        }
+  input[type="text"] {
+    width: 100%;
+    background-color: color(grey);
+    color: color(white);
+    margin-bottom: 20px;
+    padding: 1em;
+    border: none;
+    &:focus ~ .blinking__cursor::after {
+      width: 0;
     }
-    .blinking__cursor {
-        position: absolute;
-        top: 14px;
-        left: 7px;
-        animation: blinkElement 1s linear infinite; 
-        &::after {
-                content: '';
-                width: 25px;
-                height: 2px;
-                background-color: color(white);
-                display: inline-block;
-        }
+  }
+  .blinking__cursor {
+    position: absolute;
+    top: 14px;
+    left: 7px;
+    animation: blinkElement 1s linear infinite;
+    &::after {
+      content: "";
+      width: 25px;
+      height: 2px;
+      background-color: color(white);
+      display: inline-block;
     }
-    
+  }
 }
-

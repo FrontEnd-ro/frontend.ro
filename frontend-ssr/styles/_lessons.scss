@@ -1,93 +1,93 @@
 blockquote {
-    display: block;
-    font-size: 1.5em;
-    line-height: 1.75em;
-    position: relative;
-    padding: 0.5em 0 0.5em 1em;
-    font-style: italic;
-    margin: 1em 0;
-    
-    /** Default blockquote is on the side */
-    &:before {
-        content: '';
-        background-color: color(blue);
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 6px;
-    }
+  display: block;
+  font-size: 1.5em;
+  line-height: 1.75em;
+  position: relative;
+  padding: 0.5em 0 0.5em 1em;
+  font-style: italic;
+  margin: 1em 0;
 
-    &.is--center {
-        text-align: center;
-        margin: 2em 0;
-        font-size: 2em;
-        padding: 0;
+  /** Default blockquote is on the side */
+  &:before {
+    content: "";
+    background-color: color(blue);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 6px;
+  }
 
-        &:before,
-        &:after {
-            content: '"';
-            font-size: 50px;
-            background: none;
-            position: static;
-        }
+  &.is--center {
+    text-align: center;
+    margin: 2em 0;
+    font-size: 2em;
+    padding: 0;
+
+    &:before,
+    &:after {
+      content: '"';
+      font-size: 50px;
+      background: none;
+      position: static;
     }
+  }
 }
 
 .heading-with-href {
-    position: relative;
-    a {
-        display: inline-block;
-        transform: translateY(0.20em);
-        font-size: 2em;
-        margin-right: 0.25em;
-        color: color(blue);
-        text-decoration: none;
-    }
+  position: relative;
+  a {
+    display: inline-block;
+    transform: translateY(0.2em);
+    font-size: 2em;
+    margin-right: 0.25em;
+    color: color(blue);
+    text-decoration: none;
+  }
 }
 
 .dots {
-    font-size: 3em;
-    line-height: 0;
-    margin: 1.5em 0;
-    text-align: center;
+  font-size: 3em;
+  line-height: 0;
+  margin: 1.5em 0;
+  text-align: center;
 
-    &::after {
-        content: '...';
-    }
+  &::after {
+    content: "...";
+  }
 }
 
 .formatted {
-    color: color(grey);
-    padding: 0.15em 0.3em;
-    display: inline-block;
-    background: color(darker-white);
-    border: 1px solid color(grey);
-    border-radius: 5px;
-    font-family: 'Courier New', Courier, monospace;
+  color: color(grey);
+  padding: 0.15em 0.3em;
+  display: inline-block;
+  background: color(darker-white);
+  border: 1px solid color(grey);
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
 }
 
 figure {
+  width: 100%;
+  margin: 3em 0;
+  position: relative;
+
+  &.with--border {
+    img,
+    video,
+    svg {
+      border: 1px solid color(silver);
+    }
+  }
+
+  figcaption {
+    color: color(grey);
+    position: absolute;
+    bottom: -1.25em;
+    left: 0;
+    font-size: 0.6em;
     width: 100%;
-    margin: 3em 0;
-    position: relative;
-
-    &.with--border {
-        img, 
-        video,
-        svg {
-            border: 1px solid color(silver);
-        }
-    }
-
-    figcaption {
-        color: color(grey);
-        position: absolute;
-        bottom: -1.25em;
-        left: 0;
-        font-size: .6em;
-        width: 100%;
-        text-align: center;
-        display: inline-block;
-    }
+    text-align: center;
+    display: inline-block;
+  }
 }

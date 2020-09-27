@@ -173,8 +173,8 @@ class UserProfile extends PureComponent<MyProps> {
   }
 }
 
-const mapStateToProps = (state) => ({
-  userDetails: state.username.userDetails,
+const mapStateToProps = (state, ownProps) => ({
+  userDetails: state.username.userDetails || ownProps.user,
   userProgress: state.username.userProgress,
   usernameAlreadyInUse: state.username.usernameAlreadyInUse,
   emailAreadyInUse: state.username.emailAreadyInUse,

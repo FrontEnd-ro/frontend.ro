@@ -1,0 +1,89 @@
+@import "../../styles/variables";
+
+.share-wrapper {
+  $transition-delay: 0.1;
+  $transform-distance: -2em;
+
+  width: 15em;
+  position: relative;
+
+  button,
+  a {
+    width: 100%;
+  }
+
+  ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+  }
+  
+  li {
+    opacity: 0;
+    padding: 0.5em 1em;
+    background: color(white);
+    transform: translateY(-2em);
+    transition: all 0.25s ease-out;
+  }
+
+  li:nth-child(2) {
+    transform: translateY(#{$transform-distance * 2});
+    transition-delay: #{$transition-delay}s;
+  }
+
+  li:nth-child(3) {
+    transition-delay: #{$transition-delay * 2}s;
+    transform: translateY(#{$transform-distance * 3});
+  }
+
+  li:nth-child(4) {
+    transition-delay: #{$transition-delay * 3}s;
+    transform: translateY(#{$transform-distance * 4});
+  }
+
+  li:nth-child(5) {
+    transition-delay: #{$transition-delay * 4 }s;
+    transform: translateY(#{$transform-distance * 5});
+  }
+}
+
+.share-wrapper--open {
+  ul {
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  li {
+    opacity: 1;
+    transform: translateY(0) !important;
+  }
+}
+
+.facebook:hover {
+  color: color(white);
+  border-color: color(facebook-blue);
+  background: color(facebook-blue);
+}
+
+.twitter:hover {
+  color: color(white);
+  border-color: color(twitter-blue-hover);
+  background: color(twitter-blue-hover);
+}
+
+.whatsapp:hover {
+  color: color(white);
+  background: color(whatsapp-green);
+  border-color: color(whatsapp-green);
+}
+
+.linkedin:hover {
+  color: color(white);
+  background: color(linkedin-blue);
+  border-color: color(linkedin-blue);
+}

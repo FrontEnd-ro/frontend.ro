@@ -18,13 +18,13 @@ export default function LessonContributors({ contributors, className = '', displ
   return (
     <ul className={`${styles['lesson-contributors']} ${className}`}>
 
-      {contributors.slice(0, displayNumber).map((contributor, index) => (
+      {contributors.slice(0, displayNumber).map((contributor, index, arr) => (
         <li
           className="text-center"
           key={contributor.url}
           style={{
             right: `${index}em`,
-            zIndex: index + 1,
+            zIndex: arr.length - index,
           }}
         >
           <a href={contributor.url}>

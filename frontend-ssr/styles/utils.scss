@@ -29,6 +29,9 @@
 .line-through {
   text-decoration: line-through;
 }
+.no-underline {
+  text-decoration: none;
+}
 .text-bold {
   font-weight: bold;
 }
@@ -43,14 +46,37 @@
   display: flex;
 }
 
+.d-inline-block {
+  display: inline-block;
+}
+
 .justify-content-between {
   justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
 }
 
 .align-items-center {
   align-items: center;
 }
 
+/** Margins */
+.mr-1 {
+  margin-right: 0.25em;
+}
+
+.mr-2 {
+  margin-right: 0.5em;
+}
+
+.my-5 {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+/** Others */
 .outline-none {
   outline: 0;
 }

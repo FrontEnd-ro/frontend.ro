@@ -9,6 +9,7 @@
         transition: transform ease-out 0.25s;
 
         &:hover {   
+            z-index: 99 !important;
             transform: translateY(-0.5em);
             p {
                 opacity: 1;

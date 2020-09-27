@@ -25,6 +25,11 @@ export default function Footer() {
         <h5> Social </h5>
         <div>
           <p>
+            <a href="https://github.com/iampava/frontend.ro">
+              GitHub
+            </a>
+          </p>
+          <p>
             <a href="https://twitter.com/FrontEndRo">
               Twitter
             </a>

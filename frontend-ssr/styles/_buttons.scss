@@ -1,146 +1,162 @@
-@import 'variables';
+@import "variables";
 
 .btn {
-    @extend %gradientBackground;
-    font-family: inherit;
-    font-size: inherit;
-    padding: 0.1em 0.75em;
-    border-radius: 5px;
-    min-width: 6em;
-    min-height: 2.25em;
-    border: 0;
-    transition: background 0.5s;
-    color: color(white);
-    cursor: pointer;
+  @extend %gradientBackground;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.1em 0.75em;
+  border-radius: 5px;
+  min-width: 6em;
+  min-height: 2.25em;
+  border: 0;
+  transition: background 0.5s;
+  color: color(white);
+  cursor: pointer;
+  display: inline-block;
 
-    &:hover {
-        background-position: right center;
-    }
+  &:hover {
+    background-position: right center;
+  }
 
+  &:active {
+    background-position: left center;
+  }
+
+  &.btn--default {
+    background-image: linear-gradient(
+      to right,
+      #1b1b15 0%,
+      #3d3d3d 51%,
+      #1b1b15 100%
+    );
+  }
+
+  &.btn--light {
+    color: color(black);
+    border: 1px solid color(black);
+    background-image: linear-gradient(
+      to right,
+      #ecf0f1 0%,
+      #fff 51%,
+      #ecf0f1 100%
+    );
+  }
+
+  &.btn--success {
+    @extend %greenGradientBackground;
+  }
+
+  &.btn--danger {
+    @extend %redGradientBackground;
+  }
+
+  &.btn--blue {
+    @extend %blueGradientBackground;
+  }
+
+  &.btn--yellow {
+    @extend %yellowGradientBackground;
+  }
+
+  &.btn--grey {
+    @extend %greyGradientBackground;
+  }
+
+  &.btn--bouncy {
+    transition: transform 0.25s $cubic;
     &:active {
-        background-position: left center;
+      transform: scale(1.1);
     }
+  }
 
-    &.btn--default {
-        background-image: linear-gradient(to right, #1b1b15 0%, #3d3d3d 51%, #1b1b15 100%);
-    }
+  &.btn--with-icon {
+    display: inline-flex;
+    align-items: center;
+  }
 
-    &.btn--light {
-        color: color(black);
-        border: 1px solid color(black);
-        background-image: linear-gradient(to right, #ecf0f1 0%, #fff 51%, #ecf0f1 100%);
-    }
-
-    &.btn--success {
-        @extend %greenGradientBackground;
-    }
+  &.btn--outline {
+    background: none;
+    border: 1px solid color(black);
 
     &.btn--danger {
+      color: color(danger);
+      border-color: color(danger);
+
+      &:hover {
+        color: color(white);
         @extend %redGradientBackground;
+      }
     }
-
-    &.btn--blue {
-        @extend %blueGradientBackground;
-    }
-
-    &.btn--yellow {
-        @extend %yellowGradientBackground;
-    }
-
-    &.btn--grey {
-        @extend %greyGradientBackground;
-    }
-
-    &.btn--bouncy {
-        transition: transform 0.25s $cubic;
-        &:active {
-            transform: scale(1.1);
-        }
-    }
-
-    &.btn--with-icon {
-        & > * {
-            vertical-align: middle;
-        }
-
-        [class^='icon-'],
-        [class*=' icon-'] {
-            margin-right: 0.5em;
-        }
-    }
-
-    &.btn--outline {
-        background: none;
-        border: 1px solid color(black);
-
-        &.btn--danger {
-            color: color(danger);
-            border-color: color(danger);
-
-            &:hover {
-                color: color(white);
-                @extend %redGradientBackground;
-            }
-        }
-    }
+  }
 }
 
 .btn--transparent {
-    cursor: pointer;
-    font-family: inherit;
-    font-size: inherit;
-    background: none;
-    border: 0;
-    border-radius: 0;
-    min-width: initial;
-    min-height: initial;
-    color: inherit;
-    text-transform: capitalize;
-    text-transform: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  min-width: initial;
+  min-height: initial;
+  color: inherit;
+  text-transform: capitalize;
+  text-transform: none;
 }
 
 .btn--loading {
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0.4em;
-        width: 50%;
-        transform-origin: right;
-        border-top: 1.5px solid;
-        animation: btnLoading 1.5s ease-in-out infinite;
-    }
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.4em;
+    width: 50%;
+    transform-origin: right;
+    border-top: 1.5px solid;
+    animation: btnLoading 1.5s ease-in-out infinite;
+  }
 }
 
 .btn:disabled,
 .btn--transparent:disabled {
-    cursor: initial;
-    pointer-events: none;
-    opacity: 0.6;
+  cursor: initial;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
-.icon-btn {
-    border-radius: 0.5em;
-    background-color: color(white);
-    border: 1px solid color(silver);
-    text-align: center;
-    font-size: 2em;
+.cta-button {
+  border-radius: 0;
+  display: inline-block;
+  font-size: 1.25em;
+  padding: 0.75em;
+  text-decoration: none;
+  font-weight: bold;
+  border-color: color(blue) color(red) color(red) color(blue);
+  border-width: 0.4em;
+  border-style: solid;
+  box-shadow: 0 0 0.5em color(black);
+  transition: transform 0.2s cubic-bezier(0, 1.63, 1, 1);
+
+  &:hover {
+    transform: scale(1.1);
+    border-color: color(red) color(blue) color(blue) color(red);
+  }
 }
 
 @keyframes btnLoading {
-    0% {
-        transform: translateX(-50%);
-    }
+  0% {
+    transform: translateX(-50%);
+  }
 
-    50% {
-        transform: translateX(150%);
-    }
+  50% {
+    transform: translateX(150%);
+  }
 
-    100% {
-        transform: translateX(-50%);
-    }
+  100% {
+    transform: translateX(-50%);
+  }
 }

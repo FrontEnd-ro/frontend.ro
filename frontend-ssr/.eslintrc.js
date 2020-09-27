@@ -20,7 +20,8 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'import/extensions': 'off',
-    'no-console': 'off'
+    'no-console': 'off',
+    'no-use-before-define': 'off',
   },
   plugins: [
     '@typescript-eslint',

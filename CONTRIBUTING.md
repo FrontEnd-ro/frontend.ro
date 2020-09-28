@@ -14,6 +14,20 @@ For points 2 & 3 get in touch with us via **social media** or **email** at [hell
 
 <hr />
 
+## Commit Messages
+
+Every commit should be "tagged" in such a way that it's easy to scan through them:
+
+1. `[FeatureName] Description` -> general commit when adding new features
+
+2. `[BUGFIX][FeatureName] Description` -> fixing bugs
+
+3. `[FIXUP][FeatureName] Description` -> when immediately after a merge we discovered some bugs related to that feature.
+
+4. `[DOCS] Description` -> modifying README.md, CONTRIBUTORS.md or anything related to documentation
+
+5. `[COSMETIC] Description` -> when commiting cosmetic fixes like indentation, eslint fixes, so on...
+
 ## FrontEnd Style Guide
 
 As most guides, this one is opinionated. The goal is not to find the best patterns, we'll grow old and never agree on the answers. 
@@ -48,6 +62,16 @@ users/FETCH_FAILURE
 Loading states for example. Let's not move them into the store unless multiple components need them.
 
 Otherwise let's keep them in the local state of our components.
+
+<hr/>
+
+### Overall styling
+
+We use a combination of CSS Modules and utility classes in the [TailwindCSS](https://tailwindcss.com/) naming format.
+
+A combination of both allows us to declare complex styles for certain componenta, but also apply small, specialized modifications via utility classes.
+
+The **TailwindCSS** naming format is important for keeping a community-level standard. This way, when new people join the project they can easily understand the class names and add new ones.
 
 <hr />
 

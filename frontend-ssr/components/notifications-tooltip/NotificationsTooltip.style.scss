@@ -1,0 +1,90 @@
+@import "src/styles/variables";
+
+.notifications-tooltip {
+
+    .icon .icon-spinner {
+        display: inline-block;
+        animation: 1s linear rotateAnimation infinite;
+    }
+
+    .icon .badge {
+        position: absolute;
+        top: 0;
+        transform: translateY(-50%);
+        right: -5px;
+        height: 15px;
+        min-width: 15px;
+        border-radius: 50%;
+        color: color(white);
+        background-color: color(danger);
+        font-size: 10px;
+        line-height: 5px;
+        text-align: center;
+        padding: 5px 0 0 1px;
+    }
+
+
+    .scroll-wrapper {
+        height: 15em;
+        width: 20em;
+        max-width: 100vw;
+    }
+
+    #markAllAsReadBtn {
+        border: 0;
+        background: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 4px .75em 0 0;
+        display: inline-block;
+
+        &:hover {
+            color: color(blue);
+            font-weight: bold;
+        }
+    }
+
+    .notifications li {
+        &:first-child {
+            text-align: right;
+        }
+
+        &:first-child:hover {
+            background-color: color(white);
+            background-image: none;
+            color: initial;
+        }
+
+        &.is--unread {
+            background-color: darken(color(darker-white), 5%);
+        }
+
+        img {
+            width: 32px;
+            height: 32px;
+            margin-right: 1em;
+        }
+
+        .body {
+            white-space: initial;
+
+            .message {
+                margin: 0;
+            }
+
+            .time {
+                color: color(silver);
+            }
+        }
+
+        .user {
+            border-bottom: 1px solid color(silver);
+        }
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .notifications-tooltip.header-tooltip .scroll-wrapper {
+        right: -2.5em;
+    }
+}

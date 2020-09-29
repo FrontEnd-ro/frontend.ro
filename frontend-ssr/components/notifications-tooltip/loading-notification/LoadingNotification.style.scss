@@ -1,0 +1,42 @@
+@import "src/styles/variables";
+
+.dummy-notification {
+    padding: .5em 1em;
+    background-color: lighten(color(silver), 10%);
+}
+
+.dummy-notification__image {
+    width: 32px;
+    height: 32px;
+    background-color: color(gray);
+    position: relative;
+    padding: 0 !important;
+    display: block !important;
+    overflow: hidden;
+    
+    &:after {
+        content: '';
+        width: 100%;
+        height: 0px;
+        display: block;
+        position: absolute;
+        box-shadow: 0 0 1px 3px lighten(color(gray), 20%);
+        top: 50%;
+        left: 0;
+        animation: 2s ease-in-out dummyNotificationAnimation infinite;
+    }
+}
+
+@keyframes dummyNotificationAnimation {
+    0% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(5);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}

@@ -36,6 +36,7 @@ function ExerciseSubmission({ submission, dispatch, editSubmission } : Props) {
           Delete
         </button>
       </li>
+      <br />
     </ul>
   );
 }

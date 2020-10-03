@@ -3,11 +3,15 @@ import { Submission } from './types';
 const ADD = 'exercise-submissions/ADD';
 const REMOVE = 'exercise-submissions/REMOVE';
 const UPDATE = 'exercise-submissions/UPDATE';
+const LOAD = 'exercise-submissions/LOAD';
+const SEARCH = 'exercise-submissions/SEARCH';
 
 export const EXERCISE_SUBMISSIONS = {
   ADD,
   REMOVE,
   UPDATE,
+  LOAD,
+  SEARCH,
 };
 
 export const addSubmission = (submission: Submission | Submission[], index = 0) => ({
@@ -28,5 +32,19 @@ export const updateSubmission = (id: string, newSubmission: Submission) => ({
   payload: {
     id,
     newSubmission,
+  },
+});
+
+export const loadSubmissions = (newSubmissions: Submission[]) => ({
+  type: LOAD,
+  payload: {
+    newSubmissions,
+  },
+});
+
+export const searchSubmissions = (query: string) => ({
+  type: SEARCH,
+  payload: {
+    query,
   },
 });

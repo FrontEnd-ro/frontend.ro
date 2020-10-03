@@ -4,4 +4,4 @@ enum ChapterType {
   JS = 'js',
 }
 
-export { ChapterType as default };
+export default ChapterType;

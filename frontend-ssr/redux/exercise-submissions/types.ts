@@ -24,6 +24,7 @@ export interface SubmissionState {
   submissions: Submission[];
   search: string;
   page: number;
+  end: boolean;
 }
 export enum SubmissionType {
   PENDING = 'pending',

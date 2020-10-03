@@ -5,6 +5,7 @@ const initialState: SubmissionState = {
   submissions: undefined,
   search: '',
   page: 0,
+  end: false,
 };
 export const submissionReducer = (state = initialState, action: { type: string; payload: any;})
 : SubmissionState => {
@@ -47,21 +48,25 @@ export const submissionReducer = (state = initialState, action: { type: string; 
       };
     case EXERCISE_SUBMISSIONS.LOAD: {
       const { newSubmissions } = action.payload;
+
       return {
         ...state,
         submissions: state.submissions
           ? [...state.submissions, ...newSubmissions]
           : newSubmissions,
         page: state.page + 1,
+        end: newSubmissions.length === 0,
       };
     }
     case EXERCISE_SUBMISSIONS.SEARCH: {
       const { query, newSubmissions } = action.payload;
+
       return {
         ...state,
         submissions: newSubmissions,
         search: query,
-        page: 0,
+        page: 1,
+        end: newSubmissions.length === 0,
       };
     }
 

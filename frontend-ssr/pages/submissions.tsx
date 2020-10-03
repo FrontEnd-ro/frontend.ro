@@ -22,21 +22,54 @@ interface State {
 }
 
 class Submissions extends React.Component<ConnectedProps<typeof connector>, State> {
+  private observer: IntersectionObserver;
+
+  private hiddenRef = React.createRef<HTMLDivElement>();
+
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: props.submissions.submissions === undefined,
+      loading: false,
     };
   }
 
   componentDidMount() {
-    let { submissions } = this.props;
+    const { submissions } = this.props;
 
-    if (submissions.submissions === undefined) {
-      this.getData();
+    if (!submissions.end) {
+      this.initIntersectionObserver();
     }
   }
+
+  componentDidUpdate(prevProps) {
+    const { submissions } = this.props;
+
+    if (prevProps.submissions.end !== submissions.end && submissions.end) {
+      this.observer.disconnect();
+    }
+
+    if (prevProps.submissions.end !== submissions.end && !submissions.end) {
+      this.initIntersectionObserver();
+    }
+  }
+
+  componentWillUnmount() {
+    const { submissions } = this.props;
+
+    if (!submissions.end) {
+      this.observer.disconnect();
+    }
+  }
+
+  initIntersectionObserver = () => {
+    const options = {
+      threshold: 0.7,
+    };
+
+    this.observer = new IntersectionObserver(this.loadMore, options);
+    this.observer.observe(this.hiddenRef.current);
+  };
 
   getData = async () => {
     const { submissions, dispatch } = this.props;
@@ -55,6 +88,7 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
 
   searchData = async (query: string) => {
     const { dispatch } = this.props;
+
     this.setState({ loading: true });
 
     try {
@@ -66,6 +100,14 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
       this.setState({ loading: false });
     }
   };
+
+  loadMore = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        this.getData();
+      }
+    });
+  }
 
   render() {
     const { submissions } = this.props;
@@ -105,6 +147,10 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
             >
               Next page
             </button>
+            <div
+              className={styles.hidden}
+              ref={this.hiddenRef}
+            />
           </div>
         </main>
         <Footer />

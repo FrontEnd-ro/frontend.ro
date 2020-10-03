@@ -1,0 +1,12 @@
+@import "../styles/variables";
+.page-submissions {
+ @extend %containerConfig;
+  ul {
+    list-style: none;
+  }
+  .cards-wrapper {
+    li {
+      margin: 0.8em 0;
+    }
+  }
+}

@@ -47,7 +47,6 @@ export const timeAgo = (date: Date): string => {
   }
   return formatDate(date);
 };
-
 export const formatDate = (dateToFormat: Date): string => {
   //  Convert a string like '2020-09-20T00:00:00' into '20 September 2020'
   let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

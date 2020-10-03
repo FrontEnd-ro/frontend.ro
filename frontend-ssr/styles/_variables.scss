@@ -97,3 +97,9 @@ $lesson-menu-width: 18em;
     #663399 100%
   );
 }
+
+%containerConfig {
+  width: $width;
+  max-width: $max-width;
+  margin: auto;
+}

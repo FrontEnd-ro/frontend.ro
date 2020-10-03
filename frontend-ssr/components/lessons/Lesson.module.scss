@@ -15,11 +15,9 @@
   }
 
   article {
-    width: $width;
-    max-width: $max-width;
+    @extend %containerConfig;
     position: relative;
-    margin: 0 auto;
-
+   
     h1 {
       font-size: 2.25em;
     }

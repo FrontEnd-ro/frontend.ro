@@ -21,7 +21,7 @@ export default function Highlight({ language, code }: Props) {
     });
   }, []);
 
-  useClipboard(btnRef)
+  useClipboard(btnRef);
 
   return (
     <div className={styles.highlight}>

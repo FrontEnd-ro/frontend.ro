@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+
+.form {
+  width: 100%;
+  input {
+    flex: 1;
+    border-radius: 5px;
+    border: 1px solid color(silver);
+    padding: 0.5em;
+    font-size: 1em;
+    outline: 0;
+    font-family: "Courier New", Courier, monospace;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    &::-moz-focus-inner {
+      border: 0;
+    }
+  }
+  button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+}

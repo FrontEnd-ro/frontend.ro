@@ -1,4 +1,6 @@
 import React from 'react';
+import debounce from 'lodash/debounce';
+
 import styles from './Search.module.scss';
 
 interface State {
@@ -10,20 +12,26 @@ interface Props {
 }
 
 class Search extends React.Component<Props, State> {
+  debouncedSearch: (query: string) => void;
+
   constructor(props) {
     super(props);
 
     this.state = {
       searchValue: props.query,
     };
+
+    const { onSearch } = this.props;
+
+    this.debouncedSearch = debounce(onSearch, 300);
   }
 
   onChange = (e) => {
     e.preventDefault();
 
-    this.setState({
-      searchValue: e.target.value,
-    });
+    this.setState({ searchValue: e.target.value });
+
+    this.debouncedSearch(e.target.value);
   };
 
   onSubmit = (e) => {
@@ -32,7 +40,7 @@ class Search extends React.Component<Props, State> {
     e.preventDefault();
 
     onSearch(e.target.query.value);
-  }
+  };
 
   render() {
     const { searchValue } = this.state;

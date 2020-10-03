@@ -34,6 +34,12 @@ export default function Home() {
               <p>Profilul unui utilizator inexistent</p>
             </a>
           </Link>
+          <Link href="/submissions" prefetch={false}>
+            <a className="card">
+              <h3>Submissions page</h3>
+              <p>Pagina cu exercitiile submise</p>
+            </a>
+          </Link>
           <Link href="/error" prefetch={false}>
             <a className="card">
               <h3>500 User Profile</h3>

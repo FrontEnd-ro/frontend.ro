@@ -6,9 +6,6 @@ import Header from '~/components/header/Header.component';
 
 import styles from '../../styles/pages/default-page.module.scss';
 import MatchCommandClassComponent from '../../components/cli_git/GitCli_CC';
-// import ExerciseSubmissionsList from '~/components/exercise-submissions/ExerciseSubmissionsList';
-// import AddSubmissionForm from '../../components/exercise-submissions/AddSubmissionForm';
-import ExerciseSubmissionPage from '~/components/exercise-submissions/ExerciseSubmissionsPage';
 
 export default class Html extends React.Component {
   constructor(props) {
@@ -48,9 +45,6 @@ export default class Html extends React.Component {
           <MatchCommandClassComponent
             commands={expressionToMatch}
           />
-          {/* <AddSubmissionForm />
-          <ExerciseSubmissionsList /> */}
-          <ExerciseSubmissionPage />
         </main>
 
         <Footer />

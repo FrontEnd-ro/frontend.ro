@@ -1,4 +1,4 @@
-import ChapterType from '../../services/Constants';
+import { ChapterType } from '~/services/constants';
 
 export interface Submission {
     username: string,

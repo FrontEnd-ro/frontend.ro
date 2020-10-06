@@ -1,11 +1,10 @@
 import { SubmissionState } from './types';
 import { EXERCISE_SUBMISSIONS } from './exercise-submissions.actions';
-import MOCK_SUBMISSIONS from '../../pages/api/exercise-submissions/mock';
 
 const initialState: SubmissionState = {
-  submissions: MOCK_SUBMISSIONS,
+  submissions: undefined,
   search: '',
-  page: 1,
+  page: 0,
 };
 export const submissionReducer = (state = initialState, action: { type: string; payload: any;})
 : SubmissionState => {
@@ -50,32 +49,22 @@ export const submissionReducer = (state = initialState, action: { type: string; 
       const { newSubmissions } = action.payload;
       return {
         ...state,
-        submissions: [...state.submissions, ...newSubmissions],
+        submissions: state.submissions
+          ? [...state.submissions, ...newSubmissions]
+          : newSubmissions,
         page: state.page + 1,
       };
     }
     case EXERCISE_SUBMISSIONS.SEARCH: {
-      const { query } = action.payload;
-      const filteredSubmissions = state.submissions.filter((submission) => submission.username
-        .toLowerCase().includes(query)
-        || submission.chapter.toLowerCase().includes(query)
-        || submission.type.toLowerCase().includes(query));
-
-      if (query !== '') {
-        return {
-          ...state,
-          submissions: filteredSubmissions,
-          search: query,
-          page: 1,
-        };
-      }
+      const { query, newSubmissions } = action.payload;
       return {
         ...state,
-        submissions: MOCK_SUBMISSIONS,
-        search: '',
-        page: 1,
+        submissions: newSubmissions,
+        search: query,
+        page: 0,
       };
     }
+
     default:
       return state;
   }

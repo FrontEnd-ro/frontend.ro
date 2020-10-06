@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { uuid } from '~/services/Utils';
-import ChapterType from '../../services/Constants';
+import { ChapterType } from '../../services/constants';
 import { SubmissionType } from '~/redux/exercise-submissions/types';
 import { addSubmission } from '~/redux/exercise-submissions/exercise-submissions.actions';
 

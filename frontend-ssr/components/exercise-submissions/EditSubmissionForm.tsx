@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import { connect } from 'react-redux';
-import ChapterType from '../../services/Constants';
+import { ChapterType } from '../../services/constants';
 import { SubmissionType, Submission } from '~/redux/exercise-submissions/types';
 import { updateSubmission } from '~/redux/exercise-submissions/exercise-submissions.actions';
 import { uuid } from '~/services/Utils';

@@ -42,9 +42,10 @@ export const loadSubmissions = (newSubmissions: Submission[]) => ({
   },
 });
 
-export const searchSubmissions = (query: string) => ({
+export const searchSubmissions = (query: string, newSubmissions: Submission[]) => ({
   type: SEARCH,
   payload: {
     query,
+    newSubmissions,
   },
 });

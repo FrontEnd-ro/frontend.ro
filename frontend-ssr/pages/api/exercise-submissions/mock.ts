@@ -1,6 +1,6 @@
 import { uuid } from '../../../services/Utils';
-import ChapterType from '../../../services/Constants';
 import { SubmissionType, Submission } from '../../../redux/exercise-submissions/types';
+import { ChapterType } from '~/services/constants';
 
 const MOCK_SUBMISSIONS: Submission[] = [
   {

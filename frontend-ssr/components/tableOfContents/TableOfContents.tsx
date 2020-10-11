@@ -9,7 +9,7 @@ interface Props {
   chapters: Chapters[];
 }
 
-interface Chapters {
+export interface Chapters {
     title: string;
     id: string;
 }

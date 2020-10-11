@@ -19,6 +19,7 @@ $colors: (
 $width: 90%;
 $max-width: 1000px;
 $cubic: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+$lesson-menu-width: 18em;
 
 @function color($x) {
   @return map-get($colors, $x);

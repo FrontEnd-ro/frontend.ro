@@ -1,0 +1,47 @@
+@import '../../styles/variables';
+
+.lesson {
+  display: flex;
+  flex-flow: row nowrap;
+
+  main {
+    position: relative;
+    left: #{$lesson-menu-width};
+    width: calc(100% - #{$lesson-menu-width});
+
+    :global header .ceva {
+      display: none;
+    }
+  }
+
+  article {
+    width: $width;
+    max-width: $max-width;
+    position: relative;
+    margin: 0 auto;
+
+    h1 {
+      font-size: 2.25em;
+    }
+
+    h2 {
+      font-size: 1.5em;
+    }
+  }
+
+  @media screen and (max-width: 1400px) {
+    aside {
+      left: -#{$lesson-menu-width};
+    }
+
+    :global .lesson-menu__header button,
+    :global .header__menu-btn {
+      display: block;
+    }
+
+    main {
+      left: 0;
+      width: 100%;
+    }
+  }
+}

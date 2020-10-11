@@ -3,6 +3,9 @@
 const path = require('path');
 
 module.exports = {
+  env: {
+    ENDPOINT: '/api',
+  },
   webpack: (config, {
     buildId, dev, isServer, defaultLoaders, webpack,
   }) => {

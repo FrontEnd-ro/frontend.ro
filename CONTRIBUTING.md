@@ -28,6 +28,8 @@ Every commit should be "tagged" in such a way that it's easy to scan through the
 
 5. `[COSMETIC] Description` -> when commiting cosmetic fixes like indentation, eslint fixes, so on...
 
+6. `[REFACTOR][FeatureName] Description` -> when refactoring code without adding any new functionality
+
 ## FrontEnd Style Guide
 
 As most guides, this one is opinionated. The goal is not to find the best patterns, we'll grow old and never agree on the answers. 
@@ -64,6 +66,16 @@ Loading states for example. Let's not move them into the store unless multiple c
 Otherwise let's keep them in the local state of our components.
 
 <hr/>
+
+### Folder & Component names
+
+Use `kebab-case` for folder-names, `PascalCase` for component and SCSS module names.
+
+```
+/table-of-contents
+  TableOfContents.tsx
+  TableOfContents.module.scss
+```
 
 ### Overall styling
 

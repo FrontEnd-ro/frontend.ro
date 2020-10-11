@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useState } from 'react';
 import LessonMenu from './lesson-menu/LessonMenu';
-import { Chapters } from '../tableOfContents/TableOfContents';
 import Header from '~/components/header/Header.component';
 import Footer from '~/components/footer/Footer.component';
+import { Chapters } from '~/components/table-of-contents/TableOfContents';
 
 import styles from './Lesson.module.scss';
 

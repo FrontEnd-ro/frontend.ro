@@ -20,8 +20,20 @@
   color: color(black);
 }
 
+.text-grey {
+  color: color(grey);
+}
+
+.bg-white {
+  background: color(white);
+}
+
 .bg-black {
   background: color(black);
+}
+
+.bg-grey {
+  background: color(grey);
 }
 
 /** Alignement */
@@ -33,11 +45,37 @@
 .line-through {
   text-decoration: line-through;
 }
+
 .no-underline {
   text-decoration: none;
 }
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.normal-case {
+  text-transform: none;
+}
+
 .text-bold {
   font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-xs {
+  font-size: 0.75em;
 }
 
 /** Sizes */
@@ -82,6 +120,15 @@
 .my-5 {
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+/** Borders */
+.border-none {
+  border-style: none;
+}
+
+.rounded-md {
+  border-radius: 0.375em;
 }
 
 /** Others */

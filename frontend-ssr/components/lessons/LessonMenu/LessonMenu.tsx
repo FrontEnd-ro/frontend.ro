@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TableOfContents, { Chapters } from '~/components/table-of-contents/TableOfContents';
+import TableOfContents, { Chapters } from '~/components/TableOfContents';
 import { useOutsideClick } from '~/services/Hooks';
 
 import styles from './LessonMenu.module.scss';

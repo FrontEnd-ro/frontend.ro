@@ -3,9 +3,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import SEOTags from '~/components/SEOTags';
 import Lesson from '~/components/lessons/Lesson';
-import LessonContributors from '~/components/lessons/lesson-contributors/LessonContributors';
-import { ShareButton } from '~/components/social-media-buttons/SocialMediaButtons';
-import LessonCover from '~/components/lessons/lesson-cover/LessonCover';
+import { LessonCover, LessonContributors } from '~/components/lessons';
+import { ShareButton } from '~/components/SocialMediaButtons';
 
 const contributors = [{
   name: 'Păvă',

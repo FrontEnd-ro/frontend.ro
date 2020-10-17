@@ -1,11 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Footer from '~/components/footer/Footer.component';
-import Header from '~/components/header/Header.component';
-
+import Footer from '~/components/Footer';
+import Header from '~/components/Header';
 import styles from '../../styles/pages/default-page.module.scss';
-import MatchCommandClassComponent from '../../components/cli_git/GitCli_CC';
 
 export default class Html extends React.Component {
   constructor(props) {
@@ -22,11 +20,6 @@ export default class Html extends React.Component {
   }
 
   render() {
-    let expressionToMatch = [
-      { command: 'git add .', message: 'you successfully added your files' },
-      { command: 'git commit -m "something to commit"', message: 'you successfully committed your files with the message //' },
-      { command: /^git push$/, message: 'you successfully pushed your files into master' },
-    ];
     return (
       <>
         <Head>
@@ -41,9 +34,6 @@ export default class Html extends React.Component {
           <Link href="/">
             Back to home
           </Link>
-          <MatchCommandClassComponent
-            commands={expressionToMatch}
-          />
         </main>
 
         <Footer />

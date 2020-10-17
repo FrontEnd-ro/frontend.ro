@@ -10,7 +10,7 @@ import { faShare } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './SocialMediaButtons.module.scss';
 import { useOutsideClick } from '~/services/Hooks';
-import CopyToClipboard from '../copy-to-clipboard/CopyToClipboard';
+import CopyToClipboard from '../CopyToClipboard';
 
 export function ShareButton({ url, config } : {url: string, config: any}) {
   const ref = useRef(null);

@@ -1,1 +1,0 @@
-https://github.com/iampava/frontend.ro/issues/5

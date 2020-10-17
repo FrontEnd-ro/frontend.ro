@@ -67,15 +67,22 @@ Otherwise let's keep them in the local state of our components.
 
 <hr/>
 
-### Folder & Component names
+### Folder & file names
 
-Use `kebab-case` for folder-names, `PascalCase` for component and SCSS module names.
+Use `PascalCase` for components and SCSS module names. 
+
+Add an `index.ts` file inside each component folder which exports the Component so we can easily import it without duplicating names in import path.*
 
 ```
-/table-of-contents
+/TableOfContents
+  index.ts
   TableOfContents.tsx
   TableOfContents.module.scss
 ```
+
+`import TableOfContents from '~/components/TableOfContents'`
+
+\* exceptions to the above `index.ts` rule may happen when we have multiple smaller components that are probably gonna be used together all the time: see `/lessons` folder
 
 ### Overall styling
 

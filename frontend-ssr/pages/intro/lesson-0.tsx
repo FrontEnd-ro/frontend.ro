@@ -5,16 +5,9 @@ import SEOTags from '~/components/SEOTags';
 import Lesson from '~/components/lessons/Lesson';
 import { LessonCover, LessonContributors } from '~/components/lessons';
 import { ShareButton } from '~/components/SocialMediaButtons';
+import { Ira, Pava } from '~/services/contributors';
 
-const contributors = [{
-  name: 'Păvă',
-  avatarSrc: '/images/contributors/iampava.png',
-  url: 'https://iampava.com',
-}, {
-  name: 'Ira',
-  avatarSrc: '/images/contributors/iramelnic.jpg',
-  url: 'https://www.facebook.com/melnic.ira',
-}];
+const contributors = [Pava, Ira];
 
 let chapters = [
   { title: 'Ce e FrontEnd.ro?', id: 'about' },

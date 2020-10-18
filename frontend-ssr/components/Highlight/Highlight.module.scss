@@ -1,0 +1,73 @@
+@import '../../styles/variables';
+
+.highlight {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  font-size: 1.25em;
+
+  &.is--inline {
+    display: inline-block;
+    width: auto;
+    margin: 0.5em 1em;
+    vertical-align: middle;
+  }
+
+  &.is--full-screen {
+    width: 100%;
+  }
+
+  pre {
+    border-radius: 1em;
+    box-shadow: 0 0 1em color(black);
+    padding: 0 1em 1em 1em !important; // Otherwise it will get overriden by the `dracula.css`
+  }
+
+  code .formatted {
+    background: none;
+    padding: 0;
+    border-width: 0 0 1px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.5em;
+
+    span {
+      opacity: 0;
+      font-size: 0.5em;
+      transition: all 0.15s $cubic;
+      transform: translateY(50%);
+    }
+
+    &:hover {
+      color: color(white);
+
+      span {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  :global .hljs-ln-numbers {
+    color: color(silver);
+    opacity: 0.5;
+    font-size: 0.9em;
+    position: relative;
+    right: 5px;
+  }
+
+  :global .hljs-ln-code {
+    padding-left: 0.75em !important;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
+
+  @import '../../styles/external/dracula';
+}

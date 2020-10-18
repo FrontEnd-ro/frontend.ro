@@ -1,0 +1,34 @@
+@import '../../../styles/variables';
+
+.lesson-table {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+
+  thead,
+  tbody {
+    width: 100%;
+    display: block;
+  }
+
+  thead tr {
+    border-bottom: 3px solid color(silver);
+  }
+
+  :global th.is--side,
+  :global td.is--side {
+    border-right: 3px solid color(silver);
+  }
+
+  tr {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  th,
+  td {
+    padding: 0.5em;
+    white-space: nowrap;
+  }
+}

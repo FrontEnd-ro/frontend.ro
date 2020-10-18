@@ -1,25 +1,39 @@
-ul, 
+ul,
 ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.with--bullets {
+  padding-left: 2em;
+
+  li::before {
+    content: '';
+    width: 0.5em;
+    height: 0.5em;
+    display: inline-block;
+    background: color(grey);
+    border-radius: 50%;
+    margin-right: 1em;
+  }
 }
 
 ol.with--count {
-    counter-reset: ol;
-    
-    li {
-        margin-bottom: 2em;
-    
-        &::before {
-            counter-increment: ol; 
-            content: "#" counter(ol) " ";
-            
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-right: 0.5em;
-            display: inline-block;
-            transform: rotate(-11deg);
-        }
+  counter-reset: ol;
+
+  li {
+    margin-bottom: 2em;
+
+    &::before {
+      counter-increment: ol;
+      content: '#' counter(ol) ' ';
+
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-right: 0.5em;
+      display: inline-block;
+      transform: rotate(-11deg);
     }
+  }
 }

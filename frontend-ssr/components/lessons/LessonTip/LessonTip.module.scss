@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+
+.lesson-tip {
+  padding: 1em;
+  border-radius: 0.5em;
+  border: 1px solid color(silver);
+  background: color(darker-white);
+
+  svg {
+    font-size: 1.5em;
+    margin-right: 1em;
+  }
+}

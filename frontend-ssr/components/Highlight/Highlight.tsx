@@ -1,6 +1,6 @@
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useClipboard } from '~/services/Hooks';
 import styles from './Highlight.module.scss';
 
@@ -9,9 +9,10 @@ type Language = 'html' | 'css' | 'json' | 'javascript';
 interface Props {
   code: string,
   language: Language,
+  className?: string;
 }
 
-export default function Highlight({ language, code }: Props) {
+export default function Highlight({ language, code, className }: Props) {
   const [preRef, btnRef] = [useRef(null), useRef(null)];
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function Highlight({ language, code }: Props) {
   useClipboard(btnRef);
 
   return (
-    <div className={styles.highlight}>
+    <div className={`${styles.highlight} ${className}`}>
       <pre ref={preRef} className={language}>
         <code>
           {code}

@@ -34,18 +34,6 @@ blockquote {
   }
 }
 
-.heading-with-href {
-  position: relative;
-  a {
-    display: inline-block;
-    transform: translateY(0.2em);
-    font-size: 2em;
-    margin-right: 0.25em;
-    color: color(blue);
-    text-decoration: none;
-  }
-}
-
 .dots {
   font-size: 3em;
   line-height: 0;

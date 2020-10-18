@@ -1,0 +1,29 @@
+@import '../../../styles/variables';
+
+.lesson-resources {
+  padding-top: 2em;
+  padding-left: 1em;
+  border-radius: 1em;
+  border: 2px solid color(silver);
+
+  h3 {
+    left: 2em;
+    padding: 0 1em;
+    top: 0;
+    transform: translateY(-50%);
+    display: inline-block;
+    background: color(white);
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 100%;
+      width: 100%;
+      background: red;
+    }
+  }
+
+  li:last-of-type {
+    margin-bottom: 1em;
+  }
+}

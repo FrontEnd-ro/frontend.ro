@@ -13,6 +13,7 @@ export default function LessonHeading({ as, id, children }: PropsWithChildren<Pr
   }, [
     React.createElement('a', {
       href: `#${id}`,
+      key: id,
     }, '#'),
     children,
   ]);

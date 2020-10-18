@@ -79,6 +79,10 @@
 }
 
 /** Sizes */
+.w-100 {
+  width: 100%;
+}
+
 .h-100 {
   height: 100%;
 }
@@ -129,6 +133,19 @@
 
 .rounded-md {
   border-radius: 0.375em;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+/** Positions */
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
 }
 
 /** Others */

@@ -41,7 +41,7 @@ export default function Lesson0() {
       </Head>
       <Lesson title="Introducere" chapters={chapters}>
         <LessonContributors contributors={contributors} />
-        <LessonCover>
+        <LessonCover resizeOffset={100}>
           <svg xmlns="http://www.w3.org/2000/svg" width="869.99994" height="520.13854" viewBox="0 0 869.99994 520.13854" preserveAspectRatio="xMidYMax slice">
             <path d="M996.72788,546.00953a393.41394,393.41394,0,0,0-54.82622,54.44229,394.561,394.561,0,0,0-61.752,103.194c-1.112,2.72484,3.31272,3.911,4.4123,1.21642A392.34209,392.34209,0,0,1,999.96343,549.24507c2.28437-1.86015-.97-5.08035-3.23555-3.23554Z" transform="translate(-165.00003 -189.93073)" fill="#fff" />
             <path d="M217.56676,484.37281a540.35491,540.35491,0,0,1,75.30383,74.77651A548.0761,548.0761,0,0,1,352.25665,647.04a545.835,545.835,0,0,1,25.43041,53.8463c1.52726,3.74257-4.55,5.37169-6.06031,1.67075a536.35952,536.35952,0,0,0-49.009-92.727A539.73411,539.73411,0,0,0,256.889,528.63168a538.44066,538.44066,0,0,0-43.76626-39.81484c-3.13759-2.55492,1.33232-6.97788,4.444-4.444Z" transform="translate(-165.00003 -189.93073)" fill="#fff" />
@@ -332,7 +332,7 @@ export default function Lesson0() {
                 început pentru a ne familiariza cu el.
                 De asemenea, înainte să începi
                 {' '}
-                <a href="/html/lesson-1">Lecția 1</a>
+                <a href="/html/introduction">Lecția 1</a>
                 {' '}
                 te invităm să arunci un ochi pe acest
                 {' '}

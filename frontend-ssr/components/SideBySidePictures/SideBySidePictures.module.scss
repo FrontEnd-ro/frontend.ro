@@ -1,0 +1,41 @@
+@import '../../styles/variables';
+
+.side-by-side-pictures {
+  padding: 1em;
+
+  // TODO: needs to be properly fixed
+  margin: 3em -10vw;
+  // TODO: didn't DIana add one?
+  border-radius: 1em; 
+  border: 1px solid color(silver);
+
+  figure {
+    width: 45%;
+    // TODO: this should not be overwritten!
+    margin: 0; 
+
+    img {
+      max-width: 100%;
+      border-radius: 0.5em; 
+      transition: transform 0.5s $cubic;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // this should be shared!!!
+  @media screen and (max-width: 1400px) {
+    margin: 3em 0;
+    flex-flow: column nowrap;
+
+    figure {
+      width: 100%;
+
+      &:first-of-type {
+        margin-bottom: 3em;
+      }
+    }
+  }
+}

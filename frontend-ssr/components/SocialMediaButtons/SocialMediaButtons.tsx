@@ -6,11 +6,10 @@ import {
   faTwitter,
   faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faShare } from '@fortawesome/free-solid-svg-icons';
+import { useClipboard, useOutsideClick } from '~/services/Hooks';
 
 import styles from './SocialMediaButtons.module.scss';
-import { useOutsideClick } from '~/services/Hooks';
-import CopyToClipboard from '../CopyToClipboard';
 
 export function ShareButton({ url, config } : {url: string, config: any}) {
   const ref = useRef(null);
@@ -31,7 +30,7 @@ export function ShareButton({ url, config } : {url: string, config: any}) {
       <ul>
         {config.copy && (
         <li>
-          <CopyToClipboard onCopy={toggle} className="btn btn--light btn--with-icon" text={url} />
+          <CopyLinkToClipboard onCopy={toggle} className="btn btn--light btn--with-icon" text={url} />
         </li>
         )}
         {config.facebook && (
@@ -136,4 +135,21 @@ function useSocialShare(providerName: string) {
 
     window.open(e.target.href, `${providerName} Share`, 'width=500,height=500');
   };
+}
+
+function CopyLinkToClipboard({ text, className, onCopy }: {
+  text: string,
+  className: string,
+  onCopy: () => void
+}) {
+  const ref = useRef(null);
+
+  useClipboard(ref, onCopy);
+
+  return (
+    <button className={className} type="button" data-clipboard-text={text} ref={ref}>
+      <FontAwesomeIcon icon={faLink} height="24" className="mr-2" />
+      Copy link
+    </button>
+  );
 }

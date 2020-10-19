@@ -7,8 +7,16 @@ const UPCOMING_LESSONS = [{
   title: 'CSS Media Queries',
   href: '/css/media-queries',
 }, {
+  title: 'CSS Pseudo-Elements',
+  href: '/css/pseudo-elements',
+},
+{
   title: 'Graceful Degradation',
   href: '/concepts/graceful-degradation',
+},
+{
+  title: 'Smooth Scrolling',
+  href: '/concepts/smooth-scrolling',
 }, {
   title: 'How to help',
   href: '/intro/how-to-help',

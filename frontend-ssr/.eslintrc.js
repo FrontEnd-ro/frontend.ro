@@ -22,7 +22,8 @@ module.exports = {
     'import/extensions': 'off',
     'no-console': 'off',
     'no-use-before-define': 'off',
-    'func-names': 'off'
+    'func-names': 'off',
+    'no-underscore-dangle': 'off',
   },
   plugins: [
     '@typescript-eslint',

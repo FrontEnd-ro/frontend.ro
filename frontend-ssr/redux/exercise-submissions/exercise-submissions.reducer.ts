@@ -28,7 +28,7 @@ export const submissionReducer = (state = initialState, action: { type: string; 
       }
       return {
         ...state,
-        submissions: state.submissions.filter((submission) => !id.includes(submission.id)),
+        submissions: state.submissions.filter((submission) => !id.includes(submission._id)),
       };
     }
     case EXERCISE_SUBMISSIONS.UPDATE:
@@ -36,7 +36,7 @@ export const submissionReducer = (state = initialState, action: { type: string; 
         ...state,
         submissions: state.submissions.map((submission) => {
           const { id, newSubmission } = action.payload;
-          if (submission.id === id) {
+          if (submission._id === id) {
             return {
               ...submission,
               ...newSubmission,

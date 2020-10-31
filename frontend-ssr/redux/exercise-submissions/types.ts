@@ -1,19 +1,31 @@
-import { ChapterType } from '~/services/constants';
+import { ChapterType } from '~/shared-types';
 
+interface User {
+  name: string;
+  username: string;
+  email: string;
+  avatar: string;
+}
+
+interface Exercise {
+  type: ChapterType;
+  body: string;
+}
 export interface Submission {
-    username: string,
-    avatarSrc: string,
-    id: string,
-    chapter: ChapterType,
-    time: number,
-    type: SubmissionType,
+  _id: string;
+  user: User;
+  exercise: Exercise;
+  chapter: ChapterType;
+  type: SubmissionType;
+  submittedAt: number;
+  updatedAt: number;
 }
 export interface SubmissionState {
-    submissions: Submission[],
-    search: string,
-    page: number,
+  submissions: Submission[];
+  search: string;
+  page: number;
 }
 export enum SubmissionType {
-    PENDING = 'pending',
-    ASSIGNED = 'assigned',
+  PENDING = 'pending',
+  ASSIGNED = 'assigned',
 }

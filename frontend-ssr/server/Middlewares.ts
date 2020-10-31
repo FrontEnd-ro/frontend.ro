@@ -1,5 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { NextApiRequest, NextApiResponse } from 'next';
+import { connectToDb } from './database';
+import { ServerError } from './ServerUtils';
 
 type Middleware = (
   req: NextApiRequest,
@@ -29,9 +31,12 @@ export function withMiddlewares(
   handlerOrConfig: Handler | RouteConfig,
   middlewares: Middleware[] = [],
 ): Handler {
-  const extendedMiddlewares = (typeof handlerOrConfig === 'function')
+  const extendedMiddlewares = typeof handlerOrConfig === 'function'
     ? [...middlewares]
     : [...middlewares, methodExists(handlerOrConfig)];
+
+  /** Connect to DB on all API routes */
+  connectToDb();
 
   return async (req, res) => {
     try {
@@ -46,12 +51,24 @@ export function withMiddlewares(
       }
 
       if (typeof handlerOrConfig === 'function') {
-        handlerOrConfig(req, res);
+        await handlerOrConfig(req, res);
       } else {
-        handlerOrConfig[req.method](req, res);
+        await handlerOrConfig[req.method](req, res);
       }
     } catch (err) {
-      res.json(err);
+      if (err instanceof ServerError) {
+        err.send(res);
+        return;
+      }
+
+      let code = err?.code;
+      if (!code && err.name === 'ValidationError') {
+        code = 400;
+      } else {
+        code = 500;
+      }
+
+      new ServerError(code, err).send(res);
     }
   };
 }
@@ -78,15 +95,4 @@ function methodExists(routeConfig: RouteConfig) {
       );
     }
   };
-}
-
-class ServerError {
-  public status: number;
-
-  public reason: string;
-
-  constructor(status: number, reason: string) {
-    this.status = status;
-    this.reason = reason;
-  }
 }

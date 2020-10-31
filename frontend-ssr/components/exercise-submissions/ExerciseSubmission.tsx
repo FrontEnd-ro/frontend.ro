@@ -10,7 +10,6 @@ interface Props {
 function ExSubmission({ submission } : Props) {
   return (
     <div
-      key={submission.id}
       className={`${styles.card} rounded-md capitalize`}
     >
       <div className={`${styles['card-top']} d-flex align-items-center justify-content-between`}>
@@ -22,15 +21,15 @@ function ExSubmission({ submission } : Props) {
             <img
               width="50"
               height="50"
-              alt={`${submission.username} avatar`}
-              src={submission.avatarSrc}
+              alt={`${submission.user.username} avatar`}
+              src={submission.user.avatar}
             />
             <span>
-              {submission.username}
+              {submission.user.username}
             </span>
           </a>
           <span className={`${styles['card-el']} ${styles['card-chapter']} text-bold text-white rounded-md bg-grey uppercase text-center text-xs`}>
-            {submission.chapter}
+            {submission.exercise.type}
           </span>
         </div>
         {
@@ -55,7 +54,7 @@ function ExSubmission({ submission } : Props) {
         }
 
       </div>
-      <time className="text-xs">{timeAgo(new Date(submission.time))}</time>
+      <time className="text-xs">{timeAgo(new Date(submission.submittedAt))}</time>
     </div>
   );
 }

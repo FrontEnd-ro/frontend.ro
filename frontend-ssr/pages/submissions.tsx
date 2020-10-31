@@ -54,7 +54,7 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
   };
 
   searchData = async (query: string) => {
-    const { dispatch, submissions } = this.props;
+    const { dispatch } = this.props;
     this.setState({ loading: true });
 
     try {
@@ -87,7 +87,7 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
             />
             <ul className={`${styles['cards-wrapper']}`}>
               {submissions.submissions && submissions.submissions.map((submission) => (
-                <li key={submission.id}>
+                <li key={submission._id}>
                   <ExerciseSubmission submission={submission} />
                 </li>
               ))}

@@ -3,7 +3,7 @@ import styles from './LessonContributors.module.scss';
 
 interface Contributor {
     name: string;
-    avatarSrc: string;
+    avatar: string;
     url: string;
 }
 
@@ -28,7 +28,7 @@ export default function LessonContributors({ contributors, className = '', displ
           }}
         >
           <a href={contributor.url}>
-            <img width="48" height="48" alt={`${contributor.name} avatar`} src={contributor.avatarSrc} />
+            <img width="48" height="48" alt={`${contributor.name} avatar`} src={contributor.avatar} />
             <p>
               {contributor.name}
             </p>

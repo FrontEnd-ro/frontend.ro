@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import SEOTags from '~/components/SEOTags';
 import Lesson from '~/components/lessons/Lesson';
-import { LessonCover, LessonContributors } from '~/components/lessons';
+import { LessonCover, LessonContributors, LessonHeading } from '~/components/lessons';
 import { ShareButton } from '~/components/SocialMediaButtons';
 import { Ira, Pava } from '~/services/contributors';
 
@@ -71,10 +71,9 @@ export default function Lesson0() {
 
         </LessonCover>
         <section>
-          <h2 className="heading-with-href" id="about">
-            <a href="#about">#</a>
+          <LessonHeading as="h2" id="about">
             Ce e FrontEnd.ro?
-          </h2>
+          </LessonHeading>
           <p>
             FrontEnd.ro este o comunitate de oameni ce învață FrontEnd de la zero.
           </p>
@@ -91,10 +90,9 @@ export default function Lesson0() {
           </p>
         </section>
         <section>
-          <h2 id="why-are-we-different" className="heading-with-href">
-            <a href="#why-are-we-different">#</a>
+          <LessonHeading as="h2" id="why-are-we-different">
             De ce e FrontEnd.ro diferit?
-          </h2>
+          </LessonHeading>
           <p>
             Noi suntem convinși că:
           </p>
@@ -109,10 +107,9 @@ export default function Lesson0() {
           </p>
         </section>
         <section>
-          <h2 className="heading-with-href" id="why-are-we-free">
-            <a href="#why-are-we-free">#</a>
+          <LessonHeading as="h2" id="why-are-we-free">
             De ce e FrontEnd.ro gratuit?
-          </h2>
+          </LessonHeading>
           <p>
             De la început ne-am dorit ca FrontEnd.ro să fie un
             {' '}
@@ -131,10 +128,9 @@ export default function Lesson0() {
           </p>
         </section>
         <section>
-          <h2 className="heading-with-href" id="how-can-i-help">
-            <a href="#how-can-i-help">#</a>
+          <LessonHeading as="h2" id="how-can-i-help">
             Cum pot să ajut?
-          </h2>
+          </LessonHeading>
           <p>
             Dacă folosești platforma să
             {' '}
@@ -189,10 +185,9 @@ export default function Lesson0() {
         </section>
         <div className="dots" />
         <section>
-          <h2 className="heading-with-href" id="skills-and-concepts">
-            <a href="#skills-and-concepts">#</a>
+          <LessonHeading as="h2" id="skills-and-concepts">
             Skill-uri și concepte
-          </h2>
+          </LessonHeading>
           <p>
             FrontEnd'ul, de fapt programarea în general, este un domeniu în continuă
             dezvoltare și schimbare.
@@ -223,10 +218,9 @@ export default function Lesson0() {
         </section>
         <div className="dots" />
         <section>
-          <h2 className="heading-with-href" id="how-to-use-platform">
-            <a href="#how-to-use-platform">#</a>
+          <LessonHeading as="h2" id="how-to-use-platform">
             Cum să folosești platforma
-          </h2>
+          </LessonHeading>
           <p>
             Focusul nostru este pe exerciții și feedback, acolo investim cel
             mai mult timp. Există deja o mulțime de articole și tutoriale
@@ -289,10 +283,9 @@ export default function Lesson0() {
           </blockquote>
         </section>
         <section>
-          <h2 className="heading-with-href" id="tools">
-            <a href="#tools">#</a>
+          <LessonHeading as="h2" id="tools">
             Tool-uri necesare
-          </h2>
+          </LessonHeading>
           <p>
             Unul dintre cele mai faine lucruri la FrontEnd development
             este faptul că nu avem nevoie de prea multe lucruri înainte să începem.
@@ -352,10 +345,9 @@ export default function Lesson0() {
         </section>
         <div className="dots" />
         <section>
-          <h2 className="heading-with-href" id="recommended-resources">
-            <a href="#recommended-resources">#</a>
+          <LessonHeading as="h2" id="recommended-resources">
             Resurse recomandate
-          </h2>
+          </LessonHeading>
           <p>
             Pe partea de resurse, vom adăuga la finalul fiecărei lecții link-uri de
             unde poți învăța mai multe. Totuși, nu putem să nu menționăm două site-uri extrem de

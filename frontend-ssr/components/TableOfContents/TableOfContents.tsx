@@ -75,7 +75,7 @@ class TableOfContents extends React.Component<Props, State> {
          *
          * This is reproducing only when using a Mouse, not the touchpad on laptop.
          */
-        window.history.replaceState(null, '', `/intro/lesson-0#${entry.target.id}`);
+        window.history.replaceState(null, '', `${window.location.pathname}#${entry.target.id}`);
 
         this.setState({
           activeChapterId: entry.target.id,

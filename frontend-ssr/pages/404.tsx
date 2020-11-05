@@ -1,35 +1,22 @@
-import React from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-import Header from '~/components/Header';
-import Footer from '~/components/Footer';
+import { getUpcomingLesson } from '~/services/Constants';
+import { NotFound, NotWroteYet } from '~/components/404';
 
-import styles from '~/styles/pages/404.module.scss';
+export default function Generic404() {
+  const router = useRouter();
+  const [upcomingLesson, setUpcomingLesson] = useState(undefined);
 
-export default function NotFoundPage() {
-  return (
-    <>
-      <Head>
-        <title>Not Found | FrontEnd.ro</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <>
-        <Header />
-        <main className={styles.page}>
-          <h1>
-            Oops...
-            <span aria-label="Sad face emoji" role="img">😞</span>
-          </h1>
-          <h2>
-            Se pare că pagina pe care o cauți nu mai există...
-          </h2>
-          <Link href="/">
-            <a className="btn btn--blue">Navighează acasă!</a>
-          </Link>
-        </main>
-        <Footer />
-      </>
-    </>
-  );
+  useEffect(() => {
+    const lesson = getUpcomingLesson(router.asPath);
+
+    setUpcomingLesson(lesson || false);
+  }, []);
+
+  if (upcomingLesson === undefined) {
+    return null;
+  }
+
+  return (upcomingLesson ? <NotWroteYet lesson={upcomingLesson} /> : <NotFound />);
 }

@@ -1,7 +1,6 @@
-@import "../variables";
+@import '../../styles/variables';
 
 .page {
-  text-align: center;
   font-size: 1rem;
   margin: 0 auto;
   padding: 8em 8vw;
@@ -24,5 +23,29 @@
     font-size: 20px;
     padding: 0.5em 1em;
     text-decoration: none;
+  }
+}
+
+.generic-404 {
+  text-align: center;
+}
+
+.not-wrote-yet {
+  p {
+    margin-top: 2em;
+    font-weight: normal;
+    font-size: calc(12px + 1.5vw);
+    line-height: 2em;
+  }
+
+  @media screen and (max-width: 1000px) {
+    :global .hero {
+      flex-flow: column;
+      justify-content: initial;
+
+      img {
+        align-self: flex-end;
+      }
+    }
   }
 }

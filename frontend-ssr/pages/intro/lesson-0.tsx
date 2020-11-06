@@ -3,7 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import SEOTags from '~/components/SEOTags';
 import Lesson from '~/components/lessons/Lesson';
-import { LessonCover, LessonContributors, LessonHeading } from '~/components/lessons';
+import {
+  LessonCover, LessonContributors, LessonHeading, LessonFigure,
+} from '~/components/lessons';
 import { ShareButton } from '~/components/SocialMediaButtons';
 import { Ira, Pava } from '~/services/contributors';
 
@@ -373,18 +375,20 @@ export default function Lesson0() {
                 Recomandăm să pui “MDN” la final pentru ca pagina căutată
                 să apară printre primele rezultate.
               </p>
-              <figure className="with--border">
-                <img src="/images/lesson-0__google-search.png" alt="Searching 'background color MDN' on Google Search" />
-                <figcaption> Cautând `background-color MDN` pe Google  </figcaption>
-              </figure>
+              <LessonFigure
+                withBorder
+                src="/images/lesson-0__google-search.png"
+                alt="Cautând `background-color MDN` pe Google"
+              />
               <p>
                 And voilà! Am ajuns la documentație,
                 unde putem vedea toate opțiunile posibile și cum le putem folosi:
               </p>
-              <figure className="with--border">
-                <img src="/images/lesson-0__mdn.png" alt="Docs about `background-color` on MDN" />
-                <figcaption> Documentația `background-color` pe MDN </figcaption>
-              </figure>
+              <LessonFigure
+                withBorder
+                src="/images/lesson-0__mdn.png"
+                alt="Documentația `background-color` pe MDN"
+              />
             </li>
             <li>
               <a target="_blank" rel="noreferrer" href="https://stackoverflow.com/" className="text-bold">Stack Overflow</a>

@@ -96,6 +96,14 @@
   display: flex;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
 .d-block {
   display: block;
 }
@@ -141,6 +149,11 @@
 
 .rounded-md {
   border-radius: 0.375em;
+}
+
+.mx-5 {
+  margin-left: 2em;
+  margin-right: 2em;
 }
 
 .m-0 {

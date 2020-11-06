@@ -103,3 +103,13 @@ $lesson-menu-width: 18em;
   max-width: $max-width;
   margin: auto;
 }
+
+@mixin linearGradient($color1, $color2) {
+  background: repeating-linear-gradient(
+      -45deg,
+      $color1,
+      $color1 5px,
+      $color2 0,
+      $color2 10px
+    );
+}

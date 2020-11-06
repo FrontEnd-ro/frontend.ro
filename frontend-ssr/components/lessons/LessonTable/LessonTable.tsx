@@ -24,7 +24,13 @@ export default function LessonTable({
         {rows.map((row, index) => (
           <tr key={row[0]}>
             {hasSide && <td className="is--side text-bold" style={{ width }}>{side[index]}</td>}
-            {row.map((text) => (<td style={{ width }} key={text}>{text}</td>))}
+            {row.map((text) => (
+              <td
+                style={{ width }}
+                key={text}
+                dangerouslySetInnerHTML={{ __html: text }}
+              />
+            ))}
           </tr>
         ))}
       </tbody>

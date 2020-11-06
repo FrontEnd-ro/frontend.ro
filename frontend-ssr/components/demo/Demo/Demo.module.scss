@@ -1,0 +1,11 @@
+@import '../../../styles/variables';
+
+.demo {
+  display: flex;
+  flex-flow: column nowrap;
+  width: $width;
+  max-width: $max-width;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}

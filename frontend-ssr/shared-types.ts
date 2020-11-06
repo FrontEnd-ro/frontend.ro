@@ -6,3 +6,10 @@ export enum ChapterType {
   CSS = 'css',
   JS = 'js',
 }
+
+export interface Figure {
+  alt: string;
+  src: string;
+  demo?: string;
+  isVideo?: boolean;
+}

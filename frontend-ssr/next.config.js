@@ -6,6 +6,9 @@ module.exports = {
   env: {
     ENDPOINT: '/api',
   },
+  images: {
+    domains: ['d3tycb976jpudc.cloudfront.net'],
+  },
   webpack: (config, {
     buildId, dev, isServer, defaultLoaders, webpack,
   }) => {

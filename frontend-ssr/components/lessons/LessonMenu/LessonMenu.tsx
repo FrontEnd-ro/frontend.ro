@@ -9,6 +9,7 @@ import styles from './LessonMenu.module.scss';
 interface Props {
   isOpen: boolean,
   close: () => void,
+  title: string,
   chapters: Chapters[]
 }
 
@@ -16,6 +17,7 @@ export default function LessonMenu({
   isOpen,
   close,
   chapters,
+  title,
 } : Props) {
   const ref = useRef(null);
   useOutsideClick(ref, close);
@@ -23,7 +25,9 @@ export default function LessonMenu({
   return (
     <aside ref={ref} className={`${styles['lesson-menu']}${isOpen ? ` ${styles['lesson-menu--open']}` : ''} bg-black text-white`}>
       <header className="lesson-menu__header d-flex justify-content-between align-items-center">
-        <h2 title="Introducere"> Introducere </h2>
+        <h2>
+          {title}
+        </h2>
         <button type="button" onClick={close} className="btn--transparent text-white">
           <FontAwesomeIcon icon={faTimes} />
         </button>

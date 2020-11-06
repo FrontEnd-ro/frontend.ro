@@ -6,7 +6,8 @@ import { Chapters } from '~/components/TableOfContents';
 
 import styles from './Lesson.module.scss';
 
-export default function Lesson({ children, chapters } : PropsWithChildren<{
+export default function Lesson({ children, title, chapters } : PropsWithChildren<{
+  title: string
   chapters: Chapters[]
 }>) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,11 +17,15 @@ export default function Lesson({ children, chapters } : PropsWithChildren<{
       <LessonMenu
         isOpen={isMenuOpen}
         close={() => setIsMenuOpen(false)}
+        title={title}
         chapters={chapters}
       />
       <main>
         <Header onMenuClick={() => setIsMenuOpen(true)} />
         <article>
+          <h1>
+            {title}
+          </h1>
           {children}
         </article>
         <Footer />

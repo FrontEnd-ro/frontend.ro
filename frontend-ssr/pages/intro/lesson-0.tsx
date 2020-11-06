@@ -39,8 +39,7 @@ export default function Lesson0() {
           url="https://FrontEnd.ro/intro/lesson-0"
         />
       </Head>
-      <Lesson chapters={chapters}>
-        <h1> Introducere </h1>
+      <Lesson title="Introducere" chapters={chapters}>
         <LessonContributors contributors={contributors} />
         <LessonCover>
           <svg xmlns="http://www.w3.org/2000/svg" width="869.99994" height="520.13854" viewBox="0 0 869.99994 520.13854" preserveAspectRatio="xMidYMax slice">

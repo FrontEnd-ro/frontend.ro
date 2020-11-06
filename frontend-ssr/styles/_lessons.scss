@@ -54,28 +54,3 @@ blockquote {
   border-radius: 5px;
   font-family: "Courier New", Courier, monospace;
 }
-
-figure {
-  width: 100%;
-  margin: 3em 0;
-  position: relative;
-
-  &.with--border {
-    img,
-    video,
-    svg {
-      border: 1px solid color(silver);
-    }
-  }
-
-  figcaption {
-    color: color(grey);
-    position: absolute;
-    bottom: -1.25em;
-    left: 0;
-    font-size: 0.6em;
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-  }
-}

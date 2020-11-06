@@ -3,7 +3,14 @@ import Head from 'next/head';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors, LessonCover, LessonHeading, LessonResources, LessonTable, LessonTableProps, LessonTip,
+  LessonContributors,
+  LessonCover,
+  LessonFigure,
+  LessonHeading,
+  LessonResources,
+  LessonTable,
+  LessonTableProps,
+  LessonTip,
 } from '~/components/lessons';
 import { Pava } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
@@ -19,7 +26,7 @@ const chapters = [
   { title: '<picture> element', id: 'picture-element' },
 ];
 
-const sizesTable : LessonTableProps = {
+const sizesTable: LessonTableProps = {
   head: ['JPG', 'PNG', 'WebP', 'AVIF'],
   side: ['SD', 'HD', 'FullHD'],
   rows: [
@@ -41,9 +48,7 @@ export default function ImagesLesson() {
           url="https://FrontEnd.ro/html/images"
         />
       </Head>
-      <Lesson chapters={chapters}>
-        <h1> Imagini </h1>
-
+      <Lesson title="Imagini" chapters={chapters}>
         <LessonContributors contributors={contributors} />
         <LessonCover>
           <CoverSVG />
@@ -89,8 +94,16 @@ export default function ImagesLesson() {
             text - imaginea din dreapta.
           </p>
           <SideBySidePictures
-            img1={{ src: '/images/lessons/images/golden-retriever-and-ball.jpg', alt: 'Imagine încărcată cu succes într-o pagină Web' }}
-            img2={{ src: '/images/lessons/images/golden-retriever-and-ball.jpg', alt: 'Descrierea text a imaginii, dacă aceasta nu a putut fi încărcată' }}
+            img1={{
+              src: 'https://d3tycb976jpudc.cloudfront.net/demo-assets/golden-retriever-and-ball.jpg',
+              alt: 'Imagine încărcată cu succes într-o pagină Web',
+              demo: '/demo/html/basic-image',
+            }}
+            img2={{
+              src: '/images/lessons/images/image-alt.png',
+              alt: 'Descrierea text a imaginii, dacă aceasta nu a putut fi încărcată',
+              demo: '/demo/html/image-alt',
+            }}
           />
           <p>
             Este foarte important sa nu uitam de atributul
@@ -117,10 +130,15 @@ export default function ImagesLesson() {
           </p>
           <h1> DEMO </h1>
           <p>
-            La fel si in galeria de mai jos, unde avem exact 3 imagini pe fiecare rand.
-            Dimensiunea acestora e proportionala cu ecranul, mai exact 30% din dimensiunea lui.
+            La fel si in galeria de mai jos, unde avem exact 2 imagini pe fiecare rand.
+            Dimensiunea acestora e proportionala cu ecranul, mai exact 45% din dimensiunea lui.
           </p>
-          <h1> DEMO </h1>
+          <LessonFigure
+            withBorder
+            src="https://d3tycb976jpudc.cloudfront.net/demo-assets/fixed-gallery.png"
+            alt="Galerie cu 2 imagini pe fiecare rand"
+            demo="/demo/html/fixed-gallery"
+          />
           <p>
             Insa exista situatii in care o imagine va avea aceleași dimensiuni indiferent
             de dispozitiv. Un exemplu ar putea fi logo-ul unui site/companii
@@ -197,7 +215,11 @@ export default function ImagesLesson() {
           </p>
           <p>
             Ideal ar fi sa incarcam imaginile
-            <strong>doar atunci cand avem nevoie de ele</strong>
+            <strong>
+              {' '}
+              doar atunci cand avem nevoie de ele
+              {' '}
+            </strong>
             .
             Cum se intampla in video-ul din dreapta, unde imaginile sunt incarcate
             cand ne apropiem de ele, versus in cel din stanga unde vedem comportamentul default.
@@ -319,7 +341,8 @@ export default function ImagesLesson() {
             <br />
             {' '}
             <br />
-            Totusi, te rugam sa-l pui acolo, impreuna cu valoarea `max-width: 100%. Astfel ne asiguram ca imaginile nu vor iesi din pagina.
+            Totusi, te rugam sa-l pui acolo, impreuna cu valoarea `max-width: 100%.
+            Astfel ne asiguram ca imaginile nu vor iesi din pagina.
           </LessonTip>
           <p>
             Siiii voilà. Daca mergem in
@@ -336,16 +359,20 @@ export default function ImagesLesson() {
           <h1> VIDEO </h1>
           <p>
             Te incurajam sa te "joci" si cu optiunea DRP (pixels per inch or smth like that) pentru
-            a vedea ce imagini se incarca la rezolutii diferite. De exemplu, cu o valoarea de 2 si o latime de 450px se va incarca imaginea HD. Asta nu e o greseala, pentru ca avand setat DRP = 2 practic avem dublu numarul de pixeli pe ecran.
+            a vedea ce imagini se incarca la rezolutii diferite. De exemplu, cu o valoarea
+            de 2 si o latime de 450px se va incarca imaginea HD. Asta nu e o greseala,
+            pentru ca avand setat DRP = 2 practic avem dublu numarul de pixeli pe ecran.
           </p>
           <div className="dots" />
           <p>
             Mergand mai departe, e posibil ca in pagina finala imaginea sa aiba
             o dimensiune fixa - de exemplu 200px pe telefon si 500px pe tablete.
-            In cazuri de genul, e recomandat sa specificam asta prin atributul `sizes`, dandu-i browserului mai multe informatii despre care e cea mai buna sursa.
+            In cazuri de genul, e recomandat sa specificam asta prin atributul `sizes`,
+            dandu-i browserului mai multe informatii despre care e cea mai buna sursa.
           </p>
           <p>
-            Dupa cum vezi, avem mai multe instructiuni separate din virgula. Primele 2 contin asa numitele
+            Dupa cum vezi, avem mai multe instructiuni separate din virgula.
+            Primele 2 contin asa numitele
             {' '}
             <a href="/css/media-queries">media-query</a>
             In cazul asta ele spun asta:
@@ -360,7 +387,8 @@ export default function ImagesLesson() {
           </p>
           <p>
             Te incurajam sa experiementezi cu valorile de acolo in timp ce tii
-            tabul network deschis, pentru a intelege si mai bine ce/de ce anumite imagini vor fi incarcate.
+            tabul network deschis, pentru a intelege si mai bine ce/de ce anumite
+            imagini vor fi incarcate.
           </p>
         </section>
         <section>
@@ -368,9 +396,14 @@ export default function ImagesLesson() {
             {'<picture> element'}
           </LessonHeading>
           <p>
-            Dupa cum ai vazut pana acum, elementul `
-            <img />
-            ` - desi destul de simplu in utilizare - ne ofera mai multe functionalitati care ne permit sa optimizam imaginile si experienta utilizatorilor. Cu toate acestea, mai avem o posibila optimizare pe care din pacate acesta nu o suporta - si anume formate multiple ale imaginii.
+            Dupa cum ai vazut pana acum, elementul
+            {' '}
+            <span className="formatted">{'<img>'}</span>
+            {' '}
+            - desi destul de simplu in utilizare - ne ofera mai multe functionalitati
+            care ne permit sa optimizam imaginile si experienta utilizatorilor.
+            Cu toate acestea, mai avem o posibila optimizare pe care din pacate acesta
+            nu o suporta - si anume formate multiple ale imaginii.
           </p>
           <blockquote>
             De ce am vrea mai multe formate? Nu e
@@ -384,7 +417,8 @@ export default function ImagesLesson() {
             de ajuns?
           </blockquote>
           <p>
-            Hmmm.... nu chiar. Exista formate mai moderne precum WebP sau AVIF care ofera aceeasi calitate a imaginii la o dimensiune mai mica.
+            Hmmm.... nu chiar. Exista formate mai moderne precum WebP sau AVIF care
+            ofera aceeasi calitate a imaginii la o dimensiune mai mica.
             De exemplu, uite diferentele de dimensiune ale acestei imagini in functie de format:
           </p>
           <LessonTable {...sizesTable} className="my-5" />
@@ -396,7 +430,19 @@ export default function ImagesLesson() {
             de Google Chrome in timp ce WebP este mai comun insa tot lipseste din
             IOS 13 sau internet explorer 11.
           </p>
-          <h1> DEMO can i use</h1>
+          <SideBySidePictures
+            direction="column"
+            img1={{
+              src: 'https://d3tycb976jpudc.cloudfront.net/demo-assets/caniuse-webp.png',
+              alt: 'Suportul browserelor pentru formatul WebP',
+              demo: 'https://caniuse.com/?search=webp',
+            }}
+            img2={{
+              src: 'https://d3tycb976jpudc.cloudfront.net/demo-assets/caniuse-avif.png',
+              alt: 'Suportul browserelor pentru formatul Avif',
+              demo: 'https://caniuse.com/?search=avif',
+            }}
+          />
           <p>
             Deci avem nevoie de o modalitate prin care browsere care inteleg
             <strong>WebP</strong>
@@ -430,11 +476,15 @@ export default function ImagesLesson() {
           {' '}
           <span className="formatted">{'<source>'}</span>
           {' '}
-          este extrem de importanta caci browserul le va parcurge de sus-in-jos si o va alege pe prima compatibila.
+          este extrem de importanta caci browserul le va parcurge
+          de sus-in-jos si o va alege pe prima compatibila.
         </p>
         <h1> DEMOOO </h1>
         <p>
-          Deci, pentru cea mai buna si optima experienta posibila, putem converti imaginea la 3 formate, iar apoi fiecarui format ii vom face resize la 3 rezolutii diferite. Astfel indiferent de browser si dispozitiv, utilizatorii vor avea o experienta excelenta.
+          Deci, pentru cea mai buna si optima experienta posibila,
+          putem converti imaginea la 3 formate, iar apoi fiecarui format ii vom
+          face resize la 3 rezolutii diferite. Astfel indiferent de browser si
+          dispozitiv, utilizatorii vor avea o experienta excelenta.
         </p>
         <LessonResources
           className="my-5"

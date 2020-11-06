@@ -1,0 +1,8 @@
+@import '../../../styles/variables';
+
+.demo-preview {
+  padding: 2em;
+  border-radius: 1em;
+
+  @include linearGradient(color(darker-white), darken(color(darker-white), 5%));
+}

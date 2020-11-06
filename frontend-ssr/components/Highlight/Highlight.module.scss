@@ -19,6 +19,7 @@
   }
 
   pre {
+    margin: 0;
     border-radius: 1em;
     box-shadow: 0 0 1em color(black);
     padding: 0 1em 1em 1em !important; // Otherwise it will get overriden by the `dracula.css`

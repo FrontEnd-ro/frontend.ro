@@ -33,7 +33,7 @@
     "lodash": "^4.17.20",
     "mongoose": "^5.10.11",
     "mongoose-unique-validator": "^2.0.3",
-    "next": "9.4.4",
+    "next": "^10.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "^7.2.1",

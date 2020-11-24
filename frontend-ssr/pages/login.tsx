@@ -1,9 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c8a07f9... Uncommited changes
 import React, { Component } from "react";
 import Header from "../components/header/Header.component";
 import Footer from "../components/footer/Footer.component";
 import LoginForm from "../components/login.ts/loginFormComponent";
 import styles from "~/styles/pages/login/LoginPage.module.scss";
+<<<<<<< HEAD
 export default class Login extends Component {
   render() {
     return (
@@ -36,4 +40,18 @@ export default class Login extends Component {
         )
     }
 >>>>>>> 03137ef...  Adding routes for login, register, check and a middleware to check the jwt token
+=======
+export default class Login extends Component {
+  render() {
+    return (
+      <>
+        <Header />
+        <div className={styles["mere"]}>
+          <LoginForm className="" />
+        </div>
+        <Footer />
+      </>
+    );
+  }
+>>>>>>> c8a07f9... Uncommited changes
 }

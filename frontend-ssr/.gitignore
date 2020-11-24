@@ -31,12 +31,9 @@ yarn-error.log*
 .env.production.local
 .env
 
-<<<<<<< HEAD
 yarn.lock
-=======
 
 
 # package-lock.json 
 
 package-lock.json
->>>>>>> f1d80dc... Resolve some issue

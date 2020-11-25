@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+
+.scroll-wrapper {
+  position: relative;
+
+  &.is--fliped-x .bscroll-vertical-scrollbar {
+    left: 1px;
+    right: initial;
+  }
+  &.is--fliped-y .bscroll-horizontal-scrollbar {
+    top: 1px;
+    bottom: initial;
+  }
+}

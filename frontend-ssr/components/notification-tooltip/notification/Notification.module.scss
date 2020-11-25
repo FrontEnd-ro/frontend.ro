@@ -1,0 +1,116 @@
+@import "../../../styles/variables";
+@import "../../../styles/animations";
+
+.notifications-tooltip {
+  .icon .icon-spinner {
+    display: inline-block;
+    animation: rotateAnimation 1s linear infinite;
+  }
+
+  .icon .badge {
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    right: -0.5em;
+    height: 1.5em;
+    min-width: 1.5em;
+    border-radius: 50%;
+    background-color: color(red);
+    line-height: 0.5em;
+    padding: 0.5em 0 0 0.1em;
+  }
+
+  :global .scroll-wrapper {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    border: 1px solid #bcc2c6;
+    box-shadow: 0 0 1px #77838b;
+    height: 15em;
+    width: 15em;
+    max-width: 100vw;
+  }
+
+  #markAllAsReadBtn {
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0.4em 0.75em 0 0;
+
+    &:hover {
+      color: color(blue);
+      font-weight: bold;
+    }
+  }
+
+  .notifications li {
+    line-height: 2em;
+    border-bottom: 1px solid color(darker-white);
+    &:first-child {
+      text-align: right;
+      &:hover {
+        background-color: color(white);
+        background-image: none;
+        color: initial;
+      }
+    }
+    a {
+      padding: 0.5em 1em;
+      &:hover {
+        background-color: color(white);
+      }
+    }
+
+    &.is--unread {
+      background-color: darken(color(darker-white), 5%);
+    }
+
+    img {
+      margin-right: 0.8em;
+    }
+
+    .body {
+      white-space: initial;
+
+      .message {
+        margin: 0;
+      }
+
+    }
+
+    .user {
+      border-bottom: 1px solid color(silver);
+      margin-right: 0.4em;
+    }
+  }
+}
+
+.skeleton {
+  padding: 0.5em 1em;
+  background-color: lighten(color(silver), 10%);
+}
+
+.skeleton__image {
+  width: 1.6em;
+  height: 1.6em;
+  position: relative;
+  padding: 0;
+
+  &:after {
+    content: "";
+    width: 100%;
+    height: 0px;
+    display: block;
+    position: absolute;
+    box-shadow: 0 0 1px 3px lighten(color(grey), 20%);
+    top: 50%;
+    left: 0;
+    animation: skeletonOpacity 2s ease-in-out infinite;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .notifications-tooltip.header-tooltip .scroll-wrapper {
+    right: -2.5em;
+  }
+}

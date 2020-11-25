@@ -14,6 +14,7 @@ import ExerciseSubmissionSkeleton from '~/components/exercise-submissions/Exerci
 import SweetAlertService from '../services/sweet-alert/SweetAlert.service';
 import Search from '~/components/Search';
 import { RootState } from '../redux/root.reducer';
+import NotificationTooltip from '~/components/notification-tooltip/NotificationTooltip';
 
 import styles from './submissions.module.scss';
 
@@ -120,6 +121,7 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Header />
+        <NotificationTooltip />
         <main className={styles.page}>
           <div className={`${styles['page-submissions']}`}>
             <Search
@@ -148,7 +150,7 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
               Next page
             </button>
             <div
-              className={styles.hidden}
+              className="invisible"
               ref={this.hiddenRef}
             />
           </div>

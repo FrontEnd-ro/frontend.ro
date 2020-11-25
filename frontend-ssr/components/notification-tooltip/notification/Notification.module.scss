@@ -1,0 +1,65 @@
+@import '../../../styles/variables';
+
+.notification {
+  line-height: 2em;
+  border-bottom: 1px solid color(darker-white);
+
+  &:first-child {
+    text-align: right;
+
+    &:hover {
+      color: initial;
+      background-image: none;
+      background-color: color(white);
+    }
+  }
+
+  a {
+    padding: 0.5em 1em;
+
+    &:hover {
+      background-color: color(white);
+    }
+  }
+
+  &.is--unread {
+    background-color: darken(color(darker-white), 5%);
+  }
+
+  img {
+    margin-right: 0.8em;
+  }
+
+  :global .body {
+    white-space: initial;
+  }
+
+  .user {
+    margin-right: 0.4em;
+    border-bottom: 1px solid color(silver);
+  }
+}
+
+.skeleton {
+  padding: 0.5em 1em;
+  background-color: lighten(color(silver), 10%);
+}
+
+.skeleton__image {
+  width: 1.6em;
+  height: 1.6em;
+  position: relative;
+  padding: 0;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 0px;
+    display: block;
+    position: absolute;
+    box-shadow: 0 0 1px 3px lighten(color(grey), 20%);
+    top: 50%;
+    left: 0;
+    animation: skeletonOpacity 2s ease-in-out infinite;
+  }
+}

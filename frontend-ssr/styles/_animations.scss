@@ -21,3 +21,12 @@
     opacity: 0.5;
   }
 }
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { ServerError } from './ServerUtils';
 
 export function connectToDb() {
-  if (mongoose.connection.readyState === 1) {
+  if (mongoose.connection?.readyState === 1) {
     /** Early return - already connected */
     return Promise.resolve(mongoose);
   }

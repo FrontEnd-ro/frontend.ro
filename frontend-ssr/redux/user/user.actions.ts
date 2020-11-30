@@ -1,21 +1,35 @@
 import { Notification } from './types';
 
-const ADD = 'user/ADD';
-const LOAD = 'user/LOAD';
-const MARK_AS_READ = 'user/MARK_AS_READ';
-const MARK_AS_UNREAD = 'user/MARK_AS_UNREAD';
-const MARK_ALL_AS_READ = 'user/MARK_ALL_AS_READ';
+const LOAD_INFO = 'user/LOAD_INFO';
+
+const ADD_NOTIFICATIONS = 'user/ADD_NOTIFICATIONS';
+const LOAD_NOTIFICATIONS = 'user/LOAD_NOTIFICATIONS';
+
+const MARK_AS_READ = 'user/MARK_NOTIFICATIONS_AS_READ';
+const MARK_AS_UNREAD = 'user/MARK_NOTIFICATIONS_AS_UNREAD';
+const MARK_ALL_AS_READ = 'user/MARK_ALL_NOTIFICATIONS_AS_READ';
+
+export const USER_INFO = {
+  LOAD: LOAD_INFO,
+};
 
 export const USER_NOTIFICATIONS = {
-  ADD,
-  LOAD,
+  ADD: ADD_NOTIFICATIONS,
+  LOAD: LOAD_NOTIFICATIONS,
   MARK_AS_READ,
   MARK_AS_UNREAD,
   MARK_ALL_AS_READ,
 };
 
+/** User info */
+export const loadInfo = (info: any) => ({
+  type: LOAD_INFO,
+  payload: info,
+});
+
+/** Notifications */
 export const addNotification = (notification: Notification | Notification[], index = 0) => ({
-  type: ADD,
+  type: ADD_NOTIFICATIONS,
   payload: {
     notification,
     index,
@@ -23,7 +37,7 @@ export const addNotification = (notification: Notification | Notification[], ind
 });
 
 export const loadNotificationsSuccess = (newNotifications: Notification[]) => ({
-  type: LOAD,
+  type: LOAD_NOTIFICATIONS,
   payload: {
     newNotifications,
   },

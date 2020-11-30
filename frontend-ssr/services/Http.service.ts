@@ -53,7 +53,7 @@ class Http {
         });
       })
       .catch((err) => {
-        if (!err || !err.status || err.status === 500) {
+        if (!err || !err.code || err.code === 500) {
           alert('Oops! Something went wrong. Refresh and try again!');
         }
         throw err;

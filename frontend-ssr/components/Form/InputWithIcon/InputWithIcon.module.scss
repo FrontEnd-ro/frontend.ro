@@ -1,0 +1,10 @@
+.input-with-icon {
+  input {
+    padding-right: 2.5em !important;
+  }
+
+  & > span {
+    top: 0.25em;
+    right: 0.5em;
+  }
+}

@@ -1,0 +1,17 @@
+.form-group {
+  display: block;
+
+  :global .label {
+    display: block;
+    font-size: 0.75em;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    display: block;
+  }
+}

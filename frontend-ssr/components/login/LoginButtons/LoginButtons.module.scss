@@ -1,0 +1,39 @@
+@import '../../../styles/variables';
+
+.login-buttons {
+  button {
+    padding: 0.35em;
+    transition: transform 0.25s $cubic;
+  }
+
+  p {
+    font-size: 0.8em;
+  }
+
+  p::before,
+  p::after {
+    content: '';
+    top: 50%;
+    width: 40%;
+    position: absolute;
+    border-top: 1px solid color(silver);
+  }
+
+  p::before {
+    left: 0;
+  }
+
+  p::after {
+    right: 0;
+  }
+}
+
+.register-mode {
+  button:first-of-type {
+    transform: translateY(5em);
+  }
+
+  button:nth-of-type(2) {
+    transform: translateY(-5em);
+  }
+}

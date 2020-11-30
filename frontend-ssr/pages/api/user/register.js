@@ -34,7 +34,8 @@ export default async (req, res) => {
       errors.push(USERNAME_EXISTS_ERROR);
     }
     if (errors.length > 0)
-    {console.log("i am here");
+    {
+      console.log("i am here");
     return res.status(400).json({ status: "fail", errors: errors });
     }// Encrypt the password
 

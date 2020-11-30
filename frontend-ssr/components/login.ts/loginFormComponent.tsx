@@ -1100,7 +1100,7 @@ class Login extends React.Component<MyProps, MyState> {
         ) : null}
         <p className={`${formStyle["error"]} ${formStyle["error--custom"]}`}>
           {/* Fail login */}
-          {reason}Fail login or register 
+          {/* {reason}Fail login or register  */}
         </p>
         <div className={`${loginStyle["form__controls"]} ${loginStyle["form__group"]}`}>
           <button

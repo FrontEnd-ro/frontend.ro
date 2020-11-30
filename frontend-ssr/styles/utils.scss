@@ -24,6 +24,10 @@
   color: color(grey);
 }
 
+.text-green {
+  color: color(green);
+}
+
 .bg-white {
   background: color(white);
 }
@@ -129,6 +133,10 @@
   margin: 0;
 }
 
+.mb-4 {
+  margin-bottom: 1em;
+}
+
 .mr-1 {
   margin-right: 0.25em;
 }
@@ -180,4 +188,10 @@
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+/** Animations */
+
+.rotate {
+  animation: 0.5s rotateAnimation linear infinite ;
 }

@@ -1,16 +1,25 @@
 import { UserState } from './types';
-import { USER_NOTIFICATIONS } from './user.actions';
+import { USER_INFO, USER_NOTIFICATIONS } from './user.actions';
 
-const initialState: UserState = {
+export const defaultUserState = {
   info: undefined,
   notifications: {
     list: undefined, unread: 0, unreadCount: 0, page: 0, end: false,
   },
 };
 
+const initialState: UserState = defaultUserState;
+
 export const userReducer = (state = initialState, action: { type: string; payload: any; })
   : UserState => {
   switch (action.type) {
+    case USER_INFO.LOAD: {
+      return {
+        ...state,
+        info: action.payload,
+      };
+    }
+
     case USER_NOTIFICATIONS.ADD: {
       let { index, notifications } = action.payload;
 

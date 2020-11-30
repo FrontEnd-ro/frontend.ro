@@ -11,6 +11,10 @@
     {
       "name": "Catalin Popusoi",
       "url": "https://github.com/catalinpopusoi"
+    },
+    {
+      "name": "Cristian Gațu",
+      "url": "https://github.com/SirCQQ"
     }
   ],
   "scripts": {
@@ -29,8 +33,12 @@
     "@types/mongoose": "^5.7.36",
     "@types/react-router": "^5.1.8",
     "@types/uuid": "^8.3.0",
+    "bcrypt": "^5.0.0",
     "clipboard": "^2.0.6",
+    "cookie": "^0.4.1",
+    "dotenv": "^8.2.0",
     "highlight.js": "^10.4.1",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "mongoose": "^5.10.11",
     "mongoose-unique-validator": "^2.0.3",
@@ -46,7 +54,11 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/cookie": "^0.4.0",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/lodash": "^4.14.164",
+    "@types/mongoose": "^5.7.36",
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.43",
     "@types/react-redux": "^7.1.9",

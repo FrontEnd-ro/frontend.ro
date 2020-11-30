@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { NextApiRequest, NextApiResponse } from 'next';
+import jwt from 'jsonwebtoken';
 import { connectToDb } from './database';
 import { ServerError } from './ServerUtils';
 
@@ -95,4 +96,18 @@ function methodExists(routeConfig: RouteConfig) {
       );
     }
   };
+}
+
+export async function authenticated(req: NextApiRequest, res: NextApiResponse) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(req.cookies.auth, process.env.TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        reject(new ServerError(401, 'Doar utilizatorii autentificați au acces aici'));
+        return;
+      }
+
+      // FIXME: Pass data forward?
+      resolve(decoded);
+    });
+  });
 }

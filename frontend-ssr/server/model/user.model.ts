@@ -4,9 +4,9 @@ import { validateAgainstSchemaProps } from '../database';
 
 const UsersSchema = new mongoose.Schema(
   {
-    username: { type: String, required: true, unique: [true, 'Username must be unique'] },
+    username: { type: String, required: true, unique: true },
     avatar: { type: String, required: true },
-    email: { type: String, required: true, unique: [true, 'Email mut be unique'] },
+    email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
   },
 );

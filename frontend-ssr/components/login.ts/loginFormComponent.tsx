@@ -1,7 +1,4 @@
 import React,{Component} from "react";
-// import store from 'Redux/store';
-// import { loginUserSuccess } from 'Redux/user/user.actions';
-// import AuthService from 'Services/Auth.service';
 import PasswordReveal from "./passwordReveal";
 import loginStyle from "./LoginPage.module.scss";
 import formStyle from "./Form.module.scss";

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import password from "./PasswordReveal.module.scss";
 import fromStyle from "./Form.module.scss";
+
 const PasswordComponent = (props) => {
   const [visible, setVisible] = useState(false);
   const name = props.name || 'password';

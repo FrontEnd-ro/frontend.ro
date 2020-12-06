@@ -1,0 +1,68 @@
+@import "variables";
+.mere{
+    min-height: calc(100% - 15.3em);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.login-form {
+    transition: all .25s $cubic;
+    background-color: color(white);
+    padding: 1em;
+    border: 1px solid color(silver);
+    border-radius: 5px;
+    color: color(black);
+    width: 300px;
+
+    &>.form__group:first-child {
+        margin-top: 0;
+    }
+
+    .show-on-register {
+        opacity: 0;
+        transition: opacity .25s $cubic;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .btn {
+        transition: transform .25s $cubic;
+        margin: 0;
+    }
+
+    .form__controls button {
+        width: 100%;
+    }
+
+    &.login-form--register {
+        .show-on-register {
+            position: static;
+            opacity: 1;
+            z-index: 1;
+
+            .loading-icon {
+                animation: 1s linear rotateAnimation infinite;
+            }
+
+            .ok-icon {
+                color: color(green);
+            }
+        }
+
+        .login-btn {
+            transform: translateY(5em);
+        }
+
+        .register-btn {
+            transform: translateY(-5em);
+        }
+    }
+}
+.swal2-container .login-form {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+}

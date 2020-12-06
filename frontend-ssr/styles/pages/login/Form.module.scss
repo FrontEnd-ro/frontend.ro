@@ -1,0 +1,262 @@
+.form {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+
+    &.form--submitted {
+        input[type='text']:invalid,
+        input[type='password']:invalid,
+        input[type='email']:invalid,
+        textarea:invalid {
+            border-color: color(red) !important;
+        }
+
+        input:invalid ~ .error {
+            display: block;
+        }
+
+        input[type='checkbox']:required:invalid ~ .control-message {
+            color: color(red);
+        }
+    }
+
+    & > .btn {
+        font-size: 0.9em;
+        width: 100%;
+    }
+
+    .form__group {
+        margin: 1em 0;
+        display: block;
+    }
+
+
+
+    .password-reveal {
+        position: relative;
+
+        input[type='password'],
+        input[type='text'] {
+            padding-right: 2.5em;
+
+            &::-ms-reveal {
+                display: none;
+            }
+        }
+
+        button {
+            position: absolute;
+            background: none;
+            border: 0;
+            right: 0;
+            top: 0;
+            padding: 0.65em 0.75em;
+            cursor: pointer;
+        }
+    }
+
+    .error {
+        font-size: 0.8em;
+
+        &:not(.error--custom) {
+            display: none;
+            margin-top: 0;
+        }
+    }
+}
+
+.form__separator {
+    text-align: center;
+    font-size: 0.8em;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        // border:color(rgba(0, 0, 0,0.5));
+        top: 50%;
+        width: 40%;
+        border:1px solid rgba(0, 0, 0,0.5);
+    }
+
+    &::before {
+        left: 0;
+    }
+
+    &::after {
+        right: 0;
+    }
+}
+
+.form-control--text {
+    position: relative;
+    display: block;
+    max-width: 100%;
+
+    .label {
+        font-size: 0.75em;
+        font-weight: 700;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    input {
+        border-radius: 4px;
+        border: 1px solid color(silver);
+        padding: 0.5em;
+        font-size: 0.85em;
+        outline: 0;
+        font-family: 'Courier New', Courier, monospace;
+        width: 100%;
+
+        &::-moz-focus-inner {
+            border: 0;
+        }
+    }
+
+    input + .input-icon {
+        position: absolute;
+        top: 1.3em;
+        right: 0;
+        padding: 0.25em 0.5em;
+
+        &.input-icon--error {
+            color: color(red);
+        }
+
+        &.input-icon--success {
+            color: color(green);
+        }
+    }
+}
+
+.form-control--checkbox,
+.form-control--radio {
+    cursor: pointer;
+    color: color(green);
+
+    input {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+    }
+
+    .control-indicator {
+        height: 1em;
+        width: 1em;
+        background-color: transparent;
+        border: 2px solid color(silver);
+        position: relative;
+        display: inline-block;
+        transition: border-color ease 0.2s;
+        margin-right: 0.5em;
+    }
+
+    .control-message {
+        display: inline;
+        color: color(black);
+        vertical-align: middle;
+
+        p {
+            margin: 5px 0 0 0;
+        }
+    }
+
+    span {
+        vertical-align: middle;
+    }
+}
+
+.form-control--checkbox {
+    input:checked ~ .control-indicator {
+        border-color: currentColor;
+
+        &::after {
+            height: 1em * 0.5;
+            animation: dothabottomcheck 0.2s ease 0s forwards;
+        }
+
+        &::before {
+            height: 1em * 1.2;
+            box-shadow: 0 0 0 2px color(white);
+            animation: dothatopcheck 0.4s ease 0s forwards;
+        }
+    }
+
+    .control-indicator {
+        border-radius: 5px;
+
+        &::before,
+        &::after {
+            position: absolute;
+            height: 0;
+            width: 0.2em;
+            background-color: currentColor;
+            display: inline-block;
+            transform-origin: left top;
+            border-radius: 5px;
+            content: ' ';
+            transition: opacity ease 0.5;
+        }
+
+        &::before {
+            top: 0.7em;
+            left: 0.4em;
+            transform: rotate(-135deg);
+        }
+
+        &::after {
+            top: 1em * 0.37;
+            left: 1em * 0.05;
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+.form-control--radio {
+    .control-indicator {
+        border-radius: 50%;
+    }
+
+    input:checked ~ .control-indicator {
+        background-color: currentColor;
+    }
+}
+
+// select {
+//     font-size: inherit;
+//     padding: 0.4em 0.75em;
+//     border-radius: 5px;
+// }
+
+// textarea {
+//     border: 1px solid color(silver);
+//     padding: 1em;
+//     // min-height: 10em;
+//     width: 100%;
+// }
+
+@keyframes dothatopcheck {
+    0% {
+        height: 0;
+    }
+
+    50% {
+        height: 0;
+    }
+
+    100% {
+        height: 1em * 1.2;
+    }
+}
+
+@keyframes dothabottomcheck {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 1em/2;
+    }
+}

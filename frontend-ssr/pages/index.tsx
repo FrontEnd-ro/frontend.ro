@@ -46,6 +46,13 @@ export default function Home() {
               <p>Profilul unui utilizator inexistent</p>
             </a>
           </Link>
+          
+          <Link href="/login">
+            <a className="card">
+              <h3>Login &rarr;</h3>
+              <p>Login or Register</p>
+            </a>
+          </Link>
         </div>
       </main>
 

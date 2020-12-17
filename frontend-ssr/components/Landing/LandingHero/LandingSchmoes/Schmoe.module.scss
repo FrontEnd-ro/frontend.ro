@@ -1,0 +1,23 @@
+.schmoe {
+  display: inline-flex;
+  flex-flow: column-reverse;
+
+  :global .Schmoe__character {
+    transform: translateY(25px);
+    transition: transform 0.1s ease-out;
+
+    &:hover {
+      transform: translateY(0);
+    }
+  }
+  
+  :global .Schmoe__thought {
+    opacity: 0;
+    max-width: initial;
+  }
+
+  & > img:hover + img {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

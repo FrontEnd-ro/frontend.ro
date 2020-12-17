@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+
+.landing-thanks {
+  padding: 0.5em 0 2em 0;
+  background-color: color(blue);
+
+  & > section {
+    margin: 0 auto;
+    width: $width;
+    padding: 2em 0;
+    max-width: $max-width;
+
+    h2 {
+      margin-bottom: 1.5em;
+      font-size: calc(1.5em + 1vw);
+    }
+
+    p {
+      font-size: 1.25em;
+
+      &:nth-of-type(2)::first-letter {
+        font-size: 1.5em;
+      } 
+    }
+  }
+}

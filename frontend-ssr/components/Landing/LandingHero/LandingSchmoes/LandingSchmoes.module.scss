@@ -1,26 +1,24 @@
 .landing-schmoes {
   font-size: 0;
-  overflow: hidden;
-  width: 100%;
-  position: relative;
+  bottom: 0;
   white-space: nowrap;
 
   & > div {
     width: 15%;
-    display: inline-block;
+    z-index: 1;
+    position: relative;
   }
 
-  img {
-    width: 100%;
-    transform: translateY(25px);
-    transition: transform 0.1s ease-out;
-
-    &:hover {
-      transform: translateY(0);
-    }
+  @mixin back-row-schmoe {
+    left: 0;
+    z-index: 0;
+    bottom: 0.5em;
+    position: absolute;
+    transform: none !important; // Using important because the style is set via JS
   }
 
-  @media screen and (max-width: 1350px) and (min-width: 1000px) {
+  /** 7 Schmoes in a row */
+  @media screen and (max-width: 1350px) and (min-width: 1100px) {
     & > div {
       width: 19%;
 
@@ -30,9 +28,85 @@
     }
   }
 
-  @media screen and (max-width: 1000px) and (min-width: 800px) {
+  /** 5 Schmoes in front | 4 Schmoes in the back */
+  @media screen and (max-width: 1100px) and (min-width: 800px) {
     & > div {
       width: 26%;
+
+      &:nth-child(n + 6) {
+        @include back-row-schmoe;
+      }
+
+      &:nth-child(6) {
+        left: 10%;
+      }
+
+      &:nth-child(7) {
+        left: 27.5%;
+      }
+
+      &:nth-child(8) {
+        left: 45%;
+      }
+
+      &:nth-child(9) {
+        left: 62.5%;
+      }
+    }
+  }
+
+  /** 4 Schmoes in front | 3 Schmoes in the back */
+  @media screen and (max-width: 800px) and (min-width: 600px) {
+    & > div {
+      width: 33%;
+
+      &:nth-child(n + 5) {
+        @include back-row-schmoe;
+      }
+
+      &:nth-child(5) {
+        left: 10%;
+      }
+
+      &:nth-child(6) {
+        left: 35%;
+      }
+
+      &:nth-child(7) {
+        left: 58%;
+      }
+
+      &:nth-child(n + 8) {
+        display: none;
+      }
+    }
+  }
+
+  /** Below this value do not show the texts on hover */
+  @media 
+  screen and (max-width: 800px),
+  screen and (max-height: 800px) {
+    :global .Schmoe__thought {
+      display: none;
+    }
+  }
+
+  /** 3 Schmoes the front | 2 Schmoe in the back */
+  @media screen and (max-width: 600px) {
+    & > div {
+      width: 42%;
+
+      &:nth-child(n + 4) {
+        @include back-row-schmoe;
+      }
+
+      &:nth-child(4) {
+        left: 15%;
+      }
+
+      &:nth-child(5) {
+        left: 43%;
+      }
 
       &:nth-child(n + 6) {
         display: none;
@@ -40,71 +114,7 @@
     }
   }
 
-  @media screen and (max-width: 800px) and (min-width: 600px) {
-    & > div {
-      width: 33%;
-
-      &:nth-child(n + 5) {
-        display: none;
-      }
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    white-space: normal;
-
-    & > div {
-      width: 33.333%;
-      transform: none !important;
-
-      img {
-        transform: translateY(10px);
-        &:hover {
-          transform: translateY(0);
-        }
-      }
-
-      &:first-child img,
-      &:nth-child(2) img {
-        position: absolute;
-        bottom: -5px;
-        max-width: 33.333%;
-      }
-
-      &:first-child img {
-        left: 17%;
-      }
-
-      &:nth-child(2) img {
-        right: 17%;
-      }
-
-      &:nth-child(3) {
-        visibility: hidden;
-      }
-
-      &:nth-child(n + 7) {
-        display: none;
-      }
-    }
-
-    img {
-      // &:nth-child(0),
-      // &:nth-child(1),
-      // &:nth-child(2),
-      // &:nth-child(3) {
-      //   top: 6em;
-      //   left: 2.5em;
-      //   position: relative;
-      // }
-
-      // &:nth-child(3) {
-      //   visibility: hidden;
-      // }
-
-      // &:nth-child(n + 7) {
-      //   display: none;
-      // }
-    }
+  @media screen and (max-height: 580px) {
+    position: relative;
   }
 }

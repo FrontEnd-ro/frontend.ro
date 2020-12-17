@@ -1,40 +1,29 @@
 import React from 'react';
+import SchmoeJacques from './SchmoeJacques';
+import SchmoeJaqueline from './SchmoeJaqueline';
+import SchmoeJazabelle from './SchmoeJazebelle';
+import SchmoeJeri from './SchmoeJeri';
+import SchmoeJodi from './SchmoeJodi';
+import SchmoeJoe from './SchmoeJoe';
+import SchmoeJon from './SchmoeJon';
+import SchmoeJude from './SchmoeJude';
+import SchmoePirate from './SchmoePirate';
+
 import styles from './LandingSchmoes.module.scss';
 
 /** https://joeschmoe.io/ */
 export default function LandingSchmoes() {
-  const schmoes = [
-    'alex',
-    'joe',
-    'simona',
-    'jude',
-    'andreea',
-    'radu',
-    'adam',
-    'jaqueline',
-    'jacques',
-  ];
-
   return (
-    <div className={styles['landing-schmoes']}>
-      {schmoes.map((schmoe, index) => (
-        <div
-          key={schmoe}
-          style={{
-            transform:
-            index > 0
-              ? `translateX(-${30 * index}%)${index % 2 === 1 ? '' : ' scaleX(-1)'}`
-              : 'scaleX(-1)',
-
-          }}
-        >
-          <img
-            src={`https://joeschmoe.io/api/v1/${schmoe}`}
-            alt="joe"
-          />
-        </div>
-
-      ))}
+    <div className={`${styles['landing-schmoes']} absolute w-100 overflow-hidden`}>
+      <SchmoeJeri />
+      <SchmoeJoe style={{ transform: 'translateX(-30%)' }} />
+      <SchmoeJazabelle style={{ transform: 'translateX(-60%)' }} />
+      <SchmoeJude style={{ transform: 'translateX(-90%)' }} />
+      <SchmoeJon style={{ transform: 'translateX(-120%)' }} />
+      <SchmoeJodi style={{ transform: 'translateX(-150%)' }} />
+      <SchmoePirate style={{ transform: 'translateX(-180%)' }} />
+      <SchmoeJaqueline style={{ transform: 'translateX(-210%)' }} />
+      <SchmoeJacques style={{ transform: 'translateX(-240%)' }} />
     </div>
   );
 }

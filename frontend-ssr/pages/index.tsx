@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import Footer from '~/components/Footer';
-import Header from '~/components/Header';
-import LandingHero from '~/components/Landing';
+import {
+  LandingHero,
+  LandingHowItWorks,
+  LandingSubscribe,
+  LandingThanks,
+} from '~/components/Landing';
 
 export default function Home() {
   return (
@@ -12,8 +16,10 @@ export default function Home() {
       </Head>
 
       <>
-        {/* <Header /> */}
         <LandingHero />
+        <LandingHowItWorks />
+        <LandingThanks />
+        <LandingSubscribe />
         <Footer />
       </>
 

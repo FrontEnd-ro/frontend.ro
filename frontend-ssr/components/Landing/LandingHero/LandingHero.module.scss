@@ -1,14 +1,12 @@
 @import '../../../styles/variables';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Permanent+Marker&display=swap');
 
 .landing-hero {
-  display: flex;
   min-height: 100vh;
   flex-flow: column nowrap;
-  justify-content: space-between;
   background: color(darker-white);
 
   :global .call-to-action {
+    z-index: 2;
     padding: 8vh 10vw 0 10vw;
   }
 
@@ -16,9 +14,6 @@
     margin: 0;
     font-size: calc(2em + 2vw);
     display: inline-block;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-      Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-      sans-serif;
   }
 
   h2 {
@@ -30,13 +25,12 @@
     }
   }
 
-  a {
-    text-align: center;
+  button {
     padding: 0.5em 1em;
     min-height: initial;
     text-decoration: none;
     margin: 1.5em 1em 0 0;
-    font-size: calc(0.75em + 1vw);
+    font-size: calc(0.65em + 1vw);
   }
 
   @media screen and (max-width: 515px) {
@@ -44,7 +38,7 @@
       display: inline;
     }
 
-    a {
+    button {
       display: block;
     }
   }

@@ -60,11 +60,11 @@ export default function LandingSubscribe() {
         </p>
         <form id="subscribe" onSubmit={submit} className="my-5 text-center">
           <label>
-            <p className="m-0">Cum să-ți spunem?</p>
+            <span className="m-0">Cum să-ți spunem?</span>
             <input disabled={isSubscribing} type="text" name="name" required />
           </label>
           <label>
-            <p className="m-0">Email</p>
+            <span className="m-0">Email</span>
             <input disabled={isSubscribing} type="email" name="email" required />
           </label>
           {error && (

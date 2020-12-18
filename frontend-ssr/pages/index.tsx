@@ -6,13 +6,17 @@ import {
   LandingSubscribe,
   LandingThanks,
 } from '~/components/Landing';
+import SEOTags from '~/components/SEOTags';
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Frontend.ro</title>
-        <link rel="icon" href="/favicon.ico" />
+        <SEOTags
+          url="https://FrontEnd.ro"
+          title="FrontEnd.ro - Învață de la comunitatea open-source"
+          description="Vrei să înveți FrontEnd? Aici ai parte de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun."
+        />
       </Head>
 
       <>

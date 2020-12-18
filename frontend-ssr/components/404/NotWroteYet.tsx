@@ -17,8 +17,6 @@ export default function NotWroteYet({ lesson }: Props) {
   return (
     <>
       <Head>
-        <title>Article not wrote, yet!</title>
-        <link rel="icon" href="/favicon.ico" />
         <SEOTags
           title="Article not wrote, yet!"
           description="Din pacate acest articol nu a fost inca scris. Dar, proiectul fiind open-source, te invitam pe tine sa-l scrii :)"

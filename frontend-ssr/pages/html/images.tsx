@@ -53,8 +53,6 @@ export default function ImagesLesson() {
   return (
     <>
       <Head>
-        <title> Introducere | FrontEnd.ro</title>
-        <link rel="icon" href="/favicon.ico" />
         <SEOTags
           title="Imagini | Lecție HTML"
           description="Învață să adaugi și optimizezi imagini în paginile Web."

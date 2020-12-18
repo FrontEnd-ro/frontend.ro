@@ -33,8 +33,6 @@ export default function Lesson0() {
   return (
     <>
       <Head>
-        <title> Introducere | FrontEnd.ro</title>
-        <link rel="icon" href="/favicon.ico" />
         <SEOTags
           title="Introducere | FrontEnd.ro"
           description="Detalii despre noi, despre platformă și cum vom lucra împreună."

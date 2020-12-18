@@ -32,13 +32,11 @@ export default function Lesson0() {
 
   return (
     <>
-      <Head>
-        <SEOTags
-          title="Introducere | FrontEnd.ro"
-          description="Detalii despre noi, despre platformă și cum vom lucra împreună."
-          url="https://FrontEnd.ro/intro/lesson-0"
-        />
-      </Head>
+      <SEOTags
+        title="Introducere | FrontEnd.ro"
+        description="Detalii despre noi, despre platformă și cum vom lucra împreună."
+        url="https://FrontEnd.ro/intro/lesson-0"
+      />
       <Lesson title="Introducere" chapters={chapters}>
         <LessonContributors contributors={contributors} />
         <LessonCover resizeOffset={100}>

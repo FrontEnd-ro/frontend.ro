@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import Link from 'next/link';
 import SEOTags from '~/components/SEOTags';
@@ -52,13 +51,11 @@ const sizesTable: LessonTableProps = {
 export default function ImagesLesson() {
   return (
     <>
-      <Head>
-        <SEOTags
-          title="Imagini | Lecție HTML"
-          description="Învață să adaugi și optimizezi imagini în paginile Web."
-          url="https://FrontEnd.ro/html/images"
-        />
-      </Head>
+      <SEOTags
+        title="Imagini | Lecție HTML"
+        description="Învață să adaugi și optimizezi imagini în paginile Web."
+        url="https://FrontEnd.ro/html/images"
+      />
       <Lesson title="Imagini" chapters={chapters}>
         <LessonContributors contributors={contributors} />
         <LessonCover>

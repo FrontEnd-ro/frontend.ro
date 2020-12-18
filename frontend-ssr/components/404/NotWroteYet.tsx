@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import SEOTags from '../SEOTags';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -16,13 +15,11 @@ interface Props {
 export default function NotWroteYet({ lesson }: Props) {
   return (
     <>
-      <Head>
-        <SEOTags
-          title="Article not wrote, yet!"
-          description="Din pacate acest articol nu a fost inca scris. Dar, proiectul fiind open-source, te invitam pe tine sa-l scrii :)"
-          url="https://FrontEnd.ro/article-not-wrote-yet"
-        />
-      </Head>
+      <SEOTags
+        title="Article not wrote, yet!"
+        description="Din pacate acest articol nu a fost inca scris. Dar, proiectul fiind open-source, te invitam pe tine sa-l scrii :)"
+        url="https://FrontEnd.ro/article-not-wrote-yet"
+      />
       <>
         <Header />
         <main className={`${styles.page} ${styles['not-wrote-yet']}`}>

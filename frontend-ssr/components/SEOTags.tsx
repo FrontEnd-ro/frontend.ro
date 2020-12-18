@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 
 interface Props {
@@ -12,7 +13,7 @@ export default function SEOTags({
   title, description, url, shareImage = 'https://frontend.ro/main-seo-image.jpg', bigShareImage = true,
 }: Props) {
   return (
-    <>
+    <Head>
       <title>{title}</title>
 
       <meta name="description" content={description} />
@@ -35,6 +36,6 @@ export default function SEOTags({
       <meta name="twitter:site" content="@FrontEndRo" />
       <meta name="twitter:creator" content="@FrontEndRo" />
       <meta name="twitter:card" content={bigShareImage ? 'summary_large_image' : 'summary'} />
-    </>
+    </Head>
   );
 }

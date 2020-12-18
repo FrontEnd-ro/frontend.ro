@@ -8,6 +8,7 @@ import {
 } from '~/components/lessons';
 import { ShareButton } from '~/components/SocialMediaButtons';
 import { Ira, Pava } from '~/services/contributors';
+import { GITHUB_URL } from '~/services/Constants';
 
 const contributors = [Pava, Ira];
 
@@ -160,7 +161,7 @@ export default function Lesson0() {
             feedback cursanților, crearea de exerciții și lecții sau dezvoltarea
             acestei platforme al cărei cod este
             {' '}
-            <a target="_blank" rel="noreferrer" href="https://github.com/iampava/frontend.ro">open-source pe GitHub</a>
+            <a target="_blank" rel="noreferrer" href={GITHUB_URL}>open-source pe GitHub</a>
             .
             {/* Mai mult despre acest proces gasesti in capitolul
                 {' '}

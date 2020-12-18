@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import { useRouter } from 'next/router';
+import { GITHUB_URL } from '~/services/Constants';
 
 import styles from './Demo.module.scss';
 
 export default function Demo({ title, children }: PropsWithChildren<{ title: string }>) {
-  const baseURL = 'https://github.com/iampava/frontend.ro/tree/master/frontend-ssr';
+  const baseURL = `${GITHUB_URL}/tree/master/frontend-ssr`;
   const { pathname } = useRouter();
 
   return (

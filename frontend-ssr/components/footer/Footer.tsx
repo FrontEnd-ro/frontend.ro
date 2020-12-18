@@ -1,4 +1,5 @@
 import React from 'react';
+import { GITHUB_URL } from '~/services/Constants';
 
 import styles from './Footer.module.scss';
 
@@ -25,7 +26,7 @@ export default function Footer() {
         <h5> Social </h5>
         <div>
           <p>
-            <a href="https://github.com/iampava/frontend.ro">
+            <a href={GITHUB_URL}>
               GitHub
             </a>
           </p>

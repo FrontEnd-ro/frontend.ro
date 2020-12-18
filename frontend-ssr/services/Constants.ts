@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 const UPCOMING_LESSONS = [
   {
     title: 'DevTools',
@@ -38,3 +36,5 @@ export function getUpcomingLesson(
 
   return upcomingLesson || null;
 }
+
+export const GITHUB_URL = 'https://github.com/iampava/frontend.ro';

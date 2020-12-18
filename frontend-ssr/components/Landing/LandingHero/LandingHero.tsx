@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GITHUB_URL } from '~/services/Constants';
 import styles from './LandingHero.module.scss';
 import LandingSchmoes from './LandingSchmoes/LandingSchmoes';
 
@@ -35,13 +36,13 @@ export default function LandingHero() {
             {' '}
             Ai venit în locul potrivit dar puțin cam devreme
             căci mai avem câteva mici ajustări de făcut până lansăm o primă variantă
-            a platformei. Revino în câteva zile sau lasă-ți email-ul
+            a platformei. Revino în câteva zile sau
             {' '}
-            <a href="#subscribe">
-              mai jos
+            <a href={GITHUB_URL} rel="noreferrer" target="_blank">
+              hai pe GitHub
             </a>
             {' '}
-            și te contactăm noi.
+            dacă vrei să ne ajuți.
           </p>
           )}
         </div>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { GITHUB_URL } from '~/services/Constants';
+
 import styles from './LandingThanks.module.scss';
 
 export default function LandingThanks() {
@@ -12,7 +14,7 @@ export default function LandingThanks() {
           pentru construirea platformei, crearea lecțiilor și oferirea de feedback.
           Întreg codul este
           {' '}
-          <a href="https://github.com/iampava/frontend.ro" target="_blank" rel="noreferrer">open-source pe GitHub</a>
+          <a href={GITHUB_URL} target="_blank" rel="noreferrer">open-source pe GitHub</a>
           {' '}
           iar lectiile sunt și vor râmâne 100% gratuite.
         </p>

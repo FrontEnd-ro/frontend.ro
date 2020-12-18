@@ -2,6 +2,7 @@ import React from 'react';
 import SEOTags from '../SEOTags';
 import Header from '../Header';
 import Footer from '../Footer';
+import { GITHUB_URL } from '~/services/Constants';
 
 import styles from './404.module.scss';
 
@@ -47,7 +48,7 @@ export default function NotWroteYet({ lesson }: Props) {
           <div className="text-center">
             <a
               className="btn btn--blue"
-              href="https://github.com/iampava/frontend.ro/blob/master/CONTRIBUTING.md"
+              href={`${GITHUB_URL}/blob/master/CONTRIBUTING.md`}
             >
               Hai pe GitHub și contribuie cu o lecție
             </a>

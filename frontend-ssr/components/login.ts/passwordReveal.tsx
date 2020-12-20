@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import password from "./PasswordReveal.module.scss";
 import fromStyle from "./Form.module.scss";
 
@@ -16,6 +17,10 @@ import fromStyle from "~/styles/pages/login/Form.module.scss";
 import password from "~/styles/pages/login/PasswordReveal.module.scss";
 import fromStyle from "~/styles/pages/login/Form.module.scss";
 >>>>>>> c8a07f9... Uncommited changes
+=======
+import password from "./PasswordReveal.module.scss";
+import fromStyle from "./Form.module.scss";
+>>>>>>> 93cc1c0... For rebase
 const PasswordComponent = (props) => {
   const [visible, setVisible] = useState(false);
   const name = props.name || 'password';
@@ -25,6 +30,7 @@ const PasswordComponent = (props) => {
 <<<<<<< HEAD
 <<<<<<< HEAD
     <div className={password["password-reveal"]}>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <input className="form__input" type={visible ? 'text' : 'password'}  name={name} autoComplete={autoComplete} value={props.value} onChange={props.onChange} />
 =======
@@ -44,6 +50,9 @@ const PasswordComponent = (props) => {
     <div className={password["password-reveal"]}>
       <input className="form__input" type={visible ? 'text' : 'password'}  name={name} autoComplete={autoComplete} />
 >>>>>>> c8a07f9... Uncommited changes
+=======
+      <input className="form__input" type={visible ? 'text' : 'password'}  name={name} autoComplete={autoComplete} value={props.value} onChange={props.onChange} />
+>>>>>>> 93cc1c0... For rebase
       <button
         type="button"
         className={visible ? password['icon-eye'] : password['icon-eye-off']}

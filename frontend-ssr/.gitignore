@@ -32,10 +32,16 @@ yarn-error.log*
 .env.production.local
 .env
 
+<<<<<<< HEAD
 yarn.lock
+=======
+>>>>>>> 93cc1c0... For rebase
 
 
 # package-lock.json 
 
 package-lock.json
+<<<<<<< HEAD
 .env
+=======
+>>>>>>> 93cc1c0... For rebase

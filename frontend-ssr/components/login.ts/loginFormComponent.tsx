@@ -2,7 +2,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React,{Component} from "react";
+=======
+import React,{Component} from "react";
+// import store from 'Redux/store';
+// import { loginUserSuccess } from 'Redux/user/user.actions';
+// import AuthService from 'Services/Auth.service';
+>>>>>>> 93cc1c0... For rebase
 import PasswordReveal from "./passwordReveal";
 import loginStyle from "./LoginPage.module.scss";
 import formStyle from "./Form.module.scss";
@@ -56,6 +63,7 @@ class Login extends Component<MyProps, MyState> {
       password_error:false,
       register:false,
       loading:false,
+<<<<<<< HEAD
     };
 
     this.onChange=this.onChange.bind(this)
@@ -194,11 +202,20 @@ class Login extends React.Component<MyProps, MyState> {
     
     };
 
+=======
+    };
+
+    this.onChange=this.onChange.bind(this)
+>>>>>>> 93cc1c0... For rebase
     this.clearServerError = this.clearServerError.bind(this);
     this.login = this.login.bind(this);
     // this.register = this.register.bind(this);
     this.onUsernameChange = this.onUsernameChange.bind(this);
+<<<<<<< HEAD
     // this.submit = this.submit.bind(this);
+=======
+    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
+>>>>>>> 93cc1c0... For rebase
     this.register_submit = this.register_submit.bind(this);
     this.login_submit = this.login_submit.bind(this);
   }
@@ -214,6 +231,7 @@ class Login extends React.Component<MyProps, MyState> {
 
   clearServerError() {
     this.setState({
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       password_error:false,
@@ -233,6 +251,8 @@ class Login extends React.Component<MyProps, MyState> {
 <<<<<<< HEAD
 >>>>>>> 55eb138...  Change in front, look over the git review
 =======
+=======
+>>>>>>> 93cc1c0... For rebase
       password_error:false,
       username_error:false,
       email_error:false
@@ -320,6 +340,7 @@ class Login extends React.Component<MyProps, MyState> {
     }
   }
 
+<<<<<<< HEAD
 
   login_submit(e){
     e.preventDefault();
@@ -471,16 +492,24 @@ class Login extends React.Component<MyProps, MyState> {
 >>>>>>> 2f3a38f... Uncommited changes
 =======
 >>>>>>> c8a07f9... Uncommited changes
+=======
+  onUsernameChange(e) {
+    const username = e.target.value;
+>>>>>>> 93cc1c0... For rebase
     clearTimeout(this.timeoutId);
     if (username) {
       this.timeoutId = setTimeout(() => {
         this.setState({
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 93cc1c0... For rebase
           username_error: false,
         });
         console.log("expire");
         fetch(`${URL}/api/users/check_username/${username}`)
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> c8a07f9... Uncommited changes
@@ -493,6 +522,8 @@ class Login extends React.Component<MyProps, MyState> {
 >>>>>>> 2f3a38f... Uncommited changes
 =======
 >>>>>>> c8a07f9... Uncommited changes
+=======
+>>>>>>> 93cc1c0... For rebase
           .then((resp) => resp.json())
           .then((resp) => {
             console.log(resp);
@@ -505,6 +536,7 @@ class Login extends React.Component<MyProps, MyState> {
               this.setState({ username_error: false });
             }
           });
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       }, 1500);
@@ -739,6 +771,9 @@ class Login extends React.Component<MyProps, MyState> {
     // clearTimeout(this.timeoutId);
 =======
       }, 500);
+=======
+      }, 1500);
+>>>>>>> 93cc1c0... For rebase
     }
   }
 >>>>>>> c8a07f9... Uncommited changes
@@ -746,6 +781,7 @@ class Login extends React.Component<MyProps, MyState> {
   checkErrors() {
     let errors=false;
     if(this.state.register){
+<<<<<<< HEAD
       let name_error= this.formRef.current[0].value ==="" ? NAME_MISSING_ERROR : false;
       let email_error= this.formRef.current[1].value  ==="" ?EMAIL_MISSING_ERROR :false;
       let username_error= this.formRef.current[2].value  ===""? USERNAME_MISSING_ERROR :false;
@@ -785,12 +821,38 @@ class Login extends React.Component<MyProps, MyState> {
       let email_error= this.formRef.current[0].value  ==="" ?USERNAME_OR_EMAIL_ERROR :false;
       let password_error= this.formRef.current[2].value  ===""? true :false;
       console.log(email_error,password_error,this.formRef.current[2])
+=======
+      let email_error= this.state.email  ==="" ?EMAIL_MISSING_ERROR :false;
+      let username_error= this.state.username  ===""? USERNAME_MISSING_ERROR :false;
+      let password_error= this.state.password  ===""? true :false;
+      let name_error=this.state.name===""? NAME_MISSING_ERROR : false
+      let confirm_error=!this.state.confirm
+      this.setState({
+        email_error:email_error,
+        username_error:username_error,
+        password_error:password_error,
+        name_error:name_error ,
+        confirm_error:confirm_error
+      })
+      if(email_error||username_error||password_error||name_error){
+        errors=true;
+      }
+    }
+    else{
+      let email_error= this.state.email  ==="" ?USERNAME_OR_EMAIL_ERROR :false;
+      let password_error= this.state.password  ===""? true :false;
+>>>>>>> 93cc1c0... For rebase
       this.setState({
         email_error:email_error,
         password_error:password_error
       })
+<<<<<<< HEAD
       if(email_error||password_error)errors=true;
 
+=======
+      if(email_error||password_error)
+      {errors=true;}
+>>>>>>> 93cc1c0... For rebase
     }
     
     return errors
@@ -802,6 +864,7 @@ class Login extends React.Component<MyProps, MyState> {
       this.setState({ register: true });
       this.clearServerError();
     } else {
+<<<<<<< HEAD
 
     let name: String = this.formRef.current[0].value;
     let email: String = this.formRef.current[1].value;
@@ -814,6 +877,18 @@ class Login extends React.Component<MyProps, MyState> {
       return;
     }
     fetch("/api/user/register", {
+=======
+    let name: string = this.state.name
+    let email: string = this.state.email
+    let username: string = this.state.username
+    let password: string = this.state.password
+    let confirm: boolean = this.state.confirm
+    let errors=this.checkErrors();
+    if(confirm===false || errors){
+      return;
+    }
+    fetch("/api/users/register", {
+>>>>>>> 93cc1c0... For rebase
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -845,6 +920,7 @@ class Login extends React.Component<MyProps, MyState> {
 >>>>>>> c8a07f9... Uncommited changes
     }
   }
+<<<<<<< HEAD
 
   render() {
     const {
@@ -852,10 +928,29 @@ class Login extends React.Component<MyProps, MyState> {
 <<<<<<< HEAD
 =======
 >>>>>>> c8a07f9... Uncommited changes
+=======
+  onChange(e){
+    // console.log(e.target.value,typeof(e.target.value))
+    this.setState({...this.state,[e.target.name] : e.target.value})
+    // console.log(this.state)
+  }
+  onChangeCheckbox(e){
+    this.setState({confirm:e.target.checked})
+    console.log(e.target.checked)
+  }
+  render() {
+    const {
+      name,
+      email,
+      password,
+      username,
+      confirm,
+>>>>>>> 93cc1c0... For rebase
       name_error,
       email_error,
       username_error,
       password_error,
+<<<<<<< HEAD
       register,
       loading,
       reason
@@ -869,11 +964,29 @@ class Login extends React.Component<MyProps, MyState> {
         onSubmit={register ? this.register_submit : this.login_submit}
         onInput={this.clearServerError}>
 
+=======
+      confirm_error,
+      register,
+      loading,
+    } = this.state;
+    return (
+      <div className={loginStyle["center"]}>
+      <form
+        ref={this.formRef}
+        className={`${this.props.className || ""} 
+        ${loginStyle["login-form"]} ${register ? loginStyle["login-form--register"] : ""}`}
+        onSubmit={register ? this.register_submit : this.login_submit}
+        onInput={this.clearServerError}>
+>>>>>>> 93cc1c0... For rebase
         <label className={formStyle["form-control--text"]}>
           
           <span className={formStyle["label"]}>{register && "Name"}</span>
          
+<<<<<<< HEAD
          {register && <input autoCapitalize="none" type="text" name="name" />}
+=======
+         {register && <input autoCapitalize="none" type="text" name="name" value={name} onChange={this.onChange}/>}
+>>>>>>> 93cc1c0... For rebase
           
           <span className={formStyle["error"]}>
             {name_error}
@@ -887,6 +1000,7 @@ class Login extends React.Component<MyProps, MyState> {
             {register && "Email address"}
             {!register && "Email address or username"}
           </span>
+<<<<<<< HEAD
           <input autoCapitalize="none" type="text" name="email" />
 
           <span className={formStyle["error"]}>
@@ -923,6 +1037,9 @@ class Login extends React.Component<MyProps, MyState> {
             {!register && "Email address or username"}
           </span>
           <input autoCapitalize="none" type="text" name="email" />
+=======
+          <input autoCapitalize="none" type="text" value={email} name="email" onChange={this.onChange}/>
+>>>>>>> 93cc1c0... For rebase
 
           <span className={formStyle["error"]}>
             {/* Register error */}
@@ -948,6 +1065,9 @@ class Login extends React.Component<MyProps, MyState> {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 93cc1c0... For rebase
               name="username"
               value={username}
               onChange={(e)=>{
@@ -1010,6 +1130,9 @@ class Login extends React.Component<MyProps, MyState> {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 93cc1c0... For rebase
             <PasswordReveal value={password} password_error={password_error} onChange={this.onChange} />
           </label>
         </div>
@@ -1019,6 +1142,7 @@ class Login extends React.Component<MyProps, MyState> {
         {register ? (
           <label className={`${formStyle["form-control--checkbox"]} ${loginStyle["show-on-register"]} ${loginStyle["block"]} `}>
             <input type="checkbox" checked={confirm}  name="confirm" onChange={this.onChangeCheckbox}/>
+<<<<<<< HEAD
             <span className={formStyle["control-indicator"]} />
             <span className={`${formStyle["control-message"]} ${!confirm_error && formStyle["error"]}
              `}>
@@ -1091,6 +1215,11 @@ class Login extends React.Component<MyProps, MyState> {
             <input type="checkbox" required={register} />
             <span className={formStyle["control-indicator"]} />
             <span className={`${formStyle["control-message"]} ${formStyle["error"]}`}>
+=======
+            <span className={formStyle["control-indicator"]} />
+            <span className={`${formStyle["control-message"]} ${!confirm_error && formStyle["error"]}
+             `}>
+>>>>>>> 93cc1c0... For rebase
               I have read and agree to the{" "}
               <a href="/privacy" className="link">
                 Terms & Conditions
@@ -1122,6 +1251,9 @@ class Login extends React.Component<MyProps, MyState> {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 93cc1c0... For rebase
             type={register ? "submit" : "button"}
             className={`${loginStyle[`register-btn`]} ${loginStyle[`btn`]} register-btn btn ${register ? "btn--blue" : "btn--light"} ${loading && register ? "btn--loading" : ""}`}
             disabled={loading}
@@ -1132,6 +1264,7 @@ class Login extends React.Component<MyProps, MyState> {
         </div>
       </form>
       </div>
+<<<<<<< HEAD
 =======
           style={{width:"100%"}}
             type={register ? 'submit' : 'button'}
@@ -1172,6 +1305,8 @@ class Login extends React.Component<MyProps, MyState> {
 =======
       </form>
 >>>>>>> c8a07f9... Uncommited changes
+=======
+>>>>>>> 93cc1c0... For rebase
     );
   }
 }

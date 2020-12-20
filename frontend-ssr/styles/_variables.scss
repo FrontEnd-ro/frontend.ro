@@ -51,7 +51,6 @@ $lesson-menu-width: 18em;
 }
 
 %greenGradientBackground {
-<<<<<<< HEAD
   color: color(white);
   background-image: linear-gradient(
     to right,
@@ -59,13 +58,16 @@ $lesson-menu-width: 18em;
     #2ecc71 51%,
     #27ae60 100%
   );
-=======
     color: color(white);
     background-image: linear-gradient(to right, #3D8BAF 0%, #3D8BDF 51%, #3D8BBF 100%);
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 55eb138...  Change in front, look over the git review
 =======
 >>>>>>> 55eb138...  Change in front, look over the git review
+=======
+
+>>>>>>> 93cc1c0... For rebase
 }
 // %greenGradientBackground {
 //     color: color(white);

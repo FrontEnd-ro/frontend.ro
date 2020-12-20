@@ -47,19 +47,13 @@ export default function Home() {
             </a>
           </Link>
           
-          <Link href="/login">
+          <Link href="/auth">
             <a className="card">
               <h3>Login &rarr;</h3>
               <p>Login or Register</p>
             </a>
           </Link>
           
-          <Link href="/login">
-            <a className="card">
-              <h3>Login &rarr;</h3>
-              <p>Login or Register</p>
-            </a>
-          </Link>
         </div>
       </main>
 

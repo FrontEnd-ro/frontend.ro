@@ -22,6 +22,10 @@
   },
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5336767... Fix package.json
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-brands-svg-icons": "^5.14.0",
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
@@ -39,6 +43,7 @@
     "mongoose": "^5.10.11",
     "mongoose-unique-validator": "^2.0.3",
     "next": "^10.0.2",
+<<<<<<< HEAD
 =======
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
@@ -47,6 +52,8 @@
     "mongoose": "^5.9.28",
     "next": "9.4.4",
 >>>>>>> 03137ef...  Adding routes for login, register, check and a middleware to check the jwt token
+=======
+>>>>>>> 5336767... Fix package.json
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "^7.2.1",
@@ -57,11 +64,17 @@
   },
   "devDependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@types/cookie": "^0.4.0",
     "@types/lodash": "^4.14.164",
 =======
 >>>>>>> 03137ef...  Adding routes for login, register, check and a middleware to check the jwt token
     "@types/mongoose": "^5.7.36",
+=======
+    "@types/mongoose": "^5.7.36",
+    "@types/cookie": "^0.4.0",
+    "@types/lodash": "^4.14.164",
+>>>>>>> 5336767... Fix package.json
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.43",
     "@types/react-redux": "^7.1.9",

@@ -46,7 +46,11 @@ class SubmissionModel {
         },
       })
       .populate('exercise')
-      .sort('-submittedAt');
+      .sort('-submittedAt')
+      //This is the fix 
+      .skip(page*PAGE_SIZE)
+      .limit(PAGE_SIZE);
+
 
     const results = [];
     let index = 0;
@@ -57,17 +61,26 @@ class SubmissionModel {
      * than this 👇
      */
     // eslint-disable-next-line no-restricted-syntax
-    for (const submission of all) {
-      if (submission.user) {
-        if (index >= page * PAGE_SIZE) {
-          results.push(submission);
-        }
-        index += 1;
-      }
-      if (results.length === PAGE_SIZE) {
-        return results;
-      }
-    }
+
+    /**
+     * From Cristi: 
+     * 
+     * Mongoose has a function .limit(PAGE_SIZE) that makes the query return a maximum  number of elements (PAGE_SIZE) and a function 
+     * .skip( (page-1)*PAGE_SIZE ) that skips the first x elements
+     * 
+     * FIXED   
+     */
+    // for (const submission of all) {
+    //   if (submission.user) {
+    //     if (index >= page * PAGE_SIZE) {
+    //       results.push(submission);
+    //     }
+    //     index += 1;
+    //   }
+    //   if (results.length === PAGE_SIZE) {
+    //     return results;
+    //   }
+    // }
     return results;
   }
 

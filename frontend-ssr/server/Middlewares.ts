@@ -2,6 +2,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDb } from './database';
 import { ServerError } from './ServerUtils';
+import {verify} from "jsonwebtoken"
 
 type Middleware = (
   req: NextApiRequest,
@@ -95,4 +96,16 @@ function methodExists(routeConfig: RouteConfig) {
       );
     }
   };
+}
+
+
+export async function check_auth (req: NextApiRequest, res: NextApiResponse){
+  // console.log(req.cookies)
+  try{
+  let jwt_valid=await verify(req.cookies.auth,process.env.TOKEN_SECRET)
+  req.role=jwt_valid.user.role;
+  }
+  catch(err){
+      throw new ServerError(401,"You need to be logged in to do that")
+}
 }

@@ -16,7 +16,7 @@ export async function getServerSideProps({ req, res, params }) {
   });
   
   let user = null;
-  if (resp.status === 404 || resp.status===401) {
+  if (resp.status === 404 || resp.status===401|| resp.status===400) {
     res.statusCode = 404;
   } else {
     user = await resp.json();

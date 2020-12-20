@@ -179,7 +179,11 @@ export default function ImagesLesson() {
             demo="/demo/html/fixed-size-image"
           />
           <p>
-            În astfel de cazuri, în care știm dinainte dimensiunea, este recomandat
+            În astfel de cazuri, în care
+            {' '}
+            <strong>știm dinainte dimensiunea</strong>
+            {' '}
+            , este recomandat
             să adăugam și atributele
             <strong> width </strong>
             și
@@ -200,8 +204,8 @@ export default function ImagesLesson() {
           />
           <p>
             Astfel, browser-ul va ști dimensiunile imaginii înainte de a o descărca
-            iar experienta utilizatorilor va fi extrem de fluidă. Spre deosebire
-            de situația de mai jos unde textul se re-aranjează după încărcarea imaginii
+            iar experienta utilizatorilor va fi extrem de fluidă. Astfel evitam
+            situatia de mai jos unde textul se re-aranjează după încărcarea imaginii
             - problema cunoscută sub numele de
             {' '}
             <strong>content/layout shifting</strong>
@@ -250,7 +254,7 @@ export default function ImagesLesson() {
           </blockquote>
           <p>
             Citatul de mai sus a rămas - din păcate - la fel de adevărat...
-            De cate ori nu ai deschis un articol și apoi ai ieșit de pe pagină fără
+            De cate ori nu ai deschis o pagina Web și apoi ai ieșit de acolo fără
             a citi mai mult de primul paragraf?
           </p>
           <p>
@@ -298,7 +302,7 @@ export default function ImagesLesson() {
             de ce înseamnă această apropiere, însă nu trebuie să ne batem
             capul cu asta. Regula generala e să adăugăm atributul
             {' '}
-            <span className="formatted">loading="lazy"</span>
+            <strong className="formatted">loading="lazy"</strong>
             {' '}
             dacă avem multe imagini în pagină.
           </p>
@@ -312,9 +316,9 @@ export default function ImagesLesson() {
             atributele width/height iar apoi am reusit sa incarcam doar imaginile
             de care avem nevoie folosind atributul
             {' '}
-            <span className="formatted">
+            <strong className="formatted">
               loading
-            </span>
+            </strong>
             . Acum e momentul să mergem un pas mai departe în călătoria spre performanță
             și să încărcăm imaginea cea mai optimă din punct de vedere al rezoluției.
           </p>
@@ -337,7 +341,7 @@ export default function ImagesLesson() {
             {/* Pentru imaginea folosita ca demo in acest capitol inseamna o dimensiune de xMB. */}
           </p>
           <p>
-            Deși soluția ar funcționa, ea nu e deloc eficientă căci vom încărca
+            Deși soluția ar funcționa, ea nu e deloc eficientă, căci vom încărca
             mereu aceeași imagine de rezoluție înaltă și mulți MBs.
             Pe telefon de exemplu, unde ecranul e mai mic, nu avem nevoie
             de toți cei 8+ milioane de pixeli (3840 x 2160).
@@ -359,7 +363,7 @@ export default function ImagesLesson() {
             Din fericire putem rezolva aceasta problema folosindu-ne de atributul
             {' '}
             <strong>srcset</strong>
-            . Mai întâi hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
+            . Hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
           </p>
           <LessonFigure
             withBorder
@@ -392,7 +396,6 @@ export default function ImagesLesson() {
     /red_bycicle__med.jpg 2000w,
     /red_bycicle__low.jpg 800w,
   " 
-  style="max-width: 100%" 
   alt="Red bycicle wheel" 
 />`}
           />
@@ -453,15 +456,15 @@ export default function ImagesLesson() {
           <p>
             Dupa cum ai vazut pana acum, elementul
             {' '}
-            <span className="formatted">{'<img>'}</span>
+            <strong className="formatted">{'<img>'}</strong>
             {' '}
             - desi destul de simplu in utilizare - ne ofera mai multe functionalitati
             care ne permit sa optimizam imaginile si experienta utilizatorilor.
-            Cu toate acestea, mai avem o posibila optimizare
-            - folosirea unor formate moderne pentru imagini.
+            Cu toate acestea, a mai rămas totuși o ultimă optimizare,
+            și anume folosirea unor formate moderne pentru imagini.
           </p>
           <blockquote>
-            De ce am vrea alte formate? Nu e
+            De ce am vrea alte formate? Nu sunt
             {' '}
             <strong>JPG</strong>
             {' '}
@@ -472,9 +475,17 @@ export default function ImagesLesson() {
             de ajuns?
           </blockquote>
           <p>
-            Hmmm.... nu chiar. Exista formate mai moderne precum WebP sau AVIF care
+            Hmmm.... nu chiar. Exista formate mai moderne precum
+            {' '}
+            <strong>WebP</strong>
+            {' '}
+            sau
+            {' '}
+            <strong>AVIF</strong>
+            {' '}
+            care
             ofera aceeasi calitate a imaginii la o dimensiune mai mica.
-            De exemplu, uite diferentele de dimensiune ale acestei imagini in functie de format:
+            Uite diferentele de dimensiune ale acestei imagini in functie de format:
           </p>
           <LessonTable {...sizesTable} className="my-5" />
           <p>
@@ -488,7 +499,7 @@ export default function ImagesLesson() {
             <a href="https://CanIUse.com" target="_blank" rel="noreferrer">Can I use...</a>
             - AVIF are suport doar in ultimele versiuni
             de Google Chrome in timp ce WebP este mai comun insa tot lipseste din
-            IOS 13 sau internet explorer 11.
+            IOS 13 sau Internet Explorer 11.
           </p>
           <SideBySidePictures
             direction="column"
@@ -505,10 +516,13 @@ export default function ImagesLesson() {
           />
           <p>
             Deci avem nevoie de o modalitate prin care browsere care inteleg
+            {' '}
             <strong>WebP</strong>
             {' '}
             sau
+            {' '}
             <strong> Avif</strong>
+            {' '}
             sa descarce aceste formate, in timp ce celelalte sa ramana la JPG.
             Aceasta tehnica se numeste general
             {' '}
@@ -517,7 +531,9 @@ export default function ImagesLesson() {
           </p>
           <p>
             Thankfully, aceasta solutie ne este permisa de tagul
-            <span className="formatted">{'<picture>'}</span>
+            {' '}
+            <strong className="formatted">{'<picture>'}</strong>
+            {' '}
             ,
             unde putem specifica mai multe surse pentru o imagine si sa lasam
             browserul sa aleaga pe cea pe care o intelege.
@@ -528,41 +544,88 @@ export default function ImagesLesson() {
             code={`
 <picture>
   <source 
-    srcset="red_bycicle__high.avif 4000w, red_bycicle__med.avif 2000w, red_bycicle__low.avif 800w"
+    srcset="
+      red_bycicle__high.avif 4000w, 
+      red_bycicle__med.avif 2000w, 
+      red_bycicle__low.avif 800w" 
     type="image/avif">
-  
+
   <source 
-    srcset="red_bycicle__high.webp 4000w, red_bycicle__med.webp 2000w, red_bycicle__low.webp 800w"
+    srcset="
+      red_bycicle__high.webp 4000w, 
+      red_bycicle__med.webp 2000w, 
+      red_bycicle__low.webp 800w"
     type="image/webp">
-  
+
   <source 
-    srcset="red_bycicle__high.jpg 4000w, red_bycicle__med.jpg 2000w, red_bycicle__low.jpg 800w" 
+    srcset="
+      red_bycicle__high.jpg 4000w, 
+      red_bycicle__med.jpg 2000w, 
+      red_bycicle__low.jpg 800w" 
     type="image/jpeg">
-  
+
   <img 
-    alt="Red bycicle wheel" 
-    srcset="red_bycicle__high.jpg 4000w, red_bycicle__med.jpg 2000w, red_bycicle__low.jpg 800w">
+    alt="Red bycicle wheel"
+    loading="lazy"
+    srcset="
+      red_bycicle__high.jpg 4000w, 
+      red_bycicle__med.jpg 2000w, 
+      red_bycicle__low.jpg 800w
+    ">
 </picture>`}
           />
         </section>
         <p>
           Ordinea elementelor
           {' '}
-          <span className="formatted">{'<source>'}</span>
+          <strong className="formatted">{'<source>'}</strong>
           {' '}
           este extrem de importanta caci browserul le va parcurge
-          de sus-in-jos si o va alege pe prima compatibila.
+          de sus-in-jos si o va alege pe prima compatibila. De asemenea,
+          în fiecare dintre ele adaugat - via atributul
+          {' '}
+          <strong>srcset</strong>
+          {' '}
+          - mai multe surse de dimensiuni diferite.
+          Astfel browserul nu alege numai formatul cel mai bun, cat si
+          dimensiunea optima a imagini. Best of both worlds! 💪
+        </p>
+        <p>
+          PS: poate ai observat acel ultim
+          {' '}
+          <strong className="formatted">{'<img>'}</strong>
+          {' '}
+          tag. Ei bine, avem nevoie de el pentru
+          a specifica descrierea imaginii - in caz ca aceasta nu poate fi incarcata,
+          cat si pentru eventuala adaugare a unor atribute extra - cum ar fi
+          {' '}
+          <strong>loading</strong>
+          . Iar în cazurile mai rare în care utilizatorii folosesc browsere
+          destul de vechi, ce nu înțeleg elementul
+          {' '}
+          <strong className="formatted">{'<picture>'}</strong>
+          {' '}
+          , acestea vor înțelege
+          totuși tagul
+          {' '}
+          <strong className="formatted">{'<img>'}</strong>
+          {' '}
+          și-l vor arăta pe acesta.
         </p>
         <div className="dots" />
         <LessonResources
           className="my-5"
           links={[{
-            text: 'Todo',
-            url: 'https://google.com',
+            text: 'Documentația completă a elementului <img> pe MDN',
+            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img',
           }, {
-            text: 'Todo',
-            url: 'https://linkedin.com',
-          }]}
+            text: 'Documentația completă a elementului <picture> pe MDN',
+            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
+          }, {
+            text: 'Mai multe detalii despre imagini Responsive',
+            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
+          },
+          ]}
         />
       </Lesson>
     </>

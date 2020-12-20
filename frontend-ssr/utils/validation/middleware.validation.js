@@ -9,7 +9,9 @@ module.exports.validate_jwt=async(req)=>{
     try{
         //Verify header
         const verify=await jwt.verify(token,process.env.TOKEN_SECRET);
-        return verify;
+        if(!verify) return verify;
+        const user_data= await jwt.decode(token)
+        return user_data
     }
     catch(err){
         //Something went wrong 

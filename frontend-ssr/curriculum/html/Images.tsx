@@ -233,7 +233,7 @@ export default function ImagesLesson() {
           <p>
             Mai jos continuăm să discutăm despre diverse tehnici
             pentru a optimiza servirea imaginilor și a oferi cea mai
-            bună experiența posibilă, care la randul ei va mări
+            bună experiență posibilă, care la randul ei va mări
             șansele ca
             {' '}
             <a href="https://web.dev/site-speed-and-business-metrics/" target="_blank" rel="noreferrer">

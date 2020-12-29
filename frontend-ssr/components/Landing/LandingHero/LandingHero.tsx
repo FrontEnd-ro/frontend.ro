@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
+
 import { GITHUB_URL } from '~/services/Constants';
-import styles from './LandingHero.module.scss';
 import LandingSchmoes from './LandingSchmoes/LandingSchmoes';
+
+import styles from './LandingHero.module.scss';
 
 export default function LandingHero() {
   const [showInProgress, setShowInProgress] = useState(false);
@@ -12,7 +15,7 @@ export default function LandingHero() {
 
   return (
     <section className={`${styles['landing-hero']} d-flex justify-content-between`}>
-      <div className="call-to-action">
+      <div className={styles['call-to-action']}>
         <h1> FrontEnd.ro </h1>
         <h2>
           Învață FrontEnd de la zero,
@@ -24,10 +27,14 @@ export default function LandingHero() {
         <div>
           {!showInProgress && (
           <>
-            <button onClick={startLearningOrTeaching} type="button" className="text-center btn btn--default">
+            <button onClick={startLearningOrTeaching} type="button" className={`${styles['action-button']} text-center btn btn--default`}>
               Vreau să învăț
             </button>
-            <button onClick={startLearningOrTeaching} type="button" className="text-center btn btn--light">Vreau să predau</button>
+            <Link href="/teach">
+              <a className={`${styles['action-button']} text-center btn btn--light`}>
+                Vreau să predau
+              </a>
+            </Link>
           </>
           )}
 

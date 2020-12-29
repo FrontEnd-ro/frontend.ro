@@ -5,7 +5,7 @@
   flex-flow: column nowrap;
   background: color(darker-white);
 
-  :global .call-to-action {
+  .call-to-action {
     z-index: 2;
     padding: 8vh 10vw 0 10vw;
   }
@@ -25,7 +25,7 @@
     }
   }
 
-  button {
+  .action-button {
     padding: 0.5em 1em;
     min-height: initial;
     text-decoration: none;
@@ -38,8 +38,9 @@
       display: inline;
     }
 
-    button {
+    .action-button {
       display: block;
     }
   }
 }
+

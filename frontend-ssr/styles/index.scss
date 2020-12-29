@@ -21,6 +21,11 @@ body,
   height: 100%;
 }
 
+#__next {
+  display: flex;
+  flex-flow: column;
+}
+
 body {
   font-size: 1.25em;
 }

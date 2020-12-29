@@ -1,28 +1,19 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import Head from 'next/head';
-import Footer from '~/components/Footer';
-import Header from '~/components/Header';
 
-import ExerciseSubmission from '../components/exercise-submissions/ExerciseSubmission';
-import ExerciseService from '../services/ExerciseSubmissions.service';
-import {
-  loadSubmissions,
-  searchSubmissions,
-} from '~/redux/exercise-submissions/exercise-submissions.actions';
-import ExerciseSubmissionSkeleton from '~/components/exercise-submissions/ExerciseSubmissionSkeleton';
-import SweetAlertService from '../services/sweet-alert/SweetAlert.service';
 import Search from '~/components/Search';
-import { RootState } from '../redux/root.reducer';
-import NotificationTooltip from '~/components/notification-tooltip/NotificationTooltip';
+import { RootState } from '~/redux/root.reducer';
+import ExerciseSubmission from './ExerciseSubmission/ExerciseSubmission';
+import ExerciseSubmissionSkeleton from './ExerciseSubmission/ExerciseSubmissionSkeleton';
+import ExerciseService from '~/services/ExerciseSubmissions.service';
+import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
+import { loadSubmissions, searchSubmissions } from '~/redux/exercise-submissions/exercise-submissions.actions';
 
-import styles from './submissions.module.scss';
+import styles from './Teach.module.scss';
 
-interface State {
-  loading: boolean;
-}
+interface State { loading: boolean; }
 
-class Submissions extends React.Component<ConnectedProps<typeof connector>, State> {
+class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
   private observer: IntersectionObserver;
 
   private hiddenRef = React.createRef<HTMLDivElement>();
@@ -115,32 +106,32 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
     const { loading } = this.state;
 
     return (
-      <>
-        <Head>
-          <title>HTML</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Header />
-        <NotificationTooltip />
-        <main className={styles.page}>
-          <div className={`${styles['page-submissions']}`}>
-            <Search
-              key={submissions.search}
-              query={submissions.search}
-              onSearch={this.searchData}
-            />
-            <ul className={`${styles['cards-wrapper']}`}>
-              {submissions.submissions && submissions.submissions.map((submission) => (
-                <li key={submission._id}>
-                  <ExerciseSubmission submission={submission} />
-                </li>
-              ))}
-              {loading && Array.from(Array(5), (i) => (
-                <li key={i}>
-                  <ExerciseSubmissionSkeleton />
-                </li>
-              ))}
-            </ul>
+      <main className={styles.teach}>
+        <div>
+          <h1> Exerciții rezolvate </h1>
+          <h2>
+            Oferă feedback celor ce au rezolvat exercițiile de mai
+            jos și ajută-i să devină mai buni.
+          </h2>
+          <Search query={submissions.search} onSearch={this.searchData} />
+          <ul className={`${styles['cards-wrapper']}`}>
+            {submissions.submissions && submissions.submissions.map((submission) => (
+              <li key={submission._id}>
+                <ExerciseSubmission submission={submission} />
+              </li>
+            ))}
+            {loading && Array.from(Array(5), (i) => (
+              <li key={i}>
+                <ExerciseSubmissionSkeleton />
+              </li>
+            ))}
+          </ul>
+          {!submissions.submissions?.length && !loading && (
+            <p className={`${styles['no-results']} text-center`}>
+              Căutarea nu a întors nici un rezultat...
+            </p>
+          )}
+          {!submissions.end && (
             <button
               type="button"
               className="btn btn--blue"
@@ -149,14 +140,15 @@ class Submissions extends React.Component<ConnectedProps<typeof connector>, Stat
             >
               Next page
             </button>
-            <div
-              className="invisible"
-              ref={this.hiddenRef}
-            />
-          </div>
-        </main>
-        <Footer />
-      </>
+          )}
+
+          <div
+            className="invisible"
+            ref={this.hiddenRef}
+          />
+
+        </div>
+      </main>
     );
   }
 }
@@ -167,4 +159,4 @@ const mapStateToProps = (state: RootState) => ({
 
 const connector = connect(mapStateToProps);
 
-export default connector(Submissions);
+export default connector(Teach);

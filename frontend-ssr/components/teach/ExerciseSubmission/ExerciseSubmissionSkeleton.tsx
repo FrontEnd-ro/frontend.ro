@@ -3,7 +3,7 @@ import styles from './ExerciseSubmission.module.scss';
 
 export default function SubmissionSkeleton() {
   return (
-    <div className={`${styles.card} ${styles.skeleton} text-white rounded-md bg-grey`}>
+    <div className={`${styles.card} ${styles.skeleton} text-white rounded-md`}>
       <div className={`${styles['card-top']} d-flex align-items-center justify-content-between`}>
         <div className={`${styles['card-info']} d-flex align-items-center justify-content-between`}>
           <div

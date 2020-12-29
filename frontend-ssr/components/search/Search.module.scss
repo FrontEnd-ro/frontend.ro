@@ -1,7 +1,8 @@
 @import '../../styles/variables';
 
-.form {
+.search {
   width: 100%;
+
   input {
     flex: 1;
     border-radius: 5px;
@@ -9,15 +10,36 @@
     padding: 0.5em;
     font-size: 1em;
     outline: 0;
-    font-family: "Courier New", Courier, monospace;
+    font-family: 'Courier New', Courier, monospace;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     &::-moz-focus-inner {
       border: 0;
     }
   }
+
   button {
-    border-bottom-left-radius: 0;
+    padding: 0.45em 0;
     border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    svg {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    button {
+      min-width: auto;
+      padding: 0.45em 1em;
+
+      svg {
+        display: initial;
+      }
+
+      span {
+        display: none;
+      }
+    }
   }
 }

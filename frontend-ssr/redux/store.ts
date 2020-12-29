@@ -4,9 +4,7 @@ import rootReducer from './root.reducer';
 let store;
 
 function createStoreWithPreloadedData(preloadedData) {
-  if (store) {
-    console.error('[createStoreWithPreloadedData] Can only initialize store once per app!');
-  } else {
+  if (!store) {
     store = createStore(rootReducer, preloadedData);
   }
 

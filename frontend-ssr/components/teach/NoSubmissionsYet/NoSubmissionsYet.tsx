@@ -1,0 +1,110 @@
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCode, faLightbulb, faPen } from '@fortawesome/free-solid-svg-icons';
+
+import { GITHUB_URL } from '~/services/Constants';
+
+import styles from './NoSubmissionsYet.module.scss';
+
+function NoSubmissionsYet() {
+  const [help, setHelp] = useState<'code' | 'lessons' | 'exercises'>(null);
+
+  return (
+    <main className={styles['no-submissions-yet']}>
+      <div>
+        <h1> Exerciții rezolvate</h1>
+        <h2>
+          Hmm, se pare că nu sunt exerciții ce așteaptă feedback.
+          Dar, ne poți ajuta cu alte lucruri :D
+        </h2>
+
+        <div className={`${styles['help-wrapper']} d-flex  justify-content-between align-items-center`}>
+          <button
+            type="button"
+            onClick={() => setHelp('code')}
+            className={`${help === 'code' ? 'btn--blue ' : 'btn--transparent '} btn align-items-center`}
+          >
+            <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faCode} />
+            Vreau să codez
+            la platformă
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setHelp('lessons')}
+            className={`${help === 'lessons' ? 'btn--blue ' : 'btn--transparent '}btn align-items-center`}
+          >
+            <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faPen} />
+            Vreau să scriu lecții
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setHelp('exercises')}
+            className={`${help === 'exercises' ? 'btn--blue ' : 'btn--transparent '}btn align-items-center`}
+          >
+            <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faLightbulb} />
+            Vreau să creez exerciții
+          </button>
+        </div>
+        {help && (
+        <div className={styles['help-explanation']}>
+          {help === 'code' && (
+          <>
+            <h3> Codează la platformă </h3>
+            <p>
+              Tot codul este
+              {' '}
+              <a href={GITHUB_URL} target="_blank" rel="noreferrer">open-source pe GitHub</a>
+              ,
+              deci cel mai ușor mod de a începe este pornind de la secțiunea
+              {' '}
+              <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noreferrer"> issues </a>
+              .
+            </p>
+            <p>
+              Dacă nu avem
+              {' '}
+              <em>pending-issues</em>
+              {' '}
+              sau dacă ai vreo idee de funcționalitate
+              mai mare, dă-ne un semn și hai s-o facem realitate! 💪
+            </p>
+          </>
+          )}
+
+          {help === 'lessons' && (
+          <>
+            <h3> Scrie lecții </h3>
+            <p>
+              Aruncă un ochi aici pentru a vedea toate lecțiile scrise deja, cât și cele pe care
+              ne dorim să le scriem dar n-am apucat încă.
+            </p>
+            <p>
+              Dar nu trebuie să te rezumi doar la ce e acolo. Dacă ai idei de subiecte pe care noi
+              nu le-am menționat, cu atât mai bine. Dă-ne un semn și să trecem la treabă! 🔥
+            </p>
+          </>
+          )}
+          {help === 'exercises' && (
+          <>
+            <h3> Creează exerciții </h3>
+            <p>
+              Aruncă un ochi aici pentru a vedea toate exercițiile existente.
+              Le-am grupat pe capitole, iar fiecare e asignat uneia sau mai multor lecții.
+            </p>
+            <p>
+              Așteptăm submisii noi împreună cu soluțiile lor. 👍
+            </p>
+          </>
+          )}
+        </div>
+        )}
+
+      </div>
+    </main>
+  );
+}
+
+export default NoSubmissionsYet;

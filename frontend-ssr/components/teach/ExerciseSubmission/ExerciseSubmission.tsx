@@ -1,6 +1,6 @@
 import React from 'react';
-import { Submission, SubmissionType } from '../../redux/exercise-submissions/types';
-import { timeAgo } from '../../services/Utils';
+import { Submission, SubmissionType } from '../../../redux/exercise-submissions/types';
+import { timeAgo } from '../../../services/Utils';
 
 import styles from './ExerciseSubmission.module.scss';
 

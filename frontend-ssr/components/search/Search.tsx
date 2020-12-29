@@ -1,6 +1,8 @@
 import React from 'react';
 import debounce from 'lodash/debounce';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from './Search.module.scss';
 
 interface State {
@@ -49,17 +51,19 @@ class Search extends React.Component<Props, State> {
       <div>
         <form
           onSubmit={this.onSubmit}
-          className={`${styles.form} d-flex align-items-center`}
+          className={`${styles.search} d-flex align-items-center`}
         >
           <input
             type="text"
             name="query"
-            placeholder="search"
+            placeholder="Search"
             value={searchValue}
+            className="w-100"
             onChange={this.onChange}
           />
-          <button type="submit" className="btn btn--blue">
-            Search
+          <button type="submit" className="btn btn--blue" title="Search">
+            <FontAwesomeIcon width="24" icon={faSearch} />
+            <span>Search </span>
           </button>
         </form>
       </div>

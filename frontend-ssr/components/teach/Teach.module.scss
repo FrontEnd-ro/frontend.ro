@@ -1,0 +1,40 @@
+@import '../../styles/variables';
+
+.teach {
+  flex: 1;
+
+  & > div {
+    @extend %containerConfig;
+  }
+
+  h1 {
+    margin-top: 1em;
+  }
+
+  h2 {
+    margin-bottom: 2em;
+    font-weight: normal;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .cards-wrapper {
+    margin-top: 2em;
+
+    li {
+      margin: 1em 0;
+    }
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+}
+
+.no-results {
+  margin: 5em 0 10em 0;
+  font-size: 1.5em;
+  color: color(grey);
+}

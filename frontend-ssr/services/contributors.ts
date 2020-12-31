@@ -3,7 +3,11 @@ export const Pava = {
   avatar: '/images/contributors/iampava.png',
   url: 'https://iampava.com',
 };
-
+export const Diana = {
+  name: 'Diana',
+  avatar: '/images/contributors/andreeatoma.jpg',
+  url: 'https://github.com/andreeatoma',
+};
 export const Ira = {
   name: 'Ira',
   avatar: '/images/contributors/iramelnic.jpg',

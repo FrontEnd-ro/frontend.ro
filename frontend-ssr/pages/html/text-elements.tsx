@@ -1,0 +1,363 @@
+import React from 'react';
+import Link from 'next/link';
+import SEOTags from '~/components/SEOTags';
+import Lesson, {
+  LessonContributors,
+  LessonCover,
+  LessonFigure,
+  LessonHeading,
+  LessonResources,
+  LessonTip,
+} from '~/components/lessons';
+import { Diana } from '~/services/contributors';
+import Highlight from '~/components/Highlight/Highlight';
+import coverSvg from '~/public/images/lessons/text-elements__cover.svg';
+
+const contributors = [Diana];
+const chapters = [
+  { title: 'Titluri (Headings)', id: 'headings' },
+  { title: 'Paragrafe', id: 'paragraphs' },
+  { title: 'Citate', id: 'quotes' },
+  { title: '<hr> element', id: 'hr-element' },
+  { title: '<em> & <strong> elements', id: 'em-and-strong' },
+];
+
+export default function TextsLesson() {
+  return (
+    <>
+      <SEOTags
+        title="Texte | Lecție HTML"
+        description="Avem la dispoziție mai multe elemente când vine vorba de texte, iar aici învățăm când și cum să le folosim."
+        url="https://FrontEnd.ro/html/text-elements"
+      />
+      <Lesson title="Texte" chapters={chapters}>
+        <LessonContributors className="absolute" contributors={contributors} />
+        <LessonCover>
+          {/* eslint-disable-next-line react/no-danger */}
+          <div dangerouslySetInnerHTML={{
+            __html: coverSvg,
+          }}
+          />
+        </LessonCover>
+        <p>
+          Acest articol explică modul în care HTML poate fi utilizat pentru a structura o
+          pagină de text prin adăugarea de titluri și paragrafe,
+          accentuarea cuvintelor și multe altele.
+        </p>
+        <section>
+          <LessonHeading as="h3" id="headings">
+            Titluri (Headings)
+          </LessonHeading>
+          <p>
+            HTML oferă șase elemente pentru titluri (headings), care pot fi marcate
+            utilizînd tagurile:
+            {' '}
+            <strong className="formatted">{'<h1>'}</strong>
+            ,
+            {' '}
+            <strong className="formatted">{'<h2>'}</strong>
+            ,
+            {' '}
+            <strong className="formatted">{'<h3>'}</strong>
+            ,
+            {' '}
+            <strong className="formatted">{'<h4>'}</strong>
+            ,
+            {' '}
+            <strong className="formatted">{'<h5>'}</strong>
+            {' '}
+            și
+            {' '}
+            <strong className="formatted">{'<h6>'}</strong>
+            .
+          </p>
+          <p>
+            <strong className="formatted">
+              {'<h1>'}
+            </strong>
+            {' '}
+            este folosit pentru titlul principal al
+            paginii, următoarele fiind utilizate pentru a marca subtitluri în
+            ordinea importanței lor. Este recomandat să avem
+            {' '}
+            <strong>
+              un singur
+              {' <h1>'}
+            </strong>
+            {' '}
+            în pagină, pentru a arăta motoarelor de
+            căutare care este subiectul principal al paginii.
+          </p>
+          <Highlight
+            className="my-5"
+            language="html"
+            code={`
+<h1> Texte | Lecție HTML </h1>`}
+          />
+          <p>
+            În principiu
+            {' '}
+            <strong className="formatted">{'<h1>'}</strong>
+            {' '}
+            va avea fontul cel mai mare, iar
+            {' '}
+            <strong className="formatted">
+              {'<h6>'}
+            </strong>
+            {' '}
+            cel mai mic,
+            desi aceasta nu este neaparat o regula batuta in cuie.
+
+            Fiecare browser vine cu propriile stiluri asupra elementelor de baza,
+            insa mai tarziu vom vedea cum putem adauga propriile stiluri via
+            {' '}
+            <Link href="/css/intro">
+              <a>
+                CSS
+              </a>
+            </Link>
+            .
+          </p>
+          <LessonFigure
+            withBorder
+            src="https://d3tycb976jpudc.cloudfront.net/demo-assets/headings.png"
+            alt="Toate cele 6 headinguri"
+            demo="/demo/html/headings"
+          />
+          <p>
+            Atunci cînd realizăm structura unei pagini este bine să luăm în
+            considerare cîteva bune practici:
+          </p>
+          <LessonTip>
+            Să ne asiguram că atunci cînd folosim titluri, ținem cont de ordinea
+            lor in ierarhie. Adică, dacă am folosit un
+            {' '}
+            <strong>h3</strong>
+            {' '}
+            ce
+            reprezintă un subtitlu în pagină, nu vom folosi după acesta un
+            {' '}
+            <strong>h2</strong>
+            {' '}
+            să reprezentăm un sub-subtitlu. Nu ar avea nici
+            un sens să facem asta, nu?
+          </LessonTip>
+          <LessonTip>
+            Deși avem 6 headings la dispoziție, nu ar trebui să folosim mai mult
+            de 3 per pagină. Dacă totuși simțim nevoia de a folosi mai multe
+            titluri, poate e momentul să facem o nouă pagină?!
+          </LessonTip>
+        </section>
+        <section>
+          <LessonHeading as="h3" id="paragraphs">
+            Paragrafe
+          </LessonHeading>
+          <p>
+            Elementele de tip paragraf sunt marcate cu ajutorul tag-ului
+            {' '}
+            <strong className="formatted">{'<p>'}</strong>
+            . Vom folosi acest element pentru a insera paragrafe de text fara
+            vreo proprietate sau inteles special.
+          </p>
+          <Highlight
+            className="my-5"
+            language="html"
+            code={`
+<p> Acesta este un paragraf cu cateva cuvinte. </p>`}
+          />
+          <p>
+            De fiecare dată cînd va intîlni tag-ul
+            {' '}
+            <strong className="formatted">{'<p>'}</strong>
+            , browser-ul va afișa
+            conținutul acestuia începînd cu o nouă linie (spunem că paragrafele
+            sunt elemente de tip
+            {' '}
+            <a target="_blank" rel="noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements">
+              block
+            </a>
+            ). Acelasi lucru se intampla si cu titlurile, dupa cum poti vedea in demo-ul de mai jos.
+          </p>
+          <LessonFigure
+            withBorder
+            src="https://d3tycb976jpudc.cloudfront.net/demo-assets/paragraphs-and-headings.png"
+            alt="Paragrafe și heading-uri"
+            demo="/demo/html/paragraphs-and-headings"
+          />
+          <div className="dots" />
+          <p>
+            Dacă ai experimentat cu codul până acum, poate ai observat că dând
+            {' '}
+            <strong className="formatted">Enter</strong>
+            {' '}
+            într-un paragraf nu va afișa textul pe o nouă linie.
+            Ca să obținem asta putem fie să folosim un nou paragraf, fie
+            tag-ul
+            {' '}
+            <strong className="formatted">
+              {'<br>'}
+            </strong>
+            .
+          </p>
+          <Highlight
+            className="my-5"
+            language="html"
+            code={`
+<p>
+  Azi am codat împreună cu <br>
+  Alex, <br>
+  Diana și <br>
+  Antonia.
+</p>
+            `}
+          />
+          <LessonFigure
+            withBorder
+            src="https://d3tycb976jpudc.cloudfront.net/demo-assets/line-break.png"
+            alt="Elementul <br>"
+            demo="/demo/html/line-break"
+          />
+        </section>
+        <section>
+          <LessonHeading as="h3" id="quotes">
+            Citate
+          </LessonHeading>
+          <p>
+            Atunci cînd vrem să marcăm un text mai lung preluat dintr-o anumită
+            sursă ne vom folosi de tag-ul
+            {' '}
+            <strong className="formatted">{'<blockquote>'}</strong>
+            .
+            Acest tag vine la pachet cu o indentare default.
+          </p>
+          <Highlight
+            className="my-5"
+            language="html"
+            code={`
+<blockquote cite="https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step">
+  <p> Călătoria de 1000 mile începe cu un singur pas. </p>
+</blockquote>          
+            `}
+          />
+          <p>
+            Dacă avem nevoie să marcăm un citat mai scurt, vom folosi tag-ul
+            {' '}
+            <strong className="formatted">{'<q>'}</strong>
+            (quote).
+          </p>
+          <Highlight
+            className="my-5"
+            language="html"
+            code={`
+<p>
+  După cum a spus Roosevelt, 
+  <q cite="https://www.goodreads.com/quotes/10002-it-is-hard-to-fail-but-it-is-worse-never">
+    It is hard to fail, but it is worse  never to have tried to succeed.
+  </q>
+</p>       
+            `}
+          />
+          <LessonTip>
+            După cum poți observa mai sus, ambele elemente au atributul
+            {' '}
+            <strong className="formatted">cite</strong>
+            {' '}
+            pe care îl folosim pentru a marca sursa citatului.
+          </LessonTip>
+        </section>
+        <section>
+          <LessonHeading as="h3" id="hr-element">
+            {'<hr> element'}
+          </LessonHeading>
+          <p>
+            Elementul
+            {' '}
+            <strong className="formatted">
+              {'<hr>'}
+            </strong>
+            {' '}
+            (horizontal line)
+            este un separator între
+            secțiuni/elemente din pagină.
+          </p>
+          <Highlight
+            className="my-5"
+            language="html"
+            code={`
+<p> O primă regulă în această casă: Întotdeauna zîmbește! </p>
+<hr>
+<p> A doua regulă: Vino cu prăjituri! </p>
+            `}
+          />
+          <LessonFigure
+            withBorder
+            src="https://d3tycb976jpudc.cloudfront.net/demo-assets/horizontal-line.png"
+            alt="Elementul <hr> (horizontal-line)"
+            demo="/demo/html/horizontal-line"
+          />
+        </section>
+        <section>
+          <LessonHeading as="h3" id="em-and-strong">
+            {'<em> & <strong> elements'}
+          </LessonHeading>
+          <p>
+            În limbajul obișnuit, subliniem adesea cuvinte pentru a modifica
+            sensul unei propoziții și dorim să marcăm anumite cuvinte ca fiind
+            importante sau diferite într-un fel.
+          </p>
+          <p>
+            HTML oferă diverse elemente
+            semantice pentru a ne permite să marcăm conținutul textual cu astfel
+            de efecte.
+            .
+            Unul din aceste elemente este tagul
+            {' '}
+            <strong className="formatted">
+              {'<em>'}
+            </strong>
+            {' '}
+            .
+          </p>
+          <Highlight
+            className="my-5"
+            language="html"
+            code={`
+<p>
+  Sunt <em> foarte bucuros </em> că ai primit jobul!
+</p>        
+            `}
+          />
+          <p>
+            Mai avem la dispoziție și tagul
+            {' '}
+            <strong className="formatted">
+              {'<strong>'}
+            </strong>
+            {' '}
+            , folosit pentru a marca un element ca fiind
+            foarte important. Fiind un element semantic, acesta este recunoscut
+            de cititoarele de ecrane și redat cu o tonalitate diferită a vocii.
+          </p>
+          <p>
+            Deși browserele afișează acest element îngroșat (bolduit),
+            {' '}
+            <strong>nu ar trebui să folosim</strong>
+            {' '}
+            <span className="formatted">
+              {'<strong>'}
+            </span>
+            {' '}
+            doar pentru a obține acest rezultat. Pentru a face asta
+            vom folosi un element de tip
+            {' '}
+            <span className="formatted">
+              {'<span>'}
+            </span>
+            {' '}
+            pe vom aplica stiluri CSS.
+          </p>
+        </section>
+      </Lesson>
+    </>
+  );
+}

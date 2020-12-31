@@ -1,4 +1,4 @@
-import { Pava } from './contributors';
+import { Diana, Pava } from './contributors';
 
 export type LessonDescription = {
   written: boolean;
@@ -72,12 +72,14 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
-    written: false,
+    written: true,
     title: 'Texte',
     description:
       'Avem la dispoziție mai multe elemente când vine vorba de texte, iar aici învățăm când și cum să le folosim.',
     url: '/html/text-elements',
     type: 'html',
+    contributors: [Diana],
+    cover: '/images/lessons/text-elements__cover.svg',
   },
   {
     written: false,

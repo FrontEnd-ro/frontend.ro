@@ -106,10 +106,10 @@ export default function TextsLesson() {
             </strong>
             {' '}
             cel mai mic,
-            desi aceasta nu este neaparat o regula batuta in cuie.
+            deși aceasta nu este neapărat o regulă bătută în cuie.
 
-            Fiecare browser vine cu propriile stiluri asupra elementelor de baza,
-            insa mai tarziu vom vedea cum putem adauga propriile stiluri via
+            Fiecare browser vine cu propriile stiluri asupra elementelor de bază,
+            însă mai târziu vom vedea cum putem adăuga propriile stiluri via
             {' '}
             <Link href="/css/intro">
               <a>
@@ -125,8 +125,8 @@ export default function TextsLesson() {
             demo="/demo/html/headings"
           />
           <p>
-            Atunci cînd realizăm structura unei pagini este bine să luăm în
-            considerare cîteva bune practici:
+            Atunci când realizăm structura unei pagini este bine să luăm în
+            considerare câteva bune practici:
           </p>
           <LessonTip>
             Să ne asiguram că atunci cînd folosim titluri, ținem cont de ordinea
@@ -156,17 +156,17 @@ export default function TextsLesson() {
             Elementele de tip paragraf sunt marcate cu ajutorul tag-ului
             {' '}
             <strong className="formatted">{'<p>'}</strong>
-            . Vom folosi acest element pentru a insera paragrafe de text fara
-            vreo proprietate sau inteles special.
+            . Vom folosi acest element pentru a insera paragrafe de text fără
+            vreo proprietate sau înțeles special.
           </p>
           <Highlight
             className="my-5"
             language="html"
             code={`
-<p> Acesta este un paragraf cu cateva cuvinte. </p>`}
+<p> Acesta este un paragraf cu câteva cuvinte. </p>`}
           />
           <p>
-            De fiecare dată cînd va intîlni tag-ul
+            De fiecare dată când va întâlni tag-ul
             {' '}
             <strong className="formatted">{'<p>'}</strong>
             , browser-ul va afișa
@@ -176,7 +176,7 @@ export default function TextsLesson() {
             <a target="_blank" rel="noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements">
               block
             </a>
-            ). Acelasi lucru se intampla si cu titlurile, dupa cum poti vedea in demo-ul de mai jos.
+            ). Același lucru se întâmplă și cu titlurile, după cum poți vedea în demo-ul de mai jos.
           </p>
           <LessonFigure
             withBorder
@@ -190,7 +190,7 @@ export default function TextsLesson() {
             {' '}
             <strong className="formatted">Enter</strong>
             {' '}
-            într-un paragraf nu va afișa textul pe o nouă linie.
+            într-un paragraf, nu va afișa textul pe o nouă linie.
             Ca să obținem asta putem fie să folosim un nou paragraf, fie
             tag-ul
             {' '}
@@ -223,7 +223,7 @@ export default function TextsLesson() {
             Citate
           </LessonHeading>
           <p>
-            Atunci cînd vrem să marcăm un text mai lung preluat dintr-o anumită
+            Atunci când vrem să marcăm un text mai lung preluat dintr-o anumită
             sursă ne vom folosi de tag-ul
             {' '}
             <strong className="formatted">{'<blockquote>'}</strong>
@@ -252,7 +252,7 @@ export default function TextsLesson() {
 <p>
   După cum a spus Roosevelt, 
   <q cite="https://www.goodreads.com/quotes/10002-it-is-hard-to-fail-but-it-is-worse-never">
-    It is hard to fail, but it is worse  never to have tried to succeed.
+    It is hard to fail, but it is worse never to have tried to succeed.
   </q>
 </p>       
             `}
@@ -284,7 +284,7 @@ export default function TextsLesson() {
             className="my-5"
             language="html"
             code={`
-<p> O primă regulă în această casă: Întotdeauna zîmbește! </p>
+<p> O primă regulă în această casă: Întotdeauna zâmbește! </p>
 <hr>
 <p> A doua regulă: Vino cu prăjituri! </p>
             `}
@@ -310,7 +310,7 @@ export default function TextsLesson() {
             semantice pentru a ne permite să marcăm conținutul textual cu astfel
             de efecte.
             .
-            Unul din aceste elemente este tagul
+            Unul dintre aceste elemente este tag-ul
             {' '}
             <strong className="formatted">
               {'<em>'}
@@ -328,7 +328,7 @@ export default function TextsLesson() {
             `}
           />
           <p>
-            Mai avem la dispoziție și tagul
+            Mai avem la dispoziție și tag-ul
             {' '}
             <strong className="formatted">
               {'<strong>'}
@@ -354,7 +354,7 @@ export default function TextsLesson() {
               {'<span>'}
             </span>
             {' '}
-            pe vom aplica stiluri CSS.
+            pe care vom aplica stiluri CSS.
           </p>
         </section>
       </Lesson>

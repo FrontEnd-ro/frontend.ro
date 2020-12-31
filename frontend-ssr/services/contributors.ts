@@ -8,7 +8,6 @@ export const Diana = {
   avatar: '/images/contributors/andreeatoma.jpg',
   url: 'https://github.com/andreeatoma',
 };
-
 export const Ira = {
   name: 'Ira',
   avatar: '/images/contributors/iramelnic.jpg',

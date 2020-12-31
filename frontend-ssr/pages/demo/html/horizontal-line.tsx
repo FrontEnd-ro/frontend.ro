@@ -7,7 +7,7 @@ import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 
 export default function MissingImage() {
-  const title = 'Elementul <hr> adăuga o linie de separare';
+  const title = 'Elementul <hr> adaugă o linie de separare';
   return (
     <>
       <Head>

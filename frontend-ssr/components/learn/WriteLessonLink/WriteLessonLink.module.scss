@@ -1,0 +1,25 @@
+@import '../../../styles/variables';
+
+.write-lesson-link {
+  padding: 2em 1em;
+  flex-flow: column;
+  border-radius: 0.5em;
+  border: 2px dashed color(silver);
+
+  svg {
+    // FIXME?
+    // Without this the SSR version doesn't have the correct sizes
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  svg,
+  p {
+    transition: transform 0.25s $cubic;
+  }
+
+  &:hover svg,
+  &:hover p {
+    transform: scale(1.1);
+  }
+}

@@ -1,12 +1,6 @@
 @import '../../styles/variables';
 
 .teach {
-  flex: 1;
-
-  & > div {
-    @extend %containerConfig;
-  }
-
   h1 {
     margin-top: 1em;
   }

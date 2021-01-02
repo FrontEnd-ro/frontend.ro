@@ -1,10 +1,7 @@
 @import '../../../styles/variables';
 
 .lesson-contributors {
-  right: 0;
-  top: 0.75em;
   display: flex;
-  position: absolute;
   flex-flow: row nowrap;
 
   li {

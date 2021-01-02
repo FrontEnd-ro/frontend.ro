@@ -12,6 +12,13 @@ module.exports = {
   webpack: (config, {
     buildId, dev, isServer, defaultLoaders, webpack,
   }) => {
+    config.module.rules.push(
+      {
+        test: /\.svg$/,
+        use: 'raw-loader',
+      },
+    );
+
     config.resolve.alias['~'] = path.resolve(__dirname, '.');
 
     return config;

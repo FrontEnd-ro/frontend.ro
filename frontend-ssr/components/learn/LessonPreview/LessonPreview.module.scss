@@ -1,0 +1,51 @@
+@import '../../../styles/variables';
+
+.lesson-preview {
+  border-radius: 0.5em;
+  border: 1px solid color(silver);
+  transition: transform 0.5s $cubic;
+
+  &:hover {
+    transform: translateY(-0.5em);
+
+    .cover p {
+      display: block;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  [class*=LessonContributors] {
+    float: right;
+    margin: 1em 0 0.5em 0;
+  }
+}
+
+.container {
+  padding: 1em;
+}
+
+.written {
+  color: color(black);
+  box-shadow: 0 0 5px color(silver);
+  
+  .cover {
+    background-color: transparent;
+  }
+}
+
+.cover {
+  height: 7em;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: color(silver);
+  border-top-right-radius: 0.5em;
+  border-top-left-radius: 0.5em;
+  
+  p {
+    display: none;
+  }
+}

@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
+import PageContainer from '../PageContainer';
 
 import styles from './404.module.scss';
 
@@ -16,7 +17,7 @@ export default function NotFoundPage() {
       </Head>
       <>
         <Header />
-        <main className={`${styles.page} ${styles['generic-404']}`}>
+        <PageContainer className={`${styles.page} text-center`}>
           <h1>
             Oops...
             <span aria-label="Sad face emoji" role="img">😞</span>
@@ -27,7 +28,8 @@ export default function NotFoundPage() {
           <Link href="/">
             <a className="btn btn--blue">Navighează acasă!</a>
           </Link>
-        </main>
+        </PageContainer>
+
         <Footer />
       </>
     </>

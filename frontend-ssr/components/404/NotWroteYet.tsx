@@ -5,6 +5,7 @@ import Footer from '../Footer';
 import { GITHUB_URL } from '~/services/Constants';
 
 import styles from './404.module.scss';
+import PageContainer from '../PageContainer';
 
 interface Props {
   lesson: {

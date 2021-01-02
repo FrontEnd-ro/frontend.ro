@@ -2,19 +2,31 @@ import React from 'react';
 import styles from './LessonContributors.module.scss';
 
 interface Contributor {
-    name: string;
-    avatar: string;
-    url: string;
+  name: string;
+  avatar: string;
+  url: string;
 }
 
 interface Props {
   contributors: Contributor[];
 
+  /**
+   * Having two nested <a> elements inside each-other is
+   * not valid. Thus, if we want to include this inside
+   * another `<a>` element - use the `variant` prop
+   * to change the rendering from `<a>` to a `<span>`.
+   */
+  variant?: 'link' | 'no-link';
   className?: string;
   displayNumber?: number;
 }
 
-export default function LessonContributors({ contributors, className = '', displayNumber = 5 } : Props) {
+export default function LessonContributors({
+  contributors,
+  variant = 'link',
+  className = '',
+  displayNumber = 5,
+}: Props) {
   return (
     <ul className={`${styles['lesson-contributors']} ${className}`}>
 
@@ -27,25 +39,37 @@ export default function LessonContributors({ contributors, className = '', displ
             zIndex: arr.length - index,
           }}
         >
-          <a href={contributor.url}>
-            <img width="48" height="48" alt={`${contributor.name} avatar`} src={contributor.avatar} />
-            <p>
-              {contributor.name}
-            </p>
-          </a>
+          {variant === 'link'
+            ? (
+              <a href={contributor.url}>
+                <img width="48" height="48" alt={`${contributor.name} avatar`} src={contributor.avatar} />
+                <p>
+                  {contributor.name}
+                </p>
+              </a>
+            )
+            : (
+              <span>
+                <img width="48" height="48" alt={`${contributor.name} avatar`} src={contributor.avatar} />
+                <p>
+                  {contributor.name}
+                </p>
+              </span>
+            )}
+
         </li>
       ))}
       {(contributors.length > displayNumber) && (
-      <li style={{
-        right: `${displayNumber}em`,
-        zIndex: displayNumber + 1,
-      }}
-      >
-        <button type="button" className="btn btn--light">
-          +
-          {contributors.length - displayNumber}
-        </button>
-      </li>
+        <li style={{
+          right: `${displayNumber}em`,
+          zIndex: displayNumber + 1,
+        }}
+        >
+          <button type="button" className="btn btn--light">
+            +
+            {contributors.length - displayNumber}
+          </button>
+        </li>
       )}
     </ul>
   );

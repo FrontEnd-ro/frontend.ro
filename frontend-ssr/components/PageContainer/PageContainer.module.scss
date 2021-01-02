@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.page-container {
+  flex: 1;
+}
+
+.container {
+  @extend %containerConfig;
+}

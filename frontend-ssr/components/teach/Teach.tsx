@@ -8,6 +8,7 @@ import ExerciseSubmissionSkeleton from './ExerciseSubmission/ExerciseSubmissionS
 import ExerciseService from '~/services/ExerciseSubmissions.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { loadSubmissions, searchSubmissions } from '~/redux/exercise-submissions/exercise-submissions.actions';
+import PageContainer from '../PageContainer';
 
 import styles from './Teach.module.scss';
 
@@ -106,49 +107,46 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
     const { loading } = this.state;
 
     return (
-      <main className={styles.teach}>
-        <div>
-          <h1> Exerciții rezolvate </h1>
-          <h2>
-            Oferă feedback celor ce au rezolvat exercițiile de mai
-            jos și ajută-i să devină mai buni.
-          </h2>
-          <Search query={submissions.search} onSearch={this.searchData} />
-          <ul className={`${styles['cards-wrapper']}`}>
-            {submissions.submissions && submissions.submissions.map((submission) => (
-              <li key={submission._id}>
-                <ExerciseSubmission submission={submission} />
-              </li>
-            ))}
-            {loading && Array.from(Array(5), (i) => (
-              <li key={i}>
-                <ExerciseSubmissionSkeleton />
-              </li>
-            ))}
-          </ul>
-          {!submissions.submissions?.length && !loading && (
-            <p className={`${styles['no-results']} text-center`}>
-              Căutarea nu a întors nici un rezultat...
-            </p>
-          )}
-          {!submissions.end && (
-            <button
-              type="button"
-              className="btn btn--blue"
-              onClick={this.getData}
-              disabled={loading}
-            >
-              Next page
-            </button>
-          )}
+      <PageContainer className={styles.teach}>
+        <h1> Exerciții rezolvate </h1>
+        <h2>
+          Oferă feedback celor ce au rezolvat exercițiile de mai
+          jos și ajută-i să devină mai buni.
+        </h2>
+        <Search query={submissions.search} onSearch={this.searchData} />
+        <ul className={`${styles['cards-wrapper']}`}>
+          {submissions.submissions && submissions.submissions.map((submission) => (
+            <li key={submission._id}>
+              <ExerciseSubmission submission={submission} />
+            </li>
+          ))}
+          {loading && Array.from(Array(5), (i) => (
+            <li key={i}>
+              <ExerciseSubmissionSkeleton />
+            </li>
+          ))}
+        </ul>
+        {!submissions.submissions?.length && !loading && (
+        <p className={`${styles['no-results']} text-center`}>
+          Căutarea nu a întors nici un rezultat...
+        </p>
+        )}
+        {!submissions.end && (
+        <button
+          type="button"
+          className="btn btn--blue"
+          onClick={this.getData}
+          disabled={loading}
+        >
+          Next page
+        </button>
+        )}
 
-          <div
-            className="invisible"
-            ref={this.hiddenRef}
-          />
-
-        </div>
-      </main>
+        <div
+          className="invisible"
+          ref={this.hiddenRef}
+        />
+      </PageContainer>
     );
   }
 }

@@ -2,9 +2,7 @@
 
 .page {
   font-size: 1rem;
-  margin: 0 auto;
-  padding: 8em 8vw;
-  min-height: calc(100% - 15.3em);
+  padding: 8em 0;
 
   h1 {
     margin-top: 0;
@@ -26,11 +24,10 @@
   }
 }
 
-.generic-404 {
-  text-align: center;
-}
-
 .not-wrote-yet {
+  @extend %containerConfig;
+  max-width: 1600px;
+
   p {
     margin-top: 2em;
     font-weight: normal;

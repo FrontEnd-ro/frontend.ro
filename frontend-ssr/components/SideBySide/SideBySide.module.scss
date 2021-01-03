@@ -4,16 +4,24 @@
   border-radius: 1em; 
   border: 1px solid color(silver);
 
-  figure {
+  figure, ul {
     margin: 0;
     width: 45%;
+  }
+
+  ul {
+    padding: 2vw;
+    li {
+      text-align: justify;
+      font-size: 0.85em;
+    }
   }
 
   @media screen and (max-width: 1400px) {
     margin: 3em 0;
     flex-flow: column nowrap;
 
-    figure {
+    figure, ul {
       width: 100%;
 
       &:first-of-type {

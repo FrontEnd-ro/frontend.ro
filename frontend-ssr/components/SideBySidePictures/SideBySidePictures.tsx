@@ -1,17 +1,16 @@
 import React from 'react';
 import { Figure } from '~/shared-types';
 import { LessonFigure } from '../lessons';
-import styles from './SideBySidePictures.module.scss';
+import SideBySide from '../SideBySide/SideBySide';
 
 interface Props {
   img1: Figure
   img2: Figure
-  direction?: 'row' | 'column'
 }
 
-export default function SideBySidePictures({ img1, img2, direction } : Props) {
+export default function SideBySidePictures({ img1, img2 } : Props) {
   return (
-    <div className={`${styles['side-by-side']} ${direction === 'column' && styles['side-by-side--column']} d-flex justify-content-between my-5`}>
+    <SideBySide>
       <LessonFigure {...img1} />
       <LessonFigure {...img2} />
       {/* <figure className="d-flex flex-column justify-content-between">
@@ -44,6 +43,6 @@ export default function SideBySidePictures({ img1, img2, direction } : Props) {
 
         </figcaption>
       </figure> */}
-    </div>
+    </SideBySide>
   );
 }

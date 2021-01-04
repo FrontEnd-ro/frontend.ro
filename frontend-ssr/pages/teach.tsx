@@ -6,8 +6,11 @@ import NoSubmissionsYet from '~/components/teach/NoSubmissionsYet/NoSubmissionsY
 import SubmissionModel from '~/server/model/submissions.model';
 import SEOTags from '~/components/SEOTags';
 import { connectToDb } from '~/server/database';
+import { withClientMonitoring } from '~/services/Hooks';
 
 function TeachPage({ hasSubmissions }: {hasSubmissions: boolean}) {
+  withClientMonitoring();
+
   return (
     <>
       <SEOTags

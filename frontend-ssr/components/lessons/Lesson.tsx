@@ -5,12 +5,14 @@ import { LessonMenu } from '~/components/lessons';
 import { Chapters } from '~/components/TableOfContents';
 
 import styles from './Lesson.module.scss';
+import { withClientMonitoring } from '~/services/Hooks';
 
 export default function Lesson({ children, title, chapters } : PropsWithChildren<{
   title: string
   chapters: Chapters[]
 }>) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  withClientMonitoring();
 
   return (
     <div className={styles.lesson}>

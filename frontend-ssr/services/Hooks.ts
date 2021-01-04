@@ -1,4 +1,5 @@
 import { MutableRefObject, useEffect } from 'react';
+import ClientMonitoring, { LogEventType } from './ClientMonitoring';
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 import { noop } from './Utils';
 
@@ -45,7 +46,20 @@ function useClipboard(ref: MutableRefObject<HTMLElement>, onCopy: () => void = n
   }, []);
 }
 
+function withClientMonitoring() {
+  useEffect(() => {
+    // eslint-disable-next-line no-restricted-globals
+    if (location.host.includes('localhost')) {
+      return;
+    }
+    ClientMonitoring.log(LogEventType.ROUTE);
+
+    window.addEventListener('beforeunload', ClientMonitoring.destroy);
+  }, []);
+}
+
 export {
   useOutsideClick,
   useClipboard,
+  withClientMonitoring,
 };

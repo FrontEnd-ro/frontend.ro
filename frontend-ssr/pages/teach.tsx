@@ -4,10 +4,18 @@ import Teach from '~/components/teach';
 import Header from '~/components/Header';
 import NoSubmissionsYet from '~/components/teach/NoSubmissionsYet/NoSubmissionsYet';
 import SubmissionModel from '~/server/model/submissions.model';
+import SEOTags from '~/components/SEOTags';
 
 function TeachPage({ hasSubmissions }: {hasSubmissions: boolean}) {
   return (
     <>
+      <SEOTags
+        title="Exerciții Rezolvate | FrontEnd.ro"
+        shareImage="https://frontend.ro/logo-square.jpg"
+        bigShareImage={false}
+        description="Oferă feedback pentru exerciții rezolvate."
+        url="https://FrontEnd.ro/teach"
+      />
       <Header />
       {
         hasSubmissions

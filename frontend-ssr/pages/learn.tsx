@@ -9,6 +9,7 @@ function TeachPage() {
     <>
       <SEOTags
         title="Lecții | FrontEnd.ro"
+        shareImage="https://frontend.ro/learn-seo-image.jpg"
         description="Lecții gratuite despre HTML, CSS și JavaScript!"
         url="https://FrontEnd.ro/learn"
       />

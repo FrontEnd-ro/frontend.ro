@@ -23,6 +23,7 @@ const chapters = [
   { title: 'Lazy loading', id: 'lazy-loading' },
   { title: 'Responsive images', id: 'responsive-images' },
   { title: '<picture> element', id: 'picture-element' },
+  { title: 'Exerciții', id: 'exercises' },
 ];
 
 const sizesTable: LessonTableProps = {
@@ -630,6 +631,13 @@ export default function ImagesLesson() {
           },
           ]}
         />
+        <section>
+          <LessonHeading as="h3" id="exercises">
+            Exerciții
+          </LessonHeading>
+          <p className="text-bold text-center"> În curând!</p>
+          <br />
+        </section>
       </Lesson>
     </>
   );

@@ -16,8 +16,8 @@ export default function LessonTip({ icon, children } : PropsWithChildren<Props>)
         // Using icon={icon || faLightbulb} throws the following
         // TypeScript error: Expression produces a union type that is too complex to represent.
         icon
-          ? <FontAwesomeIcon icon={icon} />
-          : <FontAwesomeIcon icon={faLightbulb} />
+          ? <FontAwesomeIcon width="32" icon={icon} />
+          : <FontAwesomeIcon width="32" icon={faLightbulb} />
       }
       <span>
         {children}

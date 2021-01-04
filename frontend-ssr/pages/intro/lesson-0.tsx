@@ -396,7 +396,8 @@ export default function Lesson0() {
             </li>
           </ol>
         </section>
-        <div className="text-center my-5">
+        {/* FIXME: uncomment this */}
+        {/* <div className="text-center my-5">
           <a href="/" className="cta-button">
             Să continuăm cu prima lecție
             {' '}
@@ -404,7 +405,7 @@ export default function Lesson0() {
             {' '}
             despre HTML
           </a>
-        </div>
+        </div> */}
       </Lesson>
     </>
   );

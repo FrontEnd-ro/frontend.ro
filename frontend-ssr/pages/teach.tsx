@@ -5,6 +5,7 @@ import Header from '~/components/Header';
 import NoSubmissionsYet from '~/components/teach/NoSubmissionsYet/NoSubmissionsYet';
 import SubmissionModel from '~/server/model/submissions.model';
 import SEOTags from '~/components/SEOTags';
+import { connectToDb } from '~/server/database';
 
 function TeachPage({ hasSubmissions }: {hasSubmissions: boolean}) {
   return (
@@ -31,6 +32,8 @@ export async function getServerSideProps() {
   let hasSubmissions = false;
 
   try {
+    connectToDb();
+
     const results = await SubmissionModel.search(0, '');
     hasSubmissions = results.length > 0;
   } catch (err) {

@@ -129,9 +129,9 @@ export default function Lesson0() {
             />
           </div>
           <p>
-            Iar după ce avansezi în skill'uri și capeți mai multă experiență, chiar ne-am bucura
+            Iar după ce avansezi în skill-uri și capeți mai multă experiență, chiar ne-am bucura
             dacă vei reveni aici, de data aceasta din postura de mentor și să oferi
-            înapoi comunității :)
+            înapoi comunității. 😄
           </p>
           <p>
             Dacă
@@ -167,7 +167,7 @@ export default function Lesson0() {
             Skill-uri și concepte
           </LessonHeading>
           <p>
-            FrontEnd'ul, de fapt programarea în general, este un domeniu în continuă
+            FrontEnd-ul, de fapt programarea în general, este un domeniu în continuă
             dezvoltare și schimbare.
             În fiecare lună apar lucruri noi, iar în cațiva ani tool-urile pe care
             noi le folosim pot fi complet diferite. Ceea ce face
@@ -176,10 +176,10 @@ export default function Lesson0() {
           </p>
 
           <p>
-            Totuși, fundamentele FrontEnd'ului nu se schimbă, și le vei folosi fie că
+            Totuși, fundamentele FrontEnd-ului nu se schimbă, și le vei folosi fie că
             construiești un site de prezentare, un magazin online sau următorul
             Instagram. De aceea, aici ne vom ocupa de fundamentele celor
-            3 limbaje de programare ce compun FrontEnd'ul:
+            3 limbaje de programare ce compun FrontEnd-ul:
             {' '}
             <strong>HTML</strong>
             ,
@@ -233,7 +233,7 @@ export default function Lesson0() {
               de la fiecare lecție.
             </strong>
             {' '}
-            Ai răbdare și încredere în noi, nu am incărcat site-ul cu exerciții inutile.
+            Ai răbdare și încredere în noi, nu am încărcat site-ul cu exerciții inutile.
           </p>
           <p>
             Apoi, după ce ne trimiți soluția ta vom ajunge la
@@ -257,7 +257,7 @@ export default function Lesson0() {
           <blockquote className="is--center">
             Don't be too hard on yourself.
             Don't take it personal.
-            Noi suntem aici să te ajutăm :)
+            Noi suntem aici să te ajutăm. 😄
           </blockquote>
         </section>
         <section>

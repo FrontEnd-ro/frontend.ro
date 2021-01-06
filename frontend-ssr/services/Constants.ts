@@ -230,4 +230,4 @@ export function getUpcomingLesson(pathname: string): LessonDescription {
   return upcomingLesson || null;
 }
 
-export const GITHUB_URL = 'https://github.com/iampava/frontend.ro';
+export const GITHUB_URL = 'https://github.com/FrontEnd-ro/frontend.ro';

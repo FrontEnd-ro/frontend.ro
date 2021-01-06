@@ -8,7 +8,7 @@ Secondly, for now you can contribute in 3 ways:
 2. Writing HTML lessons
 3. Writing HTML exercises together with their solutions
 
-Regarding the first point have a look over the [issues tab](https://github.com/iampava/frontend.ro/issues) and see if you can find anything there you might one to implement. 
+Regarding the first point have a look over the [issues tab](https://github.com/FrontEnd-ro/frontend.ro/issues) and see if you can find anything there you might one to implement. 
 
 For points 2 & 3 get in touch with us via **social media** or **email** at [hello@frontend.ro](hello@frontend.ro).
 

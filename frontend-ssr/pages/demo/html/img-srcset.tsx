@@ -24,7 +24,7 @@ export default function ContentShifting() {
         <Demo title={title}>
           <p>
             Specificarea mai multor surse posibile pentru imagine
-            și încărcarea celei mai optime pentru ecranul dispozitivului.
+            și încărcarea celei mai potrivite pentru ecranul dispozitivului.
           </p>
           <p>
             {' '}

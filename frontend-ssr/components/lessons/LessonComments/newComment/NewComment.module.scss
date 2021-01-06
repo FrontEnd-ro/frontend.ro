@@ -1,0 +1,17 @@
+.new-comment {
+  form {
+    display: block;
+    max-width: 100%;
+
+    div {
+      margin: 1em 0;
+    }
+
+    textarea {
+      border: 1px solid color(silver);
+      padding: 1em;
+      min-height: 10em;
+      width: 100%;
+    }
+  }
+}

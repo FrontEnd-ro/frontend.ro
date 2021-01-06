@@ -40,26 +40,3 @@
   }
 }
 
-.skeleton {
-  padding: 0.5em 1em;
-  background-color: lighten(color(silver), 10%);
-}
-
-.skeleton__image {
-  width: 1.6em;
-  height: 1.6em;
-  position: relative;
-  padding: 0;
-
-  &:after {
-    content: '';
-    width: 100%;
-    height: 0px;
-    display: block;
-    position: absolute;
-    box-shadow: 0 0 1px 3px lighten(color(grey), 20%);
-    top: 50%;
-    left: 0;
-    animation: skeletonOpacity 2s ease-in-out infinite;
-  }
-}

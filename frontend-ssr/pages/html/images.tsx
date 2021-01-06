@@ -53,7 +53,7 @@ export default function ImagesLesson() {
     <>
       <SEOTags
         title="Imagini | Lecție HTML"
-        description="Învață să adaugi și optimizezi imagini în paginile Web."
+        description="Învață să adaugi și să optimizezi imagini în paginile Web."
         url="https://FrontEnd.ro/html/images"
       />
       <Lesson title="Imagini" chapters={chapters}>
@@ -210,7 +210,7 @@ export default function ImagesLesson() {
             Astfel, browser-ul va ști dimensiunile imaginii înainte de a o descărca
             iar experiența utilizatorilor va fi extrem de fluidă. Astfel evităm
             situația de mai jos unde textul se re-aranjează după încărcarea imaginii
-            - problema cunoscută sub numele de
+            - problemă cunoscută sub numele de
             {' '}
             <strong>content/layout shifting</strong>
             .
@@ -233,7 +233,7 @@ export default function ImagesLesson() {
           <p>
             Mai jos continuăm să discutăm despre diverse tehnici
             pentru a optimiza servirea imaginilor și a oferi cea mai
-            bună experiența posibilă, care la randul ei va mări
+            bună experiență posibilă, care la randul ei va mări
             șansele ca
             {' '}
             <a href="https://web.dev/site-speed-and-business-metrics/" target="_blank" rel="noreferrer">
@@ -438,7 +438,7 @@ export default function ImagesLesson() {
             alt="Diferite surse ale imaginii se încarcă la rezoluții diferite"
           />
           <p>
-            Te incurajăm să experimentezi și cu opțiunea
+            Te încurajăm să experimentezi și cu opțiunea
             {' '}
             <Link href="intro/devtools">
               <a target="_blank">
@@ -458,7 +458,7 @@ export default function ImagesLesson() {
             {'<picture> element'}
           </LessonHeading>
           <p>
-            Dupa cum ai văzut până acum, elementul
+            După cum ai văzut până acum, elementul
             {' '}
             <strong className="formatted">{'<img>'}</strong>
             {' '}
@@ -519,7 +519,7 @@ export default function ImagesLesson() {
             }}
           />
           <p>
-            Deci avem nevoie de o modalitate prin care browsere care ințeleg
+            Deci avem nevoie de o modalitate prin care browsere care înțeleg
             {' '}
             <strong>WebP</strong>
             {' '}
@@ -534,13 +534,13 @@ export default function ImagesLesson() {
             .
           </p>
           <p>
-            Thankfully, această soluție ne este permisă de tagul
+            Thankfully, această soluție ne este permisă de tag-ul
             {' '}
             <strong className="formatted">{'<picture>'}</strong>
             {' '}
             ,
             unde putem specifica mai multe surse pentru o imagine și să lăsăm
-            browserul să o aleagă pe cea pe care o ințelege.
+            browserul să o aleagă pe cea pe care o înțelege.
           </p>
           <Highlight
             className="my-5"
@@ -586,7 +586,7 @@ export default function ImagesLesson() {
           {' '}
           este extrem de importantă căci browserul le va parcurge
           de sus-in-jos și o va alege pe prima compatibilă. De asemenea,
-          la fiecare dintre ele am adăugat - via atributul
+          în fiecare dintre ele trebuie adăugat - via atributul
           {' '}
           <strong>srcset</strong>
           {' '}
@@ -600,8 +600,8 @@ export default function ImagesLesson() {
           <strong className="formatted">{'<img>'}</strong>
           {' '}
           tag. Ei bine, avem nevoie de el pentru
-          a specifica descrierea imaginii - în caz că aceasta nu poate fi incărcată,
-          cât și pentru eventuala adăugare a unor atribute extra - cum ar fi
+          a specifica descrierea imaginii - în caz că aceasta nu poate fi încărcată,
+          cât și pentru eventuala adaugare a unor atribute extra - cum ar fi
           {' '}
           <strong>loading</strong>
           . Iar în cazurile mai rare în care utilizatorii folosesc browsere
@@ -610,11 +610,11 @@ export default function ImagesLesson() {
           <strong className="formatted">{'<picture>'}</strong>
           {' '}
           , acestea vor înțelege
-          totuși tagul
+          totuși tag-ul
           {' '}
           <strong className="formatted">{'<img>'}</strong>
           {' '}
-          și-l vor arăta pe acesta.
+          și îl vor arăta pe acesta.
         </p>
         <div className="dots" />
         <LessonResources

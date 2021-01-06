@@ -104,7 +104,7 @@ export default function ImagesLesson() {
           />
           <p>
             Dacă imaginea se află la acel URL și avem conexiune la internet
-            vom obține o pagina ca în imaginea din stânga. Însă, dacă
+            vom obține o pagină ca în imaginea din stânga. Însă, dacă
             browserul nu a putut încărca imaginea, vom vedea descrierea
             text ca în exemplul din dreapta.
           </p>
@@ -125,8 +125,8 @@ export default function ImagesLesson() {
             {' '}
             <strong>alt</strong>
             .
-            Pe langă cazul menționat mai sus, acesta ajută și persoanele cu dizabilități
-            ce consumă continut Web via screen readere.
+            Pe lângă cazul menționat mai sus, acesta ajută și persoanele cu dizabilități
+            ce consumă conținut Web via screen readere.
             {/* Uite un demo folosind progamul XXX? */}
           </p>
 
@@ -154,7 +154,7 @@ export default function ImagesLesson() {
           </LessonHeading>
           <p>
             De multe ori imaginile de pe site-uri își vor adapta dimensiunea în funcție de
-            ecranul dispozitivul folosit: mai mici pe telefoane și tablete, mai mari
+            ecranul dispozitivului folosit: mai mici pe telefoane și tablete, mai mari
             pe laptop-uri și desktop-uri.
           </p>
           <p>
@@ -164,7 +164,7 @@ export default function ImagesLesson() {
           <LessonFigure
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/fixed-gallery.png"
-            alt="Galerie cu 2 imagini pe fiecare rand"
+            alt="Galerie cu 2 imagini pe fiecare rând"
             demo="/demo/html/fixed-gallery"
           />
           <p>
@@ -208,8 +208,8 @@ export default function ImagesLesson() {
           />
           <p>
             Astfel, browser-ul va ști dimensiunile imaginii înainte de a o descărca
-            iar experienta utilizatorilor va fi extrem de fluidă. Astfel evitam
-            situatia de mai jos unde textul se re-aranjează după încărcarea imaginii
+            iar experiența utilizatorilor va fi extrem de fluidă. Astfel evităm
+            situația de mai jos unde textul se re-aranjează după încărcarea imaginii
             - problema cunoscută sub numele de
             {' '}
             <strong>content/layout shifting</strong>
@@ -258,13 +258,13 @@ export default function ImagesLesson() {
           </blockquote>
           <p>
             Citatul de mai sus a rămas - din păcate - la fel de adevărat...
-            De cate ori nu ai deschis o pagina Web și apoi ai ieșit de acolo fără
+            De câte ori nu ai deschis o pagină Web și apoi ai ieșit de acolo fără
             a citi mai mult de primul paragraf?
           </p>
           <p>
-            In background însă, browser-ul a încărcat toate imaginile,
-            ceea ce e o risipa pentru ca noi nu le-am văzut pe toate.
-            Ideal ar fi sa încărcăm imaginile
+            În background însă, browser-ul a încărcat toate imaginile,
+            ceea ce e o risipă pentru că noi nu le-am văzut pe toate.
+            Ideal ar fi să încărcăm imaginile
             <strong>
               {' '}
               doar atunci când avem nevoie de ele
@@ -277,12 +277,12 @@ export default function ImagesLesson() {
           {/* TODO: video demo */}
           {/* <h1> VIDEO DEMO </h1> */}
           <p>
-            Pentru a rezolva aceasta problema vom
+            Pentru a rezolva această problemă vom
             folosi atributul
             {' '}
             <strong>loading</strong>
             {' '}
-            si valoarea
+            și valoarea
             {' '}
             <strong>lazy</strong>
             .
@@ -304,7 +304,7 @@ export default function ImagesLesson() {
             {' '}
             de ea. Fiecare browser are propriile metrici legate
             de ce înseamnă această apropiere, însă nu trebuie să ne batem
-            capul cu asta. Regula generala e să adăugăm atributul
+            capul cu asta. Regula generală e să adăugăm atributul
             {' '}
             <strong className="formatted">loading="lazy"</strong>
             {' '}
@@ -316,15 +316,15 @@ export default function ImagesLesson() {
             Responsive images
           </LessonHeading>
           <p>
-            Am pornit de la imagini simple, am optimizat experienta folosind
-            atributele width/height iar apoi am reusit sa incarcam doar imaginile
+            Am pornit de la imagini simple, am optimizat experiența folosind
+            atributele width/height iar apoi am reușit să incărcăm doar imaginile
             de care avem nevoie folosind atributul
             {' '}
             <strong className="formatted">
               loading
             </strong>
             . Acum e momentul să mergem un pas mai departe în călătoria spre performanță
-            și să încărcăm imaginea cea mai optimă din punct de vedere al rezoluției.
+            și să încărcăm imaginea cea mai potrivită din punct de vedere al rezoluției.
           </p>
           <p>
             De exemplu, să presupunem că avem o imagine care va acoperi întreaga pagină:
@@ -359,12 +359,12 @@ export default function ImagesLesson() {
             alt="Încărcarea unei imagini mari pe o conexiune înceată"
           />
           <p>
-            Ideal ar fi ca pe telefon să încărcăm exact aceeasi imagine dar la o
-            rezolutie mai mică, pe tabletă la o rezolutie mijlocie și la o rezolutie
-            cat mai inalta pe ecrane mari: desktop and beyond.
+            Ideal ar fi ca pe telefon să încărcăm exact aceeași imagine dar la o
+            rezoluție mai mică, pe tabletă la o rezoluție mijlocie și la o rezoluție
+            cât mai inaltă pe ecrane mari: desktop and beyond.
           </p>
           <p>
-            Din fericire putem rezolva aceasta problema folosindu-ne de atributul
+            Din fericire putem rezolva această problemă folosindu-ne de atributul
             {' '}
             <strong>srcset</strong>
             . Hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
@@ -419,16 +419,16 @@ export default function ImagesLesson() {
             Astfel ne asiguram ca imaginile nu vor iesi din pagina.
           </LessonTip> */}
           <p>
-            Siiii voilà. Daca mergem in
+            Șiiii voilà. Dacă mergem în
             {' '}
             <a href="/intro/devtools">modul responsive</a>
             {' '}
-            - și tinem tabul
+            - și ținem tabul
             {' '}
             <strong>network</strong>
             {' '}
             deschis vom observa cum diferite surse ale imaginii
-            se descărca la rezoluții diferite.
+            se încarcă la rezoluții diferite.
           </p>
           <LessonFigure
             isVideo
@@ -438,7 +438,7 @@ export default function ImagesLesson() {
             alt="Diferite surse ale imaginii se încarcă la rezoluții diferite"
           />
           <p>
-            Te incurajam sa experimentezi si cu optiunea
+            Te incurajăm să experimentezi și cu opțiunea
             {' '}
             <Link href="intro/devtools">
               <a target="_blank">
@@ -446,8 +446,8 @@ export default function ImagesLesson() {
               </a>
             </Link>
             {' '}
-            De exemplu, cu o valoarea
-            de 2 si o latime de 650px se va incarca imaginea
+            De exemplu, cu o valoare
+            de 2 și o lățime de 650px se va incărca imaginea
             {' '}
             <strong>red_bycicle__med.jpg</strong>
             .
@@ -458,12 +458,12 @@ export default function ImagesLesson() {
             {'<picture> element'}
           </LessonHeading>
           <p>
-            Dupa cum ai vazut pana acum, elementul
+            Dupa cum ai văzut până acum, elementul
             {' '}
             <strong className="formatted">{'<img>'}</strong>
             {' '}
-            - desi destul de simplu in utilizare - ne ofera mai multe functionalitati
-            care ne permit sa optimizam imaginile si experienta utilizatorilor.
+            - deși destul de simplu în utilizare - ne oferă mai multe funcționalități
+            care ne permit să optimizăm imaginile și experiența utilizatorilor.
             Cu toate acestea, a mai rămas totuși o ultimă optimizare,
             și anume folosirea unor formate moderne pentru imagini.
           </p>
@@ -479,7 +479,7 @@ export default function ImagesLesson() {
             de ajuns?
           </blockquote>
           <p>
-            Hmmm.... nu chiar. Exista formate mai moderne precum
+            Hmmm.... nu chiar. Există formate mai moderne precum
             {' '}
             <strong>WebP</strong>
             {' '}
@@ -488,21 +488,21 @@ export default function ImagesLesson() {
             <strong>AVIF</strong>
             {' '}
             care
-            ofera aceeasi calitate a imaginii la o dimensiune mai mica.
-            Uite diferentele de dimensiune ale acestei imagini in functie de format:
+            oferă aceeași calitate a imaginii la o dimensiune mai mică.
+            Uite diferențele de dimensiune ale acestei imagini în funcție de format:
           </p>
           <LessonTable {...sizesTable} className="my-5" />
           <p>
-            Dupa cum vezi formatele WebP si AVIF sunt mai mici decat JPG sau PNG,
-            deci imaginile in acest format se vor incarca mai repede decat celelalte.
-            Problema este ca nu toate browserele inteleg aceste noi formate.
+            După cum vezi formatele WebP și AVIF sunt mai mici decât JPG sau PNG,
+            deci imaginile în acest format se vor incărca mai repede decât celelalte.
+            Problema este că nu toate browserele înțeleg aceste noi formate.
           </p>
           <p>
-            Dupa cum vedem pe
+            După cum vedem pe
             {' '}
             <a href="https://CanIUse.com" target="_blank" rel="noreferrer">Can I use...</a>
-            - AVIF are suport doar in ultimele versiuni
-            de Google Chrome in timp ce WebP este mai comun insa tot lipseste din
+            - AVIF are suport doar în ultimele versiuni
+            de Google Chrome în timp ce WebP este mai comun însă tot lipsește din
             IOS 13 sau Internet Explorer 11.
           </p>
           <SideBySidePictures
@@ -519,7 +519,7 @@ export default function ImagesLesson() {
             }}
           />
           <p>
-            Deci avem nevoie de o modalitate prin care browsere care inteleg
+            Deci avem nevoie de o modalitate prin care browsere care ințeleg
             {' '}
             <strong>WebP</strong>
             {' '}
@@ -527,20 +527,20 @@ export default function ImagesLesson() {
             {' '}
             <strong> Avif</strong>
             {' '}
-            sa descarce aceste formate, in timp ce celelalte sa ramana la JPG.
-            Aceasta tehnica se numeste general
+            să descarce aceste formate, în timp ce celelalte să rămână la JPG.
+            Această tehnică se numește general
             {' '}
             <a href="/concepts/graceful-degradation">graceful degradation</a>
             .
           </p>
           <p>
-            Thankfully, aceasta solutie ne este permisa de tagul
+            Thankfully, această soluție ne este permisă de tagul
             {' '}
             <strong className="formatted">{'<picture>'}</strong>
             {' '}
             ,
-            unde putem specifica mai multe surse pentru o imagine si sa lasam
-            browserul sa aleaga pe cea pe care o intelege.
+            unde putem specifica mai multe surse pentru o imagine și să lăsăm
+            browserul să o aleagă pe cea pe care o ințelege.
           </p>
           <Highlight
             className="my-5"
@@ -584,15 +584,15 @@ export default function ImagesLesson() {
           {' '}
           <strong className="formatted">{'<source>'}</strong>
           {' '}
-          este extrem de importanta caci browserul le va parcurge
-          de sus-in-jos si o va alege pe prima compatibila. De asemenea,
-          în fiecare dintre ele adaugat - via atributul
+          este extrem de importantă căci browserul le va parcurge
+          de sus-in-jos și o va alege pe prima compatibilă. De asemenea,
+          la fiecare dintre ele am adăugat - via atributul
           {' '}
           <strong>srcset</strong>
           {' '}
           - mai multe surse de dimensiuni diferite.
-          Astfel browserul nu alege numai formatul cel mai bun, cat si
-          dimensiunea optima a imagini. Best of both worlds! 💪
+          Astfel browserul nu alege numai formatul cel mai bun, cât și
+          dimensiunea optimă a imaginii. Best of both worlds! 💪
         </p>
         <p>
           PS: poate ai observat acel ultim
@@ -600,8 +600,8 @@ export default function ImagesLesson() {
           <strong className="formatted">{'<img>'}</strong>
           {' '}
           tag. Ei bine, avem nevoie de el pentru
-          a specifica descrierea imaginii - in caz ca aceasta nu poate fi incarcata,
-          cat si pentru eventuala adaugare a unor atribute extra - cum ar fi
+          a specifica descrierea imaginii - în caz că aceasta nu poate fi incărcată,
+          cât și pentru eventuala adăugare a unor atribute extra - cum ar fi
           {' '}
           <strong>loading</strong>
           . Iar în cazurile mai rare în care utilizatorii folosesc browsere

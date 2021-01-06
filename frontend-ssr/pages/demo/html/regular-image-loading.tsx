@@ -1,13 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-import Highlight from '~/components/Highlight/Highlight';
-import { LessonTip } from '~/components/lessons';
 
 export default function RegularLoadingImages() {
   const title = 'Modul obisnuit in care browserele incarca imaginile';
@@ -66,17 +62,17 @@ export default function RegularLoadingImages() {
             {' '}
             <a href="/intro/devtools" target="_blank" rel="noreferrer">panoul Network</a>
             {' '}
-            din DevTools si apoi refreshuieste
+            din DevTools și apoi refreshuiește
             pagina.
 
-            Toate imaginile sunt incarcate inca de la inceput, spre deosebire de
+            Toate imaginile sunt încărcate încă de la început, spre deosebire de
             {' '}
             <a href="/demo/html/lazy-image-loading" target="_blank" rel="noreferrer">
               acest demo
             </a>
             {' '}
-            unde browserul incarca imaginile doar
-            cand ne apropiem de ele.
+            unde browserul încarcă imaginile doar
+            când ne apropiem de ele.
           </p>
           <DemoPreview>
             <div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 
 import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';

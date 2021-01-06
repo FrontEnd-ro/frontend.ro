@@ -1,12 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-import Highlight from '~/components/Highlight/Highlight';
 import { LessonTip } from '~/components/lessons';
 
 export default function LazyLoadingImages() {
@@ -66,20 +64,20 @@ export default function LazyLoadingImages() {
             {' '}
             <a href="/intro/devtools" target="_blank" rel="noreferrer">panoul Network</a>
             {' '}
-            din DevTools si apoi refreshuieste
+            din DevTools și apoi refreshuiește
             pagina.
 
-            Imaginile sunt incarcate doar cand ne apropiem de ele, spre deosebire de
+            Imaginile sunt încărcate doar când ne apropiem de ele, spre deosebire de
             {' '}
             <a href="/demo/html/regular-image-loading" target="_blank" rel="noreferrer">
               acest demo
             </a>
             {' '}
-            unde browserul le incarca pe toate de la inceput.
+            unde browserul le încarcă pe toate de la început.
           </p>
           <p>
             {' '}
-            Aceasta tehnica se numeste
+            Această tehnică se numește
             <strong>Lazy Loading</strong>
           </p>
           <DemoPreview>
@@ -90,7 +88,7 @@ export default function LazyLoadingImages() {
 
             </div>
           </DemoPreview>
-          {/* 
+          {/*
           TODO: add
           <Highlight
             className="my-5"

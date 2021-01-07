@@ -21,7 +21,11 @@ This project wouldn't be possible without our awesome contributors. Thank you >:
         <td align="center">
             <a href="https://github.com/SirCQQ"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/assets/contributors/cristiangatu.jpg" width="120px;" alt="Cristian Gațu"/><br /><sub><b>Cristian Gațu</b></sub></a></td>
         <td align="center">
-            <a href="https://github.com/andreeatoma"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/assets/contributors/andreeatoma.jpg" width="120px;" alt="Diana Toma"/><br /><sub><b>Diana Toma</b></sub></a></td></tr></table>
+            <a href="https://github.com/andreeatoma"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/assets/contributors/andreeatoma.jpg" width="120px;" alt="Diana Toma"/><br /><sub><b>Diana Toma</b></sub></a></td>
+    </tr>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/juppsy"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/assets/contributors/juppsy.jpg" width="120px;" alt="Sebastian Latkolic"/><br /><sub><b>Sebastian Latkolic</b></sub></a></td></tr></table>
 
 <br />
 

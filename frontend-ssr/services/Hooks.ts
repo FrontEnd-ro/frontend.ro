@@ -49,7 +49,7 @@ function useClipboard(ref: MutableRefObject<HTMLElement>, onCopy: () => void = n
 function withClientMonitoring() {
   useEffect(() => {
     // eslint-disable-next-line no-restricted-globals
-    if (location.host.includes('localhost')) {
+    if (!location.host.includes('frontend.ro')) {
       return;
     }
     ClientMonitoring.log(LogEventType.ROUTE);

@@ -57,9 +57,9 @@ export const LESSONS: LessonDescription[] = [
   },
   {
     written: false,
-    title: 'Structura de bază a oricarei aplicații web',
+    title: 'Structura de bază a oricărei aplicații web',
     description:
-      'Indiferent ce tip de aplicație creezi, toate au aceeasi structură generală despre care vom vorbi aici.',
+      'Indiferent ce tip de aplicație creezi, toate au aceeași structură generală despre care vom vorbi aici.',
     url: '/html/base-structure',
     type: 'html',
   },
@@ -90,7 +90,7 @@ export const LESSONS: LessonDescription[] = [
     written: false,
     title: 'Containere',
     description:
-      'Am parcurs câteva elemente de baza, dar nu am vorbim despre cum le organizăm pentru a crea layout-uri mai complexe.',
+      'Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru a crea layout-uri mai complexe.',
     url: '/html/containers',
     type: 'html',
   },
@@ -98,7 +98,7 @@ export const LESSONS: LessonDescription[] = [
     written: true,
     title: 'Imagini',
     description:
-      'Fara imagini web-ul ar fi mult mai plicticos, deci hai să vedem cum le putem adaugă și care sunt cele mai bune practici legate de acestea.',
+      'Fără imagini web-ul ar fi mult mai plicticos, deci hai să vedem cum le putem adăuga și care sunt cele mai bune practici legate de acestea.',
     contributors: [Pava],
     cover: '/images/lessons/images__cover.svg',
     url: '/html/images',

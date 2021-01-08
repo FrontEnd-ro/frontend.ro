@@ -13,7 +13,7 @@ This project has a dual-licence split between the source code of the UI componen
 
 The source code of the UI components is licensed under [MIT](https://github.com/FrontEnd-ro/frontend.ro/blob/master/LICENSE).
 
-The curriculum belongs to our contributors and is licensed under [Attribution-ShareAlike 4.0 International](https://github.com/FrontEnd-ro/frontend.ro/tree/master/curriculum/LICENSE). You're free to use it if you're teaching these topics as long as you provide attribution to the writer/owner.
+The curriculum belongs to our contributors and is licensed under [Attribution-ShareAlike 4.0 International](https://github.com/FrontEnd-ro/frontend.ro/blob/master/frontend-ssr/curriculum/LICENSE.md). You're free to use it if you're teaching these topics as long as you provide attribution to the writer/owner.
 
 ### Contributors
 

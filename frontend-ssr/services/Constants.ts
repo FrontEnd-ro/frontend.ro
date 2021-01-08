@@ -17,7 +17,7 @@ export const LESSONS: LessonDescription[] = [
     written: true,
     title: 'Despre noi',
     description: 'Ce ne face diferiți și de ce ai vrea să înveți alături de noi.',
-    url: '/intro/lesson-0',
+    url: '/intro/about',
     type: 'intro',
     contributors: [Pava],
     cover: '/images/lessons/lesson-0__cover.svg',

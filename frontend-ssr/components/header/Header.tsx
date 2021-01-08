@@ -6,11 +6,12 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import styles from './Header.module.scss';
 
 interface Props {
+  href?: string
   demoPage?: boolean
   onMenuClick?: () => void
 }
 
-export default function Header({ demoPage, onMenuClick } : Props) {
+export default function Header({ href = '/', demoPage, onMenuClick } : Props) {
   return (
     <header className={styles.header}>
       <div className="d-flex align-items-center h-100">
@@ -19,7 +20,7 @@ export default function Header({ demoPage, onMenuClick } : Props) {
           <FontAwesomeIcon icon={faBars} />
         </button>
         ) }
-        <Link href="/">
+        <Link href={href}>
           <a className={styles.logo}>
             <img src="/logo.png" alt="FrontEnd.ro logo" />
           </a>

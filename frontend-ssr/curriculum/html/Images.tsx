@@ -53,6 +53,7 @@ export default function ImagesLesson() {
     <>
       <SEOTags
         title="Imagini | Lecție HTML"
+        shareImage="https://frontend.ro/seo/html-images.jpg"
         description="Învață să adaugi și să optimizezi imagini în paginile Web."
         url="https://FrontEnd.ro/html/images"
       />

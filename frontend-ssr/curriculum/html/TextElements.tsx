@@ -27,6 +27,7 @@ export default function TextsLesson() {
     <>
       <SEOTags
         title="Texte | Lecție HTML"
+        shareImage="https://frontend.ro/seo/html-text-elements.jpg"
         description="Avem la dispoziție mai multe elemente când vine vorba de texte, iar aici învățăm când și cum să le folosim."
         url="https://FrontEnd.ro/html/text-elements"
       />

@@ -35,8 +35,9 @@ export default function Lesson0() {
     <>
       <SEOTags
         title="Introducere | FrontEnd.ro"
+        shareImage="https://frontend.ro/seo/intro-about.jpg"
         description="Detalii despre noi, despre platformă și cum vom lucra împreună."
-        url="https://FrontEnd.ro/intro/lesson-0"
+        url="https://FrontEnd.ro/intro/about"
       />
       <Lesson title="Introducere" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />

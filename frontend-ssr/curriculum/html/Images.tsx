@@ -1,6 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import Link from 'next/link';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
@@ -16,7 +14,7 @@ import Lesson, {
 import { Pava } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
-import AudioPlayer from '~/components/AudioPlayer';
+import coverSvg from '~/public/images/lessons/images__cover.svg';
 
 const contributors = [Pava];
 const chapters = [
@@ -25,6 +23,7 @@ const chapters = [
   { title: 'Lazy loading', id: 'lazy-loading' },
   { title: 'Responsive images', id: 'responsive-images' },
   { title: '<picture> element', id: 'picture-element' },
+  { title: 'Exerciții', id: 'exercises' },
 ];
 
 const sizesTable: LessonTableProps = {
@@ -52,19 +51,20 @@ const sizesTable: LessonTableProps = {
 export default function ImagesLesson() {
   return (
     <>
-      <Head>
-        <title> Introducere | FrontEnd.ro</title>
-        <link rel="icon" href="/favicon.ico" />
-        <SEOTags
-          title="Imagini | Lecție HTML"
-          description="Învață să adaugi și optimizezi imagini în paginile Web."
-          url="https://FrontEnd.ro/html/images"
-        />
-      </Head>
+      <SEOTags
+        title="Imagini | Lecție HTML"
+        shareImage="https://frontend.ro/seo/html-images.jpg"
+        description="Învață să adaugi și să optimizezi imagini în paginile Web."
+        url="https://FrontEnd.ro/html/images"
+      />
       <Lesson title="Imagini" chapters={chapters}>
-        <LessonContributors contributors={contributors} />
+        <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
-          <CoverSVG />
+          {/* eslint-disable-next-line react/no-danger */}
+          <div dangerouslySetInnerHTML={{
+            __html: coverSvg,
+          }}
+          />
         </LessonCover>
         <p>
           Cred că putem cu toții admite că un Internet fără imagini ar
@@ -105,7 +105,7 @@ export default function ImagesLesson() {
           />
           <p>
             Dacă imaginea se află la acel URL și avem conexiune la internet
-            vom obține o pagina ca în imaginea din stânga. Însă, dacă
+            vom obține o pagină ca în imaginea din stânga. Însă, dacă
             browserul nu a putut încărca imaginea, vom vedea descrierea
             text ca în exemplul din dreapta.
           </p>
@@ -126,8 +126,8 @@ export default function ImagesLesson() {
             {' '}
             <strong>alt</strong>
             .
-            Pe langă cazul menționat mai sus, acesta ajută și persoanele cu dizabilități
-            ce consumă continut Web via screen readere.
+            Pe lângă cazul menționat mai sus, acesta ajută și persoanele cu dizabilități
+            ce consumă conținut Web via screen readere.
             {/* Uite un demo folosind progamul XXX? */}
           </p>
 
@@ -155,7 +155,7 @@ export default function ImagesLesson() {
           </LessonHeading>
           <p>
             De multe ori imaginile de pe site-uri își vor adapta dimensiunea în funcție de
-            ecranul dispozitivul folosit: mai mici pe telefoane și tablete, mai mari
+            ecranul dispozitivului folosit: mai mici pe telefoane și tablete, mai mari
             pe laptop-uri și desktop-uri.
           </p>
           <p>
@@ -165,7 +165,7 @@ export default function ImagesLesson() {
           <LessonFigure
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/fixed-gallery.png"
-            alt="Galerie cu 2 imagini pe fiecare rand"
+            alt="Galerie cu 2 imagini pe fiecare rând"
             demo="/demo/html/fixed-gallery"
           />
           <p>
@@ -184,7 +184,11 @@ export default function ImagesLesson() {
             demo="/demo/html/fixed-size-image"
           />
           <p>
-            În astfel de cazuri, în care știm dinainte dimensiunea, este recomandat
+            În astfel de cazuri, în care
+            {' '}
+            <strong>știm dinainte dimensiunea</strong>
+            {' '}
+            , este recomandat
             să adăugam și atributele
             <strong> width </strong>
             și
@@ -205,9 +209,9 @@ export default function ImagesLesson() {
           />
           <p>
             Astfel, browser-ul va ști dimensiunile imaginii înainte de a o descărca
-            iar experienta utilizatorilor va fi extrem de fluidă. Spre deosebire
-            de situația de mai jos unde textul se re-aranjează după încărcarea imaginii
-            - problema cunoscută sub numele de
+            iar experiența utilizatorilor va fi extrem de fluidă. Astfel evităm
+            situația de mai jos unde textul se re-aranjează după încărcarea imaginii
+            - problemă cunoscută sub numele de
             {' '}
             <strong>content/layout shifting</strong>
             .
@@ -230,7 +234,7 @@ export default function ImagesLesson() {
           <p>
             Mai jos continuăm să discutăm despre diverse tehnici
             pentru a optimiza servirea imaginilor și a oferi cea mai
-            bună experiența posibilă, care la randul ei va mări
+            bună experiență posibilă, care la randul ei va mări
             șansele ca
             {' '}
             <a href="https://web.dev/site-speed-and-business-metrics/" target="_blank" rel="noreferrer">
@@ -255,13 +259,13 @@ export default function ImagesLesson() {
           </blockquote>
           <p>
             Citatul de mai sus a rămas - din păcate - la fel de adevărat...
-            De cate ori nu ai deschis un articol și apoi ai ieșit de pe pagină fără
+            De câte ori nu ai deschis o pagină Web și apoi ai ieșit de acolo fără
             a citi mai mult de primul paragraf?
           </p>
           <p>
-            In background însă, browser-ul a încărcat toate imaginile,
-            ceea ce e o risipa pentru ca noi nu le-am văzut pe toate.
-            Ideal ar fi sa încărcăm imaginile
+            În background însă, browser-ul a încărcat toate imaginile,
+            ceea ce e o risipă pentru că noi nu le-am văzut pe toate.
+            Ideal ar fi să încărcăm imaginile
             <strong>
               {' '}
               doar atunci când avem nevoie de ele
@@ -274,12 +278,12 @@ export default function ImagesLesson() {
           {/* TODO: video demo */}
           {/* <h1> VIDEO DEMO </h1> */}
           <p>
-            Pentru a rezolva aceasta problema vom
+            Pentru a rezolva această problemă vom
             folosi atributul
             {' '}
             <strong>loading</strong>
             {' '}
-            si valoarea
+            și valoarea
             {' '}
             <strong>lazy</strong>
             .
@@ -301,9 +305,9 @@ export default function ImagesLesson() {
             {' '}
             de ea. Fiecare browser are propriile metrici legate
             de ce înseamnă această apropiere, însă nu trebuie să ne batem
-            capul cu asta. Regula generala e să adăugăm atributul
+            capul cu asta. Regula generală e să adăugăm atributul
             {' '}
-            <span className="formatted">loading="lazy"</span>
+            <strong className="formatted">loading="lazy"</strong>
             {' '}
             dacă avem multe imagini în pagină.
           </p>
@@ -313,15 +317,15 @@ export default function ImagesLesson() {
             Responsive images
           </LessonHeading>
           <p>
-            Am pornit de la imagini simple, am optimizat experienta folosind
-            atributele width/height iar apoi am reusit sa incarcam doar imaginile
+            Am pornit de la imagini simple, am optimizat experiența folosind
+            atributele width/height iar apoi am reușit să incărcăm doar imaginile
             de care avem nevoie folosind atributul
             {' '}
-            <span className="formatted">
+            <strong className="formatted">
               loading
-            </span>
+            </strong>
             . Acum e momentul să mergem un pas mai departe în călătoria spre performanță
-            și să încărcăm imaginea cea mai optimă din punct de vedere al rezoluției.
+            și să încărcăm imaginea cea mai potrivită din punct de vedere al rezoluției.
           </p>
           <p>
             De exemplu, să presupunem că avem o imagine care va acoperi întreaga pagină:
@@ -342,7 +346,7 @@ export default function ImagesLesson() {
             {/* Pentru imaginea folosita ca demo in acest capitol inseamna o dimensiune de xMB. */}
           </p>
           <p>
-            Deși soluția ar funcționa, ea nu e deloc eficientă căci vom încărca
+            Deși soluția ar funcționa, ea nu e deloc eficientă, căci vom încărca
             mereu aceeași imagine de rezoluție înaltă și mulți MBs.
             Pe telefon de exemplu, unde ecranul e mai mic, nu avem nevoie
             de toți cei 8+ milioane de pixeli (3840 x 2160).
@@ -356,15 +360,15 @@ export default function ImagesLesson() {
             alt="Încărcarea unei imagini mari pe o conexiune înceată"
           />
           <p>
-            Ideal ar fi ca pe telefon să încărcăm exact aceeasi imagine dar la o
-            rezolutie mai mică, pe tabletă la o rezolutie mijlocie și la o rezolutie
-            cat mai inalta pe ecrane mari: desktop and beyond.
+            Ideal ar fi ca pe telefon să încărcăm exact aceeași imagine dar la o
+            rezoluție mai mică, pe tabletă la o rezoluție mijlocie și la o rezoluție
+            cât mai inaltă pe ecrane mari: desktop and beyond.
           </p>
           <p>
-            Din fericire putem rezolva aceasta problema folosindu-ne de atributul
+            Din fericire putem rezolva această problemă folosindu-ne de atributul
             {' '}
             <strong>srcset</strong>
-            . Mai întâi hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
+            . Hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
           </p>
           <LessonFigure
             withBorder
@@ -397,7 +401,6 @@ export default function ImagesLesson() {
     /red_bycicle__med.jpg 2000w,
     /red_bycicle__low.jpg 800w,
   " 
-  style="max-width: 100%" 
   alt="Red bycicle wheel" 
 />`}
           />
@@ -417,16 +420,16 @@ export default function ImagesLesson() {
             Astfel ne asiguram ca imaginile nu vor iesi din pagina.
           </LessonTip> */}
           <p>
-            Siiii voilà. Daca mergem in
+            Șiiii voilà. Dacă mergem în
             {' '}
             <a href="/intro/devtools">modul responsive</a>
             {' '}
-            - și tinem tabul
+            - și ținem tabul
             {' '}
             <strong>network</strong>
             {' '}
             deschis vom observa cum diferite surse ale imaginii
-            se descărca la rezoluții diferite.
+            se încarcă la rezoluții diferite.
           </p>
           <LessonFigure
             isVideo
@@ -436,7 +439,7 @@ export default function ImagesLesson() {
             alt="Diferite surse ale imaginii se încarcă la rezoluții diferite"
           />
           <p>
-            Te incurajam sa experimentezi si cu optiunea
+            Te încurajăm să experimentezi și cu opțiunea
             {' '}
             <Link href="intro/devtools">
               <a target="_blank">
@@ -444,8 +447,8 @@ export default function ImagesLesson() {
               </a>
             </Link>
             {' '}
-            De exemplu, cu o valoarea
-            de 2 si o latime de 650px se va incarca imaginea
+            De exemplu, cu o valoare
+            de 2 și o lățime de 650px se va incărca imaginea
             {' '}
             <strong>red_bycicle__med.jpg</strong>
             .
@@ -456,17 +459,17 @@ export default function ImagesLesson() {
             {'<picture> element'}
           </LessonHeading>
           <p>
-            Dupa cum ai vazut pana acum, elementul
+            După cum ai văzut până acum, elementul
             {' '}
-            <span className="formatted">{'<img>'}</span>
+            <strong className="formatted">{'<img>'}</strong>
             {' '}
-            - desi destul de simplu in utilizare - ne ofera mai multe functionalitati
-            care ne permit sa optimizam imaginile si experienta utilizatorilor.
-            Cu toate acestea, mai avem o posibila optimizare
-            - folosirea unor formate moderne pentru imagini.
+            - deși destul de simplu în utilizare - ne oferă mai multe funcționalități
+            care ne permit să optimizăm imaginile și experiența utilizatorilor.
+            Cu toate acestea, a mai rămas totuși o ultimă optimizare,
+            și anume folosirea unor formate moderne pentru imagini.
           </p>
           <blockquote>
-            De ce am vrea alte formate? Nu e
+            De ce am vrea alte formate? Nu sunt
             {' '}
             <strong>JPG</strong>
             {' '}
@@ -477,23 +480,31 @@ export default function ImagesLesson() {
             de ajuns?
           </blockquote>
           <p>
-            Hmmm.... nu chiar. Exista formate mai moderne precum WebP sau AVIF care
-            ofera aceeasi calitate a imaginii la o dimensiune mai mica.
-            De exemplu, uite diferentele de dimensiune ale acestei imagini in functie de format:
+            Hmmm.... nu chiar. Există formate mai moderne precum
+            {' '}
+            <strong>WebP</strong>
+            {' '}
+            sau
+            {' '}
+            <strong>AVIF</strong>
+            {' '}
+            care
+            oferă aceeași calitate a imaginii la o dimensiune mai mică.
+            Uite diferențele de dimensiune ale acestei imagini în funcție de format:
           </p>
           <LessonTable {...sizesTable} className="my-5" />
           <p>
-            Dupa cum vezi formatele WebP si AVIF sunt mai mici decat JPG sau PNG,
-            deci imaginile in acest format se vor incarca mai repede decat celelalte.
-            Problema este ca nu toate browserele inteleg aceste noi formate.
+            După cum vezi formatele WebP și AVIF sunt mai mici decât JPG sau PNG,
+            deci imaginile în acest format se vor incărca mai repede decât celelalte.
+            Problema este că nu toate browserele înțeleg aceste noi formate.
           </p>
           <p>
-            Dupa cum vedem pe
+            După cum vedem pe
             {' '}
             <a href="https://CanIUse.com" target="_blank" rel="noreferrer">Can I use...</a>
-            - AVIF are suport doar in ultimele versiuni
-            de Google Chrome in timp ce WebP este mai comun insa tot lipseste din
-            IOS 13 sau internet explorer 11.
+            - AVIF are suport doar în ultimele versiuni
+            de Google Chrome în timp ce WebP este mai comun însă tot lipsește din
+            IOS 13 sau Internet Explorer 11.
           </p>
           <SideBySidePictures
             direction="column"
@@ -509,23 +520,28 @@ export default function ImagesLesson() {
             }}
           />
           <p>
-            Deci avem nevoie de o modalitate prin care browsere care inteleg
+            Deci avem nevoie de o modalitate prin care browsere care înțeleg
+            {' '}
             <strong>WebP</strong>
             {' '}
             sau
+            {' '}
             <strong> Avif</strong>
-            sa descarce aceste formate, in timp ce celelalte sa ramana la JPG.
-            Aceasta tehnica se numeste general
+            {' '}
+            să descarce aceste formate, în timp ce celelalte să rămână la JPG.
+            Această tehnică se numește general
             {' '}
             <a href="/concepts/graceful-degradation">graceful degradation</a>
             .
           </p>
           <p>
-            Thankfully, aceasta solutie ne este permisa de tagul
-            <span className="formatted">{'<picture>'}</span>
+            Thankfully, această soluție ne este permisă de tag-ul
+            {' '}
+            <strong className="formatted">{'<picture>'}</strong>
+            {' '}
             ,
-            unde putem specifica mai multe surse pentru o imagine si sa lasam
-            browserul sa aleaga pe cea pe care o intelege.
+            unde putem specifica mai multe surse pentru o imagine și să lăsăm
+            browserul să o aleagă pe cea pe care o înțelege.
           </p>
           <Highlight
             className="my-5"
@@ -533,253 +549,97 @@ export default function ImagesLesson() {
             code={`
 <picture>
   <source 
-    srcset="red_bycicle__high.avif 4000w, red_bycicle__med.avif 2000w, red_bycicle__low.avif 800w"
+    srcset="
+      red_bycicle__high.avif 4000w, 
+      red_bycicle__med.avif 2000w, 
+      red_bycicle__low.avif 800w" 
     type="image/avif">
-  
+
   <source 
-    srcset="red_bycicle__high.webp 4000w, red_bycicle__med.webp 2000w, red_bycicle__low.webp 800w"
+    srcset="
+      red_bycicle__high.webp 4000w, 
+      red_bycicle__med.webp 2000w, 
+      red_bycicle__low.webp 800w"
     type="image/webp">
-  
+
   <source 
-    srcset="red_bycicle__high.jpg 4000w, red_bycicle__med.jpg 2000w, red_bycicle__low.jpg 800w" 
+    srcset="
+      red_bycicle__high.jpg 4000w, 
+      red_bycicle__med.jpg 2000w, 
+      red_bycicle__low.jpg 800w" 
     type="image/jpeg">
-  
+
   <img 
-    alt="Red bycicle wheel" 
-    srcset="red_bycicle__high.jpg 4000w, red_bycicle__med.jpg 2000w, red_bycicle__low.jpg 800w">
+    alt="Red bycicle wheel"
+    loading="lazy"
+    srcset="
+      red_bycicle__high.jpg 4000w, 
+      red_bycicle__med.jpg 2000w, 
+      red_bycicle__low.jpg 800w
+    ">
 </picture>`}
           />
         </section>
         <p>
           Ordinea elementelor
           {' '}
-          <span className="formatted">{'<source>'}</span>
+          <strong className="formatted">{'<source>'}</strong>
           {' '}
-          este extrem de importanta caci browserul le va parcurge
-          de sus-in-jos si o va alege pe prima compatibila.
+          este extrem de importantă căci browserul le va parcurge
+          de sus-in-jos și o va alege pe prima compatibilă. De asemenea,
+          în fiecare dintre ele trebuie adăugat - via atributul
+          {' '}
+          <strong>srcset</strong>
+          {' '}
+          - mai multe surse de dimensiuni diferite.
+          Astfel browserul nu alege numai formatul cel mai bun, cât și
+          dimensiunea optimă a imaginii. Best of both worlds! 💪
+        </p>
+        <p>
+          PS: poate ai observat acel ultim
+          {' '}
+          <strong className="formatted">{'<img>'}</strong>
+          {' '}
+          tag. Ei bine, avem nevoie de el pentru
+          a specifica descrierea imaginii - în caz că aceasta nu poate fi încărcată,
+          cât și pentru eventuala adaugare a unor atribute extra - cum ar fi
+          {' '}
+          <strong>loading</strong>
+          . Iar în cazurile mai rare în care utilizatorii folosesc browsere
+          destul de vechi, ce nu înțeleg elementul
+          {' '}
+          <strong className="formatted">{'<picture>'}</strong>
+          {' '}
+          , acestea vor înțelege
+          totuși tag-ul
+          {' '}
+          <strong className="formatted">{'<img>'}</strong>
+          {' '}
+          și îl vor arăta pe acesta.
         </p>
         <div className="dots" />
         <LessonResources
           className="my-5"
           links={[{
-            text: 'Todo',
-            url: 'https://google.com',
+            text: 'Documentația completă a elementului <img> pe MDN',
+            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img',
           }, {
-            text: 'Todo',
-            url: 'https://linkedin.com',
-          }]}
+            text: 'Documentația completă a elementului <picture> pe MDN',
+            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
+          }, {
+            text: 'Mai multe detalii despre imagini Responsive',
+            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
+          },
+          ]}
         />
+        <section>
+          <LessonHeading as="h3" id="exercises">
+            Exerciții
+          </LessonHeading>
+          <p className="text-bold text-center"> În curând!</p>
+          <br />
+        </section>
       </Lesson>
     </>
-  );
-}
-
-function CoverSVG() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      data-name="Layer 1"
-      viewBox="0 0 922.73 636.56"
-      width="922.73"
-      height="636.56"
-      preserveAspectRatio="xMinYMax slice"
-    >
-      <defs>
-        <linearGradient
-          id="a"
-          x1="704.04"
-          x2="704.04"
-          y1="628.14"
-          y2="138.69"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0.01" stopColor="gray" stopOpacity="0.25" />
-          <stop offset="0.54" stopColor="gray" stopOpacity="0.12" />
-          <stop offset="1" stopColor="gray" stopOpacity="0.1" />
-        </linearGradient>
-        <linearGradient
-          id="b"
-          x1="560.05"
-          x2="560.05"
-          y1="462.46"
-          y2="29.48"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="d"
-          x1="600"
-          x2="600"
-          y1="694.72"
-          y2="205.28"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="e"
-          x1="456.01"
-          x2="456.01"
-          y1="529.04"
-          y2="96.07"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="g"
-          x1="495.96"
-          x2="495.96"
-          y1="761.31"
-          y2="271.86"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="h"
-          x1="351.97"
-          x2="351.97"
-          y1="595.63"
-          y2="162.65"
-          xlinkHref="#a"
-        />
-        <clipPath id="c" transform="translate(-144.57 -138.69)">
-          <rect
-            width="617.65"
-            height="410.82"
-            x="395.46"
-            y="178.13"
-            fill="#fff"
-            rx="8.85"
-            ry="8.85"
-          />
-        </clipPath>
-        <clipPath id="f" transform="translate(-144.57 -138.69)">
-          <rect
-            width="617.65"
-            height="410.82"
-            x="291.42"
-            y="244.72"
-            fill="#fff"
-            rx="8.85"
-            ry="8.85"
-          />
-        </clipPath>
-        <clipPath id="i" transform="translate(-144.57 -138.69)">
-          <rect
-            width="617.65"
-            height="410.82"
-            x="187.38"
-            y="311.3"
-            fill="#fff"
-            rx="8.85"
-            ry="8.85"
-          />
-        </clipPath>
-      </defs>
-      <path
-        fill="url(#a)"
-        d="M1055 612.72a15.34 15.34 0 01-15.26 15.42h-671.4a15.34 15.34 0 01-15.26-15.42V154.11a15.34 15.34 0 0115.26-15.42h671.4a15.34 15.34 0 0115.26 15.42"
-        transform="translate(-144.57 -138.69)"
-      />
-      <path
-        fill="#f8f8f8"
-        d="M902.54 466.52a14.91 14.91 0 01-14.91 14.91H231.8a14.91 14.91 0 01-14.91-14.91V23.19A14.91 14.91 0 01231.8 8.31h655.83a14.91 14.91 0 0114.91 14.91"
-      />
-      <rect
-        width="633.92"
-        height="432.98"
-        x="243.09"
-        y="29.48"
-        fill="url(#b)"
-        data-name="&lt;Rectangle&gt;"
-        rx="8.85"
-        ry="8.85"
-      />
-      <rect
-        width="617.65"
-        height="410.82"
-        x="250.89"
-        y="39.44"
-        fill="#fff"
-        rx="8.85"
-        ry="8.85"
-      />
-      <g clipPath="url(#c)">
-        <path
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#2980b9"
-          d="M216.54 446.49L388.98 248.9a34.33 34.33 0 0148.57-3.17l48.29 42.58a34.33 34.33 0 0044.8.54l147.58-124.03a34.33 34.33 0 0147.49 3.19l181.11 199.3a34.33 34.33 0 018.78 20l7 78.63a34.33 34.33 0 01-34.17 37.45h-646a34.33 34.33 0 01-34.31-33.29 34.33 34.33 0 018.42-23.61z"
-        />
-      </g>
-      <circle cx="325.27" cy="105.32" r="38.25" fill="#eb4d4b" />
-      <path
-        fill="url(#d)"
-        d="M951 679.3a15.34 15.34 0 01-15.26 15.42H264.3A15.34 15.34 0 01249 679.3V220.7a15.34 15.34 0 0115.26-15.42H935.7A15.34 15.34 0 01951 220.7"
-        transform="translate(-144.57 -138.69)"
-      />
-      <path
-        fill="#f8f8f8"
-        d="M798.5 533.11a14.91 14.91 0 01-14.91 14.91H127.76a14.91 14.91 0 01-14.91-14.91V89.77a14.91 14.91 0 0114.91-14.91h655.83a14.91 14.91 0 0114.91 14.91"
-      />
-      <rect
-        width="633.92"
-        height="432.98"
-        x="139.05"
-        y="96.07"
-        fill="url(#e)"
-        data-name="&lt;Rectangle&gt;"
-        rx="8.85"
-        ry="8.85"
-      />
-      <rect
-        width="617.65"
-        height="410.82"
-        x="146.85"
-        y="106.03"
-        fill="#fff"
-        rx="8.85"
-        ry="8.85"
-      />
-      <g clipPath="url(#f)">
-        <path
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#2980b9"
-          d="M112.5 513.08l172.44-197.6a34.33 34.33 0 0148.58-3.17l48.28 42.6a34.33 34.33 0 0044.8.54L574.18 231.4a34.33 34.33 0 0147.49 3.19l181.1 199.34a34.33 34.33 0 018.78 20l7 78.63a34.33 34.33 0 01-34.19 37.36h-646a34.33 34.33 0 01-34.31-33.29 34.33 34.33 0 018.45-23.55z"
-        />
-      </g>
-      <circle cx="221.23" cy="171.9" r="38.25" fill="#eb4d4b" />
-      <path
-        fill="url(#g)"
-        d="M846.92 745.89a15.34 15.34 0 01-15.26 15.42h-671.4A15.34 15.34 0 01145 745.89V287.28a15.34 15.34 0 0115.26-15.42h671.4a15.34 15.34 0 0115.26 15.42"
-        transform="translate(-144.57 -138.69)"
-      />
-      <path
-        fill="#fff"
-        d="M694.43 599.69a14.91 14.91 0 01-14.91 14.91H23.72a14.91 14.91 0 01-14.91-14.91V156.31a14.91 14.91 0 0114.91-14.91h655.83a14.91 14.91 0 0114.88 14.91"
-      />
-      <rect
-        width="633.92"
-        height="432.98"
-        x="35.01"
-        y="162.65"
-        fill="url(#h)"
-        data-name="&lt;Rectangle&gt;"
-        rx="8.85"
-        ry="8.85"
-      />
-      <rect
-        width="617.65"
-        height="410.82"
-        x="42.81"
-        y="172.61"
-        fill="#fff"
-        rx="8.85"
-        ry="8.85"
-      />
-      <g clipPath="url(#i)">
-        <path
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#2980b9"
-          d="M8.43 579.66l172.48-197.59a34.33 34.33 0 0148.52-3.17l48.28 42.6a34.33 34.33 0 0044.8.54l147.63-124.05a34.33 34.33 0 0147.49 3.19l181.1 199.34a34.33 34.33 0 018.78 20l7 78.63a34.33 34.33 0 01-34.19 37.36h-646a34.33 34.33 0 01-34.31-33.2 34.33 34.33 0 018.42-23.65z"
-        />
-      </g>
-      <circle cx="117.19" cy="238.49" r="38.25" fill="#eb4d4b" />
-    </svg>
   );
 }

@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.markdown {
+  padding: 1em;
+  position: relative;
+  font-family: sans-serif;
+  border: 1px solid color(silver);
+  background-color: color(darker-white);
+
+  &.is--transparent {
+    border: 0;
+    background-color: transparent;
+  }
+
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0 0.5em;
+    border-radius: 3px;
+    line-height: 1.25em;
+    margin: 0 0.2em;
+    text-align: center;
+    background-color: lighten(color(silver), 20%);
+    border: 1px solid color(silver);
+    display: inline-block;
+  }
+
+  a {
+    border-bottom: 1px solid color(silver);
+  }
+}

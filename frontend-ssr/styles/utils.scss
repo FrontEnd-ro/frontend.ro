@@ -141,14 +141,23 @@
   margin-right: 0.25em;
 }
 
+.ml-1 {
+  margin-left: 0.25em;
+}
+
 .mr-2 {
   margin-right: 0.5em;
+}
+
+.ml-2 {
+  margin-left: 0.5em;
 }
 
 .my-5 {
   margin-top: 2em;
   margin-bottom: 2em;
 }
+
 
 /** Borders */
 .border-none {
@@ -193,5 +202,11 @@
 /** Animations */
 
 .rotate {
-  animation: 0.5s rotateAnimation linear infinite ;
+  animation: 0.5s rotateAnimation linear infinite;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

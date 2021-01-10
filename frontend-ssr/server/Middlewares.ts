@@ -3,11 +3,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 import { connectToDb } from './database';
 import { ServerError } from './ServerUtils';
+import ExerciseModel from './model/exercise.model';
+import { EncodedData } from './model/user.model';
 
 type Middleware = (
   req: NextApiRequest,
   res: NextApiResponse
-) => void | Promise<void>;
+) => any | Promise<any>;
 
 type Handler = (req: NextApiRequest, res: NextApiResponse) => void;
 
@@ -98,16 +100,49 @@ function methodExists(routeConfig: RouteConfig) {
   };
 }
 
-export async function authenticated(req: NextApiRequest, res: NextApiResponse) {
+export async function authenticated(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) : Promise<EncodedData> {
   return new Promise((resolve, reject) => {
-    jwt.verify(req.cookies.auth, process.env.TOKEN_SECRET, (err, decoded) => {
+    jwt.verify(req.cookies.auth, process.env.TOKEN_SECRET, (err, decoded: EncodedData) => {
       if (err) {
         reject(new ServerError(401, 'Doar utilizatorii autentificați au acces aici'));
         return;
       }
 
-      // FIXME: Pass data forward?
       resolve(decoded);
     });
   });
+}
+
+export function jsonBody(req: NextApiRequest, res: NextApiResponse) {
+  if (
+    !req.body
+    || typeof req.body !== 'object'
+    || req.headers['content-type'] !== 'application/json'
+  ) {
+    throw new ServerError(400, 'Expecting a JSON body on this method');
+  }
+}
+
+export async function ownExercise(req: NextApiRequest, res: NextApiResponse) {
+  const { exerciseId } = req.query;
+
+  const user = await authenticated(req, res);
+  const exercise = await ExerciseModel.get(exerciseId);
+
+  if (user._id !== exercise.user.toString()) {
+    throw new ServerError(403, 'Only the author of this exercise can view it');
+  }
+}
+
+export async function publicOrOwnExercise(req: NextApiRequest, res: NextApiResponse) {
+  const { exerciseId } = req.query;
+
+  const exercise = await ExerciseModel.get(exerciseId);
+
+  if (exercise?.private) {
+    await ownExercise(req, res);
+  }
 }

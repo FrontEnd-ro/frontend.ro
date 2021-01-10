@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { isValidObjectId } from 'mongoose';
 import { ServerError } from './ServerUtils';
 
 export function connectToDb() {
@@ -39,5 +39,11 @@ export function validateAgainstSchemaProps(payload, Schema: mongoose.Schema) {
     if (!(key in Schema.obj)) {
       throw new ServerError(400, `Property '${key}' cannot be directly set.`);
     }
+  }
+}
+
+export function validateObjectid(_id: string) {
+  if (!isValidObjectId(_id)) {
+    throw new ServerError(400, `Value '${_id}' is not a valid ObjectId identifier`);
   }
 }

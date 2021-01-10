@@ -16,7 +16,7 @@ UsersSchema.plugin(uniqueValidator);
 
 const User = mongoose.models?.User || mongoose.model('User', UsersSchema);
 
-interface EncodedData {
+export interface EncodedData {
   _id: string
 }
 

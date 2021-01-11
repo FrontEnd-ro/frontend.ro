@@ -13,14 +13,14 @@ import coverSvg from '~/public/images/lessons/lesson-0__cover.svg';
 const contributors = [Pava, Ira];
 
 let chapters = [
-  { title: 'Ce e FrontEnd.ro?', id: 'about' },
-  { title: 'De ce e FrontEnd.ro diferit?', id: 'why-are-we-different' },
-  { title: 'De ce e FrontEnd.ro gratuit?', id: 'why-are-we-free' },
-  { title: 'Cum pot să ajut?', id: 'how-can-i-help' },
-  { title: 'Skill-uri și concepte', id: 'skills-and-concepts' },
-  { title: 'Cum să folosești platforma', id: 'how-to-use-platform' },
-  { title: 'Tool-uri necesare', id: 'tools' },
-  { title: 'Resurse recomandate', id: 'recommended-resources' },
+  { title: 'Ce e FrontEnd.ro?', id: 'introducere' },
+  { title: 'De ce e FrontEnd.ro diferit?', id: 'de-ce-suntem-diferiți' },
+  { title: 'De ce e FrontEnd.ro gratuit?', id: 'de-ce-e-frontend-gratuit' },
+  { title: 'Cum pot să ajut?', id: 'cum-pot-să-ajut' },
+  { title: 'Skill-uri și concepte', id: 'skill-uri-și-concepte' },
+  { title: 'Cum să folosești platforma', id: 'cum-să-folosești-platforma' },
+  { title: 'Tool-uri necesare', id: 'tool-uri-necesare' },
+  { title: 'Resurse recomandate', id: 'resurse-recomandate' },
 ];
 
 export default function Lesson0() {
@@ -37,7 +37,7 @@ export default function Lesson0() {
         title="Introducere | FrontEnd.ro"
         shareImage="https://frontend.ro/seo/intro-about.jpg"
         description="Detalii despre noi, despre platformă și cum vom lucra împreună."
-        url="https://FrontEnd.ro/intro/about"
+        url="https://FrontEnd.ro/intro/despre-noi"
       />
       <Lesson title="Introducere" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
@@ -50,7 +50,7 @@ export default function Lesson0() {
 
         </LessonCover>
         <section>
-          <LessonHeading as="h2" id="about">
+          <LessonHeading as="h2" id="introducere">
             Ce e FrontEnd.ro?
           </LessonHeading>
           <p>
@@ -69,7 +69,7 @@ export default function Lesson0() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h2" id="why-are-we-different">
+          <LessonHeading as="h2" id="de-ce-suntem-diferiți">
             De ce e FrontEnd.ro diferit?
           </LessonHeading>
           <p>
@@ -86,7 +86,7 @@ export default function Lesson0() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h2" id="why-are-we-free">
+          <LessonHeading as="h2" id="de-ce-e-frontend-gratuit">
             De ce e FrontEnd.ro gratuit?
           </LessonHeading>
           <p>
@@ -107,7 +107,7 @@ export default function Lesson0() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h2" id="how-can-i-help">
+          <LessonHeading as="h2" id="cum-pot-să-ajut">
             Cum pot să ajut?
           </LessonHeading>
           <p>
@@ -164,7 +164,7 @@ export default function Lesson0() {
         </section>
         <div className="dots" />
         <section>
-          <LessonHeading as="h2" id="skills-and-concepts">
+          <LessonHeading as="h2" id="skill-uri-și-concepte">
             Skill-uri și concepte
           </LessonHeading>
           <p>
@@ -197,7 +197,7 @@ export default function Lesson0() {
         </section>
         <div className="dots" />
         <section>
-          <LessonHeading as="h2" id="how-to-use-platform">
+          <LessonHeading as="h2" id="cum-să-folosești-platforma">
             Cum să folosești platforma
           </LessonHeading>
           <p>
@@ -262,7 +262,7 @@ export default function Lesson0() {
           </blockquote>
         </section>
         <section>
-          <LessonHeading as="h2" id="tools">
+          <LessonHeading as="h2" id="tool-uri-necesare">
             Tool-uri necesare
           </LessonHeading>
           <p>
@@ -312,7 +312,7 @@ export default function Lesson0() {
                 început pentru a ne familiariza cu el.
                 De asemenea, înainte să începi
                 {' '}
-                <a href="/html/introduction">Lecția 1</a>
+                <a href="/html/despre-html">Lecția 1</a>
                 {' '}
                 te invităm să arunci un ochi pe acest
                 {' '}
@@ -324,7 +324,7 @@ export default function Lesson0() {
         </section>
         <div className="dots" />
         <section>
-          <LessonHeading as="h2" id="recommended-resources">
+          <LessonHeading as="h2" id="resurse-recomandate">
             Resurse recomandate
           </LessonHeading>
           <p>

@@ -6,7 +6,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 
-export default function MissingImage() {
+export default function Citate() {
   const title = 'Citate';
   return (
     <>

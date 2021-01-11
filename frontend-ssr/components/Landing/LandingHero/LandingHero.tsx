@@ -17,12 +17,12 @@ export default function LandingHero() {
           </span>
         </h2>
         <div>
-          <Link href="/learn">
+          <Link href="/invata">
             <a className={`${styles['action-button']} text-center btn btn--default`}>
               Vreau să învăț
             </a>
           </Link>
-          <Link href="/teach">
+          <Link href="/preda">
             <a className={`${styles['action-button']} text-center btn btn--light`}>
               Vreau să predau
             </a>

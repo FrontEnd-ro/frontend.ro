@@ -25,12 +25,7 @@ export default function FixedSizeImage() {
         <Header demoPage />
         <Demo title={title}>
           <DemoPreview>
-            <header style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <header className="d-flex align-items-center justify-content-between flex-row flex-wrap">
               <img
                 height="70"
                 width="212"

@@ -6,8 +6,8 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 
-export default function MissingImage() {
-  const title = 'Titluri (Headings)';
+export default function HorizontalLine() {
+  const title = 'Elementul <hr> adaugă o linie de separare';
   return (
     <>
       <Head>
@@ -21,24 +21,31 @@ export default function MissingImage() {
       <>
         <Header demoPage />
         <Demo title={title}>
+          <p>
+            Elementul
+            {' '}
+            <strong className="formatted">
+              {'<hr>'}
+            </strong>
+            {' '}
+            (horizontal line)
+            este un separator între
+            secțiuni/elemente din pagină.
+            .
+          </p>
           <DemoPreview>
-            <h1> Heading #1 </h1>
-            <h2> Heading #2 </h2>
-            <h3> Heading #3 </h3>
-            <h4> Heading #4 </h4>
-            <h5> Heading #5 </h5>
-            <h6> Heading #6 </h6>
+            <p> O primă regulă în această casă: Întotdeauna zîmbește! </p>
+            <hr />
+            <p> A doua regulă: Vino cu prăjituri! </p>
           </DemoPreview>
           <Highlight
             className="my-5"
             language="html"
             code={`
-<h1> Heading #1 </h1>
-<h2> Heading #2 </h2>
-<h3> Heading #3 </h3>
-<h4> Heading #4 </h4>
-<h5> Heading #5 </h5>
-<h6> Heading #6 </h6>`}
+<p> O primă regulă în această casă: Întotdeauna zîmbește! </p>
+<hr>
+<p> A doua regulă: Vino cu prăjituri! </p>
+`}
           />
         </Demo>
         <Footer />

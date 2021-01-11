@@ -17,7 +17,7 @@ export const LESSONS: LessonDescription[] = [
     written: true,
     title: 'Despre noi',
     description: 'Ce ne face diferiți și de ce ai vrea să înveți alături de noi.',
-    url: '/intro/about',
+    url: '/intro/despre-noi',
     type: 'intro',
     contributors: [Pava],
     cover: '/images/lessons/lesson-0__cover.svg',
@@ -27,7 +27,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Cum poți ajuta',
     description:
       'Ne dorim ca acest proiect să fie un efort de comunitate, deci dacă-ți place ce facem aici contribuie și tu!',
-    url: '/intro/how-to-help',
+    url: '/intro/implica-te',
     type: 'intro',
   },
   {
@@ -35,7 +35,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Ce este FrontEnd-ul?',
     description:
       'Află ce înseamnă să faci aplicații Web și de ce e mult mai interesant decât ai putea crede.',
-    url: '/intro/what-is-frontend-development',
+    url: '/intro/ce-este-frontend-ul',
     type: 'intro',
   },
   {
@@ -52,7 +52,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Despre HTML',
     description:
       'Învață principiile de bază ale acestui limbaj și scrie primele linii de cod.',
-    url: '/html/intro',
+    url: '/html/despre-html',
     type: 'html',
   },
   {
@@ -60,7 +60,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Structura de bază a oricărei aplicații web',
     description:
       'Indiferent ce tip de aplicație creezi, toate au aceeași structură generală despre care vom vorbi aici.',
-    url: '/html/base-structure',
+    url: '/html/structura-de-baza-a-oricarei-aplicatii',
     type: 'html',
   },
   {
@@ -68,7 +68,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Validarea paginilor HTML',
     description:
       'Deși putem "scăpa" fără să scriem HTML valid, acest lucru nu e deloc încurajat. Hai să vedem de ce, și cum ne putem asigura că scriem cod corect.',
-    url: '/html/validation',
+    url: '/html/validarea-paginilor-html',
     type: 'html',
   },
   {
@@ -76,7 +76,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Texte',
     description:
       'Avem la dispoziție mai multe elemente când vine vorba de texte, iar aici învățăm când și cum să le folosim.',
-    url: '/html/text-elements',
+    url: '/html/texte',
     type: 'html',
     contributors: [Diana],
     cover: '/images/lessons/text-elements__cover.svg',
@@ -95,7 +95,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Containere',
     description:
       'Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru a crea layout-uri mai complexe.',
-    url: '/html/containers',
+    url: '/html/containere',
     type: 'html',
   },
   {
@@ -105,7 +105,7 @@ export const LESSONS: LessonDescription[] = [
       'Fără imagini web-ul ar fi mult mai plicticos, deci hai să vedem cum le putem adăuga și care sunt cele mai bune practici legate de acestea.',
     contributors: [Pava],
     cover: '/images/lessons/images__cover.svg',
-    url: '/html/images',
+    url: '/html/imagini',
     type: 'html',
   },
   /** CSS Lessons */
@@ -113,7 +113,7 @@ export const LESSONS: LessonDescription[] = [
     written: false,
     title: 'Despre CSS',
     description: 'Învață principiile de bază ale stilizării paginilor Web și fii inspirat de tot ce e posibil cu acest limbaj.',
-    url: '/css/intro',
+    url: '/css/despre-css',
     type: 'css',
   },
   {
@@ -121,7 +121,7 @@ export const LESSONS: LessonDescription[] = [
     title: '3 moduri de stilizare',
     description:
       'Browserul ne oferă mai multe moduri prin care putem aplica stiluri paginilor noastre. Hai să vobim despre fiecare în parte.',
-    url: '/css/how-to-style',
+    url: '/css/cum-sa-stilizam',
     type: 'css',
   },
   {
@@ -129,7 +129,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Tag-uri, clase și id-uri',
     description:
       'Pentru a stiliza un element, sau mai multe, trebuie să le putem diferenția față de celelalte. Putem face acest lucru după tag, clase sau id-uri.',
-    url: '/css/tags-classes-and-ids',
+    url: '/css/taguri-clase-si-id-uri',
     type: 'css',
   },
   {
@@ -145,7 +145,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Tranziții',
     description:
       'Extrem de folosite în multe aplcații, acestea adaugă interactivitate paginilor noastre.',
-    url: '/css/transitions',
+    url: '/css/tranzitii',
     type: 'css',
   },
   {
@@ -153,7 +153,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Animații',
     description:
       'Similare cu tranzițiile dar mult mai puternice. Singura limită e creativitatea!',
-    url: '/css/animations',
+    url: '/css/animatii',
     type: 'css',
   },
   {
@@ -169,21 +169,21 @@ export const LESSONS: LessonDescription[] = [
     written: false,
     title: 'Despre JavaScript',
     description: 'Cu HTML și CSS putem crea o experiență vizuală plăcută, dar lipsită de interactivitate. Aici intră în scenă JavaScript, limbajul cu care totul e posibil.',
-    url: '/javascript/intro',
+    url: '/javascript/despre-javascript',
     type: 'javascript',
   },
   {
     written: false,
     title: 'Cum să gândim ca un programator',
     description: 'Înainte să "sărim" în progamarea efectivă, hai să vorbim puțin despre ce înseamnă să scrii cod și cum să abordezi această nouă provocare.',
-    url: '/javascript/how-to-think-like-a-programmer',
+    url: '/javascript/cum-sa-gandim-ca-un-programator',
     type: 'javascript',
   },
   {
     written: false,
     title: 'Variabile și tipuri primitive',
     description: 'Ce sunt variabilele, de ce avem nevoie de ele și cum le folosim.',
-    url: '/javascript/variables-and-primitive-types',
+    url: '/javascript/variabile-si-tipuri-primitive',
     type: 'javascript',
   },
   {
@@ -191,7 +191,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Obiecte și Array-uri',
     description:
       'Dacă până acum am avut variabile cu o singură valoare, în Obiecte și Array-uri putem reține mai multe informații ce au legătură între ele.',
-    url: '/javascript/objects-and-arrays',
+    url: '/javascript/obiecte-si-array-uri',
     type: 'javascript',
   },
   {
@@ -199,7 +199,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Funcții',
     description:
       'Organizează codul în "părți" reutilizabile pentru o mai bună arhitectură.',
-    url: '/javascript/objects-and-arrays',
+    url: '/javascript/functii',
     type: 'javascript',
   },
   /** Extra Lessons */
@@ -208,7 +208,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'DevTools',
     description:
       'Browser-ele ne oferă multe tool-uri care ne măresc productivitatea extrem de mult. Hai să învățăm să le folosim în această lecție.',
-    url: '/javascript/devtool',
+    url: '/javascript/devtools',
     type: 'extra',
   },
   {
@@ -216,14 +216,14 @@ export const LESSONS: LessonDescription[] = [
     title: 'Graceful Degradation',
     description:
       'Un mod de a ne construi aplicațiile astfel încât și utilizatorii de pe dispozitive mai vechi să aibă o experiență decentă',
-    url: '/concepts/graceful-degradation',
+    url: '/concepte/graceful-degradation',
     type: 'extra',
   },
   {
     written: false,
     title: 'Biblioteci și Framework-uri',
     description: 'Când vei lucra la proiecte "reale" alături de alți developeri, vei vedea că de multe ori refolosim cod scris de alții sub formă de biblioteci sau framework-uri.',
-    url: '/concepts/libraries-and-frameworks',
+    url: '/concepte/biblioteci-si-framework-uri',
     type: 'extra',
   },
 ];

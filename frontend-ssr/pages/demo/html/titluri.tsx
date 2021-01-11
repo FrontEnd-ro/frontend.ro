@@ -6,8 +6,8 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 
-export default function MissingImage() {
-  const title = 'Paragrafe și Heading-uri';
+export default function Headings() {
+  const title = 'Titluri (Headings)';
   return (
     <>
       <Head>
@@ -21,22 +21,24 @@ export default function MissingImage() {
       <>
         <Header demoPage />
         <Demo title={title}>
-          <p> Atât paragrafele cât și heading-urile sunt afișate începând cu o nouă linie. </p>
           <DemoPreview>
             <h1> Heading #1 </h1>
-            <p> Eu sunt pe o nouă linie </p>
-            <h2> Și eu! </h2>
-            <p> Nu zău?! </p>
+            <h2> Heading #2 </h2>
+            <h3> Heading #3 </h3>
+            <h4> Heading #4 </h4>
+            <h5> Heading #5 </h5>
+            <h6> Heading #6 </h6>
           </DemoPreview>
           <Highlight
             className="my-5"
             language="html"
             code={`
 <h1> Heading #1 </h1>
-<p> Eu sunt pe o nouă linie </p>
-<h2> Și eu! </h2>
-<p> Nu zău?! </p>
-`}
+<h2> Heading #2 </h2>
+<h3> Heading #3 </h3>
+<h4> Heading #4 </h4>
+<h5> Heading #5 </h5>
+<h6> Heading #6 </h6>`}
           />
         </Demo>
         <Footer />

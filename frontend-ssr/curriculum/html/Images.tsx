@@ -18,11 +18,11 @@ import coverSvg from '~/public/images/lessons/images__cover.svg';
 
 const contributors = [Pava];
 const chapters = [
-  { title: '<img> element', id: 'img-element' },
-  { title: 'Width & Height', id: 'width-and-height' },
+  { title: 'Elementul <img>', id: 'elementul-img' },
+  { title: 'Width & Height', id: 'width-height' },
   { title: 'Lazy loading', id: 'lazy-loading' },
-  { title: 'Responsive images', id: 'responsive-images' },
-  { title: '<picture> element', id: 'picture-element' },
+  { title: 'Imagini responsive', id: 'imagini-responsive' },
+  { title: 'Elementul <picture>', id: 'elementul-picture' },
   { title: 'Exerciții', id: 'exercitii' },
 ];
 
@@ -55,7 +55,7 @@ export default function ImagesLesson() {
         title="Imagini | Lecție HTML"
         shareImage="https://frontend.ro/seo/html-images.jpg"
         description="Învață să adaugi și să optimizezi imagini în paginile Web."
-        url="https://FrontEnd.ro/html/images"
+        url="https://FrontEnd.ro/html/imagini"
       />
       <Lesson title="Imagini" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
@@ -74,8 +74,8 @@ export default function ImagesLesson() {
         </p>
         <section>
           <h2> The Basics </h2>
-          <LessonHeading as="h3" id="img-element">
-            {'<img> element'}
+          <LessonHeading as="h3" id="elementul-img">
+            {'Elementul <img>'}
           </LessonHeading>
           <p>
             Primul și cel mai comun mod de a adăuga o imagine este folosind elementul
@@ -113,12 +113,12 @@ export default function ImagesLesson() {
             img1={{
               src: 'https://d3tycb976jpudc.cloudfront.net/demo-assets/golden-retriever-and-ball.jpg',
               alt: 'Imagine încărcată cu succes într-o pagină Web',
-              demo: '/demo/html/basic-image',
+              demo: '/demo/html/imagine-incarcata-cu-succes',
             }}
             img2={{
               src: '/images/lessons/images/image-alt.png',
               alt: 'Descrierea text a imaginii, dacă aceasta nu a putut fi încărcată',
-              demo: '/demo/html/image-alt',
+              demo: '/demo/html/text-alternativ-imagine',
             }}
           />
           <p>
@@ -141,7 +141,7 @@ export default function ImagesLesson() {
             {' '}
             nu este
             {' '}
-            <Link href="/html/validation">
+            <Link href="/html/validarea-paginilor-html">
               <a>
                 considerată validă
               </a>
@@ -150,7 +150,7 @@ export default function ImagesLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h3" id="width-and-height">
+          <LessonHeading as="h3" id="width-height">
             Width & Height
           </LessonHeading>
           <p>
@@ -166,7 +166,7 @@ export default function ImagesLesson() {
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/fixed-gallery.png"
             alt="Galerie cu 2 imagini pe fiecare rând"
-            demo="/demo/html/fixed-gallery"
+            demo="/demo/html/galerie-imagini-fixa"
           />
           <p>
             Însă există situații în care o imagine va avea aceleași dimensiuni fixe indiferent
@@ -181,7 +181,7 @@ export default function ImagesLesson() {
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/fixed-size-image.png"
             alt="Imagine cu dimensiunile fixe"
-            demo="/demo/html/fixed-size-image"
+            demo="/demo/html/imagine-cu-dimensiuni-fixe"
           />
           <p>
             În astfel de cazuri, în care
@@ -313,7 +313,7 @@ export default function ImagesLesson() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="responsive-images">
+          <LessonHeading as="h3" id="imagini-responsive">
             Responsive images
           </LessonHeading>
           <p>
@@ -355,7 +355,7 @@ export default function ImagesLesson() {
           <LessonFigure
             isVideo
             withBorder
-            demo="/demo/html/huge-image-loading"
+            demo="/demo/html/incarcarea-unei-imagini-mari"
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/huge-image-loading.mp4"
             alt="Încărcarea unei imagini mari pe o conexiune înceată"
           />
@@ -434,7 +434,7 @@ export default function ImagesLesson() {
           <LessonFigure
             isVideo
             withBorder
-            demo="/demo/html/img-srcset"
+            demo="/demo/html/atributul-srcset"
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/img-srcset.mp4"
             alt="Diferite surse ale imaginii se încarcă la rezoluții diferite"
           />
@@ -455,8 +455,8 @@ export default function ImagesLesson() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="picture-element">
-            {'<picture> element'}
+          <LessonHeading as="h3" id="elementul-picture">
+            {'Elementul <picture>'}
           </LessonHeading>
           <p>
             După cum ai văzut până acum, elementul
@@ -531,7 +531,7 @@ export default function ImagesLesson() {
             să descarce aceste formate, în timp ce celelalte să rămână la JPG.
             Această tehnică se numește general
             {' '}
-            <a href="/concepts/graceful-degradation">graceful degradation</a>
+            <a href="/concepte/graceful-degradation">graceful degradation</a>
             .
           </p>
           <p>

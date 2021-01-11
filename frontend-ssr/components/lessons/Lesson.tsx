@@ -35,7 +35,7 @@ export default function Lesson({
         chapters={chapters}
       />
       <main>
-        <Header href="/learn" onMenuClick={() => setIsMenuOpen(true)} />
+        <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} />
         <article>
           <h1>
             {title}

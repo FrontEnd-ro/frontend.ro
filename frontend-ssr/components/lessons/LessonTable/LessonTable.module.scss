@@ -32,3 +32,13 @@
     white-space: nowrap;
   }
 }
+
+@media screen and (max-width: 580px) {
+  .lesson-table {
+    th,
+    td {
+      white-space: pre-wrap;
+      font-size: 0.8em;
+    }
+  }
+}

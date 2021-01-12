@@ -13,3 +13,8 @@ export const Ira = {
   avatar: '/images/contributors/iramelnic.jpg',
   url: 'https://www.facebook.com/melnic.ira',
 };
+export const Nicolae = {
+  name: 'Nicolae',
+  avatar: '/images/contributors/iampava.png',
+  url: 'https://www.github.com/nmaties',
+};

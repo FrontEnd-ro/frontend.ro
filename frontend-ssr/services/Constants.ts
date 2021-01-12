@@ -82,10 +82,12 @@ export const LESSONS: LessonDescription[] = [
     cover: '/images/lessons/text-elements__cover.svg',
   },
   {
-    written: false,
+    written: true,
     title: 'Liste',
     description: 'Un alt tip de element extrem de comun în paginile Web.',
-    url: '/html/lists',
+    url: '/html/liste',
+    contributors: [Diana],
+    cover: '/images/lessons/lists__cover.svg',
     type: 'html',
   },
   {

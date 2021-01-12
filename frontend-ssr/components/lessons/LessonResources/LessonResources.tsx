@@ -15,7 +15,7 @@ export default function LessonResources({ links, className }: Props) {
       <ol className="with--count">
         {links.map(({ text, url }) => (
           <li key={url}>
-            <a href={url}>{text}</a>
+            <a href={url} target="_blank" rel="noreferrer">{text}</a>
           </li>
         ))}
       </ol>

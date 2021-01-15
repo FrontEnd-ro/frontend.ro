@@ -52,7 +52,7 @@ export default function Lesson({
         </div>
         {withExercises && (
         <section className={styles.exercises}>
-          <LessonHeading as="h3" id="exercises">
+          <LessonHeading as="h3" id="exercitii">
             Exerciții
           </LessonHeading>
           <p className="text-bold text-center"> În curând!</p>

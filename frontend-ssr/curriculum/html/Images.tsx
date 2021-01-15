@@ -23,7 +23,7 @@ const chapters = [
   { title: 'Lazy loading', id: 'lazy-loading' },
   { title: 'Responsive images', id: 'responsive-images' },
   { title: '<picture> element', id: 'picture-element' },
-  { title: 'Exerciții', id: 'exercises' },
+  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 const sizesTable: LessonTableProps = {

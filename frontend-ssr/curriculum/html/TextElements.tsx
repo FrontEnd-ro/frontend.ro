@@ -19,7 +19,7 @@ const chapters = [
   { title: '<hr> element', id: 'hr-element' },
   { title: 'Citate', id: 'quotes' },
   { title: '<em> & <strong> elements', id: 'em-and-strong' },
-  { title: 'Exerciții', id: 'exercises' },
+  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 export default function TextsLesson() {

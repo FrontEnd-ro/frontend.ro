@@ -22,12 +22,12 @@ export default function OrderedListsStart() {
         <Header demoPage />
         <Demo title={title}>
           <p>
-            Putem opta să enumerăm elementele unei liste ordonate începînd
+            Putem opta să enumerăm elementele unei liste ordonate începând
             de la un anumit număr/literă folosindu-ne de atributul
             {' '}
             <strong className="formatted">start</strong>
             {' '}
-            dînd ca valoare numărul/litera de la care vrem sa începem numărătoarea:
+            dând ca valoare numărul/litera de la care vrem să începem numărătoarea:
           </p>
           <DemoPreview>
             <ol>

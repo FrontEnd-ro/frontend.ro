@@ -23,7 +23,7 @@ export default function OrderedListsType() {
         <Header demoPage />
         <Demo title={title}>
           <p>
-            Dacă vrem ca enumerarea elementelor din listă să se faca cu un
+            Dacă vrem ca enumerarea elementelor din listă să se facă cu un
             anumit tip de cifră sau cu litere, ne putem folosi de atributul
             {' '}
             <strong>type</strong>

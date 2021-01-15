@@ -6,7 +6,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 
-export default function OrderedListsType() {
+export default function DescriptionLists() {
   const title = 'Liste de descrieri';
 
   return (
@@ -23,8 +23,8 @@ export default function OrderedListsType() {
         <Header demoPage />
         <Demo title={title}>
           <p>
-            Intalnite mai rar decat listele ordonate sau cele neordonate, pe acestea le folosim
-            cand vrem sa definim termeni sau sa asociem perechi nume/descriere.
+            Întâlnite mai rar decât listele ordonate sau cele neordonate, pe acestea le folosim
+            când vrem să definim termeni sau să asociem perechi nume/descriere.
           </p>
           <DemoPreview>
             <dl>

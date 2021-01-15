@@ -1,30 +1,25 @@
-import React from 'react';
-import Head from 'next/head';
+import React from "react";
+import Head from "next/head";
 
-import Demo, { DemoPreview } from '~/components/demo';
-import Header from '~/components/Header';
-import Footer from '~/components/Footer';
-import Highlight from '~/components/Highlight/Highlight';
+import Demo, { DemoPreview } from "~/components/demo";
+import Header from "~/components/Header";
+import Footer from "~/components/Footer";
+import Highlight from "~/components/Highlight/Highlight";
 
 export default function NestingLists() {
-  const title = 'Sub-liste';
+  const title = "Sub-liste";
   return (
     <>
       <Head>
-        <title>
-          {title}
-          {' '}
-          | FrontEnd.ro
-        </title>
+        <title>{title} | FrontEnd.ro</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
         <Header demoPage />
         <Demo title={title}>
           <p>
-            O listă poate conține o altă listă. Acest lucru poate
-            fi extrem de util dacă vrem să reprezentăm un meniu
-            de navigare pe mai multe nivele:
+            O listă poate conține o altă listă. Acest lucru este extrem de util
+            dacă vrem să reprezentăm un meniu de navigare pe mai multe nivele:
           </p>
           <DemoPreview>
             <ul>

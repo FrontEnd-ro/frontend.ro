@@ -23,7 +23,7 @@ const chapters = [
   { title: 'Tipuri de liste', id: 'tipuri-de-liste' },
   {
     title: 'Liste neordonate cu buline sau fără',
-    id: 'liste-neordonate-cu-buline-sau-fara',
+    id: 'liste-neordonate-cu-buline-sau-fără',
   },
   { title: 'Liste ordonate', id: 'liste-ordonate' },
   {
@@ -31,8 +31,8 @@ const chapters = [
     id: 'atributele-acceptate-de-listele-ordonate',
   },
   { title: 'Sub-liste', id: 'sub-liste' },
-  { title: 'Bonus tips și concluzii', id: 'bonus-tips-si-concluzii' },
-  { title: 'Exerciții', id: 'exercitii' },
+  { title: 'Bonus tips și concluzii', id: 'bonus-tips-și-concluzii' },
+  { title: 'Exerciții', id: 'exerciții' },
 ];
 
 export default function ListsLesson() {
@@ -51,9 +51,10 @@ export default function ListsLesson() {
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
           {/* eslint-disable-next-line react/no-danger */}
-          <div dangerouslySetInnerHTML={{
-            __html: coverSvg,
-          }}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: coverSvg,
+            }}
           />
         </LessonCover>
         <p>
@@ -61,10 +62,10 @@ export default function ListsLesson() {
           clar asociate între ele și ușor de citit.
         </p>
         <p>
-          În dezvoltarea modernă a
-          web-ului, listele sunt elemente HTML utilizate frecvent atât pentru
-          navigație, cât și pentru conținut general, contribuind la crearea
-          unui document bine structurat, accesibil și ușor de întreținut.
+          În dezvoltarea modernă a web-ului, listele sunt elemente HTML
+          utilizate frecvent atât pentru navigație, cât și pentru conținut
+          general, contribuind la crearea unui document bine structurat,
+          accesibil și ușor de întreținut.
         </p>
         <section>
           <LessonHeading as="h3" id="tipuri-de-liste">
@@ -75,14 +76,15 @@ export default function ListsLesson() {
             <li className="mb-4">
               <strong className="formatted">Liste neordonate</strong>
               {' '}
-              - utilizate pentru a grupa un set
-              de elemente ce nu necesită o anumită ordine
+              -
+              utilizate pentru a grupa un set de elemente ce nu necesită o
+              anumită ordine
             </li>
             <li>
               <strong className="formatted">Liste ordonate</strong>
               {' '}
-              - utilizate pentru a grupa un set
-              de elemente ce au o ordine specifică
+              - utilizate
+              pentru a grupa un set de elemente ce au o ordine specifică
             </li>
           </ul>
           <p>
@@ -91,7 +93,7 @@ export default function ListsLesson() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="liste-neordonate-cu-buline-sau-fara">
+          <LessonHeading as="h3" id="liste-neordonate-cu-buline-sau-fără">
             Liste neordonate
           </LessonHeading>
           <p>
@@ -115,25 +117,20 @@ export default function ListsLesson() {
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/unordered-list.png"
             alt="Listă neordonată"
-            demo="/demo/html/lista-neordonata"
+            demo="/demo/html/liste-neordonate"
           />
           <LessonTip>
-            Observă cum ne folosim de 2 tipuri de elemente pentru a defini o listă:
-            in exterior avem
+            Observă cum ne folosim de 2 tipuri de elemente pentru a defini o
+            listă: în exterior avem
             {' '}
-            <strong className="formatted">
-              {'<ul>'}
-            </strong>
+            <strong className="formatted">{'<ul>'}</strong>
             {' '}
-            (unordered list) pentru a defini lista,
-            iar apoi fiecare element în propriul tag
+            (unordered list)
+            pentru a defini lista, iar apoi fiecare element în propriul tag
             {' '}
-            <strong className="formatted">
-              {'<li>'}
-            </strong>
+            <strong className="formatted">{'<li>'}</strong>
             {' '}
-            (list item)
-            .
+            (list item) .
           </LessonTip>
           <p>
             Cu o stilizare potrivită, listele neordonate sunt folosite la
@@ -143,17 +140,20 @@ export default function ListsLesson() {
             {' '}
             paginilor web.
             {' '}
-            <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://github.com" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
             {' '}
-            e un exemplu bun, ei folosind liste neordonate pentru meniul de navigare:
+            e un exemplu bun, ei folosind liste neordonate pentru meniul de
+            navigare:
           </p>
           <LessonFigure
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/github_unordered-list.jpeg"
-            alt="GitHub folosește o lista neordonata in meniul de navigatie"
+            alt="GitHub folosește o listă neordonată în meniul de navigație"
           />
           <LessonTip>
-            Deși nu am ajuns incă la partea de CSS, e bine să știm că listele
+            Deși nu am ajuns încă la partea de CSS, e bine să știm că listele
             neordonate au ca și stil implicit niște buline. Putem să le
             personalizăm folosind propria noastră imagine sau putem renunța la
             ele cu totul. Vom discuta mai multe în cadrul capitolului de
@@ -167,8 +167,8 @@ export default function ListsLesson() {
           <p>
             Listele ordonate afișează elementele enumerate într-o ordine
             specifică, fie că este vorba de enumerări cu cifre arabe, cifre
-            romane sau litere. Un
-            exemplu potrivit ar fi instrucțiunile pentru a găti o prăjitură:
+            romane sau litere. Un exemplu potrivit ar fi instrucțiunile pentru a
+            găti o prăjitură:
           </p>
           <Highlight
             className="my-5"
@@ -184,14 +184,13 @@ export default function ListsLesson() {
 `}
           />
           <p>
-            Acestea au o structura similara cu cele ordonate,
-            singura diferenta fiind tagul:
+            Acestea au o structura similară cu cele neordonate, singura
+            diferență fiind tag-ul:
             {' '}
-            <strong className="formatted">
-              {'<ol>'}
-            </strong>
+            <strong className="formatted">{'<ol>'}</strong>
             {' '}
-            (ordered list). E evident că dacă vom schimba ordinea elementelor din cadrul listei,
+            (ordered list). E
+            evident că dacă vom schimba ordinea elementelor din cadrul listei,
             aceasta nu va mai avea nici un sens.
           </p>
           <LessonFigure
@@ -206,11 +205,12 @@ export default function ListsLesson() {
             Atributele acceptate de listele ordonate
           </LessonHeading>
           <p>
-            Dacă vrem ca enumerarea elementelor din listă să se faca cu un
+            Dacă vrem ca enumerarea elementelor din listă să se facă cu un
             anumit tip de cifră sau cu litere, ne putem folosi de atributul
             {' '}
             <strong className="formatted"> type</strong>
-            . Acesta acceptă ca valori:
+            . Acesta acceptă ca
+            valori:
           </p>
           <ul className="with--bullets">
             <li className="mb-4">
@@ -229,8 +229,8 @@ export default function ListsLesson() {
               {' '}
               <strong className="formatted">I</strong>
               {' '}
-              – pentru enumerare
-              cu cifre romane mici, respectiv mari
+              – pentru enumerare cu
+              cifre romane mici, respectiv mari
             </li>
             <li className="mb-4">
               {' '}
@@ -240,8 +240,8 @@ export default function ListsLesson() {
               {' '}
               <strong className="formatted">A</strong>
               {' '}
-              – pentru enumerare
-              cu litere mici, respectiv mari.
+              – pentru enumerare cu
+              litere mici, respectiv mari.
             </li>
           </ul>
           <Highlight
@@ -276,13 +276,13 @@ export default function ListsLesson() {
             demo="/demo/html/atributul-reversed-pentru-liste-ordonate"
           />
           <p>
-            Putem opta chiar să enumerăm elementele unei liste ordonate începînd
+            Putem opta chiar să enumerăm elementele unei liste ordonate începând
             de la un anumit număr/literă. Pentru asta ne vom folosi de atributul
             {' '}
             <strong className="formatted">start</strong>
             {' '}
-            dând ca valoare numărul sau litera
-            de la care vrem sa începem numărătoarea:
+            dând ca valoare numărul
+            sau litera de la care vrem sa începem numărătoarea:
           </p>
           <LessonFigure
             withBorder
@@ -296,9 +296,8 @@ export default function ListsLesson() {
             Sub-liste
           </LessonHeading>
           <p>
-            O listă poate conține o altă listă. Acest lucru poate
-            fi extrem de util dacă vrem să reprezentăm un meniu
-            de navigare pe mai multe nivele:
+            O listă poate conține o altă listă. Acest lucru este foarte util
+            dacă vrem să reprezentăm un meniu de navigare pe mai multe nivele:
           </p>
           <Highlight
             className="my-5"
@@ -326,25 +325,25 @@ export default function ListsLesson() {
           />
           <p>
             În exemplul de mai sus, noi am inclus o listă ordonată în cadrul
-            unei liste neordonate, dar putem foarte bine să includem
-            orice tip de lista in oricare altul. Ce e important să
-            reținem este ca nivelul de nesting să nu fie mai mare de 3 căci
-            lucrurile pot deveni confuze.
+            unei liste neordonate, dar putem foarte bine să includem orice tip
+            de listă în oricare altul. Ce e important să reținem este că nivelul
+            de nesting să nu fie mai mare de 3 căci lucrurile pot deveni
+            confuze.
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="bonus-tips-si-concluzii">
+          <LessonHeading as="h3" id="bonus-tips-și-concluzii">
             Bonus tips și concluzii
           </LessonHeading>
           <p>
-            Există și un al treilea tip de listă pe care-l vei
-            intalni mai rar dar e totusi bine sa-l stii:
+            Există și un al treilea tip de listă pe care-l vei întâlni mai rar
+            dar e totuși bine să-l știi:
             {' '}
             <strong className="formatted">{'<dl>'}</strong>
             {' '}
             (description list).
-            Îl vom folosi când definim termeni sau asociem perechi
-            de valori, ca în exemplul de mai jos:
+            Îl vom folosi când definim termeni sau asociem perechi de valori, ca
+            în exemplul de mai jos:
           </p>
           <Highlight
             language="html"
@@ -367,12 +366,23 @@ export default function ListsLesson() {
 
           <div className="dots" />
 
-          <p>Pentru a alege ce tip de lista sa folosim ne putem adresa doua intrebari:</p>
+          <p>
+            Pentru a alege ce tip de listă să folosim ne putem adresa două
+            întrebări:
+          </p>
           <dl itemType="">
-            <dt className="text-bold">Definesc termeni sau asociez alte perechi nume/valoare?</dt>
-            <dd className="mb-4"> Dacă da, vom folosi o listă de descrieri. </dd>
+            <dt className="text-bold">
+              Definesc termeni sau asociez alte perechi nume/valoare?
+            </dt>
+            <dd className="mb-4">
+              {' '}
+              Dacă da, vom folosi o listă de descrieri.
+              {' '}
+            </dd>
 
-            <dt className="text-bold">Este importantă ordinea elementelor din listă?</dt>
+            <dt className="text-bold">
+              Este importantă ordinea elementelor din listă?
+            </dt>
             <dd>
               {' '}
               Dacă da, folosim o listă ordonată, altfel vom folosi o listă
@@ -381,10 +391,9 @@ export default function ListsLesson() {
             </dd>
           </dl>
           <LessonTip icon={faThumbsUp}>
-            Iar pe final, nu uita ca elementele ul, li si dl
-            ajuta atat in cazul screen-readerelor cat si pe
-            ceilalti developeri care vor intelege mai usor.
-            Hai sa le folosim cand e vorba de liste.
+            Iar pe final, nu uita că elementele ul, li si dl ajută atât în cazul
+            screen-readere-lor cât și pe ceilalți developeri care vor înțelege
+            mai ușor codul tău. Hai să le folosim când e vorba de liste.
           </LessonTip>
         </section>
         <div className="dots" />
@@ -409,7 +418,7 @@ export default function ListsLesson() {
           ]}
         />
         <section>
-          <LessonHeading as="h3" id="exercitii">
+          <LessonHeading as="h3" id="exerciții">
             Exerciții
           </LessonHeading>
           <p className="text-bold text-center">În curând!</p>

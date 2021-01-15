@@ -84,7 +84,7 @@ export const LESSONS: LessonDescription[] = [
   {
     written: true,
     title: 'Liste',
-    description: 'Un alt tip de element extrem de comun în paginile Web.',
+    description: 'Hai să vorbim despre cele 3 tipuri de liste și când să-l folosești pe fiecare.',
     url: '/html/liste',
     contributors: [Diana],
     cover: '/images/lessons/lists__cover.svg',

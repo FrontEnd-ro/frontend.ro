@@ -15,7 +15,7 @@ function LessonPreview({
 }: LessonDescription) {
   return (
     <Link href={url}>
-      <a className={`${styles['lesson-preview']} ${written ? styles.written : ''} text-silver no-underline d-inline-block`}>
+      <a className={`${styles['lesson-preview']} ${written ? styles.written : ''} text-silver no-underline d-inline-block relative`}>
         <div
           className={`${styles.cover} text-black d-flex align-items-center justify-content-center`}
           style={{

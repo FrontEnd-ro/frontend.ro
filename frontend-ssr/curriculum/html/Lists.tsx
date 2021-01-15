@@ -1,9 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
-import {
-  faQuestionCircle,
-  faThumbsUp,
-} from '@fortawesome/free-regular-svg-icons';
+import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -37,16 +33,12 @@ const chapters = [
 export default function ListsLesson() {
   return (
     <>
-      <Head>
-        <title> Introducere | FrontEnd.ro</title>
-        <link rel="icon" href="/favicon.ico" />
-        <SEOTags
-          title="Liste | Lecție HTML"
-          shareImage="https://frontend.ro/seo/html-lists.jpg"
-          description="Învață despre tipurile de liste în HTML"
-          url="https://FrontEnd.ro/html/liste"
-        />
-      </Head>
+      <SEOTags
+        title="Liste | Lecție HTML"
+        shareImage="https://frontend.ro/seo/html-lists.jpg"
+        description="Învață despre tipurile de liste în HTML"
+        url="https://FrontEnd.ro/html/liste"
+      />
       <Lesson title="Liste" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>

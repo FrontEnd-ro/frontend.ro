@@ -425,12 +425,6 @@ export default function ListsLesson() {
             },
           ]}
         />
-        <section>
-          <LessonHeading as="h3" id="exercitii">
-            Exerciții
-          </LessonHeading>
-          <p className="text-bold text-center">În curând!</p>
-        </section>
       </Lesson>
     </>
   );

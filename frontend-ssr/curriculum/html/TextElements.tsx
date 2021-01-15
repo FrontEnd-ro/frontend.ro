@@ -366,13 +366,6 @@ export default function TextsLesson() {
             pe care vom aplica stiluri CSS.
           </p>
         </section>
-        <section>
-          <LessonHeading as="h3" id="exercises">
-            Exerciții
-          </LessonHeading>
-          <p className="text-bold text-center"> În curând!</p>
-          <br />
-        </section>
       </Lesson>
     </>
   );

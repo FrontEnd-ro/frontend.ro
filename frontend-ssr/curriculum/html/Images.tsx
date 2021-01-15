@@ -632,13 +632,6 @@ export default function ImagesLesson() {
           },
           ]}
         />
-        <section>
-          <LessonHeading as="h3" id="exercises">
-            Exerciții
-          </LessonHeading>
-          <p className="text-bold text-center"> În curând!</p>
-          <br />
-        </section>
       </Lesson>
     </>
   );

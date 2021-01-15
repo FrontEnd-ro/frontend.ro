@@ -39,7 +39,7 @@ export default function Lesson0() {
         description="Detalii despre noi, despre platformă și cum vom lucra împreună."
         url="https://FrontEnd.ro/intro/about"
       />
-      <Lesson title="Introducere" chapters={chapters}>
+      <Lesson title="Introducere" chapters={chapters} withExercises={false}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover resizeOffset={100}>
           {/* eslint-disable-next-line react/no-danger */}

@@ -45,8 +45,10 @@
     left: #{$lesson-menu-width};
     width: calc(100% - #{$lesson-menu-width});
 
-    :global header .ceva {
-      display: none;
+    > header {
+      position: sticky;
+      top: 0;
+      z-index: 998;
     }
   }
 
@@ -67,6 +69,11 @@
     @extend %containerConfig;
   }
 
+  [class*='LessonContributors'] {
+    right: 0;
+    top: 0.75em;
+  }
+
   @media screen and (max-width: 1400px) {
     aside {
       left: -#{$lesson-menu-width};
@@ -83,8 +90,24 @@
     }
   }
 
-  [class*='LessonContributors'] {
-    right: 0;
-    top: 0.75em;
+  @media screen and (max-width: 600px) {
+    aside {
+      left: -100%;
+      width: 100%;
+    }
   }
+
+  @media screen and (max-width: 400px) {
+   h1 {
+     margin-bottom: 2em;
+   }
+
+   [class*='LessonContributors'] {
+     position: relative;
+     float: right;
+     top: -4em;
+   }
+  }
+
+
 }

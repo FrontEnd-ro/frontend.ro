@@ -6,10 +6,11 @@ interface State {
 }
 
 interface Props {
-  chapters: Chapters[];
+  chapters: Chapter[];
+  onChapterClick?: (id: string) => void
 }
 
-export interface Chapters {
+export interface Chapter {
     title: string;
     id: string;
 }
@@ -87,6 +88,8 @@ class TableOfContents extends React.Component<Props, State> {
   }
 
   scrollToItem = (id) => {
+    const { onChapterClick } = this.props;
+
     let itemToScroll = document.getElementById(id);
     if (itemToScroll === null) {
       console.warn(`TableOfContents: expected to find element with id=${id} to scroll to`);
@@ -112,6 +115,7 @@ class TableOfContents extends React.Component<Props, State> {
     this.setState({
       activeChapterId: id,
     });
+    onChapterClick(id);
   }
 
   render() {

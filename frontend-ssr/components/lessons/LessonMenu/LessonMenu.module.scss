@@ -1,9 +1,10 @@
 @import "../../../styles/variables";
 
 .lesson-menu {
-  z-index: 1;
+  z-index: 999;
   height: 100%;
   position: fixed;
+  overflow: auto;
   width: $lesson-menu-width;
   padding: 1em 0.5em 0 0.5em;
   transition: transform 0.25s ease-out;

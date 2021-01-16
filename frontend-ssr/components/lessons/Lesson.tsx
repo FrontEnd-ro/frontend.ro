@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useState } from 'react';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import { LessonMenu } from '~/components/lessons';
-import { Chapters } from '~/components/TableOfContents';
+import { Chapter } from '~/components/TableOfContents';
 
 import styles from './Lesson.module.scss';
 import { withClientMonitoring } from '~/services/Hooks';
@@ -11,7 +11,7 @@ import LessonHeading from './LessonHeading/LessonHeading';
 
 interface Props {
   title: string;
-  chapters: Chapters[];
+  chapters: Chapter[];
   withExercises?: boolean;
 }
 

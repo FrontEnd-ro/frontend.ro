@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+
+.exercises {
+  background: lighten(color(green), 25%);
+
+  & > section {
+    @extend %containerConfig;
+  }
+
+  form {
+    font-weight: bold;
+  }
+}

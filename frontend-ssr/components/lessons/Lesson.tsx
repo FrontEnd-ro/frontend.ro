@@ -8,6 +8,7 @@ import styles from './Lesson.module.scss';
 import { withClientMonitoring } from '~/services/Hooks';
 import { GITHUB_URL } from '~/services/Constants';
 import LessonHeading from './LessonHeading/LessonHeading';
+import LessonExercises from './LessonExercises/LessonExercises';
 
 interface Props {
   title: string;
@@ -50,15 +51,7 @@ export default function Lesson({
             </a>
           </p>
         </div>
-        {withExercises && (
-        <section className={styles.exercises}>
-          <LessonHeading as="h3" id="exercitii">
-            Exerciții
-          </LessonHeading>
-          <p className="text-bold text-center"> În curând!</p>
-          <br />
-        </section>
-        )}
+        {withExercises && <LessonExercises /> }
         <Footer />
       </main>
     </div>

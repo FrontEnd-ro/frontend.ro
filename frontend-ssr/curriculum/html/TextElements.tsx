@@ -33,7 +33,7 @@ export default function TextsLesson() {
       />
       <Lesson title="Texte" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
-        <LessonCover>
+        <LessonCover resizeOffset={150}>
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{
             __html: coverSvg,

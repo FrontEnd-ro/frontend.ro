@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { timeAgo } from '../../../services/Utils';
+import { timeAgo } from '~/services/Utils';
 
 import styles from './Notification.module.scss';
 

@@ -1,0 +1,19 @@
+@import "../../styles/variables";
+@import "../../styles/animations";
+
+.skeleton__image {
+  position: relative;
+  padding: 0;
+  animation: skeletonOpacity 1s linear infinite;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 0px;
+    display: block;
+    position: absolute;
+    box-shadow: 0 0 1px 3px lighten(color(grey), 20%);
+    top: 50%;
+    left: 0;
+  }
+} 

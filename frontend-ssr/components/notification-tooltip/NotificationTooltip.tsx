@@ -8,10 +8,10 @@ import {
   markNotificationAsRead,
   markNotificationAsUnread,
   markAllAsRead,
-} from '../../redux/user/user.actions';
-import UserService from '../../services/User.service';
+} from '~/redux/user/user.actions';
+import UserService from '~/services/User.service';
 
-import NotificationSkeleton from './notification/NotificationSkeleton';
+import SkeletonImage from '~/components/SkeletonImage';
 import { RootState } from '~/redux/root.reducer';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import Notification from './notification/Notification';
@@ -166,13 +166,13 @@ class NotificationsTooltip extends React.Component<
               />
             ))}
             {loading && (
-              <>
-                <NotificationSkeleton />
-                <NotificationSkeleton />
-                <NotificationSkeleton />
-                <NotificationSkeleton />
-                <NotificationSkeleton />
-              </>
+              <li style={{ padding: '0.5em 1em', backgroundColor: 'rgba(192,192,192, 0.9)' }}>
+                <SkeletonImage width="1.6em" height="1.6em" />
+                <SkeletonImage width="1.6em" height="1.6em" />
+                <SkeletonImage width="1.6em" height="1.6em" />
+                <SkeletonImage width="1.6em" height="1.6em" />
+                <SkeletonImage width="1.6em" height="1.6em" />
+              </li>
             )}
             <li className="invisible" ref={this.hiddenRef} />
           </ul>

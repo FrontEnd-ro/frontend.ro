@@ -1,4 +1,6 @@
-import React, { ReactElement } from 'react';
+import noop from 'lodash/noop';
+import React from 'react';
+import { SweetAlertResult } from 'sweetalert2';
 import styles from './SweetAlert.module.scss';
 
 let Toast = null;
@@ -7,11 +9,41 @@ interface ToastI {
   text: string;
   href?: string;
   timer?: number;
-  type?: 'error' | 'success';
+  type?: 'error' | 'success' | 'info';
 }
 
 class SweetAlertService {
   private static anchorTag: HTMLAnchorElement;
+
+  static confirm({
+    title,
+    text,
+    html = '',
+    confirmButtonText = 'Ok',
+    preConfirm = noop,
+  }) {
+    return import('sweetalert2').then((swal) => {
+      return swal.default.fire({
+        title,
+        text,
+        html,
+        icon: 'warning',
+        showCancelButton: true,
+        customClass: {
+          actions: styles['swal-actions'],
+          confirmButton: 'btn btn--blue',
+          cancelButton: 'btn btn--danger',
+        },
+        confirmButtonText,
+        focusConfirm: false,
+        buttonsStyling: false,
+        reverseButtons: true,
+        heightAuto: false,
+        preConfirm,
+        allowOutsideClick: () => !swal.default.isLoading(),
+      });
+    });
+  }
 
   static toast({
     text, href = null, timer = 3000, type = 'success',
@@ -29,19 +61,23 @@ class SweetAlertService {
         return resolve();
       }
 
-      import('sweetalert2').then((swal) => {
-        Toast = swal.default.mixin({
-          toast: true,
-          position: 'bottom-end',
-          showConfirmButton: false,
-          background: '#1b1b15',
-          customClass: {
-            container: styles['swal--dark'],
-          },
-        });
+      import('sweetalert2')
+        .then((swal) => {
+          Toast = swal.default.mixin({
+            toast: true,
+            position: 'bottom-end',
+            showConfirmButton: false,
+            background: '#1b1b15',
+            customClass: {
+              container: styles['swal--dark'],
+            },
+          });
 
-        resolve();
-      });
+          resolve();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }).then(() => {
       Toast.fire({
         icon: type,
@@ -73,9 +109,13 @@ class SweetAlertService {
     });
   }
 
-  static async closePopup() {
+  static async closePopup(result?: SweetAlertResult<any>) {
     const swal = await import('sweetalert2');
-    swal.default.close();
+    swal.default.close(result);
+  }
+
+  static toggleLoading() {
+    import('sweetalert2').then((swal) => swal.default.getConfirmButton().classList.toggle('btn--loading'));
   }
 
   private static init() {

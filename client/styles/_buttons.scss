@@ -11,6 +11,8 @@
   transition: background 0.5s;
   color: color(white);
   cursor: pointer;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   display: inline-block;
 
   &:hover {

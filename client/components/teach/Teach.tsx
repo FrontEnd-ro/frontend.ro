@@ -5,7 +5,7 @@ import Search from '~/components/Search';
 import { RootState } from '~/redux/root.reducer';
 import ExerciseSubmission from './ExerciseSubmission/ExerciseSubmission';
 import ExerciseSubmissionSkeleton from './ExerciseSubmission/ExerciseSubmissionSkeleton';
-import ExerciseService from '~/services/ExerciseSubmissions.service';
+import ExerciseService from '~/services/Exercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { loadSubmissions, searchSubmissions } from '~/redux/exercise-submissions/exercise-submissions.actions';
 import PageContainer from '../PageContainer';

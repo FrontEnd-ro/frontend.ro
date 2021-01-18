@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { extractDbErrorMessage } = require('./database');
 
 const PAGE_SIZE = 25;

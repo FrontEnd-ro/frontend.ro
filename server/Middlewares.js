@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('./user/user.model');
-const ServerError = require('./ServerUtils');
+const { ServerError } = require('./ServerUtils');
 /** 
  * Everyone can access the API. 
  * If you have a token, it will be added into the req.body 
@@ -21,11 +21,9 @@ function PublicMiddleware(req, res, next) {
         if (err) {
           next();
         } else {
-          UserModel.findUserBy({ _id: payload.data })
+          UserModel.findUserBy({ _id: payload._id })
             .then(resp => {
-              req.body.user = Object.assign({}, resp, {
-                unique_id: payload.data
-              });
+              req.body.user = Object.assign({}, resp);
               next();
             })
             .catch(() => next());
@@ -37,7 +35,7 @@ function PublicMiddleware(req, res, next) {
 
 /** Only authorized users can access this API */
 function PrivateMiddleware(req, res, next) {
-  const authToken = req.cookies.authToken;
+  const authToken = req.cookies.token;
 
   if (!authToken) {
     new ServerError(401, 'Unauthorized!').send(res);
@@ -55,11 +53,9 @@ function PrivateMiddleware(req, res, next) {
         new ServerError(401, 'Unauthorized!').send(res);
         return
       } else {
-        UserModel.findUserBy({ _id: payload.data })
+        UserModel.findUserBy({ _id: payload._id })
           .then(resp => {
-            req.body.user = Object.assign({}, resp, {
-              unique_id: payload.data
-            });
+            req.body.user = Object.assign({}, resp);
             next();
           })
           .catch(err => res.status(err.status).json(err));

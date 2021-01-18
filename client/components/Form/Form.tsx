@@ -1,15 +1,14 @@
-import React, { PropsWithChildren } from 'react';
+import React, { FormHTMLAttributes, PropsWithChildren } from 'react';
 import noop from 'lodash/noop';
 
 import styles from './Form.module.scss';
 
-interface Props {
+interface Props extends FormHTMLAttributes<HTMLFormElement> {
   onSubmit: (data: any) => void;
 
   withStyles?: boolean;
   className?: string;
   autoComplete?: string;
-  onInput?: (target?: EventTarget) => void;
 }
 
 export default function Form({
@@ -19,6 +18,7 @@ export default function Form({
   className = '',
   autoComplete = 'on',
   children,
+  ...rest
 }: PropsWithChildren<Props>) {
   const submit = (e) => {
     e.persist();
@@ -41,7 +41,12 @@ export default function Form({
         .filter((el) => el.name)
         .forEach((el) => {
           if (el.hasOwnProperty('checked')) {
-            data[el.name] = el.checked;
+            if (el.type === 'checkbox') {
+              data[el.name] = el.checked;
+            }
+            if (el.type === 'radio' && el.checked) {
+              data[el.name] = el.value;
+            }
           } else {
             data[el.name] = el.value;
           }
@@ -56,9 +61,9 @@ export default function Form({
       className={withStyles ? `${styles.form} ${className}` : className}
       spellCheck="false"
       onSubmit={submit}
-      onInput={(e) => onInput(e.target)}
       autoCorrect="off"
       autoComplete={autoComplete}
+      {...rest}
     >
       {children}
     </form>

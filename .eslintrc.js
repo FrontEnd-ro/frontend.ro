@@ -27,6 +27,9 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'no-prototype-builtins': 'off',
     'no-param-reassign': 'off',
+    'arrow-body-style': 'off',
+    'no-shadow': 'off',
+    'no-restricted-syntax': 'off',
   },
   plugins: [
     '@typescript-eslint',

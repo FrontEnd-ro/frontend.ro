@@ -148,9 +148,9 @@ class Login extends Component<MyProps, MyState> {
                   name="username"
                   onChange={this.onUsernameChange}
                 >
-                  {usernameExists && <FontAwesomeIcon className="text-red" icon={faTimes} />}
-                  {usernameExists === false && <FontAwesomeIcon className="text-green" icon={faCheck} />}
-                  {usernameExists === undefined && username && <FontAwesomeIcon className="rotate" icon={faSpinner} />}
+                  {usernameExists && <FontAwesomeIcon width="1em" className="text-red" icon={faTimes} />}
+                  {usernameExists === false && <FontAwesomeIcon width="1em" className="text-green" icon={faCheck} />}
+                  {usernameExists === undefined && username && <FontAwesomeIcon width="1em" className="rotate" icon={faSpinner} />}
                 </InputWithIcon>
               </label>
             </FormGroup>

@@ -12,6 +12,7 @@ interface Props {
   title?: string;
   markdown?: string;
   className?: string;
+  disabled?: boolean;
   onInput: (text: string) => void;
   onUpload: (files: File[], cursorPosition: number) => void;
 }
@@ -20,6 +21,7 @@ function MarkdownTextarea({
   title = 'Modifică',
   markdown = '',
   className = '',
+  disabled = false,
   onInput,
   onUpload,
 }: Props) {
@@ -118,7 +120,7 @@ function MarkdownTextarea({
               {isUploading ? <FontAwesomeIcon className="rotate" icon={faSpinner} /> : 'Adaugă imagini'}
               <input
                 ref={fileInputRef}
-                disabled={isUploading}
+                disabled={isUploading || disabled}
                 type="file"
                 multiple={false}
                 accept={IMAGES_MIME_TYPES.join(',')}

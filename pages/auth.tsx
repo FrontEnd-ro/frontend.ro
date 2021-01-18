@@ -7,14 +7,14 @@ export default function Authpage() {
   return (
     <>
       <Header />
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
       <Login />
-      <br/>
-      <br/>
-      <br/>
-      
+      <br />
+      <br />
+      <br />
+
       <Footer />
     </>
   );

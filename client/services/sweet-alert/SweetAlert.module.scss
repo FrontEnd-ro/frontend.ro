@@ -5,8 +5,12 @@
 }
 
 .swal2-content {
-  [class*=login-form] {
+  [class*='login-form'] {
     border: none;
     margin: 1em 2em;
   }
+
+}
+.swal-actions button {
+  margin: 0 1em;
 }

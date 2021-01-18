@@ -54,3 +54,44 @@ export const formatDate = (dateToFormat: Date): string => {
   let str = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
   return str;
 };
+
+export const alphabeticSortComparator = (nameA, nameB) => {
+  let lowercaseNameA = nameA.toLowerCase();
+  let lowercaseNameB = nameB.toLowerCase();
+
+  if (lowercaseNameA === lowercaseNameB) {
+    return 0;
+  }
+
+  return lowercaseNameA < lowercaseNameB ? -1 : 1;
+};
+
+export const nextUntitledFilename = (existingNames, NAME_BASE = 'Untitled file') => {
+  let existingUntitledNumbers = [];
+  existingNames.forEach((name) => {
+    if (name === NAME_BASE) {
+      existingUntitledNumbers.push(0);
+      return;
+    }
+
+    let group = new RegExp(`^${NAME_BASE} [(](.+)[)]$`, 'g').exec(name);
+    if (group) {
+      existingUntitledNumbers.push(Number(group[1]));
+    }
+  });
+
+  existingUntitledNumbers.sort((nrA, nrB) => nrA - nrB);
+
+  let newName = NAME_BASE;
+  let count = 0;
+  let i = 0;
+
+  existingUntitledNumbers.forEach((nr) => {
+    if ((nr === 0 && newName === NAME_BASE) || nr === count) {
+      count = nr + 1;
+      newName = `${NAME_BASE} (${count})`;
+    }
+  });
+
+  return newName;
+};

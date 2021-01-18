@@ -1,4 +1,7 @@
+const multer = require('multer');
 const express = require('express');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+
 const ExerciseModel = require('./exercise.model');
 const {
   PublicMiddleware,
@@ -6,9 +9,12 @@ const {
   PublicOrOwnExercise,
   OwnExercise
 } = require('../Middlewares');
+const { MAX_MEDIA_BYTES } = require('../../shared/SharedConstants')
 
 const exerciseRouter = express.Router();
 
+const s3 = new S3Client({ region: process.env.AWS_REGION });
+const upload = multer({ storage: multer.memoryStorage() });
 
 exerciseRouter.get('/', [PublicMiddleware], async function getAllExercises(req, res) {
   let results = await ExerciseModel.getAllPublic();
@@ -29,6 +35,47 @@ exerciseRouter.get('/', [PublicMiddleware], async function getAllExercises(req, 
 exerciseRouter.post('/', [PrivateMiddleware], async function createExercise(req, res) {
   const exercise = await ExerciseModel.create(req.body);
   res.json(exercise);
+})
+
+exerciseRouter.post('/media', [PrivateMiddleware], function createExercise(req, res) {
+  const userId = req.body.user._doc._id;
+
+  upload.single('file')(req, null, async (err) => {
+    if (err) {
+      console.error('[uploadExerrciseMedia]', err);
+      new ServerError(400, 'Fișierul nu a putut fi încărcat. Încearcă din nou!').send(res);
+      return;
+    }
+
+    const { name } = req.body;
+    const { file } = req;
+
+    if (req.file.size > MAX_MEDIA_BYTES) {
+      console.error('[uploadExerrciseMedia]', err);
+      new ServerError(400, `Dimensiunea maximă a unui fișier este de ${MAX_MEDIA_MB}MB`).send(res);
+      return;
+    }
+
+    const Key = `${userId}/${name}`;
+
+    const uploadParams = {
+      Bucket: process.env.AWS_BUCKET,
+      Key,
+      Body: file.buffer,
+      ACL: 'public-read',
+    };
+
+    try {
+      await s3.send(new PutObjectCommand(uploadParams));
+      res.json({
+        name,
+        url: `${process.env.CLOUDFRONT_UPLOAD}/${Key}`,
+      });
+    } catch (err) {
+      console.log('[s3Upload]', err);
+      new ServerError(500, err.message || 'Oops! Se pare că nu am putut încărca fișierele. Încearcă din nou.').send(res);
+    }
+  });
 })
 
 exerciseRouter.get('/:exerciseId', [PublicOrOwnExercise], async function getExercise(req, res) {

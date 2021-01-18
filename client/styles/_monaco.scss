@@ -1,0 +1,41 @@
+@import './variables';
+
+.monaco-editor .overflow-guard {
+  border: 1px solid color(silver);
+  border-left: 0;
+}
+
+.monaco__feedback--praise {
+  background-color: rgba(color(green), 0.4);
+}
+
+.monaco__feedback--opinion {
+  background-color: rgba(color(yellow), 0.4);
+}
+
+.monaco__feedback--improvement {
+  background-color: rgba(color(red), 0.4);
+}
+
+.monaco__line {
+  position: absolute;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50%;
+  top: 5px;
+  left: 2px !important;
+
+  &.monaco__line--praise {
+    background: color(green);
+  }
+
+  &.monaco__line--opinion {
+    background: color(yellow);
+    margin-left: 8px;
+  }
+
+  &.monaco__line--improvement {
+    background: color(red);
+    margin-left: 16px;
+  }
+}

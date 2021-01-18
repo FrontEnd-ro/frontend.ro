@@ -14,7 +14,7 @@ userRouter.get('/check-username/:username', async function checkUsername(req, re
   if (user) {
     res.status(200).end();
   } else {
-    throw new ServerError(404, `Username ${username} is not registered`);
+    new ServerError(404, `Username ${username} is not registered`).send(res);
   }
 })
 

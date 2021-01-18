@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const { connectToDb } = require('./database');
 const { default: sslRedirect } = require('heroku-ssl-redirect');
 
+require('dotenv').config();
+
 /** API routers */
 const userRouter = require('./user/user.router');
 const exerciseRouter = require('./exercise/exercise.router');

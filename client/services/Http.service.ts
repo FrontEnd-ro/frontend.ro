@@ -7,7 +7,7 @@ class Http {
     return this.httpGeneric(url, {
       ...options,
       method: 'POST',
-      body: JSON.stringify(body),
+      body,
     });
   }
 
@@ -15,7 +15,7 @@ class Http {
     return this.httpGeneric(url, {
       ...options,
       method: 'PUT',
-      body: JSON.stringify(body),
+      body,
     });
   }
 
@@ -23,7 +23,7 @@ class Http {
     return this.httpGeneric(url, {
       ...options,
       method: 'PATCH',
-      body: JSON.stringify(body),
+      body,
     });
   }
 
@@ -31,16 +31,25 @@ class Http {
     return this.httpGeneric(url, {
       ...options,
       method: 'DELETE',
-      body: JSON.stringify(body),
+      body,
     });
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private httpGeneric(url: string, options = {}) {
+  private httpGeneric(url: string, options: Record<string, any> = {}) {
+    const headersInit : HeadersInit = {
+      'content-type': 'application/json',
+    };
+
+    if (options.body && !(options.body instanceof FormData)) {
+      // eslint-disable-next-line no-param-reassign
+      options.body = JSON.stringify(options.body);
+    } else {
+      delete headersInit['content-type'];
+    }
+
     return fetch(url, {
-      headers: new Headers({
-        'content-type': 'application/json',
-      }),
+      headers: new Headers(headersInit),
       credentials: 'include',
       ...options,
     })

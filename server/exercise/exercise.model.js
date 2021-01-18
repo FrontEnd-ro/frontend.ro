@@ -11,7 +11,7 @@ const ExercisesSchema = new mongoose.Schema(
     type: { type: String, enum: ['html', 'css', 'js'] },
     tags: [{ type: String }],
     body: { type: String, required: true },
-    starting_code: { type: String },
+    example: { type: String },
     solution: { type: String, required: true },
     private: { type: Boolean, default: false },
   },
@@ -56,7 +56,7 @@ class ExerciseModel {
   }
 
   static async update(_id, payload) {
-    validateObjectid(_id);
+    validateObjectId(_id);
     const exercise = await Exercise.findById(_id);
 
     if (!exercise) {
@@ -70,7 +70,7 @@ class ExerciseModel {
   }
 
   static async delete(_id) {
-    validateObjectid(_id);
+    validateObjectId(_id);
 
     const exercise = await Exercise.findById(_id);
 
@@ -88,6 +88,17 @@ class ExerciseModel {
         resolve();
       });
     });
+  }
+
+  static sanitize(exercise) {
+    const sanitizedExercise = { ...exercise.toObject() };
+    sanitizedExercise.id = sanitizedExercise._id;
+
+    const propsToDelete = ['__v', 'user'];
+
+    propsToDelete.forEach((prop) => delete sanitizedExercise[prop]);
+
+    return sanitizedExercise;
   }
 }
 

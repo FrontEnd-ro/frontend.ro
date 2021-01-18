@@ -1,0 +1,19 @@
+@import '../../../styles/variables';
+
+.lesson-select {
+  width: 50%;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid color(silver);
+
+  p {
+    margin-bottom: 1.5em;
+    color: color(grey);
+
+    svg {
+      top: 2px;
+      position: relative;
+      margin-right: 0.5em;
+    }
+  }
+}

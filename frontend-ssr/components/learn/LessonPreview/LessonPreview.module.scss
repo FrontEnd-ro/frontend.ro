@@ -19,6 +19,7 @@
 
   [class*=LessonContributors] {
     right: 1em;
+    opacity: 0.5;
     bottom: 0.75em;
     position: absolute;
   }
@@ -36,9 +37,13 @@
     background-color: transparent;
   }
 
-  p {
-    margin-bottom: 3.5em;
+  [class*=LessonContributors] {
+    opacity: 1;
   }
+}
+
+.with--contributors p {
+  margin-bottom: 3.5em;
 }
 
 .cover {

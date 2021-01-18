@@ -1,4 +1,12 @@
-import { Diana, Pava } from './contributors';
+import {
+  CatalinPopusoi,
+  Diana,
+  NicolaeMaties,
+  Pava,
+  RobertParasca,
+  SebastianLatkolic,
+  DanielHutanu,
+} from './contributors';
 
 export type LessonDescription = {
   written: boolean;
@@ -45,6 +53,7 @@ export const LESSONS: LessonDescription[] = [
       'Scurtă introducere în programul pe care-l vom folosi să scriem cod.',
     url: '/intro/vs-code',
     type: 'intro',
+    contributors: [Diana],
   },
   /** HTML lessons */
   {
@@ -108,6 +117,22 @@ export const LESSONS: LessonDescription[] = [
     url: '/html/imagini',
     type: 'html',
   },
+  {
+    written: false,
+    title: 'Video și Audio',
+    description: 'Imaginile aduc mai multă "viață" site-urilor noastre dar putem merge un pas mai departe folosind elemente video și audio',
+    contributors: [SebastianLatkolic],
+    url: '/html/video-audio',
+    type: 'html',
+  },
+  {
+    written: false,
+    title: 'Formulare',
+    url: '/html/formulare',
+    description: 'Cu ce elemente putem construi formulare moderne, și care sunt cele mai bune practici legate de acestea.',
+    contributors: [RobertParasca],
+    type: 'html',
+  },
   /** CSS Lessons */
   {
     written: false,
@@ -123,6 +148,7 @@ export const LESSONS: LessonDescription[] = [
       'Browserul ne oferă mai multe moduri prin care putem aplica stiluri paginilor noastre. Hai să vobim despre fiecare în parte.',
     url: '/css/cum-sa-stilizam',
     type: 'css',
+    contributors: [DanielHutanu],
   },
   {
     written: false,
@@ -131,6 +157,7 @@ export const LESSONS: LessonDescription[] = [
       'Pentru a stiliza un element, sau mai multe, trebuie să le putem diferenția față de celelalte. Putem face acest lucru după tag, clase sau id-uri.',
     url: '/css/taguri-clase-si-id-uri',
     type: 'css',
+    contributors: [NicolaeMaties],
   },
   {
     written: false,
@@ -139,6 +166,7 @@ export const LESSONS: LessonDescription[] = [
       'Deși unele site-uri sunt cu adevărat WOW, la bază fiecare element e doar un dreptunghi cu câteva proprietăți mai speciale. Aici învățăm despre ele.',
     url: '/css/box-model',
     type: 'css',
+    contributors: [CatalinPopusoi],
   },
   {
     written: false,

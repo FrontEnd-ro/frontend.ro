@@ -61,6 +61,7 @@
     "redux": "^4.0.5",
     "sass": "^1.26.10",
     "sweetalert2": "^10.3.5",
+    "sweetalert2-react-content": "^3.2.2",
     "uuid": "^8.3.0"
   },
   "devDependencies": {

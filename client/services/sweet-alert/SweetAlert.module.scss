@@ -3,3 +3,10 @@
     color: #fff;
   }
 }
+
+.swal2-content {
+  [class*=login-form] {
+    border: none;
+    margin: 1em 2em;
+  }
+}

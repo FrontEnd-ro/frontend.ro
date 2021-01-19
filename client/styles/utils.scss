@@ -28,6 +28,10 @@
   color: color(green);
 }
 
+.text-blue {
+  color: color(blue);
+}
+
 .bg-white {
   background: color(white);
 }
@@ -96,6 +100,10 @@
 }
 
 /** Display */
+.d-none {
+  display: none;
+}
+
 .d-flex {
   display: flex;
 }
@@ -124,11 +132,11 @@
   align-items: center;
 }
 
-.flex-row	{
+.flex-row {
   flex-direction: row;
 }
 
-.flex-wrap	{
+.flex-wrap {
   flex-wrap: wrap;
 }
 
@@ -201,5 +209,5 @@
 /** Animations */
 
 .rotate {
-  animation: 0.5s rotateAnimation linear infinite ;
+  animation: 0.5s rotateAnimation linear infinite;
 }

@@ -1,7 +1,7 @@
-@import "variables";
-@import "utils";
-@import "common";
-@import "animations";
+@import 'variables';
+@import 'utils';
+@import 'common';
+@import 'animations';
 
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
@@ -26,6 +26,7 @@ body,
 }
 
 body {
+  overflow-x: hidden;
   font-size: 1.25em;
 }
 

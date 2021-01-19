@@ -123,9 +123,10 @@ export const LESSONS: LessonDescription[] = [
     type: 'css',
   },
   {
-    written: false,
+    written: true,
     title: 'Tag-uri, clase și id-uri',
     contributors: [Nicolae],
+    cover: '/images/lessons/tags-classes-ids__cover.svg',
     description:
       'Pentru a stiliza un element, sau mai multe, trebuie să le putem diferenția față de celelalte. Putem face acest lucru după tag, clase sau id-uri.',
     url: '/css/taguri-clase-si-iduri',

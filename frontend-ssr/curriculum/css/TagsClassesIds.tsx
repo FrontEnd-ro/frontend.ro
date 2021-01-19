@@ -4,13 +4,12 @@ import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
   LessonCover,
-  LessonFigure,
   LessonHeading,
   LessonTip,
 } from '~/components/lessons';
 import { Nicolae } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
-import coverSvg from '~/public/images/lessons/text-elements__cover.svg';
+import coverSvg from '~/public/images/lessons/tags-classes-ids__cover.svg';
 
 const contributors = [Nicolae];
 const chapters = [
@@ -119,7 +118,7 @@ export default function TagsClassesIds() {
             Pentru a selecta o clasa specifica, va trebui
             sa scriem in CSS caracterul (.) urmat de numele clasei, in cazul nostru
             <strong className="formatted">clasaMea</strong>
-            , selectarea tuturor elementelor cu numele
+            , selectarea tuturor elementelor cu clasa
             {' '}
             <strong className="formatted">clasaMea</strong>
             {' '}
@@ -162,7 +161,7 @@ export default function TagsClassesIds() {
             {' '}
             <strong className="formatted">.descriereText</strong>
             {' '}
-            dupa cum urmeaza:
+            ca in exemplul urmator:
           </p>
           <Highlight
             className="my-5"
@@ -177,7 +176,7 @@ export default function TagsClassesIds() {
           />
           <p>
             O alta regula foarte importanta atunci cand aplicam
-            clasele, este precedenta, aceasta din urma este foarte importanta
+            clasele, este precedenta, aceasta din urma este
             atunci cand avem mai multe clase atribuite unui singur element,
             spre exemplu avem un element cu urmatoarele clase:
             <strong className="formatted">{'<h1 class="textTitlu textRosu">FrontEnd.ro</h1>'}</strong>
@@ -211,25 +210,7 @@ export default function TagsClassesIds() {
               `
             }
             />
-            Care credeti ca va fi culoare elementului
-            {' '}
-            <strong className="formatted">h1</strong>
-            {' '}
-            cu clasele
-            {' '}
-            <strong className="formatted">textTitlu</strong>
-            {' '}
-            respectiv
-            {' '}
-            <strong className="formatted">textRosu</strong>
-            {' '}
-            ?
-            <br />
-            Daca ati spus rosu inseamna ca este corect,
-            ultima clasa atribuita unui element atunci cand un elemente
-            are doua sau mai multe clase va avea intaietate cand se va schimba
-            aceasi proprietate ce a fost schimbata anterior in alta clasa al aceluiasi
-            element.
+            In acest caz elementul h1 va avea culoarea rosie.
           </p>
         </section>
         <section>
@@ -249,7 +230,7 @@ export default function TagsClassesIds() {
             <br />
             <br />
             La fel de simplu ca si in cazul clasei,
-            nu mai ca in cazul id-urilor in loc sa precedam numele clasei cu
+            numai ca in cazul id-urilor in loc sa precedam numele clasei cu
             (.) vom folosi (#). Exact, ala de pe Instagram.
             Avem si un exemplu pentru selectarea elementelor cu ajutorul id-ului:
             <Highlight
@@ -261,10 +242,10 @@ export default function TagsClassesIds() {
                 }
               `}
             />
-            Probabil o sa va intrebati: Dar daca am un
-            element cu atributele id si clasa si voi incerca sa schimb culoarea acelui element
-            si in stilul id-ului si in cel al clasei, ce se va intampla atunci ?
-            Haideti sa vedem impreuna ce se va intampla, sa luam ca si exemplu elementul:
+            Probabil o sa va intrebati: Dar daca am un element cu atributele id si
+            clasa si voi incerca sa schimb culoarea acelui element si in stilul id-ului si
+            in cel al clasei, ce se va intampla atunci?
+            Haideti sa vedem impreuna ce se va intampla:
             <Highlight
               className="my-5"
               language="html"
@@ -288,7 +269,7 @@ export default function TagsClassesIds() {
                    color: green;
                  }
 
-                 #titluAlbastru {
+                 .titluAlbastru {
                   color: green;
                  }
                 `
@@ -313,7 +294,7 @@ export default function TagsClassesIds() {
             ?
             <br />
             Daca ati raspuns rosu inseamna ca este corect, id-ul in acest caz are precedenta,
-            indiferent de numarul de clase atribuit unui element, proprietatea id-ului va avea
+            indiferent de numarul de clase atribuite unui element, proprietatea id-ului va avea
             intotdeauna intaietate.
             <LessonTip>
               Diferenta foarte

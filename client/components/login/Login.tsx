@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import debounce from 'lodash/debounce';
 import { DebouncedFunc } from 'lodash';
-import { connect, ConnectedProps } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import UserService from '~/services/User.service';
 import LoginButtons from './LoginButtons/LoginButtons';
-import { RootState } from '~/redux/root.reducer';
 import Form, {
-  FormGroup, Checkbox, InputWithIcon, PasswordReveal,
+  FormGroup,
+  Checkbox,
+  InputWithIcon,
+  PasswordReveal,
 } from '~/components/Form';
-
-import styles from './Login.module.scss';
 import { loadInfo } from '~/redux/user/user.actions';
 import { UserState } from '~/redux/user/types';
+import { getStore } from '~/redux/store';
 
-interface MyProps extends ConnectedProps<typeof connector> {
+import styles from './Login.module.scss';
+
+interface MyProps {
   className?: string;
+  onSuccess?: () => void
 }
 
 interface MyState {
@@ -91,13 +94,18 @@ class Login extends Component<MyProps, MyState> {
 
   submit = (props) => {
     const { mode } = this.state;
-    const { dispatch } = this.props;
+    const { onSuccess } = this.props;
     const apiToCall = mode === 'register' ? UserService.register : UserService.login;
 
     this.setState({ loading: true });
 
     apiToCall(props)
-      .then((user: UserState['info']) => dispatch(loadInfo(user)))
+      .then((user: UserState['info']) => {
+        getStore().dispatch(loadInfo(user));
+        if (onSuccess) {
+          onSuccess();
+        }
+      })
       .catch((error) => this.setState({ serverError: error.message }))
       .finally(() => this.setState({ loading: false }));
   }
@@ -110,13 +118,9 @@ class Login extends Component<MyProps, MyState> {
       usernameExists,
       username,
     } = this.state;
-    const { user } = this.props;
 
     return (
       <div className={styles['login-form']}>
-        <p>
-          {user.info?.username}
-        </p>
         <Form onSubmit={this.submit} onInput={() => this.setState({ serverError: null })}>
           <FormGroup className="mb-4">
             <label>
@@ -163,7 +167,7 @@ class Login extends Component<MyProps, MyState> {
             <Checkbox
               required
               name="confirm"
-              className="mb-4"
+              className="d-flex mb-4"
             >
               <span style={{ fontSize: '0.85em' }}>
                 Am citit și sunt de acord cu
@@ -191,12 +195,4 @@ class Login extends Component<MyProps, MyState> {
   }
 }
 
-function mapStateToProps(state: RootState) {
-  return {
-    user: state.user,
-  };
-}
-
-const connector = connect(mapStateToProps);
-
-export default connector(Login);
+export default Login;

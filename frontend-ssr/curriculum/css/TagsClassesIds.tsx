@@ -7,11 +7,11 @@ import Lesson, {
   LessonHeading,
   LessonTip,
 } from '~/components/lessons';
-import { Nicolae } from '~/services/contributors';
+import { NicolaeMaties } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/tags-classes-ids__cover.svg';
 
-const contributors = [Nicolae];
+const contributors = [NicolaeMaties];
 const chapters = [
   { title: 'Tag-uri', id: 'tags' },
   { title: 'Clase', id: 'classes' },

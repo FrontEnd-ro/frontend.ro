@@ -1,0 +1,83 @@
+@import '../../styles/variables';
+
+.markdown-textarea {
+
+  & > div {
+    // Wrapping container that includes both 
+    // `textarea` and the `preview` div.
+
+    & > div {
+      padding: 0.5em;
+      background: color(white);
+    }
+
+    width: 100%;
+    border-radius: 0.5em;
+    border-top-left-radius: 0;
+    border: 1px solid color(silver);
+  }
+
+  textarea {
+    width: 100%;
+    border: none;
+    font-size: 1em;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+  }
+
+  footer {
+    padding: 0 0.5em;
+    border-radius: 0.5em;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background: color(darker-white);
+
+    &:hover {
+      background: darken(color(darker-white), 10%);
+    }
+
+    label {
+      font-size: 0.8em;
+      cursor: pointer;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0.5em;
+      right: 0;
+      text-align: left;
+    }
+
+    svg {
+      color: color(grey);
+    }
+  }
+}
+
+.label {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.5em;
+  font-size: 1em;
+  background: none;
+  background: color(white);
+  border: 1px solid color(silver);
+  color: color(black);
+  border-bottom: 0;
+  border-radius: 0.5em;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  &:nth-of-type(1) {
+    border-top-right-radius: 0;
+  }
+
+  &:nth-of-type(2) {
+    border-top-left-radius: 0;
+  }
+
+  &:hover,
+  &.is--checked {
+    @extend %gradientBackground;
+    @extend %blackGradientBackground;
+  }
+}

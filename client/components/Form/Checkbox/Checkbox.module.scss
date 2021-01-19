@@ -2,11 +2,11 @@
 
 .checkbox-wrapper {
   cursor: pointer;
-  display: inline-flex;
 }
 
 .checkbox {
   color: color(green);
+  display: inline-block;
 
   input {
     opacity: 0;

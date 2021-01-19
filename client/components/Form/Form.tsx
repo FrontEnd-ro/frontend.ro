@@ -6,6 +6,7 @@ import styles from './Form.module.scss';
 interface Props {
   onSubmit: (data: any) => void;
 
+  withStyles?: boolean;
   className?: string;
   autoComplete?: string;
   onInput?: (target?: EventTarget) => void;
@@ -13,6 +14,7 @@ interface Props {
 
 export default function Form({
   onSubmit,
+  withStyles = true,
   onInput = noop,
   className = '',
   autoComplete = 'on',
@@ -51,7 +53,7 @@ export default function Form({
 
   return (
     <form
-      className={`${styles.form} ${className}`}
+      className={withStyles ? `${styles.form} ${className}` : className}
       spellCheck="false"
       onSubmit={submit}
       onInput={(e) => onInput(e.target)}

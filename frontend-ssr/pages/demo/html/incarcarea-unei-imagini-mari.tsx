@@ -6,7 +6,7 @@ import Footer from '~/components/Footer';
 import Demo, { DemoPreview } from '~/components/demo';
 import Highlight from '~/components/Highlight/Highlight';
 
-export default function ContentShifting() {
+export default function HugeImageLoading() {
   const title = 'Încărcarea greoaie a unei imagini 4K';
 
   return (

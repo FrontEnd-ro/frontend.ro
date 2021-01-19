@@ -14,12 +14,12 @@ import coverSvg from '~/public/images/lessons/text-elements__cover.svg';
 
 const contributors = [Diana];
 const chapters = [
-  { title: 'Titluri (Headings)', id: 'headings' },
-  { title: 'Paragrafe', id: 'paragraphs' },
-  { title: '<hr> element', id: 'hr-element' },
-  { title: 'Citate', id: 'quotes' },
-  { title: '<em> & <strong> elements', id: 'em-and-strong' },
-  { title: 'Exerciții', id: 'exercises' },
+  { title: 'Titluri (Headings)', id: 'titluri' },
+  { title: 'Paragrafe', id: 'paragrafe' },
+  { title: 'Elementul <hr>', id: 'elementul-hr' },
+  { title: 'Citate', id: 'citate' },
+  { title: 'Elementele <em> & <strong>', id: 'em-strong' },
+  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 export default function TextsLesson() {
@@ -29,11 +29,11 @@ export default function TextsLesson() {
         title="Texte | Lecție HTML"
         shareImage="https://frontend.ro/seo/html-text-elements.jpg"
         description="Avem la dispoziție mai multe elemente când vine vorba de texte, iar aici învățăm când și cum să le folosim."
-        url="https://FrontEnd.ro/html/text-elements"
+        url="https://FrontEnd.ro/html/texte"
       />
       <Lesson title="Texte" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
-        <LessonCover>
+        <LessonCover resizeOffset={150}>
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{
             __html: coverSvg,
@@ -46,7 +46,7 @@ export default function TextsLesson() {
           accentuarea cuvintelor și multe altele.
         </p>
         <section>
-          <LessonHeading as="h3" id="headings">
+          <LessonHeading as="h3" id="titluri">
             Titluri (Headings)
           </LessonHeading>
           <p>
@@ -123,7 +123,7 @@ export default function TextsLesson() {
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/headings.png"
             alt="Toate cele 6 headinguri"
-            demo="/demo/html/headings"
+            demo="/demo/html/titluri"
           />
           <p>
             Atunci când realizăm structura unei pagini este bine să luăm în
@@ -150,7 +150,7 @@ export default function TextsLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h3" id="paragraphs">
+          <LessonHeading as="h3" id="paragrafe">
             Paragrafe
           </LessonHeading>
           <p>
@@ -182,8 +182,8 @@ export default function TextsLesson() {
           <LessonFigure
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/paragraphs-and-headings.png"
-            alt="Paragrafe și heading-uri"
-            demo="/demo/html/paragraphs-and-headings"
+            alt="Paragrafe și titluri"
+            demo="/demo/html/paragrafe-titluri"
           />
           <div className="dots" />
           <p>
@@ -216,12 +216,12 @@ export default function TextsLesson() {
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/line-break.png"
             alt="Elementul <br>"
-            demo="/demo/html/line-break"
+            demo="/demo/html/elementul-br"
           />
         </section>
         <section>
-          <LessonHeading as="h3" id="hr-element">
-            {'<hr> element'}
+          <LessonHeading as="h3" id="elementul-hr">
+            {'Elementul <hr>'}
           </LessonHeading>
           <p>
             Elementul
@@ -247,11 +247,11 @@ export default function TextsLesson() {
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/horizontal-line.png"
             alt="Elementul <hr> (horizontal-line)"
-            demo="/demo/html/horizontal-line"
+            demo="/demo/html/elementul-hr"
           />
         </section>
         <section>
-          <LessonHeading as="h3" id="quotes">
+          <LessonHeading as="h3" id="citate">
             Citate
           </LessonHeading>
           <p>
@@ -295,7 +295,7 @@ export default function TextsLesson() {
             withBorder
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/quotes.png"
             alt="Citate"
-            demo="/demo/html/quotes"
+            demo="/demo/html/citate"
           />
           <LessonTip>
             După cum poți observa mai sus, ambele elemente au atributul
@@ -306,8 +306,8 @@ export default function TextsLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h3" id="em-and-strong">
-            {'<em> & <strong> elements'}
+          <LessonHeading as="h3" id="em-strong">
+            {'Elementele <em> & <strong>'}
           </LessonHeading>
           <p>
             În limbajul obișnuit, subliniem adesea cuvinte pentru a modifica
@@ -365,13 +365,6 @@ export default function TextsLesson() {
             {' '}
             pe care vom aplica stiluri CSS.
           </p>
-        </section>
-        <section>
-          <LessonHeading as="h3" id="exercises">
-            Exerciții
-          </LessonHeading>
-          <p className="text-bold text-center"> În curând!</p>
-          <br />
         </section>
       </Lesson>
     </>

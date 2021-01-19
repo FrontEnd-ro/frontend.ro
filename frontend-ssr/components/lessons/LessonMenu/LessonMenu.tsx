@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TableOfContents, { Chapters } from '~/components/TableOfContents';
+import TableOfContents, { Chapter } from '~/components/TableOfContents';
 import { useOutsideClick } from '~/services/Hooks';
 
 import styles from './LessonMenu.module.scss';
@@ -10,7 +10,7 @@ interface Props {
   isOpen: boolean,
   close: () => void,
   title: string,
-  chapters: Chapters[]
+  chapters: Chapter[]
 }
 
 export default function LessonMenu({
@@ -32,7 +32,7 @@ export default function LessonMenu({
           <FontAwesomeIcon icon={faTimes} />
         </button>
       </header>
-      <TableOfContents chapters={chapters} />
+      <TableOfContents onChapterClick={close} chapters={chapters} />
     </aside>
   );
 }

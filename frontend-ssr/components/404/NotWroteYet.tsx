@@ -2,16 +2,13 @@ import React from 'react';
 import SEOTags from '../SEOTags';
 import Header from '../Header';
 import Footer from '../Footer';
-import { GITHUB_URL } from '~/services/Constants';
+import { GITHUB_URL, LessonDescription } from '~/services/Constants';
 
 import styles from './404.module.scss';
 import PageContainer from '../PageContainer';
 
 interface Props {
-  lesson: {
-    title: string;
-    href: string;
-  }
+  lesson: LessonDescription
 }
 
 export default function NotWroteYet({ lesson }: Props) {
@@ -29,15 +26,36 @@ export default function NotWroteYet({ lesson }: Props) {
             <h1>
               Hey! Ai ajuns în locul potrivit, dar puțin cam devreme...
             </h1>
-            <img width="400" src="/images/letters_ilustration.png" alt="Big Font Letters and human near them" />
+            <img
+              width="400"
+              src={lesson.contributors ? lesson.contributors[0].avatar : '/images/letters_ilustration.png'}
+              alt={lesson.contributors ? lesson.contributors[0].name : 'Big Font Letters and human near them'}
+            />
           </div>
-          <p>
-            Plănuim să scriem acest articol despre
-            {' '}
-            <strong>{lesson.title}</strong>
-            {' '}
-            dar deocamdată lucrăm la alte lucruri și va mai dura puțin...
-          </p>
+          {
+            lesson.contributors
+              ? (
+                <p>
+                  <a href={lesson.contributors[0].url} target="_blank" rel="noreferrer">{lesson.contributors[0].name}</a>
+                  {' '}
+                  lucrează la această lecție despre
+                  {' '}
+                  <strong>{lesson.title}</strong>
+                  {' '}
+                  și va fi disponibilă în curând.
+                </p>
+              )
+              : (
+                <p>
+                  Plănuim să scriem acest articol despre
+                  {' '}
+                  <strong>{lesson.title}</strong>
+                  {' '}
+                  dar deocamdată lucrăm la alte lucruri și va mai dura puțin...
+                </p>
+              )
+          }
+
           <p>
             Până atunci însă,
             {' '}
@@ -48,7 +66,7 @@ export default function NotWroteYet({ lesson }: Props) {
           </p>
           <div className="text-center">
             <a
-              className="btn btn--blue"
+              className={`${styles.cta} btn btn--blue`}
               href={`${GITHUB_URL}/blob/master/CONTRIBUTING.md`}
             >
               Hai pe GitHub și contribuie cu o lecție

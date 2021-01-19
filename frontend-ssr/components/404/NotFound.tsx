@@ -26,7 +26,7 @@ export default function NotFoundPage() {
             Se pare că pagina pe care o cauți nu mai există.
           </h2>
           <Link href="/">
-            <a className="btn btn--blue">Navighează acasă!</a>
+            <a className={`${styles.cta} btn btn--blue`}>Navighează acasă!</a>
           </Link>
         </PageContainer>
 

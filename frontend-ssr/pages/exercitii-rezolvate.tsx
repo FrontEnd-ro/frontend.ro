@@ -16,7 +16,7 @@ function TeachPage({ hasSubmissions }: {hasSubmissions: boolean}) {
       <SEOTags
         title="Exerciții Rezolvate | FrontEnd.ro"
         description="Oferă feedback pentru exerciții rezolvate."
-        url="https://FrontEnd.ro/teach"
+        url="https://FrontEnd.ro/exercitii-rezolvate"
       />
       <Header />
       {

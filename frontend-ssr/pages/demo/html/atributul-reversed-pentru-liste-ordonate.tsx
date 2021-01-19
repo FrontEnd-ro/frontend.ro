@@ -6,8 +6,9 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 
-export default function MissingImage() {
-  const title = 'Elementul <hr> adaugă o linie de separare';
+export default function OrderedListsReversed() {
+  const title = 'Atributul \'reversed\' pentru liste ordonate';
+
   return (
     <>
       <Head>
@@ -21,30 +22,24 @@ export default function MissingImage() {
       <>
         <Header demoPage />
         <Demo title={title}>
-          <p>
-            Elementul
-            {' '}
-            <strong className="formatted">
-              {'<hr>'}
-            </strong>
-            {' '}
-            (horizontal line)
-            este un separator între
-            secțiuni/elemente din pagină.
-            .
-          </p>
+          <p />
+
           <DemoPreview>
-            <p> O primă regulă în această casă: Întotdeauna zîmbește! </p>
-            <hr />
-            <p> A doua regulă: Vino cu prăjituri! </p>
+            <ol reversed type="A">
+              <li> Pornește laptopul </li>
+              <li> Deschide Visual Studio Code </li>
+              <li> Începe să codezi </li>
+            </ol>
           </DemoPreview>
           <Highlight
             className="my-5"
             language="html"
             code={`
-<p> O primă regulă în această casă: Întotdeauna zîmbește! </p>
-<hr>
-<p> A doua regulă: Vino cu prăjituri! </p>
+<ol reversed type="A">
+  <li> Pornește laptopul </li>
+  <li> Deschide Visual Studio Code </li>
+  <li> Începe să codezi </li>
+</ol>  
 `}
           />
         </Demo>

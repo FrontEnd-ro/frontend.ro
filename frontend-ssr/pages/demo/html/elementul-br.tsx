@@ -6,7 +6,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 
-export default function MissingImage() {
+export default function LineBreak() {
   const title = 'Elementul <br> pentru a adăuga o linie nouă';
   return (
     <>

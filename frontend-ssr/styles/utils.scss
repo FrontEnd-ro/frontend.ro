@@ -104,10 +104,6 @@
   flex-direction: column;
 }
 
-.justify-content-between {
-  justify-content: space-between;
-}
-
 .d-block {
   display: block;
 }
@@ -126,6 +122,14 @@
 
 .align-items-center {
   align-items: center;
+}
+
+.flex-row	{
+  flex-direction: row;
+}
+
+.flex-wrap	{
+  flex-wrap: wrap;
 }
 
 /** Margins */

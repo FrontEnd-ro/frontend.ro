@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode, faLightbulb, faPen } from '@fortawesome/free-solid-svg-icons';
 
@@ -59,7 +60,7 @@ function NoSubmissionsYet() {
                 ,
                 deci cel mai ușor mod de a începe este pornind de la secțiunea
                 {' '}
-                <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noreferrer"> issues </a>
+                <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noreferrer">issues</a>
                 .
               </p>
               <p>
@@ -77,7 +78,15 @@ function NoSubmissionsYet() {
             <>
               <h3> Scrie lecții </h3>
               <p>
-                Aruncă un ochi aici pentru a vedea toate lecțiile scrise deja, cât și cele pe care
+                Aruncă un ochi
+                {' '}
+                <Link href="/lectii">
+                  <a>
+                    aici
+                  </a>
+                </Link>
+                {' '}
+                pentru a vedea toate lecțiile scrise deja, cât și cele pe care
                 ne dorim să le scriem dar n-am apucat încă.
               </p>
               <p>
@@ -90,11 +99,9 @@ function NoSubmissionsYet() {
             <>
               <h3> Creează exerciții </h3>
               <p>
-                Aruncă un ochi aici pentru a vedea toate exercițiile existente.
-                Le-am grupat pe capitole, iar fiecare e asignat uneia sau mai multor lecții.
-              </p>
-              <p>
-                Așteptăm submisii noi împreună cu soluțiile lor. 👍
+                La finalul fiecărei lecții găsești o serie de exerciții specifice pentru
+                acel capitol. Dacă ai idei de exerciții mai interesante/utile,
+                așteptăm submisii noi împreună cu soluțiile lor.
               </p>
             </>
           )}

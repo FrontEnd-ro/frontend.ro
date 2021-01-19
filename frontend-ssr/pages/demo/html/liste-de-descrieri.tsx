@@ -6,8 +6,9 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 
-export default function MissingImage() {
-  const title = 'Paragrafe și Heading-uri';
+export default function DescriptionLists() {
+  const title = 'Liste de descrieri';
+
   return (
     <>
       <Head>
@@ -21,21 +22,31 @@ export default function MissingImage() {
       <>
         <Header demoPage />
         <Demo title={title}>
-          <p> Atât paragrafele cât și heading-urile sunt afișate începând cu o nouă linie. </p>
+          <p>
+            Întâlnite mai rar decât listele ordonate sau cele neordonate, pe acestea le folosim
+            când vrem să definim termeni sau să asociem perechi nume/descriere.
+          </p>
           <DemoPreview>
-            <h1> Heading #1 </h1>
-            <p> Eu sunt pe o nouă linie </p>
-            <h2> Și eu! </h2>
-            <p> Nu zău?! </p>
+            <dl>
+              <dt> HTML </dt>
+              <dd> Hyper Text Markup Language </dd>
+
+              <dt> CSS </dt>
+              <dd> Cascading Style Sheets </dd>
+            </dl>
           </DemoPreview>
           <Highlight
             className="my-5"
             language="html"
             code={`
-<h1> Heading #1 </h1>
-<p> Eu sunt pe o nouă linie </p>
-<h2> Și eu! </h2>
-<p> Nu zău?! </p>
+<dl>
+  <dt> HTML </dt>
+  <dd> Hyper Text Markup Language </dd>
+
+  <dt> CSS </dt>
+  <dd> Cascading Style Sheets </dd>
+</dl>
+                   
 `}
           />
         </Demo>

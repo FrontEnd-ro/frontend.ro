@@ -18,8 +18,10 @@
   }
 
   [class*=LessonContributors] {
-    float: right;
-    margin: 1em 0 0.5em 0;
+    right: 1em;
+    opacity: 0.5;
+    bottom: 0.75em;
+    position: absolute;
   }
 }
 
@@ -34,6 +36,14 @@
   .cover {
     background-color: transparent;
   }
+
+  [class*=LessonContributors] {
+    opacity: 1;
+  }
+}
+
+.with--contributors p {
+  margin-bottom: 3.5em;
 }
 
 .cover {

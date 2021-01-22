@@ -58,8 +58,18 @@ function withClientMonitoring() {
   }, []);
 }
 
+function withSmoothScroll() {
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = 'initial';
+    };
+  }, []);
+}
+
 export {
   useOutsideClick,
   useClipboard,
   withClientMonitoring,
+  withSmoothScroll,
 };

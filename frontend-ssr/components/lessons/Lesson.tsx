@@ -5,7 +5,7 @@ import { LessonMenu } from '~/components/lessons';
 import { Chapter } from '~/components/TableOfContents';
 
 import styles from './Lesson.module.scss';
-import { withClientMonitoring } from '~/services/Hooks';
+import { withClientMonitoring, withSmoothScroll } from '~/services/Hooks';
 import { GITHUB_URL } from '~/services/Constants';
 import LessonHeading from './LessonHeading/LessonHeading';
 import LessonExercises from './LessonExercises/LessonExercises';
@@ -24,6 +24,7 @@ export default function Lesson({
 } : PropsWithChildren<Props>) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  withSmoothScroll();
   withClientMonitoring();
 
   return (

@@ -26,6 +26,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'no-prototype-builtins': 'off',
+    'no-param-reassign': 'off',
   },
   plugins: [
     '@typescript-eslint',

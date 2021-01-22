@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useRef, useState } from 'react';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import { LessonMenu } from '~/components/lessons';
@@ -22,9 +22,10 @@ export default function Lesson({
   chapters,
   withExercises = true,
 } : PropsWithChildren<Props>) {
+  const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  withSmoothScroll();
+  withSmoothScroll(articleWrapper);
   withClientMonitoring();
 
   return (
@@ -37,23 +38,25 @@ export default function Lesson({
       />
       <main>
         <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} />
-        <article>
-          <h1>
-            {title}
-          </h1>
-          {children}
-        </article>
-        <div className="my-5 text-right mr-2">
-          <p>
-            Ai vreo sugestie de îmbunătățire a acestei lecții?
-            {' '}
-            <a href={`${GITHUB_URL}/tree/master/frontend-ssr/curriculum`} target="_blank" rel="noreferrer">
-              Contribuie pe GitHub
-            </a>
-          </p>
+        <div ref={articleWrapper} className={styles['article-wrapper']}>
+          <article>
+            <h1>
+              {title}
+            </h1>
+            {children}
+          </article>
+          <div className="my-5 text-right mr-2">
+            <p>
+              Ai vreo sugestie de îmbunătățire a acestei lecții?
+              {' '}
+              <a href={`${GITHUB_URL}/tree/master/frontend-ssr/curriculum`} target="_blank" rel="noreferrer">
+                Contribuie pe GitHub
+              </a>
+            </p>
+          </div>
+          {withExercises && <LessonExercises /> }
+          <Footer />
         </div>
-        {withExercises && <LessonExercises /> }
-        <Footer />
       </main>
     </div>
   );

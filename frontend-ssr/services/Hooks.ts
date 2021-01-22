@@ -58,11 +58,11 @@ function withClientMonitoring() {
   }, []);
 }
 
-function withSmoothScroll() {
+function withSmoothScroll(ref: React.MutableRefObject<HTMLElement>) {
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'smooth';
+    ref.current.style.scrollBehavior = 'smooth';
     return () => {
-      document.documentElement.style.scrollBehavior = 'initial';
+      ref.current.style.scrollBehavior = 'initial';
     };
   }, []);
 }

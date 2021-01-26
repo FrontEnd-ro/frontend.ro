@@ -44,6 +44,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "next": "^10.0.2",
     "node-fetch": "^2.6.1",
+    "postmark": "^2.7.1",
     "react": "16.13.1",
     "react-bscroll": "^1.0.7",
     "react-dom": "16.13.1",

@@ -60,7 +60,13 @@ const LOAD_DURATION = 1000;
 
 class UserService {
   static ping() {
-    return HttpService.get(`${process.env.ENDPOINT}/users/ping`).then(resp => resp.json())
+    return HttpService.get(`${process.env.ENDPOINT}/users/ping`).then((resp) => resp.json());
+  }
+
+  static subscribe({ name, email }) {
+    return HttpService
+      .post(`${process.env.ENDPOINT}/users/subscribe`, { name, email })
+      .then((resp) => resp.json());
   }
 
   static login({

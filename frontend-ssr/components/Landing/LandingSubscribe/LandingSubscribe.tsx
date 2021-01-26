@@ -4,7 +4,7 @@ import styles from './LandingSubscribe.module.scss';
 
 export default function LandingSubscribe() {
   return (
-    <div className={`${styles['landing-subscribe']} bg-white text-center`}>
+    <div id="subscribe" className={`${styles['landing-subscribe']} bg-white text-center`}>
       <section>
         <h2>Rămâi conectat la noutăți</h2>
         <p>

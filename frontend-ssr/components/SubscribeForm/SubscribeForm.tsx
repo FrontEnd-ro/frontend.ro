@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import UserService from '~/services/User.service';
 import styles from './SubscribeForm.module.scss';
 
 function SubscribeForm() {
   const [didSubscribe, setDidSubscribe] = useState(false);
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [error, setError] = useState(null);
+
+  const ROBOT_STRING = 'frontend.ro';
 
   const submit = (e) => {
     e.preventDefault();
@@ -13,6 +16,11 @@ function SubscribeForm() {
     const formEl = e.target;
 
     if (!formEl.checkValidity()) {
+      return;
+    }
+
+    if (formEl['robot-check'].value !== ROBOT_STRING) {
+      setError('Hmm...ești robot cumva? 🤔');
       return;
     }
 
@@ -25,26 +33,13 @@ function SubscribeForm() {
     };
 
     /** Subscribing in a different database until we set ours up */
-    fetch('https://steallikeadev.com/api/subscribe-frontend', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: new Headers({
-        'Content-type': 'application/json',
-      }),
-    })
-      .then((resp) => {
-        if (!resp.ok) {
-          return resp.json().then((jsonResp) => {
-            throw jsonResp;
-          });
-        }
-
-        return resp.json();
+    UserService.subscribe(body)
+      .then(() => {
+        setDidSubscribe(true);
       })
-      .then(() => setDidSubscribe(true))
       .catch((err) => {
         setIsSubscribing(false);
-        setError(err.reason || 'Oups, ceva a mers greșit. Dă-mi un semn ca să pot rezolva problema :)');
+        setError(err.message || 'Oups, ceva a mers greșit. Dă-mi un semn ca să pot rezolva problema :)');
       });
   };
 
@@ -58,12 +53,24 @@ function SubscribeForm() {
         <span className="m-0">Email</span>
         <input disabled={isSubscribing} type="email" name="email" required />
       </label>
+      <label>
+        <span className="mb-2">
+          Ca să ne asigurăm că nu ești robot,
+          {' '}
+          <br />
+          {' '}
+          scrie mai jos
+          {' '}
+          <strong>{ROBOT_STRING}</strong>
+        </span>
+        <input disabled={isSubscribing} type="text" name="robot-check" required />
+      </label>
       {error && (
-      <p>
-        {' '}
-        ❌
-        {error}
-      </p>
+        <p>
+          {' '}
+          ❌
+          {error}
+        </p>
       )}
       {didSubscribe
         ? <p> ✔ Bine ai venit în comunitate!</p>

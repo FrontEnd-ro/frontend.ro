@@ -1,15 +1,28 @@
 name: Deploy
 on:
+<<<<<<< HEAD
   push:
     branches:
       - master
+=======
+  schedule:
+  - cron: '0 12,00, * * *'
+>>>>>>> Create automaticDeployments.yml
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+<<<<<<< HEAD
       - uses: akhileshns/heroku-deploy@v3.9.9
+=======
+      - uses: akhileshns/heroku-deploy@v3.8.9
+>>>>>>> Create automaticDeployments.yml
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email:  ${{secrets.HEROKU_EMAIL}}
+<<<<<<< HEAD
+=======
+          branch: "master"
+>>>>>>> Create automaticDeployments.yml

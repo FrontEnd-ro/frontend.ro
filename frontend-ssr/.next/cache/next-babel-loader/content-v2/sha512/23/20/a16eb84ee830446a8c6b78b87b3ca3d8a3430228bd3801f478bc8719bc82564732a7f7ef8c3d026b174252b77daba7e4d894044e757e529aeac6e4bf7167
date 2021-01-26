@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from '~/curriculum/intro/despre-noi';","map":{"version":3,"sources":["/Users/nmaties/Projects/personal/frontend.ro/frontend-ssr/pages/intro/despre-noi.tsx"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,+BAAxB","sourcesContent":["export { default } from '~/curriculum/intro/despre-noi';\n"]},"metadata":{},"sourceType":"module"}

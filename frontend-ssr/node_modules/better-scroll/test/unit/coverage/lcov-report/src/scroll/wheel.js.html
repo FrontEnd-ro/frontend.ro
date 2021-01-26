@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/scroll/wheel.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/scroll/</a> wheel.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.67% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>42/43</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">68.97% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>20/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.67% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>42/43</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function wheelMixin (BScroll) {
+  BScroll.prototype.wheelTo = function (index = 0) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.options.wheel) {
+      const y = -index * this.itemHeight
+      this.scrollTo(0, y)
+    }
+  }
+&nbsp;
+  BScroll.prototype.getSelectedIndex = function () {
+    return this.options.wheel &amp;&amp; this.selectedIndex
+  }
+&nbsp;
+  BScroll.prototype._initWheel = function () {
+    const wheel = this.options.wheel
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!wheel.wheelWrapperClass) {
+      wheel.wheelWrapperClass = 'wheel-scroll'
+    }
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!wheel.wheelItemClass) {
+      wheel.wheelItemClass = 'wheel-item'
+    }
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!wheel.wheelDisabledItemClass) {
+      wheel.wheelDisabledItemClass = 'wheel-disabled-item'
+    }
+    if (wheel.selectedIndex === undefined) {
+      wheel.selectedIndex = 0
+    }
+  }
+&nbsp;
+  BScroll.prototype._findNearestValidWheel = function (y) {
+    y = y &gt; 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >0 </span>: y &lt; this.maxScrollY ? <span class="branch-0 cbranch-no" title="branch not covered" >this.maxScrollY </span>: y
+    const wheel = this.options.wheel
+    let currentIndex = Math.abs(Math.round(-y / this.itemHeight))
+    const cacheIndex = currentIndex
+    const items = this.items
+    // Impersonation web native select
+    // first, check whether there is a enable item whose index is smaller than currentIndex
+    // then, check whether there is a enable item whose index is bigger than currentIndex
+    // otherwise, there are all disabled items, just keep currentIndex unchange
+    while (currentIndex &gt;= 0) {
+      if (items[currentIndex].className.indexOf(wheel.wheelDisabledItemClass) === -1) {
+        break
+      }
+      currentIndex--
+    }
+&nbsp;
+    if (currentIndex &lt; 0) {
+      currentIndex = cacheIndex
+      while (currentIndex &lt;= items.length - 1) {
+        if (items[currentIndex].className.indexOf(wheel.wheelDisabledItemClass) === -1) {
+          break
+        }
+        currentIndex++
+      }
+    }
+&nbsp;
+    // keep it unchange when all the items are disabled
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (currentIndex === items.length) {
+<span class="cstat-no" title="statement not covered" >      currentIndex = cacheIndex</span>
+    }
+    // when all the items are disabled, this.selectedIndex should always be -1
+    return {
+      index: this.wheelItemsAllDisabled ? <span class="branch-0 cbranch-no" title="branch not covered" >-1 </span>: currentIndex,
+      y: -currentIndex * this.itemHeight
+    }
+  }
+&nbsp;
+  BScroll.prototype._checkWheelAllDisabled = function () {
+    const wheel = this.options.wheel
+    const items = this.items
+    this.wheelItemsAllDisabled = true
+    for (let i = 0; i &lt; items.length; i++) {
+      if (items[i].className.indexOf(wheel.wheelDisabledItemClass) === -1) {
+        this.wheelItemsAllDisabled = false
+        break
+      }
+    }
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Apr 15 2019 15:52:39 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -174,7 +174,7 @@ class Login extends Component<MyProps, MyState> {
               <span style={{ fontSize: '0.85em' }}>
                 Am citit și sunt de acord cu
                 {' '}
-                <a href="/privacy" className="link">
+                <a href="/termeni-si-conditii" className="link">
                   Termenii și Condițiile
                 </a>
                 {' '}

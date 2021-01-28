@@ -91,6 +91,16 @@ export const LESSONS: LessonDescription[] = [
     cover: '/images/lessons/text-elements__cover.svg',
   },
   {
+    written: false,
+    title: 'Link-uri și butoane',
+    description:
+      'Pentru a putea naviga de la o secțiune la alta sau de la o pagină la alta avem nevoie de link-uri. Totodată dacă vrem să facem acțiuni, vom avea nevoie de butoane. Hai să aflăm mai multe despre cum le folosim. ',
+    url: '/html/linkuri-si-butoane',
+    type: 'html',
+    contributors: [Diana],
+    cover: '/images/lessons/links__cover.svg',
+  },
+  {
     written: true,
     title: 'Liste',
     description: 'Hai să vorbim despre cele 3 tipuri de liste și când să-l folosești pe fiecare.',

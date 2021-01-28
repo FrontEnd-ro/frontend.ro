@@ -10,7 +10,7 @@ Secondly, for now you can contribute in 3 ways:
 
 Regarding the first point have a look over the [issues tab](https://github.com/FrontEnd-ro/frontend.ro/issues) and see if you can find anything there you might one to implement. 
 
-For points 2 & 3 get in touch with us via **social media** or **email** at [hello@frontend.ro](hello@frontend.ro).
+For points 2 & 3 get in touch with us via **social media** or **email** at [hello@frontend.ro](hello@frontend.ro). Also check out [Diana](https://github.com/andreeatoma)'s guide on [how to code a new lesson](https://docs.google.com/document/d/1GouCwi6sHI5kOWv77QzMX-l7yFs_wrlHTidTsqCHIdE/edit).
 
 <hr />
 

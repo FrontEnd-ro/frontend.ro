@@ -45,6 +45,22 @@ class SweetAlertService {
     });
   }
 
+  static error({ title = 'Oops!', text, buttonText }) {
+    return import('sweetalert2').then((swal) => {
+      return swal.default.fire({
+        title,
+        text,
+        icon: 'error',
+        customClass: {
+          confirmButton: 'btn btn--light',
+        },
+        confirmButtonText: buttonText,
+        buttonsStyling: false,
+        heightAuto: false,
+      });
+    });
+  }
+
   static toast({
     text, href = null, timer = 3000, type = 'success',
   }: ToastI) {

@@ -1,3 +1,5 @@
+import SweetAlertService from './sweet-alert/SweetAlert.service';
+
 class Http {
   get(url: string, options = {}) {
     return this.httpGeneric(url, { ...options, method: 'GET' });
@@ -37,7 +39,7 @@ class Http {
 
   // eslint-disable-next-line class-methods-use-this
   private httpGeneric(url: string, options: Record<string, any> = {}) {
-    const headersInit : HeadersInit = {
+    const headersInit: HeadersInit = {
       'content-type': 'application/json',
     };
 
@@ -63,7 +65,10 @@ class Http {
       })
       .catch((err) => {
         if (!err || !err.code || err.code === 500) {
-          alert('Oops! Something went wrong. Refresh and try again!');
+          SweetAlertService.error({
+            text: err.reason || 'Refresh-uiește pagina și încearcă din nou.',
+            buttonText: 'Ok1',
+          });
         }
         throw err;
       });

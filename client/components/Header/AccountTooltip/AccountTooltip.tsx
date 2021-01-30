@@ -13,7 +13,7 @@ function AccountTooltip({ user }: ConnectedProps<typeof connector>) {
 
   const logout = () => {
     UserService.logout().then(() => {
-      window.location = '/';
+      window.location.pathname = '/';
     });
   };
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-import * as postmark from 'postmark';
+const postmark = require('postmark');
 const UserModel = require('./user.model');
 const { ServerError, setTokenCookie } = require('../ServerUtils');
 
@@ -114,7 +114,7 @@ userRouter.post('/register', async function register(req, res) {
   res.json(UserModel.sanitize(user));
 })
 
-userRouter.post('/subscribe', (req, res) => {
+userRouter.post('/subscribe', async (req, res) => {
   const { name, email } = req.body;
 
   if (!name || !email) {

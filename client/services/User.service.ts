@@ -64,9 +64,10 @@ class UserService {
   }
 
   static subscribe({ name, email }) {
-    return HttpService
-      .post(`${process.env.ENDPOINT}/auth/subscribe`, { name, email })
-      .then((resp) => resp.json());
+    return HttpService.post(`${process.env.ENDPOINT}/auth/subscribe`, {
+      name,
+      email,
+    }).then((resp) => resp.json());
   }
 
   static login({
@@ -80,6 +81,10 @@ class UserService {
       emailOrUsername,
       password,
     }).then((resp) => resp.json());
+  }
+
+  static logout() {
+    return HttpService.post(`${process.env.ENDPOINT}/auth/logout`);
   }
 
   static checkUsername(username: string) {

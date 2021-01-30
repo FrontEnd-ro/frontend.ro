@@ -3,7 +3,10 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+import { connect, ConnectedProps } from 'react-redux';
 import styles from './Header.module.scss';
+import AccountTooltip from './AccountTooltip/AccountTooltip';
+import { RootState } from '~/redux/root.reducer';
 
 interface Props {
   href?: string
@@ -11,7 +14,12 @@ interface Props {
   onMenuClick?: () => void
 }
 
-export default function Header({ href = '/', demoPage, onMenuClick } : Props) {
+function Header({
+  href = '/',
+  demoPage,
+  onMenuClick,
+  isLoggedIn,
+} : ConnectedProps<typeof connector> & Props) {
   return (
     <header className={styles.header}>
       <div className="d-flex align-items-center h-100">
@@ -33,7 +41,19 @@ export default function Header({ href = '/', demoPage, onMenuClick } : Props) {
         </p>
         )}
       </div>
-      {/* We're gonna have the user info and a drodown menu on the right */}
+      <div>
+        {isLoggedIn ? <AccountTooltip /> : null }
+      </div>
     </header>
   );
 }
+
+function mapStateToProps(state: RootState) {
+  return {
+    isLoggedIn: !!state.user.info,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
+export default connector(Header);

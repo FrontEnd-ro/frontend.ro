@@ -64,6 +64,11 @@ userRouter.post('/login', async function login(req, res) {
   res.json(UserModel.sanitize(user));
 })
 
+userRouter.post('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.status(200).send();
+});
+
 userRouter.post('/register', async function register(req, res) {
   const { email, username, password } = req.body;
 
@@ -128,7 +133,7 @@ userRouter.post('/subscribe', (req, res) => {
 
   await SubscribeModel.subscribe({ name, email });
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' || true) {
     try {
       const client = new postmark.ServerClient(process.env.EMAIL_TOKEN);
 
@@ -144,6 +149,8 @@ userRouter.post('/subscribe', (req, res) => {
     } catch (err) {
       console.error('[sendEmailWithTemplate]', err, { name, email });
     }
+  } else {
+    console.log('[SubscribeEmail] Not on production so email wasn\'t sent.')
   }
 
   res.json({

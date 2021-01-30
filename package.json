@@ -25,7 +25,9 @@
     "prebuild": "yarn lint",
     "build": "next build",
     "start": "NODE_ENV=production node server/server.js",
-    "lint": "eslint pages/**/*.tsx client/**/*.tsx"
+    "lint": "eslint pages/**/*.tsx client/**/*.tsx",
+    "deploy:master-dev": "git push dev master:master",
+    "deploy:master-prod": "git push heroku master:master"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.3.0",

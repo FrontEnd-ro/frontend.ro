@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const postmark = require('postmark');
 const UserModel = require('./user.model');
+const SubscribeModel = require('../subscribe.model');
 const { ServerError, setTokenCookie, MAX_NAME_LENGTH } = require('../ServerUtils');
 const { PrivateMiddleware } = require('../Middlewares');
 

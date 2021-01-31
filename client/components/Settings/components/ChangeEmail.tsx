@@ -31,7 +31,7 @@ function ChangeEmail({ onSuccess }: Props) {
       onSuccess(updatedUser);
     } catch (err) {
       shouldResetForm = false;
-      setError(err.message || 'Nu am putut să-ți schimbăm numele. Încearcă din nou!');
+      setError(err.message || 'Nu am putut să-ți schimbăm email-ul. Încearcă din nou!');
     } finally {
       setIsChanging(false);
     }

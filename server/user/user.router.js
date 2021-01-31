@@ -74,7 +74,8 @@ userRouter.post('/register', async function register(req, res) {
   const { email, username, password } = req.body;
 
   if (!email || !username || !password) {
-    throw new ServerError(400, '⛔ Nu te poți înregistra fără email, username și parolă!');
+    new ServerError(400, '⛔ Nu te poți înregistra fără email, username și parolă!').send(res);
+    return
   }
 
   if (!/^.+@.+[.].+$/.test(email)) {

@@ -217,38 +217,37 @@ userRouter.post('/subscribe', async (req, res) => {
 
   if (!name || !email) {
     new ServerError(400, 'Email-ul și numele tău sunt obligatorii!').send(res);
+    return;
   }
 
   const alreadyRegistered = await UserModel.findUserBy({ email });
   if (alreadyRegistered) {
     new ServerError(400, 'Ești deja înregistrat ca utilizator!').send(res);
+    return;
   }
 
   const alreadySubscribed = await SubscribeModel.exists(email);
   if (alreadySubscribed) {
     new ServerError(400, 'Hmm, încerci să te abonezi încă o data...🤔').send(res);
+    return;
   }
 
   await SubscribeModel.subscribe({ name, email });
 
-  if (process.env.NODE_ENV === 'production') {
-    try {
-      const client = new postmark.ServerClient(process.env.EMAIL_TOKEN);
+  try {
+    const client = new postmark.ServerClient(process.env.EMAIL_TOKEN);
 
-      await client.sendEmailWithTemplate({
-        To: email,
-        From: 'hello@frontend.ro',
-        TemplateId: Number(process.env.EMAIL_WELCOME_TEMPLATE),
-        TemplateModel: {
-          name,
-          sender_name: 'Păvă',
-        },
-      });
-    } catch (err) {
-      console.error('[sendEmailWithTemplate]', err, { name, email });
-    }
-  } else {
-    console.log('[SubscribeEmail] Not on production so email wasn\'t sent.')
+    await client.sendEmailWithTemplate({
+      To: process.env.APP_ENV === 'production' ? email : 'pava@frontend.ro',
+      From: 'hello@frontend.ro',
+      TemplateId: Number(process.env.EMAIL_WELCOME_TEMPLATE),
+      TemplateModel: {
+        name,
+        sender_name: 'Păvă',
+      },
+    });
+  } catch (err) {
+    console.error('[sendEmailWithTemplate]', err, { name, email });
   }
 
   res.json({

@@ -133,7 +133,7 @@ userRouter.post('/subscribe', async (req, res) => {
 
   await SubscribeModel.subscribe({ name, email });
 
-  if (process.env.NODE_ENV === 'production' || true) {
+  if (process.env.NODE_ENV === 'production') {
     try {
       const client = new postmark.ServerClient(process.env.EMAIL_TOKEN);
 

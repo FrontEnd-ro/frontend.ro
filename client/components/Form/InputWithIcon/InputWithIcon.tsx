@@ -1,16 +1,23 @@
 import React, { PropsWithChildren } from 'react';
 import styles from './InputWithIcon.module.scss';
 
-export default function InputWithIcon({
-  children,
-  ...props
-}: PropsWithChildren<React.InputHTMLAttributes<HTMLInputElement>>) {
+type Props = PropsWithChildren<React.InputHTMLAttributes<HTMLInputElement>>
+
+const InputWithIcon = React.forwardRef((
+  {
+    children,
+    ...rest
+  }: Props,
+  ref: React.RefObject<HTMLInputElement>,
+) => {
   return (
     <div className={`${styles['input-with-icon']} relative`}>
-      <input {...props} />
+      <input ref={ref} {...rest} />
       <span className="absolute">
         {children}
       </span>
     </div>
   );
-}
+});
+
+export default InputWithIcon;

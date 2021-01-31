@@ -4,7 +4,7 @@ import noop from 'lodash/noop';
 import styles from './Form.module.scss';
 
 interface Props extends FormHTMLAttributes<HTMLFormElement> {
-  onSubmit: (data: any) => void;
+  onSubmit: (data: any) => void | Promise<boolean>;
 
   withStyles?: boolean;
   className?: string;
@@ -52,7 +52,14 @@ export default function Form({
           }
         });
 
-      onSubmit(data);
+      let submitResult = onSubmit(data);
+      if (submitResult instanceof Promise) {
+        submitResult.then((shouldReset) => {
+          if (shouldReset) {
+            e.target.reset();
+          }
+        });
+      }
     }
   };
 
@@ -61,6 +68,7 @@ export default function Form({
       className={withStyles ? `${styles.form} ${className}` : className}
       spellCheck="false"
       onSubmit={submit}
+      onInput={onInput}
       autoCorrect="off"
       autoComplete={autoComplete}
       {...rest}

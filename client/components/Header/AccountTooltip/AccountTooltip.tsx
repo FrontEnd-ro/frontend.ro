@@ -1,19 +1,24 @@
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { connect, ConnectedProps } from 'react-redux';
+import { useRouter } from 'next/router';
 import UserService from '~/services/User.service';
 import { RootState } from '~/redux/root.reducer';
 
 import styles from './AccountTooltip.module.scss';
 import { useOutsideClick } from '~/services/Hooks';
+import { logoutUser } from '~/redux/user/user.actions';
 
-function AccountTooltip({ user }: ConnectedProps<typeof connector>) {
+function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
   const ref = useRef(null);
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const logout = () => {
     UserService.logout().then(() => {
-      window.location.pathname = '/';
+      router.replace('/').then(() => {
+        dispatch(logoutUser());
+      });
     });
   };
 
@@ -38,7 +43,7 @@ function AccountTooltip({ user }: ConnectedProps<typeof connector>) {
           <li>
             <Link href="/settings">
               <a className="no-underline">
-                Account Settings
+                Setări
               </a>
             </Link>
           </li>

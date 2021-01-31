@@ -4,6 +4,8 @@ const { extractDbErrorMessage } = require('./database');
 const PAGE_SIZE = 25;
 
 const AUTH_EXPIRATION = 7;
+const MAX_NAME_LENGTH = 255;
+const MAX_USERNAME_LENGTH = 100;
 
 class ServerError extends Error {
   code;
@@ -54,10 +56,12 @@ function validateObjectId(_id) {
 }
 
 module.exports = {
+  ServerError,
   PAGE_SIZE,
   AUTH_EXPIRATION,
+  MAX_NAME_LENGTH,
+  MAX_USERNAME_LENGTH,
   setTokenCookie,
   validateAgainstSchemaProps,
   validateObjectId,
-  ServerError
 }

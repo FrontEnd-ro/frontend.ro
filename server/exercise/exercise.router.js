@@ -38,7 +38,7 @@ exerciseRouter.post('/', [PrivateMiddleware], async function createExercise(req,
 })
 
 exerciseRouter.post('/media', [PrivateMiddleware], function createExercise(req, res) {
-  const userId = req.body.user._doc._id;
+  const userId = req.body.user._id;
 
   upload.single('file')(req, null, async (err) => {
     if (err) {

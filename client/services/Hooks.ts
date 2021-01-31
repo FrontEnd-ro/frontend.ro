@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { MutableRefObject, useEffect } from 'react';
 import ClientMonitoring, { LogEventType } from './ClientMonitoring';
 import SweetAlertService from './sweet-alert/SweetAlert.service';
@@ -67,9 +68,31 @@ function withSmoothScroll(ref: React.MutableRefObject<HTMLElement>) {
   }, []);
 }
 
+function useLoggedInOnly(isLoggedIn: boolean, path: string) {
+  const router = useRouter();
+
+  if (!isLoggedIn) {
+    if (typeof window !== 'undefined') {
+      router.replace(`/auth?next=${encodeURIComponent(path)}`);
+    }
+  }
+}
+
+function useAnonymousOnly(isLoggedIn: boolean, nextHref: string) {
+  const router = useRouter();
+
+  if (isLoggedIn) {
+    if (typeof window !== 'undefined') {
+      router.replace(nextHref);
+    }
+  }
+}
+
 export {
   useOutsideClick,
   useClipboard,
   withClientMonitoring,
   withSmoothScroll,
+  useLoggedInOnly,
+  useAnonymousOnly,
 };

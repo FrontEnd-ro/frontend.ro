@@ -5,7 +5,7 @@ module.exports = {
   distDir: 'dist',
   env: {
     ENDPOINT: '/api',
-    CLOUDFRONT_PUBLIC: 'https://d3tycb976jpudc.cloudfront.net'
+    CLOUDFRONT_PUBLIC: 'https://d3tycb976jpudc.cloudfront.net',
 
   },
   webpack: (config) => {

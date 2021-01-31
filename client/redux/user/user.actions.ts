@@ -21,6 +21,8 @@ export const USER_NOTIFICATIONS = {
   MARK_ALL_AS_READ,
 };
 
+export const USER_LOGOUT = 'user/LOGOUT';
+
 /** User info */
 export const loadInfo = (info: any) => ({
   type: LOAD_INFO,
@@ -59,5 +61,10 @@ export const markNotificationAsUnread = (id: string) => ({
 
 export const markAllAsRead = () => ({
   type: MARK_ALL_AS_READ,
+  payload: null,
+});
+
+export const logoutUser = () => ({
+  type: USER_LOGOUT,
   payload: null,
 });

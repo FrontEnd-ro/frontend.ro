@@ -102,6 +102,7 @@ class Login extends Component<MyProps, MyState> {
     apiToCall(props)
       .then((user: UserState['info']) => {
         getStore().dispatch(loadInfo(user));
+
         if (onSuccess) {
           onSuccess();
         }
@@ -118,9 +119,10 @@ class Login extends Component<MyProps, MyState> {
       usernameExists,
       username,
     } = this.state;
+    const { className } = this.props;
 
     return (
-      <div className={styles['login-form']}>
+      <div className={`${styles['login-form']} ${className || ''}`}>
         <Form onSubmit={this.submit} onInput={() => this.setState({ serverError: null })}>
           <FormGroup className="mb-4">
             <label>

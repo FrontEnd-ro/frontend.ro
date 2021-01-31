@@ -5,12 +5,14 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import styles from './PasswordReveal.module.scss';
 
 interface Props {
+  required?: boolean;
   name?: string;
   autoComplete?: string;
   passwordError?: boolean;
 }
 
-export default function ({
+function PasswordReveal({
+  required = true,
   name = 'password',
   autoComplete = 'on',
   passwordError = false,
@@ -23,6 +25,7 @@ export default function ({
         <input
           type={visible ? 'text' : 'password'}
           name={name}
+          required={required}
           autoComplete={autoComplete}
         />
 
@@ -41,3 +44,5 @@ export default function ({
     </div>
   );
 }
+
+export default PasswordReveal;

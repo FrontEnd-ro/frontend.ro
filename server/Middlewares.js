@@ -23,7 +23,7 @@ function PublicMiddleware(req, res, next) {
         } else {
           UserModel.findUserBy({ _id: payload._id })
             .then(resp => {
-              req.body.user = Object.assign({}, resp);
+              req.body.user = resp;
               next();
             })
             .catch(() => next());
@@ -55,7 +55,7 @@ function PrivateMiddleware(req, res, next) {
       } else {
         UserModel.findUserBy({ _id: payload._id })
           .then(resp => {
-            req.body.user = Object.assign({}, resp);
+            req.body.user = resp;
             next();
           })
           .catch(err => res.status(err.status).json(err));

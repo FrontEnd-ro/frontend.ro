@@ -47,7 +47,7 @@ export default function MyApp({ Component, pageProps }: any) {
   try {
     const [databaseImport, userModelImport] = await Promise.all([
       import('../server/database'),
-      import('../server/user/user.model'),
+      import('../shared/user.shared-model'),
     ]);
 
     const { connectToDb } = databaseImport;

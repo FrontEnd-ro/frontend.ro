@@ -1,0 +1,57 @@
+@import '../../styles/variables';
+
+.settings {
+  section {
+    margin-bottom: 3em;
+
+    h2 {
+      color: red;
+    }
+
+    form {
+      border: 1px solid color(silver);
+
+      h3 {
+        padding: 1em 3em 1em 1em;
+        display: inline-block;
+        border-bottom: 1px solid color(silver);
+      }
+
+      & > div {
+        padding: 1em 1em 1.5em 1em;
+      }
+
+      &:first-of-type {
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+      }
+
+      &:last-of-type {
+        border-bottom-left-radius: 0.5em;
+        border-bottom-right-radius: 0.5em;
+      }
+
+      &:nth-of-type(n + 2) {
+        border-top: 0;
+      }
+    }
+  }
+
+  .danger form{
+    border-color: color(red);
+  }
+
+  @media screen and (max-width: 600px) {
+    form {
+      & > div {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      button[type="submit"] {
+        margin-top: 2em;
+      }
+    }
+  }
+}

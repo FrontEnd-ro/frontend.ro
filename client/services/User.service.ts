@@ -109,6 +109,35 @@ class UserService {
     }).then((resp) => resp.json());
   }
 
+  static updateName(payload: {name: string, password: string}) {
+    return HttpService
+      .post(`${process.env.ENDPOINT}/auth/name`, payload)
+      .then((resp) => resp.json());
+  }
+
+  static updateUsername(payload: {username: string, password: string}) {
+    return HttpService
+      .post(`${process.env.ENDPOINT}/auth/username`, payload)
+      .then((resp) => resp.json());
+  }
+
+  static updateEmail(payload: {email: string, password: string}) {
+    return HttpService
+      .post(`${process.env.ENDPOINT}/auth/email`, payload)
+      .then((resp) => resp.json());
+  }
+
+  static updatePassword(payload: {newPassword: string, password: string}) {
+    return HttpService
+      .post(`${process.env.ENDPOINT}/auth/password`, payload)
+      .then((resp) => resp.json());
+  }
+
+  static delete(password: string) {
+    return HttpService
+      .delete(`${process.env.ENDPOINT}/auth`, { password });
+  }
+
   static wait(mili) {
     return new Promise((resolve) => setTimeout(resolve, mili));
   }

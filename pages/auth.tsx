@@ -1,21 +1,44 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import { connect, ConnectedProps } from 'react-redux';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-import Login from '~/components/login';
+import AuthRedirect from '~/components/AuthRedirect/AuthRedirect';
+import { RootState } from '~/redux/root.reducer';
+import { useAnonymousOnly } from '~/services/Hooks';
+import SEOTags from '~/components/SEOTags';
 
-export default function Authpage() {
+function Authpage({ isLoggedIn }: ConnectedProps<typeof connector>) {
+  const router = useRouter();
+
+  const nextHref = Array.isArray(router.query.next) ? router.query.next[0] : router.query.next;
+  useAnonymousOnly(isLoggedIn, nextHref);
+
   return (
     <>
-      <Header />
-      <br />
-      <br />
-      <br />
-      <Login />
-      <br />
-      <br />
-      <br />
-
-      <Footer />
+      <SEOTags
+        title="Autentifică-te pentru a merge mai departe | FrontEnd.ro"
+        shareImage="https://frontend.ro/learn-seo-image.jpg"
+        description="Autentifică-te pentru a merge mai departe"
+        url="https://FrontEnd.ro/auth"
+      />
+      {!isLoggedIn && (
+        <>
+          <Header />
+          <AuthRedirect />
+          <Footer />
+        </>
+      )}
     </>
   );
 }
+
+function mapStateToProps(state: RootState) {
+  return {
+    isLoggedIn: !!state.user.info,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
+export default connector(Authpage);

@@ -60,18 +60,21 @@ This project wouldn't be possible without our awesome contributors. Thank you >:
 <table>
     <tr>
         <td align="center">
-            <a href="https://www.facebook.com/melnic.ira/"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/iramelnic.jpg" width="120px;" alt="Ira Melnic"/><br /><sub><b>Ira Melnic</b></sub></a></td>
+            <a href="https://github.com/andreeatoma"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/andreeatoma.jpg" width="120px;" alt="Diana Toma"/><br /><sub><b>Diana Toma</b></sub></a></td>
         <td align="center">
             <a href="https://github.com/catalinpopusoi">
                 <img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/catalinpopusoi.jpg" width="120px;" alt="Cătălin Popușoi"/><br /><sub><b>Cătălin Popușoi</b></sub></a></td>
         <td align="center">
             <a href="https://github.com/SirCQQ"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/cristiangatu.jpg" width="120px;" alt="Cristian Gațu"/><br /><sub><b>Cristian Gațu</b></sub></a></td>
         <td align="center">
-            <a href="https://github.com/andreeatoma"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/andreeatoma.jpg" width="120px;" alt="Diana Toma"/><br /><sub><b>Diana Toma</b></sub></a></td>
+            <a href="https://github.com/juppsy"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/juppsy.jpg" width="120px;" alt="Sebastian Latkolic"/><br /><sub><b>Sebastian Latkolic</b></sub></a></td>
     </tr>
     <tr>
         <td align="center">
-            <a href="https://github.com/juppsy"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/juppsy.jpg" width="120px;" alt="Sebastian Latkolic"/><br /><sub><b>Sebastian Latkolic</b></sub></a></td></tr></table>
+            <a href="https://github.com/nmaties/"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/nmaties.jpg" width="120px;" alt="Nicolae Maties"/><br /><sub><b>Nicolae Maties</b></sub></a></td>
+        <td align="center">
+            <a href="https://www.facebook.com/melnic.ira/"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/iramelnic.jpg" width="120px;" alt="Ira Melnic"/><br /><sub><b>Ira Melnic</b></sub></a></td>
+    </tr></table>
 
 <br />
 

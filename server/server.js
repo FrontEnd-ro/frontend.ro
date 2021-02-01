@@ -24,11 +24,12 @@ const nextHandler = nextApp.getRequestHandler()
 app.use(
   cors({
     credentials: true,
-    origin: process.env.NODE_ENV === 'production'
+    origin: process.env.APP_ENV === 'production'
       ? 'https://frontend.ro'
-      : `http://localhost:${port}`
+      : 'http://localhost:3000'
   })
 );
+
 
 app.use(sslRedirect());
 app.use(compression());

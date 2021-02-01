@@ -1,6 +1,7 @@
 import React from 'react';
 import NotFoundPage from './404';
 import UserProfile from '~/components/user-profile/UserProfile';
+import SharedUserModel from '../shared/user.shared-model';
 
 export default function Username(props: any) {
   // eslint-disable-next-line react/destructuring-assignment
@@ -8,13 +9,10 @@ export default function Username(props: any) {
 }
 
 export async function getServerSideProps({ res, params }) {
-  const resp = await fetch(`${process.env.HOST}/api/users/${params.username}`);
-  let user = null;
+  const user = await SharedUserModel.findUserBy({ username: params.username });
 
-  if (resp.status === 404) {
+  if (!user) {
     res.statusCode = 404;
-  } else {
-    user = await resp.json();
   }
 
   return {

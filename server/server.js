@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-// app.use(sslRedirect());
+app.use(sslRedirect());
 app.use(compression());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());

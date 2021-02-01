@@ -71,7 +71,7 @@ function withSmoothScroll(ref: React.MutableRefObject<HTMLElement>) {
 function useLoggedInOnly(isLoggedIn: boolean, path: string) {
   const router = useRouter();
 
-  if (!isLoggedIn) {
+  if (!isLoggedIn && path) {
     if (typeof window !== 'undefined') {
       router.replace(`/auth?next=${encodeURIComponent(path)}`);
     }
@@ -81,7 +81,7 @@ function useLoggedInOnly(isLoggedIn: boolean, path: string) {
 function useAnonymousOnly(isLoggedIn: boolean, nextHref: string) {
   const router = useRouter();
 
-  if (isLoggedIn) {
+  if (isLoggedIn && nextHref) {
     if (typeof window !== 'undefined') {
       router.replace(nextHref);
     }

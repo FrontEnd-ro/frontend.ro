@@ -21,7 +21,8 @@
     }
   ],
   "scripts": {
-    "dev": "nodemon server/server.js --watch server",
+    "dev:local": "nodemon server/server.js --watch server",
+    "dev": "node server/local-server.js",
     "prebuild": "yarn lint",
     "build": "next build",
     "start": "node server/server.js",

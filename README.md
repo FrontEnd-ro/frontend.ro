@@ -1,4 +1,4 @@
-![frontend.ro social banner](https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/assets/frontend.ro-social-banner-en.jpg)
+![frontend.ro social banner](https://frontend.ro/main-seo-image.jpg)
 
 ## FrontEnd.ro's open-source codebase and curriculum
 
@@ -6,6 +6,44 @@
 
 <br />
 <hr />
+
+## Install & Run 
+
+1. Install all the dependencies by running `yarn` in the root folder.
+2. Create a `.env` file in root and add the following line 
+
+```
+ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
+```
+
+3. Run `yarn dev`. This will run the FrontEnd locally and connect you to the development server.
+4. If you want to do server-side work you're gonna need to run the server and MongoDB on your local machine as well.  For this to happen you're gonna need to add the following variables inside `.env`:
+
+```
+# App environment
+APP_ENV=development
+
+# Auth
+SALT_ROUNDS=
+TOKEN_ALGORITHM=
+TOKEN_SECRET=
+DB_CONNECT=
+
+# Aws
+AWS_REGION=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_BUCKET=
+CLOUDFRONT_UPLOAD=
+
+# Postmark
+EMAIL_WELCOME_TEMPLATE=
+EMAIL_TOKEN=
+
+ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
+```
+
+Then run the local server using `yarn dev:local`. Get in touch with us for more details.
 
 ## License
 

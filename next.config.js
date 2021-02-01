@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   distDir: 'dist',
   env: {
-    ENDPOINT: '/api',
+    ENDPOINT: process.env.ENDPOINT,
     CLOUDFRONT_PUBLIC: 'https://d3tycb976jpudc.cloudfront.net',
 
   },

@@ -66,3 +66,39 @@ function entryToTextMiddleware(entry) {
     });
   });
 }
+
+export function cropImage(src: string): Promise<Blob> {
+  const image = new Image();
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  return new Promise((resolve, reject) => {
+    image.onload = () => {
+      const { width, height } = image;
+      const size = Math.min(width, height);
+
+      canvas.width = size;
+      canvas.height = size;
+
+      ctx.drawImage(image, size - width, size - height, width, height);
+
+      canvas.toBlob((blob) => {
+        resolve(blob);
+      }, 'image/jpeg', 1);
+    };
+
+    image.onerror = () => reject(new Error('Failed to crop image'));
+
+    image.src = src;
+  });
+}
+
+export function loadImage(src: string) {
+  const image = new Image();
+  return new Promise((resolve, reject) => {
+    image.addEventListener('load', resolve);
+    image.addEventListener('error', reject);
+
+    image.src = src;
+  });
+}

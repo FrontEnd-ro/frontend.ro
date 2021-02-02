@@ -35,6 +35,10 @@
         border-top: 0;
       }
     }
+    
+    textarea {
+      resize: vertical;
+    }
   }
 
   .danger form{

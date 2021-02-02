@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 interface Props {
   url: string;
@@ -10,8 +10,13 @@ interface Props {
 }
 
 export default function SEOTags({
-  title, description, url, shareImage = 'https://frontend.ro/main-seo-image.jpg', bigShareImage = true,
-}: Props) {
+  title,
+  description,
+  url,
+  shareImage = 'https://frontend.ro/main-seo-image.jpg',
+  bigShareImage = true,
+  children,
+}: PropsWithChildren<Props>) {
   return (
     <Head>
       <title>{title}</title>
@@ -36,6 +41,8 @@ export default function SEOTags({
       <meta name="twitter:site" content="@FrontEndRo" />
       <meta name="twitter:creator" content="@FrontEndRo" />
       <meta name="twitter:card" content={bigShareImage ? 'summary_large_image' : 'summary'} />
+
+      {children}
     </Head>
   );
 }

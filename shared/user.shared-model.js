@@ -9,6 +9,7 @@ const UsersSchema = new mongoose.Schema({
   name: { type: String, required: false, default: '' },
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true, unique: true },
+  description: { type: String, required: false, default: '' },
   password: { type: String, required: true },
   lastLogin: { type: Date, default: Date.now() },
 });

@@ -1,0 +1,71 @@
+@import '../../../styles/variables';
+
+.user-bio {
+  text-align: center;
+  padding: 3em 2em 1em 2em;
+  background: color(black);
+  color: color(white);
+
+  & > img {
+    height: 14em;
+    max-width: 80%;
+  }
+
+  img {
+    border-radius: 50%;
+    background: color(white);
+    border: 1px solid color(silver);
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.25em;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-size: 1.3em;
+    display: inline-block;
+    border-bottom: 1px solid color(white);
+
+    &::before {
+      content: '@';
+      font-weight: bold;
+      color: color(blue);
+    }
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+}
+
+@mixin UserBioRow {
+  .user-bio {
+    display: flex;
+    text-align: left;
+    flex-flow: row wrap;
+
+    & > img {
+      max-width: 12em;
+      margin-right: 2em;
+    }
+
+    img {
+      height: 12em;
+    }
+
+    [class*='change-avatar'] {
+      margin-right: 2em;
+
+      label {
+        margin: 0;
+        max-width: 12em;
+      }
+    }
+
+    .description-wrapper {
+      flex-basis: 100%;
+    }
+  }
+}

@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import { loadInfo, logoutUser } from '~/redux/user/user.actions';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import PageContainer from '../PageContainer';
+import ChangeDescription from './components/ChangeDescription';
 import ChangeEmail from './components/ChangeEmail';
 import ChangeName from './components/ChangeName';
 import ChangePassword from './components/ChangePassword';
@@ -39,6 +40,7 @@ function Settings({ user, dispatch }: ConnectedProps<typeof connector>) {
       <h1 className="mb-4"> Setări </h1>
       <section>
         <ChangeName onSuccess={updateUserStore} />
+        <ChangeDescription onSuccess={updateUserStore} />
         <ChangeUsername onSuccess={updateUserStore} />
         <ChangeEmail onSuccess={updateUserStore} />
         <ChangePassword onSuccess={updateUserStore} />

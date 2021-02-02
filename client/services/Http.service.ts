@@ -67,7 +67,7 @@ class Http {
         if (!err || !err.code || err.code === 500) {
           SweetAlertService.error({
             text: err.reason || 'Refresh-uiește pagina și încearcă din nou.',
-            buttonText: 'Ok1',
+            buttonText: 'Ok!',
           });
         }
         throw err;

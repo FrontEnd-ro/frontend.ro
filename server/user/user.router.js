@@ -1,12 +1,18 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
 const postmark = require('postmark');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const UserModel = require('./user.model');
 const SubscribeModel = require('../subscribe.model');
-const { ServerError, setTokenCookie, MAX_NAME_LENGTH } = require('../ServerUtils');
+const { ServerError, setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } = require('../ServerUtils');
 const { PrivateMiddleware } = require('../Middlewares');
+const { MAX_MEDIA_MB, MAX_MEDIA_BYTES } = require('../../shared/SharedConstants')
 
 const userRouter = express.Router();
+
+const s3 = new S3Client({ region: process.env.AWS_REGION });
+const upload = multer({ storage: multer.memoryStorage() });
 
 userRouter.get('/check-username/:username', async function checkUsername(req, res) {
   const { username } = req.params;
@@ -146,6 +152,31 @@ userRouter.post('/name', [
   }
 ]);
 
+userRouter.post('/description', [
+  PrivateMiddleware,
+  async function updateDescription(req, res) {
+    const description = req.body.description.toString().trim();
+    const { password, user } = req.body;
+
+    if (description.length === 0) {
+      new ServerError(400, 'Descrierea nu poate fi goală').send(res);
+      return;
+    }
+
+    if (description.length > MAX_DESCRIPTION_LENGTH) {
+      new ServerError(400, `Descrierea poate avea maxim ${MAX_DESCRIPTION_LENGTH} caractere.`).send(res);
+      return;
+    }
+
+    try {
+      const updatedUser = await updateUserFields({ _id: user._id, username: user.username, password }, { description });
+      res.json(UserModel.sanitize(updatedUser));
+    } catch (err) {
+      err.send(res); // Err is of type ServerError
+    }
+  }
+]);
+
 userRouter.post('/username', [
   PrivateMiddleware,
   async function updateUsername(req, res) {
@@ -220,6 +251,48 @@ userRouter.post('/password', [
     }
   }
 ]);
+
+userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(req, res) {
+  const userId = req.body.user._id;
+
+  upload.single('file')(req, null, async (err) => {
+    if (err) {
+      console.error('[uploadExerrciseMedia]', err);
+      new ServerError(400, 'Fișierul nu a putut fi încărcat. Încearcă din nou!').send(res);
+      return;
+    }
+
+    const { file } = req;
+    const name = `${userId}_${Date.now()}.jpg`;
+
+    if (req.file.size > MAX_MEDIA_BYTES) {
+      console.error('[uploadExerrciseMedia]', err);
+      new ServerError(400, `Dimensiunea maximă a unui fișier este de ${MAX_MEDIA_MB}MB`).send(res);
+      return;
+    }
+
+    const Key = `${userId}/${name}`;
+
+    const uploadParams = {
+      Bucket: process.env.AWS_BUCKET,
+      Key,
+      Body: file.buffer,
+      ACL: 'public-read',
+    };
+
+    try {
+      await s3.send(new PutObjectCommand(uploadParams));
+      const newUser = await UserModel.update(userId, {
+        avatar: `${process.env.CLOUDFRONT_UPLOAD}/${Key}`
+      });
+
+      res.json(UserModel.sanitize(newUser));
+    } catch (err) {
+      console.log('[s3Upload]', err);
+      new ServerError(500, err.message || 'Oops! Se pare că nu am putut încărca fișierele. Încearcă din nou.').send(res);
+    }
+  });
+})
 
 userRouter.post('/subscribe', async (req, res) => {
   const { name, email } = req.body;

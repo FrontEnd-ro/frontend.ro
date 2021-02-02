@@ -1,9 +1,10 @@
 export interface UserState {
   info: {
-    name: 'string',
-    username: 'string',
-    email: 'string',
-    avatar: 'string',
+    name: string,
+    username: string,
+    email: string,
+    avatar: string,
+    description?: string,
   }
   notifications: Notifications;
 }

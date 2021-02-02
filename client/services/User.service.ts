@@ -115,6 +115,12 @@ class UserService {
       .then((resp) => resp.json());
   }
 
+  static updateDescription(payload: {description: string, password: string}) {
+    return HttpService
+      .post(`${process.env.ENDPOINT}/auth/description`, payload)
+      .then((resp) => resp.json());
+  }
+
   static updateUsername(payload: {username: string, password: string}) {
     return HttpService
       .post(`${process.env.ENDPOINT}/auth/username`, payload)
@@ -130,6 +136,15 @@ class UserService {
   static updatePassword(payload: {newPassword: string, password: string}) {
     return HttpService
       .post(`${process.env.ENDPOINT}/auth/password`, payload)
+      .then((resp) => resp.json());
+  }
+
+  static uploadAvatar(file: Blob): Promise<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return HttpService
+      .post(`${process.env.ENDPOINT}/auth/avatar`, formData)
       .then((resp) => resp.json());
   }
 

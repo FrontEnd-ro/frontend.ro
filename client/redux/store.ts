@@ -4,7 +4,7 @@ import rootReducer from './root.reducer';
 let store;
 
 function createStoreWithPreloadedData(preloadedData) {
-  if (!store) {
+  if (typeof window === 'undefined' || !store) {
     store = createStore(rootReducer, preloadedData);
   }
 

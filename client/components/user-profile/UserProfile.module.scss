@@ -1,0 +1,40 @@
+@import './UserBio//UserBio.module.scss';
+
+.user-profile {
+  flex: 1;
+
+  @media screen and (min-width: 800px) {
+    .user-bio {
+      width: 22em;
+      height: 100%;
+      min-width: 22em;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    flex-flow: column;
+
+    @include UserBioRow;
+    .user-bio {
+      display: none;
+    }
+
+    .right .user-bio {
+      display: flex;
+    }
+  }
+}
+
+.right {
+  display: flex;
+  flex-flow: column;
+  flex-basis: 100%;
+
+  main {
+    flex: 1;
+  }
+
+  .user-bio {
+    display: none;
+  }
+}

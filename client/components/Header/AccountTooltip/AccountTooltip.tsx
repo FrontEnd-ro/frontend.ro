@@ -41,9 +41,16 @@ function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
       {isOpen && (
         <ul className="menu">
           <li>
+            <Link href={`/${user.info.username}`}>
+              <a className="no-underline">
+                Profilul tău
+              </a>
+            </Link>
+          </li>
+          <li>
             <Link href="/settings">
               <a className="no-underline">
-                Setări
+                Setările contului
               </a>
             </Link>
           </li>

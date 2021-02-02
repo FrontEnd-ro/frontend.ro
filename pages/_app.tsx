@@ -8,7 +8,7 @@ export default function MyApp({ Component, pageProps }: any) {
   const store = createStoreWithPreloadedData({
     user: {
       ...defaultUserState,
-      info: pageProps.user,
+      info: pageProps._serverUser,
     },
   });
 
@@ -33,9 +33,9 @@ export default function MyApp({ Component, pageProps }: any) {
  * so we found a little "hack" by checking the `req` parameter.
  */
 
- MyApp.getInitialProps = async ({ ctx, req }) => {
+MyApp.getInitialProps = async ({ ctx, req }) => {
   const pageProps = {
-    user: null,
+    _serverUser: null,
   };
 
   const isClientSide = !ctx.req;
@@ -64,7 +64,7 @@ export default function MyApp({ Component, pageProps }: any) {
     const sanitizedUser = UserModel.sanitize(user);
 
     sanitizedUser.lastLogin = sanitizedUser.lastLogin.toString();
-    pageProps.user = sanitizedUser;
+    pageProps._serverUser = sanitizedUser
   } catch (err) {
     console.error('[getServerSideProps][pingUser]: ', err);
   }

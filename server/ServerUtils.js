@@ -5,6 +5,7 @@ const PAGE_SIZE = 25;
 
 const AUTH_EXPIRATION = 7;
 const MAX_NAME_LENGTH = 255;
+const MAX_DESCRIPTION_LENGTH = 255;
 const MAX_USERNAME_LENGTH = 100;
 
 class ServerError extends Error {
@@ -61,6 +62,7 @@ module.exports = {
   AUTH_EXPIRATION,
   MAX_NAME_LENGTH,
   MAX_USERNAME_LENGTH,
+  MAX_DESCRIPTION_LENGTH,
   setTokenCookie,
   validateAgainstSchemaProps,
   validateObjectId,

@@ -1,0 +1,134 @@
+@import '../../styles/variables';
+
+.exercise-preview {
+  // border-radius: 0.25em;
+  border: 1px solid color(silver);
+  transition: transform 0.5s $cubic;
+  box-shadow: 0 2px 6px color(silver);
+
+  &.is--skeleton {
+    .body {
+      margin-top: 1.75em;
+      height: 15em;
+
+      &::after {
+        content: none;
+      }
+
+      div {
+        height: 14px;
+        margin: 0.5em 0;
+        background-color: lighten(color(silver), 10%);
+
+        &:nth-of-type(1) {
+          width: 35%;
+        }
+        &:nth-of-type(4) {
+          width: 90%;
+        }
+        &:nth-of-type(5) {
+          width: 50%;
+        }
+      }
+    }
+
+    img {
+      width: 2em;
+      height: 2em;
+      background-color: lighten(color(silver), 10%);
+    }
+
+    footer a {
+      width: 6em;
+      padding: 1em;
+      background-color: lighten(color(silver), 10%);
+    }
+  }
+
+  &:hover {
+    transform: translateY(-0.5em);
+  }
+
+  header {
+    padding: 0.5em 1em;
+  }
+
+  .body {
+    height: 15em;
+    padding: 0 1em;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 4em;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(9, 9, 121, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+      );
+    }
+  }
+
+  footer {
+    padding: 1em;
+    border-top: 1px solid color(silver);
+  }
+
+  .avatar {
+    border-radius: 50%;
+    height: 100%;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    display: inline-block;
+    float: none;
+
+    img {
+      height: 2em;
+      border-radius: 50%;
+    }
+  }
+
+  .tags {
+    width: 50%;
+    max-width: calc(100% - 9em);
+
+    span {
+      opacity: 0.75;
+      font-size: 14px;
+      line-height: 4em;
+      font-weight: bold;
+      padding: 0.25em 0.5em;
+
+      &::before {
+        content: '#';
+        font-size: 2em;
+        margin-right: 1px;
+        color: color(blue);
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  &.is--done footer,
+  &.is--waiting footer,
+  &.has--issues footer {
+    color: color(white);
+    @extend %gradientBackground;
+  }
+
+  &.is--done footer {
+    @extend %greenGradientBackground;
+  }
+
+  &.is--waiting footer {
+    @extend %yellowGradientBackground;
+  }
+
+  &.has--issues footer {
+    @extend %redGradientBackground;
+  }
+}

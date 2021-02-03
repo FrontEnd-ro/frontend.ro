@@ -165,8 +165,16 @@
   margin-right: 0.25em;
 }
 
+.ml-1 {
+  margin-left: 0.25em;
+}
+
 .mr-2 {
   margin-right: 0.5em;
+}
+
+.ml-2 {
+  margin-left: 0.5em;
 }
 
 .my-5 {
@@ -220,6 +228,12 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /** Animations */

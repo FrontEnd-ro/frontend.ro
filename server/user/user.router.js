@@ -39,7 +39,15 @@ userRouter.get('/ping', async function pingCurrentuser(req, res) {
 })
 
 userRouter.post('/login', async function login(req, res) {
-  const { emailOrUsername, password } = req.body;
+  let { emailOrUsername, password } = req.body;
+  emailOrUsername = emailOrUsername.trim().toLowerCase();
+
+
+  if (!emailOrUsername || !password) {
+    new ServerError(400, 'Email-ul/username-ul și parola sunt obligatorii pentru login').send(res);
+    return
+  }
+
   const user = await UserModel.getUser({
     email: emailOrUsername,
     username: emailOrUsername,

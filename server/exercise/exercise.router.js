@@ -9,28 +9,36 @@ const {
   PublicOrOwnExercise,
   OwnExercise
 } = require('../Middlewares');
-const { MAX_MEDIA_BYTES } = require('../../shared/SharedConstants')
+const { MAX_MEDIA_BYTES } = require('../../shared/SharedConstants');
+const UserModel = require('../user/user.model');
 
 const exerciseRouter = express.Router();
 
 const s3 = new S3Client({ region: process.env.AWS_REGION });
 const upload = multer({ storage: multer.memoryStorage() });
 
-exerciseRouter.get('/', [PublicMiddleware], async function getAllExercises(req, res) {
-  let results = await ExerciseModel.getAllPublic();
-
-  try {
-    const encodedUserData = await authenticated(req, res);
-    results = [
-      ...results,
-      ...(await ExerciseModel.getOwnExercises(encodedUserData._id)),
-    ];
-  } catch (err) {
-    // User not logged it. Do nothing
-  }
+exerciseRouter.get('/', [PrivateMiddleware], async function getUserExercises(req, res) {
+  let results = await ExerciseModel.getUserExercises(req.body.user._id);
 
   res.json(results);
 })
+
+exerciseRouter.get('/public/:username', [PublicMiddleware], async function getPublicUserExercises(req, res) {
+  const { username } = req.params
+
+  const user = await UserModel.findUserBy({ username });
+
+  if (!user) {
+    new ServerError(404, `Nu am găsit user-ul cu username: ${username}`).send(res);
+    return
+  }
+
+  let results = await ExerciseModel.getUserExercises(user._id, true);
+
+  res.json(results);
+})
+
+
 
 exerciseRouter.post('/', [PrivateMiddleware], async function createExercise(req, res) {
   const exercise = await ExerciseModel.create(req.body);

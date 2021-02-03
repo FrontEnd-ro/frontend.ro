@@ -1,0 +1,16 @@
+@import '../../../styles/variables';
+
+.no-activity {
+  margin: 3em 0;
+
+  h2 {
+    top: 2em;
+    background: color(white);
+    font-size: 2em;
+    position: relative;
+  }
+  div {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}

@@ -17,8 +17,6 @@ class ExerciseService {
     formData.append('name', name);
     formData.append('file', file);
 
-    console.log({ name, file });
-
     return HttpService
       .post(`${process.env.ENDPOINT}/exercises/media`, formData)
       .then((resp) => resp.json());
@@ -39,6 +37,16 @@ class ExerciseService {
   static getSubmissions(page = 0, query = '') : Promise<Submission[]> {
     return HttpService.get(`${process.env.ENDPOINT}/exercises/submissions?page=${page}&query=${query}`)
       .then((response) => response.json()) as unknown as Promise<Submission[]>;
+  }
+
+  static getExercises(username: string) {
+    return HttpService.get(`${process.env.ENDPOINT}/exercises`)
+      .then((response) => response.json());
+  }
+
+  static getPublicExercises(username: string) {
+    return HttpService.get(`${process.env.ENDPOINT}/exercises/public/${username}`)
+      .then((response) => response.json());
   }
 }
 export default ExerciseService;

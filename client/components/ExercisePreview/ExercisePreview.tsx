@@ -52,7 +52,7 @@ function ExercisePreview({
   return (
     <div className={className}>
       <header className="text-right">
-        {isPrivate && <FontAwesomeIcon className="text-grey" icon={faLock} title="Exercițiu privat" />}
+        {isPrivate && <FontAwesomeIcon className="text-grey" width="24" icon={faLock} title="Exercițiu privat" />}
       </header>
       <Markdown
         className={`${styles.body} relative overflow-hidden`}
@@ -84,9 +84,9 @@ function ExercisePreview({
           )}
         </>
         <Link href={href}>
-          <a className={`btn no-underline ${isApproved || readOnly || feedbackCount > 0 ? 'btn--light' : 'btn--blue'}`}>
+          <a className={`d-flex btn no-underline ${isApproved || readOnly || feedbackCount > 0 ? 'btn--light' : 'btn--blue'}`}>
             {btnText}
-            <FontAwesomeIcon className="ml-2" icon={faPlay} />
+            <FontAwesomeIcon width="16" className="ml-2" icon={faPlay} />
           </a>
         </Link>
       </footer>

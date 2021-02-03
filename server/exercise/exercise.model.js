@@ -27,11 +27,16 @@ class ExerciseModel {
     return Exercise.find({ private: false });
   }
 
-  static getOwnExercises(userId) {
-    return Exercise.find({
-      user: userId,
-      private: true,
-    });
+  static getUserExercises(userId, publicOnly = false) {
+    const query = {
+      user: userId
+    }
+
+    if (publicOnly) {
+      query.private = false
+    }
+
+    return Exercise.find(query);
   }
 
   static get(_id) {

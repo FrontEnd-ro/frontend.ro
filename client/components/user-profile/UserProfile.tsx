@@ -5,6 +5,7 @@ import { UserState } from '~/redux/user/types';
 
 import SEOTags from '../SEOTags';
 import styles from './UserProfile.module.scss';
+import UserActivity from './UserActivity/UserActivity';
 
 interface Props {
   profileUser: UserState['info']
@@ -30,6 +31,7 @@ function UserProfile({ profileUser }: Props) {
           <Header />
           <main>
             <UserBio className={styles['user-bio']} user={profileUser} />
+            <UserActivity profileUser={profileUser} />
           </main>
           <Footer />
         </div>

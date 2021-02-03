@@ -27,7 +27,7 @@ function PrivacyControls(props: Props) {
         name="private"
         onChange={() => onPrivacyChange(false)}
         checked={!isPrivate}
-        value="true"
+        value="false"
       >
         Public
       </Checkbox>
@@ -38,7 +38,7 @@ function PrivacyControls(props: Props) {
         name="private"
         onChange={() => onPrivacyChange(true)}
         checked={isPrivate}
-        value="false"
+        value="true"
       >
         Privat
       </Checkbox>

@@ -108,16 +108,17 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
     }
   };
 
-  const createExercise = async (formData: { type: ChapterType, private: boolean }) => {
+  const createExercise = async (formData: { type: ChapterType, private: 'true' | 'false' }) => {
     if (!validateRequiredData()) {
       return;
     }
 
+    let newBody = body;
     setIsCreating(true);
 
     try {
       const uploadInfo = await uploadMedia();
-      replaceMarkdownWithUploads(uploadInfo);
+      newBody = replaceMarkdownWithUploads(uploadInfo);
     } catch (err) {
       SweetAlertService.toast({
         type: 'error',
@@ -128,9 +129,9 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
 
     try {
       await ExerciseService.createExercise({
-        body,
+        body: newBody,
         type: formData.type,
-        private: formData.private,
+        private: formData.private === 'true',
         example: exampleRef.current ? exampleRef.current.getFolderStructure() : null,
         solution: solutionRef.current ? solutionRef.current.getFolderStructure() : null,
       });
@@ -140,7 +141,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
         text: 'Exercițiul a fost creat cu succes!',
       });
 
-      // router.push('/');
+      router.push(`/${user.info.username}`);
     } catch (err) {
       SweetAlertService.toast({
         text: err?.message || 'Oops! Nu am putut crea exercițiul',
@@ -222,6 +223,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
     });
 
     setBody(newBody);
+    return newBody;
   };
 
   return (

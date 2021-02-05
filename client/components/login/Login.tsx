@@ -20,7 +20,7 @@ import styles from './Login.module.scss';
 
 interface MyProps {
   className?: string;
-  onSuccess?: () => void
+  onSuccess?: (user?: UserState['info']) => void
 }
 
 interface MyState {
@@ -104,7 +104,7 @@ class Login extends Component<MyProps, MyState> {
         getStore().dispatch(loadInfo(user));
 
         if (onSuccess) {
-          onSuccess();
+          onSuccess(user);
         }
       })
       .catch((error) => this.setState({ serverError: error.message }))

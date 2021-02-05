@@ -19,6 +19,7 @@ import BasicEditorLazy from '../Editor/BasicEditor/BasicEditor.lazy';
 import FolderStructure from '~/services/utils/FolderStructure';
 import { ChapterType } from '~/redux/exercise-submissions/types';
 import { extractExtension } from '~/services/utils/FileUtils';
+import { UserState } from '~/redux/user/types';
 
 interface FileDictionary {
   [id: string]: {
@@ -93,22 +94,28 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
 
   const onSubmit = (formData) => {
     if (user.info) {
-      createExercise(formData);
+      createExercise(formData, user.info);
     } else {
       SweetAlertService.content(
         Login,
         'Autentifică-te',
         {
-          onSuccess() {
+          onSuccess(userInfo: UserState['info']) {
             SweetAlertService.closePopup();
-            createExercise(formData);
+            createExercise(formData, userInfo);
           },
         },
       );
     }
   };
 
-  const createExercise = async (formData: { type: ChapterType, private: 'true' | 'false' }) => {
+  const createExercise = async (
+    formData: {
+      type: ChapterType,
+      private: 'true' | 'false'
+    },
+    userInfo: UserState['info']
+  ) => {
     if (!validateRequiredData()) {
       return;
     }
@@ -141,7 +148,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
         text: 'Exercițiul a fost creat cu succes!',
       });
 
-      router.push(`/${user.info.username}`);
+      router.push(`/${userInfo.username}`);
     } catch (err) {
       SweetAlertService.toast({
         text: err?.message || 'Oops! Nu am putut crea exercițiul',

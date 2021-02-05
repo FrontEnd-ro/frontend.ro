@@ -9,6 +9,7 @@ interface NewExercisePayload {
   type: string;
   solution: string;
   example?: string;
+  suggestion?: string;
 }
 
 class ExerciseService {

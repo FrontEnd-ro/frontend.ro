@@ -47,6 +47,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
   const [showSolutionEditor, setShowSolutionEditor] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const [suggestion, setSuggestion] = useState(null);
 
   const filesToUpload = useRef<FileDictionary>({});
 
@@ -114,7 +115,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
       type: ChapterType,
       private: 'true' | 'false'
     },
-    userInfo: UserState['info']
+    userInfo: UserState['info'],
   ) => {
     if (!validateRequiredData()) {
       return;
@@ -136,6 +137,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
 
     try {
       await ExerciseService.createExercise({
+        suggestion,
         body: newBody,
         type: formData.type,
         private: formData.private === 'true',
@@ -312,7 +314,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
         <ChapterControls form="createForm" />
         <PrivacyControls form="createForm" isPrivate={isPrivate} onPrivacyChange={setIsPrivate} />
         <footer className="d-flex align-items-center justify-content-between">
-          <LessonSelect onChange={noop} />
+          <LessonSelect onChange={(value) => setSuggestion(value.label)} />
           <div>
             <button
               form="createForm"

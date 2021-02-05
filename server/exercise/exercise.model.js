@@ -14,6 +14,7 @@ const ExercisesSchema = new mongoose.Schema(
     example: { type: String },
     solution: { type: String, required: true },
     private: { type: Boolean, default: false },
+    suggestion: {type: String, required: false}
   },
   {
     timestamps: true,

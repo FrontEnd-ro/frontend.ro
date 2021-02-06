@@ -118,11 +118,11 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
-    written: false,
+    written: true,
     title: 'Video și Audio',
-    description: 'Imaginile aduc mai multă "viață" site-urilor noastre dar putem merge un pas mai departe folosind elemente video și audio',
+    description: 'Imaginile aduc mai multă viață site-urilor noastre, dar putem merge un pas mai departe folosind elemente video și audio.',
     contributors: [SebastianLatkolic],
-    url: '/html/video-audio',
+    url: '/html/audio-video',
     type: 'html',
   },
   {

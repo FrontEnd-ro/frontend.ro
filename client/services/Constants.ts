@@ -181,10 +181,10 @@ export const LESSONS: LessonDescription[] = [
   },
   {
     id: 'box-model',
-    written: false,
+    written: true,
     title: 'Box model',
     description:
-      'Deși unele site-uri sunt cu adevărat WOW, la bază fiecare element e doar un dreptunghi cu câteva proprietăți mai speciale. Aici învățăm despre ele.',
+      'Deși unele site-uri sunt cu adevărat WOW, fiecare element e de fapt un dreptunghi cu câteva proprietăți mai speciale numit Box Model. Aici învățăm despre el.',
     url: '/css/box-model',
     type: 'css',
     contributors: [CatalinPopusoi],

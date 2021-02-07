@@ -1,0 +1,137 @@
+@import "../../styles/variables";
+
+$box-model-colors: (
+  "margin": #ffcb96,
+  "border": #ffdc91,
+  "padding": #bfd081,
+  "content": #7fb6c2,
+);
+
+@each $name, $color in $box-model-colors {
+  .#{$name}-colored {
+    background-color: $color;
+  }
+}
+
+.wrapper {
+  border-radius: 1em;
+  border: 1px solid color(silver);
+  padding: 2vw;
+
+  section {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+    &:first-of-type {
+      margin-bottom: 4vw;
+    }
+
+    &:last-of-type {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+}
+
+.header {
+  flex-basis: 100%;
+  margin-bottom: 4vw;
+  text-align: center;
+
+  label:first-child {
+    margin-right: 1em;
+  }
+}
+
+.footer {
+  flex-basis: 100%;
+  margin: 4vw 0 2vw;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+.item {
+  border: 1px solid color(black);
+  box-sizing: border-box;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+
+  label {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    text-transform: capitalize;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    input {
+      width: 30px;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid color(black);
+      height: 14px;
+
+      /* Remove the increment / decrement arrows */
+
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+  &.content-colored label {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.content {
+  margin: 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .wrapper section {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 936px) {
+  .wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .item:first-child {
+      width: 400px;
+    }
+
+    section {
+      flex-basis: 50%;
+
+      &:first-of-type {
+        padding-right: 2vw;
+        border-right: 1px solid color(silver);
+        margin-bottom: 0;
+      }
+    }
+  }
+}

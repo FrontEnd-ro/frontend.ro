@@ -11,7 +11,7 @@ export default function NewExercisePage() {
         title="Creează un exercițiu | FrontEnd.ro"
         description="Scrie un nou exercițiu pe care-l poți propune pentru lecțiile noastre sau îl poți folosi în propriile traininguri."
         shareImage="https://frontend.ro/seo/create-exercise.jpg"
-        url="https://FrontEnd.ro/exercitii/new"
+        url="https://FrontEnd.ro/exercitii/creeaza"
       />
       <>
         <Header />

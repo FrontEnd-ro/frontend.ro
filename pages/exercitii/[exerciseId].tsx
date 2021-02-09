@@ -19,7 +19,7 @@ function EditExercisePage({ exercise }: { exercise?: Exercise }) {
         description={`${authorNameOrUsername} a scris un exercițiu pentru ${exerciseChapter.toUpperCase()}.`}
         bigShareImage={false}
         shareImage={exercise.user.avatar}
-        url="https://FrontEnd.ro/exercitii/new"
+        url={`https://FrontEnd.ro/exercitii/${exercise._id}`}
       />
       <>
         <Header />

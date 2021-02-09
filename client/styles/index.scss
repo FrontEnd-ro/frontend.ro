@@ -3,8 +3,6 @@
 @import 'common';
 @import 'animations';
 
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
 html,
 body {
   padding: 0;
@@ -31,9 +29,4 @@ body {
 
 * {
   box-sizing: border-box;
-}
-
-/** FIXME: refactor this into separate file + self host fonts so we can pre-load them */
-.pacifico {
-  font-family: 'Pacifico', cursive;
 }

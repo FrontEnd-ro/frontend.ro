@@ -5,24 +5,7 @@ const {
   validateObjectId
 } = require('../ServerUtils');
 
-const ExercisesSchema = new mongoose.Schema(
-  {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    type: { type: String, enum: ['html', 'css', 'js'] },
-    tags: [{ type: String }],
-    body: { type: String, required: true },
-    example: { type: String },
-    solution: { type: String, required: true },
-    private: { type: Boolean, default: false },
-    suggestion: {type: String, required: false}
-  },
-  {
-    timestamps: true,
-  },
-);
-
-const Exercise = mongoose.models.Exercise || mongoose.model('Exercise', ExercisesSchema);
-
+const { ExercisesSchema, Exercise, getById, sanitize } = require('../../shared/exercise.shared-model');
 class ExerciseModel {
   static getAllPublic() {
     return Exercise.find({ private: false });
@@ -40,10 +23,7 @@ class ExerciseModel {
     return Exercise.find(query);
   }
 
-  static get(_id) {
-    validateObjectId(_id);
-    return Exercise.findById(_id);
-  }
+  static get = getById;
 
   static create(payload) {
     validateAgainstSchemaProps(payload, ExercisesSchema);
@@ -96,16 +76,7 @@ class ExerciseModel {
     });
   }
 
-  static sanitize(exercise) {
-    const sanitizedExercise = { ...exercise.toObject() };
-    sanitizedExercise.id = sanitizedExercise._id;
-
-    const propsToDelete = ['__v', 'user'];
-
-    propsToDelete.forEach((prop) => delete sanitizedExercise[prop]);
-
-    return sanitizedExercise;
-  }
+  static sanitize = sanitize;
 }
 
 module.exports = ExerciseModel;

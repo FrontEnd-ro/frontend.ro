@@ -13,10 +13,10 @@ export async function getServerSideProps({ res, params }) {
 
   if (!user) {
     res.statusCode = 404;
-    
+
     return {
-      props:{}
-    }
+      props: {},
+    };
   }
 
   const sanitizedUser = SharedUserModel.sanitize(user);

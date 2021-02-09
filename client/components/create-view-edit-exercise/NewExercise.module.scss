@@ -4,12 +4,15 @@
 $mobile-threshold: 950px;
 
 .new-exercise {
-  & > main {
-    @extend %containerConfig;
+  @extend %containerConfig;
 
-    & > footer {
-      margin: 2em 0;
-    }
+  h1 {
+    margin-top: 1.5em;
+    font-size: calc(1em + 1.5vw);
+  }
+  
+  & > footer {
+    margin: 2em 0;
   }
 
   [class*='ChapterControls'],
@@ -18,7 +21,7 @@ $mobile-threshold: 950px;
   }
 
   @media screen and (max-width: $mobile-threshold) {
-    main > form {
+    & > form {
       margin-top: 7.5em;
 
       & > footer {

@@ -10,27 +10,43 @@ declare global {
   var monaco: any;
 }
 
-function loadMonaco(): Promise<void> {
-  if (window.monaco) {
-    return Promise.resolve(monaco);
-  }
+const loadMonaco = (function loadMonacoIIFE() {
+  let promisesToResolve = [];
+  let loadInProgress = false;
 
-  const script = document.createElement('script');
-  script.src = `${process.env.CLOUDFRONT_PUBLIC}/lib/vs/loader.js`;
+  return function loadMonaco(): Promise<void> {
+    if (window.monaco) {
+      return Promise.resolve(monaco);
+    }
 
-  document.body.appendChild(script);
+    if (loadInProgress) {
+      return new Promise((resolve) => {
+        promisesToResolve.push(resolve);
+      });
+    }
 
-  return new Promise((resolve) => {
-    script.addEventListener('load', () => {
-      const require: any = window.require;
+    const script = document.createElement('script');
+    script.src = `${process.env.CLOUDFRONT_PUBLIC}/lib/vs/loader.js`;
 
-      require.config({ paths: { vs: `${process.env.CLOUDFRONT_PUBLIC}/lib/vs` } });
-      require(['vs/editor/editor.main'], () => {
-        monaco = window.monaco;
-        resolve(monaco);
+    loadInProgress = true;
+    document.body.appendChild(script);
+
+    return new Promise((resolve) => {
+      promisesToResolve.push(resolve);
+
+      script.addEventListener('load', () => {
+        const require: any = window.require;
+
+        require.config({ paths: { vs: `${process.env.CLOUDFRONT_PUBLIC}/lib/vs` } });
+        require(['vs/editor/editor.main'], () => {
+          monaco = window.monaco;
+
+          promisesToResolve.forEach((res) => res(monaco));
+          promisesToResolve = [];
+        });
       });
     });
-  });
-}
+  };
+}());
 
 export default loadMonaco;

@@ -58,7 +58,7 @@
     "jsonwebtoken": "^8.5.1",
     "jszip": "^3.5.0",
     "lodash": "^4.17.20",
-    "marked": "^1.2.8",
+    "marked": "^2.0.0",
     "monaco-editor": "^0.21.3",
     "monaco-editor-webpack-plugin": "^2.1.0",
     "mongoose": "^5.10.11",

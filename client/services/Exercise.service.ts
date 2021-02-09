@@ -1,8 +1,6 @@
 import { Submission } from '~/redux/exercise-submissions/types';
 import HttpService from './Http.service';
 
-// FIXME ---> we need to do a little more research to find a better solution
-
 interface NewExercisePayload {
   body: string;
   private: boolean;
@@ -29,6 +27,12 @@ class ExerciseService {
       .then((resp) => resp.json());
   }
 
+  static updateExercise(id: string, payload: NewExercisePayload): Promise<any> {
+    return HttpService
+      .put(`${process.env.ENDPOINT}/exercises/${id}`, payload)
+      .then((resp) => resp.json());
+  }
+
   static markFeedbackAsDone(feedbackId: string) {
     return new Promise((resolve, reject) => {
       setTimeout(resolve, 1000);
@@ -48,6 +52,10 @@ class ExerciseService {
   static getPublicExercises(username: string) {
     return HttpService.get(`${process.env.ENDPOINT}/exercises/public/${username}`)
       .then((response) => response.json());
+  }
+
+  static delete(id: string) {
+    return HttpService.delete(`${process.env.ENDPOINT}/exercises/${id}`);
   }
 }
 export default ExerciseService;

@@ -98,7 +98,7 @@ exerciseRouter.get('/:exerciseId', [PublicOrOwnExercise], async function getExer
   }
 })
 
-exerciseRouter.post('/:exerciseId', [PrivateMiddleware], async function updateExercise(req, res) {
+exerciseRouter.put('/:exerciseId', [PrivateMiddleware, OwnExercise], async function updateExercise(req, res) {
   const { exerciseId } = req.params;
 
   const exercise = await ExerciseModel.update(exerciseId, req.body);

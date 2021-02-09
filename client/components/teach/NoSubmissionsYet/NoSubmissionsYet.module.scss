@@ -8,8 +8,13 @@
   h2 {
     font-weight: normal;
   }
+}
 
-  button {
+.help-wrapper {
+  margin-top: 5em;
+
+  & > button,
+  & > a {
     display: flex;
     font-size: 1em;
     padding: 0.5em;
@@ -24,10 +29,6 @@
       transform: scale(1.1);
     }
   }
-}
-
-.help-wrapper {
-  margin-top: 5em;
 
   @media screen and (max-width: 950px) {
     flex-flow: column;

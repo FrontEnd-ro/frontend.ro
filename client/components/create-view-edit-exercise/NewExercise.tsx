@@ -13,25 +13,16 @@ import styles from './NewExercise.module.scss';
 import ExerciseService from '~/services/Exercise.service';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
-import { noop, uuid } from '~/services/Utils';
-import { MAX_MEDIA_BYTES, MAX_MEDIA_MB } from '~/../shared/SharedConstants';
 import BasicEditorLazy from '../Editor/BasicEditor/BasicEditor.lazy';
 import FolderStructure from '~/services/utils/FolderStructure';
 import { ChapterType } from '~/redux/exercise-submissions/types';
-import { extractExtension } from '~/services/utils/FileUtils';
 import { UserState } from '~/redux/user/types';
-
-interface FileDictionary {
-  [id: string]: {
-    file: File;
-    markdownToReplace: string;
-  }
-}
-
-interface MediaUploadResp {
-  name: string;
-  url: string;
-}
+import {
+  MediaUploadResp,
+  FileDictionary,
+  uploadFiles,
+  uploadMedia,
+} from '.';
 
 function NewExercise({ user }: ConnectedProps<typeof connector>) {
   const router = useRouter();
@@ -56,41 +47,11 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
     setBodyError(false);
   };
 
-  const uploadFiles = (files: File[], cursorPosition: number) => {
-    let newMarkdown = body;
-    let filesIgnored = 0; // due to size restrictions
-
-    files.forEach((file) => {
-      if (file.size > MAX_MEDIA_BYTES) {
-        filesIgnored += 1;
-        return;
-      }
-
-      console.log(file.size);
-      const fileName = `${uuid()}.${extractExtension(file.name)}`;
-      const objectURL = URL.createObjectURL(file);
-      const imgMarkdown = `![${file.name}](${objectURL})`;
-
-      filesToUpload.current[fileName] = {
-        file,
-        markdownToReplace: imgMarkdown,
-      };
-
-      newMarkdown = `${newMarkdown.substring(0, cursorPosition)}${imgMarkdown}${newMarkdown.substring(cursorPosition)}`;
-      // eslint-disable-next-line no-param-reassign
-      cursorPosition += imgMarkdown.length;
-    });
-
-    if (filesIgnored) {
-      SweetAlertService.toast({
-        type: 'info',
-        text: filesIgnored === 1
-          ? `Fișierul a fost ignorat căci nu se încadrează în limita de ${MAX_MEDIA_MB}MB`
-          : `${filesIgnored} fișiere au fost ignorate căci nu se încadrează în limita de ${MAX_MEDIA_MB}MB`,
-      });
-    }
-
+  const updateMarkdownWithUploadedFiles = (newMarkdown, newFiles) => {
     setBody(newMarkdown);
+    Object.keys(newFiles).forEach((fileId) => {
+      filesToUpload.current[fileId] = newFiles[fileId];
+    });
   };
 
   const onSubmit = (formData) => {
@@ -125,7 +86,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
     setIsCreating(true);
 
     try {
-      const uploadInfo = await uploadMedia();
+      const uploadInfo = await uploadMedia(body, filesToUpload.current);
       newBody = replaceMarkdownWithUploads(uploadInfo);
     } catch (err) {
       SweetAlertService.toast({
@@ -184,37 +145,6 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
     return isValid;
   };
 
-  const uploadMedia = async (): Promise<MediaUploadResp[]> => {
-    // 1. Maybe some files were removed in the meantime -> double check they're stll here
-    Object.keys(filesToUpload.current).forEach((id) => {
-      const { markdownToReplace } = filesToUpload.current[id];
-      if (body.indexOf(markdownToReplace) === -1) {
-        delete filesToUpload.current[id];
-      }
-    });
-
-    // 2. Upload to AWS
-    const results = await Promise.allSettled(Object.keys(filesToUpload.current).map((id) => {
-      return ExerciseService.uploadMedia(id, filesToUpload.current[id].file);
-    }));
-
-    const fulfilledResults = results
-      .filter((res) => res.status === 'fulfilled')
-      .map((res: PromiseFulfilledResult<MediaUploadResp>) => res.value);
-
-    if (results.length !== fulfilledResults.length) {
-      const filesIgnored = results.length - fulfilledResults.length;
-
-      SweetAlertService.toast({
-        type: 'info',
-        text: filesIgnored === 1
-          ? '1 fișisier nu a putut fi uploadat. Încearcă din nou'
-          : `${filesIgnored} fișiere nu au putut fi uploadate. Încearcă din nou`,
-      });
-    }
-    return fulfilledResults;
-  };
-
   const replaceMarkdownWithUploads = (uploadedInfo: MediaUploadResp[]) => {
     let newBody = body;
 
@@ -236,7 +166,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
   };
 
   return (
-    <div className={styles['new-exercise']}>
+    <div>
       <section className={`${styles.cta} relative`}>
         <div>
           <h1> Creează un nou exercițiu</h1>
@@ -254,13 +184,15 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
         }}
         />
       </section>
-      <main>
+      <main className={styles['new-exercise']}>
         <Form withStyles={false} onSubmit={onSubmit} className="relative" id="createForm">
           <div ref={markdownWrapper} className="relative">
             <MarkdownTextarea
               title="Descrie exercițiul"
               markdown={body}
-              onUpload={uploadFiles}
+              onUpload={(files, cursorPosition) => uploadFiles(
+                files, cursorPosition, body, updateMarkdownWithUploadedFiles,
+              )}
               onInput={onMarkdownInput}
             />
             {bodyError && <p className={`${styles['error-message']} text-right text-bold absolute`}> Nu poți crea un exercițiu fără descriere 👆</p>}

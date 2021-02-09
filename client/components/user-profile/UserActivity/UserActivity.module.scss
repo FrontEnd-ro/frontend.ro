@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .exercises-wrapper {
   display: flex;
   margin-top: 3em;
@@ -7,6 +9,24 @@
     width: 45%;
     margin-right: 5%;
     margin-bottom: 2em;
+  }
+
+  & > a {
+    margin-bottom: 2rem;
+    width: 45%;
+    padding: 6em 2em;
+    border-radius: 0.5em;
+    border: 5px dashed color(silver);
+    transition: transform 0.5s $cubic;
+
+    &:hover {
+      transform: translateY(-0.5em);
+    }
+
+    span {
+      margin-left: 1em;
+      font-size: 1.5em;
+    }
   }
 
 

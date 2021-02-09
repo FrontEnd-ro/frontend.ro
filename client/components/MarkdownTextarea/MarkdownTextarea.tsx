@@ -13,6 +13,7 @@ interface Props {
   markdown?: string;
   className?: string;
   disabled?: boolean;
+  initialTab?: 'EDIT' | 'PREVIEW';
   onInput: (text: string) => void;
   onUpload: (files: File[], cursorPosition: number) => void;
 }
@@ -22,6 +23,7 @@ function MarkdownTextarea({
   markdown = '',
   className = '',
   disabled = false,
+  initialTab = 'EDIT',
   onInput,
   onUpload,
 }: Props) {
@@ -29,7 +31,7 @@ function MarkdownTextarea({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [isPreview, setIsPreview] = useState(false);
+  const [isPreview, setIsPreview] = useState(initialTab === 'PREVIEW');
   const [isFechingMarked, setIsFetchingMarked] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -105,7 +107,7 @@ function MarkdownTextarea({
           <textarea
             placeholder="Editează folosing Markdown..."
             ref={textareaRef}
-            disabled={isPreview}
+            disabled={isPreview || disabled}
             className={`${isPreview ? 'd-none absolute' : ''}`}
             value={markdown}
             rows={10}
@@ -114,24 +116,26 @@ function MarkdownTextarea({
           />
           <div ref={previewRef} className={`${isPreview ? '' : 'd-none absolute'}`} />
         </div>
+        {!disabled && (
         <footer className="text-right relative">
           {!isPreview && (
-            <label className="absolute">
-              {isUploading ? <FontAwesomeIcon className="rotate" icon={faSpinner} /> : 'Adaugă imagini'}
-              <input
-                ref={fileInputRef}
-                disabled={isUploading || disabled}
-                type="file"
-                multiple={false}
-                accept={IMAGES_MIME_TYPES.join(',')}
-                onChange={fileInput}
-                hidden
-              />
-            </label>
+          <label className="absolute">
+            {isUploading ? <FontAwesomeIcon className="rotate" icon={faSpinner} /> : 'Adaugă imagini'}
+            <input
+              ref={fileInputRef}
+              disabled={isUploading || disabled}
+              type="file"
+              multiple={false}
+              accept={IMAGES_MIME_TYPES.join(',')}
+              onChange={fileInput}
+              hidden
+            />
+          </label>
           )}
 
           <FontAwesomeIcon icon={faMarkdown} width="20" />
         </footer>
+        )}
       </div>
     </div>
   );

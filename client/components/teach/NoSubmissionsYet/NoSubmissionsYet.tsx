@@ -39,14 +39,12 @@ function NoSubmissionsYet() {
           Vreau să scriu lecții
         </button>
 
-        <button
-          type="button"
-          onClick={() => setHelp('exercises')}
-          className={`${help === 'exercises' ? 'btn--blue ' : 'btn--transparent '}btn align-items-center`}
-        >
-          <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faLightbulb} />
-          Vreau să creez exerciții
-        </button>
+        <Link href="/exercitii/creeaza">
+          <a className={`${help === 'exercises' ? 'btn--blue ' : 'btn--transparent '}btn align-items-center`}>
+            <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faLightbulb} />
+            Vreau să creez exerciții
+          </a>
+        </Link>
       </div>
       {help && (
         <div className={styles['help-explanation']}>

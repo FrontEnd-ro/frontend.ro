@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('./user/user.model');
 const { ServerError } = require('./ServerUtils');
+const ExerciseModel = require('./exercise/exercise.model');
+
 /** 
  * Everyone can access the API. 
  * If you have a token, it will be added into the req.body 
@@ -79,10 +81,12 @@ async function OwnExercise(req, res, next) {
 
   const exercise = await ExerciseModel.get(exerciseId);
 
-  if (req.body.user._id !== exercise.user.toString()) {
-    new ServerError(403, 'Only the author of this exercise can view it').send(res);
+  if (req.body.user.username !== exercise.user.username) {
+    new ServerError(403, 'Doar autorul acestui exercițiu îl poate accesa.').send(res);
     return
   }
+
+  next();
 }
 
 module.exports = {

@@ -1,3 +1,6 @@
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import ExercisePreview from '~/components/ExercisePreview';
@@ -44,7 +47,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
         {exercises.map((ex, index) => (
           <ExercisePreview
             key={ex._id}
-            href={`${profileUser.username}/#`}
+            href={`exercitii/${ex._id}`}
             author={profileUser}
             body={ex.body}
             isPrivate={ex.private}
@@ -55,6 +58,12 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
             readOnly={false}
           />
         ))}
+        <Link href="/exercitii/creeaza">
+          <a className="d-flex align-items-center justify-content-center no-underline text-center">
+            <FontAwesomeIcon icon={faPlus} width="32" height="32" />
+            <span> Creează un nou exercițiu </span>
+          </a>
+        </Link>
 
       </div>
     </PageContainer>

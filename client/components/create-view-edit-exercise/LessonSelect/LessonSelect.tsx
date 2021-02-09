@@ -15,10 +15,11 @@ interface LessonOption {
 }
 
 interface Props {
+  selectedId?: string,
   onChange: (value: LessonOption) => void
 }
 
-function LessonSelect({ onChange } : Props) {
+function LessonSelect({ selectedId, onChange } : Props) {
   const chapterLessonPairs = LESSONS
     .filter((lesson) => lesson.written)
     .map((lesson) => ({
@@ -29,6 +30,8 @@ function LessonSelect({ onChange } : Props) {
       },
       label: `${lesson.type}/${lesson.title}`,
     }));
+
+  const defaultValue = chapterLessonPairs.find((pair) => pair.label === selectedId);
 
   return (
     <div className={styles['lesson-select']}>
@@ -42,6 +45,7 @@ function LessonSelect({ onChange } : Props) {
         placeholder=""
         onChange={onChange}
         className={styles.select}
+        defaultValue={defaultValue}
         options={chapterLessonPairs}
       />
     </div>

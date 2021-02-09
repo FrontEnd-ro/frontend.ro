@@ -3,8 +3,11 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import { NewExercise } from '~/components/create-view-edit-exercise';
+import { withClientMonitoring } from '~/services/Hooks';
 
 export default function NewExercisePage() {
+  withClientMonitoring();
+
   return (
     <>
       <SEOTags

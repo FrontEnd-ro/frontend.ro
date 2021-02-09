@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
-const postmark = require('postmark');
+const EmailService = require('../Email.service');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const UserModel = require('./user.model');
 const SubscribeModel = require('../subscribe.model');
@@ -123,6 +123,15 @@ userRouter.post('/register', async function register(req, res) {
   // Create and set JTW as cookie
   const token = UserModel.generateJwtForUser(user._id);
   setTokenCookie(token, res);
+
+  EmailService.sendEmailWithTemplate(
+    email,
+    Number(process.env.EMAIL_REGISTER_TEMPLATE),
+    {
+      name: username,
+      sender_name: 'Păvă'
+    }
+  );
 
   res.json(UserModel.sanitize(user));
 })
@@ -316,21 +325,14 @@ userRouter.post('/subscribe', async (req, res) => {
 
   await SubscribeModel.subscribe({ name, email });
 
-  try {
-    const client = new postmark.ServerClient(process.env.EMAIL_TOKEN);
-
-    await client.sendEmailWithTemplate({
-      To: process.env.APP_ENV === 'production' ? email : 'pava@frontend.ro',
-      From: 'hello@frontend.ro',
-      TemplateId: Number(process.env.EMAIL_WELCOME_TEMPLATE),
-      TemplateModel: {
-        name,
-        sender_name: 'Păvă',
-      },
-    });
-  } catch (err) {
-    console.error('[sendEmailWithTemplate]', err, { name, email });
-  }
+  EmailService.sendEmailWithTemplate(
+    email,
+    Number(process.env.EMAIL_WELCOME_TEMPLATE),
+    {
+      name,
+      sender_name: 'Păvă'
+    }
+  );
 
   res.json({
     name,

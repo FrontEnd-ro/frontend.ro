@@ -36,7 +36,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
     return null;
   }
 
-  if (exercises.length === 0) {
+  if (exercises.length === 0 && !isOwnProfile) {
     return <NoActivity user={profileUser} />;
   }
 

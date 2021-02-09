@@ -58,12 +58,14 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
             readOnly={false}
           />
         ))}
+        {isOwnProfile && (
         <Link href="/exercitii/creeaza">
           <a className="d-flex align-items-center justify-content-center no-underline text-center">
             <FontAwesomeIcon icon={faPlus} width="32" height="32" />
             <span> Creează un nou exercițiu </span>
           </a>
         </Link>
+        )}
 
       </div>
     </PageContainer>

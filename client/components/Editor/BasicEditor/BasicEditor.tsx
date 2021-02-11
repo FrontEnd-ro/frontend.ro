@@ -18,6 +18,10 @@ class BasicMonacoEditor extends MonacoBase {
     };
   }
 
+  static defaultProps = {
+    showFileSwitcher: true,
+  }
+
   initEditor = () => {
     const { readOnly } = this.props;
 
@@ -48,13 +52,19 @@ class BasicMonacoEditor extends MonacoBase {
 
   onModelChange = () => {
     const { folderStructure } = this.state;
+    const { onChange } = this.props;
+
     folderStructure.setContent(this.state.selectedFileKey, this.editor.getValue());
+
+    if (onChange) {
+      onChange(folderStructure);
+    }
 
     this.setState({ folderStructure });
   }
 
   render() {
-    const { readOnly } = this.props;
+    const { readOnly, showFileSwitcher } = this.props;
     const {
       folderStructure, fileSwitcherWidth, selectedFileKey, isDropable,
     } = this.state;
@@ -71,6 +81,8 @@ class BasicMonacoEditor extends MonacoBase {
       >
         {folderStructure.files.length || folderStructure.folders.length ? (
           <>
+            { showFileSwitcher
+            && (
             <FileSwitcher
               maxHeight={500}
               folderStructure={folderStructure}
@@ -86,6 +98,7 @@ class BasicMonacoEditor extends MonacoBase {
               onDownload={this.onDownload}
               onResize={this.onResize}
             />
+            )}
             <div
               className={`
                 ${styles.editor}

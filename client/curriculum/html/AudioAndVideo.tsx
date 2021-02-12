@@ -5,8 +5,10 @@ import Lesson, {
   LessonCover,
   LessonHeading,
   LessonTip,
+  LessonFigure,
   LessonResources,
 } from '~/components/lessons';
+import { DemoPreview } from '~/components/demo';
 import { SebastianLatkolic } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/video_cover.svg';
@@ -51,7 +53,7 @@ export default function ListsLesson() {
             {' '}
             este folosit pentru a adăuga fișiere audio paginii tale web. Acesta se declară cu ajutorul atributului
             {' '}
-            <strong className="formatted">{'src'}</strong>
+            <strong className="formatted">src</strong>
             .
           </p>
           <Highlight
@@ -70,21 +72,24 @@ export default function ListsLesson() {
             {' '}
             se face cu elementul
             {' '}
-            <strong className="formatted">{'<source>'}</strong>.
+            <strong className="formatted">{'<source>'}</strong>
+            .
             Poate conține mai multe surse audio de diferite extensii declarate cu
             {' '}
-            <strong className="formatted">{'src'}</strong>,
+            <strong className="formatted">src</strong>
+            ,
             iar tipul acestora declarat cu
             {' '}
-            <strong className="formatted">{'type'}</strong>.
+            <strong className="formatted">type</strong>
+            .
           </p>
           <Highlight
             className="my-5"
             language="html"
             code={`
 <audio>
-  <source src=”fișier-audio.mp3” type=”audio/mpeg”>
-  <source src=”fișier-audio.ogg” type=”audio/ogg”>
+  <source src=”fișier-audio.mp3” type=”audio/mpeg” />
+  <source src=”fișier-audio.ogg” type=”audio/ogg” />
   <p>
     Browser-ul tău nu suportă fișierele audio oferite de noi.
     Folosește <a href=”fișier-audio.mp4”>acest link</a> în schimb
@@ -93,6 +98,29 @@ export default function ListsLesson() {
 </audio> 
 `}
           />
+          <DemoPreview>
+            <audio controls>
+              <source
+                src="/audio-video/fisier-audio.mp3"
+                type="audio/mp3"
+              />
+
+              <source
+                src="/audio-video/fisier-audio.aac"
+                type="audio/aac"
+              />
+
+              <p>
+                Browser-ul tău nu suportă fișierele audio oferite de noi.
+                Folosește
+                {' '}
+                {'<a href=”fișier-audio.mp4”>acest link</a>'}
+                {' '}
+                în schimb
+                pentru a putea vizualiza acesta.
+              </p>
+            </audio>
+          </DemoPreview>
           <p>
             Elementul
             {' '}
@@ -102,19 +130,19 @@ export default function ListsLesson() {
             browser-ul nu acceptă nici unul dintre formatele fișierelor audio.
           </p>
           <LessonTip>
-            Nu toate browserele suportă fiecare tip de fișier audio, de aceea este recomandat 
-            să oferim același fișier audio în mai multe tipuri sau extensii, 
+            Nu toate browserele suportă fiecare tip de fișier audio, de aceea este recomandat
+            să oferim același fișier audio în mai multe tipuri sau extensii,
             declarate cu ajutorul atributul
             {' '}
-            <strong className="formatted">{'type'}</strong>
+            <strong className="formatted">type</strong>
             {' '}
             (mp3, ogg, mp4 etc).
           </LessonTip>
-        
+
         </section>
         <section>
           <LessonHeading as="h3" id="atributele-elementului-audio">
-          {'Atributele elementului <audio>'}
+            {'Atributele elementului <audio>'}
           </LessonHeading>
           <ul className="with--bullets">
             <li className="mb-4">
@@ -134,7 +162,7 @@ export default function ListsLesson() {
               {' '}
               <strong className="formatted">controls</strong>
               {' '}
-              – permite controlul asupra fișierului audio, adăugând funcții precum 
+              – permite controlul asupra fișierului audio, adăugând funcții precum
               play/pause, control al volumului dar și a timpului.
             </li>
           </ul>
@@ -143,20 +171,25 @@ export default function ListsLesson() {
             language="html"
             code={`
 <audio controls>
-  <source src=”fișier-audio.mp3” type=”audio/mpeg”>
-  <source src=”fișier-audio.ogg” type=”audio/ogg”>
+  <source src=”fișier-audio.mp3”
+    type=”audio/mpeg” />
+
+  <source src=”fișier-audio.ogg”
+    type=”audio/ogg” />
+
   <p>
     Browser-ul tău nu suportă fișierele audio oferite de noi.
     Folosește <a href=”fișier-audio.mp4”>acest link</a> în schimb
     pentru a putea vizualiza acesta.
   </p>
-</audio> 
+</audio>
 `}
           />
           <LessonTip>
             Mare atenție la ordinea în care punem elementele
             {' '}
-            <strong className="formatted">{'<source>'}</strong>,
+            <strong className="formatted">{'<source>'}</strong>
+            ,
             {' '}
             ele fiind citite de sus în jos de către browser.
             Acesta va alege prima sursă compatibilă.
@@ -164,9 +197,13 @@ export default function ListsLesson() {
           <p>
             Pentru a vedea toate atributele elementului
             {' '}
-            <strong className="formatted">{'<audio>'}</strong>,
+            <strong className="formatted">{'<audio>'}</strong>
+            ,
             {' '}
-            accesează link-ul din secțiunea <strong className="text-bold">Resurse suplimentare</strong>.
+            accesează link-ul din secțiunea
+            {' '}
+            <strong className="text-bold">Resurse suplimentare</strong>
+            .
           </p>
         </section>
         <section>
@@ -181,7 +218,7 @@ export default function ListsLesson() {
             ne permite adăugarea unui video pe pagina noastră.
             Acesta se declară cu ajutorul atributului
             {' '}
-            <strong className="formatted">{'src'}</strong>
+            <strong className="formatted">src</strong>
             .
           </p>
           <Highlight
@@ -200,13 +237,16 @@ export default function ListsLesson() {
             {' '}
             se face cu elementul
             {' '}
-            <strong className="formatted">{'<source>'}</strong>.
+            <strong className="formatted">{'<source>'}</strong>
+            .
             Poate conține mai multe surse video de diferite extensii declarate cu
             {' '}
-            <strong className="formatted">{'src'}</strong>,
+            <strong className="formatted">src</strong>
+            ,
             iar tipul acestora declarat cu
             {' '}
-            <strong className="formatted">{'type'}</strong>.
+            <strong className="formatted">type</strong>
+            .
           </p>
           <Highlight
             className="my-5"
@@ -214,14 +254,21 @@ export default function ListsLesson() {
             code={`
 <video>
   <source src="fișier-video.webm"
-    type="video/webm">
+    type="video/webm" />
         
   <source src="fișier-video.mp4"
-    type="video/mp4">
+    type="video/mp4" />
         
   <p>Ne pare rău, browserul dvs. nu acceptă videoclipuri încorporate</p>
 </video>
 `}
+          />
+          <LessonFigure
+            isVideo
+            withBorder
+            src="/audio-video/fisier-video.mp4"
+            alt="Exemplu de utilizare a elementului <video>"
+            demo="/demo/html/video"
           />
           <p>
             Elementul
@@ -232,18 +279,18 @@ export default function ListsLesson() {
             browser-ul nu acceptă nici unul dintre formatele fișierelor video oferite.
           </p>
           <LessonTip>
-            Nu toate browserele suportă fiecare tip de fișier video, de aceea este recomandat 
-            să oferim același fișier în mai multe tipuri sau extensii, 
+            Nu toate browserele suportă fiecare tip de fișier video, de aceea este recomandat
+            să oferim același fișier în mai multe tipuri sau extensii,
             declarate cu ajutorul atributul
             {' '}
-            <strong className="formatted">{'type'}</strong>
+            <strong className="formatted">type</strong>
             {' '}
             (webm, mp4, avi etc).
           </LessonTip>
         </section>
         <section>
           <LessonHeading as="h3" id="atributele-elementului-video">
-          {'Atributele elementului <video>'}
+            {'Atributele elementului <video>'}
           </LessonHeading>
           <ul className="with--bullets">
             <li className="mb-4">
@@ -277,7 +324,7 @@ export default function ListsLesson() {
               {' '}
               <strong className="formatted">controls</strong>
               {' '}
-              – permite controlul asupra fișierului video, adăugând funcții precum 
+              – permite controlul asupra fișierului video, adăugând funcții precum
               play/pause, control al volumului dar și a timpului.
             </li>
           </ul>
@@ -288,10 +335,10 @@ export default function ListsLesson() {
 <video controls width="350" height=”250”>
 
   <source src="fisier-video.webm"
-    type="video/webm">
+    type="video/webm" />
         
   <source src="fisier.video.mp4"
-    type="video/mp4">
+    type="video/mp4" />
         
   <p>Ne pare rău, browserul dvs. nu acceptă videoclipuri încorporate</p>
 </video>
@@ -300,7 +347,8 @@ export default function ListsLesson() {
           <LessonTip>
             Mare atenție la ordinea în care punem elementele
             {' '}
-            <strong className="formatted">{'<source>'}</strong>,
+            <strong className="formatted">{'<source>'}</strong>
+            ,
             {' '}
             ele fiind citite de sus în jos de către browser.
             Acesta va alege prima sursă compatibilă.
@@ -308,9 +356,13 @@ export default function ListsLesson() {
           <p>
             Pentru a vedea toate atributele elementului
             {' '}
-            <strong className="formatted">{'<video>'}</strong>,
+            <strong className="formatted">{'<video>'}</strong>
+            ,
             {' '}
-            accesează link-ul din secțiunea <strong className="text-bold">Resurse suplimentare</strong>.
+            accesează link-ul din secțiunea
+            {' '}
+            <strong className="text-bold">Resurse suplimentare</strong>
+            .
           </p>
         </section>
         <div className="dots" />

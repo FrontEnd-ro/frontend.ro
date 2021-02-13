@@ -70,6 +70,11 @@ async function PublicOrOwnExercise(req, res, next) {
   const { exerciseId } = req.params;
 
   const exercise = await ExerciseModel.get(exerciseId);
+  if (!exercise) {
+    new ServerError(404, 'Exercițiul nu există.').send(res);
+    return
+  }
+
   if (!exercise || exercise.private) {
     await ownExercise(req, res, next);
   }
@@ -80,6 +85,10 @@ async function OwnExercise(req, res, next) {
   const { exerciseId } = req.params;
 
   const exercise = await ExerciseModel.get(exerciseId);
+  if (!exercise) {
+    new ServerError(404, 'Exercițiul nu există.').send(res);
+    return
+  }
 
   if (req.body.user.username !== exercise.user.username) {
     new ServerError(403, 'Doar autorul acestui exercițiu îl poate accesa.').send(res);

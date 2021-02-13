@@ -3,6 +3,7 @@ const UserModel = require('./user/user.model');
 const { ServerError } = require('./ServerUtils');
 const ExerciseModel = require('./exercise/exercise.model');
 
+/****************** User Middleware */
 /** 
  * Everyone can access the API. 
  * If you have a token, it will be added into the req.body 
@@ -66,6 +67,29 @@ function PrivateMiddleware(req, res, next) {
   );
 }
 
+function UserRoleMiddleware(role) {
+  if (!role in USER_ROLE) {
+    const availableUserRoles = Object.values(USER_ROLE).join(',');
+    console.error(`[UserRoleMiddleware] 'role' must be one of: ${availableUserRoles}.`);
+
+    return (_, res) => {
+      new ServerError(401, 'Nu ai rolul necesar pentru a accesa această resursă').send(res);
+      return
+    }
+  }
+
+  return (req, res, next) => {
+    PrivateMiddleware(req, res, () => {
+      if (req.body.user.role === role) {
+        next();
+      }
+
+      new ServerError(401, 'Nu ai rolul necesar pentru a accesa această resursă').send(res);
+    })
+  }
+}
+
+/****************** Exercise Middleware */
 async function PublicOrOwnExercise(req, res, next) {
   const { exerciseId } = req.params;
 
@@ -103,61 +127,6 @@ module.exports = {
   PublicMiddleware,
   PrivateMiddleware,
   PublicOrOwnExercise,
+  UserRoleMiddleware,
   OwnExercise
 }
-
-/**
- * Higher order function which applies a bunch of middlewares to all
- * configured methods of an API request.
- *
- * For example, in case we want only authenticated access to all (GET, POST, etc),
- * we can just specify the middleware in the second param instead of duplicating it everywhere.
- *
- * If we want to have specific middlewares per method, we'll need to apply this function again on
- * the individual handlers.
- */
-// export function withMiddlewares(
-//   handlerOrConfig: Handler | RouteConfig,
-//   middlewares: Middleware[] = [],
-// ): Handler {
-//   const extendedMiddlewares = typeof handlerOrConfig === 'function'
-//     ? [...middlewares]
-//     : [...middlewares, methodExists(handlerOrConfig)];
-
-//   /** Connect to DB on all API routes */
-//   connectToDb();
-
-//   return async (req, res) => {
-//     try {
-//       for (let i = 0; i < extendedMiddlewares.length; i += 1) {
-//         /**
-//          * We want them to be iterative sequencial, as we must make sure that
-//          * we run the next middleware only if the current one has successfully passed.
-//          */
-
-//         // eslint-disable-next-line no-await-in-loop
-//         await extendedMiddlewares[i](req, res);
-//       }
-
-//       if (typeof handlerOrConfig === 'function') {
-//         await handlerOrConfig(req, res);
-//       } else {
-//         await handlerOrConfig[req.method](req, res);
-//       }
-//     } catch (err) {
-//       if (err instanceof ServerError) {
-//         err.send(res);
-//         return;
-//       }
-
-//       let code = err?.code;
-//       if (!code && err.name === 'ValidationError') {
-//         code = 400;
-//       } else {
-//         code = 500;
-//       }
-
-//       new ServerError(code, err).send(res);
-//     }
-//   };
-// }

@@ -75,10 +75,11 @@ async function PublicOrOwnExercise(req, res, next) {
     return
   }
 
-  if (!exercise || exercise.private) {
+  if (exercise.private) {
     await ownExercise(req, res, next);
+  } else {
+    next();
   }
-
 }
 
 async function OwnExercise(req, res, next) {

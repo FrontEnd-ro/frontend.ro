@@ -21,6 +21,9 @@ const BasicEditorLazy = React.forwardRef(({ folderStructure, ...rest }: any, for
   return (
     <BasicEditor
       ref={forwardRef}
+        // FIXME
+        // https://github.com/FrontEnd-ro/frontend.ro/issues/111
+      key={folderStructure}
       folderStructure={folderStructure || {}}
       {...rest}
     />

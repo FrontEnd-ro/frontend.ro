@@ -20,6 +20,12 @@ class BasicMonacoEditor extends MonacoBase {
 
   initEditor = () => {
     const { readOnly } = this.props;
+
+    // FIXME
+    // This should look at the prop. By looking at the state,
+    // when receiving new props we can't re-render this component nicely.
+    // To test: have a look at the SolveExercise page and jump
+    // between 2 exercises one with example code and one without
     const { folderStructure, selectedFileKey } = this.state;
 
     if (!folderStructure.files.length && !folderStructure.folders.length) {
@@ -106,8 +112,8 @@ class BasicMonacoEditor extends MonacoBase {
             </label>
           </>
         ) : (
-            <InitForm createFirstFile={this.createFirstFile} uploadStructure={this.uploadStructure} />
-          )}
+          <InitForm createFirstFile={this.createFirstFile} uploadStructure={this.uploadStructure} />
+        )}
       </div>
     );
   }

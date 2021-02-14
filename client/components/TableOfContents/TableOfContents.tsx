@@ -1,4 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+
 import React from 'react';
+import Link from 'next/link';
 import styles from './TableOfContents.module.scss';
 
 interface State {
@@ -11,8 +15,9 @@ interface Props {
 }
 
 export interface Chapter {
-    title: string;
-    id: string;
+  id: string;
+  title: string;
+  href: string;
 }
 
 const SCROLL_DURATION = 2000;
@@ -25,9 +30,7 @@ class TableOfContents extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeChapterId: props.chapters[0].id,
-    };
+    this.state = { activeChapterId: null };
   }
 
   componentDidMount() {
@@ -35,14 +38,17 @@ class TableOfContents extends React.Component<Props, State> {
       threshold: 0.5,
     };
 
-    if (window.location.hash) {
-      this.setState({
-        activeChapterId: window.location.hash.split('#')[1],
-      });
-    }
+    this.refreshActiveChapter();
 
     this.observer = new IntersectionObserver(this.changeNav, options);
     this.timeoutId = setTimeout(this.observeAll, SCROLL_DURATION);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { chapters } = this.props;
+    if (chapters !== prevProps.chapters) {
+      this.refreshActiveChapter();
+    }
   }
 
   componentWillUnmount() {
@@ -77,10 +83,7 @@ class TableOfContents extends React.Component<Props, State> {
          * This is reproducing only when using a Mouse, not the touchpad on laptop.
          */
         window.history.replaceState(null, '', `${window.location.pathname}#${entry.target.id}`);
-
-        this.setState({
-          activeChapterId: entry.target.id,
-        });
+        this.refreshActiveChapter();
       }
 
       return true;
@@ -115,7 +118,24 @@ class TableOfContents extends React.Component<Props, State> {
     this.setState({
       activeChapterId: id,
     });
-    onChapterClick(id);
+
+    if (onChapterClick) {
+      onChapterClick(id);
+    }
+  }
+
+  refreshActiveChapter = () => {
+    const { chapters } = this.props;
+
+    const match = chapters.find((chapter) => {
+      return window.location.href.includes(chapter.href);
+    });
+
+    if (match !== undefined) {
+      this.setState({
+        activeChapterId: match.id,
+      });
+    }
   }
 
   render() {
@@ -129,13 +149,15 @@ class TableOfContents extends React.Component<Props, State> {
             <li
               key={item.id}
             >
-              <a
-                href={`#${item.id}`}
-                onClick={() => this.scrollToItem(item.id)}
-                className={activeChapterId === item.id ? `${styles.active} text-bold` : 'text-bold'}
-              >
-                {item.title}
-              </a>
+              <Link href={item.href}>
+                <a
+                  role="button"
+                  onClick={() => this.scrollToItem(item.id)}
+                  className={activeChapterId === item.id ? `${styles.active} text-bold` : 'text-bold'}
+                >
+                  {item.title}
+                </a>
+              </Link>
             </li>
           ))}
         </ul>

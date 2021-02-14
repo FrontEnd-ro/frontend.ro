@@ -57,7 +57,7 @@ export default function ImagesLesson() {
         description="Învață să adaugi și să optimizezi imagini în paginile Web."
         url="https://FrontEnd.ro/html/imagini"
       />
-      <Lesson title="Imagini" chapters={chapters}>
+      <Lesson id="imagini" title="Imagini" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
           {/* eslint-disable-next-line react/no-danger */}

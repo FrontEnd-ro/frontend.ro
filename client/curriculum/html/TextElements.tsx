@@ -31,7 +31,7 @@ export default function TextsLesson() {
         description="Avem la dispoziție mai multe elemente când vine vorba de texte, iar aici învățăm când și cum să le folosim."
         url="https://FrontEnd.ro/html/texte"
       />
-      <Lesson title="Texte" chapters={chapters}>
+      <Lesson id="texte" title="Texte" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover resizeOffset={150}>
           {/* eslint-disable-next-line react/no-danger */}

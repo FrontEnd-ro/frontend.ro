@@ -9,17 +9,19 @@ import { GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
 
 interface Props {
+  id: string;
   title: string;
-  chapters: {title: string; id: string; }[];
+  chapters: { title: string; id: string; }[];
   withExercises?: boolean;
 }
 
 export default function Lesson({
+  id,
   children,
   title,
   chapters,
   withExercises = true,
-} : PropsWithChildren<Props>) {
+}: PropsWithChildren<Props>) {
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -55,7 +57,7 @@ export default function Lesson({
               </a>
             </p>
           </div>
-          {withExercises && <LessonExercises /> }
+          {withExercises && <LessonExercises />}
           <Footer />
         </div>
       </main>

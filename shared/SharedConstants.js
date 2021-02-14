@@ -8,10 +8,24 @@ const USER_ROLE = {
   STUDENT: 'student',
 };
 
+const SUBMISSION_STATUS = {
+  IN_PROGRESS: 'in_progress',
+  AWAITING_REVIEW: 'awaiting_review',
+  DONE: 'done',
+};
+
+const LESSONS_WITH_EXERCISES = [
+  'texte',
+  'liste',
+  'imagini',
+];
+
 // Use NodeJS style exports because this file is consumed
 // both from the server & client
 module.exports = {
   MAX_MEDIA_MB,
   MAX_MEDIA_BYTES,
   USER_ROLE,
+  SUBMISSION_STATUS,
+  LESSONS_WITH_EXERCISES,
 };

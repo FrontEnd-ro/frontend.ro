@@ -1,0 +1,54 @@
+@import '../../../../styles/variables';
+
+.ask-tooltip {
+  height: 15em;
+  font-size: 16px;
+
+  textarea,
+  .markdown {
+    font-size: 1em;
+    display: block;
+    height: calc(100% - 3em);
+  }
+
+  .markdown {
+    width: 100%;
+    overflow: auto;
+  }
+
+  .btn {
+    font-size: 0.9em;
+    border-radius: 0;
+    background: color(white);
+  }
+
+  .toggle-markdown-btn {
+    margin-right: 1em;
+  }
+
+  .feedback-tooltip__controls {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1em;
+    font-size: 0.9em;
+
+    label {
+      display: inline-block;
+      font-weight: bold;
+      margin-right: 1em;
+      color: color(black);
+      text-transform: capitalize;
+    }
+  }
+
+  .separator {
+    height: 2em;
+    width: 1px;
+    margin-right: 1em;
+    vertical-align: middle;
+    display: inline-block;
+    background: color(black);
+  }
+}

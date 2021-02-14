@@ -13,6 +13,7 @@ require('dotenv').config();
 const userRouter = require('./user/user.router');
 const exerciseRouter = require('./exercise/exercise.router');
 const submissionRouter = require('./submission/submission.router');
+const lessonExerciseRouter = require('./lesson-exercise/lesson-exercise.router');
 const demoRouter = require('./demo.router');
 const eventRouter = require('./event/event.router');
 
@@ -44,6 +45,7 @@ app.use('/_next', express.static('/../dist'));
 /** API routers */
 app.use('/api/auth', userRouter);
 app.use('/api/exercises', exerciseRouter);
+app.use('/api/lesson-exercises', lessonExerciseRouter);
 app.use('/api/submissions', submissionRouter);
 app.use('/api/demo', demoRouter);
 app.use('/api/events', eventRouter);

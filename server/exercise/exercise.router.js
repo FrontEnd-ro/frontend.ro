@@ -3,12 +3,15 @@ const express = require('express');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
 const ExerciseModel = require('./exercise.model');
+
 const {
   PublicMiddleware,
   PrivateMiddleware,
   PublicOrOwnExercise,
   OwnExercise
 } = require('../Middlewares');
+
+const { ServerError } = require('../ServerUtils');
 const { MAX_MEDIA_BYTES } = require('../../shared/SharedConstants');
 const UserModel = require('../user/user.model');
 
@@ -22,6 +25,17 @@ exerciseRouter.get('/', [PrivateMiddleware], async function getUserExercises(req
 
   res.json(results);
 })
+
+exerciseRouter.get('/:exerciseId', [PublicMiddleware, PublicOrOwnExercise], async function getExerciseById(req, res) {
+  const { exerciseId } = req.params;
+
+  try {
+    let result = await ExerciseModel.get(exerciseId);
+    res.json(result);
+  } catch (err) {
+    new ServerError(err.code, err.message).send(res);
+  }
+});
 
 exerciseRouter.get('/public/:username', [PublicMiddleware], async function getPublicUserExercises(req, res) {
   const { username } = req.params

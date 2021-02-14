@@ -14,7 +14,7 @@
 }
 
 .monaco__feedback--improvement {
-  background-color: rgba(color(danger), 0.4);
+  background-color: rgba(color(red), 0.4);
 }
 
 .monaco__line {
@@ -35,7 +35,7 @@
   }
 
   &.monaco__line--improvement {
-    background: color(danger);
+    background: color(red);
     margin-left: 16px;
   }
 }

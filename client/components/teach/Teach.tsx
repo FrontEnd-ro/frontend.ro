@@ -12,6 +12,7 @@ import PageContainer from '../PageContainer';
 import Button from '~/components/Button';
 
 import styles from './Teach.module.scss';
+import SubmissionService from '~/services/Submission.service';
 
 interface State { loading: boolean; }
 
@@ -71,7 +72,7 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
     this.setState({ loading: true });
 
     try {
-      const newSubmissions = await ExerciseService.getSubmissions(submissions.page, '');
+      const newSubmissions = await SubmissionService.searchSubmissions(submissions.page, '');
       dispatch(loadSubmissions(newSubmissions));
     } catch (err) {
       SweetAlertService.toast({ type: 'error', text: err });
@@ -114,7 +115,7 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
           Oferă feedback celor ce au rezolvat exercițiile de mai
           jos și ajută-i să devină mai buni.
         </h2>
-        <Search query={submissions.search} onSearch={this.searchData} />
+        {/* <Search query={submissions.search} onSearch={this.searchData} /> */}
         <ul className={`${styles['cards-wrapper']}`}>
           {submissions.submissions && submissions.submissions.map((submission) => (
             <li key={submission._id}>

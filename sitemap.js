@@ -3,5 +3,5 @@ module.exports = {
   generateRobotsTxt: true,
   sourceDir: 'dist',
   autoLastmod: false,
-  exclude: ['/settings'],
+  exclude: ['/settings', '/rezolva', '/feedback'],
 };

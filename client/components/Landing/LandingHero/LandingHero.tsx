@@ -22,9 +22,9 @@ export default function LandingHero() {
               Vreau să învăț
             </a>
           </Link>
-          <Link href="/exercitii-rezolvate">
+          <Link href="/vreau-sa-ajut">
             <a className={`${styles['action-button']} text-center btn btn--light`}>
-              Vreau să predau
+              Vreau să ajut
             </a>
           </Link>
         </div>

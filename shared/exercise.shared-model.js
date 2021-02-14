@@ -3,17 +3,19 @@ const mongoose = require('mongoose');
 const { validateObjectId } = require('../server/ServerUtils');
 const { sanitize: userSanitize } = require('./user.shared-model');
 
+const ExerciseJSONSchema = {
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  type: { type: String, enum: ['html', 'css', 'js'] },
+  tags: [{ type: String }],
+  body: { type: String, required: true },
+  example: { type: String },
+  solution: { type: String, required: true },
+  private: { type: Boolean, default: false },
+  suggestion: { type: String, required: false },
+};
+
 const ExercisesSchema = new mongoose.Schema(
-  {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    type: { type: String, enum: ['html', 'css', 'js'] },
-    tags: [{ type: String }],
-    body: { type: String, required: true },
-    example: { type: String },
-    solution: { type: String, required: true },
-    private: { type: Boolean, default: false },
-    suggestion: { type: String, required: false },
-  },
+  ExerciseJSONSchema,
   {
     timestamps: true,
   },
@@ -40,6 +42,7 @@ function sanitize(exercise) {
 module.exports = {
   Exercise,
   ExercisesSchema,
+  ExerciseJSONSchema,
   getById,
   sanitize,
 };

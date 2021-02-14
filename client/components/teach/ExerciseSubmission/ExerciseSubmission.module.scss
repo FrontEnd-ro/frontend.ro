@@ -4,10 +4,10 @@
 .card {
   padding: 0.8em;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s $cubic;
 
   &:hover {
     transform: scale(1.02);
-    transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
   .card-info {
@@ -43,6 +43,7 @@
   }
 
   time {
+    margin-top: 1em;
     letter-spacing: 0.01em;
   }
 }

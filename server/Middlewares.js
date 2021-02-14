@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const UserModel = require('./user/user.model');
 const { ServerError } = require('./ServerUtils');
 const ExerciseModel = require('./exercise/exercise.model');
+const LessonExerciseModel = require('./lesson-exercise/lesson-exercise.model');
+const { USER_ROLE } = require('../shared/SharedConstants');
 
 /****************** User Middleware */
 /** 
@@ -82,6 +84,7 @@ function UserRoleMiddleware(role) {
     PrivateMiddleware(req, res, () => {
       if (req.body.user.role === role) {
         next();
+        return;
       }
 
       new ServerError(401, 'Nu ai rolul necesar pentru a accesa această resursă').send(res);
@@ -93,34 +96,75 @@ function UserRoleMiddleware(role) {
 async function PublicOrOwnExercise(req, res, next) {
   const { exerciseId } = req.params;
 
-  const exercise = await ExerciseModel.get(exerciseId);
-  if (!exercise) {
-    new ServerError(404, 'Exercițiul nu există.').send(res);
-    return
-  }
+  try {
+    const exercise = await ExerciseModel.get(exerciseId);
+    if (!exercise) {
+      new ServerError(404, 'Exercițiul nu există.').send(res);
+      return
+    }
 
-  if (exercise.private) {
-    await ownExercise(req, res, next);
-  } else {
+    if (exercise.private) {
+      await OwnExercise(req, res, next);
+    }
+
     next();
+  } catch (err) {
+    console.error("[OwnExercise]", {
+      code: err.code,
+      message: err.message
+    });
+
+    new ServerError(err.code, err.message).send(res);
+    return
   }
 }
 
 async function OwnExercise(req, res, next) {
   const { exerciseId } = req.params;
 
-  const exercise = await ExerciseModel.get(exerciseId);
-  if (!exercise) {
-    new ServerError(404, 'Exercițiul nu există.').send(res);
+  try {
+    const exercise = await ExerciseModel.get(exerciseId);
+    if (!exercise) {
+      new ServerError(404, 'Exercițiul nu există.').send(res);
+      return
+    }
+
+    if (req.body.user?.username !== exercise.user.username) {
+      new ServerError(403, 'Doar autorul acestui exercițiu îl poate accesa.').send(res);
+      return
+    }
+
+    next();
+  } catch (err) {
+    console.error("[OwnExercise]", {
+      code: err.code,
+      message: err.message
+    });
+
+    new ServerError(err.code, err.message).send(res);
     return
   }
+}
 
-  if (req.body.user.username !== exercise.user.username) {
-    new ServerError(403, 'Doar autorul acestui exercițiu îl poate accesa.').send(res);
+async function SolvableExercise(req, res, next) {
+  const { exerciseId } = req.params;
+
+  try {
+    const lessonExercise = await LessonExerciseModel.get(exerciseId);
+    if(!lessonExercise) {
+      throw new ServerError(404, 'Exercițiul nu există!');
+    }
+
+    next();
+  } catch(err) {
+    console.error("[SolvableExercise]", {
+      code: err.code,
+      message: err.message
+    });
+
+    new ServerError(err.code, err.message).send(res);
     return
   }
-
-  next();
 }
 
 module.exports = {
@@ -128,5 +172,6 @@ module.exports = {
   PrivateMiddleware,
   PublicOrOwnExercise,
   UserRoleMiddleware,
-  OwnExercise
+  OwnExercise,
+  SolvableExercise,
 }

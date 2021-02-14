@@ -17,7 +17,7 @@ export default function MyApp({ Component, pageProps }: any) {
 
   useEffect(() => {
     if (process.env.APP_ENV === 'production') {
-      LogRocketService.init();
+      // LogRocketService.init();
     }
   }, []);
 

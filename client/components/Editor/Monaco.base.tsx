@@ -4,7 +4,7 @@
 import React from 'react';
 import noop from 'lodash/noop';
 import * as Monaco from './monaco';
-import ExerciseService from '~/services/Exercise.service';
+import SubmissionService from '~/services/Submission.service';
 import { extractExtension, filesToFolderStructure, fsEntriesToFolderStructure } from '~/services/utils/FileUtils';
 import FolderStructure from '~/services/utils/FolderStructure';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -251,12 +251,12 @@ class MonacoBase extends React.Component<any, any> {
     return new Promise<void>((resolve, reject) => {
       SweetAlertService.confirm({
         title: 'Hold on!',
-        text: "You're about to delete a file which contains feedback. Doing this will mark them as done.",
-        confirmButtonText: 'Continue',
+        text: 'Urmează să ștergi un fișier ce conține feedback. Ești sigur?',
+        confirmButtonText: 'Continuă',
         preConfirm: () => {
           const feedbacksInFile = this.Feedbacks.getAll().filter((f) => f.file_key === key);
           SweetAlertService.toggleLoading();
-          return Promise.all(feedbacksInFile.map((f) => ExerciseService.markFeedbackAsDone(f.id)))
+          return Promise.all(feedbacksInFile.map((f) => SubmissionService.markFeedbackAsDone(f._id)))
             .then((resp) => {
               resp.forEach((_, index) => this.onFeedbackDone(feedbacksInFile[index].id));
             });
@@ -311,15 +311,15 @@ class MonacoBase extends React.Component<any, any> {
     return new Promise<void>((resolve, reject) => {
       SweetAlertService.confirm({
         title: 'Hold on!',
-        text: "You're about to delete a folder which contains files with feedback. Doing this will mark them as done.",
-        confirmButtonText: 'Continue',
+        text: 'Urmează să ștergi un folder ce conține fișiere cu feedback.',
+        confirmButtonText: 'Continuă',
         preConfirm: () => {
           const feedbacksInFolder = this.Feedbacks
             .getAll()
             .filter((f) => folderStructure.getFile(f.file_key, folder).file);
 
           SweetAlertService.toggleLoading();
-          return Promise.all(feedbacksInFolder.map((f) => ExerciseService.markFeedbackAsDone(f.id)))
+          return Promise.all(feedbacksInFolder.map((f) => SubmissionService.markFeedbackAsDone(f._id)))
             .then((resp) => {
               resp.forEach((_, index) => this.onFeedbackDone(feedbacksInFolder[index].id));
             });
@@ -524,7 +524,7 @@ class MonacoBase extends React.Component<any, any> {
         SweetAlertService.toggleLoading();
 
         return Promise
-          .all(allFeedbacks.map((f) => ExerciseService.markFeedbackAsDone(f.id)))
+          .all(allFeedbacks.map((f) => SubmissionService.markFeedbackAsDone(f._id)))
           .then((resp) => {
             resp.forEach((_, index) => this.onFeedbackDone(allFeedbacks[index].id));
           });

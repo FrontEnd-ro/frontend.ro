@@ -4,7 +4,7 @@
   position: relative;
 
   &.has--file-with-feedback > .folder-button span {
-    color: color(danger);
+    color: color(red);
     font-weight: bold;
   }
 

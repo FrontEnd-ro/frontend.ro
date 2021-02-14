@@ -43,7 +43,7 @@ class Feedbacks {
     return {
 
       ...this.feedbacksArr.find(
-        (f) => f.id === idOrTimestamp || f.timestamp === idOrTimestamp,
+        (f) => f._id === idOrTimestamp || f.timestamp === idOrTimestamp,
       ),
     };
   }
@@ -68,7 +68,7 @@ class Feedbacks {
 
   delete(timestampOrId) {
     let indexToDelete = this.feedbacksArr.findIndex(
-      (f) => f.timestamp === timestampOrId || f.id === timestampOrId,
+      (f) => f.timestamp === timestampOrId || f._id === timestampOrId,
     );
     if (indexToDelete >= 0) {
       this.MonacoEditor.unDecorate(this.feedbacksArr[indexToDelete].id);

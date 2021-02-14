@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+
+.banner {
+  padding: 1em;
+  margin: 0 0 2em 0;
+  @extend %gradientBackground;
+}
+
+.banner-in_progress {
+  @extend %yellowGradientBackground;
+}
+
+.banner-done {
+  @extend %greenGradientBackground;
+}

@@ -1,15 +1,18 @@
 import React from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import Footer from '~/components/Footer';
 import Teach from '~/components/teach';
 import Header from '~/components/Header';
-import NoSubmissionsYet from '~/components/teach/NoSubmissionsYet/NoSubmissionsYet';
-import SubmissionModel from '~/../server/submission/submission.model';
 import SEOTags from '~/components/SEOTags';
-import { connectToDb } from '~/../server/database';
-import { withClientMonitoring } from '~/services/Hooks';
+import { useLoggedInOnly, withClientMonitoring } from '~/services/Hooks';
+import { RootState } from '~/redux/root.reducer';
+import { USER_ROLE } from '../shared/SharedConstants';
+import PageContainer from '~/components/PageContainer';
 
-function TeachPage({ hasSubmissions }: {hasSubmissions: boolean}) {
+function TeachPage({ userInfo }: ConnectedProps<typeof connector>) {
   withClientMonitoring();
+
+  useLoggedInOnly(!!userInfo, '/exercitii-rezolvate');
 
   return (
     <>
@@ -19,31 +22,27 @@ function TeachPage({ hasSubmissions }: {hasSubmissions: boolean}) {
         url="https://FrontEnd.ro/exercitii-rezolvate"
       />
       <Header />
+
       {
-        hasSubmissions
-          ? <Teach />
-          : <NoSubmissionsYet />
+        userInfo?.role !== USER_ROLE.ADMIN
+          ? (
+            <PageContainer>
+              <h1> Doar echipa FrontEnd.ro are poate da feedback la exercițiile submise</h1>
+            </PageContainer>
+          )
+          : <Teach />
       }
       <Footer />
     </>
   );
 }
 
-export async function getServerSideProps() {
-  let hasSubmissions = false;
-
-  try {
-    connectToDb();
-
-    const results = await SubmissionModel.search(0, '');
-    hasSubmissions = results.length > 0;
-  } catch (err) {
-    console.error('[teach.tsx][getServerSideProps]', err);
-  }
-
+function mapStateToProps(state: RootState) {
   return {
-    props: { hasSubmissions },
+    userInfo: state.user.info,
   };
 }
 
-export default TeachPage;
+const connector = connect(mapStateToProps);
+
+export default connector(TeachPage);

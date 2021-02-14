@@ -34,12 +34,12 @@ export const LESSONS: LessonDescription[] = [
     cover: '/images/lessons/lesson-0__cover.svg',
   },
   {
-    id: 'cum-poti-ajuta',
+    id: 'vreau-sa-ajut',
     written: false,
     title: 'Cum poți ajuta',
     description:
       'Ne dorim ca acest proiect să fie un efort de comunitate, deci dacă-ți place ce facem aici contribuie și tu!',
-    url: '/intro/cum-poti-ajuta',
+    url: '/intro/vreau-sa-ajut',
     type: 'intro',
   },
   {
@@ -294,7 +294,13 @@ export function getUpcomingLesson(pathname: string): LessonDescription {
   return upcomingLesson || null;
 }
 
-export const GITHUB_ORG_URL = 'https://github.com/FrontEnd-ro'; 
+export function getLessonById(id: string): LessonDescription {
+  const match = LESSONS.find((lesson) => lesson.id === id);
+
+  return match || null;
+}
+
+export const GITHUB_ORG_URL = 'https://github.com/FrontEnd-ro';
 export const GITHUB_URL = 'https://github.com/FrontEnd-ro/frontend.ro';
 
 export interface Figure {

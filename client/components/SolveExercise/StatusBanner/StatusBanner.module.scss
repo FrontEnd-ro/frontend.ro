@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+.status-banner {
+  padding: 0 1em;
+  font-weight: bold;
+  justify-content: space-around;
+}
+
+.awaiting-review {
+  @extend %gradientBackground;
+  @extend %yellowGradientBackground;
+}
+
+.done {
+  @extend %gradientBackground;
+  @extend %greenGradientBackground;
+}

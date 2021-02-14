@@ -14,12 +14,11 @@ function NoSubmissionsYet() {
 
   return (
     <PageContainer className={styles['no-submissions-yet']}>
-      <h1> Exerciții rezolvate</h1>
+      <h1> Vreau să ajut</h1>
       <h2>
-        Hmm, se pare că nu sunt exerciții ce așteaptă feedback.
-        Dar, ne poți ajuta cu alte lucruri :D
+        Ne bucuram ca-ti place ideea si ca vrei sa te implici. Uite cele 3 moduri prin care o poti 
+        face acum:
       </h2>
-
       <div className={`${styles['help-wrapper']} d-flex  justify-content-between align-items-center`}>
         <Button
           onClick={() => setHelp('code')}

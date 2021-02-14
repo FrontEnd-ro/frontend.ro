@@ -42,18 +42,18 @@
     &.has--feedback-improvement.has--feedback-opinion.has--feedback-praise::before {
       background: linear-gradient(
         to right,
-        color(danger),
+        color(red),
         color(yellow),
         color(green)
       );
     }
 
     &.has--feedback-improvement.has--feedback-opinion::before {
-      background: linear-gradient(to right, color(danger), color(yellow));
+      background: linear-gradient(to right, color(red), color(yellow));
     }
 
     &.has--feedback-improvement.has--feedback-praise::before {
-      background: linear-gradient(to right, color(danger), color(green));
+      background: linear-gradient(to right, color(red), color(green));
     }
 
     &.has--feedback-opinion.has--feedback-praise::before {
@@ -61,7 +61,7 @@
     }
 
     &.has--feedback-improvement::before {
-      background: color(danger);
+      background: color(red);
     }
 
     &.has--feedback-opinion::before {

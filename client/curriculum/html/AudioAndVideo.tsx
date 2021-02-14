@@ -33,7 +33,7 @@ export default function VideoAndAudioLesson() {
         description="Imaginile aduc mai multă viață site-urilor noastre, dar putem merge un pas mai departe folosind elemente video și audio."
         url="https://FrontEnd.ro/html/audio-video"
       />
-      <Lesson title="Audio și Video" chapters={chapters}>
+      <Lesson id="audio-video" title="Audio și Video" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover resizeOffset={250}>
           <div

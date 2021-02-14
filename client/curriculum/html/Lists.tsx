@@ -39,7 +39,7 @@ export default function ListsLesson() {
         description="Învață despre tipurile de liste în HTML"
         url="https://FrontEnd.ro/html/liste"
       />
-      <Lesson title="Liste" chapters={chapters}>
+      <Lesson id="liste" title="Liste" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
           {/* eslint-disable-next-line react/no-danger */}

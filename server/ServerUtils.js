@@ -16,7 +16,9 @@ class ServerError extends Error {
   constructor(code, err, ...rest) {
     super(...rest);
 
-    this.code = code;
+    this.code = code || 500;
+
+    err = err || 'Oops! Asta nu trebuia să se întâmple 😬';
 
     if (typeof err === 'object') {
       this.message = extractDbErrorMessage(err);

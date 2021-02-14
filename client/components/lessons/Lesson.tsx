@@ -57,7 +57,7 @@ export default function Lesson({
               </a>
             </p>
           </div>
-          {withExercises && <LessonExercises />}
+          {withExercises && <LessonExercises lessonId={id} />}
           <Footer />
         </div>
       </main>

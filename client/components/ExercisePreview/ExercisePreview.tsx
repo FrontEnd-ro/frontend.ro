@@ -5,19 +5,15 @@ import { faLock, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './ExercisePreview.module.scss';
 import Markdown from '../Markdown';
+import { Exercise } from '~/redux/user/types';
 
 export type ExerciseViewMode = 'STUDENT' | 'TEACHER'
 
 interface Props {
   href: string;
-  body: string;
-  tags: string[];
   viewMode: ExerciseViewMode;
   isPrivate: boolean;
-  author: {
-    username: string;
-    avatar: string;
-  }
+  exercise: Exercise,
   feedbackCount: number;
   isApproved: boolean;
 
@@ -27,14 +23,12 @@ interface Props {
 
 function ExercisePreview({
   href,
-  body,
   viewMode,
   isPrivate,
-  author,
   readOnly,
   feedbackCount,
   isApproved,
-  tags,
+  exercise,
 }: Props) {
   const { btnText, infoMessage } = getFooterTexts(viewMode, feedbackCount, readOnly, isApproved);
 
@@ -56,7 +50,7 @@ function ExercisePreview({
       </header>
       <Markdown
         className={`${styles.body} relative overflow-hidden`}
-        markdownString={body}
+        markdownString={exercise.body}
         variant="transparent"
       />
       <footer className="d-flex align-items-center justify-content-between">
@@ -68,13 +62,13 @@ function ExercisePreview({
           )}
           {(viewMode === 'TEACHER' || !infoMessage) && (
             <>
-              <Link href={`/${author.username}`}>
+              <Link href={`/${exercise.user.username}`}>
                 <a className={styles.avatar}>
-                  <img src={author.avatar} alt="Author avatar" />
+                  <img src={exercise.user.avatar} alt="Author avatar" />
                 </a>
               </Link>
               <div className={`${styles.tags} truncate d-inline-block`}>
-                {tags.map((t) => (
+                {exercise.tags.map((t) => (
                   <span className="text-bold" key={t}>
                     {t}
                   </span>
@@ -113,7 +107,7 @@ function getFooterTexts(
     if (isApproved) {
       infoMessage = '✔';
     } else if (feedbackCount) {
-      infoMessage = `${feedbackCount} problem${feedbackCount > 1 ? 'e' : 'ă'} de rezolvat`;
+      infoMessage = `${feedbackCount} feedback${feedbackCount > 1 ? '-uri' : ''} în așteptare`;
     } else if (readOnly) {
       infoMessage = 'În așteptarea feedback-ului';
     }

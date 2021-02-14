@@ -1,0 +1,67 @@
+@import '../../../styles/variables';
+
+.feedback-tooltip {
+  padding: 0.5em 1em;
+  opacity: 0;
+  max-height: 15em;
+  z-index: 1;
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  left: 0;
+  transform: translateY(-100%);
+  background-color: color(white);
+  border: 0.5em solid transparent;
+  box-shadow: 0 1px 10px color(black);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+
+  &.feedback--praise {
+    border-color: color(green);
+  }
+  &.feedback--opinion {
+    border-color: color(yellow);
+  }
+  &.feedback--improvement {
+    border-color: color(red);
+  }
+
+  &.feedback-tooltip--visible {
+    opacity: 1;
+    pointer-events: initial;
+    transform: translateY(0);
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  button {
+    background: none;
+    cursor: pointer;
+    border: 0;
+    transition: transform 0.25s ease-in-out;
+  }
+
+  &:before,
+  &:after {
+    // content: '';
+    position: absolute;
+    bottom: -0.5em;
+    left: 20%;
+    transform: translateX(-50%) rotate(-135deg);
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: color(white) transparent transparent color(white);
+    z-index: 1;
+  }
+
+  &:before {
+    transform: translateX(-50%) rotate(-135deg) scale(1.2);
+    border-color: color(silver) transparent transparent color(silver);
+  }
+
+  @media screen and (max-width: 900px) {
+    left: 0;
+  }
+}

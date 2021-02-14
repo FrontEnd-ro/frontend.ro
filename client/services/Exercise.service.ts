@@ -1,4 +1,3 @@
-import { Submission } from '~/redux/exercise-submissions/types';
 import HttpService from './Http.service';
 
 interface NewExercisePayload {
@@ -11,6 +10,12 @@ interface NewExercisePayload {
 }
 
 class ExerciseService {
+  static getExercise(exerciseId: string) {
+    return HttpService
+      .get(`${process.env.ENDPOINT}/exercises/${exerciseId}`)
+      .then((resp) => resp.json());
+  }
+
   static uploadMedia(name: string, file: File): Promise<any> {
     const formData = new FormData();
     formData.append('name', name);
@@ -33,18 +38,7 @@ class ExerciseService {
       .then((resp) => resp.json());
   }
 
-  static markFeedbackAsDone(feedbackId: string) {
-    return new Promise((resolve, reject) => {
-      setTimeout(resolve, 1000);
-    });
-  }
-
-  static getSubmissions(page = 0, query = '') : Promise<Submission[]> {
-    return HttpService.get(`${process.env.ENDPOINT}/exercises/submissions?page=${page}&query=${query}`)
-      .then((response) => response.json()) as unknown as Promise<Submission[]>;
-  }
-
-  static getExercises(username: string) {
+  static getExercises() {
     return HttpService.get(`${process.env.ENDPOINT}/exercises`)
       .then((response) => response.json());
   }

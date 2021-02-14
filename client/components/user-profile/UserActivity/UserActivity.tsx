@@ -47,11 +47,9 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
         {exercises.map((ex, index) => (
           <ExercisePreview
             key={ex._id}
+            exercise={ex}
             href={`exercitii/${ex._id}`}
-            author={profileUser}
-            body={ex.body}
             isPrivate={ex.private}
-            tags={[ex.type.toUpperCase()]}
             viewMode={isOwnProfile ? 'TEACHER' : 'STUDENT'}
             feedbackCount={0}
             isApproved={false}

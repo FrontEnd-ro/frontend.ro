@@ -1,3 +1,5 @@
+import { Exercise } from '../user/types';
+
 export enum ChapterType {
   HTML = 'html',
   CSS = 'css',
@@ -11,18 +13,17 @@ interface User {
   avatar: string;
 }
 
-interface Exercise {
-  type: ChapterType;
-  body: string;
-}
 export interface Submission {
   _id: string;
   user: User;
   exercise: Exercise;
   chapter: ChapterType;
   type: SubmissionType;
+  // FIXME 👇
+  status: string;
   submittedAt: number;
   updatedAt: number;
+  code: string;
 }
 export interface SubmissionState {
   submissions: Submission[];

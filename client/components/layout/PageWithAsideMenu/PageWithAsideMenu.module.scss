@@ -1,0 +1,42 @@
+@import '../../../styles/variables';
+
+.page-with-aside-menu {
+  & > main {
+    position: relative;
+    left: #{$aside-menu-width};
+    width: calc(100% - #{$aside-menu-width});
+
+    > header {
+      position: sticky;
+      top: 0;
+      z-index: 998;
+    }
+  }
+
+
+  [class*=feedback-tooltip] {
+    top: 3.3em;
+    left: #{$aside-menu-width};
+  }
+
+  @media screen and (max-width: 1400px) {
+    aside {
+      left: -#{$lesson-menu-width};
+    }
+
+    :global .lesson-menu__header button,
+    :global .header__menu-btn {
+      display: block;
+    }
+
+    main {
+      left: 0;
+      width: 100%;
+    }
+
+    [class*=feedback-tooltip] {
+      left: 0;
+      top: 3.3em;
+    }
+  }
+}

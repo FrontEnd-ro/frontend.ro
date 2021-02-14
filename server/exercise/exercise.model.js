@@ -20,7 +20,7 @@ class ExerciseModel {
       query.private = false
     }
 
-    return Exercise.find(query);
+    return Exercise.find(query).populate("user");
   }
 
   static get = getById;

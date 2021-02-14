@@ -1,7 +1,7 @@
 @import '../../../styles/variables';
 
 .exercises {
-  background: lighten(color(green), 25%);
+  padding: 0 0 1em 0;
 
   & > section {
     @extend %containerConfig;
@@ -9,5 +9,23 @@
 
   form {
     font-weight: bold;
+  }
+}
+
+.exercises--empty {
+  background: lighten(color(green), 25%);
+}
+
+.exercises-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  
+  > [class*='ExercisePreview'] {
+    width: 45%;
+    margin: 0 10% 2em 0;
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
   }
 }

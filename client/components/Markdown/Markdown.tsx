@@ -20,7 +20,7 @@ function Markdown({ markdownString, className = '', variant = 'none' }: Props) {
 
       markdownRef.current.innerHTML = marked(markdownString);
     });
-  }, []);
+  }, [markdownString]);
 
   return (
     <div className={`${styles.markdown} ${variant === 'transparent' && styles['is--transparent']} ${className}`} ref={markdownRef} />

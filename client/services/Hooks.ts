@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { MutableRefObject, useEffect } from 'react';
+import { UserState } from '~/redux/user/types';
 import ClientMonitoring, { LogEventType } from './ClientMonitoring';
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 import { noop } from './Utils';
@@ -88,6 +89,31 @@ function useAnonymousOnly(isLoggedIn: boolean, nextHref: string) {
   }
 }
 
+/**
+ * If the user is not logged in when this method is called,
+ * let's show the Login/Register modal and authenticate/register.
+ */
+function withAuthModal(isLoggedIn: boolean, cb: (...any) => any) {
+  return (...props) => {
+    if (isLoggedIn) {
+      cb(...props);
+    } else {
+      import('~/components/login/Login').then((module) => {
+        SweetAlertService.content(
+          module.default,
+          'Autentifică-te',
+          {
+            onSuccess(userInfo: UserState['info']) {
+              SweetAlertService.closePopup();
+              cb(...props, userInfo);
+            },
+          },
+        );
+      });
+    }
+  };
+}
+
 export {
   useOutsideClick,
   useClipboard,
@@ -95,4 +121,5 @@ export {
   withSmoothScroll,
   useLoggedInOnly,
   useAnonymousOnly,
+  withAuthModal,
 };

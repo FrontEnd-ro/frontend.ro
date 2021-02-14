@@ -2,17 +2,15 @@ import React, { PropsWithChildren, useRef, useState } from 'react';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import { LessonMenu } from '~/components/lessons';
-import { Chapter } from '~/components/TableOfContents';
 
 import styles from './Lesson.module.scss';
 import { withClientMonitoring, withSmoothScroll } from '~/services/Hooks';
 import { GITHUB_URL } from '~/services/Constants';
-import LessonHeading from './LessonHeading/LessonHeading';
 import LessonExercises from './LessonExercises/LessonExercises';
 
 interface Props {
   title: string;
-  chapters: Chapter[];
+  chapters: {title: string; id: string; }[];
   withExercises?: boolean;
 }
 
@@ -34,7 +32,10 @@ export default function Lesson({
         isOpen={isMenuOpen}
         close={() => setIsMenuOpen(false)}
         title={title}
-        chapters={chapters}
+        chapters={chapters.map((chapter) => ({
+          ...chapter,
+          href: `#${chapter.id}`,
+        }))}
       />
       <main>
         <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} />

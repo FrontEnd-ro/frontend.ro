@@ -24,6 +24,7 @@ import {
   uploadFiles,
   uploadMedia,
 } from '.';
+import { withAuthModal } from '~/services/Hooks';
 
 function NewExercise({ user }: ConnectedProps<typeof connector>) {
   const router = useRouter();
@@ -55,29 +56,12 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
     });
   };
 
-  const onSubmit = (formData) => {
-    if (user.info) {
-      createExercise(formData, user.info);
-    } else {
-      SweetAlertService.content(
-        Login,
-        'Autentifică-te',
-        {
-          onSuccess(userInfo: UserState['info']) {
-            SweetAlertService.closePopup();
-            createExercise(formData, userInfo);
-          },
-        },
-      );
-    }
-  };
-
   const createExercise = async (
     formData: {
       type: ChapterType,
       private: 'true' | 'false'
     },
-    userInfo: UserState['info'],
+    userInfo: UserState['info'] = user.info,
   ) => {
     if (!validateRequiredData()) {
       return;
@@ -186,7 +170,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
         />
       </section>
       <main className={styles['new-exercise']}>
-        <Form withStyles={false} onSubmit={onSubmit} className="relative" id="createForm">
+        <Form withStyles={false} onSubmit={withAuthModal(!!user.info, createExercise)} className="relative" id="createForm">
           <div ref={markdownWrapper} className="relative">
             <MarkdownTextarea
               title="Descrie exercițiul"

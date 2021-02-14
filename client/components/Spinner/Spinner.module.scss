@@ -1,0 +1,60 @@
+@import '../../styles/variables';
+
+.spinner {
+  position: relative;
+  display: inline-block;
+  min-width: 5em;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    transform-origin: right;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(270deg, #27ae60, #2980b9, #c0392b, #f39c12);
+    background-size: 800% 800%;
+
+    /** ⚠⚠⚠ Without adding the Animatio Name first it's not transpiling correctly */
+    animation: spinnerAnimation 4s ease-in-out infinite;
+  }
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+
+  p {
+    margin: 0 0 0.25em 0;
+    padding: 0 1em;
+    display: inline-block;
+  }
+}
+
+@keyframes spinnerAnimation {
+  0% {
+    background-position: 0% 50%;
+    transform: translateX(-50%);
+  }
+
+  25% {
+    transform: translateX(150%);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    transform: translateX(-50%);
+  }
+
+  75% {
+    transform: translateX(150%);
+  }
+
+  100% {
+    background-position: 0% 50%;
+    transform: translateX(-50%);
+  }
+}

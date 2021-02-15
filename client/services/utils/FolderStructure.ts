@@ -24,7 +24,7 @@ export interface ExerciseFolder {
   key: string;
   name: string;
   files: ExerciseFile[];
-  folders: ExerciseFolder;
+  folders: ExerciseFolder[];
 }
 
 class FolderStructure {

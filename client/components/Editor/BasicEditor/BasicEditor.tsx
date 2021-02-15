@@ -18,10 +18,6 @@ class BasicMonacoEditor extends MonacoBase {
     };
   }
 
-  componentDidMount() {
-    this.initEditor();
-  }
-
   initEditor = () => {
     const { readOnly } = this.props;
     const { folderStructure, selectedFileKey } = this.state;

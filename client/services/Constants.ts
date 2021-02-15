@@ -158,12 +158,13 @@ export const LESSONS: LessonDescription[] = [
     type: 'css',
   },
   {
-    id: 'cum-sa-stilizam',
-    written: false,
-    title: '3 moduri de stilizare',
+    id: 'moduri-stilizare',
+    written: true,
+    title: 'Cele 3 moduri de stilizare',
     description:
       'Browserul ne oferă mai multe moduri prin care putem aplica stiluri paginilor noastre. Hai să vobim despre fiecare în parte.',
-    url: '/css/cum-sa-stilizam',
+    url: '/css/moduri-stilizare',
+    cover: '/images/lessons/styling-methods__cover.svg',
     type: 'css',
     contributors: [DanielHutanu],
   },

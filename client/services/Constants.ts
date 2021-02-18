@@ -121,6 +121,7 @@ export const LESSONS: LessonDescription[] = [
     written: true,
     title: 'Video și Audio',
     description: 'Imaginile aduc mai multă viață site-urilor noastre, dar putem merge un pas mai departe folosind elemente video și audio.',
+    cover: '/images/lessons/audio-and-video__cover.svg',
     contributors: [SebastianLatkolic],
     url: '/html/audio-video',
     type: 'html',

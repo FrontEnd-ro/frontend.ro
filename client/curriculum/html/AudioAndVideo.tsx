@@ -35,7 +35,7 @@ export default function VideoAndAudioLesson() {
       />
       <Lesson title="Audio și Video" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
-        <LessonCover>
+        <LessonCover resizeOffset={250}>
           <div
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{

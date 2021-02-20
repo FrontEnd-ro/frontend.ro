@@ -9,6 +9,7 @@ import {
 } from './contributors';
 
 export type LessonDescription = {
+  id: string;
   written: boolean;
   title: string;
   description: string;
@@ -22,6 +23,7 @@ export type LessonDescription = {
 export const LESSONS: LessonDescription[] = [
   /** Intro lessons */
   {
+    id: 'despre-noi',
     written: true,
     title: 'Despre noi',
     description: 'Ce ne face diferiți și de ce ai vrea să înveți alături de noi.',
@@ -31,14 +33,16 @@ export const LESSONS: LessonDescription[] = [
     cover: '/images/lessons/lesson-0__cover.svg',
   },
   {
+    id: 'cum-poti-ajuta',
     written: false,
     title: 'Cum poți ajuta',
     description:
       'Ne dorim ca acest proiect să fie un efort de comunitate, deci dacă-ți place ce facem aici contribuie și tu!',
-    url: '/intro/implica-te',
+    url: '/intro/cum-poti-ajuta',
     type: 'intro',
   },
   {
+    id: 'ce-este-frontend-ul',
     written: false,
     title: 'Ce este FrontEnd-ul?',
     description:
@@ -47,6 +51,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'intro',
   },
   {
+    id: 'vs-code',
     written: false,
     title: 'VisualStudio Code',
     description:
@@ -57,6 +62,7 @@ export const LESSONS: LessonDescription[] = [
   },
   /** HTML lessons */
   {
+    id: 'despre-html',
     written: false,
     title: 'Despre HTML',
     description:
@@ -65,6 +71,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
+    id: 'structura-de-baza-a-oricarei-aplicatii',
     written: false,
     title: 'Structura de bază a oricărei aplicații web',
     description:
@@ -73,6 +80,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
+    id: 'validarea-paginilor-html',
     written: false,
     title: 'Validarea paginilor HTML',
     description:
@@ -81,6 +89,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
+    id: 'texte',
     written: true,
     title: 'Texte',
     description:
@@ -91,6 +100,7 @@ export const LESSONS: LessonDescription[] = [
     cover: '/images/lessons/text-elements__cover.svg',
   },
   {
+    id: 'liste',
     written: true,
     title: 'Liste',
     description: 'Hai să vorbim despre cele 3 tipuri de liste și când să-l folosești pe fiecare.',
@@ -100,6 +110,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
+    id: 'containere',
     written: false,
     title: 'Containere',
     description:
@@ -108,6 +119,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
+    id: 'imagini',
     written: true,
     title: 'Imagini',
     description:
@@ -118,6 +130,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
+    id: 'audio-video',
     written: true,
     title: 'Video și Audio',
     description: 'Imaginile aduc mai multă viață site-urilor noastre, dar putem merge un pas mai departe folosind elemente video și audio.',
@@ -127,6 +140,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
+    id: 'formulare',
     written: false,
     title: 'Formulare',
     url: '/html/formulare',
@@ -136,6 +150,7 @@ export const LESSONS: LessonDescription[] = [
   },
   /** CSS Lessons */
   {
+    id: 'despre-css',
     written: false,
     title: 'Despre CSS',
     description: 'Învață principiile de bază ale stilizării paginilor Web și fii inspirat de tot ce e posibil cu acest limbaj.',
@@ -143,6 +158,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'css',
   },
   {
+    id: 'cum-sa-stilizam',
     written: false,
     title: '3 moduri de stilizare',
     description:
@@ -152,6 +168,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [DanielHutanu],
   },
   {
+    id: 'taguri-clase-si-id-uri',
     written: false,
     title: 'Tag-uri, clase și id-uri',
     description:
@@ -161,6 +178,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [NicolaeMaties],
   },
   {
+    id: 'box-model',
     written: false,
     title: 'Box model',
     description:
@@ -170,6 +188,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [CatalinPopusoi],
   },
   {
+    id: 'tranzitii',
     written: false,
     title: 'Tranziții',
     description:
@@ -178,6 +197,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'css',
   },
   {
+    id: 'animatii',
     written: false,
     title: 'Animații',
     description:
@@ -186,6 +206,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'css',
   },
   {
+    id: 'media-queries',
     written: false,
     title: 'CSS Media Queries',
     description:
@@ -195,6 +216,7 @@ export const LESSONS: LessonDescription[] = [
   },
   /** JavaScript Lessons */
   {
+    id: 'despre-javascript',
     written: false,
     title: 'Despre JavaScript',
     description: 'Cu HTML și CSS putem crea o experiență vizuală plăcută, dar lipsită de interactivitate. Aici intră în scenă JavaScript, limbajul cu care totul e posibil.',
@@ -202,6 +224,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'javascript',
   },
   {
+    id: 'cum-sa-gandim-ca-un-programator',
     written: false,
     title: 'Cum să gândim ca un programator',
     description: 'Înainte să "sărim" în progamarea efectivă, hai să vorbim puțin despre ce înseamnă să scrii cod și cum să abordezi această nouă provocare.',
@@ -209,6 +232,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'javascript',
   },
   {
+    id: 'variabile-si-tipuri-primitive',
     written: false,
     title: 'Variabile și tipuri primitive',
     description: 'Ce sunt variabilele, de ce avem nevoie de ele și cum le folosim.',
@@ -216,6 +240,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'javascript',
   },
   {
+    id: 'obiecte-si-array-uri',
     written: false,
     title: 'Obiecte și Array-uri',
     description:
@@ -224,6 +249,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'javascript',
   },
   {
+    id: 'functii',
     written: false,
     title: 'Funcții',
     description:
@@ -233,6 +259,7 @@ export const LESSONS: LessonDescription[] = [
   },
   /** Extra Lessons */
   {
+    id: 'devtools',
     written: false,
     title: 'DevTools',
     description:
@@ -241,6 +268,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'extra',
   },
   {
+    id: 'graceful-degradation',
     written: false,
     title: 'Graceful Degradation',
     description:
@@ -249,6 +277,7 @@ export const LESSONS: LessonDescription[] = [
     type: 'extra',
   },
   {
+    id: 'biblioteci-si-framework-uri',
     written: false,
     title: 'Biblioteci și Framework-uri',
     description: 'Când vei lucra la proiecte "reale" alături de alți developeri, vei vedea că de multe ori refolosim cod scris de alții sub formă de biblioteci sau framework-uri.',

@@ -48,44 +48,59 @@ export default function TagsClassesIds() {
             Atunci când construim un site și implicit stilurile pentru paginile
             din site este important să avem o consistență a stilurilor.
             De aceea ne putem folosi de tag-uri pentru a stiliza o anumită categorie de elemente,
-            în cazul nostru ne vom folosi urmatorul exemplu:
+            cum ar fi toate paragrafele, linkurile sau butoane.
+          </p>
+          <p>
+            Pentru demonstrație vom lucra pe exemplul de mai jos,
+            ce conține HTML-ul pentru un formular de înregistrare:
           </p>
           <Highlight
             className="my-5"
             language="html"
             code={
             `
-              <button type=”button”>
-                Închide formular
-              </button>
-              <button type=”button”>
-                Aplică
-              </button>
-              <button type=”reset”>
-                Resetează formular
-              <button>
-              
-              <style>
-                button {
-                  font-style: italic;
-                  background-color: blue;
-                  color: white;
-                }
-              </style>
+<form>
+  <h2> Înregistrează-te</h2>
+  <button type="button">
+    Închide formular
+  </button>
+
+  <input type="email" name="email" required placeholder="Adresa de email">
+
+  <input type="password" name="password" required placeholder="Parola">
+
+
+  <button type="reset">
+    Resetează formular
+  </button>
+  <button type="submit"> Înregistreză-te</button>
+</form>
             `
           }
           />
+          <h1> DEMO (poza) la rezultatul final </h1>
+          <h1> Cumva aratat si rezultatul curent, sa vedem de unde plecam?! </h1>
           <p>
-            În exemplu de mai sus avem două butoane care au stilul textului din interior italic,
-            culoarea textului albă si fundalul albastru.
+            In exemplul de mai sus, observam ca toate inputurile arata la fel:
+            (descrierea proprietatilor comune).
+            Pentru acestea e bine sa aplicam stilizarea dupa taguri:
           </p>
+
+          <h1>COD DEMO</h1>
+
           <p>
+            La fel si la butoane. Desi nu toate 3 sunt la fel, au cateva proprietati comune,
+            deci este un good practice sa le stilizam dupa tag folosind acele proprietati comune.
+          </p>
+
+          <h1> Cod demo butoane </h1>
+          <LessonTip>
             De asemenea poate fi folosit și în JavaScript pentru a accesa și manipula elementele,
             acestea vor fi discutate pe larg în capitolul
             {' '}
             <Link href="/javascript/despre-javascript"><a>JavaScript</a></Link>
             .
-          </p>
+          </LessonTip>
         </section>
         <section>
           <LessonHeading as="h3" id="classes">
@@ -96,28 +111,22 @@ export default function TagsClassesIds() {
             vrem totuși să avem și o varietate mai mare de stiluri din care să alegem.
           </p>
           <p>
-            Luând în considerare următorul exemplu, același ca și în cazul tag-urilor,
-            vrem să stilizam fiecare element diferit folosindu-ne de clase:
+            In acelasi exemplu de mai sus, observam cu butoanele "X si Y" 
+            au (proprietati comune) in timp ce butonul "Z" e default.
+            
+            Hai sa adaugam atributul `class` pe cele 2 butoane:
           </p>
           <Highlight
             className="my-5"
             language="html"
             code={
             `
-            <button type=”button” class=”btn-red”>
-              Închide formular
-            </button>
-            <button type=”button” class=”btn-green”>
-              Aplică
-            </button>
-            <button type=”reset”  class=”btn-red”>
-              Resetează formular
-            <button>
+            COD UPDATAT
             `
           }
           />
-          <p>
-            <b>Cum selectam elementele cu ajutorul clasei în CSS?</b>
+          <p> 
+            Iar apoi din CSS vom selecta elementele in functie de clasa si le vom stiliza diferit.
           </p>
           <p>
             Pentru a selecta o clasa specifică, va trebui sa scriem în CSS
@@ -139,13 +148,13 @@ export default function TagsClassesIds() {
             `
           }
           />
-          <p>
+          <LessonTip>
             De asemenea clasele pot fi folosite și în JavaScript pentru a accesa și
             manipula elementele, acestea vor fi discutate pe larg în capitolul
             {' '}
             <Link href="/javascript/despre-javascript"><a>JavaScript</a></Link>
             .
-          </p>
+          </LessonTip>
         </section>
         <section>
           <LessonHeading as="h3" id="ids">
@@ -156,27 +165,20 @@ export default function TagsClassesIds() {
             cu ajutorul aceleași clase, vom vedea în continuare cum putem selecta un singur
             element cu ajutorul id-urilor.
           </p>
+          <LessonTip>
+            Id-urile sunt folosite pentru a identifica un element in mod unic.
+
+            Apoi din CSS putem aplica stiluri specifice pentru acel element:
+          </LessonTip>
           <p>
-            Id-urile sunt folosite in CSS pentru a găsi și
-            selecta un singur element din documentul HTML.
-          </p>
-          <p>
-            Ca și în cazul tag-urilor și claselor ne vom folosi
-            de aceleași elemente HTML pentru urmatorul exemplu:
+            Ca și în cazul tag-urilor și claselor ne vom folosi de aceleași exemplu.
+            Observam ca elementul "X" este unic deci am putea sa-i atribuim lui un "id" unic.
           </p>
           <Highlight
             className="my-5"
             language="html"
             code={`
-              <button type=”button” class=”btn-red”>
-                Închide formular
-              </button>
-              <button type=”button” id=”btn-green”>
-                Aplică
-              </button>
-              <button type=”reset”  class=”btn-red”>
-                Resetează formular
-              <button>
+              demo code
             `}
           />
           <p>
@@ -184,7 +186,7 @@ export default function TagsClassesIds() {
           </p>
           <p>
             La fel ca și în cazul clasei, numai ca în loc să precedam numele clasei cu (.)
-            vom folosi (#). Exact, ăla de pe Instagram, exact ca în exemplul următor:
+            vom folosi (#). Exact, ce; de pe Instagram, exact ca în exemplul următor:
           </p>
           <Highlight
             className="my-5"
@@ -213,6 +215,16 @@ export default function TagsClassesIds() {
             {' '}
             <Link href="/javascript/despre-javascript"><a>JavaScript</a></Link>
             .
+          </p>
+        </section>
+        <section>
+          <LessonHeading as="h3" id="resule">
+            Rezultat final
+          </LessonHeading>
+          <p>
+            Concluzie plus demo-cod final. Aici cred ca poti integra componenta de
+            BasicEditor
+            . Ea are suport pentru mai multe fisiere.
           </p>
         </section>
         <section>

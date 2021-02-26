@@ -291,3 +291,17 @@ export const MONACO = {
     SCROLL: 'SC',
   },
 };
+
+export interface EVENT_DETAILS {
+  title: string,
+  cover: string,
+  description: string,
+  url: string,
+  date: string,
+  optionsDateAndHour: OptionsDateAndHour[],
+}
+
+export interface OptionsDateAndHour {
+  value: string,
+  label: string,
+}

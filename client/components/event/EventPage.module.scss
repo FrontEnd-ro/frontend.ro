@@ -1,0 +1,35 @@
+@import "../../styles/variables";
+
+.event {
+  padding: 0 3em;
+  section {
+    padding: 3em;
+    border: 5px dotted color(silver);
+    margin-bottom: 4em;
+  }
+  .cover {
+    min-height: 50vh;
+    flex: 1;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top-right-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    margin: 0 2.5em 0 0;
+  }
+  .event-details {
+    flex: 1;
+    .event-location {
+      color: #2980b9;
+    }
+  }
+  .select {
+    margin-top: 1.5em;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .event section {
+    display: block;
+  }
+}

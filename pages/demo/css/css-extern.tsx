@@ -8,7 +8,7 @@ import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import SEOTags from '~/components/SEOTags';
 
 export default function ExternalMethod() {
-  const title = 'CSS Externă';
+  const title = 'CSS Extern';
   return (
     <>
       <SEOTags

@@ -8,7 +8,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import SEOTags from '~/components/SEOTags';
 
 export default function InternalCSS() {
-  const title = 'CSS intern';
+  const title = 'CSS Intern';
   return (
     <>
       <SEOTags

@@ -49,7 +49,7 @@ export default function Lesson({
             <p>
               Ai vreo sugestie de îmbunătățire a acestei lecții?
               {' '}
-              <a href={`${GITHUB_URL}/tree/master/frontend-ssr/curriculum`} target="_blank" rel="noreferrer">
+              <a href={`${GITHUB_URL}/tree/master/client/curriculum`} target="_blank" rel="noreferrer">
                 Contribuie pe GitHub
               </a>
             </p>

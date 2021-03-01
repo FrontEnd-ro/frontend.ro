@@ -12,12 +12,32 @@
   },
   "contributors": [
     {
+      "name": "Diana Toma",
+      "url": "https://github.com/andreeatoma"
+    },
+    {
       "name": "Catalin Popusoi",
       "url": "https://github.com/catalinpopusoi"
     },
     {
       "name": "Cristian Gațu",
       "url": "https://github.com/SirCQQ"
+    },
+    {
+      "name": "Sebastian Latkolic",
+      "url": "https://github.com/juppsy"
+    },
+    {
+      "name": "Nicolae Matieș",
+      "url": "https://github.com/nmaties/"
+    },
+    {
+      "name": "Daniel Huțanu",
+      "url": "https://www.linkedin.com/in/danielhutanu22/"
+    },
+    {
+      "name": "Ira Melnic",
+      "url": "https://www.facebook.com/melnic.ira"
     }
   ],
   "scripts": {

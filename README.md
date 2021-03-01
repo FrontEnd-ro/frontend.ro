@@ -71,7 +71,9 @@ This project wouldn't be possible without our awesome contributors. Thank you >:
     </tr>
     <tr>
         <td align="center">
-            <a href="https://github.com/nmaties/"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/nmaties.jpg" width="120px;" alt="Nicolae Maties"/><br /><sub><b>Nicolae Maties</b></sub></a></td>
+            <a href="https://github.com/nmaties/"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/nmaties.jpg" width="120px;" alt="Nicolae Maties"/><br /><sub><b>Nicolae Matieș</b></sub></a></td>
+        <td align="center">
+            <a href="https://www.linkedin.com/in/danielhutanu22/"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/images/contributors/danielhutanu.jpg" width="120px;" alt="Ira Melnic"/><br /><sub><b>Daniel Huțanu</b></sub></a></td>
         <td align="center">
             <a href="https://www.facebook.com/melnic.ira/"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/contributors/iramelnic.jpg" width="120px;" alt="Ira Melnic"/><br /><sub><b>Ira Melnic</b></sub></a></td>
     </tr></table>

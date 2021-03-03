@@ -1,0 +1,48 @@
+@import '../../../styles/variables';
+
+.register-event-card {
+  padding: 1.5em 3em;
+  margin-bottom: 4em;
+  border: 5px dotted color(silver);
+
+  form {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 1.6em;
+  }
+
+  .cover--row {
+    width: 50%;
+    margin: 0 2.5em 0 0;
+  }
+
+  .cover--column {
+    display: none;
+  }
+
+  .select {
+    margin-top: 1.5em;
+  }
+}
+
+@mixin register-event-card-vertical {
+  [class*='register-event-card'] {
+    flex-flow: column;
+
+    [class*='cover--row'] {
+      display: none;
+    }
+
+    [class*='cover--column'] {
+      display: block;
+    }
+
+    button[type="submit"],
+    [class*='share-wrapper'] {
+      width: 100%;
+      margin: 1em 0;
+    }
+  }
+}

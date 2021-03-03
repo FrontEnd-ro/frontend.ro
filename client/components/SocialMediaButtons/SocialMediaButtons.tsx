@@ -11,7 +11,19 @@ import { useClipboard, useOutsideClick } from '~/services/Hooks';
 
 import styles from './SocialMediaButtons.module.scss';
 
-export function ShareButton({ url, config } : {url: string, config: any}) {
+interface Props {
+  url: string;
+  config: {
+    copy?: boolean;
+    facebook?: boolean;
+    twitter?: boolean;
+    linkedin?: boolean;
+    whatsapp?: boolean;
+  }
+  variant?: 'blue' | 'light';
+}
+
+export function ShareButton({ url, config, variant = 'blue' }: Props) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,25 +35,25 @@ export function ShareButton({ url, config } : {url: string, config: any}) {
 
   return (
     <div ref={ref} className={`${styles['share-wrapper']} ${isOpen ? styles['share-wrapper--open'] : ''}`}>
-      <button className="btn btn--blue" type="button" onClick={toggle}>
+      <button className={`btn ${variant === 'blue' ? 'btn--blue' : 'btn--light'}`} type="button" onClick={toggle}>
         <FontAwesomeIcon icon={faShare} height="24" className="mr-2" />
         Share
       </button>
       <ul>
         {config.copy && (
-        <li>
-          <CopyLinkToClipboard onCopy={toggle} className="btn btn--light btn--with-icon" text={url} />
-        </li>
+          <li>
+            <CopyLinkToClipboard onCopy={toggle} className="btn btn--light btn--with-icon" text={url} />
+          </li>
         )}
         {config.facebook && (
-        <li>
-          <FacebookButton url={url} />
-        </li>
+          <li>
+            <FacebookButton url={url} />
+          </li>
         )}
         {config.twitter && (
-        <li>
-          <TwitterButton url={url} />
-        </li>
+          <li>
+            <TwitterButton url={url} />
+          </li>
         )}
         {config.linkedin && (
           <li>
@@ -49,9 +61,9 @@ export function ShareButton({ url, config } : {url: string, config: any}) {
           </li>
         )}
         {config.whatsapp && (
-        <li>
-          <WhatsAppButton url={url} />
-        </li>
+          <li>
+            <WhatsAppButton url={url} />
+          </li>
         )}
       </ul>
     </div>
@@ -59,7 +71,7 @@ export function ShareButton({ url, config } : {url: string, config: any}) {
   );
 }
 
-export function FacebookButton({ url }: {url: string}) {
+export function FacebookButton({ url }: { url: string }) {
   const share = useSocialShare('Facebook');
 
   return (
@@ -76,7 +88,7 @@ export function FacebookButton({ url }: {url: string}) {
   );
 }
 
-export function TwitterButton({ url, hashtags = 'FrontEndRo' } : {url: string, hashtags?: string}) {
+export function TwitterButton({ url, hashtags = 'FrontEndRo' }: { url: string, hashtags?: string }) {
   const share = useSocialShare('Twitter');
 
   return (
@@ -93,7 +105,7 @@ export function TwitterButton({ url, hashtags = 'FrontEndRo' } : {url: string, h
   );
 }
 
-export function WhatsAppButton({ url } : {url: string}) {
+export function WhatsAppButton({ url }: { url: string }) {
   const share = useSocialShare('WhatsApp');
 
   return (
@@ -111,7 +123,7 @@ export function WhatsAppButton({ url } : {url: string}) {
   );
 }
 
-export function LinkedInButton({ url } : {url: string}) {
+export function LinkedInButton({ url }: { url: string }) {
   const share = useSocialShare('LinkedIn');
 
   return (

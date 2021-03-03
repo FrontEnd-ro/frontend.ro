@@ -1,4 +1,5 @@
 import {
+  Contributor,
   CatalinPopusoi,
   Diana,
   NicolaeMaties,
@@ -17,7 +18,7 @@ export type LessonDescription = {
   type: 'intro' | 'html' | 'css' | 'javascript' | 'extra';
   // 👇 Optional properties for lessons not written yet
   cover?: string;
-  contributors?: { name: string; avatar: string; url: string }[];
+  contributors?: Contributor[];
 };
 
 export const LESSONS: LessonDescription[] = [

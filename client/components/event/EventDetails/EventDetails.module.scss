@@ -1,0 +1,67 @@
+@import '../../../styles/variables';
+
+.wrapper-event-details {
+  h1 {
+    font-size: 2em;
+    position: relative;
+
+    &::before {
+      content: 'Training';
+      left: 0;
+      top: 100%;
+      // FIXME: having a fixed width is not very re-usable
+      // Yet it's not as bad and we can leave it for now
+      // since the text is set from here as well
+      width: 4em;
+      display: block;
+      color: color(white);
+      padding: 0.25em 0.5em;
+      background: color(blue);
+    }
+  }
+
+  & > img {
+    bottom: 3em;
+  }
+
+  .lesson-contributors {
+    flex-wrap: wrap;
+
+    li {
+      margin: 1em 0;
+      transition: transform 0.25s $cubic;
+
+      &:hover {
+        transform: translateY(-0.5em);
+      }
+    }
+    
+    p {
+      margin-bottom: 0;
+    }
+
+    img {
+      border-radius: 50%;
+      border: 2px solid color(black);
+    }
+
+    @media screen and (max-width: 500px) {
+      flex-flow: column;
+      align-items: flex-start;
+
+      li {
+        margin: 1em 0;
+      }
+
+      a {
+        display: flex;
+        text-align: left;
+        align-items: center;
+
+        img {
+          margin-right: 1em;
+        }
+      }
+    }
+  }
+}

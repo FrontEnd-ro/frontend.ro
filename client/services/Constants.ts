@@ -6,6 +6,7 @@ import {
   RobertParasca,
   SebastianLatkolic,
   DanielHutanu,
+  GeorgeMarianMorosac,
 } from './contributors';
 
 export type LessonDescription = {
@@ -18,6 +19,16 @@ export type LessonDescription = {
   cover?: string;
   contributors?: { name: string; avatar: string; url: string }[];
 };
+export type EventDescription = {
+  title: string;
+  description: string;
+  url: string,
+  cover: string;
+  agendaTitles?: Agenda[];
+  contributors? : { name: string; avatar: string; url: string; bio?: string}[];
+  date: string,
+  optionsDateAndHour: OptionsDateAndHour[],
+}
 
 export const LESSONS: LessonDescription[] = [
   /** Intro lessons */
@@ -291,3 +302,12 @@ export const MONACO = {
     SCROLL: 'SC',
   },
 };
+
+export interface OptionsDateAndHour {
+  value: string,
+  label: string,
+}
+export interface Agenda {
+  nrCrt: string;
+  title: string;
+}

@@ -1,0 +1,11 @@
+@import "../../../styles/variables";
+
+.event {
+  padding: 0 3em;
+}
+
+@media screen and (max-width: 991px) {
+  .event section {
+    display: block;
+  }
+}

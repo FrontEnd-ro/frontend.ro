@@ -2,6 +2,7 @@ export const Pava = {
   name: 'Păvă',
   avatar: '/images/contributors/iampava.png',
   url: 'https://iampava.com',
+  bio: 'Building FrontEnd.ro one small step at a time',
 };
 export const Diana = {
   name: 'Diana',
@@ -22,6 +23,7 @@ export const CatalinPopusoi = {
   name: 'Cătălin',
   avatar: '/images/contributors/catalinpopusoi.jpg',
   url: 'https://github.com/catalinpopusoi',
+  bio: 'FullStack developer at Endava',
 };
 export const RobertParasca = {
   name: 'Robert',
@@ -37,4 +39,10 @@ export const SebastianLatkolic = {
   name: 'Sebastian',
   avatar: '/images/contributors/juppsy.jpg',
   url: 'https://github.com/juppsy',
+};
+export const GeorgeMarianMorosac = {
+  name: 'George',
+  avatar: '/images/contributors/georgemarianmorosac.jpg',
+  url: 'https://www.linkedin.com/in/george-marian-morosac-7381508a/',
+  bio: 'Full Stack developer at Amazon',
 };

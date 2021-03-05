@@ -15,6 +15,9 @@ export default function Footer() {
       <section>
         <h5> About </h5>
         <p>
+          <a href="mailto:hello@frontend.ro">hello@frontend.ro</a>
+        </p>
+        <p>
           Made with
           {' '}
           <span className="text-red">❤</span>

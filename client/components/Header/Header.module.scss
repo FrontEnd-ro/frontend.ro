@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .header {
   display: flex;
@@ -27,6 +27,86 @@
   img {
     max-height: 100%;
   }
+}
+.main-nav li {
+  display: inline-block;
+  color: color(black);
+  margin: 0 0.5em;
+
+  a {
+    padding-bottom: 0.1em;
+    text-decoration: none;
+    border-bottom: 1px solid color(black);
+
+    &:hover {
+      color: color(blue);
+      border-bottom: 1px solid color(blue);
+    }
+  }
+}
+
+#menuOpenBtn {
+  display: none;
+
+  span {
+    flex: 3;
+  }
+
+  .hamburger {
+    flex: 1;
+  }
+}
+
+.title {
+  display: block;
+  font-size: 3em;
+  margin: 0.75em 0;
+  text-decoration: none;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+  @extend %gradientBackground;
+  @extend %blueGradientBackground;
+
+  ul {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    li {
+      font-size: 1.5em;
+      width: 80%;
+      text-align: left;
+      margin: 0 1em 0 2em;
+      padding: 1em 0 0.5em;
+      border-bottom: 1px solid color(white);
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+header.header-menu-open .mobile-menu {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  text-align: center;
+}
+
+.mobile-menu #menuCloseBtn {
+  margin: 10vh 10% 2em 0;
+  bottom: 1em;
+  color: color(white);
+  border: 1px solid color(white);
+  background-color: transparent;
 }
 
 .demo-label {
@@ -63,10 +143,36 @@
       }
 
       &:hover {
-        // @extend %gradientBackground;
-        // @extend %blueGradientBackground;
         color: color(white);
       }
     }
+  }
+}
+
+// @media screen and (max-width: 500px) {
+//   .header {
+//     .main-nav {
+//       display: none;
+//     }
+
+//     #menuOpenBtn,
+//     #menuCloseBtn {
+//       display: flex;
+//       justify-content: center;
+//     }
+//     .mobile-menu {
+//       display: block;
+//       right: 0;
+//       width: 100%;
+//       height: 0;
+//       overflow: hidden;
+//     }
+//   }
+// }
+
+@media screen and (min-height: 450px) {
+  .header #menuCloseBtn {
+    position: absolute;
+    right: 0;
   }
 }

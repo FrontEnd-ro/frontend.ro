@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { connect, ConnectedProps } from 'react-redux';
-import styles from './Header.module.scss';
+
 import AccountTooltip from './AccountTooltip/AccountTooltip';
 import { RootState } from '~/redux/root.reducer';
 
+import styles from './Header.module.scss';
+
 interface Props {
-  href?: string
-  demoPage?: boolean
-  onMenuClick?: () => void
+  href?: string;
+  demoPage?: boolean;
+  onMenuClick?: () => void;
 }
 
 function Header({
@@ -19,31 +21,66 @@ function Header({
   demoPage,
   onMenuClick,
   isLoggedIn,
-} : ConnectedProps<typeof connector> & Props) {
+}: ConnectedProps<typeof connector> & Props) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <header className={styles.header}>
-      <div className="d-flex align-items-center h-100">
+    <header className={`${styles.header} ${isMenuOpen ? ` ${styles['header-menu-open']}` : ''}`}>
+      <div className="d-flex justify-content-between w-100 align-items-center h-100">
         {onMenuClick && (
-        <button type="button" onClick={onMenuClick} className={`header__menu-btn btn--transparent ${styles.menu}`}>
-          <FontAwesomeIcon icon={faBars} />
-        </button>
-        ) }
+          <button
+            type="button"
+            onClick={onMenuClick}
+            className={`header__menu-btn btn--transparent ${styles.menu}`}
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+        )}
         <Link href={href}>
           <a className={styles.logo}>
             <img src="/logo.png" alt="FrontEnd.ro logo" />
           </a>
         </Link>
+        <nav className={styles['main-nav']}>
+          <ul>
+            <li>
+              <Link href="/evenimente">
+                <a> Evenimente </a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        {/* <button type="button" className="btn btn--blue" id={styles.menuOpenBtn} onClick={() => setIsMenuOpen(true)}>
+          <span> Meniu </span>
+          <span className={styles.hamburger}>
+            <FontAwesomeIcon icon={faBars} />
+          </span>
+        </button> */}
+        {/* <nav className={styles['mobile-menu']}>
+          <Link href={href}>
+            <a className={styles.title} href="/">
+              FrontEnd.ro
+            </a>
+          </Link>
+          <ul>
+            <li>
+              <a href="/slideuri">Slide-uri</a>
+            </li>
+            <li>
+              <a href="/evenimente">Evenimente</a>
+            </li>
+          </ul>
+          <button type="button" className="btn" id={styles.menuCloseBtn} onClick={() => setIsMenuOpen(false)}>
+            <span> Inchide </span>
+          </button>
+        </nav> */}
         {demoPage && (
-        <p
-          className={`${styles['demo-label']} text-white mx-5 text-bold`}
-        >
-          DEMO
-        </p>
+          <p className={`${styles['demo-label']} text-white mx-5 text-bold`}>
+            DEMO
+          </p>
         )}
       </div>
-      <div>
-        {isLoggedIn ? <AccountTooltip /> : null }
-      </div>
+      <div>{isLoggedIn ? <AccountTooltip /> : null}</div>
     </header>
   );
 }

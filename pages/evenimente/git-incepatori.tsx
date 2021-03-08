@@ -26,6 +26,7 @@ function EventDetailsPage() {
       <Header />
 
       <EventDetails
+        id="git-incepatori"
         duration="2.5h"
         location="Online via Zoom"
         contributors={[Pava2, CatalinPopusoi, GeorgeMarianMorosac]}

@@ -13,6 +13,7 @@ export default function Event() {
       <p className={styles.description}> Participă la evenimentele comunității FrontEnd.ro </p>
 
       <RegisterEventCard
+        id="git-incepatori"
         title="Introducere practică în Git & GitHub pentru începători"
         description={description}
         url="/evenimente/git-incepatori"

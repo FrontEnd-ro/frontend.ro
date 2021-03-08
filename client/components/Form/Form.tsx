@@ -69,7 +69,6 @@ export default function Form({
       spellCheck="false"
       onSubmit={submit}
       onInput={onInput}
-      autoCorrect="off"
       autoComplete={autoComplete}
       {...rest}
     >

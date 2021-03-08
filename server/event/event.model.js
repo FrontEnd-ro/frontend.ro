@@ -38,8 +38,6 @@ class EventModel {
       throw new ServerError(400, `Nu există evenimentul cu label=${label}`);
     }
 
-    console.log("add ", label, attendee);
-
     validateAgainstSchemaProps(attendee, AttendeeSchema);
 
     event.attendees.push(attendee);

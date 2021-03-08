@@ -9,7 +9,7 @@ function Events() {
     <>
       <SEOTags
         title="Evenimente | FrontEnd.ro"
-        shareImage="https://frontend.ro/seo/events-page.jpg"
+        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/events-page.jpg`}
         description="Participă la evenimetele comunității FrontEnd.ro"
         url="https://FrontEnd.ro/evenimente"
       />

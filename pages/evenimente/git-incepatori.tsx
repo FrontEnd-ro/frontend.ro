@@ -54,13 +54,11 @@ function EventDetailsPage() {
           Aceasta nu este o prezentare ci un
           {' '}
           <strong>training practic</strong>
-          , unde vom învăța
-          despre:
+          , unde vom învăța despre:
         </p>
         <ol className="with--checkmark">
           <li> De ce Git?</li>
           <li> Git clients (CLI și aplicații desktop)</li>
-          <li> GitHub pages</li>
           <li> Ce e un "repo" și cum creem unul?</li>
           <li> Ce sunt branch-urile si de ce vrem să le folosim?</li>
           <li>
@@ -74,10 +72,26 @@ function EventDetailsPage() {
               <li> push</li>
             </ul>
           </li>
-
           <li> Ce e un "pull-request" si cum creem unul? </li>
           <li> Rezolvarea conflictelor la merge </li>
         </ol>
+
+        <p className="my-5">
+          Am limitat
+          {' '}
+          <strong>numărul de participanți la 12</strong>
+          {' '}
+          pentru că vrem să avem timp pentru fiecare
+          dintre voi.
+          Din motive similare am ales și o
+          {' '}
+          <strong>
+            zi de Weekend pentru
+            desfășurare
+          </strong>
+          {' '}
+          - ca să fim cu toții fresh și gata de treabă! 💪
+        </p>
       </EventDetails>
       <Footer />
     </>

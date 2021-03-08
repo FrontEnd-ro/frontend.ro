@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+.landing-ad-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  transform: translateY(-100%);
+  background: color(darker-white);
+  transition: transform 0.5s $cubic;
+  border-bottom: 1px solid color(silver);
+
+  &--visible {
+    transform: translateY(0);
+  }
+}

@@ -7,6 +7,7 @@ import RegisterEventCard, { EventDate } from '../RegisterEventCard';
 import styles from './EventDetails.module.scss';
 
 interface Props {
+  id: string;
   title: string;
   cover: string;
   duration: string;
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export default function EventDetails({
+  id,
   title,
   cover,
   children,
@@ -34,6 +36,7 @@ export default function EventDetails({
         <img src={cover} alt={`${title}`} className="relative" />
         {children}
         <RegisterEventCard
+          id={id}
           className="my-5"
           location={location}
           duration={duration}

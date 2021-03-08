@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
-import EventService from '~/services/Event.service';
+import EventService from '~/services/api/Event.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
 import styles from './WaitListConfirmation.module.scss';
 
-function WaitListConfirmation() {
+interface Props {
+  id: string;
+  userData: {
+    name: string;
+    tel: string;
+    email: string;
+  }
+}
+
+function WaitListConfirmation({ id, userData }: Props) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const addToWaitlist = async (userData) => {
+  const addToWaitlist = async () => {
     setIsLoading(true);
 
     try {
-      await EventService.addToWaitList(userData);
+      await EventService.addToWaitlist(id, userData);
       SweetAlertService.toast({
         type: 'success',
         text: 'Te-am adăugat pe lista de așteptare, te vom contacta în curând!',

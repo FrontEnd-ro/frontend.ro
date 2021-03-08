@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import ReactSelect from 'react-select';
 
-import EventService from '~/services/Event.service';
+import EventService from '~/services/api/Event.service';
 import Form, { FormGroup } from '~/components/Form';
 import { ShareButton } from '~/components/SocialMediaButtons';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -17,6 +17,7 @@ export interface EventDate {
 }
 
 interface Props {
+  id: string;
   duration: string;
   location: string;
   eventDates: EventDate[];
@@ -28,6 +29,7 @@ interface Props {
 }
 
 function EventCard({
+  id,
   title,
   cover,
   url,
@@ -65,16 +67,18 @@ function EventCard({
     }
 
     try {
-      const status = await EventService.registerToEvent(formData);
+      const seatsInfo = await EventService.getSeatsInfo(id);
 
-      if (status === 201) {
+      if (seatsInfo.free > 0) {
+        await EventService.register(id, formData);
+
         SweetAlertService.toast({
           type: 'success',
-          text: 'Felicitări! Înregistrarea la eveniment a avut loc cu succes!',
+          text: 'Felicitări! Vei primi un email cu mai multe informații!',
         });
       } else {
         SweetAlertService.content(
-          WaitlistConfirmation,
+          () => <WaitlistConfirmation id={id} userData={formData} />,
           'Listă de așteptare',
           {
             onSuccess() {
@@ -97,9 +101,9 @@ function EventCard({
       {cover && <img className={styles['cover--row']} src={cover} alt={`${title} cover`} />}
       <Form onSubmit={onSubmit} onInput={() => setError(null)}>
         {title && (
-        <h2 className={styles.title}>
-          {title}
-        </h2>
+          <h2 className={styles.title}>
+            {title}
+          </h2>
         )}
         {cover && <img className={styles['cover--column']} src={cover} alt={`${title} cover`} />}
         <div className="d-flex justify-content-between flex-wrap">
@@ -112,13 +116,13 @@ function EventCard({
               </strong>
             </p>
             {eventDates.length === 1 && (
-            <p className="m-0">
-              Dată:
-              {' '}
-              <strong>
-                <time dateTime={format(eventDates[0].timestamp, 'yyyy-MM-dd')}>{eventDates[0].label}</time>
-              </strong>
-            </p>
+              <p className="m-0">
+                Dată:
+                {' '}
+                <strong>
+                  <time dateTime={format(eventDates[0].timestamp, 'yyyy-MM-dd')}>{eventDates[0].label}</time>
+                </strong>
+              </p>
             )}
 
           </div>
@@ -171,19 +175,19 @@ function EventCard({
         </FormGroup>
 
         {eventDates.length > 1 && (
-        <ReactSelect
-          isSearchable
-          placeholder="Alege data si ora la care vrei sa participi"
-          className={styles.select}
-          options={eventDates}
-          name="timestamp"
-        />
+          <ReactSelect
+            isSearchable
+            placeholder="Alege data si ora la care vrei sa participi"
+            className={styles.select}
+            options={eventDates}
+            name="timestamp"
+          />
         )}
 
         {error && (
-        <p className="text-red text-bold">
-          {error}
-        </p>
+          <p className="text-red text-bold">
+            {error}
+          </p>
         )}
         <footer className="d-flex my-5 justify-content-between flex-wrap">
           <button
@@ -205,13 +209,13 @@ function EventCard({
           />
         </footer>
         {url && (
-        <div className="text-right my-5">
-          <Link href={url}>
-            <a>
-              Află mai multe
-            </a>
-          </Link>
-        </div>
+          <div className="text-right my-5">
+            <Link href={url}>
+              <a>
+                Află mai multe
+              </a>
+            </Link>
+          </div>
         )}
       </Form>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import UserService from '~/services/User.service';
+import Button from '~/components/Button';
 import styles from './SubscribeForm.module.scss';
 
 function SubscribeForm() {
@@ -75,13 +76,14 @@ function SubscribeForm() {
       {didSubscribe
         ? <p> ✔ Bine ai venit în comunitate!</p>
         : (
-          <button
+          <Button
+            variant="light"
             type="submit"
-            disabled={isSubscribing}
-            className={`btn btn--light w-100${isSubscribing ? ' btn--loading' : ''}`}
+            loading={isSubscribing}
+            className="w-100"
           >
             Abonează-te!
-          </button>
+          </Button>
         )}
 
     </form>

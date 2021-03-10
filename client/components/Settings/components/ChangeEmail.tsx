@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '~/components/Button';
 import Form, { FormGroup, PasswordReveal } from '~/components/Form';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import UserService from '~/services/User.service';
@@ -67,13 +68,13 @@ function ChangeEmail({ onSuccess }: Props) {
             </p>
           )}
         </div>
-        <button
+        <Button
           type="submit"
-          disabled={isChanging}
-          className={`btn btn--blue ${isChanging ? 'btn--loading' : ''}`}
+          variant="blue"
+          loading={isChanging}
         >
           Schimbă email-ul
-        </button>
+        </Button>
       </div>
     </Form>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { uuid } from '../../services/Utils';
+import Button from '~/components/Button';
 
 import styles from './GitCli.module.scss';
 
@@ -125,13 +126,13 @@ class MatchCommandMessageClassComponent extends React.Component<Props, State> {
               readOnly={currentIndex === commands.length}
             />
             <span className={styles.blinking__cursor} />
-            <button
-              className="btn btn--blue"
+            <Button
+              variant="blue"
               type="submit"
-              disabled={currentIndex === commands.length}
+              loading={currentIndex === commands.length}
             >
               {btnMessage}
-            </button>
+            </Button>
           </form>
         </div>
       </>

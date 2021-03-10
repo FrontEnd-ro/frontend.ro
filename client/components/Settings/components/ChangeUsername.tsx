@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '~/components/Button';
 import Form, { FormGroup, PasswordReveal } from '~/components/Form';
 import UsernameInput from '~/components/Form/UsernameInput/UsernameInput';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -70,13 +71,13 @@ function ChangeUsername({ onSuccess }: Props) {
             </p>
           )}
         </div>
-        <button
+        <Button
           type="submit"
-          disabled={isChanging}
-          className={`btn btn--blue ${isChanging ? 'btn--loading' : ''}`}
+          variant="blue"
+          loading={isChanging}
         >
           Schimbă username-ul
-        </button>
+        </Button>
       </div>
     </Form>
   );

@@ -3,6 +3,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TableOfContents, { Chapter } from '~/components/TableOfContents';
 import { useOutsideClick } from '~/services/Hooks';
+import Button from '~/components/Button';
 
 import styles from './LessonMenu.module.scss';
 
@@ -28,9 +29,9 @@ export default function LessonMenu({
         <h2>
           {title}
         </h2>
-        <button type="button" onClick={close} className="btn--transparent text-white">
+        <Button onClick={close}>
           <FontAwesomeIcon icon={faTimes} />
-        </button>
+        </Button>
       </header>
       <TableOfContents onChapterClick={close} chapters={chapters} />
     </aside>

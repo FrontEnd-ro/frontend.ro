@@ -83,6 +83,11 @@
     :global .header__menu-btn {
       display: block;
     }
+    :global .lesson-menu__header button {
+      width: 2.5em;
+      color: white;
+      background: transparent;
+    }
 
     main {
       left: 0;

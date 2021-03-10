@@ -5,6 +5,7 @@ import { faCode, faLightbulb, faPen } from '@fortawesome/free-solid-svg-icons';
 
 import { GITHUB_URL } from '~/services/Constants';
 import PageContainer from '~/components/PageContainer';
+import Button from '~/components/Button';
 
 import styles from './NoSubmissionsYet.module.scss';
 
@@ -20,24 +21,22 @@ function NoSubmissionsYet() {
       </h2>
 
       <div className={`${styles['help-wrapper']} d-flex  justify-content-between align-items-center`}>
-        <button
-          type="button"
+        <Button
           onClick={() => setHelp('code')}
           className={`${help === 'code' ? 'btn--blue ' : 'btn--transparent '} btn align-items-center`}
         >
           <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faCode} />
           Vreau să codez
           la platformă
-        </button>
+        </Button>
 
-        <button
-          type="button"
+        <Button
           onClick={() => setHelp('lessons')}
           className={`${help === 'lessons' ? 'btn--blue ' : 'btn--transparent '}btn align-items-center`}
         >
           <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faPen} />
           Vreau să scriu lecții
-        </button>
+        </Button>
 
         <Link href="/exercitii/creeaza">
           <a className={`${help === 'exercises' ? 'btn--blue ' : 'btn--transparent '}btn align-items-center`}>

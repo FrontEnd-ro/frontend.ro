@@ -6,6 +6,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { connect, ConnectedProps } from 'react-redux';
 
 import AccountTooltip from './AccountTooltip/AccountTooltip';
+import Button from '~/components/Button';
 import { RootState } from '~/redux/root.reducer';
 
 import styles from './Header.module.scss';
@@ -28,13 +29,12 @@ function Header({
     <header className={`${styles.header} ${isMenuOpen ? ` ${styles['header-menu-open']}` : ''}`}>
       <div className="d-flex justify-content-between w-100 align-items-center h-100">
         {onMenuClick && (
-          <button
-            type="button"
+          <Button
             onClick={onMenuClick}
-            className={`header__menu-btn btn--transparent ${styles.menu}`}
+            className={`header__menu-btn ${styles.menu}`}
           >
             <FontAwesomeIcon icon={faBars} />
-          </button>
+          </Button>
         )}
         <Link href={href}>
           <a className={styles.logo}>
@@ -55,12 +55,12 @@ function Header({
             </li>
           </ul>
         </nav>
-        {/* <button type="button" className="btn btn--blue" id={styles.menuOpenBtn} onClick={() => setIsMenuOpen(true)}>
+        {/* <Button variant="blue" id={styles.menuOpenBtn} onClick={() => setIsMenuOpen(true)}>
           <span> Meniu </span>
           <span className={styles.hamburger}>
             <FontAwesomeIcon icon={faBars} />
           </span>
-        </button> */}
+        </Button> */}
         {/* <nav className={styles['mobile-menu']}>
           <Link href={href}>
             <a className={styles.title} href="/">
@@ -75,9 +75,9 @@ function Header({
               <a href="/evenimente">Evenimente</a>
             </li>
           </ul>
-          <button type="button" className="btn" id={styles.menuCloseBtn} onClick={() => setIsMenuOpen(false)}>
+          <Button id={styles.menuCloseBtn} onClick={() => setIsMenuOpen(false)}>
             <span> Inchide </span>
-          </button>
+          </Button>
         </nav> */}
         {demoPage && (
           <p className={`${styles['demo-label']} text-white mx-5 text-bold`}>

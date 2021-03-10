@@ -4,6 +4,7 @@
 import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import Button from '~/components/Button';
 import FileIcons from '~/services/utils/FileIcons';
 import FolderStructure from '~/services/utils/FolderStructure';
 import Feedbacks from '../Feedbacks';
@@ -120,7 +121,7 @@ class FolderBrowse extends React.Component<Props, State> {
               onBlur={saveAsset}
             />
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button hidden disabled={renamedAsset.key !== folderKey} type="submit" />
+            <Button hidden loading={renamedAsset.key !== folderKey} type="submit" />
           </form>
         </div>
         {folders.map((folder) => (

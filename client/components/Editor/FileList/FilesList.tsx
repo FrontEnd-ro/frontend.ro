@@ -3,6 +3,7 @@
 import React from 'react';
 import noop from 'lodash/noop';
 import FileIcons from '~/services/utils/FileIcons';
+import Button from '~/components/Button';
 
 import styles from './FilesList.module.scss';
 
@@ -57,7 +58,7 @@ function FilesList({
               onBlur={saveAsset}
             />
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button hidden disabled={renamedAsset.key !== f.key} type="submit" />
+            <Button hidden loading={renamedAsset.key !== f.key} type="submit" />
           </form>
         </li>
       ))}

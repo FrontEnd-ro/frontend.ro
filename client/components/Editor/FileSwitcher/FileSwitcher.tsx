@@ -18,6 +18,7 @@ import FolderStructure, { ExerciseFile, ExerciseFolder, NewSourceFile } from '~/
 import FilesList from '../FileList/FilesList';
 import FolderBrowse from '../FolderBrowser/FolderBrowse';
 import Feedbacks from '../Feedbacks';
+import Button from '~/components/Button';
 
 import styles from './FileSwitcher.module.scss';
 
@@ -253,7 +254,7 @@ class FileSwitcher extends React.Component<Props, State> {
       maxHeight,
       folderStructure,
       selectedFileKey,
-      feedbacks: feedbacksProp
+      feedbacks: feedbacksProp,
     } = this.props;
 
     const {
@@ -282,35 +283,33 @@ class FileSwitcher extends React.Component<Props, State> {
         style={{ width: `${INITIAL_WIDTH_PX}px`, minWidth: `${MIN_WIDTH_PX}px`, maxHeight: `${maxHeight}px` }}
       >
         {isCollapsed && (
-          <button onClick={this.toggleCollapse} title="Browse files" type="button" className={`${styles['toggle-button']} btn--transparent`}>
+          <Button onClick={this.toggleCollapse} title="Browse files" className={`${styles['toggle-button']}`}>
             <img src={FileIcons.getIconUrl('svg')} alt="File SVG icon" />
-          </button>
+          </Button>
         )}
         <div className={styles.controls}>
           <div>
             {!readOnly && (
-              <button onClick={() => this.newFile()} type="button" className="btn--transparent" title="New file">
+              <Button onClick={() => this.newFile()} title="New file">
                 <FontAwesomeIcon icon={faPlus} width="18" height="18" />
-              </button>
+              </Button>
             )}
             {!readOnly && (
-              <button onClick={() => this.newFolder()} type="button" className="btn--transparent" title="New folder">
+              <Button onClick={() => this.newFolder()} title="New folder">
                 <FontAwesomeIcon icon={faFolderPlus} width="18" height="18" />
-              </button>
+              </Button>
             )}
-            <button
+            <Button
               onClick={this.onDownload}
-              disabled={isGeneratingArchive}
-              type="button"
-              className="btn--transparent"
+              loading={isGeneratingArchive}
               title="Download to device"
             >
               <FontAwesomeIcon icon={faCloudDownloadAlt} width="18" height="18" />
-            </button>
+            </Button>
           </div>
-          <button onClick={this.toggleCollapse} type="button" className="btn--transparent" title="Collapse panel">
+          <Button onClick={this.toggleCollapse} title="Collapse panel">
             <FontAwesomeIcon icon={faChevronLeft} width="18" height="18" />
-          </button>
+          </Button>
         </div>
         {/* <Scroll className="is--fliped-x"> */}
         <div>
@@ -352,30 +351,30 @@ class FileSwitcher extends React.Component<Props, State> {
           {ctxMenuType === 'FOLDER' && (
             <>
               <li>
-                <button type="button" onClick={() => this.newFile(ctxMenuKey)} className="btn btn--transparent">
+                <Button onClick={() => this.newFile(ctxMenuKey)}>
                   <FontAwesomeIcon icon={faFileAlt} width="18" height="18" />
                   New file
-                </button>
+                </Button>
               </li>
               <li>
-                <button type="button" onClick={() => this.newFolder(ctxMenuKey)} className="btn btn--transparent">
+                <Button onClick={() => this.newFolder(ctxMenuKey)}>
                   <FontAwesomeIcon icon={faFolder} width="18" height="18" />
                   New folder
-                </button>
+                </Button>
               </li>
             </>
           )}
           <li>
-            <button type="button" onClick={() => this.enterEditMode(ctxMenuKey)} className="btn btn--transparent">
+            <Button onClick={() => this.enterEditMode(ctxMenuKey)}>
               <FontAwesomeIcon icon={faEdit} width="18" height="18" />
               Rename
-            </button>
+            </Button>
           </li>
           <li>
-            <button type="button" onClick={() => this.deleteFileOrFolder(ctxMenuKey)} className="btn btn--transparent">
+            <Button onClick={() => this.deleteFileOrFolder(ctxMenuKey)}>
               <FontAwesomeIcon icon={faTrashAlt} width="18" height="18" />
               Delete
-            </button>
+            </Button>
           </li>
         </ul>
         <HResizable onResize={this.onResize} />

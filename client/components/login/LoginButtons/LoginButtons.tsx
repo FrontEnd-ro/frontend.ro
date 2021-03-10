@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '~/components/Button';
 import styles from './LoginButtons.module.scss';
 
 interface Props {
@@ -13,23 +14,27 @@ export default function LoginButtons({
 }: Props) {
   return (
     <div className={`${styles['login-buttons']} ${mode === 'register' ? styles['register-mode'] : ''} text-center`}>
-      <button
+      <Button
+        variant="light"
         type={mode === 'register' ? 'button' : 'submit'}
         className={`${mode === 'register' ? 'btn--light' : 'btn--blue'} ${(loading && mode === 'login') ? 'btn--loading' : ''} btn w-100`}
+        loading={loading && mode === 'login'}
         disabled={loading}
         onClick={onLogin}
       >
         Intră în cont
-      </button>
+      </Button>
       <p className="relative"> sau </p>
-      <button
+      <Button
+        variant="light"
         type={mode === 'register' ? 'submit' : 'button'}
         className={`${mode === 'register' ? 'btn--blue' : 'btn--light'} ${(loading && mode === 'register') ? 'btn--loading' : ''} btn w-100`}
+        loading={loading && mode === 'register'}
         disabled={loading}
         onClick={onRegister}
       >
         Înregistrează-te
-      </button>
+      </Button>
 
     </div>
   );

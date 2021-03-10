@@ -1,6 +1,8 @@
-import { faPause, faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useRef, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPause, faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
+
+import Button from '~/components/Button';
 
 import styles from './AudioPlayer.module.scss';
 
@@ -44,12 +46,12 @@ export default function AudioPlayer({ title, src, className } : Props) {
 
   return (
     <div className={`${styles['audio-player']} ${className} d-flex align-items-center`}>
-      <button type="button" onClick={togglePlay} className="bg-white text-black">
+      <Button onClick={togglePlay} className={styles['play-button']}>
         <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
-      </button>
-      <button type="button" className={`${styles['stop-button']}${isPlaying ? ` ${styles['stop-button--visible']}` : ''}`} onClick={stop}>
+      </Button>
+      <Button className={`${styles['stop-button']}${isPlaying ? ` ${styles['stop-button--visible']}` : ''}`} onClick={stop}>
         <FontAwesomeIcon icon={faStop} />
-      </button>
+      </Button>
       <p title={title} className="text-white">{title}</p>
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio ref={ref} src={src} hidden />

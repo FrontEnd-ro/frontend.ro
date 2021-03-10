@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '~/components/Button';
 import Form from '~/components/Form';
 import { uuid } from '~/services/Utils';
 
@@ -42,9 +43,9 @@ function InitForm({ createFirstFile, uploadStructure }: Props) {
         <span>Numele fișierului*</span>
         <div className={styles['input-and-button']}>
           <input required type="text" name="name" />
-          <button type="submit" className="btn btn--success">
+          <Button type="submit" variant="success">
             Creează
-          </button>
+          </Button>
         </div>
       </label>
       <span className={styles.separator}>

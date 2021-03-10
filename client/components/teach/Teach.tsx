@@ -9,6 +9,7 @@ import ExerciseService from '~/services/Exercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { loadSubmissions, searchSubmissions } from '~/redux/exercise-submissions/exercise-submissions.actions';
 import PageContainer from '../PageContainer';
+import Button from '~/components/Button';
 
 import styles from './Teach.module.scss';
 
@@ -132,14 +133,13 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
         </p>
         )}
         {!submissions.end && (
-        <button
-          type="button"
-          className="btn btn--blue"
+        <Button
+          variant="blue"
           onClick={this.getData}
-          disabled={loading}
+          loading={loading}
         >
           Next page
-        </button>
+        </Button>
         )}
 
         <div

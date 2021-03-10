@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import Button from '~/components/Button';
 
 import styles from './PasswordReveal.module.scss';
 
@@ -29,14 +30,13 @@ function PasswordReveal({
           autoComplete={autoComplete}
         />
 
-        <button
-          type="button"
+        <Button
           className="absolute text-grey"
           onClick={() => setVisible(!visible)}
           title={visible ? 'Hide password' : 'Show password'}
         >
           <FontAwesomeIcon icon={visible ? faEye : faEyeSlash} />
-        </button>
+        </Button>
       </div>
       {passwordError
         ? <span className="text-red text-bold">🧙‍ Nu poți trece mai departe decât cu o parolă!</span>

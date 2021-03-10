@@ -93,6 +93,15 @@ eventRouter.post('/:label/waitlist', async function addToWaitlist(req, res) {
     }
 
     await EventModel.addToWaitlist(label, { name, email, tel });
+    EmailService.sendEmailWithTemplate(
+      email,
+      Number(process.env.EMAIL_WAITING_TRAINING_TEMPLATE),
+      {
+        name,
+        sender_name: "Păvă",
+        product_name: "Git & GitHub pentru începători",
+      }
+    );
     res.status(200).send()
   } catch (err) {
     console.error("[addToWaitlist]", err);

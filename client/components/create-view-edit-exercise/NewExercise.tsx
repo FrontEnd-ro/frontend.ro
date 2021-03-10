@@ -3,6 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import Form from '../Form';
 import Login from '../login';
+import Button from '~/components/Button';
 import MarkdownTextarea from '../MarkdownTextarea';
 import { RootState } from '~/redux/root.reducer';
 import PrivacyControls from './PrivacyControls/PrivacyControls';
@@ -208,13 +209,12 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
                 </>
               )
               : (
-                <button
-                  className="btn btn--light"
-                  type="button"
+                <Button
+                  variant="light"
                   onClick={() => setShowExampleEditor(true)}
                 >
                   Adaugă cod de început
-                </button>
+                </Button>
               )
           }
         </div>
@@ -233,13 +233,13 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
                 </>
               )
               : (
-                <button
-                  type="button"
+                <Button
+                  variant="light"
                   className={`btn ${solutionError ? 'btn--danger' : 'btn--light'}`}
                   onClick={() => setShowSolutionEditor(true)}
                 >
                   Adaugă soluția exercițiului
-                </button>
+                </Button>
               )
           }
         </div>
@@ -248,14 +248,14 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
         <footer className="d-flex align-items-center justify-content-between">
           <LessonSelect onChange={(value) => setSuggestion(value.label)} />
           <div>
-            <button
+            <Button
+              variant="blue"
               form="createForm"
               type="submit"
-              disabled={isCreating}
-              className={`btn btn--blue ${isCreating ? 'btn--loading' : ''}`}
+              loading={isCreating}
             >
               Creează
-            </button>
+            </Button>
           </div>
         </footer>
       </main>

@@ -2,6 +2,8 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef } from 'react';
 import { useClipboard } from '~/services/Hooks';
+import Button from '~/components/Button';
+
 import styles from './Highlight.module.scss';
 
 type Language = 'html' | 'css' | 'json' | 'javascript';
@@ -31,10 +33,10 @@ export default function Highlight({ language, code, className }: Props) {
           {code}
         </code>
       </pre>
-      <button type="button" className="btn--transparent" data-clipboard-text={code} ref={btnRef}>
+      <Button data-clipboard-text={code} ref={btnRef}>
         <FontAwesomeIcon className="text-silver" icon={faCopy} width="32" />
         <span className="d-block"> Copy </span>
-      </button>
+      </Button>
     </div>
   );
 }

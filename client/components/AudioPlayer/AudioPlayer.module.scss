@@ -9,7 +9,6 @@
   margin-right: auto;
   padding: 0.5em 1em;
   box-shadow: 0 0 0.5em color(black);
-
   button {
     width: 4em;
     height: 4em;
@@ -17,7 +16,14 @@
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 0 0 5px color(black);
+    &.play-button {
+      color: color(black);
+      border: 1px solid color(black);
+      background-image: linear-gradient(to right, #ecf0f1 0%, #fff 51%, #ecf0f1 100%);
+    }
   }
+
+  
 
   p {
     overflow: hidden;

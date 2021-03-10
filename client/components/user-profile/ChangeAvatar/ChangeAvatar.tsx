@@ -5,6 +5,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import { IMAGES_MIME_TYPES } from '~/services/Constants';
 import { cropImage, filterFiles, loadImage } from '~/services/utils/FileUtils';
+import Button from '~/components/Button';
 
 import UserService from '~/services/User.service';
 import { loadInfo } from '~/redux/user/user.actions';
@@ -78,8 +79,8 @@ function ChangeAvatar({ user, dispatch }: ConnectedProps<typeof connector>) {
       </label>
       {newAvatar && (
         <div className={`${styles.controls} d-flex justify-content-between`}>
-          <button type="button" disabled={isUploading} className="btn btn--light" onClick={cancel}> Cancel </button>
-          <button type="button" disabled={isUploading} className={`btn btn--blue ${isUploading ? 'btn--loading' : ''}`} onClick={save}> Save </button>
+          <Button variant="light" loading={isUploading} onClick={cancel}> Cancel </Button>
+          <Button variant="blue" loading={isUploading} onClick={save}> Save </Button>
         </div>
       )}
     </div>

@@ -15,6 +15,7 @@ import NotificationSkeleton from './notification/NotificationSkeleton';
 import { RootState } from '~/redux/root.reducer';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import Notification from './notification/Notification';
+import Button from '~/components/Button';
 
 import styles from './NotificationTooltip.module.scss';
 
@@ -150,13 +151,12 @@ class NotificationsTooltip extends React.Component<
 
           <ul className={styles.notifications}>
             <li className="text-right">
-              <button
-                type="button"
+              <Button
                 className={`${styles['mark-all-as-read-btn']} outline-none d-inline-block border-none`}
                 onClick={this.markAllAsRead}
               >
                 Mark all as read
-              </button>
+              </Button>
             </li>
             {notifications.map((notificationProps) => (
               <Notification

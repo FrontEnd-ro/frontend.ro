@@ -25,6 +25,7 @@ import editCover from './coding.svg';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import ExerciseService from '~/services/Exercise.service';
 import { ChapterType } from '~/redux/exercise-submissions/types';
+import Button from '~/components/Button';
 
 function ViewOrEditExercise({
   exercise,
@@ -257,7 +258,7 @@ function ViewOrEditExercise({
               initialTab="PREVIEW"
               onInput={onMarkdownInput}
               onUpload={(files, cursorPosition) => uploadFiles(
-                files, cursorPosition, body, updateMarkdownWithUploadedFiles
+                files, cursorPosition, body, updateMarkdownWithUploadedFiles,
               )}
             />
             {bodyError && (
@@ -280,13 +281,12 @@ function ViewOrEditExercise({
             </>
           )}
           {(!exerciseBody && isOwnExercise && !showExampleEditor) && (
-            <button
-              className="btn btn--light"
-              type="button"
+            <Button
+              variant="light"
               onClick={() => setShowExampleEditor(true)}
             >
               Adaugă cod de început
-            </button>
+            </Button>
           )}
           {(!exerciseBody && isOwnExercise && showExampleEditor) && (
             <>
@@ -324,23 +324,23 @@ function ViewOrEditExercise({
                 onChange={(value) => setSuggestion(value.label)}
               />
               <div>
-                <button
-                  type="button"
+                <Button
+                  variant="danger"
                   onClick={deleteExercise}
-                  disabled={isEditing || isDeleting}
-                  className={`btn btn--danger mr-2 ${isDeleting ? 'btn--loading' : ''}`}
+                  loading={isDeleting}
+                  className="mr-2"
                 >
                   Șterge
-                </button>
+                </Button>
 
-                <button
+                <Button
+                  variant="blue"
                   form="createForm"
                   type="submit"
-                  disabled={isEditing || isDeleting}
-                  className={`btn btn--blue ${isEditing ? 'btn--loading' : ''}`}
+                  loading={isEditing || isDeleting}
                 >
                   Modifică
-                </button>
+                </Button>
               </div>
             </footer>
           </>

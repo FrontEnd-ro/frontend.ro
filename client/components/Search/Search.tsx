@@ -3,6 +3,8 @@ import debounce from 'lodash/debounce';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Button from '~/components/Button';
+
 import styles from './Search.module.scss';
 
 interface State {
@@ -61,10 +63,10 @@ class Search extends React.Component<Props, State> {
             className="w-100"
             onChange={this.onChange}
           />
-          <button type="submit" className="btn btn--blue" title="Search">
+          <Button type="submit" variant="blue" title="Search">
             <FontAwesomeIcon width="24" icon={faSearch} />
             <span>Search </span>
-          </button>
+          </Button>
         </form>
       </div>
     );

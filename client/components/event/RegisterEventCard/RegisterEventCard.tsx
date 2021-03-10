@@ -8,6 +8,7 @@ import Form, { FormGroup } from '~/components/Form';
 import { ShareButton } from '~/components/SocialMediaButtons';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import WaitlistConfirmation from '../WaitListConfirmation/WaitListConfirmation';
+import Button from '~/components/Button';
 
 import styles from './RegisterEventCard.module.scss';
 
@@ -197,13 +198,9 @@ function EventCard({
         )}
         {!isPastEvent && (
           <footer className="d-flex my-5 justify-content-between flex-wrap">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`btn btn--blue ${isLoading ? 'btn--loading' : ''}`}
-            >
+            <Button type="submit" variant="blue" loading={isLoading}>
               Înscrie-te
-            </button>
+            </Button>
             <ShareButton
               variant="light"
               url={urlToShare}

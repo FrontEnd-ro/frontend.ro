@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '~/components/Button';
 import styles from './LessonContributors.module.scss';
 
 interface Contributor {
@@ -65,10 +66,10 @@ export default function LessonContributors({
           zIndex: displayNumber + 1,
         }}
         >
-          <button type="button" className="btn btn--light">
+          <Button variant="light">
             +
             {contributors.length - displayNumber}
-          </button>
+          </Button>
         </li>
       )}
     </ul>

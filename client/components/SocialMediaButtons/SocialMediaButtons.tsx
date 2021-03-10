@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink, faShare } from '@fortawesome/free-solid-svg-icons';
 import { useClipboard, useOutsideClick } from '~/services/Hooks';
+import Button from '~/components/Button';
 
 import styles from './SocialMediaButtons.module.scss';
 
@@ -35,10 +36,10 @@ export function ShareButton({ url, config, variant = 'blue' }: Props) {
 
   return (
     <div ref={ref} className={`${styles['share-wrapper']} ${isOpen ? styles['share-wrapper--open'] : ''}`}>
-      <button className={`btn ${variant === 'blue' ? 'btn--blue' : 'btn--light'}`} type="button" onClick={toggle}>
+      <Button variant={variant} onClick={toggle}>
         <FontAwesomeIcon icon={faShare} height="24" className="mr-2" />
         Share
-      </button>
+      </Button>
       <ul>
         {config.copy && (
           <li>
@@ -159,9 +160,9 @@ function CopyLinkToClipboard({ text, className, onCopy }: {
   useClipboard(ref, onCopy);
 
   return (
-    <button className={className} type="button" data-clipboard-text={text} ref={ref}>
+    <Button variant="blue" className={className} data-clipboard-text={text} ref={ref}>
       <FontAwesomeIcon icon={faLink} height="24" className="mr-2" />
       Copy link
-    </button>
+    </Button>
   );
 }

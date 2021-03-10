@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import UserService from '~/services/User.service';
 import { RootState } from '~/redux/root.reducer';
+import Button from '~/components/Button';
 
 import styles from './AccountTooltip.module.scss';
 import { useOutsideClick } from '~/services/Hooks';
@@ -28,7 +29,7 @@ function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
 
   return (
     <div ref={ref} className={styles['account-tooltip']}>
-      <button className={styles.avatar} type="button" onClick={toggleToolip}>
+      <Button className={styles.avatar} onClick={toggleToolip}>
         <img
           className="pointer"
           title="Toggle menu"
@@ -37,7 +38,7 @@ function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
           width="32"
           data-toggle="true"
         />
-      </button>
+      </Button>
       {isOpen && (
         <ul className="menu">
           <li>

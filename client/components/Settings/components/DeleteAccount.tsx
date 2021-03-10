@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import Button from '~/components/Button';
 import Form, { FormGroup, PasswordReveal } from '~/components/Form';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import UserService from '~/services/User.service';
@@ -62,13 +63,13 @@ function DeleteAccount({ onSuccess }: Props) {
             </p>
           )}
         </FormGroup>
-        <button
+        <Button
+          variant="danger"
           type="submit"
-          disabled={isDeleting}
-          className={`btn btn--danger ${isDeleting ? 'btn--loading' : ''}`}
+          loading={isDeleting}
         >
           Șterge contul
-        </button>
+        </Button>
       </div>
     </Form>
   );

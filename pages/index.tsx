@@ -20,7 +20,7 @@ export default function Home() {
         description="Vrei să înveți FrontEnd? Aici ai parte de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun."
       />
       <>
-        <LandingAdBanner />
+        {/* <LandingAdBanner /> */}
         <LandingHero />
         <LandingHowItWorks />
         <LandingThanks />

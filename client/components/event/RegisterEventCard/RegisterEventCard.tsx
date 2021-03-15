@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import ReactSelect from 'react-select';
+import { RootState } from '~/redux/root.reducer';
 
 import EventService from '~/services/api/Event.service';
 import Form, { FormGroup } from '~/components/Form';
@@ -32,6 +34,7 @@ interface Props {
 }
 
 function RegisterEventCard({
+  userInfo,
   id,
   title,
   cover,
@@ -41,7 +44,7 @@ function RegisterEventCard({
   location,
   eventDates,
   className,
-}: Props) {
+}: ConnectedProps<typeof connector> & Props) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [urlToShare, setUrlToShare] = useState(url);
@@ -163,7 +166,8 @@ function RegisterEventCard({
                 <span className="label text-bold mb-2">
                   Nume si prenume
                 </span>
-                <input type="text" name="name" required />
+                {userInfo && <input type="text" name="name" defaultValue={userInfo.name} required />}
+
               </label>
             </FormGroup>
 
@@ -172,7 +176,8 @@ function RegisterEventCard({
                 <span className="label text-bold mb-2">
                   Adresa de email
                 </span>
-                <input type="email" name="email" required />
+                {userInfo && <input type="email" defaultValue={userInfo.email} name="email" required />}
+
               </label>
             </FormGroup>
 
@@ -237,4 +242,11 @@ function RegisterEventCard({
   );
 }
 
-export default RegisterEventCard;
+function mapStateToProps(state: RootState) {
+  return {
+    userInfo: state.user.info,
+  };
+}
+const connector = connect(mapStateToProps);
+
+export default connector(RegisterEventCard);

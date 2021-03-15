@@ -43,6 +43,8 @@ function EventCard({
   const [isLoading, setIsLoading] = useState(false);
   const [urlToShare, setUrlToShare] = useState(url);
 
+  const isPastEvent = eventDates.every(({ timestamp }) => Date.now() > timestamp);
+
   useEffect(() => {
     // If we have the `url` prop then let's use that
     // as the share url. Otherwise default to the current page.
@@ -144,35 +146,39 @@ function EventCard({
           </div>
         </div>
         <p className="my-5">{description}</p>
-        <FormGroup className="mb-4">
-          <label>
-            <span className="label text-bold mb-2">
-              Nume si prenume
-            </span>
-            <input type="text" name="name" required />
-          </label>
-        </FormGroup>
+        {!isPastEvent && (
+          <>
+            <FormGroup className="mb-4">
+              <label>
+                <span className="label text-bold mb-2">
+                  Nume si prenume
+                </span>
+                <input type="text" name="name" required />
+              </label>
+            </FormGroup>
 
-        <FormGroup className="mb-4">
-          <label>
-            <span className="label text-bold mb-2">
-              Adresa de email
-            </span>
-            <input type="email" name="email" required />
-          </label>
-        </FormGroup>
+            <FormGroup className="mb-4">
+              <label>
+                <span className="label text-bold mb-2">
+                  Adresa de email
+                </span>
+                <input type="email" name="email" required />
+              </label>
+            </FormGroup>
 
-        <FormGroup>
-          <label>
-            <span className="label text-bold mb-2">
-              Număr de telefon
-            </span>
-            <span className="text-xs text-grey d-flex align-items-center">
-              Te vom contacta cu o zi înainte de eveniment a confirma participarea
-            </span>
-            <input type="tel" name="tel" required />
-          </label>
-        </FormGroup>
+            <FormGroup>
+              <label>
+                <span className="label text-bold mb-2">
+                  Număr de telefon
+                </span>
+                <span className="text-xs text-grey d-flex align-items-center">
+                  Te vom contacta cu o zi înainte de eveniment a confirma participarea
+                </span>
+                <input type="tel" name="tel" required />
+              </label>
+            </FormGroup>
+          </>
+        )}
 
         {eventDates.length > 1 && (
           <ReactSelect
@@ -189,25 +195,28 @@ function EventCard({
             {error}
           </p>
         )}
-        <footer className="d-flex my-5 justify-content-between flex-wrap">
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={`btn btn--blue ${isLoading ? 'btn--loading' : ''}`}
-          >
-            Înscrie-te
-          </button>
-          <ShareButton
-            variant="light"
-            url={urlToShare}
-            config={{
-              copy: true,
-              facebook: true,
-              whatsapp: true,
-              linkedin: true,
-            }}
-          />
-        </footer>
+        {!isPastEvent && (
+          <footer className="d-flex my-5 justify-content-between flex-wrap">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`btn btn--blue ${isLoading ? 'btn--loading' : ''}`}
+            >
+              Înscrie-te
+            </button>
+            <ShareButton
+              variant="light"
+              url={urlToShare}
+              config={{
+                copy: true,
+                facebook: true,
+                whatsapp: true,
+                linkedin: true,
+              }}
+            />
+          </footer>
+
+        )}
         {url && (
           <div className="text-right my-5">
             <Link href={url}>

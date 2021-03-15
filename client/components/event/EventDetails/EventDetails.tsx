@@ -26,6 +26,8 @@ export default function EventDetails({
   eventDates,
   contributors,
 }: PropsWithChildren<Props>) {
+  const isPastEvent = eventDates.every(({ timestamp }) => Date.now() > timestamp);
+
   return (
     <PageContainer>
 
@@ -35,13 +37,15 @@ export default function EventDetails({
         </h1>
         <img src={cover} alt={`${title}`} className="relative" />
         {children}
-        <RegisterEventCard
-          id={id}
-          className="my-5"
-          location={location}
-          duration={duration}
-          eventDates={eventDates}
-        />
+        {!isPastEvent && (
+          <RegisterEventCard
+            id={id}
+            className="my-5"
+            location={location}
+            duration={duration}
+            eventDates={eventDates}
+          />
+        )}
         <h2 className="text-center"> Cine sunt trainerii? </h2>
         <ul className={`${styles['lesson-contributors']} relative d-flex justify-content-between text-center my-5`}>
           {contributors.map((contributor) => (

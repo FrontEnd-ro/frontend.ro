@@ -10,6 +10,7 @@ import {
 
 import SEOTags from '~/components/SEOTags';
 import { LessonTip } from '~/components/lessons';
+import { SubscribeFormWithText } from '~/components/SubscribeForm';
 
 function EventDetailsPage() {
   const title = 'Introducere practică în Git & GitHub pentru toți';
@@ -92,6 +93,16 @@ function EventDetailsPage() {
           {' '}
           - ca să fim cu toții fresh și gata de treabă! 💪
         </p>
+        <SubscribeFormWithText>
+          <h2>
+            Deocamdată nu avem alt training de Git programat
+          </h2>
+          <p className="text-xl">
+            Însă ne dorim să mai organizăm. Deci, dacă vrei să fii primul care află
+            despre ele, abonează-te aici 👉
+
+          </p>
+        </SubscribeFormWithText>
       </EventDetails>
       <Footer />
     </>

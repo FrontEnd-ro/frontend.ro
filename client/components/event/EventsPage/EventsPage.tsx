@@ -1,5 +1,6 @@
 import React from 'react';
 import PageContainer from '~/components/PageContainer';
+import { SubscribeFormWithText } from '~/components/SubscribeForm';
 import RegisterEventCard from '../RegisterEventCard';
 
 import styles from './EventsPage.module.scss';
@@ -11,7 +12,17 @@ export default function Event() {
     <PageContainer className={styles['events-page']}>
       <h1>Evenimente</h1>
       <p className={styles.description}> Participă la evenimentele comunității FrontEnd.ro </p>
-
+      <SubscribeFormWithText>
+        <h2>
+          Deocamdată nu avem traininguri programate
+        </h2>
+        <p className="text-xl">
+          Însă cu siguranță vom mai organiza în viitor, deci dacă vrei să fii primul care află
+          despre ele abonează-te aici 👉
+        </p>
+      </SubscribeFormWithText>
+      <div className="dots" />
+      <h2> Evenimente trecute</h2>
       <RegisterEventCard
         id="git-incepatori"
         title="Introducere practică în Git & GitHub pentru începători"

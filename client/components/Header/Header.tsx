@@ -44,6 +44,11 @@ function Header({
         <nav className={styles['main-nav']}>
           <ul>
             <li>
+              <Link href="/slides">
+                <a> Slide-uri </a>
+              </Link>
+            </li>
+            <li>
               <Link href="/evenimente">
                 <a> Evenimente </a>
               </Link>

@@ -1,0 +1,71 @@
+@import '../../../styles/variables';
+
+.slides-link {
+  display: flex;
+  border-radius: 0.5em;
+  text-decoration: none;
+  border: 1px solid color(silver);
+  box-shadow: 0 0 5px color(grey);
+  transition: transform 0.35s $cubic;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  img {
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+  }
+
+  :global .img {
+    display: none;
+    height: 256px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  > section {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  :global .footer {
+    display: flex;
+    margin-bottom: 0.5em;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+      color: color(grey);
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    flex-direction: column;
+
+    img {
+      display: none;
+    }
+
+    :global .img {
+      display: block;
+    }
+
+    section {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+    :global .btn {
+      position: static;
+      margin-bottom: 0.5em;
+      float: right;
+    }
+  }
+}

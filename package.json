@@ -93,6 +93,7 @@
     "postmark": "^2.7.1",
     "react": "16.13.1",
     "react-bscroll": "^1.0.7",
+    "react-countup": "^4.3.3",
     "react-dom": "16.13.1",
     "react-redux": "^7.2.1",
     "react-select": "^4.0.2",

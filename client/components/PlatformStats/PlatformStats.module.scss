@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.platform-stats {
+  padding: 4em 0 2em 0;
+  @extend %gradientBackground;
+  @extend %blueGradientBackground;
+
+  > section {
+    width: $width;
+    margin: 0 auto;
+    max-width: 1400px;
+
+    h2 {
+      margin-bottom: 1.5em;
+      font-size: calc(1.5em + 1vw);
+    }
+  }
+
+  ul {
+    width: 100%;
+    flex-flow: wrap;
+
+    li {
+      margin-bottom: 2em;
+    }
+  }
+}

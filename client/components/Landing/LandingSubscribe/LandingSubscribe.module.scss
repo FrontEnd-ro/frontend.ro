@@ -1,12 +1,13 @@
 @import '../../../styles/variables';
 
 .landing-subscribe {
+  color: color(white);
   padding: 0.5em 0 2em 0;
+  background: color(blue);
 
   & > section {
-    margin: 0 auto;
     width: $width;
-    background: color(white);
+    margin: 0 auto;
     max-width: $max-width;
   }
   

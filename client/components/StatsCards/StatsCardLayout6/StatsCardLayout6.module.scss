@@ -1,0 +1,39 @@
+@import '../../../styles/variables';
+
+.grid-card {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-column-gap: 1em;
+  align-items: center;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+}
+
+.counter {
+  font-size: 7em;
+}
+
+.description {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.footer-card {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-column-gap: 1em;
+  align-items: center;
+  text-align: center;
+  margin: 0 0 2em;
+  font-size: 1em;
+
+  &::before,
+  &::after {
+    content: '';
+    height: 0;
+    margin-bottom: -2px;
+    border-bottom: 1px solid;
+    opacity: 0.5;
+  }
+}

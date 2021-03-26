@@ -1,0 +1,34 @@
+@import '../../../styles/variables';
+
+.stats-card-layout-5 {
+  position: relative;
+
+  div {
+    padding-left: 1.5em;
+  }
+
+  .small {
+    font-size: 0.9em;
+  }
+
+  .description {
+    font-size: 1.6em;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .contributors {
+    position: absolute;
+    top: -0.4em;
+    right: 1em;
+
+    img {
+      border-radius: 50%;
+      border: 2px solid color(white);
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}

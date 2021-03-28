@@ -3,6 +3,7 @@ import Background from '../Background';
 import styles from './StatsCardLayout3.module.scss';
 
 interface Props {
+  src: string;
   text1: string;
   text2: string;
   colorText: string;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 function StatsCardLayout3({
+  src,
   text1,
   text2,
   colorText,
@@ -18,7 +20,7 @@ function StatsCardLayout3({
   return (
     <Background
       background="image"
-      src="./images/stats/vintage-typewriter.jpg"
+      src={src}
       className={`${className} ${styles['stats-card-layout-3']} d-flex justify-content-center`}
     >
       <div className="text-center" style={{ color: `${colorText}` }}>

@@ -1,29 +1,14 @@
 import React from 'react';
-import {
-  faCalendarCheck,
-  faCheck,
-  faHourglassHalf,
-  faUserAstronaut,
-  faUserNinja,
-} from '@fortawesome/free-solid-svg-icons';
-import { faSlideshare } from '@fortawesome/free-brands-svg-icons';
-import PlatformStats from '~/components/PlatformStats/v1';
 import PageContainer from '~/components/PageContainer';
 import { SubscribeFormWithText } from '~/components/SubscribeForm';
 import RegisterEventCard from '../RegisterEventCard';
+import EventsStats from './EventsStats/EventsStats';
 
 import styles from './EventsPage.module.scss';
 
 export default function Event() {
   const description = 'Hai să descoperim și să punem în practică cele mai importante concepte și comenzi din Git, ce te vor ajuta să colaborezi mai bine în echipă.';
-  const stats = [
-    { icon: faCalendarCheck, counter: 2, description: 'workshop-uri practice' },
-    { icon: faUserAstronaut, counter: 11, description: 'frontend-eri curioși' },
-    { icon: faUserNinja, counter: 4, description: 'traineri pasionați' },
-    { icon: faHourglassHalf, counter: 7, description: 'ore de training' },
-    { icon: faSlideshare, counter: 38, description: 'slide-uri' },
-    { icon: faCheck, counter: 33, description: 'challenge-uri practice' },
-  ];
+
   return (
     <>
       <PageContainer className={styles['events-page']}>
@@ -53,7 +38,7 @@ export default function Event() {
           ]}
         />
       </PageContainer>
-      <PlatformStats stats={stats} />
+      <EventsStats />
     </>
   );
 }

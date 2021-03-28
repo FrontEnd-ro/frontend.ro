@@ -8,6 +8,7 @@ interface Props {
   colorText: string;
   description: string;
   className?: string;
+  position?: 'top' | 'left' | 'bottom' | 'right' | 'center';
 }
 
 function StatsCardLayout1({
@@ -16,6 +17,7 @@ function StatsCardLayout1({
   colorText,
   description,
   className = '',
+  position = 'top',
 }: Props) {
   return (
     <Background
@@ -25,6 +27,7 @@ function StatsCardLayout1({
       colorGradient1="ACCB0B"
       colorGradient2="FFFF82"
       src={src}
+      position={position}
       className={`${className} ${styles['stats-card-layout-1']} d-flex justify-content-center align-items-center`}
     >
       <div className="text-center" style={{ color: `${colorText}` }}>

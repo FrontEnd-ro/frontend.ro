@@ -48,7 +48,7 @@ function LandingStats() {
               text1="Am scris"
               text2="5 lecții"
               colorText="#1b1b15"
-              className={styles.card4}
+              src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/vintage-typewriter.jpg`}
             />
           </a>
         </Link>

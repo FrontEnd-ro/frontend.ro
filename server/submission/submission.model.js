@@ -10,10 +10,10 @@ require('../exercise/exercise.model');
 
 const FeedbackSchema = new mongoose.Schema(
   {
-    body: {type: String, required: true},
-    file_key: {type: String, required: true},
-    position: {type: [Number], required: true},
-    type: {type: String, enum: ['praise', 'opinion', 'improvement'], required: true},
+    body: { type: String, required: true },
+    file_key: { type: String, required: true },
+    position: { type: [Number], required: true },
+    type: { type: String, enum: ['praise', 'opinion', 'improvement'], required: true },
   },
   {
     createdAt: 'submittedAt',
@@ -60,7 +60,7 @@ class SubmissionModel {
         exercise: exerciseId
       })
       .populate({ path: 'user' })
-      .populate({ path: 'exercise'})
+      .populate({ path: 'exercise' })
       .populate({
         path: 'exercise',
         populate: {
@@ -79,7 +79,7 @@ class SubmissionModel {
         exercise: exerciseId
       })
       .populate({ path: 'user' })
-      .populate({ path: 'exercise'})
+      .populate({ path: 'exercise' })
       .populate({
         path: 'exercise',
         populate: {
@@ -91,7 +91,14 @@ class SubmissionModel {
   static getAllUserSubmissions(userId) {
     validateObjectId(userId);
 
-    return Submission.find({ user: userId });
+    return Submission
+      .find({ user: userId })
+      .populate({
+        path: 'exercise',
+        populate: {
+          path: 'user'
+        }
+      });
   }
 
   static async search(page = 0, query = '') {

@@ -5,6 +5,7 @@ import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
 import styles from './ViewTooltip.module.scss';
 import editorTooltipStyles from '../EditorTooltip.module.scss';
+import Button from '~/components/Button';
 
 interface Feedback {
   id: string;
@@ -122,16 +123,10 @@ class ViewTooltip extends React.Component<Props, State> {
 
         {!feedback.readOnly && (
           <div className="feedback-tooltip__controls">
-            <button
-              type="button"
-              disabled={loading}
-              title="Mark as done"
-              onClick={this.onFeedbackDone}
-              className={`btn btn--light ${loading ? ' btn--loading' : ''}`}
-            >
+            <Button loading={loading} variant="light" onClick={this.onFeedbackDone}>
               <span>Done</span>
               <i className="icon-check" />
-            </button>
+            </Button>
           </div>
         )}
       </div>

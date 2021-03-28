@@ -27,6 +27,7 @@ const Button = React.forwardRef<
       children,
       loading = false,
       className,
+      disabled,
       variant = 'transparent',
       ...props
     }: PropsWithChildren<Props> & React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -44,7 +45,7 @@ const Button = React.forwardRef<
         className={`btn ${
           variant === `${variant}` ? `btn--${variant}` : 'btn--transparent'
         } ${updatedClassName}`}
-        disabled={loading}
+        disabled={loading || disabled}
         ref={forwardRef}
         {...props}
       >

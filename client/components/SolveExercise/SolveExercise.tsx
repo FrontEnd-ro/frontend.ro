@@ -22,6 +22,7 @@ import styles from './SolveExercise.module.scss';
 import { getLessonById } from '~/services/Constants';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 import Feedbacks from '../Editor/Feedbacks';
+import Button from '../Button';
 
 interface Props {
   exerciseId: string;
@@ -168,7 +169,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   };
 
   const onFeedbackDone = (_id: string) => {
-    console.log(_id, submission.feedbacks.filter((f) => f._id !== _id))
+    console.log(_id, submission.feedbacks.filter((f) => f._id !== _id));
     setSubmission({
       ...submission,
       feedbacks: submission.feedbacks.filter((f) => f._id !== _id),
@@ -267,24 +268,24 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
           />
         </section>
         <section className="my-5 d-flex align-items-center justify-content-between">
-          <button
-            type="button"
-            disabled={isSubmitting || readonly}
+          <Button
+            disabled={readonly}
+            loading={isSubmitting}
+            variant="success"
             onClick={withAuthModal(!!userInfo, submitSolution)}
-            className={`btn btn--success ${isSubmitting ? 'btn--loading' : ''}`}
           >
-            Submit
-          </button>
+            {userInfo ? 'Trimite' : 'Autentifică-te și trimite soluția'}
+          </Button>
           {
-          (submission.status !== SUBMISSION_STATUS.IN_PROGRESS)
-          && (exerciseIndex + 1 < lessonExercises.length) && (
-            <Link href={`/rezolva/${lessonExercises[exerciseIndex + 1]._id}`}>
-              <a className="btn btn--default no-underline">
-                Rezolvă următorul exercițiu!
-              </a>
-            </Link>
-          )
-}
+            (submission.status !== SUBMISSION_STATUS.IN_PROGRESS)
+            && (exerciseIndex + 1 < lessonExercises.length) && (
+              <Link href={`/rezolva/${lessonExercises[exerciseIndex + 1]._id}`}>
+                <a className="btn btn--default no-underline">
+                  Rezolvă următorul exercițiu!
+                </a>
+              </Link>
+            )
+          }
         </section>
       </PageContainer>
     </PageWithAsideMenu>

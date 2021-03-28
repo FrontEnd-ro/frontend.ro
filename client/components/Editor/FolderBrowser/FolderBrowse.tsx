@@ -121,7 +121,7 @@ class FolderBrowse extends React.Component<Props, State> {
               onBlur={saveAsset}
             />
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <Button hidden loading={renamedAsset.key !== folderKey} type="submit" />
+            <Button hidden disabled={renamedAsset.key !== folderKey} type="submit" />
           </form>
         </div>
         {folders.map((folder) => (

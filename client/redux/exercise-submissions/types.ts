@@ -6,6 +6,15 @@ export enum ChapterType {
   JS = 'js',
 }
 
+interface SubmissionFeedback {
+    _id: string;
+    // FIXME: use a type for SubmissionFeedback types
+    type: string;
+    body: string;
+    // eslint-disable-next-line camelcase
+    file_key: string;
+    position: number[];
+}
 interface User {
   name: string;
   username: string;
@@ -20,10 +29,12 @@ export interface Submission {
   chapter: ChapterType;
   type: SubmissionType;
   // FIXME 👇
+  // SUBMISSION_STATUS
   status: string;
   submittedAt: number;
   updatedAt: number;
   code: string;
+  feedbacks: SubmissionFeedback[]
 }
 export interface SubmissionState {
   submissions: Submission[];

@@ -16,6 +16,7 @@ import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
 
 import styles from './OfferFeedback.module.scss';
+import Button from '../Button';
 
 interface Props {
   username: string;
@@ -167,18 +168,13 @@ function OfferFeedback({
         />
         {canOfferFeedback && (
         <div className="text-right my-5">
-          <button
-            type="button"
-            disabled={isSendingFeedback}
-            className={`
-            btn
-            ${isSendingFeedback ? 'btn--loading' : ''}
-            ${isCorrect ? 'btn--success' : 'btn--blue'} 
-          `}
+          <Button
+            loading={isSendingFeedback}
+            variant={isCorrect ? 'success' : 'blue'}
             onClick={approveOrSendFeedback}
           >
             {isCorrect ? 'Aprobă exercițiul' : 'Trimite feedback-ul'}
-          </button>
+          </Button>
         </div>
         )}
       </PageContainer>

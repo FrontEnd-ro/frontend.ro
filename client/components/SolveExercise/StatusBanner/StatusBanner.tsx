@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import Button from '~/components/Button';
 
 import styles from './StatusBanner.module.scss';
 
@@ -37,14 +38,9 @@ function StatusBanner({ status, onExitReadonly }: Props) {
         <p> Congrats! Soluția este bună! </p>
       )}
 
-      <button
-        type="button"
-        onClick={exitReadonly}
-        disabled={isExitingReadonly}
-        className={`btn btn--light ${isExitingReadonly ? 'btn--loading' : ''}`}
-      >
+      <Button variant="light" onClick={exitReadonly} loading={isExitingReadonly}>
         Editează soluția
-      </button>
+      </Button>
     </div>
   );
 }

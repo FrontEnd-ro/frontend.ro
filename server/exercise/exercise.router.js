@@ -3,6 +3,7 @@ const express = require('express');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
 const ExerciseModel = require('./exercise.model');
+const SubmissionModel = require('../submission/submission.model');
 
 const {
   PublicMiddleware,
@@ -22,6 +23,12 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 exerciseRouter.get('/', [PrivateMiddleware], async function getUserExercises(req, res) {
   let results = await ExerciseModel.getUserExercises(req.body.user._id);
+
+  res.json(results);
+})
+
+exerciseRouter.get('/solved', [PrivateMiddleware], async function getSolvedExercises(req, res) {
+  let results = await SubmissionModel.getAllUserSubmissions(req.body.user._id);
 
   res.json(results);
 })

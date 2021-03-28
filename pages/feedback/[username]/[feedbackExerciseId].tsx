@@ -29,7 +29,9 @@ function FeedbackExercisePage({ userInfo }: ConnectedProps<typeof connector>) {
         userInfo?.role !== USER_ROLE.ADMIN
           ? (
             <PageContainer>
-              <h1> Doar echipa FrontEnd.ro are poate da feedback la exercițiile submise</h1>
+              <h1>
+                Pentru moment doar echipa FrontEnd.ro are poate da feedback la exercițiile submise
+              </h1>
             </PageContainer>
           )
           : (

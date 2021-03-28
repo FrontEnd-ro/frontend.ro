@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import { MutableRefObject, useEffect } from 'react';
 import { UserState } from '~/redux/user/types';
 import ClientMonitoring, { LogEventType } from './ClientMonitoring';
@@ -79,9 +79,7 @@ function useLoggedInOnly(isLoggedIn: boolean, path: string) {
   }
 }
 
-function useAnonymousOnly(isLoggedIn: boolean, nextHref: string) {
-  const router = useRouter();
-
+function useAnonymousOnly(router: NextRouter, isLoggedIn: boolean, nextHref: string) {
   if (isLoggedIn && nextHref) {
     if (typeof window !== 'undefined') {
       router.replace(nextHref);

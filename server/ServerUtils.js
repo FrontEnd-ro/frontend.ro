@@ -3,7 +3,7 @@ const { extractDbErrorMessage } = require('./database');
 
 const PAGE_SIZE = 25;
 
-const AUTH_EXPIRATION = 7;
+const AUTH_EXPIRATION = 30; // days
 const MAX_NAME_LENGTH = 255;
 const MAX_DESCRIPTION_LENGTH = 255;
 const MAX_USERNAME_LENGTH = 100;

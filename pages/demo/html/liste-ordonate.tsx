@@ -19,7 +19,7 @@ export default function OrderedLists() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Așa cum sugerează și numele lor, ordinea elementelor din cadrul

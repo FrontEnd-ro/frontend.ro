@@ -75,7 +75,7 @@
   }
 
   @media screen and (max-width: 1400px) {
-    aside {
+    .lesson-menu {
       left: -#{$lesson-menu-width};
     }
 
@@ -96,7 +96,7 @@
   }
 
   @media screen and (max-width: 600px) {
-    aside {
+    .lesson-menu {
       left: -100%;
       width: 100%;
     }

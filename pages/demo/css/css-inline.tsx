@@ -17,7 +17,7 @@ export default function InlineMethod() {
         shareImage="https://frontend.ro/seo/styling-methods.jpg"
       />
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Prin

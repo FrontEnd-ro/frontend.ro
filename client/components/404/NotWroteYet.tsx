@@ -20,7 +20,7 @@ export default function NotWroteYet({ lesson }: Props) {
         url="https://FrontEnd.ro/article-not-wrote-yet"
       />
       <>
-        <Header />
+        <Header withNavMenu />
         <main className={`${styles.page} ${styles['not-wrote-yet']}`}>
           <div className="hero d-flex align-items-center">
             <h1>

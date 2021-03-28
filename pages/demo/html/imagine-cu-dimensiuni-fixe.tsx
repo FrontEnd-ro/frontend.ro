@@ -22,7 +22,7 @@ export default function FixedSizeImage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <DemoPreview>
             <header className="d-flex align-items-center justify-content-between flex-row flex-wrap">

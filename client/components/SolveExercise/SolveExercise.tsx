@@ -195,7 +195,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   if (fetchError) {
     return (
       <>
-        <Header />
+        <Header withNavMenu />
         <PageContainer className="text-center">
           <h1> Oops 😟</h1>
           <h2> Exercițiul e privat sau nu există </h2>

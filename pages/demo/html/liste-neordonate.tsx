@@ -19,7 +19,7 @@ export default function UnorderedLists() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Utilizată cînd un set de elemente poate fi folosite în orice

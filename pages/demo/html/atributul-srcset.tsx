@@ -20,7 +20,7 @@ export default function ContentShifting() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Specificarea mai multor surse posibile pentru imagine

@@ -17,7 +17,7 @@ export default function NewExercisePage() {
         url="https://FrontEnd.ro/exercitii/creeaza"
       />
       <>
-        <Header />
+        <Header withNavMenu />
         <NewExercise />
         <Footer />
       </>

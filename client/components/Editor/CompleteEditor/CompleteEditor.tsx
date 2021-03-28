@@ -214,6 +214,8 @@ class MonacoEditor extends MonacoBase {
         },
       }).then((result) => {
         // FIXME 👇 (correct types)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         if (result.value) {
           // mark feedback as done
         } else {
@@ -241,7 +243,6 @@ class MonacoEditor extends MonacoBase {
   render() {
     const {
       askTooltip,
-      toggleableHeight,
       readOnly,
       feedbacks,
     } = this.props;

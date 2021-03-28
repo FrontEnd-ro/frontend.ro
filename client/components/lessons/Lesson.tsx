@@ -34,13 +34,14 @@ export default function Lesson({
         isOpen={isMenuOpen}
         close={() => setIsMenuOpen(false)}
         title={title}
+        className={styles['lesson-menu']}
         chapters={chapters.map((chapter) => ({
           ...chapter,
           href: `#${chapter.id}`,
         }))}
       />
       <main>
-        <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} />
+        <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} withNavMenu />
         <div ref={articleWrapper} className={styles['article-wrapper']}>
           <article>
             <h1>

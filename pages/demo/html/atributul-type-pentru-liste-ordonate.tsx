@@ -20,7 +20,7 @@ export default function OrderedListsType() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Dacă vrem ca enumerarea elementelor din listă să se facă cu un

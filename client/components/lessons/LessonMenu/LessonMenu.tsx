@@ -11,20 +11,23 @@ interface Props {
   isOpen: boolean,
   close: () => void,
   title: string,
-  chapters: Chapter[]
+  chapters: Chapter[],
+  className?: string,
 }
 
-export default function LessonMenu({
+export default function
+LessonMenu({
   isOpen,
   close,
   chapters,
   title,
+  className = '',
 } : Props) {
   const ref = useRef(null);
   useOutsideClick(ref, close);
 
   return (
-    <aside ref={ref} className={`${styles['lesson-menu']}${isOpen ? ` ${styles['lesson-menu--open']}` : ''} bg-black text-white`}>
+    <aside ref={ref} className={`${styles['lesson-menu']}${isOpen ? ` ${styles['lesson-menu--open']}` : ''} ${className} bg-black text-white`}>
       <header className="lesson-menu__header d-flex justify-content-between align-items-center">
         <h2>
           {title}

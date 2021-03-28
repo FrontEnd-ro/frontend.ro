@@ -9,13 +9,13 @@ import editorTooltipStyles from '../EditorTooltip.module.scss';
 
 interface State {
   body: string;
-  visible: boolean;
   type: string;
   forceShow: boolean;
   showMarkdown: boolean;
 }
 
 interface Props {
+  visible: boolean;
   onAsk: ({ type, body }: { type: string, body: string }) => void
 }
 
@@ -32,7 +32,6 @@ class AskTooltip extends React.Component<Props, State> {
     super(props);
     this.state = {
       body: '',
-      visible: false,
       type: FEEDBACK_TYPES.IMPROVEMENT,
       forceShow: false,
       showMarkdown: false,
@@ -45,11 +44,19 @@ class AskTooltip extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.timeoutId = setTimeout(() => {
-      this.setState({
-        visible: true,
-      });
-    }, 50);
+    const { visible } = this.props;
+
+    if (visible && this.textareaRef.current) {
+      setTimeout(() => this.textareaRef.current.focus(), 0);
+    }
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const { visible } = this.props;
+
+    if (visible && !prevProps.visible) {
+      setTimeout(() => this.textareaRef.current.focus(), 0);
+    }
   }
 
   componentWillUnmount() {
@@ -123,12 +130,11 @@ class AskTooltip extends React.Component<Props, State> {
   render() {
     const { visible } = this.props;
     const {
-      body, type, forceShow, showMarkdown,
+      body,
+      type,
+      forceShow,
+      showMarkdown,
     } = this.state;
-
-    if (visible) {
-      setTimeout(() => this.textareaRef.current.focus(), 0);
-    }
 
     return (
       <Form

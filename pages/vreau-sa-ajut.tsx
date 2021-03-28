@@ -15,7 +15,7 @@ function WantToHelpPage() {
         description="Scrie lecții, compune exerciții sau oferă feedback celor ce învață cu noi."
         url="https://FrontEnd.ro/vreau-sa-ajut"
       />
-      <Header />
+      <Header withNavMenu />
       <NoSubmissionsYet />
       <Footer />
     </>

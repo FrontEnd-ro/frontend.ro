@@ -29,7 +29,7 @@ function Authpage({ isLoggedIn }: ConnectedProps<typeof connector>) {
       />
       {!isLoggedIn && (
         <>
-          <Header />
+          <Header withNavMenu />
           <AuthRedirect />
           <Footer />
         </>

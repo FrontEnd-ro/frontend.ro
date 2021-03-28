@@ -42,7 +42,7 @@ export default function InternalCSS() {
         </style>
       </SEOTags>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Metoda de integrare a codului CSS în pagina web se va face prin

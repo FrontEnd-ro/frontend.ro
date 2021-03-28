@@ -19,7 +19,7 @@ export default function NestingLists() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             O listă poate conține o altă listă. Acest lucru este extrem de util

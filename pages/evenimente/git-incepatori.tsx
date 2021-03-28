@@ -24,7 +24,7 @@ function EventDetailsPage() {
         description={description}
         url="https://FrontEnd.ro/evenimente/git-incepatori"
       />
-      <Header />
+      <Header withNavMenu />
 
       <EventDetails
         id="git-incepatori"

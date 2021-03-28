@@ -15,7 +15,7 @@ function TermsAndConditions() {
         description="Detalii despre platformă și politica de confidențialitate"
         url="https://FrontEnd.ro/termeni-si-conditii"
       />
-      <Header />
+      <Header withNavMenu />
       <PageContainer>
         <section style={{
           fontSize: '1.25em',

@@ -14,7 +14,7 @@ export default function () {
         url="https://FrontEnd.ro/exercitii"
       />
       <>
-        <Header />
+        <Header withNavMenu />
         <ExercisesPage />
         <Footer />
       </>

@@ -17,7 +17,7 @@ function AuthRedirect() {
   return (
     <PageContainer className={styles.main}>
       <h2>
-        <span>Pentru a continua trebuie să te autentifici! 😉</span>
+        <span>Pentru a continua, autentifică-te 😉</span>
       </h2>
       <div>
         <Login className={styles.login} onSuccess={onLogin} />

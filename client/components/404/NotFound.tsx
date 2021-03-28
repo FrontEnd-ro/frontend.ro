@@ -16,7 +16,7 @@ export default function NotFoundPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header />
+        <Header withNavMenu />
         <PageContainer className={`${styles.page} text-center`}>
           <h1>
             Oops...

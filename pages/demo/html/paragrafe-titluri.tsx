@@ -19,7 +19,7 @@ export default function ParagraphsAndHeadings() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p> Atât paragrafele cât și heading-urile sunt afișate începând cu o nouă linie. </p>
           <DemoPreview>

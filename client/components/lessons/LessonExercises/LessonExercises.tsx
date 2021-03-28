@@ -47,6 +47,7 @@ function LessonExercises({ lessonId }: { lessonId: string }) {
                 feedbackCount={ex.feedbackCount}
                 isApproved={ex.isApproved}
                 viewMode="STUDENT"
+                readOnly={false}
                 href={`/rezolva/${ex._id}`}
               />
             ))}

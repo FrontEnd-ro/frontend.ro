@@ -13,7 +13,7 @@ function Events() {
         description="Slide-urile folosite la evenimentele comunității FrontEnd.ro"
         url="https://FrontEnd.ro/slides"
       />
-      <Header />
+      <Header withNavMenu />
       <SlidesPage />
       <Footer />
     </>

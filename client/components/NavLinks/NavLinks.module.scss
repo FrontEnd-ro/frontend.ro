@@ -1,0 +1,37 @@
+@import '../../styles/variables';
+
+.nav-links {
+  font-size: 2em;
+  ol {
+    list-style: none;
+  }
+
+  li {
+    margin: 1em 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: color(white);
+    position: relative;
+    &::after {
+      content: '';
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-bottom: 1px solid color(silver);
+      transform: scale(0);
+      transform-origin: bottom left;
+      transition: transform 0.2s $cubic;
+    }
+
+    &:hover::after {
+      transform: scale(1);
+    }
+  }
+
+  .login {
+    margin-top: 2em;
+  }
+}

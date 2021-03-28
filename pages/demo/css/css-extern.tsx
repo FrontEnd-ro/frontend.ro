@@ -18,7 +18,7 @@ export default function ExternalMethod() {
         shareImage="https://frontend.ro/seo/styling-methods.jpg"
       />
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <DemoPreview className="mb-4">
             <div>

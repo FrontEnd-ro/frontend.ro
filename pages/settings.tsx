@@ -23,7 +23,7 @@ function SettingsPage({ isLoggedIn }: ConnectedProps<typeof connector>) {
       {
         isLoggedIn && (
           <>
-            <Header />
+            <Header withNavMenu />
             <Settings />
             <Footer />
           </>

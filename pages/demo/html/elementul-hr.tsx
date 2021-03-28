@@ -19,7 +19,7 @@ export default function HorizontalLine() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Elementul

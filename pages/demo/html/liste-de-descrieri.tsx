@@ -20,7 +20,7 @@ export default function DescriptionLists() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Întâlnite mai rar decât listele ordonate sau cele neordonate, pe acestea le folosim

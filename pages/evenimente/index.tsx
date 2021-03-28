@@ -13,7 +13,7 @@ function Events() {
         description="Participă la evenimetele comunității FrontEnd.ro"
         url="https://FrontEnd.ro/evenimente"
       />
-      <Header />
+      <Header withNavMenu />
       <EventsPage />
       <Footer />
     </>

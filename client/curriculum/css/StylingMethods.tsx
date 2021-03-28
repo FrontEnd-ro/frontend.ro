@@ -34,7 +34,7 @@ export default function CssStylingLesson() {
         description="Învață modurile prin care putem aplica stiluri paginilor Web."
         url="https://FrontEnd.ro/css/moduri-stilizare"
       />
-      <Lesson title="Cele 3 moduri de stilizare" chapters={chapters}>
+      <Lesson id="moduri-stilizare" title="Cele 3 moduri de stilizare" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
           <div

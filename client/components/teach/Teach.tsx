@@ -82,18 +82,18 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
   };
 
   searchData = async (query: string) => {
-    const { dispatch } = this.props;
+    // const { dispatch } = this.props;
 
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
 
-    try {
-      const newSubmissions = await ExerciseService.getSubmissions(0, query);
-      dispatch(searchSubmissions(query, newSubmissions));
-    } catch (err) {
-      SweetAlertService.toast({ type: 'error', text: err });
-    } finally {
-      this.setState({ loading: false });
-    }
+    // try {
+    //   const newSubmissions = await ExerciseService.getSubmissions(0, query);
+    //   dispatch(searchSubmissions(query, newSubmissions));
+    // } catch (err) {
+    //   SweetAlertService.toast({ type: 'error', text: err });
+    // } finally {
+    //   this.setState({ loading: false });
+    // }
   };
 
   loadMore = (entries) => {

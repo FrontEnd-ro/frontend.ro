@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faLink } from '@fortawesome/free-solid-svg-icons';
 
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -10,10 +10,13 @@ import Button from '~/components/Button';
 import { RootState } from '~/redux/root.reducer';
 
 import styles from './Header.module.scss';
+import AsideMenu from '../layout/AsideMenu/AsideMenu';
+import NavLinks from '../NavLinks/NavLinks';
 
 interface Props {
   href?: string;
   demoPage?: boolean;
+  withNavMenu?: boolean;
   onMenuClick?: () => void;
 }
 
@@ -22,71 +25,61 @@ function Header({
   demoPage,
   onMenuClick,
   isLoggedIn,
+  withNavMenu = false,
 }: ConnectedProps<typeof connector> & Props) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
 
   return (
-    <header className={`${styles.header} ${isMenuOpen ? ` ${styles['header-menu-open']}` : ''}`}>
-      <div className="d-flex justify-content-between w-100 align-items-center h-100">
-        {onMenuClick && (
-          <Button
-            onClick={onMenuClick}
-            className={`header__menu-btn ${styles.menu}`}
-          >
-            <FontAwesomeIcon icon={faBars} />
-          </Button>
-        )}
-        <Link href={href}>
-          <a className={styles.logo}>
-            <img src="/logo.png" alt="FrontEnd.ro logo" />
-          </a>
-        </Link>
-        <nav className={styles['main-nav']}>
-          <ul>
-            <li>
-              <Link href="/slides">
-                <a> Slide-uri </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/evenimente">
-                <a> Evenimente </a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        {/* <Button variant="blue" id={styles.menuOpenBtn} onClick={() => setIsMenuOpen(true)}>
-          <span> Meniu </span>
-          <span className={styles.hamburger}>
-            <FontAwesomeIcon icon={faBars} />
-          </span>
-        </Button> */}
-        {/* <nav className={styles['mobile-menu']}>
+    <>
+
+      <header className={styles.header}>
+        <div className="d-flex justify-content-between w-100 align-items-center h-100">
+          {onMenuClick && (
+            <Button
+              onClick={onMenuClick}
+              className={`header__menu-btn ${styles.menu}`}
+            >
+              <FontAwesomeIcon icon={faBars} />
+            </Button>
+          )}
           <Link href={href}>
-            <a className={styles.title} href="/">
-              FrontEnd.ro
+            <a className={styles.logo}>
+              <img src="/logo.png" alt="FrontEnd.ro logo" />
             </a>
           </Link>
-          <ul>
-            <li>
-              <a href="/slideuri">Slide-uri</a>
-            </li>
-            <li>
-              <a href="/evenimente">Evenimente</a>
-            </li>
-          </ul>
-          <Button id={styles.menuCloseBtn} onClick={() => setIsMenuOpen(false)}>
-            <span> Inchide </span>
-          </Button>
-        </nav> */}
-        {demoPage && (
-          <p className={`${styles['demo-label']} text-white mx-5 text-bold`}>
-            DEMO
-          </p>
-        )}
-      </div>
-      <div>{isLoggedIn ? <AccountTooltip /> : null}</div>
-    </header>
+          {demoPage && (
+            <p className={`${styles['demo-label']} text-white mx-5 text-bold`}>
+              DEMO
+            </p>
+          )}
+        </div>
+        <div className="d-flex align-items-center">
+          {isLoggedIn ? <AccountTooltip /> : null}
+          {withNavMenu && (
+            <Button className={styles['nav-menu']} variant="light" onClick={() => setIsNavMenuOpen(true)}>
+              Nav
+              <FontAwesomeIcon icon={faLink} />
+            </Button>
+          )}
+        </div>
+      </header>
+      {
+        withNavMenu && (
+        <AsideMenu
+          hideScrollOnBody
+          title="FrontEnd.ro"
+          isOpen={isNavMenuOpen}
+          className={styles['aside-menu']}
+          close={() => setIsNavMenuOpen(false)}
+        >
+          <div className={styles['nav-wrapper']}>
+            <NavLinks />
+          </div>
+        </AsideMenu>
+        )
+      }
+
+    </>
   );
 }
 

@@ -8,7 +8,7 @@ import editorTooltipStyles from '../EditorTooltip.module.scss';
 import Button from '~/components/Button';
 
 interface Feedback {
-  id: string;
+  _id: string;
   // This should be tied to feedback types!
   type: string;
   body: string;
@@ -17,7 +17,6 @@ interface Feedback {
 
 interface State {
   loading: boolean;
-  visible: boolean;
   forceShow: boolean;
 }
 
@@ -34,18 +33,9 @@ class ViewTooltip extends React.Component<Props, State> {
     super(props);
     this.state = {
       loading: false,
-      visible: false,
       forceShow: false,
     };
     this.timeoutId = null;
-  }
-
-  componentDidMount() {
-    this.timeoutId = setTimeout(() => {
-      this.setState({
-        visible: true,
-      });
-    }, 50);
   }
 
   componentDidUpdate() {

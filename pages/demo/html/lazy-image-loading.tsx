@@ -57,7 +57,7 @@ export default function LazyLoadingImages() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Deschide

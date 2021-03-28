@@ -15,7 +15,7 @@ function TeachPage() {
         description="Lecții gratuite despre HTML, CSS și JavaScript!"
         url="https://FrontEnd.ro/lectii"
       />
-      <Header />
+      <Header withNavMenu />
       <Learn />
       <Footer />
     </>

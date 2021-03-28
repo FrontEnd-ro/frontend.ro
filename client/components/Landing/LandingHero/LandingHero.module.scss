@@ -1,9 +1,15 @@
 @import '../../../styles/variables';
 
+
 .landing-hero {
   min-height: 100vh;
   flex-flow: column nowrap;
   background: color(darker-white);
+
+  aside {
+    left: -100vw;
+    width: 100vw;
+  }
 
   .call-to-action {
     z-index: 2;
@@ -44,3 +50,45 @@
   }
 }
 
+.menu-btn {
+  top: 2em;
+  right: 2em;
+  z-index: 3;
+  display: flex;
+  position: absolute;
+
+  svg {
+    width: 1em;
+    margin-left: 0.5em;
+  }
+}
+
+.nav-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 515px) {
+  .menu-btn {
+    top: 1em;
+    right: 1em;
+
+    span {
+      display: none;
+    }
+    svg {
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-height: 450px) {
+  .nav-wrapper {
+    position: static;
+    display: flex;
+    justify-content: center;
+    transform: none;  
+  }
+}

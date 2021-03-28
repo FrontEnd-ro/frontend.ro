@@ -19,7 +19,7 @@ export default function OrderedListsStart() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Putem opta să enumerăm elementele unei liste ordonate începând

@@ -20,7 +20,7 @@
   }
 
   @media screen and (max-width: 1400px) {
-    aside {
+    .aside-menu {
       left: -#{$lesson-menu-width};
     }
 
@@ -29,9 +29,15 @@
       display: block;
     }
 
+    
+
     main {
       left: 0;
       width: 100%;
+
+      header [class*=logo] {
+        display: none;
+      }
     }
 
     [class*=feedback-tooltip] {

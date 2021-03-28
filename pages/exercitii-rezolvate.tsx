@@ -21,7 +21,7 @@ function TeachPage({ userInfo }: ConnectedProps<typeof connector>) {
         description="Oferă feedback pentru exerciții rezolvate."
         url="https://FrontEnd.ro/exercitii-rezolvate"
       />
-      <Header />
+      <Header withNavMenu />
 
       {
         userInfo?.role !== USER_ROLE.ADMIN

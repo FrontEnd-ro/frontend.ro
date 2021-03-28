@@ -17,7 +17,7 @@ export default function Audio() {
         shareImage="https://d3tycb976jpudc.cloudfront.net/seo/html-audio-video.jpg"
       />
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
             Exemplu de utilizare a elementului

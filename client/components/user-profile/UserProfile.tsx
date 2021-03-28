@@ -28,7 +28,7 @@ function UserProfile({ profileUser }: Props) {
       <div className={`d-flex ${styles['user-profile']}`}>
         <UserBio className={styles['user-bio']} user={profileUser} />
         <div className={styles.right}>
-          <Header />
+          <Header withNavMenu />
           <main>
             <UserBio className={styles['user-bio']} user={profileUser} />
             <UserActivity profileUser={profileUser} />

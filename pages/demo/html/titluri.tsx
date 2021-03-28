@@ -19,7 +19,7 @@ export default function Headings() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Header demoPage />
+        <Header demoPage withNavMenu />
         <Demo title={title}>
           <DemoPreview>
             <h1> Heading #1 </h1>

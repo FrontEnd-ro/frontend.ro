@@ -1,6 +1,8 @@
 @import '../../styles/variables';
 
 .grid {
+  @extend %containerConfig;
+
   display: grid;
   grid-gap: 2em;
   margin-top: 5em;
@@ -9,11 +11,10 @@
   grid-auto-rows: $width-grid;
   grid-template-columns: repeat(12, 1fr);
 
-  @extend %containerConfig;
-  > div {
+  > * {
+    padding: 1em;
     position: relative;
     border-radius: 0.35em;
-    padding: 1em;
     transition: transform 0.2s $cubic;
 
     &:hover {
@@ -30,6 +31,19 @@
       left: 3px;
       border: 2px solid rgba(255, 255, 255, 0.4);
       border-radius: 0.35em;
+    }
+  }
+
+  & > a {
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+
+    & > div {
+      width: 100%;
+      height: 100%;
+      padding: 1em;
     }
   }
 

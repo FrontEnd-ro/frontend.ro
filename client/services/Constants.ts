@@ -294,6 +294,7 @@ export function getUpcomingLesson(pathname: string): LessonDescription {
   return upcomingLesson || null;
 }
 
+export const GITHUB_ORG_URL = 'https://github.com/FrontEnd-ro'; 
 export const GITHUB_URL = 'https://github.com/FrontEnd-ro/frontend.ro';
 
 export interface Figure {

@@ -12,7 +12,7 @@ export type ExerciseViewMode = 'STUDENT' | 'TEACHER'
 interface Props {
   href: string;
   viewMode: ExerciseViewMode;
-  isPrivate: boolean;
+  isPrivate?: boolean;
   exercise: Exercise,
   feedbackCount: number;
   isApproved: boolean;
@@ -24,7 +24,7 @@ interface Props {
 function ExercisePreview({
   href,
   viewMode,
-  isPrivate,
+  isPrivate = false,
   readOnly,
   feedbackCount,
   isApproved,
@@ -107,7 +107,7 @@ function getFooterTexts(
     if (isApproved) {
       infoMessage = '✔';
     } else if (feedbackCount) {
-      infoMessage = `${feedbackCount} feedback${feedbackCount > 1 ? '-uri' : ''} în așteptare`;
+      infoMessage = `${feedbackCount} problem${feedbackCount > 1 ? 'e' : 'ă'} de rezolvat`;
     } else if (readOnly) {
       infoMessage = 'În așteptarea feedback-ului';
     }

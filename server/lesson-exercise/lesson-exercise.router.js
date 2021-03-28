@@ -7,11 +7,21 @@ const SubmissionModel = require('../submission/submission.model');
 
 const lessonExerciseRouter = express.Router();
 
+lessonExerciseRouter.get('/', [PublicMiddleware], async function getAllLessonExercises(req, res) {
+  try {
+    const result = await LessonExerciseModel.getAll();
+    res.json(result);
+  } catch (err) {
+    new ServerError(err.code, err.message).send(res);
+  }
+});
+
 lessonExerciseRouter.get('/:exerciseId', [PublicMiddleware], async function getLessonExercise(req, res) {
   const { exerciseId } = req.params;
 
   try {
     let result = await LessonExerciseModel.get(exerciseId);
+    
     if (!result) {
       throw (new ServerError(404, 'Acest exercițiu nu există'));
     }
@@ -25,12 +35,10 @@ lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function
   const { lessonId } = req.params;
   const { user } = req.body;
 
-  if (!LESSONS_WITH_EXERCISES.includes(lessonId)) {
-    new ServerError(404, `Nu există lecția cu id-ul: ${lessonId}`).send(res);
-    return
-  }
-
-
+  // if (!LESSONS_WITH_EXERCISES.includes(lessonId)) {
+  //   new ServerError(404, `Nu există lecția cu id-ul: ${lessonId}`).send(res);
+  //   return
+  // }
 
   try {
     let exercises = await LessonExerciseModel.getAllFromLesson(lessonId);
@@ -40,12 +48,9 @@ lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function
       submissions = await SubmissionModel.getAllUserSubmissions(user._id);
     }
 
-    console.log("=============");
-    console.log(exercises);
     const result = exercises.map(ex => {
-      const submissionMatch = submissions.find(sub => sub.exercise.toString() === ex._id.toString());
+      const submissionMatch = submissions.find(sub => sub.exercise._id.toString() === ex._id.toString());
 
-      console.log("XXX", submissionMatch);
       return {
         ...ex.toObject(),
         feedbackCount: submissionMatch?.feedbacks?.length ?? 0,

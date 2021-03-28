@@ -43,6 +43,7 @@ export interface Exercise {
   tags: string[];
   type: ChapterType;
   user: UserState['info'];
+  lesson?: string;
 }
 
 export interface LessonExercise {

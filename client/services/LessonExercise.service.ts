@@ -1,6 +1,12 @@
 import HttpService from './Http.service';
 
 class LessonExerciseService {
+  static getAllLessonExercises() {
+    return HttpService
+      .get(`${process.env.ENDPOINT}/lesson-exercises`)
+      .then((resp) => resp.json());
+  }
+
   static getLessonExercise(exerciseId: string) {
     return HttpService
       .get(`${process.env.ENDPOINT}/lesson-exercises/${exerciseId}`)

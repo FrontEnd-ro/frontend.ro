@@ -38,12 +38,17 @@ class ExerciseService {
       .then((resp) => resp.json());
   }
 
-  static getExercises() {
+  static getSolvedExercises() {
+    return HttpService.get(`${process.env.ENDPOINT}/exercises/solved`)
+      .then((response) => response.json());
+  }
+
+  static getCreatedExercises() {
     return HttpService.get(`${process.env.ENDPOINT}/exercises`)
       .then((response) => response.json());
   }
 
-  static getPublicExercises(username: string) {
+  static getPublicCreatedExercises(username: string) {
     return HttpService.get(`${process.env.ENDPOINT}/exercises/public/${username}`)
       .then((response) => response.json());
   }

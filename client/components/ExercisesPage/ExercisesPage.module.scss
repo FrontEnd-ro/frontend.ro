@@ -1,0 +1,68 @@
+@import '../../styles/variables';
+
+.exercises-page {
+  
+}
+
+.lesson-section {
+  margin: 4em 0;
+
+  h2 span {
+    position: relative;
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em 0.25em 0 0;
+    display: inline-block;
+    color: color(white);
+    background: color(blue);
+    margin-right: 1em;
+    text-transform: uppercase;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 10em;
+      border-bottom: 3px solid color(blue);
+    }
+  }
+}
+
+.exercises-wrapper {
+  display: flex;
+  margin-top: 3em;
+  flex-flow: row wrap;
+
+  & > [class*=ExercisePreview] {
+    width: 45%;
+    margin-right: 5%;
+    margin-bottom: 2em;
+  }
+
+  & > a {
+    margin-bottom: 2rem;
+    width: 45%;
+    padding: 6em 2em;
+    border-radius: 0.5em;
+    border: 5px dashed color(silver);
+    transition: transform 0.5s $cubic;
+
+    &:hover {
+      transform: translateY(-0.5em);
+    }
+
+    span {
+      margin-left: 1em;
+      font-size: 1.5em;
+    }
+  }
+
+
+  @media screen and (max-width: 1000px) {
+    & > [class*=ExercisePreview],
+    & > a {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 2em;
+    }
+  }
+}

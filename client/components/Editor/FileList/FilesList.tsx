@@ -58,7 +58,7 @@ function FilesList({
               onBlur={saveAsset}
             />
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <Button hidden loading={renamedAsset.key !== f.key} type="submit" />
+            <Button hidden style={{ display: 'none' }} disabled={renamedAsset.key !== f.key} type="submit" />
           </form>
         </li>
       ))}

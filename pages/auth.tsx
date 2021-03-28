@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import Header from '~/components/Header';
@@ -11,8 +11,13 @@ import SEOTags from '~/components/SEOTags';
 function Authpage({ isLoggedIn }: ConnectedProps<typeof connector>) {
   const router = useRouter();
 
-  const nextHref = Array.isArray(router.query.next) ? router.query.next[0] : router.query.next;
-  useAnonymousOnly(isLoggedIn, nextHref);
+  useEffect(() => {
+    let nextHref = '/';
+    if (router.query.next) {
+      nextHref = Array.isArray(router.query.next) ? router.query.next[0] : router.query.next;
+    }
+    useAnonymousOnly(router, isLoggedIn, nextHref);
+  }, []);
 
   return (
     <>

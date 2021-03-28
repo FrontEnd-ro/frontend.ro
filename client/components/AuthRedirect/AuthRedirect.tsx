@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { UserState } from '~/redux/user/types';
 import Login from '../login';
 import PageContainer from '../PageContainer';
 
@@ -8,9 +9,9 @@ import styles from './AuthRedirect.module.scss';
 function AuthRedirect() {
   const router = useRouter();
 
-  const onLogin = () => {
+  const onLogin = (user: UserState['info']) => {
     const nextHref = router.query.next as string;
-    router.replace(nextHref || '/');
+    router.replace(nextHref || `/${user.username}`);
   };
 
   return (

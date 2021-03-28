@@ -7,7 +7,7 @@ import {
   faUserNinja,
 } from '@fortawesome/free-solid-svg-icons';
 import { faSlideshare } from '@fortawesome/free-brands-svg-icons';
-import PlatformStats from '~/components/PlatformStats';
+import PlatformStats from '~/components/PlatformStats/v1';
 import PageContainer from '~/components/PageContainer';
 import { SubscribeFormWithText } from '~/components/SubscribeForm';
 import RegisterEventCard from '../RegisterEventCard';

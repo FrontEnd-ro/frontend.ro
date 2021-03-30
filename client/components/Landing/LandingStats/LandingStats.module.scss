@@ -14,29 +14,6 @@
     grid-auto-rows: $width-grid;
     grid-template-columns: repeat(12, 1fr);
 
-    > * {
-      padding: 1em;
-      position: relative;
-      border-radius: 0.35em;
-      transition: transform 0.2s $cubic;
-
-      &:hover {
-        transform: scale(1.05);
-      }
-
-      &::before {
-        content: '';
-        pointer-events: none;
-        position: absolute;
-        top: 3px;
-        right: 3px;
-        bottom: 3px;
-        left: 3px;
-        border: 2px solid rgba(255, 255, 255, 0.4);
-        border-radius: 0.35em;
-      }
-    }
-
     & > a {
       padding: 0;
       display: block;

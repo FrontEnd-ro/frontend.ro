@@ -1,6 +1,6 @@
 import React from 'react';
 import { Contributor } from '~/services/contributors';
-import Background from '../Background';
+import Background from '../Background/Background';
 
 import styles from './StatsCardLayout5.module.scss';
 
@@ -8,7 +8,7 @@ interface Props {
   text1: string;
   text2: string;
   colorText: string;
-  contributors: Contributor[];
+  contributors?: Contributor[];
   className?: string;
 }
 
@@ -16,7 +16,7 @@ function StatsCardLayout5({
   text1,
   text2,
   colorText,
-  contributors,
+  contributors = [],
   className = '',
 
 }: Props) {

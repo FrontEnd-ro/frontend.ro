@@ -1,0 +1,28 @@
+@import '../../../../../styles/variables';
+
+
+  .background-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 1em;
+    border-radius: 0.35em;
+    transition: transform 0.2s $cubic;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &::before {
+        content: '';
+        pointer-events: none;
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        bottom: 3px;
+        left: 3px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 0.35em;
+      }
+  }
+

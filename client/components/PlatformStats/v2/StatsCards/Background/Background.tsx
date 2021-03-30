@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import styles from './Background.module.scss';
 
 interface Props {
   background: 'image' | 'linear-gradient' | 'image & linear-gradient';
@@ -31,7 +32,7 @@ function Background({
     style.background = `#${colorGradient1} linear-gradient(${direction}, #${colorGradient1}, #${colorGradient2})`;
   }
   return (
-    <div className={`${className}`} style={style}>
+    <div className={`${className}  ${styles['background-wrapper']}`} style={style}>
       {children}
     </div>
   );

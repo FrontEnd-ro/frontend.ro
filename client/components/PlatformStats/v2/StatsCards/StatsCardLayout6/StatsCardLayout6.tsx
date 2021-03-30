@@ -1,5 +1,5 @@
 import React from 'react';
-import Background from '~/components/PlatformStats/v2/StatsCards/Background';
+import Background from '../Background/Background';
 
 import styles from './StatsCardLayout6.module.scss';
 

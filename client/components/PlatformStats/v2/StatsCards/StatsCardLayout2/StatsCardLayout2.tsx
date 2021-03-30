@@ -1,10 +1,10 @@
 import React from 'react';
-import Background from '../Background';
+import Background from '../Background/Background';
 import styles from './StatsCardLayout2.module.scss';
 
 interface Props {
   src;
-  header: string;
+  header?: string;
   counter: number;
   description: string;
   colorText: string;
@@ -14,7 +14,7 @@ interface Props {
 
 function StatsCardLayout2({
   src,
-  header,
+  header = '',
   counter,
   description,
   colorText,

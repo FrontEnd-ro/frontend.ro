@@ -4,3 +4,4 @@ export { default as StatsCardLayout3 } from './StatsCardLayout3/StatsCardLayout3
 export { default as StatsCardLayout4 } from './StatsCardLayout4/StatsCardLayout4';
 export { default as StatsCardLayout5 } from './StatsCardLayout5/StatsCardLayout5';
 export { default as StatsCardLayout6 } from './StatsCardLayout6/StatsCardLayout6';
+export { default as Background } from './Background/Background';

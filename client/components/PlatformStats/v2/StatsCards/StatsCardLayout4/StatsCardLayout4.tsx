@@ -1,5 +1,5 @@
 import React from 'react';
-import Background from '../Background';
+import Background from '../Background/Background';
 import styles from './StatsCardLayout4.module.scss';
 
 interface Props {

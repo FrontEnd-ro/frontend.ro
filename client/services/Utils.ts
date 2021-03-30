@@ -22,25 +22,25 @@ export const timeAgo = (date: Date): string => {
   let days = Math.floor(hours / 24);
 
   if (seconds < 60) {
-    return 'Just now';
+    return 'Chiar acum';
   }
   if (minutes < 60) {
     return minutes === 1
-      ? `${minutes} minute ago`
-      : `${minutes} minutes ago`;
+      ? `acum ${minutes} minut`
+      : `acum ${minutes} minute `;
   }
   if (hours < 24) {
     return hours === 1
-      ? `${hours} hour ago`
-      : `${hours} hours ago`;
+      ? `acum ${hours} oră`
+      : `acum ${hours} ore`;
   }
   if (hours > 24 && hours < 24 * 2) {
-    return 'Yesterday';
+    return 'Ieri';
   }
   if (days < 3) {
     return days === 1
-      ? `${days} day ago`
-      : `${days} days ago`;
+      ? `acum ${days} zi`
+      : `acum ${days} zile`;
   }
   if (days > 3) {
     return formatDate(date);

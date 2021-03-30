@@ -143,7 +143,7 @@ function OfferFeedback({
         <h1 className="mb-0">
           Feedback pentru
           {' '}
-          <Link href={`/${submission.exercise.user.username}`}>
+          <Link href={`/${submission.user.username}`}>
             <a>
               {authorNameOrUsername}
             </a>
@@ -151,7 +151,7 @@ function OfferFeedback({
           </Link>
         </h1>
         <time className="m-0">
-          Trimis pe
+          Trimis
           {' '}
           {timeAgo(new Date(submission.submittedAt))}
 

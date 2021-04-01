@@ -26,8 +26,6 @@ export interface Submission {
   _id: string;
   user: User;
   exercise: Exercise;
-  chapter: ChapterType;
-  type: SubmissionType;
   // FIXME 👇
   // SUBMISSION_STATUS
   status: string;

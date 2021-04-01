@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { ConnectedProps, connect } from 'react-redux';
 import LessonHeading from '../LessonHeading/LessonHeading';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import { LessonExercise } from '~/redux/user/types';
-
-import styles from './LessonExercises.module.scss';
 import Spinner from '~/components/Spinner';
 import ExercisePreview from '~/components/ExercisePreview';
-import SubmissionService from '~/services/Submission.service';
+import { RootState } from '~/redux/root.reducer';
+import { Submission } from '~/redux/exercise-submissions/types';
+import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import ExerciseService from '~/services/Exercise.service';
 
-function LessonExercises({ lessonId }: { lessonId: string }) {
+import styles from './LessonExercises.module.scss';
+
+interface Props {
+  lessonId: string
+}
+
+function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof connector>) {
+  const isLoggedIn = !!user.info;
+
+  const [submissions, setSubmissions] = useState<Submission[]>(undefined);
   const [exercises, setExercises] = useState<LessonExercise[]>(undefined);
 
   useEffect(() => {
@@ -20,15 +31,46 @@ function LessonExercises({ lessonId }: { lessonId: string }) {
         console.error('[LessonExercises.useEffect]', err);
         setExercises([]);
       });
+
+    if (isLoggedIn) {
+      ExerciseService
+        .getSolvedExercises()
+        .then((resp) => setSubmissions(resp))
+        .catch((err) => console.error(err));
+    } else {
+      setSubmissions([]);
+    }
   }, []);
 
-  if (!Array.isArray(exercises)) {
+  if (!Array.isArray(exercises) || !Array.isArray(submissions)) {
     return (
       <div id="exercitii" className={styles.exercises}>
         <Spinner showText />
       </div>
     );
   }
+
+  const mergedData: Submission[] = [];
+  exercises.forEach((ex) => {
+    const matchedSubmission = submissions.find((sub) => sub.exercise._id === ex._id);
+
+    if (matchedSubmission) {
+      mergedData.push(matchedSubmission);
+    } else {
+      mergedData.push({
+        code: '',
+        _id: ex._id,
+        exercise: ex,
+        feedbacks: [],
+        status: null,
+        user: user.info,
+        submittedAt: null,
+        updatedAt: null,
+      });
+    }
+  });
+
+  console.log("XXX", mergedData);
 
   return (
     <div className={`${styles.exercises} ${exercises.length === 0 ? styles['exercises--empty'] : ''}`}>
@@ -39,16 +81,19 @@ function LessonExercises({ lessonId }: { lessonId: string }) {
 
         {exercises.length > 0 ? (
           <div className={styles['exercises-wrapper']}>
-            {exercises.map((ex) => (
+            {mergedData.map((sub) => (
               <ExercisePreview
-                key={ex._id}
-                exercise={ex}
+                key={sub.exercise._id}
+                exercise={sub.exercise}
                 isPrivate={false}
-                feedbackCount={ex.feedbackCount}
-                isApproved={ex.isApproved}
+                feedbackCount={sub.feedbacks.filter((f) => f.type === 'improvement').length}
+                isApproved={sub.status === SUBMISSION_STATUS.DONE}
                 viewMode="STUDENT"
-                readOnly={false}
-                href={`/rezolva/${ex._id}`}
+                readOnly={[
+                  SUBMISSION_STATUS.AWAITING_REVIEW,
+                  SUBMISSION_STATUS.DONE,
+                ].includes(sub.status)}
+                href={`/rezolva/${sub.exercise._id}`}
               />
             ))}
           </div>
@@ -72,4 +117,12 @@ function LessonExercises({ lessonId }: { lessonId: string }) {
   );
 }
 
-export default LessonExercises;
+function mapStateToProps(state: RootState) {
+  return {
+    user: state.user,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
+export default connector(LessonExercises);

@@ -10,10 +10,11 @@
     margin: 1em 0;
   }
 
-  a {
+  a, button {
     text-decoration: none;
     color: color(white);
     position: relative;
+    padding: 0;
     &::after {
       content: '';
       width: 100%;

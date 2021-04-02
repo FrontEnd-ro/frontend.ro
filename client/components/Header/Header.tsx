@@ -70,17 +70,17 @@ function Header({
       </header>
       {
         withNavMenu && (
-        <AsideMenu
-          hideScrollOnBody
-          title="FrontEnd.ro"
-          isOpen={isNavMenuOpen}
-          className={styles['aside-menu']}
-          close={() => setIsNavMenuOpen(false)}
-        >
-          <div className={styles['nav-wrapper']}>
-            <NavLinks />
-          </div>
-        </AsideMenu>
+          <AsideMenu
+            hideScrollOnBody
+            title="FrontEnd.ro"
+            isOpen={isNavMenuOpen}
+            className={styles['aside-menu']}
+            close={() => setIsNavMenuOpen(false)}
+          >
+            <div className={styles['nav-wrapper']}>
+              <NavLinks />
+            </div>
+          </AsideMenu>
         )
       }
 

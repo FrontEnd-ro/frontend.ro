@@ -50,11 +50,11 @@ function LandingHero({ user }: ConnectedProps<typeof connector>) {
                 Lecții
               </a>
             </Link>
-            {/* <Link href="/exercitii">
+            <Link href="/exercitii">
               <a className={`${styles['action-button']} text-center btn btn--default`}>
                 Exerciții
               </a>
-            </Link> */}
+            </Link>
             <Link href="/vreau-sa-ajut">
               <a className={`${styles['action-button']} text-center btn btn--light`}>
                 Implică-te

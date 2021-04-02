@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  background: #000;
+  overflow: hidden;
+}
+
+h1 {
+  z-index: 1;
+  color: #000;
+  padding: 1em;
+  position: relative;
+  border-radius: 1em 0 1em 0;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+img,
+picture {
+  width: 100vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

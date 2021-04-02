@@ -76,7 +76,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
           />
         ))}
         {solvedExercises.length === 0 && (
-          <Link href="/exerciti">
+          <Link href="/exercitii">
             <a className="d-flex align-items-center justify-content-center no-underline text-center">
               <FontAwesomeIcon icon={faPlus} width="32" height="32" />
               <span> Rezolvă un exercițiu </span>

@@ -44,7 +44,12 @@ function Header({
           )}
           <Link href={href}>
             <a className={styles.logo}>
-              <img src="/logo.png" alt="FrontEnd.ro logo" />
+              <img
+                srcSet="/logo.png 500w, /logo-square--S.jpg 165w"
+                sizes="(max-width: 600px) 165px, 500px"
+                src="/logo.png"
+                alt="FrontEnd.ro logo"
+              />
             </a>
           </Link>
           {demoPage && (

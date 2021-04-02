@@ -31,13 +31,13 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
             </a>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="/exercitii">
             <a>
               Exerciții
             </a>
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link href="/evenimente">
             <a>

@@ -9,8 +9,7 @@ export default function () {
     <>
       <SEOTags
         title="Exerciții | FrontEnd.ro"
-        shareImage=""
-        description="Rezolvă exerciții de FrontEnd și primește feedback pe soluțiile tale"
+        description="Rezolvă exerciții de FrontEnd și primește feedback pentru soluțiile tale"
         url="https://FrontEnd.ro/exercitii"
       />
       <>

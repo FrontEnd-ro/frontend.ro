@@ -14,7 +14,22 @@ export default function Event() {
       <PageContainer className={styles['events-page']}>
         <h1>Evenimente</h1>
         <p className={styles.description}> Participă la evenimentele comunității FrontEnd.ro </p>
-        <SubscribeFormWithText>
+        <RegisterEventCard
+          id="git-incepatori-2"
+          title="Introducere practică în Git & GitHub pentru începători"
+          description={description}
+          url="/evenimente/git-incepatori"
+          cover={`${process.env.CLOUDFRONT_PUBLIC}/events/git-2__cover.svg`}
+          location="Online via Zoom"
+          duration="3h"
+          eventDates={[{
+            parts: [
+              { timestamp: 1618038000000, label: '10 Aprilie, ora 10:00' },
+              { timestamp: 1618729200000, label: '18 Aprilie, ora 10:00' },
+            ],
+          }]}
+        />
+        {/* <SubscribeFormWithText>
           <h2>
             Deocamdată nu avem traininguri programate
           </h2>
@@ -22,7 +37,7 @@ export default function Event() {
             Însă cu siguranță vom mai organiza în viitor, deci dacă vrei să fii primul care află
             despre ele abonează-te aici 👉
           </p>
-        </SubscribeFormWithText>
+        </SubscribeFormWithText> */}
         <div className="dots" />
         <h2> Evenimente trecute</h2>
         <RegisterEventCard
@@ -34,7 +49,11 @@ export default function Event() {
           location="Online via Zoom"
           duration="2.5h"
           eventDates={[
-            { timestamp: 1615708800000, label: '14 Martie | 10:00' },
+            {
+              parts: [
+                { timestamp: 1615708800000, label: '14 Martie | 10:00' },
+              ],
+            },
           ]}
         />
       </PageContainer>

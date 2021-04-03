@@ -50,9 +50,9 @@ eventRouter.post('/:label/register', async function registerToEvent(req, res) {
     if (freeSeatsCount >= 1) {
       await EventModel.addAttendee(label, { name, email, tel });
 
-      EmailService.sendEmailWithTemplate(
+      EmailService.sendTemplateWithAlias(
         email,
-        Number(process.env.EMAIL_REGISTER_TRAINING_TEMPLATE),
+        `${label}-registered`,
         {
           name,
           sender_name: "Păvă",
@@ -93,9 +93,9 @@ eventRouter.post('/:label/waitlist', async function addToWaitlist(req, res) {
     }
 
     await EventModel.addToWaitlist(label, { name, email, tel });
-    EmailService.sendEmailWithTemplate(
+    EmailService.sendTemplateWithAlias(
       email,
-      Number(process.env.EMAIL_WAITING_TRAINING_TEMPLATE),
+      `${label}-waitlist`,
       {
         name,
         sender_name: "Păvă",

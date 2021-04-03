@@ -13,8 +13,10 @@ import Button from '~/components/Button';
 import styles from './RegisterEventCard.module.scss';
 
 export interface EventDate {
-  label: string;
-  timestamp: number;
+  parts: {
+    label: string;
+    timestamp: number;
+  }[]
 }
 
 interface Props {
@@ -29,7 +31,7 @@ interface Props {
   className?: string;
 }
 
-function EventCard({
+function RegisterEventCard({
   id,
   title,
   cover,
@@ -44,7 +46,9 @@ function EventCard({
   const [isLoading, setIsLoading] = useState(false);
   const [urlToShare, setUrlToShare] = useState(url);
 
-  const isPastEvent = eventDates.every(({ timestamp }) => Date.now() > timestamp);
+  const isPastEvent = eventDates.every(({ parts }) => {
+    return parts[0].timestamp < Date.now();
+  });
 
   useEffect(() => {
     // If we have the `url` prop then let's use that
@@ -66,7 +70,7 @@ function EventCard({
     let shouldResetForm = true;
 
     if (!formData.timestamp) {
-      formData.timestamp = formData.timestamp || eventDates[0].timestamp;
+      formData.timestamp = formData.timestamp || eventDates[0].parts[0].timestamp;
     }
 
     try {
@@ -122,9 +126,14 @@ function EventCard({
               <p className="m-0">
                 Dată:
                 {' '}
-                <strong>
-                  <time dateTime={format(eventDates[0].timestamp, 'yyyy-MM-dd')}>{eventDates[0].label}</time>
-                </strong>
+                {eventDates[0].parts.map((p, index) => (
+                  <React.Fragment key={p.timestamp}>
+                    <strong>
+                      <time dateTime={format(p.timestamp, 'yyyy-MM-dd')}>{p.label}</time>
+                    </strong>
+                    {index < eventDates[0].parts.length - 1 && <>{' și '}</>}
+                  </React.Fragment>
+                ))}
               </p>
             )}
 
@@ -228,4 +237,4 @@ function EventCard({
   );
 }
 
-export default EventCard;
+export default RegisterEventCard;

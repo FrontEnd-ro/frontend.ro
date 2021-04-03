@@ -26,7 +26,9 @@ export default function EventDetails({
   eventDates,
   contributors,
 }: PropsWithChildren<Props>) {
-  const isPastEvent = eventDates.every(({ timestamp }) => Date.now() > timestamp);
+  const isPastEvent = eventDates.every(({ parts }) => {
+    return parts[0].timestamp < Date.now();
+  });
 
   return (
     <PageContainer>

@@ -21,6 +21,7 @@ export const Diana : Contributor = {
   name: 'Diana',
   avatar: '/images/contributors/andreeatoma.jpg',
   url: 'https://github.com/andreeatoma',
+  shortBio: 'Open-source contributor',
 };
 export const Ira : Contributor = {
   name: 'Ira',

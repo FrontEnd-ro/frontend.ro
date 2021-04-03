@@ -6,6 +6,7 @@ import {
   Pava2,
   CatalinPopusoi,
   GeorgeMarianMorosac,
+  Diana,
 } from '~/services/contributors';
 
 import SEOTags from '~/components/SEOTags';
@@ -27,13 +28,18 @@ function EventDetailsPage() {
       <Header withNavMenu />
 
       <EventDetails
-        id="git-incepatori"
-        duration="2.5h"
+        id="git-incepatori-2"
+        duration="3h"
         location="Online via Zoom"
-        contributors={[Pava2, CatalinPopusoi, GeorgeMarianMorosac]}
+        contributors={[Pava2, CatalinPopusoi, GeorgeMarianMorosac, Diana]}
         title="Introducere practică în Git & GitHub pentru începători"
         cover={`${process.env.CLOUDFRONT_PUBLIC}/events/git__cover.svg`}
-        eventDates={[{ timestamp: 1615708800000, label: '14 Martie | 10:00' }]}
+        eventDates={[{
+          parts: [
+            { timestamp: 1618038000000, label: '10 Aprilie, ora 10:00' },
+            { timestamp: 1618729200000, label: '18 Aprilie, ora 10:00' },
+          ],
+        }]}
       >
         <p>
           Dacă nu ai lucrat deloc în Git sau ești încă la început,
@@ -77,23 +83,22 @@ function EventDetailsPage() {
           <li> Rezolvarea conflictelor la merge </li>
         </ol>
 
-        <p className="my-5">
-          Am limitat
+        <p>
+          PS: Trainingul se desfășoară pe
+          {' '}
+          <strong>
+            parcursul a 2 weekend-uri
+          </strong>
+          {' '}
+          pentru a avea destul timp să punem în practică ce vom învăța.
+          De asemenea, am limitat
           {' '}
           <strong>numărul de participanți la 12</strong>
           {' '}
           pentru că vrem să avem timp pentru fiecare
-          dintre voi.
-          Din motive similare am ales și o
-          {' '}
-          <strong>
-            zi de Weekend pentru
-            desfășurare
-          </strong>
-          {' '}
-          - ca să fim cu toții fresh și gata de treabă! 💪
+          dintre voi, deci înscrie-te "cât e cald"!
         </p>
-        <SubscribeFormWithText>
+        {/* <SubscribeFormWithText>
           <h2>
             Deocamdată nu avem alt training de Git programat
           </h2>
@@ -102,7 +107,7 @@ function EventDetailsPage() {
             despre ele, abonează-te aici 👉
 
           </p>
-        </SubscribeFormWithText>
+        </SubscribeFormWithText> */}
       </EventDetails>
       <Footer />
     </>

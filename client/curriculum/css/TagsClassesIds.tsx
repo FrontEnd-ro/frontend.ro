@@ -59,41 +59,61 @@ export default function TagsClassesIds() {
             language="html"
             code={
             `
-<form>
-  <h2> Înregistrează-te</h2>
-  <button type="button">
-    Închide formular
-  </button>
+            <form>
+              <h2> Înregistrează-te</h2>
 
-  <input type="email" name="email" required placeholder="Adresa de email">
+              <input type="email" name="email" required placeholder="Adresa de email">
+              <input type="password" name="password" required placeholder="Parola">
 
-  <input type="password" name="password" required placeholder="Parola">
-
-
-  <button type="reset">
-    Resetează formular
-  </button>
-  <button type="submit"> Înregistreză-te</button>
-</form>
+              <button type="reset">
+                Resetează formular
+              </button>
+              <button type="submit">Înregistreză-te</button>
+            </form>
             `
           }
           />
-          <h1> DEMO (poza) la rezultatul final </h1>
-          <h1> Cumva aratat si rezultatul curent, sa vedem de unde plecam?! </h1>
           <p>
             In exemplul de mai sus, observam ca toate inputurile arata la fel:
-            (descrierea proprietatilor comune).
+            (au aceasi dimensiune, acelasi tip de border si acelasi format).
             Pentru acestea e bine sa aplicam stilizarea dupa taguri:
           </p>
 
-          <h1>COD DEMO</h1>
+          <Highlight
+            className="my-5"
+            language="css"
+            code={
+            `
+             input {
+               border: 1px solid red;
+               padding: 10px;
+               margin-top: 5px;
+               border-radius: 5px;
+             }
+            `
+          }
+          />
 
           <p>
-            La fel si la butoane. Desi nu toate 3 sunt la fel, au cateva proprietati comune,
+            La fel si la butoane. Desi nu toate sunt la fel, au cateva proprietati comune,
             deci este un good practice sa le stilizam dupa tag folosind acele proprietati comune.
           </p>
-
-          <h1> Cod demo butoane </h1>
+          <Highlight
+            className="my-5"
+            language="css"
+            code={
+            `
+            button {
+              font-style: italic;
+              padding: 10px;
+              background-color: blue;
+              border-radius: 5px;
+              border: none;
+              color: white;
+            }
+            `
+          }
+          />
           <LessonTip>
             De asemenea poate fi folosit și în JavaScript pentru a accesa și manipula elementele,
             acestea vor fi discutate pe larg în capitolul
@@ -111,9 +131,8 @@ export default function TagsClassesIds() {
             vrem totuși să avem și o varietate mai mare de stiluri din care să alegem.
           </p>
           <p>
-            In acelasi exemplu de mai sus, observam cu butoanele "X si Y" 
-            au (proprietati comune) in timp ce butonul "Z" e default.
-            
+            In acelasi exemplu de mai sus, observam cum cele doua butoane de mai sus
+            au aceasi culoare de fundal, acelasi tip de border, aceasi culoare.
             Hai sa adaugam atributul `class` pe cele 2 butoane:
           </p>
           <Highlight
@@ -121,11 +140,21 @@ export default function TagsClassesIds() {
             language="html"
             code={
             `
-            COD UPDATAT
+            <form>
+              <h2> Înregistrează-te</h2>
+
+              <input type="email" name="email" required placeholder="Adresa de email">
+              <input type="password" name="password" required placeholder="Parola">
+
+              <button type="reset" class="btn-red">
+                Resetează formular
+              </button>
+              <button type="submit" class="btn-green">Înregistreză-te</button>
+            </form>
             `
           }
           />
-          <p> 
+          <p>
             Iar apoi din CSS vom selecta elementele in functie de clasa si le vom stiliza diferit.
           </p>
           <p>
@@ -139,11 +168,11 @@ export default function TagsClassesIds() {
             code={
             `
               .btn-red {
-                color: red;
+                background-color: red;
               }
 
               .btn-green {
-                color: green;
+                background-color: green;
               }
             `
           }
@@ -172,14 +201,27 @@ export default function TagsClassesIds() {
           </LessonTip>
           <p>
             Ca și în cazul tag-urilor și claselor ne vom folosi de aceleași exemplu.
-            Observam ca elementul "X" este unic deci am putea sa-i atribuim lui un "id" unic.
+            Observam ca butonul de tip submit (Înregistreză-te) este unic deci
+            am putea sa-i atribuim lui un "id" unic.
           </p>
           <Highlight
             className="my-5"
             language="html"
-            code={`
-              demo code
-            `}
+            code={
+            `
+            <form>
+              <h2> Înregistrează-te</h2>
+
+              <input type="email" name="email" required placeholder="Adresa de email">
+              <input type="password" name="password" required placeholder="Parola">
+
+              <button type="reset" class="btn-red">
+                Resetează formular
+              </button>
+              <button type="submit" id="btn-green">Înregistreză-te</button>
+            </form>
+            `
+          }
           />
           <p>
             <b>Cum selectam elementele cu ajutorul id-ului în CSS?</b>
@@ -193,11 +235,11 @@ export default function TagsClassesIds() {
             language="css"
             code={`
               .btn-red {
-                color: red;
+                background-color: red;
               }
 
               #btn-green {
-                color: green;
+                background-color: green;
               }
             `}
           />

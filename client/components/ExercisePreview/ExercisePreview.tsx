@@ -53,7 +53,7 @@ function ExercisePreview({
         markdownString={exercise.body}
         variant="transparent"
       />
-      <footer className="d-flex align-items-center justify-content-between">
+      <footer className="d-flex align-items-center justify-content-between flex-wrap">
         <>
           {viewMode === 'STUDENT' && infoMessage && (
             <span>

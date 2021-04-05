@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import LogRocketService from '~/services/utils/LogRocket.service';
@@ -9,18 +10,19 @@ import LogRocketService from '~/services/utils/LogRocket.service';
  * When that user logs out, it clear all the data.
  */
 function IdentifyLogrocket({ userInfo }: ConnectedProps<typeof connector>) {
-  if (typeof window === 'undefined') {
-    /** Client-side only */
-    return null;
-  }
+  useEffect(() => {
+    if (process.env.APP_ENV !== 'production') {
+      return;
+    }
 
-  if (!userInfo && LogRocketService.getIdentityData()) {
-    LogRocketService.anonymize();
-  }
+    LogRocketService.init();
 
-  if (userInfo && !LogRocketService.getIdentityData()) {
-    LogRocketService.identify(userInfo);
-  }
+    if (userInfo) {
+      LogRocketService.identify(userInfo);
+    } else {
+      LogRocketService.anonymize();
+    }
+  }, [userInfo]);
 
   return null;
 }

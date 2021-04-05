@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
 import { createStoreWithPreloadedData } from '~/redux/store';
 import { defaultUserState } from '~/redux/user/user.reducer';
-import LogRocketService from '~/services/utils/LogRocket.service';
 
 import '~/styles/index.scss';
 
@@ -14,12 +13,6 @@ export default function MyApp({ Component, pageProps }: any) {
       info: pageProps._serverUser,
     },
   });
-
-  useEffect(() => {
-    if (process.env.APP_ENV === 'production') {
-      // LogRocketService.init();
-    }
-  }, []);
 
   return (
     <Provider store={store}>

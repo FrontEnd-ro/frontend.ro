@@ -46,7 +46,8 @@ class LogRocketService {
 
   static async anonymize() {
     if (!LogRocketService.instance) {
-      await LogRocketService.init();
+      // Not even initialized yet. We can return
+      return;
     }
 
     LogRocketService.identityData = null;

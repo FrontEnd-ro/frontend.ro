@@ -21,7 +21,7 @@ function EventDetailsPage() {
     <>
       <SEOTags
         title={`${title} | FrontEnd.ro`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/intro-to-git-training.jpg`}
+        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/git-incepatori-2.jpg`}
         description={description}
         url="https://FrontEnd.ro/evenimente/git-incepatori"
       />

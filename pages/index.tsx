@@ -1,5 +1,6 @@
 import SEOTags from '~/components/SEOTags';
 import {
+  LandingAdBanner,
   LandingHero,
   LandingHowItWorks,
   LandingStats,
@@ -19,6 +20,7 @@ export default function Home() {
         description="Vrei să înveți FrontEnd? Aici ai parte de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun."
       />
       <>
+        <LandingAdBanner adId="ad/git-incepatori-2" />
         <LandingHero />
         <LandingHowItWorks />
         {/* <LandingThanks /> */}

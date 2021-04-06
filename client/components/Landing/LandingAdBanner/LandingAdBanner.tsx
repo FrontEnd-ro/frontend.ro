@@ -5,14 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './LandingAdBanner.module.scss';
 
-const LOCAL_STORAGE_KEY = 'ad/git-incepatori';
-
-function LandingAdBanner() {
+/**
+ * Show a banner with info about our next training.
+ *
+ * Whether you've see it or not is saved in
+ * localStorage via the `adId` key.
+ */
+function LandingAdBanner({ adId }: { adId: string }) {
   const [show, setShow] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const didShow = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const didShow = localStorage.getItem(adId);
 
     if (!didShow) {
       setShow(true);
@@ -29,7 +33,7 @@ function LandingAdBanner() {
     return null;
   }
 
-  const didVisit = () => localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+  const didVisit = () => localStorage.setItem(adId, 'true');
 
   return (
     <div className={`
@@ -40,7 +44,7 @@ function LandingAdBanner() {
     >
       <FontAwesomeIcon className="mr-2" icon={faBell} width={24} height={24} />
       <p className="mr-2">
-        În weekend organizăm un training gratuit despre Git & GitHub.
+        În weekend organizăm din nou trainingul despre Git & GitHub.
       </p>
       <Link href="/evenimente/git-incepatori">
         <a onClick={didVisit}>

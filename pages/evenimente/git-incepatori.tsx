@@ -69,7 +69,15 @@ function EventDetailsPage() {
           <li> Ce e un "repo" și cum creem unul?</li>
           <li> Ce sunt branch-urile si de ce vrem să le folosim?</li>
           <li>
-            <span> Comenzile de bază </span>
+            <span> Git în contextul VSCode  </span>
+            <ul className="with--bullets">
+              <li> clone</li>
+              <li> commit & push </li>
+              <li> checkout & merge </li>
+            </ul>
+          </li>
+          <li>
+            <span> Git CLI (command line interface) </span>
             <ul className="with--bullets">
               <li> clone</li>
               <li> status</li>

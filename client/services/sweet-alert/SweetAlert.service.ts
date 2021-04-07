@@ -119,7 +119,9 @@ class SweetAlertService {
         closeModal: () => swalModule.default.close(),
         ...props,
       }),
-      customClass: styles['swal2-content'],
+      customClass: {
+        container: styles['swal2-content'],
+      },
       showConfirmButton: false,
       heightAuto: false,
     });

@@ -104,6 +104,7 @@
     "react-select": "^4.0.2",
     "redux": "^4.0.5",
     "sass": "^1.32.8",
+    "storybook-addon-next-router": "^2.0.4",
     "sweetalert2": "^10.3.5",
     "sweetalert2-react-content": "^3.2.2",
     "uuid": "^8.3.0"

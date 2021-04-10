@@ -12,10 +12,10 @@ function SlidesPage() {
         Mai jos găsești slide-urile folosite în toate trainingurile noastre
       </p>
       <SlidesLink
-        id="git-github-incepatori"
+        id="git-incepatori"
         created={1615708800000}
-        thumb={`${process.env.CLOUDFRONT_PUBLIC}/slides/git-github-incepatori/cover.png`}
-        href={`${process.env.CLOUDFRONT_PUBLIC}/slides/git-github-incepatori/index.html`}
+        thumb={`${process.env.CLOUDFRONT_PUBLIC}/slides/git-incepatori/cover.png`}
+        href={`${process.env.CLOUDFRONT_PUBLIC}/slides/git-incepatori/index.html`}
         title="Git & GitHub începători"
         description="Hai să descoperim și să punem în practică cele mai importante concepte și comenzi din Git & GitHub."
       />

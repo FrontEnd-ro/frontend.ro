@@ -12,11 +12,19 @@ import {
 import SEOTags from '~/components/SEOTags';
 import { LessonTip } from '~/components/lessons';
 import { SubscribeFormWithText } from '~/components/SubscribeForm';
+import { EventDate } from '~/components/event/RegisterEventCard';
 
 function EventDetailsPage() {
   const title = 'Introducere practică în Git & GitHub pentru toți';
   const description = 'Hai să descoperim și să punem în practică cele mai importante concepte și comenzi din Git & GitHub.';
+  const eventDates: EventDate[] = [{
+    parts: [
+      { timestamp: 1618038000000, label: '10 Aprilie, ora 10:00' },
+      { timestamp: 1618729200000, label: '18 Aprilie, ora 10:00' },
+    ],
+  }];
 
+  const isPastEvent = eventDates.every((eventDate) => eventDate.parts[0].timestamp < Date.now());
   return (
     <>
       <SEOTags
@@ -34,12 +42,7 @@ function EventDetailsPage() {
         contributors={[Pava2, CatalinPopusoi, GeorgeMarianMorosac, Diana]}
         title="Introducere practică în Git & GitHub pentru începători"
         cover={`${process.env.CLOUDFRONT_PUBLIC}/events/git__cover.svg`}
-        eventDates={[{
-          parts: [
-            { timestamp: 1618038000000, label: '10 Aprilie, ora 10:00' },
-            { timestamp: 1618729200000, label: '18 Aprilie, ora 10:00' },
-          ],
-        }]}
+        eventDates={eventDates}
       >
         <p>
           Dacă nu ai lucrat deloc în Git sau ești încă la început,
@@ -106,7 +109,8 @@ function EventDetailsPage() {
           pentru că vrem să avem timp pentru fiecare
           dintre voi, deci înscrie-te "cât e cald"!
         </p>
-        {/* <SubscribeFormWithText>
+        {isPastEvent && (
+        <SubscribeFormWithText>
           <h2>
             Deocamdată nu avem alt training de Git programat
           </h2>
@@ -115,7 +119,8 @@ function EventDetailsPage() {
             despre ele, abonează-te aici 👉
 
           </p>
-        </SubscribeFormWithText> */}
+        </SubscribeFormWithText>
+        )}
       </EventDetails>
       <Footer />
     </>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
+import Link from 'next/link';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { Exercise } from '~/redux/user/types';
 import { getLessonById } from '~/services/Constants';
@@ -62,10 +63,43 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
     <PageContainer className={styles['exercises-page']}>
       <h1> Exerciții </h1>
       <p>
-        Rezolvă exercițiile de mai jos iar noi îți vom trimite feedback
+        Lecțiile și tutorialale de programare sunt un bun prim pas pentru
+        a învăța, dar noi credem că mai important este
+        <strong> să codezi și să primești feedback </strong>
+        la rezolvările tale.
+        Ăsta a fost procesul fiecăruia dintre noi
+        la începutul carierei, când am avut un mentor în cadrul echipei
+        ce ne-a ajutat cu sfaturi și code-review.
+      </p>
+      <p>
+        De aceea, pentru fiecare
+        {' '}
+        <Link href="lectii">
+          <a>
+            lecție
+          </a>
+        </Link>
+        {' '}
+        am adăugat câteva exerciții pe care te încurajăm să le rezolvi. Apoi,
+        {' '}
+        <strong>
+          trimite-ne rezolvările
+        </strong>
+        {' '}
+        chiar aici pe platformă, iar noi îți vom oferi feedback
         pentru fiecare.
       </p>
-      {(!lessonExercises || !submissions) && <Spinner showText text="Încărcăm exercițiile" />}
+      <p className="text-right">
+        PS: dacă ești curios să afli mai multe despre noi și de ce facem asta,
+        aruncă un ochi
+        {' '}
+        <Link href="/intro/despre-noi">
+          <a>
+            aici
+          </a>
+        </Link>
+      </p>
+      {(!lessonExercises || !submissions) && (<Spinner showText text="Încărcăm exercițiile" />)}
       {Object.keys(mergedData).map((lesson) => (
         <section className={styles['lesson-section']}>
           <h2>

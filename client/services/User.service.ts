@@ -109,31 +109,31 @@ class UserService {
     }).then((resp) => resp.json());
   }
 
-  static updateName(payload: {name: string, password: string}) {
+  static updateName(payload: { name: string, password: string }) {
     return HttpService
       .post(`${process.env.ENDPOINT}/auth/name`, payload)
       .then((resp) => resp.json());
   }
 
-  static updateDescription(payload: {description: string, password: string}) {
+  static updateDescription(payload: { description: string, password: string }) {
     return HttpService
       .post(`${process.env.ENDPOINT}/auth/description`, payload)
       .then((resp) => resp.json());
   }
 
-  static updateUsername(payload: {username: string, password: string}) {
+  static updateUsername(payload: { username: string, password: string }) {
     return HttpService
       .post(`${process.env.ENDPOINT}/auth/username`, payload)
       .then((resp) => resp.json());
   }
 
-  static updateEmail(payload: {email: string, password: string}) {
+  static updateEmail(payload: { email: string, password: string }) {
     return HttpService
       .post(`${process.env.ENDPOINT}/auth/email`, payload)
       .then((resp) => resp.json());
   }
 
-  static updatePassword(payload: {newPassword: string, password: string}) {
+  static updatePassword(payload: { newPassword: string, password: string }) {
     return HttpService
       .post(`${process.env.ENDPOINT}/auth/password`, payload)
       .then((resp) => resp.json());
@@ -151,6 +151,12 @@ class UserService {
   static delete(password: string) {
     return HttpService
       .delete(`${process.env.ENDPOINT}/auth`, { password });
+  }
+
+  static getGithubAccount() {
+    return HttpService
+      .get(`${process.env.ENDPOINT}/github/user`)
+      .then((resp) => resp.json());
   }
 
   static wait(mili) {

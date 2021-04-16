@@ -1,0 +1,65 @@
+@import '../../../styles/variables';
+
+.task-list {
+  margin: 5em 0;
+  padding: 1em 0 1em 1em;
+  border-left: 1px solid color(silver);
+}
+
+.task {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 1em;
+  border-radius: 5px;
+  margin-bottom: 2em;
+  background: color(darker-white);
+  box-shadow: 0 0 5px color(silver);
+
+  & > button {
+    display: flex;
+    padding: 1em;
+    margin-right: 1em;
+    border-radius: 50%;
+    border: 1px solid inherit;
+
+    &:hover > svg{
+      transform: scale(1.1);
+    }
+
+    & > svg {
+      width: 2em;
+      height: 2em;
+      transition: scale 0.25s $cubic;
+    }
+  }
+}
+
+.task__error {
+  margin: 0.5em 0 0 0;
+  font-weight: bold;
+  color: color(red);
+}
+
+.task--disabled {
+  opacity: 0.5
+}
+
+.task--done {
+  border-color: darken(color(green), 20%);
+  box-shadow: 0 0 5px darken(color(green), 20%);
+
+  & > button > svg{
+    color: darken(color(green), 20%);
+  }
+}
+
+.task--error {
+  border-color: color(red);
+  box-shadow: 0 0 5px color(red);
+
+  & > button > svg{
+    color: color(red);
+  }
+}

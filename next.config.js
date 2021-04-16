@@ -7,6 +7,7 @@ module.exports = {
     APP_ENV: process.env.APP_ENV,
     ENDPOINT: process.env.ENDPOINT,
     CLOUDFRONT_PUBLIC: 'https://d3tycb976jpudc.cloudfront.net',
+    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
 
   },
   webpack: (config) => {

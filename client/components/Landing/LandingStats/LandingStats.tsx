@@ -55,7 +55,7 @@ function LandingStats() {
         <Link href="/evenimente">
           <a className={styles.card5}>
             <StatsCardLayout6
-              counter={2}
+              counter={3}
               colorText="#663399"
               description="training-uri practice"
               direction="to top left"
@@ -87,7 +87,7 @@ function LandingStats() {
           </a>
         </Link>
         <StatsCardLayout1
-          counter={11}
+          counter={22}
           colorText="#fff"
           className={styles.card8}
           description="Participanți la traininguri"

@@ -14,7 +14,7 @@ function EventsStats() {
       <Link href="/evenimente">
         <a className={styles.card1}>
           <StatsCardLayout6
-            counter={2}
+            counter={3}
             colorText="#663399"
             description="training-uri practice"
             direction="to top left"
@@ -37,7 +37,7 @@ function EventsStats() {
         <a className={styles.card3}>
           <StatsCardLayout3
             text1="În total"
-            text2="7 ore predate online"
+            text2="11 ore predate online"
             colorText="#1b1b15"
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/hourglass.jpg`}
           />
@@ -56,7 +56,7 @@ function EventsStats() {
         </a>
       </Link>
       <StatsCardLayout1
-        counter={11}
+        counter={22}
         colorText="#1b1b15"
         position="bottom"
         className={styles.card5}

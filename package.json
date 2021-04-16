@@ -60,6 +60,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "@octokit/rest": "^18.5.2",
     "@types/mongoose": "^5.7.36",
     "@types/multer": "^1.4.5",
     "@types/react-router": "^5.1.8",

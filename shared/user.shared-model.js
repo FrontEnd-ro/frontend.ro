@@ -12,6 +12,7 @@ const UsersSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   description: { type: String, required: false, default: '' },
   password: { type: String, required: true },
+  github_access_token: { type: String },
   lastLogin: { type: Date, default: Date.now() },
   role: {
     type: String,
@@ -51,7 +52,7 @@ async function ping(token) {
 
 function sanitize(user) {
   const sanitizedUser = { ...user.toObject() };
-  const propsToDelete = ['_id', '__v', 'password'];
+  const propsToDelete = ['_id', '__v', 'password', 'github_access_token'];
 
   propsToDelete.forEach((prop) => delete sanitizedUser[prop]);
 

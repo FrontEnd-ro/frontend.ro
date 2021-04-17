@@ -16,7 +16,8 @@ const submissionRouter = require('./submission/submission.router');
 const lessonExerciseRouter = require('./lesson-exercise/lesson-exercise.router');
 const demoRouter = require('./demo.router');
 const eventRouter = require('./event/event.router');
-
+const githubRouter = require('./github/github.router.js');
+const challengeRouter = require('./challenge/challenge.router.js');
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -49,6 +50,8 @@ app.use('/api/lesson-exercises', lessonExerciseRouter);
 app.use('/api/submissions', submissionRouter);
 app.use('/api/demo', demoRouter);
 app.use('/api/events', eventRouter);
+app.use('/api/github', githubRouter);
+app.use('/api/challenges', challengeRouter);
 
 app.get('*', (req, res) => {
   nextHandler(req, res, req.url);

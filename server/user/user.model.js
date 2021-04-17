@@ -115,6 +115,20 @@ class UserModel {
       result: true,
     };
   }
+
+  static async setGithubAccessToken(_id, github_access_token) {
+    validateObjectId(_id);
+    const user = await User.findById(_id);
+
+    if (!user) {
+      throw new ServerError(404, `Couldn't set Github Access Token for non-existent user with id=${_id}.`);
+    }
+
+    user.github_access_token = github_access_token;
+
+    await user.save();
+    return user;
+  }
 }
 
 module.exports = UserModel;

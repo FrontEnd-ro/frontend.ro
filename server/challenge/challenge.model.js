@@ -105,7 +105,10 @@ class ChallengeModel {
       .find(participant => participant.user._id.toString() === userId);
 
     if (!participant) {
-      return null;
+      return {
+        meta: null,
+        lastDoneTask: null,
+      }
     }
 
     // Returns a String with the last done task

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './TemplateRegisterEvent';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/event/TemplateRegisterEvent/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,yBAAxB","sourcesContent":["export { default } from './TemplateRegisterEvent';\r\n"]},"metadata":{},"sourceType":"module"}

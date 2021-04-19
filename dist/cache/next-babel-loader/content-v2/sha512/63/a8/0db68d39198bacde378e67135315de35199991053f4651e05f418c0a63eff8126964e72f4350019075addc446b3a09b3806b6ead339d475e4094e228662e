@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './Settings';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/Settings/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,YAAxB","sourcesContent":["export { default } from './Settings';\r\n"]},"metadata":{},"sourceType":"module"}

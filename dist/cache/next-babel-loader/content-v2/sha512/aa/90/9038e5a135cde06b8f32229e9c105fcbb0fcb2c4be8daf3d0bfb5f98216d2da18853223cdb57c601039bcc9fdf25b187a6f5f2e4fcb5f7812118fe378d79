@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './Spinner';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/Spinner/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,WAAxB","sourcesContent":["export { default } from './Spinner';\r\n"]},"metadata":{},"sourceType":"module"}

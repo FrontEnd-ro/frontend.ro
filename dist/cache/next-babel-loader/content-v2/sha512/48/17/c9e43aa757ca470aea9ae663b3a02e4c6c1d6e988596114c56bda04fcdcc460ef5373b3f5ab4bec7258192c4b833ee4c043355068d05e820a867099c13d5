@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './EventPageDetails';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/EventPageDetails/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,oBAAxB","sourcesContent":["export { default } from './EventPageDetails';\r\n"]},"metadata":{},"sourceType":"module"}

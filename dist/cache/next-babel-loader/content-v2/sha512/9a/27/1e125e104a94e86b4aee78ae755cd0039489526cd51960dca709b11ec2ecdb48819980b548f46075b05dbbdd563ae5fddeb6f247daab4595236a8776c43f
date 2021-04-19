@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from '~/curriculum/html/Lists';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/pages/html/liste.tsx"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,yBAAxB","sourcesContent":["export { default } from '~/curriculum/html/Lists';\r\n"]},"metadata":{},"sourceType":"module"}

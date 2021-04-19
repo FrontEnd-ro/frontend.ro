@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './Footer';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/Footer/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,UAAxB","sourcesContent":["export { default } from './Footer';\r\n"]},"metadata":{},"sourceType":"module"}

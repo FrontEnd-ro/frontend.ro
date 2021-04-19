@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './ExercisesPage';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/ExercisesPage/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,iBAAxB","sourcesContent":["export { default } from './ExercisesPage';\r\n"]},"metadata":{},"sourceType":"module"}

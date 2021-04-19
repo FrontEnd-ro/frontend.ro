@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './Background';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/Background/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,cAAxB","sourcesContent":["export { default } from './Background';\r\n"]},"metadata":{},"sourceType":"module"}

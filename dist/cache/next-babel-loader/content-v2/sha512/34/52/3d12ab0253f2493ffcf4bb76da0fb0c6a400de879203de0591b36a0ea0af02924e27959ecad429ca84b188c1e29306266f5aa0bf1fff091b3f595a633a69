@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from '~/curriculum/html/Test';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/pages/html/test.tsx"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,wBAAxB","sourcesContent":["export { default } from '~/curriculum/html/Test';\r\n"]},"metadata":{},"sourceType":"module"}

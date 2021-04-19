@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './StatsPage';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/StatsPage/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,aAAxB","sourcesContent":["export { default } from './StatsPage';\r\n"]},"metadata":{},"sourceType":"module"}

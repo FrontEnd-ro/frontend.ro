@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './Button';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/Button/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,UAAxB","sourcesContent":["export { default } from './Button';\r\n"]},"metadata":{},"sourceType":"module"}

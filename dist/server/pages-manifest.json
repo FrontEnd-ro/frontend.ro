@@ -2,5 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/exercitii": "pages/exercitii.js"
+  "/html/linkuri-si-butoane": "pages/html/linkuri-si-butoane.js",
+  "/demo/html/noopener-noreferrer-rel": "pages/demo/html/noopener-noreferrer-rel.js"
 }

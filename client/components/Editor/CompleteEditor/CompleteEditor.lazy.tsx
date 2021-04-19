@@ -3,7 +3,8 @@ import loadMonaco from '../loadMonaco';
 
 import styles from '../Editor.module.scss';
 
-const CompleteEditorLazy = React.forwardRef(({ folderStructure, feedbacks, ...rest }: any, forwardRef) => {
+const CompleteEditorLazy = React.forwardRef(({ folderStructure, feedbacks, ...rest }: 
+  any, forwardRef) => {
   const [CompleteEditor, setCompleteEditor] = useState(null);
 
   useEffect(() => {

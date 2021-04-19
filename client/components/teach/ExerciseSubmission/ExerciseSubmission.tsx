@@ -43,7 +43,8 @@ function ExSubmission({ submission } : Props) {
         submission.type === 'assigned'
           ? (
             <span
-              className={`${styles['card-el']} ${styles['card-status-assigned']} text-bold rounded-md bg-grey text-center normal-case text-xs`}
+              className={`${styles['card-el']} ${styles['card-status-assigned']}
+               text-bold rounded-md bg-grey text-center normal-case text-xs`}
             >
               {SubmissionType.ASSIGNED}
             </span>
@@ -52,7 +53,8 @@ function ExSubmission({ submission } : Props) {
             <select
               name="submissionType"
               id="submissionType"
-              className={`${styles['card-el']} ${styles['card-status-pending']} text-bold rounded-md bg-grey text-center text-xs`}
+              className={`${styles['card-el']} ${styles['card-status-pending']}
+               text-bold rounded-md bg-grey text-center text-xs`}
             >
               <option value="pending">{SubmissionType.PENDING}</option>
               <option value="assignTo">assign-to-you</option>

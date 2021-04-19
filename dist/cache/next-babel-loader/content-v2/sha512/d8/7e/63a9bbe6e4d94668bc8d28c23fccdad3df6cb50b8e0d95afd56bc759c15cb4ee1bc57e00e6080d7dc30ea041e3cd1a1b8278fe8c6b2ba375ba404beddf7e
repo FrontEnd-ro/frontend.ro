@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default } from './Login';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/login/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,SAAxB","sourcesContent":["export { default } from './Login';\r\n"]},"metadata":{},"sourceType":"module"}

@@ -24,10 +24,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/exercitii": [
+    "/demo/html/noopener-noreferrer-rel": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/exercitii.js"
+      "static/chunks/pages/demo/html/noopener-noreferrer-rel.js"
+    ],
+    "/html/linkuri-si-butoane": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/html/linkuri-si-butoane.js"
     ]
   },
   "ampFirstPages": []

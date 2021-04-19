@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default } from './SlidesPage';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/SlidesPage/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,cAAxB","sourcesContent":["export { default } from './SlidesPage';"]},"metadata":{},"sourceType":"module"}

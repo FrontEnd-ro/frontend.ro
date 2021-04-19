@@ -984,7 +984,7 @@
   "clipboard": [
     {
       "id": "./node_modules/clipboard/dist/clipboard.js",
-      "file": "static/chunks/6.js"
+      "file": "static/chunks/7.js"
     }
   ],
   "logrocket": [
@@ -996,7 +996,7 @@
   "marked": [
     {
       "id": "./node_modules/marked/lib/marked.js",
-      "file": "static/chunks/7.js"
+      "file": "static/chunks/8.js"
     }
   ],
   "sweetalert2": [
@@ -1008,7 +1008,7 @@
   "sweetalert2-react-content": [
     {
       "id": "./node_modules/sweetalert2-react-content/dist/sweetalert2-react-content.umd.js",
-      "file": "static/chunks/8.js"
+      "file": "static/chunks/9.js"
     }
   ],
   "~/components/login/Login": [
@@ -1090,34 +1090,6 @@
     },
     {
       "id": "./client/redux/user/user.reducer.ts",
-      "file": "static/chunks/5.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js",
-      "file": "static/chunks/5.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js",
-      "file": "static/chunks/5.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js",
-      "file": "static/chunks/5.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js",
-      "file": "static/chunks/5.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js",
-      "file": "static/chunks/5.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js",
-      "file": "static/chunks/5.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js",
       "file": "static/chunks/5.js"
     },
     {
@@ -1243,6 +1215,32 @@
     {
       "id": "./node_modules/next/node_modules/@babel/runtime/helpers/esm/typeof.js",
       "file": "static/chunks/5.js"
+    }
+  ],
+  "~/services/highlight": [
+    {
+      "id": "./client/services/highlight.ts",
+      "file": "static/chunks/6.js"
+    },
+    {
+      "id": "./node_modules/highlight.js/lib/core.js",
+      "file": "static/chunks/6.js"
+    },
+    {
+      "id": "./node_modules/highlight.js/lib/languages/css.js",
+      "file": "static/chunks/6.js"
+    },
+    {
+      "id": "./node_modules/highlight.js/lib/languages/javascript.js",
+      "file": "static/chunks/6.js"
+    },
+    {
+      "id": "./node_modules/highlight.js/lib/languages/json.js",
+      "file": "static/chunks/6.js"
+    },
+    {
+      "id": "./node_modules/highlight.js/lib/languages/xml.js",
+      "file": "static/chunks/6.js"
     }
   ]
 }

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default } from './NewExercise';","map":{"version":3,"sources":["C:/Users/didi/Desktop/frontend.ro/client/components/NewExercise/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,eAAxB","sourcesContent":["export { default } from './NewExercise';\r\n"]},"metadata":{},"sourceType":"module"}

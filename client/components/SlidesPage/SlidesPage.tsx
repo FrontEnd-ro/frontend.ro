@@ -13,7 +13,7 @@ function SlidesPage() {
       </p>
       <SlidesLink
         id="git-incepatori"
-        created={1615708800000}
+        created={1618825556676}
         thumb={`${process.env.CLOUDFRONT_PUBLIC}/slides/git-incepatori/cover.png`}
         href={`${process.env.CLOUDFRONT_PUBLIC}/slides/git-incepatori/index.html`}
         title="Git & GitHub începători"

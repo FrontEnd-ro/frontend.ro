@@ -12,6 +12,7 @@ export default function LessonCover(
 ) {
   const coverRef = useRef(null);
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (resizeOffset) {
       const resizeObserver = new ResizeObserver(([entry]) => {

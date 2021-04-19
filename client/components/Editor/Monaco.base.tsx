@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/require-render-return */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/sort-comp */

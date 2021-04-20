@@ -183,6 +183,7 @@ export const LESSONS: LessonDescription[] = [
     id: 'box-model',
     written: true,
     title: 'Box model',
+    cover: '/images/lessons/box-model/cover.svg',
     description:
       'Deși unele site-uri sunt cu adevărat WOW, fiecare element e de fapt un dreptunghi cu câteva proprietăți mai speciale numit Box Model. Aici învățăm despre el.',
     url: '/css/box-model',

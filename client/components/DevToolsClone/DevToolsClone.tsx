@@ -116,8 +116,8 @@ const DevToolsClone = () => {
       </section>
       <footer className={styles.footer}>
         <p>
-          Lățimea și înălțimea finală:
-          <strong>{getFinalSize()}</strong>
+          Lățimea și înălțimea finală:{' '}
+          <strong>{getFinalSize()}px</strong>
         </p>
       </footer>
     </div>

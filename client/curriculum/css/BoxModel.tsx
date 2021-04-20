@@ -511,7 +511,7 @@ div {
             pentru a nu strica layout-ul general al paginii.
             Pentru a interacționa cu valorile, este suficient să setați
             orice valoare pozitivă mai mică decât acest maxim.
-            La apăsarea unuia dintre butoanele albastre, ar trebui să
+            La schimbarea checkbox-ului activ, ar trebui să
             vedeți valoarea finală modificată în funcție de alegerea voastră.
           </LessonTip>
           <DevToolsClone />

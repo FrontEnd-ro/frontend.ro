@@ -52,7 +52,7 @@ export default function BoxModelLesson() {
         <p>
           În această lecție vom învăța despre box-model: din ce este compus și cum este folosit
           “în spate” pentru a crea acele design-uri WOW. Înțelegerea modului în care
-          lucrează cheia care te va ajuta să construiești orice interfață și să
+          lucrează este cheia care te va ajuta să construiești orice interfață și să
           rezolvi diverse probleme de layout ce pot apărea.
         </p>
         <section>

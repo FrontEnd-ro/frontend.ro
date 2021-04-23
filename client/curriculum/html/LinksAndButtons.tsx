@@ -17,7 +17,6 @@ import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/links-and-buttons/cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
-import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 
 const contributors = [Diana];
 const chapters = [
@@ -27,10 +26,21 @@ const chapters = [
     id: 'exemple-unde-folosim-tagul-a',
   },
   {
+    title: 'Link-uri către email-uri',
+    id: 'emails',
+  },
+  {
+    title: 'Link-uri către numere de telefon',
+    id: 'tel',
+  },
+  {
+    title: 'Link-uri de download',
+    id: 'download',
+  },
+  {
     title: 'Atributul target=”_blank”',
     id: 'atributul-target-blank',
   },
-  // { title: 'Bune practici', id: 'bune-practici' },
   { title: 'Întrebări BONUS', id: 'intrebari-bonus' },
   { title: '<button> element', id: 'button-element' },
   { title: 'Atributul type', id: 'atributul-type' },
@@ -42,15 +52,12 @@ const chapters = [
 export default function LinksAndButtonsLesson() {
   return (
     <>
-      <Head>
-        <title> Introducere | FrontEnd.ro</title>
-        <link rel="icon" href="/favicon.ico" />
-        <SEOTags
-          title="Link-uri și butoane | Lecție HTML"
-          description="Învață să adaugi link-uri și butoane în HTML și diferența dintre acestea."
-          url="https://FrontEnd.ro/html/linkuri-si-butoane"
-        />
-      </Head>
+      <SEOTags
+        title="Link-uri și butoane | Lecție HTML"
+        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons.jpg`}
+        description="Învață să folosești link-uri și butoane în HTML și diferența dintre acestea."
+        url="https://FrontEnd.ro/html/linkuri-si-butoane"
+      />
       <Lesson
         id="linkuriSiButoane"
         title="Link-uri si butoane"
@@ -69,15 +76,16 @@ export default function LinksAndButtonsLesson() {
         <p>
           Deși la prima vedere pare un subiect simplu, sunt totuși multe de
           știut despre link-uri și butoane în HTML. În acest articol vom discuta
-          despre markup, atribute și cele mai bune practici. Totodată vom trata
+          despre markup, atribute și cele mai bune practici. Totodată, vom trata
           împreună cele două concepte pentru că de multe ori se folosesc
-          link-uri în loc de butoane și invers. Astfel la sfârșitul articolului
-          vom ști exact cum să implementăm un UX corect folosind cele 2
-          elemente.
+          link-uri în loc de butoane și invers.
+        </p>
+        <p>
+          Astfel, la sfârșitul articolului vom ști exact cum
+          să implementăm un UX corect folosind cele 2 elemente.
         </p>
         <section>
-          <h2> The Basics </h2>
-          <LessonHeading as="h3" id="a-element">
+          <LessonHeading as="h2" id="a-element">
             {'<a> element'}
           </LessonHeading>
           <p>
@@ -90,23 +98,25 @@ export default function LinksAndButtonsLesson() {
             <i>ancoră</i>
             {' '}
             sau
+            {' '}
             <i>link</i>
             {' '}
             este unul din cele mai uzuale elemente folosite pentru
             construirea paginilor web. Dacă vrem să ne mutam la o altă pagină
             sau la o altă zonă în cadrul aceleiași pagini, atunci vom folosi
-            acest element. Pentru a specifica destinația link-ului, vom folosi
+            acest element. Pentru a specifica destinația link-ului vom folosi
             atributul
+            {' '}
             <strong className="formatted">href</strong>
             {' '}
             .
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="exemple-unde-folosim-tagul-a">
+          <LessonHeading as="h2" id="exemple-unde-folosim-tagul-a">
             Exemple unde folosim tag-ul a
           </LessonHeading>
-          <LessonHeading as="h4" id="cele-mai-uzuale">
+          <LessonHeading as="h3" id="cele-mai-uzuale">
             Cele mai uzuale
           </LessonHeading>
           <Highlight
@@ -128,10 +138,33 @@ export default function LinksAndButtonsLesson() {
             Putem avea și
             {' '}
             <strong>URL-uri relative</strong>
+            ,
+            a căror destinție finală se calculează în funcție de
+            pagina pe cară ne aflăm. În exemplul de mai jos avem același
+            link atât în
             {' '}
-            .Un exemplu ar putea fi un meniu dintr-o pagină web.
+            <strong className="formatted">
+              about.html
+            </strong>
+            {' '}
+            cât și în
+            {' '}
+            <strong className="formatted">
+              home.html
+            </strong>
+            :
           </p>
-          <BasicEditorLazy folderStructure={relativUrlExample} readOnly />
+          <Highlight
+            language="html"
+            code={`
+<a href="info.html"> Go to info page </a>`}
+          />
+          <p>
+            Totuși, ajungem la destinații diferite în funcție de pagina
+            pe care suntem.
+          </p>
+
+          <BasicEditorLazy folderStructure={relativeUrlExample} readOnly />
           <p>
             Foarte utile sunt și link-urile care duc către o secțiune ale
             aceleiași pagini sau așa numitele
@@ -143,10 +176,11 @@ export default function LinksAndButtonsLesson() {
             className="my-5"
             language="html"
             code={`
-<a href="#Section-further-down"> 
-  Sari la secțiunea de mai jos 
+<a href="#comments"> 
+  Sari la secțiunea de comentarii
 </a> 
-<h2 id="Section-further-down">Section further down</h2>`}
+<h2 id="comments">Comentarii</h2>
+<!-- ... -->`}
           />
           <LessonTip>
             Observați atributul
@@ -158,29 +192,31 @@ export default function LinksAndButtonsLesson() {
           </LessonTip>
           <p>
             Deși nu am ajuns la partea de CSS, merită menționat că jump links
-            trebuie să beneficieze de
+            pot să beneficieze de
             {' '}
-            <a href="/concepts/smooth-scrolling">smooth scrolling</a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior">smooth scrolling</a>
             {' '}
-            pentru ca
-            userii să aibă o experiență plăcută. Un usage case este chiar pe
-            platforma noastră:
+            pentru ca utilizatorii să aibă o experiență mai plăcută:
           </p>
           <LessonFigure
             isVideo
             withBorder
-            src="/videos/lessons/links-and-buttons/smooth-scrolling.mp4"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/smooth-scrolling.mp4`}
             alt="Redarea comportamentului de smooth scrolling"
             demo="/demo/html/jump-links"
           />
         </section>
         <section>
-          <LessonHeading as="h4" id="alte-exemple-unde-vom-folosi-linkuri">
-            Alte exemple unde vom folosi link-uri
+          <LessonHeading as="h3" id="emails">
+            Link-uri către email-uri
           </LessonHeading>
           <p>
-            Sunt situații în care vrem să oferim unui user posibilitatea de a
-            deschide email-ul pentru a trimite un mesaj nou. În cazul acesta ne
+            Sunt situații în care vrem să oferim unui utilizator posibilitatea de a
+            {' '}
+            <strong>
+              deschide email-ul precompletat către o adresă
+            </strong>
+            . În cazul acesta ne
             vom folosi de
             {' '}
             <strong className="formatted">mailto</strong>
@@ -195,18 +231,25 @@ export default function LinksAndButtonsLesson() {
 </a>`}
           />
           <p>
+            Apasă pe linkul alăturat și ți se va deschide clientul de email,
+            precompletat cu adresa noastră 👉
+            {' '}
             <a href="mailto:hello@frontend.ro">Trimite email la Frontend.ro</a>
+            .
           </p>
           <LessonFigure
             isVideo
             withBorder
-            src="/videos/lessons/links-and-buttons/mailto.mp4"
-            alt="Opțiunea mailto care ne permite să deschidem email-ul"
-            demo="/demo/html/mail-to"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/mailto.mp4`}
+            alt="Opțiunea mailto pentru a ușura trimiterea de email-uri"
           />
+          <LessonHeading as="h3" id="tel">
+            Link-uri către numere de telefon
+          </LessonHeading>
           <p>
-            Totodată, link-urile către numere de telefon sunt foarte uzuale mai
-            ales când navigăm de pe dispozitive mobile:
+            Mai mult, dacă vrem să arătăm în pagină
+            numere de telefon e recomandat să folosim link-uri,
+            pentru a ne deschide direct aplicația prin care sunăm:
           </p>
           <Highlight
             className="my-5"
@@ -217,24 +260,32 @@ export default function LinksAndButtonsLesson() {
 `}
           />
           <p>
-            Apelează unul din numerele de telefon:
-            <br />
-            <a href="tel:+49.157.0156">+49 157 0156</a>
-            <br />
-            <a href="tel:+1(555)5309">(555) 5309</a>
+            Apasă pe unul din numerele de mai jos pentru a vedea cum sunt
+            precompletate pe telefon (poți să dai click fără griji, nu le vei apela dacă faci asta)
           </p>
+          <ul className="with--bullets">
+            <li>
+              <a href="tel:+49.157.0156">+49 157 0156</a>
+            </li>
+            <li>
+              <a href="tel:+1(555)5309">(555) 5309</a>
+            </li>
+          </ul>
           <LessonFigure
             isVideo
             withBorder
-            src="/videos/lessons/links-and-buttons/link-to-tel.mp4"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/link-to-tel.mp4`}
             alt="Link-uri către numere de telefon"
-            demo="/demo/html/linkuri-catre-numere-de-telefon"
           />
+          <LessonHeading as="h3" id="download">
+            Link-uri de download
+          </LessonHeading>
           <p>
             Împreuna cu atributul
             {' '}
             <strong className="formatted">download</strong>
-            , putem instrui
+            {' '}
+            putem instrui
             browser-ul să downloadeze fișierul din cadrul link-ului în loc să îl
             deschidă în pagina curentă:
           </p>
@@ -242,72 +293,55 @@ export default function LinksAndButtonsLesson() {
             className="my-5"
             language="html"
             code={`
-<a href="/files/test.pdf" download>Download PDF</a>
+<a href="https://FrontEnd.ro/logo.png" download> Download our logo </a>
 `}
           />
           <p>
-            <a href="/files/test.pdf" download>
-              Download PDF
+            Apasă pe linkul de alături pentru a downlada logo-ul nostru 👉
+            {' '}
+            <a href="/logo.png" download>
+              Downloadează logo-ul nostru
             </a>
           </p>
           <p>
-            Iată cum putem downloada VSCode:
-          </p>
-          <LessonFigure
-            isVideo
-            withBorder
-            src="/videos/lessons/links-and-buttons/download-link.mp4"
-            alt="Atributul download"
-            demo="/demo/html/linkuri-atributul-download"
-          />
-          <p>
-            Oky, acum că ne-am familiarizat cu situații din practică unde putem
+            Acum că ne-am familiarizat cu situații din practică unde putem
             folosi link-uri, ne-am obișnuit puțin cu markup-ul și cu câteva
-            dintre atributele ce pot însoți elementul, putem să trecem la ceva
-            detalii legate de cele mai bune practici pe care să le avem în
-            vedere.
+            dintre atributele ce pot însoți elementul, putem să
+            vorbim de câteva bune practici pe care să le avem în vedere.
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="atributul-target-blank">
+          <LessonHeading as="h2" id="atributul-target-blank">
             Atributul target=”_blank”
           </LessonHeading>
           <p>
-            În afară de atributele prezentate, un alt atribut folosit este
+            În afară de atributele prezentate, un alt atribut des folosit este
             {' '}
             <strong className="formatted"> target</strong>
             {' '}
-            , care ne indică unde
+            , care ne indică cum
             să deschidem link-ul din href.
           </p>
           <p>
             Ca și developeri cel mai des ne vom întâlni cu situația de a folosi
             {' '}
-            <strong>
-              target=”_blank” (link-ul va fi deschis într-o fereastră sau un tab
-              nou)
+            <strong className="formatted">
+              target="_blank"
             </strong>
-          </p>
-        </section>
-        <section>
-          <LessonHeading as="h3" id="bune-practici">
-            Bune practici
-          </LessonHeading>
-          <p>
-            Când folosim valoarea _blank, e recomandat să adăugăm un nou atribut
+            {' '}
+            (link-ul va fi deschis într-o fereastră sau un tab
+            nou)
+            .
+            Când folosim valoarea
+            {' '}
+            <strong>_blank</strong>
+            , e recomandat să adăugăm un nou atribut
             pentru securitate și anume :
             {' '}
             <strong className="formatted">
-              rel cu valorile ”noopener noreferrer”.
+              rel=”noopener noreferrer”
             </strong>
-            {' '}
-            Atributul
-            {' '}
-            <strong className="formatted">rel</strong>
-            {' '}
-            poate avea mai
-            multe valori, dar le vom prezenta aici doar pe cele 2 recomandate a
-            se folosi împreuna cu atributul target=”_blank”.
+            .
           </p>
           <Highlight
             className="my-5"
@@ -319,6 +353,8 @@ export default function LinksAndButtonsLesson() {
             `}
           />
           <p>
+            Apasă pe următorul link pentru a-l deschide într-un nou tab 👉
+            {' '}
             <a
               href="http://frontend.ro"
               target="_blank"
@@ -327,69 +363,15 @@ export default function LinksAndButtonsLesson() {
               Link-ul se deschide într-un nou tab
             </a>
           </p>
-
-          <ul className="with--bullets">
-            <li>
-              <strong className="formatted">rel="noopener"</strong>
-              : blochează
-              accesul tabului nou la pagina ce conține link-ul
-            </li>
-            <li>
-              <strong className="formatted">rel="noreferrer"</strong>
-              : împiedică
-              alte site-uri sau servicii de urmărire (de exemplu, Google
-              Analytics) să identifice pagina ca sursă a link-ului pe care s-a
-              dat click.
-            </li>
-          </ul>
         </section>
         <section>
-          <LessonHeading as="h3" id="intrebari-bonus">
+          <LessonHeading as="h2" id="intrebari-bonus">
             Întrebări BONUS
           </LessonHeading>
           <p>
             În continuare vom raspunde la câteva întrebări pe care noi ca și
             developeri ni le putem adresa pe măsură ce codăm și ne întâlnim cu
             diverse situații:
-          </p>
-          <blockquote>
-            Ar trebui să folosim atributul
-            {' '}
-            <strong className="formatted">title</strong>
-            {' '}
-            împreuna cu tag-ul a?
-          </blockquote>
-          <p>
-            Hmmm..probabil că nu. În momentul în care mergem cu mouse-ul în
-            dreptul elementului (facem
-            {' '}
-            <i>hover</i>
-            ) ce are ca și atribut title
-            vom vedea un pop-up cu textul pe care l-am scris.
-          </p>
-          <Highlight
-            className="my-5"
-            language="html"
-            code={`
-<a title="Nu ar trebui să fiu aici" href="/">
-  Un simplu exemplu
-</a>`}
-          />
-          <p>
-            <a title="Nu ar trebui să fiu aici" href="/">
-              Un simplu exemplu
-            </a>
-          </p>
-          <LessonFigure
-            withBorder
-            src="/images/lessons/links-and-buttons/title.png"
-            alt="Atributul title"
-          />
-          <p>
-            Acest pop-up nu este atât de accesibil și nu poate fi stilizat. Plus
-            că pe device-urile cu touch este imposibil de folosit. Trebuie să ne
-            asigurăm întotdeauna că oferim un text suficient de descriptiv
-            pentru a ști la ce să ne așteptăm când dăm click pe un link.
           </p>
           <blockquote>
             Putem folosi doar un
@@ -400,52 +382,52 @@ export default function LinksAndButtonsLesson() {
             interiorul unui link?
           </blockquote>
           <p>
-            Așa cum am precizat deja, un simplu icon nu ne-ar oferi suficientă
+            Din păcate un simplu icon nu ne-ar oferi suficientă
             informație contextuală despre link, deci nu ar fi chiar recomandat.
             Dacă totuși suntem nevoiți să folosim un astfel de icon, o bună
-            practică ar fi să utilizam un pattern de genul în care adăugam niște
-            text ascuns ce va oferi context pentru screen readere:
+            practică ar fi să adăugăm în link niște text
+            ascuns vizual, care va fi totuși citit de
+            {' '}
+            <strong>screen readers</strong>
+            :
           </p>
           <Highlight
             className="my-5"
             language="html"
             code={`
-<a href="/">
-  <!-- Ascundem icon-ul de assistive technology -->
-  <svg viewBox="0 0 32 32" width="32px" height="32px" 
-  aria-hidden="true" focusable="false">
-  <circle cx="16" cy="16" r="16"/>
+<a href="https://fontawesome.com/">
+  <svg width="24" height="24" viewBox="0 0 1024 1024">
+    <g>
+      <path d="M384 928c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z" />
+      <path d="M1024 928c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z" />
+      <path d="M1024 512v-384h-768c0-35.346-28.654-64-64-64h-192v64h128l48.074 412.054c-29.294 23.458-48.074 59.5-48.074 99.946 0 70.696 57.308 128 128 128h768v-64h-768c-35.346 0-64-28.654-64-64 0-0.218 0.014-0.436 0.016-0.656l831.984-127.344z" />
+    </g>
   </svg>
-  <!--Se comporta ca un label ce e ascuns -->
-  <span style="position: absolute; opacity: 0">
-  Useful link text
+  {/* Se comporta ca un label ce e ascuns  */}
+  <span style={{ position: 'absolute', opacity: '0' }}>
+    Coș de cumpărături
   </span>
  </a>`}
           />
           <p>
-            <a href="/">
-              {/* Ascundem icon-ul de assistive technology */}
-              <svg
-                viewBox="0 0 32 32"
-                width="32px"
-                height="32px"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <circle cx="16" cy="16" r="16" />
+            Spre exemplu, link-ul alăturat conține doar un icon pentru un coș de cumpărături,
+            dar e în același timp
+            accesibil pentru cei ce folosesc screen readere 👉:
+            {' '}
+            <a href="https://fontawesome.com/">
+              <svg width="24" height="24" viewBox="0 0 1024 1024">
+                <g>
+                  <path d="M384 928c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z" />
+                  <path d="M1024 928c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z" />
+                  <path d="M1024 512v-384h-768c0-35.346-28.654-64-64-64h-192v64h128l48.074 412.054c-29.294 23.458-48.074 59.5-48.074 99.946 0 70.696 57.308 128 128 128h768v-64h-768c-35.346 0-64-28.654-64-64 0-0.218 0.014-0.436 0.016-0.656l831.984-127.344z" />
+                </g>
               </svg>
               {/* Se comporta ca un label ce e ascuns  */}
               <span style={{ position: 'absolute', opacity: '0' }}>
-                Useful link text
+                Coș de cumpărături
               </span>
             </a>
           </p>
-          <LessonFigure
-            withBorder
-            src="/images/lessons/links-and-buttons/icon-inside-link.png"
-            alt="Doar un icon în interiorul unui link"
-            demo="/demo/html/icon-in-link"
-          />
           <LessonTip icon={faQuestionCircle}>
             Atributul
             {' '}
@@ -453,11 +435,9 @@ export default function LinksAndButtonsLesson() {
             {' '}
             este folosit
             pentru a adăuga reguli CSS elementelor. Încă nu am ajuns la acel
-            capitol deci e absolut normal să nu știi ce face.
-            <br />
-            {' '}
-            <br />
-            Totuși, te rugăm să-l pui acolo, e un exemplu bun de avut în vedere.
+            capitol deci e ok dacă nu știi cum să-l folosești.
+            Totuși, te rugăm să-l păstrezi în exemplu, pentu a funcționa
+            cum ne așteptăm.
           </LessonTip>
           <blockquote>
             Putem folosi o
@@ -475,29 +455,21 @@ export default function LinksAndButtonsLesson() {
             className="my-5"
             language="html"
             code={`
-<a href="/">
-  <img src="images/logo.png" alt="Frontend.ro LOGO." />
+<a href="https://FrontEnd.ro">
+  <img 
+    src="https://FrontEnd.ro/images/logo.png" 
+    alt="Frontend.ro LOGO." 
+    height="48" 
+  />
 </a>`}
           />
           <p>
-            <a href="/">
-              <img src="/logo.png" alt="Frontend.ro LOGO." />
+            Alături avem o imagine într-un link. Dacă dăm click pe ea,
+            ne va duce pa pagina principală (home page) 👉
+            {' '}
+            <a style={{ verticalAlign: 'middle' }} href="/">
+              <img height="48" src="/logo.png" alt="Frontend.ro LOGO." />
             </a>
-          </p>
-          <LessonFigure
-            withBorder
-            src="/images/lessons/links-and-buttons/card.png"
-            alt="O imagine în interiorul unui link"
-            demo="/demo/html/imagine-in-link"
-          />
-          <p>
-            Nu e nevoie să folosim atributul
-            {' '}
-            <strong className="formatted">alt</strong>
-            {' '}
-            pentru a preciza că
-            imaginea este un link, tehnologiile assistive vor face deja asta
-            pentru noi.
           </p>
           {/* this demo 👇 is not very clear at this moment, when we will have more CSS lessons,
            maybe we can uncomment this part */}
@@ -507,14 +479,14 @@ export default function LinksAndButtonsLesson() {
           <p>Răspunsul la această întrebare este că nu e tocmai o idee bună.</p>
           <LessonFigure
             withBorder
-            src="/images/lessons/links-and-buttons/demo-link.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/demo-link.png`}
             alt="2 metode diferite prin care putem folosi link-urile în raport cu bucăți
             mai mari de cod și implicațiile lor"
             demo="/demo/html/linkuri-care-contin-bucati-mari-de-continut"
           /> */}
         </section>
         <section>
-          <LessonHeading as="h3" id="button-element">
+          <LessonHeading as="h2" id="button-element">
             {'<button> element'}
           </LessonHeading>
           <p>
@@ -522,25 +494,29 @@ export default function LinksAndButtonsLesson() {
             {' '}
             <strong className="formatted">{'<button>'}</strong>
             {' '}
-            este folosit atunci când vrem să facem o acțiune (exemple: mergem cu
-            mouse-ul deasupra unui element (hover) , o pagină web se încarcă
-            (load), dăm click pe un buton sau alegem o cheie de la tastatură,
-            facem resize la o fereastră sau o închidem, dăm play sau pause la un
-            video, etc.
+            este folosit atunci când vrem să facem o acțiune (exemple: arată/ascunde
+            un meniu, play sau pause la un video, trimite un comentariu, etc)
           </p>
+          <Highlight
+            language="html"
+            code={`
+<button type="button">
+  Open menu
+</button>`}
+          />
           <p>
             Spre deosebire de link-uri, butoanele
             {' '}
             <strong>NU</strong>
             {' '}
             schimbă
-            pagina. Totuși dacă avem un form cu un buton de login, dăm click pe
+            pagina. Totuși dacă avem un formular cu un buton de login, dăm click pe
             el, așteptăm, apoi suntem direcționați către o nouă pagină, putem
-            spune că butonul a schimbat pagina. În cazul ăsta e ok.
+            spune că acțiunea declanșată de buton a schimbat pagina. În cazul acesta e ok :)
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="atributul-type">
+          <LessonHeading as="h2" id="atributul-type">
             Atributul type
           </LessonHeading>
           <p>
@@ -563,9 +539,8 @@ export default function LinksAndButtonsLesson() {
             Pe lîngă submit și button, type mai pot avea și valoarea
             {' '}
             <strong className="formatted">reset</strong>
-            .
+            . Uite un exemplu care le include pe toate 3:
           </p>
-          <p>Un exemplu care le include pe toate 3:</p>
           <Highlight
             className="my-5"
             language="html"
@@ -589,19 +564,19 @@ export default function LinksAndButtonsLesson() {
           />
           <LessonFigure
             withBorder
-            src="/images/lessons/links-and-buttons/buttons-types.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/buttons-types.png`}
             alt="Tipuri de butoane"
             demo="/demo/html/tipuri-de-butoane"
           />
         </section>
         <section>
-          <LessonHeading as="h3" id="atributul-disabled">
+          <LessonHeading as="h2" id="atributul-disabled">
             Atributul disabled
           </LessonHeading>
           <p>
             Acest atribut boolean împiedică interactivitatea cu butonul: nu
             poate fi apăsat sau focusat. Cel mai comun pattern este în cazul
-            logării :
+            autentificării pe un site:
           </p>
           {/* <Highlight
             className="my-5"
@@ -618,32 +593,46 @@ export default function LinksAndButtonsLesson() {
           />
           <LessonFigure
             withBorder
-            src="/images/lessons/links-and-buttons/disabled-button.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/disabled-button.png`}
             alt="Atributul disabled"
             demo="/demo/html/butoane-atributul-disabled"
           /> */}
-          <p>
-            Avem un form, ne logăm, butonul devine disabled cât se face logarea
-            pentru a nu mai încerca din nou.
-          </p>
-          <p>
-            Dacă logarea eșuează, putem afișa un mesaj de validare în care să
-            explicăm de ce nu a putut avea loc și să facem enabled la buton abia
-            la final, când totul e ok.
-          </p>
+          <ol style={{ listStyle: 'revert' }}>
+            <li>
+              completăm formularul
+            </li>
+            <li>
+              apăsăm butonul de login
+            </li>
+            <li>
+              butonul devinde
+              {' '}
+              <strong> disabled </strong>
+              {' '}
+              cât timp
+              se trimit datele la server și se așteaptă un răspuns
+              (pentru a preveni cazul în care utilizatorul încearcă
+              din nou în timp ce autentificarea e înca în proges)
+            </li>
+            <li>
+              dacă logarea eșuează, putem afișa un mesaj informativ în care să
+              explicăm de ce nu a putut avea loc și să facem enabled la buton abia
+              la final, pentru a re-încerca
+            </li>
+          </ol>
           <LessonFigure
             isVideo
             withBorder
-            src="/videos/lessons/links-and-buttons/form_validation_with_disabled_button.mp4"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/form_validation_with_disabled_button.mp4`}
             alt="Validare form cu button disabled"
           />
         </section>
         <section>
-          <LessonHeading as="h3" id="linkuri-vs-butoane">
+          <LessonHeading as="h2" id="linkuri-vs-butoane">
             Link-uri versus butoane
           </LessonHeading>
           <p>
-            Ca o scurtă recapitulare, vorbim de link-uri dacă se schimbă pagina,
+            Ca o scurtă recapitulare, folosim link-uri dacă se schimbă pagina
             sau facem jump la o secțiune din pagină, iar de butoane dacă facem o
             acțiune.
           </p>
@@ -666,25 +655,27 @@ export default function LinksAndButtonsLesson() {
               url:
                 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button',
             },
+            {
+              text: 'Valoarea "noreferrer" pentru atributul "rel"',
+              url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer',
+            },
+            {
+              text: 'Valoarea "noopener" pentru atributul "rel"',
+              url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
+            },
           ]}
         />
-        <section>
-          <LessonHeading as="h3" id="exercitii">
-            Exerciții
-          </LessonHeading>
-          <p className="text-bold text-center">În curând!</p>
-        </section>
       </Lesson>
     </>
   );
 }
-const relativUrlExample: {
-  folders: ExerciseFolder[];
-  files: ExerciseFile[];
-} = {
 
-  files: [
-    {
+const relativeUrlExample = {
+  files: [],
+  folders: [{
+    key: 'home',
+    name: 'home',
+    files: [{
       key: 'home.html',
       name: 'home.html',
       content: `<!DOCTYPE html>
@@ -694,21 +685,30 @@ const relativUrlExample: {
 </head>
 <body>
     <h1>Home Page</h1>
-    <nav>
-      <ul>
-        <li>
-          <a href="home.html">Home</a>
-        </li>
-        <li>
-        <a href="about.html">About</a>
-      </li>
-      </ul>
-    </nav>
+    <a href="info.html"> Go to info page </a>
 </body>
 </html>
       `,
-    },
-    {
+    }, {
+      key: 'info.html',
+      name: 'info.html',
+      content: `<!DOCTYPE html>
+<html>
+<head>
+  <title>Info | Home page</title>
+</head>
+<body>
+    <h1>Info regarding the Home page</h1>
+</body>
+</html>
+`,
+    }],
+    folders: [],
+  }, {
+    key: 'about',
+    name: 'about',
+    folders: [],
+    files: [{
       key: 'about.html',
       name: 'about.html',
       content: `<!DOCTYPE html>
@@ -718,19 +718,23 @@ const relativUrlExample: {
 </head>
 <body>
     <h1>About page</h1>
-    <nav>
-      <ul>
-        <li>
-          <a href="home.html">Home</a>
-        </li>
-        <li>
-        <a href="about.html">About</a>
-      </li>
-      </ul>
-    </nav>
+    <a href="info.html"> Go to info page </a>
 </body>
 </html>
 `,
-    },
-  ],
+    }, {
+      key: 'info.html',
+      name: 'info.html',
+      content: `<!DOCTYPE html>
+<html>
+<head>
+  <title>Info | About page</title>
+</head>
+<body>
+    <h1>Info regarding the About page</h1>
+</body>
+</html>
+`,
+    }],
+  }],
 };

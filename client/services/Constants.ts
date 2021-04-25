@@ -156,11 +156,12 @@ export const LESSONS: LessonDescription[] = [
   },
   {
     id: 'formulare',
-    written: false,
+    written: true,
     title: 'Formulare',
     url: '/html/formulare',
-    description: 'Cu ce elemente putem construi formulare moderne, și care sunt cele mai bune practici legate de acestea.',
-    contributors: [RobertParasca],
+    description: 'Cu ce elemente putem construi formulare moderne, și care sunt cele mai bune practici legate de acestea?',
+    contributors: [RobertParasca, Pava],
+    cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
     type: 'html',
   },
   /** CSS Lessons */

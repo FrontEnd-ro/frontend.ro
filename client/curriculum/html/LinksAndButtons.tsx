@@ -403,8 +403,8 @@ export default function LinksAndButtonsLesson() {
       <path d="M1024 512v-384h-768c0-35.346-28.654-64-64-64h-192v64h128l48.074 412.054c-29.294 23.458-48.074 59.5-48.074 99.946 0 70.696 57.308 128 128 128h768v-64h-768c-35.346 0-64-28.654-64-64 0-0.218 0.014-0.436 0.016-0.656l831.984-127.344z" />
     </g>
   </svg>
-  {/* Se comporta ca un label ce e ascuns  */}
-  <span style={{ position: 'absolute', opacity: '0' }}>
+  // Se comporta ca un label ce e ascuns
+  <span style="position: absolute; opacity: 0">
     Coș de cumpărături
   </span>
  </a>`}
@@ -534,7 +534,7 @@ export default function LinksAndButtonsLesson() {
               vom ajunge la această lecție)
             </li>
           </ul>
-          <p>O bună practica este să specificăm mereu tipul acestora.</p>
+          <p>O bună practică este să specificăm mereu tipul acestora.</p>
           <p>
             Pe lîngă submit și button, type mai pot avea și valoarea
             {' '}
@@ -617,7 +617,7 @@ export default function LinksAndButtonsLesson() {
             <li>
               dacă logarea eșuează, putem afișa un mesaj informativ în care să
               explicăm de ce nu a putut avea loc și să facem enabled la buton abia
-              la final, pentru a re-încerca
+              la final, pentru a reîncerca.
             </li>
           </ol>
           <LessonFigure

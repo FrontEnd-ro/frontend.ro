@@ -100,10 +100,8 @@ const IframeEmbed = ({
 
   return (
     <iframe
-      scrolling="no"
       loading="lazy"
       src={iframeSrc}
-      frameBorder="no"
       allowFullScreen
       className={`
         ${className}

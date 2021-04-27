@@ -101,7 +101,7 @@ export const LESSONS: LessonDescription[] = [
     cover: '/images/lessons/text-elements__cover.svg',
   },
   {
-    id: 'linkuriSiButoane',
+    id: 'linkuri-si-butoane',
     written: true,
     title: 'Link-uri și butoane',
     description:

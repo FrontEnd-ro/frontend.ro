@@ -59,7 +59,7 @@ export default function LinksAndButtonsLesson() {
         url="https://FrontEnd.ro/html/linkuri-si-butoane"
       />
       <Lesson
-        id="linkuriSiButoane"
+        id="linkuri-si-butoane"
         title="Link-uri si butoane"
         chapters={chapters}
         withExercises

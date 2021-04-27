@@ -18,6 +18,7 @@ const LESSONS_WITH_EXERCISES = [
   'texte',
   'liste',
   'imagini',
+  'linkuri-si-butoane',
 ];
 
 // Use NodeJS style exports because this file is consumed

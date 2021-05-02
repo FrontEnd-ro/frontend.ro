@@ -2,6 +2,7 @@
 
 .exercises {
   padding: 0 0 1em 0;
+  position: relative;
 
   & > section {
     @extend %containerConfig;
@@ -12,7 +13,12 @@
   }
 }
 
-.exercises--empty {
+.spinner-wrapper {
+  padding: 3em 0;
+}
+
+.exercises--empty,
+.exercises--fetching {
   background: lighten(color(green), 25%);
 }
 

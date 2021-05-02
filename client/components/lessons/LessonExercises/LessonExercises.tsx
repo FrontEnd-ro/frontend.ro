@@ -22,6 +22,7 @@ function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof conne
 
   const [submissions, setSubmissions] = useState<Submission[]>(undefined);
   const [exercises, setExercises] = useState<LessonExercise[]>(undefined);
+  const isFetching = !Array.isArray(exercises) || !Array.isArray(submissions);
 
   useEffect(() => {
     LessonExerciseService
@@ -42,44 +43,48 @@ function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof conne
     }
   }, []);
 
-  if (!Array.isArray(exercises) || !Array.isArray(submissions)) {
-    return (
-      <div id="exercitii" className={styles.exercises}>
-        <Spinner showText />
-      </div>
-    );
+  const mergedData: Submission[] = [];
+
+  if (exercises) {
+    exercises.forEach((ex) => {
+      const matchedSubmission = submissions.find((sub) => sub.exercise._id === ex._id);
+
+      if (matchedSubmission) {
+        mergedData.push(matchedSubmission);
+      } else {
+        mergedData.push({
+          code: '',
+          _id: ex._id,
+          exercise: ex,
+          feedbacks: [],
+          status: null,
+          user: user.info,
+          submittedAt: null,
+          updatedAt: null,
+        });
+      }
+    });
   }
 
-  const mergedData: Submission[] = [];
-  exercises.forEach((ex) => {
-    const matchedSubmission = submissions.find((sub) => sub.exercise._id === ex._id);
-
-    if (matchedSubmission) {
-      mergedData.push(matchedSubmission);
-    } else {
-      mergedData.push({
-        code: '',
-        _id: ex._id,
-        exercise: ex,
-        feedbacks: [],
-        status: null,
-        user: user.info,
-        submittedAt: null,
-        updatedAt: null,
-      });
-    }
-  });
-
-  console.log("XXX", mergedData);
-
   return (
-    <div className={`${styles.exercises} ${exercises.length === 0 ? styles['exercises--empty'] : ''}`}>
+    <div className={`
+      ${styles.exercises}
+      ${isFetching ? styles['exercises--fetching'] : ''}
+      ${exercises?.length === 0 ? styles['exercises--empty'] : ''}
+    `}
+    >
       <section>
         <LessonHeading as="h3" id="exercitii">
           Exerciții
         </LessonHeading>
 
-        {exercises.length > 0 ? (
+        {isFetching && (
+          <div className={styles['spinner-wrapper']}>
+            <Spinner showText={false} />
+          </div>
+        )}
+
+        {!isFetching && (exercises.length > 0 ? (
           <div className={styles['exercises-wrapper']}>
             {mergedData.map((sub) => (
               <ExercisePreview
@@ -111,7 +116,7 @@ function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof conne
             </Link>
             .
           </p>
-        )}
+        ))}
       </section>
     </div>
   );

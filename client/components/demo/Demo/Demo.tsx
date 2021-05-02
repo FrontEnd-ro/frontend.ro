@@ -3,13 +3,10 @@ import { useRouter } from 'next/router';
 import { GITHUB_URL } from '~/services/Constants';
 
 import styles from './Demo.module.scss';
-import { withClientMonitoring } from '~/services/Hooks';
 
 export default function Demo({ title, children }: PropsWithChildren<{ title: string }>) {
   const baseURL = `${GITHUB_URL}/tree/master/frontend-ssr`;
   const { pathname } = useRouter();
-
-  withClientMonitoring();
 
   return (
     <>

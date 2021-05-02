@@ -1,7 +1,6 @@
 import { NextRouter, useRouter } from 'next/router';
 import { MutableRefObject, useEffect } from 'react';
 import { UserState } from '~/redux/user/types';
-import ClientMonitoring, { LogEventType } from './ClientMonitoring';
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 import { noop } from './Utils';
 
@@ -45,18 +44,6 @@ function useClipboard(ref: MutableRefObject<HTMLElement>, onCopy: () => void = n
     import('clipboard').then((module) => {
       initClipboard(module.default);
     });
-  }, []);
-}
-
-function withClientMonitoring() {
-  useEffect(() => {
-    // eslint-disable-next-line no-restricted-globals
-    if (!location.host.includes('frontend.ro')) {
-      return;
-    }
-    ClientMonitoring.log(LogEventType.ROUTE);
-
-    window.addEventListener('beforeunload', ClientMonitoring.destroy);
   }, []);
 }
 
@@ -115,7 +102,6 @@ function withAuthModal(isLoggedIn: boolean, cb: (...any) => any) {
 export {
   useOutsideClick,
   useClipboard,
-  withClientMonitoring,
   withSmoothScroll,
   useLoggedInOnly,
   useAnonymousOnly,

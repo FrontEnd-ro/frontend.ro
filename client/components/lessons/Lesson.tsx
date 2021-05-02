@@ -4,7 +4,7 @@ import Footer from '~/components/Footer';
 import { LessonMenu } from '~/components/lessons';
 
 import styles from './Lesson.module.scss';
-import { withClientMonitoring, withSmoothScroll } from '~/services/Hooks';
+import { withSmoothScroll } from '~/services/Hooks';
 import { GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
 
@@ -26,7 +26,6 @@ export default function Lesson({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   withSmoothScroll(articleWrapper);
-  withClientMonitoring();
 
   return (
     <div className={styles.lesson}>

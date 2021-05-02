@@ -15,6 +15,7 @@ export interface Chapter {
   id: string;
   title: string;
   href: string;
+  subchapters?: Chapter[]
 }
 
 const SCROLL_DURATION = 2000;
@@ -57,7 +58,8 @@ class TableOfContents extends React.Component<Props, State> {
     const { chapters } = this.props;
 
     /**  Target the elements to be observed */
-    chapters.forEach((item) => {
+    const flattenChapters = chapters.flatMap(this.flattenChapter);
+    flattenChapters.forEach((item) => {
       const chapterId = document.getElementById(item.id);
       if (chapterId !== null) {
         this.observer.observe(chapterId);
@@ -121,12 +123,23 @@ class TableOfContents extends React.Component<Props, State> {
     }
   }
 
+  flattenChapter = (chapter: Chapter) => {
+    if (!chapter.subchapters || chapter.subchapters.length === 0) {
+      return [chapter];
+    }
+
+    return [chapter, ...chapter.subchapters.flatMap(this.flattenChapter)];
+  }
+
   refreshActiveChapter = () => {
     const { chapters } = this.props;
+    const flattenedChapters = chapters.flatMap(this.flattenChapter);
 
-    const match = chapters.find((chapter) => {
+    const match = flattenedChapters.find((chapter) => {
       return window.location.href.includes(chapter.href);
     });
+
+    console.log('REFRESH');
 
     if (match !== undefined) {
       this.setState({
@@ -143,23 +156,57 @@ class TableOfContents extends React.Component<Props, State> {
       <nav className={styles.tableOfContents}>
         <ul>
           {chapters.map((item) => (
-            <li
+            <ChapterListItem
               key={item.id}
-            >
-              <Link href={item.href}>
-                <a
-                  role="button"
-                  onClick={() => this.scrollToItem(item.id)}
-                  className={activeChapterId === item.id ? `${styles.active} text-bold` : 'text-bold'}
-                >
-                  {item.title}
-                </a>
-              </Link>
-            </li>
+              item={item}
+              scrollToItem={this.scrollToItem}
+              activeChapterId={activeChapterId}
+            />
           ))}
         </ul>
       </nav>
     );
   }
 }
+
+function ChapterListItem({
+  item,
+  scrollToItem,
+  activeChapterId,
+  isSubchapter,
+}: {
+  item: Chapter,
+  scrollToItem: (id: string) => void,
+  activeChapterId: string,
+  isSubchapter?: boolean
+}) {
+  return (
+    <li className={`
+      ${!isSubchapter ? styles['is--main-chapter'] : ''}
+      ${item.subchapters?.length > 0 ? styles['with--subchapters'] : ''}
+    `}
+    >
+      <Link href={item.href}>
+        <a
+          onClick={() => scrollToItem(item.id)}
+          className={activeChapterId === item.id ? `${styles.active} text-bold` : 'text-bold'}
+        >
+          {item.title}
+        </a>
+      </Link>
+      <ul>
+        {item.subchapters && item.subchapters.map((subchapter) => (
+          <ChapterListItem
+            isSubchapter
+            key={subchapter.id}
+            item={subchapter}
+            scrollToItem={scrollToItem}
+            activeChapterId={activeChapterId}
+          />
+        ))}
+      </ul>
+    </li>
+  );
+}
+
 export default TableOfContents;

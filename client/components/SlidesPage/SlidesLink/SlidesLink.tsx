@@ -3,7 +3,6 @@ import React from 'react';
 import { format } from 'date-fns';
 
 import styles from './SlidesLink.module.scss';
-
 interface Props {
   id: string;
   href?: string;
@@ -19,7 +18,7 @@ function SlidesLink({
 }: Props) {
   return (
     <Link href={href ?? `/slides/${id}`}>
-      <a target="_blank" className={styles['slides-link']}>
+      <a className={styles['slides-link']}>
         <img width="256" height="256" src={thumb} alt={`${title} slides thumb`} />
         <div
           className="img"
@@ -46,7 +45,7 @@ function SlidesLink({
               ) : null}
             </p>
             <div className="btn btn--light">
-              See slides
+              Vezi slide-urile
             </div>
           </div>
         </section>

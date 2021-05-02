@@ -15,7 +15,7 @@ function SlidesPage() {
         id="git-incepatori"
         created={1618825556676}
         thumb={`${process.env.CLOUDFRONT_PUBLIC}/slides/git-incepatori/cover.png`}
-        href={`${process.env.CLOUDFRONT_PUBLIC}/slides/git-incepatori/index.html`}
+        href="/slides/git-incepatori"
         title="Git & GitHub începători"
         description="Hai să descoperim și să punem în practică cele mai importante concepte și comenzi din Git & GitHub."
       />

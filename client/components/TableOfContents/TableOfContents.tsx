@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/interactive-supports-focus */
-
 import React from 'react';
 import Link from 'next/link';
 import styles from './TableOfContents.module.scss';

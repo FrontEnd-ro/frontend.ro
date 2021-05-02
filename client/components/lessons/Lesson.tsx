@@ -5,7 +5,7 @@ import { LessonMenu } from '~/components/lessons';
 
 import styles from './Lesson.module.scss';
 import { withSmoothScroll } from '~/services/Hooks';
-import { GITHUB_URL } from '~/services/Constants';
+import { getLessonById, GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
 
 interface Props {
@@ -24,14 +24,21 @@ export default function Lesson({
 }: PropsWithChildren<Props>) {
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const lesson = getLessonById(id);
 
   withSmoothScroll(articleWrapper);
+
+  const scrollTop = () => {
+    articleWrapper.current.scrollTo(0, 0);
+  };
 
   return (
     <div className={styles.lesson}>
       <LessonMenu
+        url={lesson.url}
         isOpen={isMenuOpen}
         close={() => setIsMenuOpen(false)}
+        onScrollTop={scrollTop}
         title={title}
         className={styles['lesson-menu']}
         chapters={chapters.map((chapter) => ({

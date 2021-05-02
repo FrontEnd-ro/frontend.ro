@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import Link from 'next/link';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TableOfContents, { Chapter } from '~/components/TableOfContents';
@@ -12,6 +13,8 @@ interface Props {
   close: () => void,
   title: string,
   chapters: Chapter[],
+  url: string,
+  onScrollTop: () => void,
   className?: string,
 }
 
@@ -21,6 +24,8 @@ LessonMenu({
   close,
   chapters,
   title,
+  url,
+  onScrollTop,
   className = '',
 } : Props) {
   const ref = useRef(null);
@@ -29,9 +34,13 @@ LessonMenu({
   return (
     <aside ref={ref} className={`${styles['lesson-menu']}${isOpen ? ` ${styles['lesson-menu--open']}` : ''} ${className} bg-black text-white`}>
       <header className="lesson-menu__header d-flex justify-content-between align-items-center">
-        <h2>
-          {title}
-        </h2>
+        <Link href={url}>
+          <a onClick={onScrollTop}>
+            <h2>
+              {title}
+            </h2>
+          </a>
+        </Link>
         <Button onClick={close}>
           <FontAwesomeIcon icon={faTimes} />
         </Button>

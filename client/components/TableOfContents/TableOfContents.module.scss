@@ -1,14 +1,42 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .tableOfContents {
   li {
     position: relative;
     padding-left: 2.5em;
-    margin-bottom: 2em;
+    margin: 2em 0;
+
+    &.is--main-chapter::after,
+    &.with--subchapters::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0.8em;
+      background-color: #77838b;
+      width: 0.13em;
+      height: 100%;
+      margin-top: 1.8em;
+    }
+
+    & li::before {
+      content: '';
+      position: absolute;
+      right: calc(100% + 0.25em);
+      bottom: calc(100% - 0.8em);
+      background-color: #77838b;
+      width: 1.4em;
+      height: 0.13em;
+      margin-top: 1.8em;
+    }
+
+    &:not([class*='with--subchapters']):last-of-type::after {
+      height: 0;
+    }
+
     a {
       text-decoration: none;
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
@@ -20,16 +48,7 @@
         background-clip: content-box;
         padding: 0.2em;
       }
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0.8em;
-        background-color: #77838b;
-        width: 0.13em;
-        height: 100%;
-        margin-top: 1.8em;
-      }
+
       &.active,
       &:hover {
         color: color(green);
@@ -38,9 +57,6 @@
           transition: background-color 0.3s ease-in;
         }
       }
-    }
-    &:last-child a::after {
-      height: 0;
     }
   }
 }

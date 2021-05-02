@@ -7,6 +7,7 @@ import styles from './Lesson.module.scss';
 import { withSmoothScroll } from '~/services/Hooks';
 import { getLessonById, GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
+import { Chapter } from '../TableOfContents';
 
 interface Props {
   id: string;
@@ -32,6 +33,20 @@ export default function Lesson({
     articleWrapper.current.scrollTo(0, 0);
   };
 
+  const parseChapters = (chapters: {title: string; id: string}[]) => {
+    return chapters.map(parseOneChapter);
+
+    function parseOneChapter(chapter: Chapter) {
+      return {
+        ...chapter,
+        href: `#${chapter.id}`,
+        subchapters: chapter.subchapters?.map(parseOneChapter),
+      };
+    }
+  };
+
+  const chaptersWithHref = parseChapters(chapters);
+
   return (
     <div className={styles.lesson}>
       <LessonMenu
@@ -41,10 +56,7 @@ export default function Lesson({
         onScrollTop={scrollTop}
         title={title}
         className={styles['lesson-menu']}
-        chapters={chapters.map((chapter) => ({
-          ...chapter,
-          href: `#${chapter.id}`,
-        }))}
+        chapters={chaptersWithHref}
       />
       <main>
         <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} withNavMenu />

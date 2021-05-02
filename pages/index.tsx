@@ -7,11 +7,8 @@ import {
   LandingSubscribe,
 } from '~/components/Landing';
 import Footer from '~/components/Footer';
-import { withClientMonitoring } from '~/services/Hooks';
 
 export default function Home() {
-  withClientMonitoring();
-
   return (
     <>
       <SEOTags

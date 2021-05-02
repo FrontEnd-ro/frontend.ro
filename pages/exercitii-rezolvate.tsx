@@ -4,14 +4,12 @@ import Footer from '~/components/Footer';
 import Teach from '~/components/teach';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
-import { useLoggedInOnly, withClientMonitoring } from '~/services/Hooks';
+import { useLoggedInOnly } from '~/services/Hooks';
 import { RootState } from '~/redux/root.reducer';
 import { USER_ROLE } from '../shared/SharedConstants';
 import PageContainer from '~/components/PageContainer';
 
 function TeachPage({ userInfo }: ConnectedProps<typeof connector>) {
-  withClientMonitoring();
-
   useLoggedInOnly(!!userInfo, '/exercitii-rezolvate');
 
   return (

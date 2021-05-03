@@ -46,7 +46,7 @@ function EventsStats() {
       <Link href="/slides">
         <a className={styles.card4}>
           <StatsCardLayout4
-            counter1={38}
+            counter1={100}
             counter2={33}
             text1="slide-uri"
             colorText="#1b1b15"

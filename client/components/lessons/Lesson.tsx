@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, useRef, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import { LessonMenu } from '~/components/lessons';
@@ -8,6 +13,7 @@ import { withSmoothScroll } from '~/services/Hooks';
 import { getLessonById, GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
 import { Chapter } from '../TableOfContents';
+import LessonService from '~/services/api/Lesson.service';
 
 interface Props {
   id: string;
@@ -33,7 +39,7 @@ export default function Lesson({
     articleWrapper.current.scrollTo(0, 0);
   };
 
-  const parseChapters = (chapters: {title: string; id: string}[]) => {
+  const parseChapters = (chapters: { title: string; id: string }[]) => {
     return chapters.map(parseOneChapter);
 
     function parseOneChapter(chapter: Chapter) {
@@ -46,6 +52,14 @@ export default function Lesson({
   };
 
   const chaptersWithHref = parseChapters(chapters);
+
+  useEffect(() => {
+    LessonService
+      .increaseViews(id)
+      .catch((err) => {
+        console.error('[Lesson.tsx] got while trying to update view count', err);
+      });
+  }, []);
 
   return (
     <div className={styles.lesson}>

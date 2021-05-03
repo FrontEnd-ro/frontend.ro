@@ -18,6 +18,7 @@ const demoRouter = require('./demo.router');
 const eventRouter = require('./event/event.router');
 const githubRouter = require('./github/github.router.js');
 const challengeRouter = require('./challenge/challenge.router.js');
+const lessonRouter = require('./lesson/lesson.router');
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -52,6 +53,7 @@ app.use('/api/demo', demoRouter);
 app.use('/api/events', eventRouter);
 app.use('/api/github', githubRouter);
 app.use('/api/challenges', challengeRouter);
+app.use('/api/lessons', lessonRouter);
 
 app.get('*', (req, res) => {
   nextHandler(req, res, req.url);

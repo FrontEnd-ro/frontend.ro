@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
-import { format } from 'date-fns';
 
-import styles from './SlidesLink.module.scss';
+import styles from './PresentationLink.module.scss';
+
 interface Props {
   id: string;
   href?: string;
@@ -13,12 +13,16 @@ interface Props {
   views?: number;
 }
 
-function SlidesLink({
+function PresentationLink({
   id, href, title, description, thumb, created, views,
 }: Props) {
+  const formattedDate = new Date(created).toLocaleDateString('ro-RO', {
+    year: 'numeric', month: 'long', day: 'numeric',
+  });
+
   return (
     <Link href={href ?? `/slides/${id}`}>
-      <a className={styles['slides-link']}>
+      <a className={styles['presentation-link']}>
         <img width="256" height="256" src={thumb} alt={`${title} slides thumb`} />
         <div
           className="img"
@@ -33,14 +37,14 @@ function SlidesLink({
           </div>
           <div className="footer">
             <p>
-              {format((new Date(created)), 'dd MMMM yyyy')}
+              {formattedDate}
               {views ? (
                 <span>
                   {' '}
                   |
                   {views}
                   {' '}
-                  views
+                  vizualizări
                 </span>
               ) : null}
             </p>
@@ -54,4 +58,4 @@ function SlidesLink({
   );
 }
 
-export { SlidesLink };
+export default PresentationLink;

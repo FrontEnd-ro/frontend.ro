@@ -321,7 +321,7 @@ export default function VSCodeLesson() {
             Formatarea codului la save
           </LessonHeading>
           <p>
-            Pînă acum am rulat manual o comandă pentru a formata codul nostru.
+            Până acum am rulat manual o comandă pentru a formata codul nostru.
             Dar putem automatiza acest proces să se întâmple de fiecare
             dată când dăm Save (Ctrl + S).
           </p>
@@ -405,7 +405,7 @@ export default function VSCodeLesson() {
           </p>
           <p>
             Așa că un feature ce s-ar putea să-ți placă este
-            customizare palatei de culori.
+            customizarea paletei de culori.
           </p>
           <ol className="with--count">
             <li>

@@ -9,8 +9,8 @@ import Lesson, {
   LessonResources,
   LessonTip,
 } from '~/components/lessons';
-import coverSvg from '~/public/images/lessons/vs-code/cover.svg';
 import { Diana } from '~/services/contributors';
+import { getLessonById } from '~/services/Constants';
 
 const contributors = [Diana];
 const chapters = [
@@ -29,23 +29,19 @@ const chapters = [
 ];
 
 export default function VSCodeLesson() {
+  const lesson = getLessonById('vs-code');
   return (
     <>
       <SEOTags
-        title="Visual Studio Code | Lecție INTRO"
+        title={`${lesson.title} | Lecție introductivă`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`}
-        description="Învață despre cel mai popular tool pentru developeri."
+        description={lesson.description}
         url="https://FrontEnd.ro/html/vs-code"
       />
-      <Lesson id="vs-code" withExercises={false} title="VisualStudio Code" chapters={chapters}>
+      <Lesson id="vs-code" withExercises={false} title={lesson.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
-          <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: coverSvg,
-            }}
-          />
+          <img src={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`} alt="Logo-ul VSCode" />
         </LessonCover>
         <section>
           <h2> Introducere </h2>
@@ -54,7 +50,7 @@ export default function VSCodeLesson() {
           </LessonHeading>
           <p>
             A învăța programare poate părea intimidant, mai ales pentru cei ce
-            vin din domenii cu totul diferite. Well, ținem să te anunțăm că ai
+            vin din domenii cu totul diferite. Ei bine, ținem să te anunțăm că ai
             ajuns fix la locul potrivit, întrucât noi, developeri cu experiență,
             te vom îndruma ca acest proces să fie unul cât mai interactiv și
             plăcut.
@@ -62,19 +58,21 @@ export default function VSCodeLesson() {
           <p>
             Ca să fim aliniați în acest proces de învățare ne vom folosi de un
             {' '}
-            <strong className="formatted">tool</strong>
+            <strong>tool</strong>
             {' '}
             ce are mare succes
             printre developeri și anume
             {' '}
-            <strong className="formatted">Visual Studio Code</strong>
+            <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
+              <strong>
+                Visual Studio Code
+              </strong>
+            </a>
             {' '}
             .
-          </p>
-          <p>
             Acesta este un editor de cod
             {' '}
-            <strong className="formatted">open source</strong>
+            <strong>open source</strong>
             {' '}
             , ce oferă foarte
             multe facilități pentru a ne ajuta să codăm rapid. Rulează pe
@@ -107,7 +105,7 @@ export default function VSCodeLesson() {
           </Link>
           <LessonFigure
             withBorder
-            src="/images/lessons/vs-code/download-VSCode.jpg"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/download-VSCode.jpg`}
             alt="Descarcă Visual Studio Code de pe site-ul oficial."
           />
         </section>
@@ -120,17 +118,18 @@ export default function VSCodeLesson() {
             Haideți să deschidem un proiect în VS Code. Ca să facem asta, putem
             să-l tragem cu
             {' '}
-            <strong className="formatted">drag and drop</strong>
+            <strong>drag and drop</strong>
             {' '}
             sau putem alege opțiunea
-            <strong className="formatted">Open Folder</strong>
+            {' '}
+            <strong>Open Folder</strong>
             {' '}
             .
           </p>
           <LessonFigure
             isVideo
             withBorder
-            src="/images/lessons/vs-code/adaugare-proiect-vs-code.mp4"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/adaugare-proiect-vs-code.mp4`}
             alt="Cum adăugăm un proiect în VS Code."
           />
           <p>
@@ -139,7 +138,7 @@ export default function VSCodeLesson() {
           </p>
           <LessonFigure
             withBorder
-            src="/images/lessons/vs-code/files-and-folders.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/files-and-folders.png`}
             alt="Folderul și tot ce acesta conține."
           />
           <p>
@@ -152,7 +151,7 @@ export default function VSCodeLesson() {
           </p>
           <LessonFigure
             withBorder
-            src="/images/lessons/vs-code/create-file.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/create-file.png`}
             alt="Crearea unui nou fișier."
           />
           <LessonTip>
@@ -188,20 +187,19 @@ export default function VSCodeLesson() {
           <p>
             În partea din stânga a ecranului avem
             {' '}
-            <strong className="formatted">Bara de Activitate</strong>
-            {' '}
-            .
+            <strong>Bara de Activitate</strong>
+            :
           </p>
           <LessonFigure
             withBorder
-            src="/images/lessons/vs-code/activity-bar.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/activity-bar.png`}
             alt="Bara de activitate în VS Code."
           />
           <ol className="with--count">
             <li>
               Începem cu prima opțiune de sus denumită
               {' '}
-              <strong className="formatted">File Explorer</strong>
+              <strong>File Explorer</strong>
               {' '}
               , unde vom
               găsi folderele și fișierele curente ale proiectului nostru.
@@ -209,106 +207,113 @@ export default function VSCodeLesson() {
             <li>
               Continuăm cu
               {' '}
-              <strong className="formatted">Search</strong>
+              <strong>Search</strong>
               {' '}
               ,
               pentru a putea căuta global, adică în toate folderele și fișierele
               noastre.
             </li>
             <li>
-              <strong className="formatted">Source Control</strong>
+              <strong>Source Control</strong>
               {' '}
-              - VS Code
-              vine cu
-              <strong>Git Source Control</strong>
+              este locul unde putem
+              putem colabora via
               {' '}
-              la pachet.
+              <strong>
+                Git
+              </strong>
+              , folosind o interfață vizuală. (PS: dacă nu știi Git poate
+              {' '}
+              <Link href="/slides/git-incepatori">
+                <a>
+                  slide-urile de la trainingul pe care l-am ținut
+                </a>
+              </Link>
+              {' '}
+              o să te ajute)
             </li>
             <li>
-              <strong className="formatted">Run and Debug</strong>
-            </li>
-            <li>
-              <strong className="formatted">Extensions View</strong>
+              <strong>Extensions View</strong>
               {' '}
               - de unde
-              putem downloada extensii pentru aproape orice avem nevoie. Aceste
-              extensii sunt de fapt niște programe pe care le putem adăuga la
-              proiectul nostru. Ele sunt
+              putem descărca programe
               {' '}
-              <strong className="formatted">open-source</strong>
-              , deci un efort
-              de comunitate.
+              <strong>
+                create de comunitate
+              </strong>
+              {' '}
+              (numite extensii) care extind acest editor cu funcționalități suplimentare.
+              Povestim mai multe
+              despre ele
+              {' '}
+              <Link href="#extensii">
+                <a>
+                  mai jos
+                </a>
+              </Link>
+              .
             </li>
           </ol>
         </section>
         <section>
           <LessonHeading as="h3" id="scurtaturi">
-            Shortcuts
+            Scurtături
           </LessonHeading>
           <p>
-            Vedem totodată și scurtăturile pentru a iniția o anumită acțiune.
+            Ca și programatori
+            e foarte important
+            ca tool-urile pe care le folosim să ne crească productivitatea,
+            mai ales când vine vorba de taskuri foarte repetitive.
+          </p>
+          <p>
+            De aceea, fiecare editor de cod vine cu o serie de Shortcut-uri
+            (scurtături), adică combinații
+            de taste care împreună fac anumite acțiuni.
+            E posibil ca la început să fii obșnuit să faci
+            totul cu mouse-ul, dar crede-ne pe cuvânt
+            (de fapt nu ne crede, uită-te la alți progamatori
+            când codează) și ai să vezi că folosesc cât de mult
+            se poate tastatura.
+          </p>
+
+          <p>
+            Mai jos îți lăsăm 3 combinații de taste
+            foarte importante, pe care îți sugerăm să le înveți și folosești:
           </p>
           <LessonFigure
             withBorder
-            src="/images/lessons/vs-code/shortcuts.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/shortcuts.png`}
             alt="Shortcuts VS Code."
           />
-          <p>
-            Fiecare acțiune în VisualStudio Code este atribuită unei comenzi
-            care se regăsește aici în
-            {' '}
-            <strong>Command Palette.</strong>
-          </p>
         </section>
         <section>
           <LessonHeading as="h3" id="indentarea-si-formatarea-codului">
             Indentarea și formatarea codului
           </LessonHeading>
-          <LessonTip>
+          <p>
             Este foarte important să indentăm codul și să îl formatăm de fiecare
             dată. Ne ajută să avem o viziune clară, să ne aliniem cu întreaga
             comunitate și să respectăm cele mai bune practici.
-          </LessonTip>
+          </p>
           <p>
             Pentru a face lucrul acesta vom folosi comanda
             {' '}
-            <strong className="formatted"> Format Document </strong>
+            <strong> Format Document </strong>
             {' '}
-            din Command
-            Palette. Această comandă va oferi consistență codului scris prin
-            spațiere, ghilimele.
+            din
+            {' '}
+            <strong>
+              Command Palette
+            </strong>
+            {' '}
+            (vezi shortcut-urile de mai sus)
+            .
           </p>
           <LessonFigure
             isVideo
             withBorder
-            src="/images/lessons/vs-code/format-document.mp4"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/format-document.mp4`}
             alt="Formatarea codului pentru un document html."
-          />
-          <p>
-            Și cam asta e tot pentru un fișier cu extensia
-            {' '}
-            <strong>.html</strong>
-            {' '}
-            . Vedem cum
-            editorul a formatat codul pentru noi. Pentru fișiere de tip
-            {' '}
-            <strong>
-              .css,
-              .js, .ts,
-            </strong>
-            {' '}
-            s.a.m.d va trebui să instalăm anumite extensii care să ne
-            ajute pe partea aceasta.
-          </p>
-          <p>
-            În momentul în care vom avea mai multe extensii instalate si vom
-            selecta opțiunea Format Document, va apărea un pop-up de genul
-            acesta. Va trebui apoi să selectăm noi cu ce formatter vom continua.
-          </p>
-          <LessonFigure
-            withBorder
-            src="/images/lessons/vs-code/select-formatter-multiple-extensions.png"
-            alt="În momentul în care vom avea mai multe extensii instalate si vom selecta opțiunea Format Document, va apărea un pop-up de genul acesta. Va trebui apoi să selectăm noi cu ce formatter vom continua."
           />
         </section>
         <section>
@@ -317,41 +322,27 @@ export default function VSCodeLesson() {
           </LessonHeading>
           <p>
             Pînă acum am rulat manual o comandă pentru a formata codul nostru.
-            Dar putem automatiza acest proces, prin realizarea unor setări.
+            Dar putem automatiza acest proces să se întâmple de fiecare
+            dată când dăm Save (Ctrl + S).
           </p>
           <p>
-            Dacă mergem în
+            În secțiunea
             {' '}
-            <strong>File -&gt; Preferences -&gt; Settings</strong>
+            <strong>User Settings</strong>
             {' '}
-            sau dacă apăsăm
+            (la care putem ajunge din
             {' '}
-            <strong>COMMAND +</strong>
+            <strong>Command Pallete</strong>
+            )
+            putem găsi opțiunea
             {' '}
-            (pentru macOS) sau
+            <strong>Format On Save</strong>
             {' '}
-            <strong>CTRL +</strong>
-            {' '}
-            (pentru Windows), vom deschide
-            meniul de
-            {' '}
-            <strong>Settings</strong>
-            .
-          </p>
-          <p>
-            Odată ce meniul s-a deschis, căutăm opțiunea
-            {' '}
-            <strong>Editor</strong>
-            {' '}
-            :
-            {' '}
-            <em>Format On Save</em>
-            {' '}
-            și ne asigurăm că e bifată.
+            și să o bifăm.
           </p>
           <LessonFigure
             withBorder
-            src="/images/lessons/vs-code/formatarea-codului-la-save.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/formatarea-codului-la-save.png`}
             alt="Formatarea codului la save."
           />
         </section>
@@ -360,21 +351,13 @@ export default function VSCodeLesson() {
             Extensii
           </LessonHeading>
           <p>
-            Extensiile ne permit să adăugăm diferite tool-uri (de la debuggere,
-            la formatări sau extensii de programare) care să vină în sprijinul
-            dezvoltării.
-          </p>
-          <LessonTip>
-            Ne putem gândi la extensii ca și la aplicații noi pe care le
-            instalăm pentru telefonul nostru.
-          </LessonTip>
-          <p>
-            Dacă dăm click pe icon-ul extensii se va deschide o listă cu cele
-            mai populare extensii.
+            Extensiile ne permit să adăugăm diverse funcționalități care să vină în sprijinul
+            dezvoltării codului. Cum ziceam și în introducere, de obicei sunt
+            scrise de comunitate și open-source.
           </p>
           <LessonFigure
             withBorder
-            src="/images/lessons/vs-code/extensii.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/extensii.png`}
             alt="Extensii"
           />
           <p>
@@ -385,64 +368,28 @@ export default function VSCodeLesson() {
           </p>
           <LessonFigure
             withBorder
-            src="/images/lessons/vs-code/detalii-extensii.png"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/detalii-extensii.png`}
             alt="Extensii"
           />
           <p>
             Să luăm spre exemplu extensia
             {' '}
-            <strong className="formatted">Live Server</strong>
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <strong>Live Server</strong>
+            </a>
             {' '}
             .
-          </p>
-          <LessonTip>
-            Aceasta practic pornește un
+            Aceasta pornește un
             {' '}
-            <em>server local</em>
+            <em>server de dezvoltare local</em>
             {' '}
-            de dezvoltare ce
-            oferă caracteristica de reîncărcare a paginii de câte ori facem o
-            modificare în codul nostru. Asta ne ajută să câștigăm timp, întrucât
-            nu trebuie să mai facem noi refresh de fiecare dată în browser.
-          </LessonTip>
-          <p>
-            Ca să o instalăm vom apăsa pe
-            {' '}
-            <strong>Install</strong>
-            {' '}
-            . Odată ce a fost instalată, ea
-            va apărea în stânga, alături de celelalte extensii pe care le avem.
-          </p>
-          <LessonFigure
-            withBorder
-            src="/images/lessons/vs-code/instalare-extensie.png"
-            alt="Instalarea unei extensii."
-          />
-          <p>
-            Dacă decidem că nu vrem să mai folosim o extensie, vom da click pe
-            aceasta și vom selecta opțiunea
-            {' '}
-            <strong>Disable</strong>
-            {' '}
-            sau
-            {' '}
-            <strong>Uninstall</strong>
-            .
-          </p>
-          <LessonFigure
-            withBorder
-            src="/images/lessons/vs-code/dezinstalare-extensie.png"
-            alt="Dezinstalarea unei extensii."
-          />
-          <p>
-            Și așa vom proceda pentru orice extensie pe care dorim să o folosim.
-            Mai multe detalii găsim în documentația oficială:
-            {' '}
-            <Link href=" https://code.visualstudio.com/docs/editor/extension-gallery.">
-              <a target="_blank" rel="noopener noreferrer">
-                Despre extensii
-              </a>
-            </Link>
+            ce va da refresh la pagină în browser de fiecare dată când
+            modificăm ceva în fișier. Deci nu mai trebuie noi să ținem minte
+            să facem asta pentru a vedea ultimele modificări.
           </p>
         </section>
         <section>
@@ -452,62 +399,54 @@ export default function VSCodeLesson() {
           <p>
             Sunt multe multe lucruri faine pe care le oferă VS Code. Nu reușim
             să le includem pe toate în această lecție, aici vrem să acoperim
-            lucrurile care contează acum pentru începutul carierei de developer.
+            lucrurile care contează acum pentru începutul carierei tale de developer.
             Dar vrem să discutăm un pic și despre partea customizabilă, ca să ne
             creem un environment cât mai plăcut.
           </p>
           <p>
-            Așa că un feature foarte fain pe care VisualStudio Code îl are este
-            cel de customizare a temei. Hai să nu mai prelungim așteptarea și să
-            vedem cum putem face asta.
+            Așa că un feature ce s-ar putea să-ți placă este
+            customizare palatei de culori.
           </p>
           <ol className="with--count">
             <li>
-              In VS Code, deschide Color Theme picker din File
+              Deschide
               {' '}
-              {'>'}
+              <strong>
+                Color Theme
+              </strong>
               {' '}
-              <strong className="formatted">Preferences</strong>
+              din
               {' '}
-              {'>'}
-              {' '}
-              <strong className="formatted">Color Theme</strong>
-              . (Code
-              Preferences
-              {'>'}
-              {' '}
-              Color Theme pe macOS). Sau cu ajutorul tastaturii
-              <strong className="formatted">Ctrl+K</strong>
-              {' '}
-              <strong className="formatted">Ctrl + T</strong>
+              <strong>
+                Command Pallete
+              </strong>
               .
             </li>
             <li>
               Folosește tastele up și down pentru a face preview la culorile
               temelor.
             </li>
-            <li>Selectează tema pe care o dorești apăsând ENTER.</li>
+            <li>
+              Selectează tema pe care o dorești apăsând
+              {' '}
+              <strong>ENTER</strong>
+              .
+            </li>
           </ol>
           <p>
-            Dacă tema pe care o dorești nu se află printre cele default, poți
-            instala o extensie (că tot am vorbit despre ele).
+            psst: poți instala și alte teme via Extensii. Nouă ne
+            place foarte mult
+            {' '}
+            <a href="https://draculatheme.com/visual-studio-code" target="_blank" rel="noreferrer">
+              Dracula Theme 🧛‍♂️
+            </a>
           </p>
           <LessonFigure
             isVideo
             withBorder
-            src="/images/lessons/vs-code/color-theme.mp4"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/color-theme.mp4`}
             alt="Instalare extensie pentru customizare temă."
           />
-          <LessonTip>
-            VS Code ne permite chiar și să ne creem noi propria temă. Află cum
-            poți face asta de aici:
-            {' '}
-            <Link href="https://code.visualstudio.com/docs/getstarted/themes">
-              <a target="_blank" rel="noopener noreferrer">
-                customizare teme.
-              </a>
-            </Link>
-          </LessonTip>
         </section>
         <div className="dots" />
         <LessonResources

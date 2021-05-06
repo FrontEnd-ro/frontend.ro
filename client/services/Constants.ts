@@ -53,13 +53,14 @@ export const LESSONS: LessonDescription[] = [
   },
   {
     id: 'vs-code',
-    written: false,
-    title: 'VisualStudio Code',
+    written: true,
+    title: 'Visual Studio Code',
     description:
-      'Scurtă introducere în programul pe care-l vom folosi să scriem cod.',
+      'Scurtă introducere în programul pe care-l vom folosi să scriem cod, și nu numai.',
     url: '/intro/vs-code',
     type: 'intro',
     contributors: [Diana],
+    cover: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
   },
   /** HTML lessons */
   {

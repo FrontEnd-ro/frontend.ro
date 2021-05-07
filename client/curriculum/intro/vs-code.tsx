@@ -36,7 +36,7 @@ export default function VSCodeLesson() {
         title={`${lesson.title} | Lecție introductivă`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`}
         description={lesson.description}
-        url="https://FrontEnd.ro/html/vs-code"
+        url={`https://FrontEnd.ro/${lesson.url}`}
       />
       <Lesson id="vs-code" withExercises={false} title={lesson.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />

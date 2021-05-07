@@ -11,14 +11,18 @@ export default function LessonFigure(
 ) {
   return (
     <figure className={`${styles.figure} ${withBorder && styles['figure--border']} d-flex flex-column justify-content-between text-center`}>
-      <a href={demo || src} target="_blank" rel="noreferrer">
-        {isVideo ? (
-          <video muted autoPlay loop controls>
+      {isVideo ? (
+        <div>
+          <video muted autoPlay loop>
             <source src={src} type="video/mp4" />
           </video>
-        ) : <img src={src} alt={alt} />}
-
-      </a>
+        </div>
+      )
+        : (
+          <a href={demo || src} target="_blank" rel="noreferrer">
+            <img src={src} alt={alt} />
+          </a>
+        )}
       <figcaption>
         {alt}
         {demo && (

@@ -53,7 +53,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "storybook-to-ghpages": "storybook-to-ghpages",
-    "deploy-storybook": "yarn storybook-to-ghpages -o storybook-static"
+    "deploy-storybook": "storybook-to-ghpages -o storybook-static"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.3.0",

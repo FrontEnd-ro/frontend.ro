@@ -1,8 +1,8 @@
 name: Build & Deploy Storybook
 on:
   push:
-    # Trigger the action only when files change in the folders defined here
-    paths: ['client/components/**']
+    branches:
+      - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

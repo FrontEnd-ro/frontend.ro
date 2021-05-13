@@ -1,0 +1,16 @@
+name: Build & Deploy Storybook
+on: 
+  push:
+    # Trigger the action only when files change in the folders defined here
+    paths: ["client/components/**"]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install and Build 🔧
+        run: |
+          npm install
+          npm run deploy-storybook -- -ci --host-token-env-variable=GH_TOKEN
+        with:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

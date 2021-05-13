@@ -8,8 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install and Build 🔧
-        # This needs an Acces Token stored as "GH_TOKEN" 👇
+      - name: Install and Build
         run: |
           npm install
-          npm run deploy-storybook -- -ci --host-token-env-variable=GH_TOKEN
+          npm run build-storybook
+      - uses: "finnp/create-file-action@master"
+        env:
+          FILE_NAME: "storybook-static/CNAME"
+          FILE_DATA: "storybook.frontend.ro"
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: storybook-static # The folder the action should deploy.

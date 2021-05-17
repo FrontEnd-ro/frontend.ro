@@ -1,0 +1,34 @@
+@import '../../../../styles/variables';
+
+.resource-preview {
+  border-radius: 0.5em;
+  border: 1px solid color(silver);
+  transition: transform 0.5s $cubic;
+  box-shadow: 0 0 5px color(silver);
+
+  &:hover {
+    transform: translateY(-0.5em);
+
+    .cover p {
+      display: block;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.cover {
+  height: 11em;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: color(silver);
+  border-top-right-radius: 0.5em;
+  border-top-left-radius: 0.5em;
+
+  p {
+    display: none;
+  }
+}

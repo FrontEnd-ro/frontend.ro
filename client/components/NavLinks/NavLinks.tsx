@@ -67,6 +67,13 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
             </Link>
           </li>
         )}
+        <li>
+          <Link href="/resurse">
+            <a>
+              Resurse utile
+            </a>
+          </Link>
+        </li>
       </ol>
     </nav>
   );

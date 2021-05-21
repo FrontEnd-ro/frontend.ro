@@ -44,12 +44,20 @@ function Header({
           )}
           <Link href={href}>
             <a className={styles.logo}>
-              <img
-                srcSet="/logo.png 500w, /logo-square--S.jpg 165w"
-                sizes="(max-width: 600px) 165px, 500px"
-                src="/logo.png"
-                alt="FrontEnd.ro logo"
-              />
+              <picture>
+                <source
+                  srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo-square--S.jpg`}
+                  media="(max-width: 600px)"
+                />
+                <source
+                  srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo.png`}
+                  media="(min-width: 600px)"
+                />
+                <img
+                  src={`${process.env.CLOUDFRONT_PUBLIC}/public/logo.png`}
+                  alt="FrontEnd.ro logo"
+                />
+              </picture>
             </a>
           </Link>
           {demoPage && (

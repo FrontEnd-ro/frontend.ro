@@ -6,41 +6,58 @@ import styles from './Footer.module.scss';
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <section className="branding">
+      <section>
         <h5> FrontEnd.ro </h5>
-        <p> © 2020 FrontEnd.ro</p>
-        <p> All rights reserved</p>
+        <p>
+          Contribuie pe
+          {' '}
+          <a href={GITHUB_URL}>
+            GitHub
+          </a>
+        </p>
+        <p>
+          Vezi componentele în
+          {' '}
+          <a href="https://storybook.frontend.ro">
+            Storybook
+          </a>
+        </p>
       </section>
 
       <section>
-        <h5> About </h5>
+        <h5> Contact </h5>
         <p>
           <a href="mailto:hello@frontend.ro">hello@frontend.ro</a>
         </p>
         <p>
-          Made with
+          Un proiect open-source pornit din Iași, România
           {' '}
-          <span className="text-red">❤</span>
-          {' '}
-          by the open-source community
+          <span className="text-red">
+            ❤
+          </span>
         </p>
       </section>
       <section className="social">
         <h5> Social </h5>
         <div>
           <p>
-            <a href={GITHUB_URL}>
-              GitHub
-            </a>
-          </p>
-          <p>
-            <a href="https://twitter.com/FrontEndRo">
-              Twitter
+            <a href="https://ro.linkedin.com/company/frontend-ro">
+              LinkedIn
             </a>
           </p>
           <p>
             <a href="https://facebook.com/FrontEndRo">
               Facebook
+            </a>
+          </p>
+          <p>
+            <a href="https://www.instagram.com/frontend.ro/">
+              Instagram
+            </a>
+          </p>
+          <p>
+            <a href="https://twitter.com/FrontEndRo">
+              Twitter
             </a>
           </p>
         </div>

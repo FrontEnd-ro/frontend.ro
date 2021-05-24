@@ -14,7 +14,7 @@ function EventsStats() {
       <Link href="/evenimente">
         <a className={styles.card1}>
           <StatsCardLayout6
-            counter={3}
+            counter={4}
             colorText="#663399"
             description="training-uri practice"
             direction="to top left"

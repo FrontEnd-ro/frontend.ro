@@ -181,6 +181,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://addyosmani.com/resources/essentialjsdesignpatterns/book/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/js-design-patterns_500w.jpg`,
     },
+    {
+      title: 'JavaScript Notes',
+      url: 'https://goalkicker.com/JavaScriptBook/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/javascript-notes_350w.png`,
+    },
   ],
   [ResourceCategory.BACKGROUNDS_AND_COLORS]: [
     {

@@ -1,61 +1,61 @@
 import React from 'react';
-import { RESOURCES } from './resources-model';
+import { RESOURCES, ResourceCategory } from './resources-model';
 import ResourcePreview from './ResourcePreview/ResourcePreview';
 
 import styles from './Resources.module.scss';
 
 function Resources() {
   const sections = [{
-    id: 'esentials',
+    id: ResourceCategory.ESSENTIALS,
     title: 'Esențiale',
     description: 'Noi le avem mereu deschise într-un tab. Tu?',
   }, {
-    id: 'images-videos',
+    id: ResourceCategory.IMAGES_VIDEOS,
     title: 'Imagini și Video-uri',
-    description: 'Vin cu o licență deschisă deci le putem folosi în orice proiect.',
+    description: 'Vin cu o licență deschisă deci let poți folosi în orice proiect.',
   },
   {
-    id: 'vector',
+    id: ResourceCategory.VECTOR,
     title: 'Ilustrații vectoriale',
     description: 'Te ajută să faci site-ul mai prietenos și au o licență deschisă pentru a le folosi fără probleme.',
   },
   {
-    id: 'icons',
-    title: 'Iconite',
-    description: 'Te ajută să faci interfața mai intuitivă, mai ales pe mobil unde nu ai char așa de mult spațiu.',
+    id: ResourceCategory.ICONS,
+    title: 'Iconițe',
+    description: 'Te ajută să faci interfața mai intuitivă, mai ales pe mobil unde nu avem chiar așa de mult spațiu.',
   },
   {
-    id: 'css-spinners',
+    id: ResourceCategory.CSS_SPINNERS,
     title: 'CSS Spiners',
     description: 'Inspirație pentru loaderele din proiectele tale.',
   }, {
-    id: 'tutorials',
+    id: ResourceCategory.TUTORIALS,
     title: 'Tutoriale interactive',
     description: 'Sunt multe tutoriale pe net, dar acestea ne-au atras atenția căci fac învățarea mai interactivă.',
   }, {
-    id: 'blogs',
+    id: ResourceCategory.BLOGS,
     title: 'Blog-uri',
     description: 'Pentru când vrei să te relaxezi citind despre ultimele noutăți.',
   },
   {
-    id: 'fonts',
-    title: 'Free Fonts',
-    description: 'Adaugă mai multă personalitate site-ului tău shimbând fonturile.',
-  },
-  {
-    id: 'books',
+    id: ResourceCategory.BOOKS,
     title: 'Cărți',
-    description: 'Merită citite pe larg căci conțin o mulțime de informații care te vor ajuta să ajungi la următorul nivel.',
+    description: 'Merită citite pe larg căci conțin o mulțime de informații care sigur te vor ajuta.',
   },
   {
-    id: 'backgrounds-and-colors',
+    id: ResourceCategory.BACKGROUNDS_AND_COLORS,
     title: 'Background-uri & Culori',
-    description: 'Dacă nu ai un designer care să vină cu sugestii, te poți inspira de aici. :)',
+    description: 'Dacă echipa nu are un designer care să vină cu sugestii, te poți inspira de aici :)',
   },
   {
-    id: 'perf',
+    id: ResourceCategory.PERFORMANCE,
     title: 'Performanță',
     description: 'Asigură-te că aplicație rămâne performantă și respectă bunele practici.',
+  },
+  {
+    id: ResourceCategory.FONTS,
+    title: 'Fonts',
+    description: 'Adaugă mai multă personalitate site-ului tău schimbând fonturile.',
   }];
 
   return (
@@ -72,7 +72,7 @@ function Resources() {
         </p>
         <p>
           Așteptăm și sugestiile tale, așa că dă-ne un semn
-          cu resurse care te ajută pe tine și le vom adauga aici
+          cu resursele care te ajută pe tine și le vom adăuga aici.
         </p>
       </div>
       <ol className={styles['category-list']}>
@@ -87,7 +87,7 @@ function Resources() {
               </p>
             )}
             <ol className={styles['resources-list']}>
-              {RESOURCES.filter((r) => r.category === id).map((resource) => (
+              {RESOURCES[id].map((resource) => (
                 <li key={resource.title}>
                   <ResourcePreview {...resource} />
                 </li>

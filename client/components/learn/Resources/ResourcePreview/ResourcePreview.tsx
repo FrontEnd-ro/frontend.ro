@@ -11,7 +11,10 @@ function ResourcePreview({
 }: ResourceDescription) {
   return (
     <Link href={url}>
-      <a className={`
+      <a
+        target="_blank"
+        rel="noreferrer"
+        className={`
         ${styles['resource-preview']} 
         w-100 no-underline d-inline-block relative
       `}

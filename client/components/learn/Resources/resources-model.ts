@@ -57,6 +57,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: ' https://www.pexels.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/pexels_500w.jpg`,
     },
+    {
+      title: 'Coverr',
+      url: 'https://coverr.co/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/coverr_500w.png`,
+    },
   ],
   [ResourceCategory.VECTOR]: [
     {
@@ -110,6 +115,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       title: 'Flaticon',
       url: 'https://www.flaticon.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/flaticon_500w.jpg`,
+    },
+    {
+      title: 'Noun Project',
+      url: 'https://thenounproject.com/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/nounproject_500w.png`,
     },
   ],
   [ResourceCategory.CSS_SPINNERS]: [
@@ -173,6 +183,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       title: 'Google Fonts',
       url: 'https://fonts.google.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/googlefonts_500w.png`,
+    },
+    {
+      title: 'DaFont',
+      url: 'https://www.dafont.com/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/dafont_500w.png`,
     },
   ],
   [ResourceCategory.BOOKS]: [

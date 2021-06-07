@@ -92,6 +92,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/fontawesome_500w.png`,
     },
     {
+      title: 'Google Material Icons',
+      url: 'https://fonts.google.com/icons',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/material-icons_500w.png`,
+    },
+    {
       title: 'Eva Icons',
       url: 'https://akveo.github.io/eva-icons/#/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/eva-icons_500w.jpg`,

@@ -133,6 +133,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://tobiasahlin.com/spinkit/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/spinkit_500w.jpg`,
     },
+    {
+      title: 'Loading.io',
+      url: 'https://loading.io/css/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/loading-io_500w.png`,
+    },
   ],
   [ResourceCategory.TUTORIALS]: [
     {

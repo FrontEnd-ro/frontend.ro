@@ -1,0 +1,21 @@
+.responsive-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-structure-wrapper {
+  width: 20em;
+  margin-left: 5em;
+}
+
+@media screen and (max-width: 660px) {
+  .responsive-flex {
+    flex-direction: column;
+
+    & > * {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

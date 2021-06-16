@@ -5,7 +5,7 @@ export interface Contributor {
   shortBio?: string,
 }
 
-export const Pava : Contributor = {
+export const Pava: Contributor = {
   name: 'Păvă',
   avatar: '/images/contributors/iampava.png',
   url: 'https://iampava.com',
@@ -17,46 +17,52 @@ export const Pava2: Contributor = {
   url: 'https://iampava.com',
   shortBio: 'Fondatorul FrontEnd.ro',
 };
-export const Diana : Contributor = {
+export const Diana: Contributor = {
   name: 'Diana',
   avatar: '/images/contributors/andreeatoma.jpg',
   url: 'https://github.com/andreeatoma',
   shortBio: 'Open-source contributor',
 };
-export const Ira : Contributor = {
+export const Ira: Contributor = {
   name: 'Ira',
   avatar: '/images/contributors/iramelnic.jpg',
   url: 'https://www.facebook.com/melnic.ira',
 };
-export const NicolaeMaties : Contributor = {
+export const NicolaeMaties: Contributor = {
   name: 'Nicolae',
   avatar: '/images/contributors/nmaties.jpg',
   url: 'https://github.com/nmaties',
 };
-export const CatalinPopusoi : Contributor = {
+export const CatalinPopusoi: Contributor = {
   name: 'Cătălin',
   avatar: '/images/contributors/catalinpopusoi.jpg',
   url: 'https://github.com/catalinpopusoi',
   shortBio: 'FrontEnd developer la Endava',
 };
-export const RobertParasca : Contributor = {
+export const RobertParasca: Contributor = {
   name: 'Robert',
   avatar: '/images/contributors/robertparasca.png',
   url: 'https://www.facebook.com/robert.parasca/',
 };
-export const DanielHutanu : Contributor = {
+export const DanielHutanu: Contributor = {
   name: 'Daniel',
   avatar: '/images/contributors/danielhutanu.jpg',
   url: 'https://www.linkedin.com/in/danielhutanu22/',
 };
-export const SebastianLatkolic : Contributor = {
+export const SebastianLatkolic: Contributor = {
   name: 'Sebastian',
   avatar: '/images/contributors/juppsy.jpg',
   url: 'https://github.com/juppsy',
 };
-export const GeorgeMarianMorosac : Contributor = {
+export const GeorgeMarianMorosac: Contributor = {
   name: 'George',
   avatar: '/images/contributors/georgemarianmorosac.jpg',
   url: 'https://www.linkedin.com/in/george-marian-morosac-7381508a/',
   shortBio: 'SDE la Amazon',
+};
+export const IulianRedinciuc: Contributor = {
+  name: 'Iulian',
+  avatar: '/images/contributors/iulianredinciuc.png',
+  url: 'https://www.linkedin.com/in/iulian-redinciuc-b90b51b8/',
+  shortBio: 'FrontEnd Developer',
 };

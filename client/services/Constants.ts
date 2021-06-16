@@ -4,6 +4,7 @@ import {
   Diana,
   NicolaeMaties,
   Pava,
+  IulianRedinciuc,
   RobertParasca,
   SebastianLatkolic,
   DanielHutanu,
@@ -73,13 +74,14 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
   },
   {
-    id: 'structura-de-baza-a-oricarei-aplicatii',
-    written: false,
-    title: 'Structura de bază a oricărei aplicații web',
-    description:
-      'Indiferent ce tip de aplicație creezi, toate au aceeași structură generală despre care vom vorbi aici.',
-    url: '/html/structura-de-baza-a-oricarei-aplicatii',
+    id: 'structura-pagina-html',
+    written: true,
+    title: 'Structura fiecărei pagini HTML',
+    description: 'Orice website, fie că este un site de prezentare sau un complex editor video, conține aceeași structura de bază cu mai multe elemente descriptive și nu numai.',
+    url: '/html/structura-pagina-html',
     type: 'html',
+    contributors: [IulianRedinciuc, Pava],
+    cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
   },
   {
     id: 'validarea-paginilor-html',

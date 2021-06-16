@@ -214,14 +214,14 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
   ],
   [ResourceCategory.BACKGROUNDS_AND_COLORS]: [
     {
-      title: 'SVG Backgrounds',
-      url: 'https://www.svgbackgrounds.com//',
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/svgbg_500w.jpg`,
+      title: 'Coolors',
+      url: 'https://coolors.co/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/coolors_500w.png`,
     },
     {
-      title: 'Cool Backgrounds',
-      url: 'https://coolbackgrounds.io/',
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/coolbg_500w.png`,
+      title: 'Color Hunt',
+      url: 'https://colorhunt.co/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/color-hunt_500w.png`,
     },
     {
       title: 'UI gradients',
@@ -229,9 +229,14 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/uigradients_500w.jpg`,
     },
     {
-      title: 'Coolors',
-      url: 'https://coolors.co/',
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/coolors_500w.png`,
+      title: 'Cool Backgrounds',
+      url: 'https://coolbackgrounds.io/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/coolbg_500w.png`,
+    },
+    {
+      title: 'SVG Backgrounds',
+      url: 'https://www.svgbackgrounds.com//',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/svgbg_500w.jpg`,
     },
   ],
   [ResourceCategory.PERFORMANCE]: [

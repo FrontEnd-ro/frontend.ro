@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AD_CONFIGS from './ads/ads-model';
 
 import styles from './LandingAdBanner.module.scss';
 
@@ -33,6 +31,7 @@ function LandingAdBanner({ adId }: { adId: string }) {
     return null;
   }
 
+  const adConfig = AD_CONFIGS[adId];
   const didVisit = () => localStorage.setItem(adId, 'true');
 
   return (
@@ -42,15 +41,7 @@ function LandingAdBanner({ adId }: { adId: string }) {
       d-flex justify-content-center align-items-center
     `}
     >
-      <FontAwesomeIcon className="mr-2" icon={faBell} width={24} height={24} />
-      <p className="mr-2">
-        În weekend organizăm din nou trainingul despre Git & GitHub.
-      </p>
-      <Link href="/evenimente/git-incepatori">
-        <a onClick={didVisit}>
-          Vrei să participi?
-        </a>
-      </Link>
+      <adConfig.Component href={adConfig.href} didVisit={didVisit} />
     </div>
   );
 }

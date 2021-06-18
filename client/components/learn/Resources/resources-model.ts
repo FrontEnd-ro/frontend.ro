@@ -190,6 +190,16 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/googlefonts_500w.png`,
     },
     {
+      title: 'Fontshare',
+      url: 'https://www.fontshare.com',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/fontshare_500w.png`,
+    },
+    {
+      title: 'Fontesk',
+      url: 'https://fontesk.com/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/fontesk_500w.png`,
+    },
+    {
       title: 'DaFont',
       url: 'https://www.dafont.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/dafont_500w.png`,

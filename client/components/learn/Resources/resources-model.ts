@@ -151,6 +151,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/flexboxfroggy_500w.png`,
     },
     {
+      title: 'Flexbox Defense',
+      url: 'http://www.flexboxdefense.com/',
+      cover: `https://www.flickr.com/photos/193258951@N02/`,
+    },
+    {
       title: 'CSS Grid Garden',
       url: 'https://cssgridgarden.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/css-grid-garden_500w.png`,

@@ -16,7 +16,7 @@ function ResourcePreview({
         rel="noreferrer"
         className={`
         ${styles['resource-preview']} 
-        w-100 no-underline d-inline-block relative
+        w-100 h-100 d-flex flex-column no-underline
       `}
       >
         <div
@@ -25,7 +25,7 @@ function ResourcePreview({
             backgroundImage: `url(${cover})`,
           }}
         />
-        <div className={styles.container}>
+        <div className="flex-1 d-flex align-items-center justify-content-center">
           <h3 className="text-center">
             {title}
           </h3>

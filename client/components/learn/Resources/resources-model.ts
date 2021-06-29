@@ -222,6 +222,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/js-design-patterns_500w.jpg`,
     },
     {
+      title: 'High Perf Browser Networking',
+      url: 'https://hpbn.co/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/hpbn_600w.png`,
+    },
+    {
       title: 'JavaScript Notes',
       url: 'https://goalkicker.com/JavaScriptBook/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/javascript-notes_350w.png`,

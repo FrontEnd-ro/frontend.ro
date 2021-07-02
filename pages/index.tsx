@@ -1,3 +1,5 @@
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '~/redux/root.reducer';
 import SEOTags from '~/components/SEOTags';
 import {
   LandingAdBanner,
@@ -8,7 +10,7 @@ import {
 } from '~/components/Landing';
 import Footer from '~/components/Footer';
 
-export default function Home() {
+function Home({ applicationConfig }: ConnectedProps<typeof connector>) {
   return (
     <>
       <SEOTags
@@ -17,7 +19,7 @@ export default function Home() {
         description="Vrei să înveți FrontEnd? Aici ai parte de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun."
       />
       <>
-        <LandingAdBanner adId="ad/resources" />
+        {applicationConfig.banner && <LandingAdBanner banner={applicationConfig.banner} />}
         <LandingHero />
         <LandingHowItWorks />
         {/* <LandingThanks /> */}
@@ -28,3 +30,13 @@ export default function Home() {
     </>
   );
 }
+
+function mapStateToProps(state: RootState) {
+  return {
+    applicationConfig: state.applicationConfig,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
+export default connector(Home);

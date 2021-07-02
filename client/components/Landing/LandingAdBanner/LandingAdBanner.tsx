@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import AD_CONFIGS from './ads/ads-model';
+import Link from 'next/link';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ApplicationConfig } from '~/redux/application-config.reducer';
 
 import styles from './LandingAdBanner.module.scss';
 
@@ -9,12 +12,12 @@ import styles from './LandingAdBanner.module.scss';
  * Whether you've see it or not is saved in
  * localStorage via the `adId` key.
  */
-function LandingAdBanner({ adId }: { adId: string }) {
+function LandingAdBanner({ banner }: { banner: ApplicationConfig['banner'] }) {
   const [show, setShow] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const didShow = localStorage.getItem(adId);
+    const didShow = localStorage.getItem(banner.id);
 
     if (!didShow) {
       setShow(true);
@@ -31,8 +34,7 @@ function LandingAdBanner({ adId }: { adId: string }) {
     return null;
   }
 
-  const adConfig = AD_CONFIGS[adId];
-  const didVisit = () => localStorage.setItem(adId, 'true');
+  const didVisit = () => localStorage.setItem(banner.id, 'true');
 
   return (
     <div className={`
@@ -41,7 +43,17 @@ function LandingAdBanner({ adId }: { adId: string }) {
       d-flex justify-content-center align-items-center
     `}
     >
-      <adConfig.Component href={adConfig.href} didVisit={didVisit} />
+      <FontAwesomeIcon className="mr-2" icon={faBell} width={24} height={24} />
+      <p className="mr-2">
+        {banner.text}
+      </p>
+      {banner.cta && banner.ctaLink && (
+        <Link href={banner.ctaLink}>
+          <a onClick={didVisit}>
+            {banner.cta}
+          </a>
+        </Link>
+      )}
     </div>
   );
 }

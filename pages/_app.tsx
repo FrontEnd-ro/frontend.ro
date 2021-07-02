@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
+import { ApplicationConfig, loadConfig } from '~/redux/application-config.reducer';
 import { createStoreWithPreloadedData } from '~/redux/store';
 import { defaultUserState } from '~/redux/user/user.reducer';
+import ApplicationConfigService from '~/services/api/ApplicationConfig.service';
 
 import '~/styles/index.scss';
 
@@ -13,6 +15,8 @@ export default function MyApp({ Component, pageProps }: any) {
       info: pageProps._serverUser,
     },
   });
+
+  useApplicationConfig((config) => store.dispatch(loadConfig(config)));
 
   return (
     <Provider store={store}>
@@ -74,3 +78,18 @@ MyApp.getInitialProps = async ({ ctx, req }) => {
 
   return { pageProps };
 };
+
+function useApplicationConfig(callback: (config: ApplicationConfig) => void) {
+  const fetchApplicationConfig = () => {
+    ApplicationConfigService.get()
+      .then(callback)
+      .catch((err) => {
+        console.error('[useApplicationConfig]', err);
+      });
+  };
+
+  useEffect(() => {
+    fetchApplicationConfig();
+    setInterval(fetchApplicationConfig, 30 * 1000);
+  }, []);
+}

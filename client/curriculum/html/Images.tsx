@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -14,14 +15,23 @@ import Lesson, {
 import { Pava } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
-import coverSvg from '~/public/images/lessons/images__cover.svg';
 
 const contributors = [Pava];
 const chapters = [
   { title: 'Elementul <img>', id: 'elementul-img' },
   { title: 'Width & Height', id: 'width-height' },
   { title: 'Lazy loading', id: 'lazy-loading' },
-  { title: 'Imagini responsive', id: 'imagini-responsive' },
+  {
+    title: 'Imagini responsive',
+    id: 'imagini-responsive',
+    subchapters: [{
+      title: 'Atributul srcset',
+      id: 'srcset',
+    }, {
+      title: 'Proprietatea image-set',
+      id: 'image-set',
+    }],
+  },
   { title: 'Elementul <picture>', id: 'elementul-picture' },
   { title: 'Exerciții', id: 'exercitii' },
 ];
@@ -53,28 +63,26 @@ export default function ImagesLesson() {
     <>
       <SEOTags
         title="Imagini | Lecție HTML"
-        shareImage="https://frontend.ro/seo/html-images.jpg"
-        description="Învață să adaugi și să optimizezi imagini în paginile Web."
         url="https://FrontEnd.ro/html/imagini"
+        description="Învață să adaugi și să optimizezi imagini în paginile Web."
+        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`}
       />
       <Lesson id="imagini" title="Imagini" chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
-          {/* eslint-disable-next-line react/no-danger */}
-          <div dangerouslySetInnerHTML={{
-            __html: coverSvg,
-          }}
+          <img
+            alt="Doodle cu rama unei imagini"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_2400w.jpg`}
           />
         </LessonCover>
-        <p>
+        <p className="text-2xl font-light">
           Cred că putem cu toții admite că un Internet fără imagini ar
           fi destul de plictisitor. Deci hai să
           încheiem așteptarea și să vedem cum adăugăm imagini
           în site-urile noastre și care sunt cele mai bune practici legate de acest subiect.
         </p>
         <section>
-          <h2> The Basics </h2>
-          <LessonHeading as="h3" id="elementul-img">
+          <LessonHeading as="h2" id="elementul-img">
             {'Elementul <img>'}
           </LessonHeading>
           <p>
@@ -150,7 +158,7 @@ export default function ImagesLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h3" id="width-height">
+          <LessonHeading as="h2" id="width-height">
             Width & Height
           </LessonHeading>
           <p>
@@ -244,7 +252,7 @@ export default function ImagesLesson() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="lazy-loading">
+          <LessonHeading as="h2" id="lazy-loading">
             Lazy loading
           </LessonHeading>
           <blockquote>
@@ -313,7 +321,7 @@ export default function ImagesLesson() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="imagini-responsive">
+          <LessonHeading as="h2" id="imagini-responsive">
             Responsive images
           </LessonHeading>
           <p>
@@ -364,38 +372,46 @@ export default function ImagesLesson() {
             rezoluție mai mică, pe tabletă la o rezoluție mijlocie și la o rezoluție
             cât mai inaltă pe ecrane mari: desktop and beyond.
           </p>
-          <p>
-            Din fericire putem rezolva această problemă folosindu-ne de atributul
-            {' '}
-            <strong>srcset</strong>
-            . Hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
-          </p>
-          <LessonFigure
-            withBorder
-            src="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle_resize_infographic.jpg"
-            alt="Aceeași imagine în 3 dimensiuni diferite"
-          />
-          <LessonTip>
-            Pe Windows putem face resize cu
-            {' '}
-            <strong>Paint</strong>
-            {' '}
-            iar pe MacOS folosind
-            {' '}
-            <strong>
-              <a href="https://support.apple.com/guide/preview/resize-rotate-or-flip-an-image-prvw2015/mac" target="_blank" rel="noreferrer">Preview App</a>
-            </strong>
-            {' '}
-            .
-          </LessonTip>
-          <p>
-            Apoi vom adăuga atributul srcset unde definim diferitele
-            surse ale imaginii împreună cu dimensiunea (în lățime) a fiecăreia:
-          </p>
-          <Highlight
-            className="my-5"
-            language="html"
-            code={`
+          <section>
+            <LessonHeading as="h3" id="srcset">
+              Atributul srcset
+            </LessonHeading>
+            <p>
+              Din fericire putem rezolva această problemă folosindu-ne de atributul
+              {' '}
+              <strong>srcset</strong>
+              . Hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
+            </p>
+            <LessonFigure
+              withBorder
+              src="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle_resize_infographic.jpg"
+              alt="Aceeași imagine în 3 dimensiuni diferite"
+            />
+            <LessonTip>
+              Pe Windows putem face resize cu
+              {' '}
+              <strong>Paint</strong>
+              {' '}
+              iar pe MacOS folosind
+              {' '}
+              <strong>
+                <a href="https://support.apple.com/guide/preview/resize-rotate-or-flip-an-image-prvw2015/mac" target="_blank" rel="noreferrer">Preview App</a>
+              </strong>
+              {' '}
+              .
+            </LessonTip>
+            <p>
+              Apoi vom adăuga atributul
+              {' '}
+              <strong>srcset</strong>
+              {' '}
+              unde definim diferitele
+              surse ale imaginii împreună cu dimensiunea (în lățime) a fiecăreia:
+            </p>
+            <Highlight
+              className="my-5"
+              language="html"
+              code={`
 <img srcset="
     /red_bycicle__high.jpg 4000w,
     /red_bycicle__med.jpg 2000w,
@@ -403,8 +419,8 @@ export default function ImagesLesson() {
   " 
   alt="Red bycicle wheel" 
 />`}
-          />
-          {/* <LessonTip icon={faQuestionCircle}>
+            />
+            {/* <LessonTip icon={faQuestionCircle}>
             Atributul
             {' '}
             <strong>style</strong>
@@ -419,43 +435,103 @@ export default function ImagesLesson() {
             Totusi, te rugam sa-l pui acolo, impreuna cu valoarea `max-width: 100%.
             Astfel ne asiguram ca imaginile nu vor iesi din pagina.
           </LessonTip> */}
-          <p>
-            Șiiii voilà. Dacă mergem în
-            {' '}
-            <a href="/intro/devtools">modul responsive</a>
-            {' '}
-            - și ținem tabul
-            {' '}
-            <strong>network</strong>
-            {' '}
-            deschis vom observa cum diferite surse ale imaginii
-            se încarcă la rezoluții diferite.
-          </p>
-          <LessonFigure
-            isVideo
-            withBorder
-            demo="/demo/html/atributul-srcset"
-            src="https://d3tycb976jpudc.cloudfront.net/demo-assets/img-srcset.mp4"
-            alt="Diferite surse ale imaginii se încarcă la rezoluții diferite"
-          />
-          <p>
-            Te încurajăm să experimentezi și cu opțiunea
-            {' '}
-            <Link href="intro/devtools">
-              <a target="_blank">
-                DRP (Device Pixel Ratio)
+            <p>
+              Șiiii voilà. Dacă mergem în
+              {' '}
+              <a href="/intro/devtools">modul responsive</a>
+              {' '}
+              - și ținem tabul
+              {' '}
+              <strong>network</strong>
+              {' '}
+              deschis vom observa cum diferite surse ale imaginii
+              se încarcă la rezoluții diferite.
+            </p>
+            <LessonFigure
+              isVideo
+              withBorder
+              demo="/demo/html/atributul-srcset"
+              src="https://d3tycb976jpudc.cloudfront.net/demo-assets/img-srcset.mp4"
+              alt="Diferite surse ale imaginii se încarcă la rezoluții diferite"
+            />
+            <p>
+              Te încurajăm să experimentezi și cu opțiunea
+              {' '}
+              <Link href="intro/devtools">
+                <a target="_blank">
+                  DRP (Device Pixel Ratio)
+                </a>
+              </Link>
+              {' '}
+              De exemplu, cu o valoare
+              de 2 și o lățime de 650px se va incărca imaginea
+              {' '}
+              <strong>red_bycicle__med.jpg</strong>
+              .
+            </p>
+          </section>
+          <section>
+            <LessonHeading as="h3" id="image-set">
+              Proprietatea image-set
+            </LessonHeading>
+            <p>
+              Până de curând singurul mod de a face imaginile din CSS (cele puse prin
+              {' '}
+              <strong className="formatted">background-image:</strong>
+              {' '}
+              )
+              responsive a fost să punem mai multe reguli
+              {' '}
+              <strong className="formatted">@media-query</strong>
+              {' '}
+              și să specificăm pentru fiecare o altă imagine.
+            </p>
+            <p>
+              Dar odată cu introducerea proprietății
+              {' '}
+              <a
+                target="_blank"
+                className="text-bold"
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/image/image-set()"
+                rel="noreferrer"
+              >
+                image-set()
               </a>
-            </Link>
-            {' '}
-            De exemplu, cu o valoare
-            de 2 și o lățime de 650px se va incărca imaginea
-            {' '}
-            <strong>red_bycicle__med.jpg</strong>
-            .
-          </p>
+              {' '}
+              putem lăsa browserul să aleagă cea mai bună imagine în funcție de rezoluția ecranului:
+            </p>
+            <Highlight
+              language="css"
+              code={`
+.cover {
+  height: 50vh;
+
+  background-image: -webkit-image-set(
+    url("red_bycicle__low.jpg") 1x,
+    url("red_bycicle__med.jpg") 2x, 
+    url("red_bycicle__high.jpg") 4x
+  );
+
+  background-image: image-set(
+    url("red_bycicle__low.jpg") 1x,
+    url("red_bycicle__med.jpg") 2x, 
+    url("red_bycicle__high.jpg") 4x
+  );
+}
+              `}
+            />
+            <LessonTip icon={faQuestion}>
+              Această proprietate nu are încă suport nativ în toate Browserele,
+              așa că în exemplul de mai sus am prefixat regulat cu
+              {' '}
+              <span className="formatted">-webkit</span>
+              {' '}
+              pentru a funcționa și în Chrome sau Safari.
+            </LessonTip>
+          </section>
         </section>
         <section>
-          <LessonHeading as="h3" id="elementul-picture">
+          <LessonHeading as="h2" id="elementul-picture">
             {'Elementul <picture>'}
           </LessonHeading>
           <p>

@@ -140,7 +140,7 @@ export const LESSONS: LessonDescription[] = [
     description:
       'Fără imagini web-ul ar fi mult mai plicticos, deci hai să vedem cum le putem adăuga și care sunt cele mai bune practici legate de acestea.',
     contributors: [Pava],
-    cover: '/images/lessons/images__cover.svg',
+    cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
     url: '/html/imagini',
     type: 'html',
   },

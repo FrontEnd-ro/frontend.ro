@@ -1,7 +1,7 @@
 export { v4 as uuid } from 'uuid';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-export function noop() {}
+export function noop() { }
 
 /**
  * Here we make the function timeAgo to format a JavaScript Date as a
@@ -95,3 +95,28 @@ export const nextUntitledFilename = (existingNames, NAME_BASE = 'Untitled file')
 
   return newName;
 };
+
+export const includeScript = (src: string) => {
+  const alreadyExists = document.querySelector(`script[src="${src}"]`) !== null;
+
+  if (alreadyExists) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src;
+
+    script.addEventListener('load', resolve);
+    script.addEventListener('error', reject);
+    document.body.appendChild(script);
+  });
+};
+
+export const removeScript = (src: string) => {
+  const script = document.querySelector(`script[src="${src}"]`);
+
+  if (script !== null) {
+    script.remove();
+  }
+}

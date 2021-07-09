@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+
+.codepen-embed {
+  height: 25em;
+  position: relative;
+  background-color: color(darker-white);
+}
+
+.codepen-embed--loaded {
+  & > *,
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.centered {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}

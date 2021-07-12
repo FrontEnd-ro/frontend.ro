@@ -12,6 +12,7 @@ import Lesson, {
   LessonHeading,
   LessonResources,
   LessonTip,
+  LessonQuote,
 } from '~/components/lessons';
 import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
@@ -373,14 +374,14 @@ export default function LinksAndButtonsLesson() {
             developeri ni le putem adresa pe măsură ce codăm și ne întâlnim cu
             diverse situații:
           </p>
-          <blockquote>
+          <LessonQuote>
             Putem folosi doar un
             {' '}
             <strong className="formatted">icon</strong>
             {' '}
             în
             interiorul unui link?
-          </blockquote>
+          </LessonQuote>
           <p>
             Din păcate un simplu icon nu ne-ar oferi suficientă
             informație contextuală despre link, deci nu ar fi chiar recomandat.
@@ -439,14 +440,14 @@ export default function LinksAndButtonsLesson() {
             Totuși, te rugăm să-l păstrezi în exemplu, pentu a funcționa
             cum ne așteptăm.
           </LessonTip>
-          <blockquote>
+          <LessonQuote>
             Putem folosi o
             {' '}
             <strong className="formatted">imagine</strong>
             {' '}
             în
             interiorul unui link?
-          </blockquote>
+          </LessonQuote>
           <p>
             Daaa. Vom avea nevoie de multe ori să facem asta în proiectele
             noastre.
@@ -473,9 +474,9 @@ export default function LinksAndButtonsLesson() {
           </p>
           {/* this demo 👇 is not very clear at this moment, when we will have more CSS lessons,
            maybe we can uncomment this part */}
-          {/* <blockquote>
+          {/* <LessonQuote>
             Putem folosi bucăți mari de cod în interiorul unui link?
-          </blockquote>
+          </LessonQuote>
           <p>Răspunsul la această întrebare este că nu e tocmai o idee bună.</p>
           <LessonFigure
             withBorder

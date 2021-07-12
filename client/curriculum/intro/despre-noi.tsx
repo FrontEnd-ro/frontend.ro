@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import SEOTags from '~/components/SEOTags';
 import Lesson from '~/components/lessons/Lesson';
 import {
-  LessonCover, LessonContributors, LessonHeading, LessonFigure,
+  LessonCover, LessonContributors, LessonHeading, LessonFigure, LessonQuote,
 } from '~/components/lessons';
 import { ShareButton } from '~/components/SocialMediaButtons';
 import { Ira, Pava } from '~/services/contributors';
@@ -75,9 +75,9 @@ export default function Lesson0() {
           <p>
             Noi suntem convinși că:
           </p>
-          <blockquote className="is--center">
+          <LessonQuote variant="centered">
             Nu contează la câte tutoriale te uiți, ci cât de mult codezi
-          </blockquote>
+          </LessonQuote>
           <p>
             Însă când înveți singur e puțin mai greu să-ți dai seama dacă rezolvarea
             găsită de tine este cea mai bună. Așa că ne vei trimite aici rezolvările
@@ -220,10 +220,10 @@ export default function Lesson0() {
             la partea de învățare este a ta.
             {' '}
           </p>
-          <blockquote>
+          <LessonQuote>
             Ne așteptăm să fii motivat
             și autodidact, să poți înțelege în mare conceptele de unul singur.
-          </blockquote>
+          </LessonQuote>
           <p>
             Pentru a învăța cât mai mult, începe cu lecția 0 (cea pe care o citești acum)
             și continuă pe rând cu fiecare lecție nouă. Citește rezumatul nostru, iar
@@ -258,11 +258,11 @@ export default function Lesson0() {
             care poți să înveți. Mulți dintre noi nu am avut șansa asta.
             Și din nou:
           </p>
-          <blockquote className="is--center">
+          <LessonQuote variant="centered">
             Don't be too hard on yourself.
             Don't take it personal.
             Noi suntem aici să te ajutăm. 😄
-          </blockquote>
+          </LessonQuote>
         </section>
         <section>
           <LessonHeading as="h2" id="tooluri-necesare">

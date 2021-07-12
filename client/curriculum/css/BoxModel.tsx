@@ -6,6 +6,7 @@ import Lesson, {
   LessonCover,
   LessonFigure,
   LessonHeading,
+  LessonQuote,
   LessonResources,
   LessonTip,
 } from '~/components/lessons';
@@ -414,9 +415,9 @@ div {
             8px și un border: 1px. Modul în care este calculată
             lățimea este următorul:
           </p>
-          <blockquote>
+          <LessonQuote>
             100px + 8px * 2 + 1px * 2 = 118px
-          </blockquote>
+          </LessonQuote>
           <LessonTip>
             De ce 8px * 2? Trebuie să luăm în considerare
             {' '}

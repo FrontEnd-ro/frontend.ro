@@ -7,6 +7,7 @@ import Lesson, {
   LessonCover,
   LessonFigure,
   LessonHeading,
+  LessonQuote,
   LessonResources,
   LessonTable,
   LessonTableProps,
@@ -255,7 +256,7 @@ export default function ImagesLesson() {
           <LessonHeading as="h2" id="lazy-loading">
             Lazy loading
           </LessonHeading>
-          <blockquote>
+          <LessonQuote>
             Most of the images on the web are downloaded,
             decoded and rendered only never to be seen, as [...]
             the user never scrolled that far.
@@ -264,7 +265,7 @@ export default function ImagesLesson() {
             <small>
               <a href="https://twitter.com/yoavweiss" target="_blank" rel="noopener noreferrer">Yoav Weiss</a>
             </small>
-          </blockquote>
+          </LessonQuote>
           <p>
             Citatul de mai sus a rămas - din păcate - la fel de adevărat...
             De câte ori nu ai deschis o pagină Web și apoi ai ieșit de acolo fără
@@ -343,9 +344,9 @@ export default function ImagesLesson() {
             src="https://d3tycb976jpudc.cloudfront.net/demo-assets/full-screen-image-illustration.jpg"
             alt="Imagine full-screen intr-o pagină Web"
           />
-          <blockquote>
+          <LessonQuote>
             La ce rezoluție salvăm imaginea pentru a fi 100% clară pe toate dispozitivele?
-          </blockquote>
+          </LessonQuote>
           <p>
             Știind că site-ul poate fi văzut atât de pe dispozitive mobile,
             cu ecrane mai mici, cât și de pe desktop-uri sau chiar televizoare,
@@ -544,7 +545,7 @@ export default function ImagesLesson() {
             Cu toate acestea, a mai rămas totuși o ultimă optimizare,
             și anume folosirea unor formate moderne pentru imagini.
           </p>
-          <blockquote>
+          <LessonQuote>
             De ce am vrea alte formate? Nu sunt
             {' '}
             <strong>JPG</strong>
@@ -554,7 +555,7 @@ export default function ImagesLesson() {
             <strong>PNG</strong>
             {' '}
             de ajuns?
-          </blockquote>
+          </LessonQuote>
           <p>
             Hmmm.... nu chiar. Există formate mai moderne precum
             {' '}

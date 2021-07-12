@@ -12,6 +12,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/styling-methods__cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
 import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [DanielHutanu];
 const chapters = [
@@ -34,7 +35,11 @@ export default function CssStylingLesson() {
         description="Învață modurile prin care putem aplica stiluri paginilor Web."
         url="https://FrontEnd.ro/css/moduri-stilizare"
       />
-      <Lesson id="moduri-stilizare" title="Cele 3 moduri de stilizare" chapters={chapters}>
+      <Lesson
+        id="moduri-stilizare"
+        title="Cele 3 moduri de stilizare"
+        chapters={chapters}
+      >
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
           <div
@@ -46,43 +51,23 @@ export default function CssStylingLesson() {
         </LessonCover>
         <p>
           În acest articol vom vorbi despre cele trei modalități prin care putem
-          aplica stilul unei pagini web:
-          {' '}
-          <strong>
-            CSS inline
-          </strong>
-          ,
-          {' '}
-          <strong>
-            CSS intern
-          </strong>
-          {' '}
-          sau
-          {' '}
-          <strong>
-            CSS extern
-          </strong>
-          .
-          Fiecare metoda vine cu avantaje și dezavantaje, despre care vom vorbi
-          în cele ce urmează.
+          aplica stilul unei pagini web: <strong>CSS inline</strong>,{' '}
+          <strong>CSS intern</strong> sau <strong>CSS extern</strong>. Fiecare
+          metoda vine cu avantaje și dezavantaje, despre care vom vorbi în cele
+          ce urmează.
         </p>
         <section>
           <LessonHeading as="h3" id="css-inline">
             CSS inline
           </LessonHeading>
           <p>
-            Prin
-            {' '}
-            <strong className="formatted">CSS inline</strong>
-            {' '}
-            putem aplica stilul unui singur element HTML.
+            Prin <FormattedText as="strong">CSS inline</FormattedText> putem
+            aplica stilul unui singur element HTML.
           </p>
           <p>
-            Scrierea codului CSS se va face prin adaugarea atributului
-            {' '}
-            <strong className="formatted">style</strong>
-            {' '}
-            pe elementul căruia vrem să-i modificăm stilul:
+            Scrierea codului CSS se va face prin adaugarea atributului{' '}
+            <FormattedText as="strong">style</FormattedText> pe elementul căruia
+            vrem să-i modificăm stilul:
           </p>
           <Highlight
             className="my-5"
@@ -111,10 +96,7 @@ export default function CssStylingLesson() {
             demo="/demo/css/css-inline"
           />
           <p>
-            Metoda inline vine la pachet cu
-            {' '}
-            <strong>dezavantaje uriașe</strong>
-            {' '}
+            Metoda inline vine la pachet cu <strong>dezavantaje uriașe</strong>{' '}
             și din această cauză majoritatea programatorilor o evită. Hai să
             vedem de ce nu e indicată:
           </p>
@@ -123,21 +105,20 @@ export default function CssStylingLesson() {
               dacă avem de stilizat mai multe elemente similare, (să zicem mai
               multe paragrafe care vrem să arate la fel) , prin metoda inline va
               trebui să facem copy-paste la cod pentru fiecare paragraf în
-              parte. Mai mult, când o să ne răzgândim
-              asupra stilurilor, va trebuie să ținem minte și să modificăm peste tot.
+              parte. Mai mult, când o să ne răzgândim asupra stilurilor, va
+              trebuie să ținem minte și să modificăm peste tot.
             </li>
             <li>
               vedem că e greu să distingem codul CSS de cel HTML (se produce un
-              așa numit efect de
-              {' '}
-              <strong>spaghetti code</strong>
-              ). Așadar, ne va fi dificil să înțelegem și să facem modificări pe un astfel de
-              cod.
+              așa numit efect de <strong>spaghetti code</strong>
+              ). Așadar, ne va fi dificil să înțelegem și să facem modificări pe
+              un astfel de cod.
             </li>
           </ul>
           <LessonTip>
-            Aceasta este prima și cea mai ușor de înțeles metodă prin care
-            putem stiliza o pagină web, dar după cum am menționat mai sus, nu este recomandată.
+            Aceasta este prima și cea mai ușor de înțeles metodă prin care putem
+            stiliza o pagină web, dar după cum am menționat mai sus, nu este
+            recomandată.
           </LessonTip>
         </section>
         <section>
@@ -146,28 +127,17 @@ export default function CssStylingLesson() {
           </LessonHeading>
           <p>
             Dacă prin metoda inline trebuie să stilizăm câte un element pe rând,
-            printr-un
-            {' '}
-            <strong>CSS intern</strong>
-            {' '}
-            putem
-            controla stilul pentru o întreagă pagină, scăpând astfel de codul
-            duplicat. Totodată, vom avea o mai bună înțelegere a codului și vom
-            câștiga timp.
+            printr-un <strong>CSS intern</strong> putem controla stilul pentru o
+            întreagă pagină, scăpând astfel de codul duplicat. Totodată, vom
+            avea o mai bună înțelegere a codului și vom câștiga timp.
           </p>
           <p>
             Metoda de integrare a codului CSS în pagina web se va face prin
-            inserarea elementului
-            {' '}
-            <strong className="formatted">{'<style>'}</strong>
-            {' '}
-            în secțiunea
-            {' '}
-            <strong className="formatted">{'<head>'}</strong>
-            {' '}
-            a documentului
-            HTML. Față de metoda anterioară, la aceasta trebuie să precizăm pentru ce elemente
-            vom aplica regulile de stilizare.
+            inserarea elementului{' '}
+            <FormattedText as="strong">{'<style>'}</FormattedText> în secțiunea{' '}
+            <FormattedText as="strong">{'<head>'}</FormattedText> a documentului
+            HTML. Față de metoda anterioară, la aceasta trebuie să precizăm
+            pentru ce elemente vom aplica regulile de stilizare.
           </p>
           <Highlight
             className="my-5"
@@ -182,23 +152,18 @@ export default function CssStylingLesson() {
 </style>`}
           />
           <p>
-            În exemplul de mai sus aplicăm regulile
-            pe toate elementele de tip
-            {' '}
-            <strong className="formatted">a</strong>
-            {' '}
-            ,
-            {' '}
-            selectorul folosit fiind tagul elementului HTML.
+            În exemplul de mai sus aplicăm regulile pe toate elementele de tip{' '}
+            <FormattedText as="strong">a</FormattedText> , selectorul folosit
+            fiind tagul elementului HTML.
           </p>
           <LessonTip>
-            Există și alți selectori: după clasă sau id. Vom vorbi de ei în lecțiile următoare,
-            însă pentru moment e important să reții această metodă de stilizare și
-            rolul selectorilor.
+            Există și alți selectori: după clasă sau id. Vom vorbi de ei în
+            lecțiile următoare, însă pentru moment e important să reții această
+            metodă de stilizare și rolul selectorilor.
           </LessonTip>
           <p>
-            Uite mai jos un exemplu mai complet, în
-            care aplicăm stiluri pe elementul main, heading-uri, paragrafe:
+            Uite mai jos un exemplu mai complet, în care aplicăm stiluri pe
+            elementul main, heading-uri, paragrafe:
           </p>
           <Highlight
             className="my-5"
@@ -254,29 +219,19 @@ export default function CssStylingLesson() {
             demo="/demo/css/css-intern"
           />
           <p>
-            Observăm că în acest caz codul HTML este puțin mai separat față de CSS ceea ce
-            e o îmbunătățire față de metoda anterioară.
+            Observăm că în acest caz codul HTML este puțin mai separat față de
+            CSS ceea ce e o îmbunătățire față de metoda anterioară.
           </p>
           <p>
-            În practică însă,
-            {' '}
-            <strong>
-              nu recomandăm nici folosirea metodei interne
-            </strong>
-            {' '}
-            pentru că site-urile sunt
-            construite din mai multe pagini deci vom ajunge iar să facem copy-paste în
-            fiecare pagină.
-            Plus, deși codul HTML și CSS e puțin mai separat, sunt încă în același fișier
-            și vom ajunge iar la
-            {' '}
-            <span className="text-bold">spaghetti code</span>
-            {' '}
-            pe măsură ce aplicația crește.
+            În practică însă,{' '}
+            <strong>nu recomandăm nici folosirea metodei interne</strong> pentru
+            că site-urile sunt construite din mai multe pagini deci vom ajunge
+            iar să facem copy-paste în fiecare pagină. Plus, deși codul HTML și
+            CSS e puțin mai separat, sunt încă în același fișier și vom ajunge
+            iar la <span className="text-bold">spaghetti code</span> pe măsură
+            ce aplicația crește.
           </p>
-          <p>
-            Și ajungem iar de unde am plecat, right?
-          </p>
+          <p>Și ajungem iar de unde am plecat, right?</p>
         </section>
         <section>
           <LessonHeading as="h3" id="css-extern">
@@ -284,26 +239,14 @@ export default function CssStylingLesson() {
           </LessonHeading>
           <p>
             Ei bine, acestea fiind zise care ar fi totuși soluția pentru a face
-            lucrurile așa cum trebuie? Metoda
-            {' '}
-            <strong>CSS-ului extern</strong>
-            {' '}
-            all the
-            way!
+            lucrurile așa cum trebuie? Metoda <strong>CSS-ului extern</strong>{' '}
+            all the way!
           </p>
           <p>
-            Aceasta este
-            {' '}
-            <strong>metoda pe care o recomandăm</strong>
-            {' '}
-            și constă în crearea unui
-            fișier separat pe care-l asociem paginilor HTML.
+            Aceasta este <strong>metoda pe care o recomandăm</strong> și constă
+            în crearea unui fișier separat pe care-l asociem paginilor HTML.
             Integrarea fișierului CSS în HTML se va face prin intermediul
-            elementului
-            {' '}
-            <strong className="formatted">{'<link>'}</strong>
-            {' '}
-            .
+            elementului <FormattedText as="strong">{'<link>'}</FormattedText> .
           </p>
           <Highlight
             className="my-5"
@@ -314,28 +257,19 @@ export default function CssStylingLesson() {
           <p>Unde:</p>
           <ul className="with--bullets">
             <li className="mb-4">
-              atributul
-              {' '}
-              <strong className="formatted">rel</strong>
-              {' '}
-              specifică
+              atributul <FormattedText as="strong">rel</FormattedText> specifică
               relația dintre documentul HTML curent și documentul extern pe care
               îl conectăm acesteia. În cazul nostru, documentul extern este o
               foaie de stil
             </li>
             <li>
-              atributul
-              {' '}
-              <strong className="formatted">href</strong>
-              {' '}
+              atributul <FormattedText as="strong">href</FormattedText>{' '}
               specifică locația (URL-ul) unde găsim foaia de stiluri
             </li>
           </ul>
           <p>
-            Mai concret,
-            {' '}
-            <span className="text-bold">hai să vedem un exemplu</span>
-            :
+            Mai concret,{' '}
+            <span className="text-bold">hai să vedem un exemplu</span>:
           </p>
           <BasicEditorLazy folderStructure={externCssExample} readOnly />
           <p>
@@ -348,23 +282,21 @@ export default function CssStylingLesson() {
             alt="Pagină web creata prin metoda CSS-ului extern"
             demo="/demo/css/css-extern"
           />
-          <p>
-            Prin această metodă rezolvăm ambele probleme:
-          </p>
+          <p>Prin această metodă rezolvăm ambele probleme:</p>
           <ul className="with--bullets">
             <li className="mb-4">
-              în ceea ce privește copy-paste'ul, avand un fisier
-              inclus in mai multe pagini e de ajuns sa modificam stilul
-              in acel fisier iar stilurile se vor aplica oriunde este inclus
+              în ceea ce privește copy-paste'ul, avand un fisier inclus in mai
+              multe pagini e de ajuns sa modificam stilul in acel fisier iar
+              stilurile se vor aplica oriunde este inclus
             </li>
             <li>
-              legat de spaghetti code, avand separat stilurile de HTML
-              e mult mai usor sa intelegem si sa modificam codul
+              legat de spaghetti code, avand separat stilurile de HTML e mult
+              mai usor sa intelegem si sa modificam codul
             </li>
           </ul>
           <LessonTip>
-            Psst: într-un document HTML pot fi adăugate mai multe foi de stil externe,
-            fiecare printr-un element link diferit.
+            Psst: într-un document HTML pot fi adăugate mai multe foi de stil
+            externe, fiecare printr-un element link diferit.
           </LessonTip>
         </section>
         <section>
@@ -372,31 +304,20 @@ export default function CssStylingLesson() {
             BONUS
           </LessonHeading>
           <p>
-            Poate v-ați întrebat de ce punem tagul
-            {' '}
-            <strong className="formatted">{'<link>'}</strong>
-            {' '}
-            in
-            {' '}
-            <strong className="formatted">{'<head>'}</strong>
-            {' '}
-            și nu în
-            {' '}
-            <strong className="formatted">{'<body>'}</strong>
-            {' '}
+            Poate v-ați întrebat de ce punem tagul{' '}
+            <FormattedText as="strong">{'<link>'}</FormattedText> in{' '}
+            <FormattedText as="strong">{'<head>'}</FormattedText> și nu în{' '}
+            <FormattedText as="strong">{'<body>'}</FormattedText>{' '}
           </p>
           <p>
             Motivul e legat de modul în care browser-ul citește documentul HTML,
-            și anume
-            {' '}
-            <strong>de sus în jos</strong>
-            {' '}
-            . Astfel, punând elementul înainte de body ne asigurăm
-            că stilurile sunt încărcate înainte să apară conținutul pe pagină.
+            și anume <strong>de sus în jos</strong> . Astfel, punând elementul
+            înainte de body ne asigurăm că stilurile sunt încărcate înainte să
+            apară conținutul pe pagină.
           </p>
           <p>
-            Dacă l-am pune la final de body - cum am făcut în video-ul de mai jos  - e posibil
-            să vedem mai întâi HTML-ul nestilizat iar mai târziu
+            Dacă l-am pune la final de body - cum am făcut în video-ul de mai
+            jos - e posibil să vedem mai întâi HTML-ul nestilizat iar mai târziu
             să se aplice stilurile.
           </p>
 
@@ -407,10 +328,8 @@ export default function CssStylingLesson() {
             alt="CSS extern inclus la final de body"
           />
           <LessonTip>
-            De aceea ca și "good practice" vom includem fișierele
-            de CSS externe în
-            {' '}
-            <span className="formatted">{'<head>'}</span>
+            De aceea ca și "good practice" vom includem fișierele de CSS externe
+            în <FormattedText as="span">{'<head>'}</FormattedText>
           </LessonTip>
         </section>
       </Lesson>
@@ -419,25 +338,28 @@ export default function CssStylingLesson() {
 }
 
 const externCssExample: {
-  folders: ExerciseFolder[],
-  files: ExerciseFile[]
+  folders: ExerciseFolder[];
+  files: ExerciseFile[];
 } = {
-  folders: [{
-    key: 'style',
-    name: 'style',
-    files: [{
-      key: 'custom.css',
-      name: 'custom.css',
-      content: `body {
+  folders: [
+    {
+      key: 'style',
+      name: 'style',
+      files: [
+        {
+          key: 'custom.css',
+          name: 'custom.css',
+          content: `body {
   color: #fff;
   text-align: center;
   font-family: sans-serif;
   background-color: #282a36;
 }`,
-    }, {
-      key: 'style.css',
-      name: 'style.css',
-      content: `h1 {
+        },
+        {
+          key: 'style.css',
+          name: 'style.css',
+          content: `h1 {
   text-align: center;
   font-size: 40px;
   text-decoration: underline;
@@ -453,13 +375,16 @@ p {
   margin-left: 50px;
 }
 `,
-    }],
-    folders: [],
-  }],
-  files: [{
-    key: 'index.html',
-    name: 'index.html',
-    content: `<!DOCTYPE html>
+        },
+      ],
+      folders: [],
+    },
+  ],
+  files: [
+    {
+      key: 'index.html',
+      name: 'index.html',
+      content: `<!DOCTYPE html>
 <html>
 <head>
   <title>My Dog</title>
@@ -473,5 +398,6 @@ p {
 </body>
 </html>
 `,
-  }],
+    },
+  ],
 };

@@ -5,31 +5,31 @@ import Button from '~/components/Button';
 import styles from './GitCli.module.scss';
 
 interface Props {
-  commands: Commands[],
+  commands: Commands[];
 }
 
 interface State {
-  currentIndex: number,
-  messages: Message[],
-  btnMessage: string,
+  currentIndex: number;
+  messages: Message[];
+  btnMessage: string;
 }
 
 interface Commands {
-  command: RegExp | string,
-  message: string,
+  command: RegExp | string;
+  message: string;
 }
 
 interface Message {
-  text: string,
-  type: MessageType,
-  time: number,
-  id: string,
+  text: string;
+  type: MessageType;
+  time: number;
+  id: string;
 }
 
 enum MessageType {
   COMMAND = 'command',
   ERROR = 'error',
-  SUCCESS = 'success'
+  SUCCESS = 'success',
 }
 
 class MatchCommandMessageClassComponent extends React.Component<Props, State> {
@@ -56,7 +56,8 @@ class MatchCommandMessageClassComponent extends React.Component<Props, State> {
     if (commands[currentIndex].command instanceof RegExp) {
       isMatch = (commands[currentIndex].command as RegExp).test(gitCommand);
     } else {
-      isMatch = commands[currentIndex].command === gitCommand.trim().toLowerCase();
+      isMatch =
+        commands[currentIndex].command === gitCommand.trim().toLowerCase();
     }
 
     const commandMessage: Message = {
@@ -108,16 +109,11 @@ class MatchCommandMessageClassComponent extends React.Component<Props, State> {
             {messages.map((message) => (
               <p key={message.id} className={styles[message.type]}>
                 <span>{message.text}</span>
-                <span>
-                  {new Date(message.time).toLocaleString()}
-                </span>
+                <span>{new Date(message.time).toLocaleString()}</span>
               </p>
             ))}
           </div>
-          <form
-            className={styles.form}
-            onSubmit={this.handleSubmit}
-          >
+          <form className={styles.form} onSubmit={this.handleSubmit}>
             <input
               type="text"
               name="gitCommand"

@@ -5,18 +5,15 @@ import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function OrderedListsType() {
-  const title = 'Atributul \'type\' pentru liste ordonate';
+  const title = "Atributul 'type' pentru liste ordonate";
 
   return (
     <>
       <Head>
-        <title>
-          {title}
-          {' '}
-          | FrontEnd.ro
-        </title>
+        <title>{title} | FrontEnd.ro</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
@@ -24,10 +21,8 @@ export default function OrderedListsType() {
         <Demo title={title}>
           <p>
             Dacă vrem ca enumerarea elementelor din listă să se facă cu un
-            anumit tip de cifră sau cu litere, ne putem folosi de atributul
-            {' '}
-            <strong>type</strong>
-            :
+            anumit tip de cifră sau cu litere, ne putem folosi de atributul{' '}
+            <strong>type</strong>:
           </p>
           <DemoPreview>
             <ol type="I">
@@ -48,30 +43,20 @@ export default function OrderedListsType() {
                    
 `}
           />
-          <p>
-            Acesta acceptă și alte valori:
-          </p>
+          <p>Acesta acceptă și alte valori:</p>
           <ul className="with--bullets">
             <li className="mb-4">
-              <strong className="formatted">1</strong>
-              {' '}
-              – pentru enumerare cu
-              {' '}
+              <FormattedText as="strong">1</FormattedText> – pentru enumerare cu{' '}
               cifre arabe
             </li>
             <li className="mb-4">
-              <strong className="formatted">i</strong>
-              {' '}
-              – pentru enumerare cifre romane mici
+              <FormattedText as="strong">i</FormattedText> – pentru enumerare
+              cifre romane mici
             </li>
             <li>
-              <strong className="formatted">a</strong>
-              {' '}
-              sau
-              {' '}
-              <strong className="formatted">A</strong>
-              {' '}
-              – pentru enumerare cu litere mici, respectiv mari
+              <FormattedText as="strong">a</FormattedText> sau{' '}
+              <FormattedText as="strong">A</FormattedText> – pentru enumerare cu
+              litere mici, respectiv mari
             </li>
           </ul>
         </Demo>

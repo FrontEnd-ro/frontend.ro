@@ -12,6 +12,7 @@ import Lesson, {
 import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/lists__cover.svg';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [Diana];
 const chapters = [
@@ -43,9 +44,10 @@ export default function ListsLesson() {
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
           {/* eslint-disable-next-line react/no-danger */}
-          <div dangerouslySetInnerHTML={{
-            __html: coverSvg,
-          }}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: coverSvg,
+            }}
           />
         </LessonCover>
         <p>
@@ -65,17 +67,14 @@ export default function ListsLesson() {
           <p>Există două tipuri de liste des folosite în HTML:</p>
           <ul className="with--bullets">
             <li className="mb-4">
-              <strong className="formatted">Liste neordonate</strong>
-              {' '}
-              -
+              <FormattedText as="strong">Liste neordonate</FormattedText> -
               utilizate pentru a grupa un set de elemente ce nu necesită o
               anumită ordine
             </li>
             <li>
-              <strong className="formatted">Liste ordonate</strong>
-              {' '}
-              - utilizate
-              pentru a grupa un set de elemente ce au o ordine specifică
+              <FormattedText as="strong">Liste ordonate</FormattedText> -
+              utilizate pentru a grupa un set de elemente ce au o ordine
+              specifică
             </li>
           </ul>
           <p>
@@ -111,29 +110,17 @@ export default function ListsLesson() {
           />
           <LessonTip>
             Observă cum ne folosim de 2 tipuri de elemente pentru a defini o
-            listă: în exterior avem
-            {' '}
-            <strong className="formatted">{'<ul>'}</strong>
-            {' '}
-            (unordered list)
-            pentru a defini lista, iar apoi fiecare element în propriul tag
-            {' '}
-            <strong className="formatted">{'<li>'}</strong>
-            {' '}
-            (list item) .
+            listă: în exterior avem{' '}
+            <FormattedText as="strong">{'<ul>'}</FormattedText> (unordered list)
+            pentru a defini lista, iar apoi fiecare element în propriul tag{' '}
+            <FormattedText as="strong">{'<li>'}</FormattedText> (list item) .
           </LessonTip>
           <p>
-            Cu o stilizare potrivită, listele neordonate sunt folosite la
-            {' '}
-            <strong>
-              realizarea meniurilor paginilor web
-            </strong>
-            .
-            {' '}
+            Cu o stilizare potrivită, listele neordonate sunt folosite la{' '}
+            <strong>realizarea meniurilor paginilor web</strong>.{' '}
             <a href="https://github.com" target="_blank" rel="noreferrer">
               GitHub
-            </a>
-            {' '}
+            </a>{' '}
             e un exemplu bun, ei folosind liste neordonate pentru meniul de
             navigare:
           </p>
@@ -175,12 +162,9 @@ export default function ListsLesson() {
           />
           <p>
             Acestea au o structura similară cu cele neordonate, singura
-            diferență fiind tag-ul:
-            {' '}
-            <strong className="formatted">{'<ol>'}</strong>
-            {' '}
-            (ordered list). E
-            evident că dacă vom schimba ordinea elementelor din cadrul listei,
+            diferență fiind tag-ul:{' '}
+            <FormattedText as="strong">{'<ol>'}</FormattedText> (ordered list).
+            E evident că dacă vom schimba ordinea elementelor din cadrul listei,
             aceasta nu va mai avea nici un sens.
           </p>
           <LessonFigure
@@ -196,41 +180,26 @@ export default function ListsLesson() {
           </LessonHeading>
           <p>
             Dacă vrem ca enumerarea elementelor din listă să se facă cu un
-            anumit tip de cifră sau cu litere, ne putem folosi de atributul
-            {' '}
-            <strong className="formatted"> type</strong>
-            . Acesta acceptă ca
+            anumit tip de cifră sau cu litere, ne putem folosi de atributul{' '}
+            <FormattedText as="strong"> type</FormattedText>. Acesta acceptă ca
             valori:
           </p>
           <ul className="with--bullets">
             <li className="mb-4">
               {' '}
-              <strong className="formatted">1</strong>
-              {' '}
-              – pentru enumerare cu
-              {' '}
+              <FormattedText as="strong">1</FormattedText> – pentru enumerare cu{' '}
               cifre arabe;
             </li>
             <li className="mb-4">
               {' '}
-              <strong className="formatted">i</strong>
-              {' '}
-              sau
-              {' '}
-              <strong className="formatted">I</strong>
-              {' '}
-              – pentru enumerare cu
+              <FormattedText as="strong">i</FormattedText> sau{' '}
+              <FormattedText as="strong">I</FormattedText> – pentru enumerare cu
               cifre romane mici, respectiv mari
             </li>
             <li className="mb-4">
               {' '}
-              <strong className="formatted">a</strong>
-              {' '}
-              sau
-              {' '}
-              <strong className="formatted">A</strong>
-              {' '}
-              – pentru enumerare cu
+              <FormattedText as="strong">a</FormattedText> sau{' '}
+              <FormattedText as="strong">A</FormattedText> – pentru enumerare cu
               litere mici, respectiv mari.
             </li>
           </ul>
@@ -253,11 +222,8 @@ export default function ListsLesson() {
           />
           <p>
             Dacă vrem ca lista să înceapă enumerarea de la cifra/litera cea mai
-            avansată și să se termine cu prima, vom folosi atributul
-            {' '}
-            <strong className="formatted">reversed</strong>
-            {' '}
-            .
+            avansată și să se termine cu prima, vom folosi atributul{' '}
+            <FormattedText as="strong">reversed</FormattedText> .
           </p>
           <LessonFigure
             withBorder
@@ -267,12 +233,9 @@ export default function ListsLesson() {
           />
           <p>
             Putem opta chiar să enumerăm elementele unei liste ordonate începând
-            de la un anumit număr/literă. Pentru asta ne vom folosi de atributul
-            {' '}
-            <strong className="formatted">start</strong>
-            {' '}
-            dând ca valoare numărul
-            sau litera de la care vrem sa începem numărătoarea:
+            de la un anumit număr/literă. Pentru asta ne vom folosi de atributul{' '}
+            <FormattedText as="strong">start</FormattedText> dând ca valoare
+            numărul sau litera de la care vrem sa începem numărătoarea:
           </p>
           <LessonFigure
             withBorder
@@ -314,11 +277,10 @@ export default function ListsLesson() {
             demo="/demo/html/sub-liste"
           />
           <p>
-            În exemplul de mai sus am inclus o listă ordonată în cadrul
-            unei liste neordonate, dar putem foarte bine să includem orice tip
-            de listă în oricare altul. Ce e important să reținem este că nivelul
-            de nesting să nu fie mai mare de 3 căci lucrurile pot deveni
-            confuze.
+            În exemplul de mai sus am inclus o listă ordonată în cadrul unei
+            liste neordonate, dar putem foarte bine să includem orice tip de
+            listă în oricare altul. Ce e important să reținem este că nivelul de
+            nesting să nu fie mai mare de 3 căci lucrurile pot deveni confuze.
           </p>
         </section>
         <section>
@@ -327,13 +289,10 @@ export default function ListsLesson() {
           </LessonHeading>
           <p>
             Există și un al treilea tip de listă pe care-l vei întâlni mai rar
-            dar e totuși bine să-l știi:
-            {' '}
-            <strong className="formatted">{'<dl>'}</strong>
-            {' '}
-            (description list).
-            Îl vom folosi când definim termeni sau asociem perechi de valori, ca
-            în exemplul de mai jos:
+            dar e totuși bine să-l știi:{' '}
+            <FormattedText as="strong">{'<dl>'}</FormattedText> (description
+            list). Îl vom folosi când definim termeni sau asociem perechi de
+            valori, ca în exemplul de mai jos:
           </p>
           <Highlight
             language="html"
@@ -366,8 +325,7 @@ export default function ListsLesson() {
             </dt>
             <dd className="mb-4">
               {' '}
-              Dacă da, vom folosi o listă de descrieri.
-              {' '}
+              Dacă da, vom folosi o listă de descrieri.{' '}
             </dd>
 
             <dt className="text-bold">
@@ -376,24 +334,15 @@ export default function ListsLesson() {
             <dd>
               {' '}
               Dacă da, folosim o listă ordonată, altfel vom folosi o listă
-              neordonată.
-              {' '}
+              neordonată.{' '}
             </dd>
           </dl>
           <LessonTip icon={faThumbsUp}>
-            Iar pe final, nu uita că elementele
-            {' '}
-            <strong>{'<ul>'}</strong>
-            ,
-            <strong>{'<ol>'}</strong>
-            {' '}
-            și
-            {' '}
-            <strong>{'<dl>'}</strong>
-            {' '}
-            ajută atât în cazul
-            screen-readere-lor cât și pe ceilalți developeri care vor înțelege
-            mai ușor codul tău. Hai să le folosim când e vorba de liste.
+            Iar pe final, nu uita că elementele <strong>{'<ul>'}</strong>,
+            <strong>{'<ol>'}</strong> și <strong>{'<dl>'}</strong> ajută atât în
+            cazul screen-readere-lor cât și pe ceilalți developeri care vor
+            înțelege mai ușor codul tău. Hai să le folosim când e vorba de
+            liste.
           </LessonTip>
         </section>
         <div className="dots" />

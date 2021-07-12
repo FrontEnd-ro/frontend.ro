@@ -17,6 +17,7 @@ import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/links-and-buttons/cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [Diana];
 const chapters = [
@@ -81,35 +82,21 @@ export default function LinksAndButtonsLesson() {
           link-uri în loc de butoane și invers.
         </p>
         <p>
-          Astfel, la sfârșitul articolului vom ști exact cum
-          să implementăm un UX corect folosind cele 2 elemente.
+          Astfel, la sfârșitul articolului vom ști exact cum să implementăm un
+          UX corect folosind cele 2 elemente.
         </p>
         <section>
           <LessonHeading as="h2" id="a-element">
             {'<a> element'}
           </LessonHeading>
           <p>
-            Elementul
-            {' '}
-            <strong className="formatted">{'<a>'}</strong>
-            {' '}
-            denumit și
-            {' '}
-            <i>ancoră</i>
-            {' '}
-            sau
-            {' '}
-            <i>link</i>
-            {' '}
-            este unul din cele mai uzuale elemente folosite pentru
-            construirea paginilor web. Dacă vrem să ne mutam la o altă pagină
-            sau la o altă zonă în cadrul aceleiași pagini, atunci vom folosi
-            acest element. Pentru a specifica destinația link-ului vom folosi
-            atributul
-            {' '}
-            <strong className="formatted">href</strong>
-            {' '}
-            .
+            Elementul <FormattedText as="strong">{'<a>'}</FormattedText> denumit
+            și <i>ancoră</i> sau <i>link</i> este unul din cele mai uzuale
+            elemente folosite pentru construirea paginilor web. Dacă vrem să ne
+            mutam la o altă pagină sau la o altă zonă în cadrul aceleiași
+            pagini, atunci vom folosi acest element. Pentru a specifica
+            destinația link-ului vom folosi atributul{' '}
+            <FormattedText as="strong">href</FormattedText> .
           </p>
         </section>
         <section>
@@ -126,33 +113,17 @@ export default function LinksAndButtonsLesson() {
 <a href="https://frontend.ro/"> Frontend.ro </a>`}
           />
           <p>
-            În cazul acesta, spunem că este un
-            {' '}
-            <strong>link către un URL absolut</strong>
-            {' '}
-            - adică un URL care
+            În cazul acesta, spunem că este un{' '}
+            <strong>link către un URL absolut</strong> - adică un URL care
             conține întreaga adresă a unei pagini. Acest tip de URL este deseori
             întâlnit atunci când un website face legătura către un alt website.
           </p>
           <p>
-            Putem avea și
-            {' '}
-            <strong>URL-uri relative</strong>
-            ,
-            a căror destinție finală se calculează în funcție de
-            pagina pe cară ne aflăm. În exemplul de mai jos avem același
-            link atât în
-            {' '}
-            <strong className="formatted">
-              about.html
-            </strong>
-            {' '}
-            cât și în
-            {' '}
-            <strong className="formatted">
-              home.html
-            </strong>
-            :
+            Putem avea și <strong>URL-uri relative</strong>, a căror destinție
+            finală se calculează în funcție de pagina pe cară ne aflăm. În
+            exemplul de mai jos avem același link atât în{' '}
+            <FormattedText as="strong">about.html</FormattedText> cât și în{' '}
+            <FormattedText as="strong">home.html</FormattedText>:
           </p>
           <Highlight
             language="html"
@@ -160,17 +131,15 @@ export default function LinksAndButtonsLesson() {
 <a href="info.html"> Go to info page </a>`}
           />
           <p>
-            Totuși, ajungem la destinații diferite în funcție de pagina
-            pe care suntem.
+            Totuși, ajungem la destinații diferite în funcție de pagina pe care
+            suntem.
           </p>
 
           <BasicEditorLazy folderStructure={relativeUrlExample} readOnly />
           <p>
             Foarte utile sunt și link-urile care duc către o secțiune ale
-            aceleiași pagini sau așa numitele
-            {' '}
-            <strong className="formatted">jump links</strong>
-            .
+            aceleiași pagini sau așa numitele{' '}
+            <FormattedText as="strong">jump links</FormattedText>.
           </p>
           <Highlight
             className="my-5"
@@ -183,19 +152,16 @@ export default function LinksAndButtonsLesson() {
 <!-- ... -->`}
           />
           <LessonTip>
-            Observați atributul
-            {' '}
-            <strong className="formatted">id</strong>
-            .
+            Observați atributul <FormattedText as="strong">id</FormattedText>.
             Aceasta este modalitatea prin care facem legătura între link și
             secțiunea paginii la care vrem să ajungem.
           </LessonTip>
           <p>
             Deși nu am ajuns la partea de CSS, merită menționat că jump links
-            pot să beneficieze de
-            {' '}
-            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior">smooth scrolling</a>
-            {' '}
+            pot să beneficieze de{' '}
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior">
+              smooth scrolling
+            </a>{' '}
             pentru ca utilizatorii să aibă o experiență mai plăcută:
           </p>
           <LessonFigure
@@ -211,16 +177,10 @@ export default function LinksAndButtonsLesson() {
             Link-uri către email-uri
           </LessonHeading>
           <p>
-            Sunt situații în care vrem să oferim unui utilizator posibilitatea de a
-            {' '}
-            <strong>
-              deschide email-ul precompletat către o adresă
-            </strong>
-            . În cazul acesta ne
-            vom folosi de
-            {' '}
-            <strong className="formatted">mailto</strong>
-            :
+            Sunt situații în care vrem să oferim unui utilizator posibilitatea
+            de a <strong>deschide email-ul precompletat către o adresă</strong>.
+            În cazul acesta ne vom folosi de{' '}
+            <FormattedText as="strong">mailto</FormattedText> :
           </p>
           <Highlight
             className="my-5"
@@ -232,10 +192,8 @@ export default function LinksAndButtonsLesson() {
           />
           <p>
             Apasă pe linkul alăturat și ți se va deschide clientul de email,
-            precompletat cu adresa noastră 👉
-            {' '}
-            <a href="mailto:hello@frontend.ro">Trimite email la Frontend.ro</a>
-            .
+            precompletat cu adresa noastră 👉{' '}
+            <a href="mailto:hello@frontend.ro">Trimite email la Frontend.ro</a>.
           </p>
           <LessonFigure
             isVideo
@@ -247,9 +205,9 @@ export default function LinksAndButtonsLesson() {
             Link-uri către numere de telefon
           </LessonHeading>
           <p>
-            Mai mult, dacă vrem să arătăm în pagină
-            numere de telefon e recomandat să folosim link-uri,
-            pentru a ne deschide direct aplicația prin care sunăm:
+            Mai mult, dacă vrem să arătăm în pagină numere de telefon e
+            recomandat să folosim link-uri, pentru a ne deschide direct
+            aplicația prin care sunăm:
           </p>
           <Highlight
             className="my-5"
@@ -261,7 +219,8 @@ export default function LinksAndButtonsLesson() {
           />
           <p>
             Apasă pe unul din numerele de mai jos pentru a vedea cum sunt
-            precompletate pe telefon (poți să dai click fără griji, nu le vei apela dacă faci asta)
+            precompletate pe telefon (poți să dai click fără griji, nu le vei
+            apela dacă faci asta)
           </p>
           <ul className="with--bullets">
             <li>
@@ -281,11 +240,8 @@ export default function LinksAndButtonsLesson() {
             Link-uri de download
           </LessonHeading>
           <p>
-            Împreuna cu atributul
-            {' '}
-            <strong className="formatted">download</strong>
-            {' '}
-            putem instrui
+            Împreuna cu atributul{' '}
+            <FormattedText as="strong">download</FormattedText> putem instrui
             browser-ul să downloadeze fișierul din cadrul link-ului în loc să îl
             deschidă în pagina curentă:
           </p>
@@ -297,8 +253,7 @@ export default function LinksAndButtonsLesson() {
 `}
           />
           <p>
-            Apasă pe linkul de alături pentru a downlada logo-ul nostru 👉
-            {' '}
+            Apasă pe linkul de alături pentru a downlada logo-ul nostru 👉{' '}
             <a href="/logo.png" download>
               Downloadează logo-ul nostru
             </a>
@@ -306,8 +261,8 @@ export default function LinksAndButtonsLesson() {
           <p>
             Acum că ne-am familiarizat cu situații din practică unde putem
             folosi link-uri, ne-am obișnuit puțin cu markup-ul și cu câteva
-            dintre atributele ce pot însoți elementul, putem să
-            vorbim de câteva bune practici pe care să le avem în vedere.
+            dintre atributele ce pot însoți elementul, putem să vorbim de câteva
+            bune practici pe care să le avem în vedere.
           </p>
         </section>
         <section>
@@ -315,32 +270,17 @@ export default function LinksAndButtonsLesson() {
             Atributul target=”_blank”
           </LessonHeading>
           <p>
-            În afară de atributele prezentate, un alt atribut des folosit este
-            {' '}
-            <strong className="formatted"> target</strong>
-            {' '}
-            , care ne indică cum
-            să deschidem link-ul din href.
+            În afară de atributele prezentate, un alt atribut des folosit este{' '}
+            <FormattedText as="strong"> target</FormattedText> , care ne indică
+            cum să deschidem link-ul din href.
           </p>
           <p>
-            Ca și developeri cel mai des ne vom întâlni cu situația de a folosi
-            {' '}
-            <strong className="formatted">
-              target="_blank"
-            </strong>
-            {' '}
-            (link-ul va fi deschis într-o fereastră sau un tab
-            nou)
-            .
-            Când folosim valoarea
-            {' '}
-            <strong>_blank</strong>
-            , e recomandat să adăugăm un nou atribut
-            pentru securitate și anume :
-            {' '}
-            <strong className="formatted">
-              rel=”noopener noreferrer”
-            </strong>
+            Ca și developeri cel mai des ne vom întâlni cu situația de a folosi{' '}
+            <FormattedText as="strong">target="_blank"</FormattedText> (link-ul
+            va fi deschis într-o fereastră sau un tab nou) . Când folosim
+            valoarea <strong>_blank</strong>, e recomandat să adăugăm un nou
+            atribut pentru securitate și anume :{' '}
+            <FormattedText as="strong">rel=”noopener noreferrer”</FormattedText>
             .
           </p>
           <Highlight
@@ -353,8 +293,7 @@ export default function LinksAndButtonsLesson() {
             `}
           />
           <p>
-            Apasă pe următorul link pentru a-l deschide într-un nou tab 👉
-            {' '}
+            Apasă pe următorul link pentru a-l deschide într-un nou tab 👉{' '}
             <a
               href="http://frontend.ro"
               target="_blank"
@@ -374,22 +313,15 @@ export default function LinksAndButtonsLesson() {
             diverse situații:
           </p>
           <blockquote>
-            Putem folosi doar un
-            {' '}
-            <strong className="formatted">icon</strong>
-            {' '}
-            în
-            interiorul unui link?
+            Putem folosi doar un <FormattedText as="strong">icon</FormattedText>{' '}
+            în interiorul unui link?
           </blockquote>
           <p>
-            Din păcate un simplu icon nu ne-ar oferi suficientă
-            informație contextuală despre link, deci nu ar fi chiar recomandat.
-            Dacă totuși suntem nevoiți să folosim un astfel de icon, o bună
-            practică ar fi să adăugăm în link niște text
-            ascuns vizual, care va fi totuși citit de
-            {' '}
-            <strong>screen readers</strong>
-            :
+            Din păcate un simplu icon nu ne-ar oferi suficientă informație
+            contextuală despre link, deci nu ar fi chiar recomandat. Dacă totuși
+            suntem nevoiți să folosim un astfel de icon, o bună practică ar fi
+            să adăugăm în link niște text ascuns vizual, care va fi totuși citit
+            de <strong>screen readers</strong>:
           </p>
           <Highlight
             className="my-5"
@@ -410,10 +342,9 @@ export default function LinksAndButtonsLesson() {
  </a>`}
           />
           <p>
-            Spre exemplu, link-ul alăturat conține doar un icon pentru un coș de cumpărături,
-            dar e în același timp
-            accesibil pentru cei ce folosesc screen readere 👉:
-            {' '}
+            Spre exemplu, link-ul alăturat conține doar un icon pentru un coș de
+            cumpărături, dar e în același timp accesibil pentru cei ce folosesc
+            screen readere 👉:{' '}
             <a href="https://fontawesome.com/">
               <svg width="24" height="24" viewBox="0 0 1024 1024">
                 <g>
@@ -429,22 +360,13 @@ export default function LinksAndButtonsLesson() {
             </a>
           </p>
           <LessonTip icon={faQuestionCircle}>
-            Atributul
-            {' '}
-            <strong className="formatted">style</strong>
-            {' '}
-            este folosit
-            pentru a adăuga reguli CSS elementelor. Încă nu am ajuns la acel
-            capitol deci e ok dacă nu știi cum să-l folosești.
-            Totuși, te rugăm să-l păstrezi în exemplu, pentu a funcționa
-            cum ne așteptăm.
+            Atributul <FormattedText as="strong">style</FormattedText> este
+            folosit pentru a adăuga reguli CSS elementelor. Încă nu am ajuns la
+            acel capitol deci e ok dacă nu știi cum să-l folosești. Totuși, te
+            rugăm să-l păstrezi în exemplu, pentu a funcționa cum ne așteptăm.
           </LessonTip>
           <blockquote>
-            Putem folosi o
-            {' '}
-            <strong className="formatted">imagine</strong>
-            {' '}
-            în
+            Putem folosi o <FormattedText as="strong">imagine</FormattedText> în
             interiorul unui link?
           </blockquote>
           <p>
@@ -464,9 +386,8 @@ export default function LinksAndButtonsLesson() {
 </a>`}
           />
           <p>
-            Alături avem o imagine într-un link. Dacă dăm click pe ea,
-            ne va duce pa pagina principală (home page) 👉
-            {' '}
+            Alături avem o imagine într-un link. Dacă dăm click pe ea, ne va
+            duce pa pagina principală (home page) 👉{' '}
             <a style={{ verticalAlign: 'middle' }} href="/">
               <img height="48" src="/logo.png" alt="Frontend.ro LOGO." />
             </a>
@@ -490,12 +411,10 @@ export default function LinksAndButtonsLesson() {
             {'<button> element'}
           </LessonHeading>
           <p>
-            Elementul html
-            {' '}
-            <strong className="formatted">{'<button>'}</strong>
-            {' '}
-            este folosit atunci când vrem să facem o acțiune (exemple: arată/ascunde
-            un meniu, play sau pause la un video, trimite un comentariu, etc)
+            Elementul html{' '}
+            <FormattedText as="strong">{'<button>'}</FormattedText> este folosit
+            atunci când vrem să facem o acțiune (exemple: arată/ascunde un
+            meniu, play sau pause la un video, trimite un comentariu, etc)
           </p>
           <Highlight
             language="html"
@@ -505,14 +424,11 @@ export default function LinksAndButtonsLesson() {
 </button>`}
           />
           <p>
-            Spre deosebire de link-uri, butoanele
-            {' '}
-            <strong>NU</strong>
-            {' '}
-            schimbă
-            pagina. Totuși dacă avem un formular cu un buton de login, dăm click pe
-            el, așteptăm, apoi suntem direcționați către o nouă pagină, putem
-            spune că acțiunea declanșată de buton a schimbat pagina. În cazul acesta e ok :)
+            Spre deosebire de link-uri, butoanele <strong>NU</strong> schimbă
+            pagina. Totuși dacă avem un formular cu un buton de login, dăm click
+            pe el, așteptăm, apoi suntem direcționați către o nouă pagină, putem
+            spune că acțiunea declanșată de buton a schimbat pagina. În cazul
+            acesta e ok :)
           </p>
         </section>
         <section>
@@ -525,21 +441,19 @@ export default function LinksAndButtonsLesson() {
           </p>
           <ul className="with--bullets">
             <li>
-              <strong className="formatted">type="button"</strong>
+              <FormattedText as="strong">type="button"</FormattedText>
             </li>
             <li>
-              <strong className="formatted">type="submit"</strong>
-              : (utilizate
-              în cadrul formularelor - vom discuta mai multe în momentul în care
-              vom ajunge la această lecție)
+              <FormattedText as="strong">type="submit"</FormattedText>:
+              (utilizate în cadrul formularelor - vom discuta mai multe în
+              momentul în care vom ajunge la această lecție)
             </li>
           </ul>
           <p>O bună practică este să specificăm mereu tipul acestora.</p>
           <p>
-            Pe lîngă submit și button, type mai pot avea și valoarea
-            {' '}
-            <strong className="formatted">reset</strong>
-            . Uite un exemplu care le include pe toate 3:
+            Pe lîngă submit și button, type mai pot avea și valoarea{' '}
+            <FormattedText as="strong">reset</FormattedText>. Uite un exemplu
+            care le include pe toate 3:
           </p>
           <Highlight
             className="my-5"
@@ -598,26 +512,18 @@ export default function LinksAndButtonsLesson() {
             demo="/demo/html/butoane-atributul-disabled"
           /> */}
           <ol style={{ listStyle: 'revert' }}>
+            <li>completăm formularul</li>
+            <li>apăsăm butonul de login</li>
             <li>
-              completăm formularul
-            </li>
-            <li>
-              apăsăm butonul de login
-            </li>
-            <li>
-              butonul devinde
-              {' '}
-              <strong> disabled </strong>
-              {' '}
-              cât timp
-              se trimit datele la server și se așteaptă un răspuns
-              (pentru a preveni cazul în care utilizatorul încearcă
-              din nou în timp ce autentificarea e înca în proges)
+              butonul devinde <strong> disabled </strong> cât timp se trimit
+              datele la server și se așteaptă un răspuns (pentru a preveni cazul
+              în care utilizatorul încearcă din nou în timp ce autentificarea e
+              înca în proges)
             </li>
             <li>
               dacă logarea eșuează, putem afișa un mesaj informativ în care să
-              explicăm de ce nu a putut avea loc și să facem enabled la buton abia
-              la final, pentru a reîncerca.
+              explicăm de ce nu a putut avea loc și să facem enabled la buton
+              abia la final, pentru a reîncerca.
             </li>
           </ol>
           <LessonFigure
@@ -657,11 +563,13 @@ export default function LinksAndButtonsLesson() {
             },
             {
               text: 'Valoarea "noreferrer" pentru atributul "rel"',
-              url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer',
+              url:
+                'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer',
             },
             {
               text: 'Valoarea "noopener" pentru atributul "rel"',
-              url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
+              url:
+                'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
             },
           ]}
         />
@@ -672,13 +580,15 @@ export default function LinksAndButtonsLesson() {
 
 const relativeUrlExample = {
   files: [],
-  folders: [{
-    key: 'home',
-    name: 'home',
-    files: [{
-      key: 'home.html',
-      name: 'home.html',
-      content: `<!DOCTYPE html>
+  folders: [
+    {
+      key: 'home',
+      name: 'home',
+      files: [
+        {
+          key: 'home.html',
+          name: 'home.html',
+          content: `<!DOCTYPE html>
 <html>
 <head>
   <title>Url relativ</title>
@@ -689,10 +599,11 @@ const relativeUrlExample = {
 </body>
 </html>
       `,
-    }, {
-      key: 'info.html',
-      name: 'info.html',
-      content: `<!DOCTYPE html>
+        },
+        {
+          key: 'info.html',
+          name: 'info.html',
+          content: `<!DOCTYPE html>
 <html>
 <head>
   <title>Info | Home page</title>
@@ -702,16 +613,19 @@ const relativeUrlExample = {
 </body>
 </html>
 `,
-    }],
-    folders: [],
-  }, {
-    key: 'about',
-    name: 'about',
-    folders: [],
-    files: [{
-      key: 'about.html',
-      name: 'about.html',
-      content: `<!DOCTYPE html>
+        },
+      ],
+      folders: [],
+    },
+    {
+      key: 'about',
+      name: 'about',
+      folders: [],
+      files: [
+        {
+          key: 'about.html',
+          name: 'about.html',
+          content: `<!DOCTYPE html>
 <html>
 <head>
   <title>Url relativ</title>
@@ -722,10 +636,11 @@ const relativeUrlExample = {
 </body>
 </html>
 `,
-    }, {
-      key: 'info.html',
-      name: 'info.html',
-      content: `<!DOCTYPE html>
+        },
+        {
+          key: 'info.html',
+          name: 'info.html',
+          content: `<!DOCTYPE html>
 <html>
 <head>
   <title>Info | About page</title>
@@ -735,6 +650,8 @@ const relativeUrlExample = {
 </body>
 </html>
 `,
-    }],
-  }],
+        },
+      ],
+    },
+  ],
 };

@@ -6,6 +6,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 import SEOTags from '~/components/SEOTags';
+import FormattedText from '~/components/FormattedText';
 
 export default function InternalCSS() {
   const title = 'CSS Intern';
@@ -46,25 +47,15 @@ export default function InternalCSS() {
         <Demo title={title}>
           <p>
             Metoda de integrare a codului CSS în pagina web se va face prin
-            inserarea elementului
-            {' '}
-            <strong className="formatted">{'<style>'}</strong>
-            {' '}
-            în secțiunea
-            {' '}
-            <strong className="formatted">{'<head>'}</strong>
-            {' '}
-            a documentului
-            HTML. Față de
-            {' '}
+            inserarea elementului{' '}
+            <FormattedText as="strong">{'<style>'}</FormattedText> în secțiunea{' '}
+            <FormattedText as="strong">{'<head>'}</FormattedText> a documentului
+            HTML. Față de{' '}
             <Link href="/demo/css/css-inline">
-              <a>
-                metoda inline
-              </a>
-            </Link>
-            {' '}
-            , la aceasta trebuie să precizăm pentru ce elemente
-            vom aplica regulile de stilizare folosind selectori.
+              <a>metoda inline</a>
+            </Link>{' '}
+            , la aceasta trebuie să precizăm pentru ce elemente vom aplica
+            regulile de stilizare folosind selectori.
           </p>
           <DemoPreview>
             <div className="css-intern">
@@ -72,8 +63,7 @@ export default function InternalCSS() {
                 <h1>Frontend.ro</h1>
                 <p>
                   Învață alături de noi cum
-                  <span> să stilizezi </span>
-                  .
+                  <span> să stilizezi </span>.
                 </p>
               </main>
             </div>

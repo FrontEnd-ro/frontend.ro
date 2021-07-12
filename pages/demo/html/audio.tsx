@@ -5,6 +5,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function Audio() {
   const title = 'Elementul <audio>';
@@ -20,11 +21,9 @@ export default function Audio() {
         <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
-            Exemplu de utilizare a elementului
-            {' '}
-            <strong className="formatted">{'<audio>'}</strong>
-            {' '}
-            ce specifică mai multe surse:
+            Exemplu de utilizare a elementului{' '}
+            <FormattedText as="strong">{'<audio>'}</FormattedText> ce specifică
+            mai multe surse:
           </p>
           <DemoPreview>
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
@@ -40,10 +39,12 @@ export default function Audio() {
               />
 
               <p>
-                Browser-ul tău nu suportă fișiere audio.
-                Folosește
-                {' '}
-                <a href={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.mp3`}>acest link</a>
+                Browser-ul tău nu suportă fișiere audio. Folosește{' '}
+                <a
+                  href={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.mp3`}
+                >
+                  acest link
+                </a>
                 pentru a-l putea vizualiza.
               </p>
             </audio>

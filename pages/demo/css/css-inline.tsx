@@ -5,6 +5,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 import SEOTags from '~/components/SEOTags';
+import FormattedText from '~/components/FormattedText';
 
 export default function InlineMethod() {
   const title = 'CSS Inline';
@@ -20,43 +21,56 @@ export default function InlineMethod() {
         <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
-            Prin
-            {' '}
-            <strong className="formatted">metoda inline</strong>
-            {' '}
-            putem aplica stilul unui singur element HTML.
+            Prin <FormattedText as="strong">metoda inline</FormattedText> putem
+            aplica stilul unui singur element HTML.
           </p>
           <p>
-            Scrierea codului CSS se va face prin adaugarea atributului
-            {' '}
-            <strong className="formatted">style</strong>
-            {' '}
-            pe elementul căruia vrem să-i modificăm stilul:
+            Scrierea codului CSS se va face prin adaugarea atributului{' '}
+            <FormattedText as="strong">style</FormattedText> pe elementul căruia
+            vrem să-i modificăm stilul:
           </p>
           <DemoPreview>
             <div style={{ background: '#282a36', padding: '1em' }}>
-              <h1 style={{
-                textAlign: 'center',
-                fontSize: '45px',
-                fontFamily: 'sans-serif',
-                color: 'white',
-                textShadow: '2px 2px 0 #000',
-              }}
+              <h1
+                style={{
+                  textAlign: 'center',
+                  fontSize: '45px',
+                  fontFamily: 'sans-serif',
+                  color: 'white',
+                  textShadow: '2px 2px 0 #000',
+                }}
               >
                 CSS inline
               </h1>
-              <p style={{
-                color: '#fff', marginLeft: '50px', fontSize: '25px', fontFamily: 'sans-serif',
-              }}
+              <p
+                style={{
+                  color: '#fff',
+                  marginLeft: '50px',
+                  fontSize: '25px',
+                  fontFamily: 'sans-serif',
+                }}
               >
                 Observăm că stilurile sunt destul de greu de citit și editat.
               </p>
-              <p style={{
-                color: '#fff', marginLeft: '50px', fontSize: '27px', fontFamily: 'sans-serif',
-              }}
+              <p
+                style={{
+                  color: '#fff',
+                  marginLeft: '50px',
+                  fontSize: '27px',
+                  fontFamily: 'sans-serif',
+                }}
               >
                 De aceea recomandăm evitarea
-                <span style={{ fontSize: '30px', fontWeight: 'bold', color: '#9f616a' }}> acestei metode </span>
+                <span
+                  style={{
+                    fontSize: '30px',
+                    fontWeight: 'bold',
+                    color: '#9f616a',
+                  }}
+                >
+                  {' '}
+                  acestei metode{' '}
+                </span>
                 .
               </p>
             </div>

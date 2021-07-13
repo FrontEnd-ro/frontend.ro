@@ -13,7 +13,17 @@ interface Props {
   className?: string;
 }
 
-const CodePenEmbed = ({
+type Variant = 'default' | 'iframe';
+
+const CodePenEmbed = ({ variant, ...rest }: Props & { variant?: Variant }) => {
+  if (variant === 'default') {
+    return <HTMLEmbed {...rest} />;
+  }
+
+  return <IframeEmbed {...rest} />;
+};
+
+const HTMLEmbed = ({
   user,
   slug,
   defaultTab,
@@ -70,6 +80,37 @@ const CodePenEmbed = ({
         data-default-tab={`${defaultTab},result`}
       />
     </div>
+  );
+};
+
+const IframeEmbed = ({
+  user,
+  slug,
+  defaultTab,
+  editable = true,
+  useClickToLoad = false,
+  theme = 'light',
+  className = '',
+}: Props) => {
+  let iframeSrc = `https://codepen.io/${user}/embed/${useClickToLoad ? 'preview/' : ''}${slug}?default-tab=${defaultTab}%2Cresult&theme-id=${theme}`;
+
+  if (editable) {
+    iframeSrc += '&editable=true';
+  }
+
+  return (
+    <iframe
+      scrolling="no"
+      loading="lazy"
+      src={iframeSrc}
+      frameBorder="no"
+      allowFullScreen
+      className={`
+        ${className}
+        ${styles['codepen-embed']}
+      `}
+      title="CodePen Embed"
+    />
   );
 };
 

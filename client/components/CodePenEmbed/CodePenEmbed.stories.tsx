@@ -6,28 +6,64 @@ export default {
 };
 
 export const Default = () => (
-  <CodePenEmbed
-    user="iampava"
-    slug="mdmENZO"
-    defaultTab="html"
-  />
+  <>
+    <h2> HTML (recommended) </h2>
+    <CodePenEmbed
+      user="iampava"
+      slug="mdmENZO"
+      defaultTab="html"
+    />
+
+    <h2> IFrame Embed </h2>
+    <CodePenEmbed
+      user="iampava"
+      slug="mdmENZO"
+      variant="iframe"
+      defaultTab="html"
+    />
+  </>
 );
 
 export const Dark = () => (
-  <CodePenEmbed
-    user="iampava"
-    slug="mdmENZO"
-    defaultTab="html"
-    theme="dark"
-  />
+  <>
+    <h2> HTML (recommended) </h2>
+    <CodePenEmbed
+      user="iampava"
+      slug="mdmENZO"
+      defaultTab="html"
+      theme="dark"
+    />
+
+    <h2> IFrame Embed </h2>
+    <CodePenEmbed
+      user="iampava"
+      slug="mdmENZO"
+      defaultTab="html"
+      theme="dark"
+      variant="iframe"
+    />
+  </>
 );
 
 export const WithClickToLoad = () => (
-  <CodePenEmbed
-    user="iampava"
-    slug="mdmENZO"
-    defaultTab="html"
-    theme="dark"
-    useClickToLoad
-  />
+  <>
+    <h2> HTML (recommended) </h2>
+    <CodePenEmbed
+      user="iampava"
+      slug="mdmENZO"
+      defaultTab="html"
+      theme="dark"
+      useClickToLoad
+    />
+
+    <h2> IFrame Embed </h2>
+    <CodePenEmbed
+      user="iampava"
+      slug="mdmENZO"
+      defaultTab="html"
+      theme="dark"
+      variant="iframe"
+      useClickToLoad
+    />
+  </>
 );

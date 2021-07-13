@@ -12,7 +12,11 @@ export default function OrderedListsStart() {
   return (
     <>
       <Head>
-        <title>{title} | FrontEnd.ro</title>
+        <title>
+          {title}
+          {' '}
+          | FrontEnd.ro
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
@@ -20,8 +24,11 @@ export default function OrderedListsStart() {
         <Demo title={title}>
           <p>
             Putem opta să enumerăm elementele unei liste ordonate începând de la
-            un anumit număr/literă folosindu-ne de atributul{' '}
-            <FormattedText as="strong">start</FormattedText> dând ca valoare
+            un anumit număr/literă folosindu-ne de atributul
+            {' '}
+            <FormattedText as="strong">start</FormattedText>
+            {' '}
+            dând ca valoare
             numărul/litera de la care vrem să începem numărătoarea:
           </p>
           <DemoPreview>

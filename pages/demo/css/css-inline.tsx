@@ -21,12 +21,19 @@ export default function InlineMethod() {
         <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
-            Prin <FormattedText as="strong">metoda inline</FormattedText> putem
+            Prin
+            {' '}
+            <FormattedText as="strong">metoda inline</FormattedText>
+            {' '}
+            putem
             aplica stilul unui singur element HTML.
           </p>
           <p>
-            Scrierea codului CSS se va face prin adaugarea atributului{' '}
-            <FormattedText as="strong">style</FormattedText> pe elementul căruia
+            Scrierea codului CSS se va face prin adaugarea atributului
+            {' '}
+            <FormattedText as="strong">style</FormattedText>
+            {' '}
+            pe elementul căruia
             vrem să-i modificăm stilul:
           </p>
           <DemoPreview>
@@ -69,7 +76,8 @@ export default function InlineMethod() {
                   }}
                 >
                   {' '}
-                  acestei metode{' '}
+                  acestei metode
+                  {' '}
                 </span>
                 .
               </p>

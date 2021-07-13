@@ -65,22 +65,35 @@ export default function VSCodeLesson() {
             interactiv și plăcut.
           </p>
           <p>
-            Ca să fim aliniați în acest proces de învățare ne vom folosi de un{' '}
-            <strong>tool</strong> ce are mare succes printre developeri și anume{' '}
+            Ca să fim aliniați în acest proces de învățare ne vom folosi de un
+            {' '}
+            <strong>tool</strong>
+            {' '}
+            ce are mare succes printre developeri și anume
+            {' '}
             <a
               href="https://code.visualstudio.com/"
               target="_blank"
               rel="noreferrer"
             >
               <strong>Visual Studio Code</strong>
-            </a>{' '}
-            . Acesta este un editor de cod <strong>open source</strong> , ce
+            </a>
+            {' '}
+            . Acesta este un editor de cod
+            {' '}
+            <strong>open source</strong>
+            {' '}
+            , ce
             oferă foarte multe facilități pentru a ne ajuta să codăm rapid.
             Rulează pe desktop și este disponibil pentru toate sistemele de
             operare.
           </p>
           <p>
-            Este extrem de popular pentru partea de <strong>FrontEnd</strong> ,
+            Este extrem de popular pentru partea de
+            {' '}
+            <strong>FrontEnd</strong>
+            {' '}
+            ,
             dar printr-o serie de extensii poate fi folosit și pentru alte
             limbaje/tehnologii.
           </p>
@@ -113,8 +126,16 @@ export default function VSCodeLesson() {
           <p>Ok, acum că l-am instalat, vom deschide VS Code.</p>
           <p>
             Haideți să deschidem un proiect în VS Code. Ca să facem asta, putem
-            să-l tragem cu <strong>drag and drop</strong> sau putem alege
-            opțiunea <strong>Open Folder</strong> .
+            să-l tragem cu
+            {' '}
+            <strong>drag and drop</strong>
+            {' '}
+            sau putem alege
+            opțiunea
+            {' '}
+            <strong>Open Folder</strong>
+            {' '}
+            .
           </p>
           <LessonFigure
             isVideo
@@ -132,9 +153,12 @@ export default function VSCodeLesson() {
             alt="Folderul și tot ce acesta conține."
           />
           <p>
-            Ca să creem un nou fișier, fie vom alege{' '}
+            Ca să creem un nou fișier, fie vom alege
+            {' '}
             {/* <strong className="formatted">New file</strong> */}
-            <FormattedText as="strong">New file</FormattedText> (CTRL + N), fie
+            <FormattedText as="strong">New file</FormattedText>
+            {' '}
+            (CTRL + N), fie
             vom selecta prima iconiță (de lângă denumirea proiectului).
           </p>
           <LessonFigure
@@ -145,9 +169,20 @@ export default function VSCodeLesson() {
           <LessonTip>
             În funcție de ce tip de fișier avem nevoie în proiectul nostru vom
             folosi extensia corespunzătoare. Fișierele de tip HTML vor avea
-            extensia <strong>.html</strong> (ca în exemplul de mai sus),
-            fișierele de tip CSS vor avea extensia <strong>.css</strong> , iar
-            cele de Javascript vor avea extensia <strong>.js</strong>. Putem
+            extensia
+            {' '}
+            <strong>.html</strong>
+            {' '}
+            (ca în exemplul de mai sus),
+            fișierele de tip CSS vor avea extensia
+            {' '}
+            <strong>.css</strong>
+            {' '}
+            , iar
+            cele de Javascript vor avea extensia
+            {' '}
+            <strong>.js</strong>
+            . Putem
             folosi ce limbaj de programare dorim, momentan doar cele trei fac
             obiectul discuției noastre.
           </LessonTip>
@@ -162,8 +197,10 @@ export default function VSCodeLesson() {
             de codare pe care le oferă editorul și despre care e bine să știm.
           </p>
           <p>
-            În partea din stânga a ecranului avem{' '}
-            <strong>Bara de Activitate</strong>:
+            În partea din stânga a ecranului avem
+            {' '}
+            <strong>Bara de Activitate</strong>
+            :
           </p>
           <LessonFigure
             withBorder
@@ -172,28 +209,47 @@ export default function VSCodeLesson() {
           />
           <ol className="with--count">
             <li>
-              Începem cu prima opțiune de sus denumită{' '}
-              <strong>File Explorer</strong> , unde vom găsi folderele și
+              Începem cu prima opțiune de sus denumită
+              {' '}
+              <strong>File Explorer</strong>
+              {' '}
+              , unde vom găsi folderele și
               fișierele curente ale proiectului nostru.
             </li>
             <li>
-              Continuăm cu <strong>Search</strong> , pentru a putea căuta
+              Continuăm cu
+              {' '}
+              <strong>Search</strong>
+              {' '}
+              , pentru a putea căuta
               global, adică în toate folderele și fișierele noastre.
             </li>
             <li>
-              <strong>Source Control</strong> este locul unde putem putem
-              colabora via <strong>Git</strong>, folosind o interfață vizuală.
-              (PS: dacă nu știi Git poate{' '}
+              <strong>Source Control</strong>
+              {' '}
+              este locul unde putem putem
+              colabora via
+              <strong>Git</strong>
+              , folosind o interfață vizuală.
+              (PS: dacă nu știi Git poate
+              {' '}
               <Link href="/slides/git-incepatori">
                 <a>slide-urile de la trainingul pe care l-am ținut</a>
-              </Link>{' '}
+              </Link>
+              {' '}
               o să te ajute)
             </li>
             <li>
-              <strong>Extensions View</strong> - de unde putem descărca programe{' '}
-              <strong>create de comunitate</strong> (numite extensii) care
+              <strong>Extensions View</strong>
+              {' '}
+              - de unde putem descărca programe
+              {' '}
+              <strong>create de comunitate</strong>
+              {' '}
+              (numite extensii) care
               extind acest editor cu funcționalități suplimentare. Povestim mai
-              multe despre ele{' '}
+              multe despre ele
+              {' '}
               <Link href="#extensii">
                 <a>mai jos</a>
               </Link>
@@ -239,9 +295,15 @@ export default function VSCodeLesson() {
             comunitate și să respectăm cele mai bune practici.
           </p>
           <p>
-            Pentru a face lucrul acesta vom folosi comanda{' '}
-            <strong> Format Document </strong> din{' '}
-            <strong>Command Palette</strong> (vezi shortcut-urile de mai sus) .
+            Pentru a face lucrul acesta vom folosi comanda
+            {' '}
+            <strong> Format Document </strong>
+            {' '}
+            din
+            {' '}
+            <strong>Command Palette</strong>
+            {' '}
+            (vezi shortcut-urile de mai sus) .
           </p>
           <LessonFigure
             isVideo
@@ -260,9 +322,19 @@ export default function VSCodeLesson() {
             când dăm Save (Ctrl + S).
           </p>
           <p>
-            În secțiunea <strong>User Settings</strong> (la care putem ajunge
-            din <strong>Command Pallete</strong>) putem găsi opțiunea{' '}
-            <strong>Format On Save</strong> și să o bifăm.
+            În secțiunea
+            {' '}
+            <strong>User Settings</strong>
+            {' '}
+            (la care putem ajunge
+            din
+            {' '}
+            <strong>Command Pallete</strong>
+            ) putem găsi opțiunea
+            {' '}
+            <strong>Format On Save</strong>
+            {' '}
+            și să o bifăm.
           </p>
           <LessonFigure
             withBorder
@@ -296,15 +368,21 @@ export default function VSCodeLesson() {
             alt="Extensii"
           />
           <p>
-            Să luăm spre exemplu extensia{' '}
+            Să luăm spre exemplu extensia
+            {' '}
             <a
               href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer"
               target="_blank"
               rel="noreferrer"
             >
               <strong>Live Server</strong>
-            </a>{' '}
-            . Aceasta pornește un <em>server de dezvoltare local</em> ce va da
+            </a>
+            {' '}
+            . Aceasta pornește un
+            {' '}
+            <em>server de dezvoltare local</em>
+            {' '}
+            ce va da
             refresh la pagină în browser de fiecare dată când modificăm ceva în
             fișier. Deci nu mai trebuie noi să ținem minte să facem asta pentru
             a vedea ultimele modificări.
@@ -327,20 +405,30 @@ export default function VSCodeLesson() {
           </p>
           <ol className="with--count">
             <li>
-              Deschide <strong>Color Theme</strong> din{' '}
-              <strong>Command Pallete</strong>.
+              Deschide
+              {' '}
+              <strong>Color Theme</strong>
+              {' '}
+              din
+              {' '}
+              <strong>Command Pallete</strong>
+              .
             </li>
             <li>
               Folosește tastele up și down pentru a face preview la culorile
               temelor.
             </li>
             <li>
-              Selectează tema pe care o dorești apăsând <strong>ENTER</strong>.
+              Selectează tema pe care o dorești apăsând
+              {' '}
+              <strong>ENTER</strong>
+              .
             </li>
           </ol>
           <p>
             psst: poți instala și alte teme via Extensii. Nouă ne place foarte
-            mult{' '}
+            mult
+            {' '}
             <a
               href="https://draculatheme.com/visual-studio-code"
               target="_blank"

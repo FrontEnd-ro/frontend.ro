@@ -13,7 +13,11 @@ export default function NoopenerNoreferrerRel() {
   return (
     <>
       <Head>
-        <title>{title} | DEMO - FrontEnd.ro</title>
+        <title>
+          {title}
+          {' '}
+          | DEMO - FrontEnd.ro
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
@@ -30,10 +34,12 @@ export default function NoopenerNoreferrerRel() {
           </DemoPreview>
           <p>
             Când folosim valoarea _blank, e recomandat să adăugăm un nou atribut
-            pentru securitate și anume :{' '}
+            pentru securitate și anume :
+            {' '}
             <FormattedText as="strong">
               rel cu valorile ”noopener noreferrer”.
-            </FormattedText>{' '}
+            </FormattedText>
+            {' '}
           </p>
           <Highlight
             className="my-5"

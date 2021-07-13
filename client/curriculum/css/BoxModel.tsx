@@ -46,6 +46,7 @@ export default function BoxModelLesson() {
         <LessonCover>
           {/* eslint-disable-next-line react/no-danger */}
           <div
+            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: coverSvg,
             }}
@@ -69,23 +70,29 @@ export default function BoxModelLesson() {
             Componentele Box Model
           </LessonHeading>
           <p>
-            <strong>Box model</strong> este compus din 4 proprietăți:
+            <strong>Box model</strong>
+            {' '}
+            este compus din 4 proprietăți:
           </p>
           <ul className="with--bullets">
             <li>
-              <strong>Content</strong>: Conținutul "cutiei", adică locul unde se
+              <strong>Content</strong>
+              : Conținutul "cutiei", adică locul unde se
               afișează textul / imaginea / etc.
             </li>
             <li>
-              <strong>Padding</strong>: Un spațiu transparent care înconjoară
+              <strong>Padding</strong>
+              : Un spațiu transparent care înconjoară
               conținutul
             </li>
             <li>
-              <strong>Border</strong>: O "bordură" care înconjoară conținutul și
+              <strong>Border</strong>
+              : O "bordură" care înconjoară conținutul și
               padding-ul
             </li>
             <li>
-              <strong>Margin</strong>: O suprafață transparentă din afara
+              <strong>Margin</strong>
+              : O suprafață transparentă din afara
               border-ului care ajută la spațierea dintre elemente
             </li>
           </ul>
@@ -99,10 +106,19 @@ export default function BoxModelLesson() {
           <p>
             În mod normal, dacă nu intervenim, majoritatea elementelor ar fi
             lipite unul de celălalt. Browserele aplică totuși câteva margini pe
-            anumite elemente, în special pe tag-urile de tip heading ({' '}
-            <FormattedText as="strong">{'<h1>'}</FormattedText> -{' '}
-            <FormattedText as="strong">{'<h6>'}</FormattedText> ) și pe
-            paragrafe ( <FormattedText as="strong">{'<p>'}</FormattedText> ),
+            anumite elemente, în special pe tag-urile de tip heading (
+            {' '}
+            <FormattedText as="strong">{'<h1>'}</FormattedText>
+            {' '}
+            -
+            {' '}
+            <FormattedText as="strong">{'<h6>'}</FormattedText>
+            {' '}
+            ) și pe
+            paragrafe (
+            <FormattedText as="strong">{'<p>'}</FormattedText>
+            {' '}
+            ),
             dar nu vom intra acum în detaliu.
           </p>
 
@@ -120,11 +136,15 @@ export default function BoxModelLesson() {
             alt="Doua elemente fara spatieri"
           />
           <p>
-            Așa cum se poate observa, ambele tag-uri{' '}
-            <FormattedText as="strong">{'<div>'}</FormattedText> sunt lipite. Nu
+            Așa cum se poate observa, ambele tag-uri
+            {' '}
+            <FormattedText as="strong">{'<div>'}</FormattedText>
+            {' '}
+            sunt lipite. Nu
             avem o spațiere definită, și nici vreo bordură pentru a le separa.
             Haideți să vedem cum putem folosi componentele box model-ului pentru
-            a schimba modul în care cele două{' '}
+            a schimba modul în care cele două
+            {' '}
             <FormattedText as="strong">{'<div>'}</FormattedText>
             -uri sunt afișate.
           </p>
@@ -156,8 +176,10 @@ div {
           <p>
             Setarea unui border pentru cele două div-uri ajută puțin la
             separare, însă elementele tot lipite sunt. Este departe de acel
-            design WOW pe care îl dorim. Pentru a le distanța, putem folosi{' '}
-            <strong>margin</strong>.
+            design WOW pe care îl dorim. Pentru a le distanța, putem folosi
+            {' '}
+            <strong>margin</strong>
+            .
           </p>
         </section>
         <section>
@@ -186,22 +208,28 @@ div {
           </p>
 
           <LessonTip>
-            Chiar dacă am setat 12px ca margin pentru ambele{' '}
+            Chiar dacă am setat 12px ca margin pentru ambele
+            {' '}
             <FormattedText as="strong">{'<div>'}</FormattedText>
             -uri, distanța dintre cele două elemente nu va fi 24px (12px * 2),
             ci va rămâne 12px. Acest lucru se întâmplă din cauza conceptului
-            numit <strong>margin collapsing</strong>. Este un fenomen care ar
+            numit
+            {' '}
+            <strong>margin collapsing</strong>
+            . Este un fenomen care ar
             merita propria mini-lecție, însă ceea ce trebuie să știi pentru
             moment este că uneori două margini se pot combina într-una singură,
             care va avea valoarea maximă dintre cele două margini individuale.
-            Poți citi mai multe{' '}
+            Poți citi mai multe
+            {' '}
             <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing">
               <a target="_blank">aici</a>
             </Link>
             .
           </LessonTip>
           <p>
-            Dacă deschidem DevTools și inspectăm unul dintre{' '}
+            Dacă deschidem DevTools și inspectăm unul dintre
+            {' '}
             <FormattedText as="strong">{'<div>'}</FormattedText>
             -uri, vom vedea imaginea de mai jos. Concret, chenarul portocaliu
             reprezintă de fapt marginea pe care noi am setat-o în cod, adică
@@ -219,7 +247,9 @@ div {
             Padding
           </LessonHeading>
           <p>
-            <strong>Padding-ul</strong> este folosit pentru a adăuga spațiu
+            <strong>Padding-ul</strong>
+            {' '}
+            este folosit pentru a adăuga spațiu
             între content și border. În exemplul nostru, padding-ul s-ar afișa
             între cuvântul "Element" și bordura neagră de 1px pe care noi am
             setat-o prima dată.
@@ -254,7 +284,10 @@ div {
           <p>
             Ok, acum că am învățat despre border, margin și padding, este
             momentul să vedem cum se aplică toate pe elementul din exemplu.
-            Pentru asta, vom folosi din nou <strong>DevTools</strong>.
+            Pentru asta, vom folosi din nou
+            {' '}
+            <strong>DevTools</strong>
+            .
           </p>
           <LessonFigure
             withBorder
@@ -274,14 +307,26 @@ div {
           </p>
           <p>
             În imaginea a doua, veți vedea exact dimensiunile setate pentru
-            margin, border și padding. Chenarul albastru este corespondentul{' '}
-            <strong>content-ului</strong>, care în exemplu are o lățime de{' '}
-            <em>372px</em> și o înălțime de <em>19px</em>.
+            margin, border și padding. Chenarul albastru este corespondentul
+            {' '}
+            <strong>content-ului</strong>
+            , care în exemplu are o lățime de
+            {' '}
+            <em>372px</em>
+            {' '}
+            și o înălțime de
+            <em>19px</em>
+            .
           </p>
           <p>
-            Haideți să setăm și proprietățile{' '}
-            <FormattedText as="strong">width</FormattedText> și{' '}
-            <FormattedText as="strong">height</FormattedText>, pentru a le vedea
+            Haideți să setăm și proprietățile
+            {' '}
+            <FormattedText as="strong">width</FormattedText>
+            {' '}
+            și
+            {' '}
+            <FormattedText as="strong">height</FormattedText>
+            , pentru a le vedea
             modificate și în reprezentarea grafică.
           </p>
           <Highlight
@@ -312,9 +357,21 @@ div {
             alt="Box Model complet, vizualizat pe pagina"
           />
           <p>
-            Hmm, ceva nu e bine. Am setat lățimea de <em>100px</em> și înălțimea
-            de <em>50px</em>, însă div-ul nostru are în schimb o lățime de{' '}
-            <em>118px</em> și o înălțime de <em>68px</em>. Oare de ce?
+            Hmm, ceva nu e bine. Am setat lățimea de
+            {' '}
+            <em>100px</em>
+            {' '}
+            și înălțimea
+            de
+            {' '}
+            <em>50px</em>
+            , însă div-ul nostru are în schimb o lățime de
+            {' '}
+            <em>118px</em>
+            {' '}
+            și o înălțime de
+            <em>68px</em>
+            . Oare de ce?
           </p>
         </section>
         <section>
@@ -323,15 +380,20 @@ div {
           </LessonHeading>
           <p>
             Pentru a înțelege ce s-a întâmplat, trebuie să vorbim puțin despre
-            proprietatea <FormattedText as="strong">box-sizing</FormattedText>.
+            proprietatea
+            {' '}
+            <FormattedText as="strong">box-sizing</FormattedText>
+            .
           </p>
           <p>
             Această proprietate controlează modul în care este calculată
             dimensiunea totală a unui element (lățime și înălțime).
           </p>
           <p>
-            În CSS, dacă setam o lățime de 100px, ea se va aplica asupra{' '}
-            <strong>content-ului</strong>. În momentul în care adăugăm padding
+            În CSS, dacă setam o lățime de 100px, ea se va aplica asupra
+            {' '}
+            <strong>content-ului</strong>
+            . În momentul în care adăugăm padding
             sau border, aceste valori se vor adăuga la dimensiunea totală a
             elementului final care va fi randat pe pagină.
           </p>
@@ -358,11 +420,17 @@ div {
           </p>
           <blockquote>100px + 8px * 2 + 1px * 2 = 118px</blockquote>
           <LessonTip>
-            De ce 8px * 2? Trebuie să luăm în considerare{' '}
-            <FormattedText as="strong">padding-left</FormattedText> și{' '}
-            <FormattedText as="strong">padding-right</FormattedText>. Același
+            De ce 8px * 2? Trebuie să luăm în considerare
+            {' '}
+            <FormattedText as="strong">padding-left</FormattedText>
+            {' '}
+            și
+            {' '}
+            <FormattedText as="strong">padding-right</FormattedText>
+            . Același
             lucru este valabil și pentru
-            <FormattedText as="strong">border</FormattedText>.
+            <FormattedText as="strong">border</FormattedText>
+            .
           </LessonTip>
           <p>
             Se poate observa că nu este neapărat un mod ușor de a seta
@@ -371,16 +439,28 @@ div {
             ajungem la rezultatul dorit. Asta nu sună prea bine, nu?
           </p>
           <p>
-            Din fericire, CSS ne oferă o soluție: proprietatea{' '}
-            <FormattedText as="strong">box-sizing</FormattedText>. Implicit,
-            această proprietate are valoarea{' '}
-            <FormattedText as="strong">content-box</FormattedText>, adică{' '}
-            <em>width-ul</em> și <em>height-ul</em> se vor aplica asupra
+            Din fericire, CSS ne oferă o soluție: proprietatea
+            {' '}
+            <FormattedText as="strong">box-sizing</FormattedText>
+            . Implicit,
+            această proprietate are valoarea
+            {' '}
+            <FormattedText as="strong">content-box</FormattedText>
+            , adică
+            {' '}
+            <em>width-ul</em>
+            {' '}
+            și
+            <em>height-ul</em>
+            {' '}
+            se vor aplica asupra
             content-ului.
           </p>
           <p>
-            Cealaltă valoare este{' '}
-            <FormattedText as="strong">border-box</FormattedText>. Setarea
+            Cealaltă valoare este
+            {' '}
+            <FormattedText as="strong">border-box</FormattedText>
+            . Setarea
             acestei valori îi va spune browser-ului să țină cont pentru
             calcularea dimensiuni de orice border sau padding adăugat.
             Content-ul va fi micșorat pentru a se putea atinge width-ul sau
@@ -419,8 +499,10 @@ div {
           <p>
             Mai jos, am recreat box model-ul din DevTools, pentru că tu să poți
             interacționa cu el și pentru a vedea în timp real cum este afectată
-            dimensiunea elementului în funcție de valoarea proprietății{' '}
-            <FormattedText as="strong">box-sizing</FormattedText>.
+            dimensiunea elementului în funcție de valoarea proprietății
+            {' '}
+            <FormattedText as="strong">box-sizing</FormattedText>
+            .
           </p>
           <LessonTip>
             Valorile implicite setate în stânga servesc drept limite maxime,

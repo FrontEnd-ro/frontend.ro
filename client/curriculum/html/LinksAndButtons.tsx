@@ -90,13 +90,28 @@ export default function LinksAndButtonsLesson() {
             {'<a> element'}
           </LessonHeading>
           <p>
-            Elementul <FormattedText as="strong">{'<a>'}</FormattedText> denumit
-            și <i>ancoră</i> sau <i>link</i> este unul din cele mai uzuale
+            Elementul
+            {' '}
+            <FormattedText as="strong">{'<a>'}</FormattedText>
+            {' '}
+            denumit
+            și
+            {' '}
+            <i>ancoră</i>
+            {' '}
+            sau
+            {' '}
+            <i>link</i>
+            {' '}
+            este unul din cele mai uzuale
             elemente folosite pentru construirea paginilor web. Dacă vrem să ne
             mutam la o altă pagină sau la o altă zonă în cadrul aceleiași
             pagini, atunci vom folosi acest element. Pentru a specifica
-            destinația link-ului vom folosi atributul{' '}
-            <FormattedText as="strong">href</FormattedText> .
+            destinația link-ului vom folosi atributul
+            {' '}
+            <FormattedText as="strong">href</FormattedText>
+            {' '}
+            .
           </p>
         </section>
         <section>
@@ -113,17 +128,28 @@ export default function LinksAndButtonsLesson() {
 <a href="https://frontend.ro/"> Frontend.ro </a>`}
           />
           <p>
-            În cazul acesta, spunem că este un{' '}
-            <strong>link către un URL absolut</strong> - adică un URL care
+            În cazul acesta, spunem că este un
+            {' '}
+            <strong>link către un URL absolut</strong>
+            {' '}
+            - adică un URL care
             conține întreaga adresă a unei pagini. Acest tip de URL este deseori
             întâlnit atunci când un website face legătura către un alt website.
           </p>
           <p>
-            Putem avea și <strong>URL-uri relative</strong>, a căror destinție
+            Putem avea și
+            {' '}
+            <strong>URL-uri relative</strong>
+            , a căror destinție
             finală se calculează în funcție de pagina pe cară ne aflăm. În
-            exemplul de mai jos avem același link atât în{' '}
-            <FormattedText as="strong">about.html</FormattedText> cât și în{' '}
-            <FormattedText as="strong">home.html</FormattedText>:
+            exemplul de mai jos avem același link atât în
+            {' '}
+            <FormattedText as="strong">about.html</FormattedText>
+            {' '}
+            cât și în
+            {' '}
+            <FormattedText as="strong">home.html</FormattedText>
+            :
           </p>
           <Highlight
             language="html"
@@ -138,8 +164,10 @@ export default function LinksAndButtonsLesson() {
           <BasicEditorLazy folderStructure={relativeUrlExample} readOnly />
           <p>
             Foarte utile sunt și link-urile care duc către o secțiune ale
-            aceleiași pagini sau așa numitele{' '}
-            <FormattedText as="strong">jump links</FormattedText>.
+            aceleiași pagini sau așa numitele
+            {' '}
+            <FormattedText as="strong">jump links</FormattedText>
+            .
           </p>
           <Highlight
             className="my-5"
@@ -152,16 +180,21 @@ export default function LinksAndButtonsLesson() {
 <!-- ... -->`}
           />
           <LessonTip>
-            Observați atributul <FormattedText as="strong">id</FormattedText>.
+            Observați atributul
+            {' '}
+            <FormattedText as="strong">id</FormattedText>
+            .
             Aceasta este modalitatea prin care facem legătura între link și
             secțiunea paginii la care vrem să ajungem.
           </LessonTip>
           <p>
             Deși nu am ajuns la partea de CSS, merită menționat că jump links
-            pot să beneficieze de{' '}
+            pot să beneficieze de
+            {' '}
             <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior">
               smooth scrolling
-            </a>{' '}
+            </a>
+            {' '}
             pentru ca utilizatorii să aibă o experiență mai plăcută:
           </p>
           <LessonFigure
@@ -178,9 +211,15 @@ export default function LinksAndButtonsLesson() {
           </LessonHeading>
           <p>
             Sunt situații în care vrem să oferim unui utilizator posibilitatea
-            de a <strong>deschide email-ul precompletat către o adresă</strong>.
-            În cazul acesta ne vom folosi de{' '}
-            <FormattedText as="strong">mailto</FormattedText> :
+            de a
+            {' '}
+            <strong>deschide email-ul precompletat către o adresă</strong>
+            .
+            În cazul acesta ne vom folosi de
+            {' '}
+            <FormattedText as="strong">mailto</FormattedText>
+            {' '}
+            :
           </p>
           <Highlight
             className="my-5"
@@ -192,8 +231,10 @@ export default function LinksAndButtonsLesson() {
           />
           <p>
             Apasă pe linkul alăturat și ți se va deschide clientul de email,
-            precompletat cu adresa noastră 👉{' '}
-            <a href="mailto:hello@frontend.ro">Trimite email la Frontend.ro</a>.
+            precompletat cu adresa noastră 👉
+            {' '}
+            <a href="mailto:hello@frontend.ro">Trimite email la Frontend.ro</a>
+            .
           </p>
           <LessonFigure
             isVideo
@@ -240,8 +281,11 @@ export default function LinksAndButtonsLesson() {
             Link-uri de download
           </LessonHeading>
           <p>
-            Împreuna cu atributul{' '}
-            <FormattedText as="strong">download</FormattedText> putem instrui
+            Împreuna cu atributul
+            {' '}
+            <FormattedText as="strong">download</FormattedText>
+            {' '}
+            putem instrui
             browser-ul să downloadeze fișierul din cadrul link-ului în loc să îl
             deschidă în pagina curentă:
           </p>
@@ -253,7 +297,8 @@ export default function LinksAndButtonsLesson() {
 `}
           />
           <p>
-            Apasă pe linkul de alături pentru a downlada logo-ul nostru 👉{' '}
+            Apasă pe linkul de alături pentru a downlada logo-ul nostru 👉
+            {' '}
             <a href="/logo.png" download>
               Downloadează logo-ul nostru
             </a>
@@ -270,16 +315,25 @@ export default function LinksAndButtonsLesson() {
             Atributul target=”_blank”
           </LessonHeading>
           <p>
-            În afară de atributele prezentate, un alt atribut des folosit este{' '}
-            <FormattedText as="strong"> target</FormattedText> , care ne indică
+            În afară de atributele prezentate, un alt atribut des folosit este
+            {' '}
+            <FormattedText as="strong"> target</FormattedText>
+            {' '}
+            , care ne indică
             cum să deschidem link-ul din href.
           </p>
           <p>
-            Ca și developeri cel mai des ne vom întâlni cu situația de a folosi{' '}
-            <FormattedText as="strong">target="_blank"</FormattedText> (link-ul
+            Ca și developeri cel mai des ne vom întâlni cu situația de a folosi
+            {' '}
+            <FormattedText as="strong">target="_blank"</FormattedText>
+            {' '}
+            (link-ul
             va fi deschis într-o fereastră sau un tab nou) . Când folosim
-            valoarea <strong>_blank</strong>, e recomandat să adăugăm un nou
-            atribut pentru securitate și anume :{' '}
+            valoarea
+            <strong>_blank</strong>
+            , e recomandat să adăugăm un nou
+            atribut pentru securitate și anume :
+            {' '}
             <FormattedText as="strong">rel=”noopener noreferrer”</FormattedText>
             .
           </p>
@@ -293,7 +347,8 @@ export default function LinksAndButtonsLesson() {
             `}
           />
           <p>
-            Apasă pe următorul link pentru a-l deschide într-un nou tab 👉{' '}
+            Apasă pe următorul link pentru a-l deschide într-un nou tab 👉
+            {' '}
             <a
               href="http://frontend.ro"
               target="_blank"
@@ -313,7 +368,10 @@ export default function LinksAndButtonsLesson() {
             diverse situații:
           </p>
           <blockquote>
-            Putem folosi doar un <FormattedText as="strong">icon</FormattedText>{' '}
+            Putem folosi doar un
+            {' '}
+            <FormattedText as="strong">icon</FormattedText>
+            {' '}
             în interiorul unui link?
           </blockquote>
           <p>
@@ -321,7 +379,10 @@ export default function LinksAndButtonsLesson() {
             contextuală despre link, deci nu ar fi chiar recomandat. Dacă totuși
             suntem nevoiți să folosim un astfel de icon, o bună practică ar fi
             să adăugăm în link niște text ascuns vizual, care va fi totuși citit
-            de <strong>screen readers</strong>:
+            de
+            {' '}
+            <strong>screen readers</strong>
+            :
           </p>
           <Highlight
             className="my-5"
@@ -344,7 +405,8 @@ export default function LinksAndButtonsLesson() {
           <p>
             Spre exemplu, link-ul alăturat conține doar un icon pentru un coș de
             cumpărături, dar e în același timp accesibil pentru cei ce folosesc
-            screen readere 👉:{' '}
+            screen readere 👉:
+            {' '}
             <a href="https://fontawesome.com/">
               <svg width="24" height="24" viewBox="0 0 1024 1024">
                 <g>
@@ -360,13 +422,21 @@ export default function LinksAndButtonsLesson() {
             </a>
           </p>
           <LessonTip icon={faQuestionCircle}>
-            Atributul <FormattedText as="strong">style</FormattedText> este
+            Atributul
+            {' '}
+            <FormattedText as="strong">style</FormattedText>
+            {' '}
+            este
             folosit pentru a adăuga reguli CSS elementelor. Încă nu am ajuns la
             acel capitol deci e ok dacă nu știi cum să-l folosești. Totuși, te
             rugăm să-l păstrezi în exemplu, pentu a funcționa cum ne așteptăm.
           </LessonTip>
           <blockquote>
-            Putem folosi o <FormattedText as="strong">imagine</FormattedText> în
+            Putem folosi o
+            {' '}
+            <FormattedText as="strong">imagine</FormattedText>
+            {' '}
+            în
             interiorul unui link?
           </blockquote>
           <p>
@@ -387,7 +457,8 @@ export default function LinksAndButtonsLesson() {
           />
           <p>
             Alături avem o imagine într-un link. Dacă dăm click pe ea, ne va
-            duce pa pagina principală (home page) 👉{' '}
+            duce pa pagina principală (home page) 👉
+            {' '}
             <a style={{ verticalAlign: 'middle' }} href="/">
               <img height="48" src="/logo.png" alt="Frontend.ro LOGO." />
             </a>
@@ -411,8 +482,11 @@ export default function LinksAndButtonsLesson() {
             {'<button> element'}
           </LessonHeading>
           <p>
-            Elementul html{' '}
-            <FormattedText as="strong">{'<button>'}</FormattedText> este folosit
+            Elementul html
+            {' '}
+            <FormattedText as="strong">{'<button>'}</FormattedText>
+            {' '}
+            este folosit
             atunci când vrem să facem o acțiune (exemple: arată/ascunde un
             meniu, play sau pause la un video, trimite un comentariu, etc)
           </p>
@@ -424,7 +498,11 @@ export default function LinksAndButtonsLesson() {
 </button>`}
           />
           <p>
-            Spre deosebire de link-uri, butoanele <strong>NU</strong> schimbă
+            Spre deosebire de link-uri, butoanele
+            {' '}
+            <strong>NU</strong>
+            {' '}
+            schimbă
             pagina. Totuși dacă avem un formular cu un buton de login, dăm click
             pe el, așteptăm, apoi suntem direcționați către o nouă pagină, putem
             spune că acțiunea declanșată de buton a schimbat pagina. În cazul
@@ -444,15 +522,18 @@ export default function LinksAndButtonsLesson() {
               <FormattedText as="strong">type="button"</FormattedText>
             </li>
             <li>
-              <FormattedText as="strong">type="submit"</FormattedText>:
+              <FormattedText as="strong">type="submit"</FormattedText>
+              :
               (utilizate în cadrul formularelor - vom discuta mai multe în
               momentul în care vom ajunge la această lecție)
             </li>
           </ul>
           <p>O bună practică este să specificăm mereu tipul acestora.</p>
           <p>
-            Pe lîngă submit și button, type mai pot avea și valoarea{' '}
-            <FormattedText as="strong">reset</FormattedText>. Uite un exemplu
+            Pe lîngă submit și button, type mai pot avea și valoarea
+            {' '}
+            <FormattedText as="strong">reset</FormattedText>
+            . Uite un exemplu
             care le include pe toate 3:
           </p>
           <Highlight
@@ -515,7 +596,11 @@ export default function LinksAndButtonsLesson() {
             <li>completăm formularul</li>
             <li>apăsăm butonul de login</li>
             <li>
-              butonul devinde <strong> disabled </strong> cât timp se trimit
+              butonul devinde
+              {' '}
+              <strong> disabled </strong>
+              {' '}
+              cât timp se trimit
               datele la server și se așteaptă un răspuns (pentru a preveni cazul
               în care utilizatorul încearcă din nou în timp ce autentificarea e
               înca în proges)

@@ -12,14 +12,21 @@ export default function HorizontalLine() {
   return (
     <>
       <Head>
-        <title>{title} | FrontEnd.ro</title>
+        <title>
+          {title}
+          {' '}
+          | FrontEnd.ro
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
         <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
-            Elementul <FormattedText as="strong">{'<hr>'}</FormattedText>{' '}
+            Elementul
+            {' '}
+            <FormattedText as="strong">{'<hr>'}</FormattedText>
+            {' '}
             (horizontal line) este un separator între secțiuni/elemente din
             pagină. .
           </p>

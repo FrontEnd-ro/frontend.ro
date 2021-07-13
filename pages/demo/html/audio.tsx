@@ -21,8 +21,11 @@ export default function Audio() {
         <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
-            Exemplu de utilizare a elementului{' '}
-            <FormattedText as="strong">{'<audio>'}</FormattedText> ce specifică
+            Exemplu de utilizare a elementului
+            {' '}
+            <FormattedText as="strong">{'<audio>'}</FormattedText>
+            {' '}
+            ce specifică
             mai multe surse:
           </p>
           <DemoPreview>
@@ -39,7 +42,8 @@ export default function Audio() {
               />
 
               <p>
-                Browser-ul tău nu suportă fișiere audio. Folosește{' '}
+                Browser-ul tău nu suportă fișiere audio. Folosește
+                {' '}
                 <a
                   href={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.mp3`}
                 >

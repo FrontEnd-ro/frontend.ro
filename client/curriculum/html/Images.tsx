@@ -91,14 +91,20 @@ export default function ImagesLesson() {
           </LessonHeading>
           <p>
             Primul și cel mai comun mod de a adăuga o imagine este folosind
-            elementul <strong>img</strong> alături de 2 atribute:
+            elementul
+            {' '}
+            <strong>img</strong>
+            {' '}
+            alături de 2 atribute:
           </p>
           <ul className="with--bullets">
             <li>
-              <strong>src</strong>: pentru a specifica URL-ul imaginii
+              <strong>src</strong>
+              : pentru a specifica URL-ul imaginii
             </li>
             <li>
-              <strong>alt</strong>: pentru a descrie conținutul imaginii - în
+              <strong>alt</strong>
+              : pentru a descrie conținutul imaginii - în
               caz că aceasta nu poate fi încărcată
             </li>
           </ul>
@@ -132,7 +138,10 @@ export default function ImagesLesson() {
             }}
           />
           <p>
-            Este foarte important să nu uităm de atributul <strong>alt</strong>.
+            Este foarte important să nu uităm de atributul
+            {' '}
+            <strong>alt</strong>
+            .
             Pe lângă cazul menționat mai sus, acesta ajută și persoanele cu
             dizabilități ce consumă conținut Web via screen readere.
             {/* Uite un demo folosind progamul XXX? */}
@@ -142,8 +151,12 @@ export default function ImagesLesson() {
           {/* <AudioPlayer className="my-5" src="" title="Web captions demo" /> */}
 
           <LessonTip>
-            De aceea, o pagină ce conține imagini{' '}
-            <strong>fără atributul alt</strong> nu este{' '}
+            De aceea, o pagină ce conține imagini
+            {' '}
+            <strong>fără atributul alt</strong>
+            {' '}
+            nu este
+            {' '}
             <Link href="/html/validarea-paginilor-html">
               <a>considerată validă</a>
             </Link>
@@ -172,8 +185,11 @@ export default function ImagesLesson() {
           <p>
             Însă există situații în care o imagine va avea aceleași dimensiuni
             fixe indiferent de dispozitiv. Un exemplu ar putea fi logo-ul unei
-            companii aflat de obicei în{' '}
-            <FormattedText as="strong">{'<header>'}</FormattedText> -ul paginii.
+            companii aflat de obicei în
+            {' '}
+            <FormattedText as="strong">{'<header>'}</FormattedText>
+            {' '}
+            -ul paginii.
           </p>
           <LessonFigure
             withBorder
@@ -182,11 +198,17 @@ export default function ImagesLesson() {
             demo="/demo/html/imagine-cu-dimensiuni-fixe"
           />
           <p>
-            În astfel de cazuri, în care{' '}
-            <strong>știm dinainte dimensiunea</strong> , este recomandat să
+            În astfel de cazuri, în care
+            {' '}
+            <strong>știm dinainte dimensiunea</strong>
+            {' '}
+            , este recomandat să
             adăugam și atributele
             <strong> width </strong>
-            și <strong> height </strong>.
+            și
+            {' '}
+            <strong> height </strong>
+            .
           </p>
           <Highlight
             className="my-5"
@@ -203,8 +225,10 @@ export default function ImagesLesson() {
             Astfel, browser-ul va ști dimensiunile imaginii înainte de a o
             descărca iar experiența utilizatorilor va fi extrem de fluidă.
             Astfel evităm situația de mai jos unde textul se re-aranjează după
-            încărcarea imaginii - problemă cunoscută sub numele de{' '}
-            <strong>content/layout shifting</strong>.
+            încărcarea imaginii - problemă cunoscută sub numele de
+            {' '}
+            <strong>content/layout shifting</strong>
+            .
           </p>
           <LessonFigure
             isVideo
@@ -225,7 +249,8 @@ export default function ImagesLesson() {
           <p>
             Mai jos continuăm să discutăm despre diverse tehnici pentru a
             optimiza servirea imaginilor și a oferi cea mai bună experiență
-            posibilă, care la randul ei va mări șansele ca{' '}
+            posibilă, care la randul ei va mări șansele ca
+            {' '}
             <a
               href="https://web.dev/site-speed-and-business-metrics/"
               target="_blank"
@@ -242,7 +267,8 @@ export default function ImagesLesson() {
           </LessonHeading>
           <blockquote>
             Most of the images on the web are downloaded, decoded and rendered
-            only never to be seen, as [...] the user never scrolled that far. -{' '}
+            only never to be seen, as [...] the user never scrolled that far. -
+            {' '}
             <small>
               <a
                 href="https://twitter.com/yoavweiss"
@@ -262,14 +288,21 @@ export default function ImagesLesson() {
             În background însă, browser-ul a încărcat toate imaginile, ceea ce e
             o risipă pentru că noi nu le-am văzut pe toate. Ideal ar fi să
             încărcăm imaginile
-            <strong> doar atunci când avem nevoie de ele </strong>.{/* , */}
+            <strong> doar atunci când avem nevoie de ele </strong>
+            .
+            {/* , */}
             {/* cum se întâmplă în video-ul din dreapta. */}
           </p>
           {/* TODO: video demo */}
           {/* <h1> VIDEO DEMO </h1> */}
           <p>
-            Pentru a rezolva această problemă vom folosi atributul{' '}
-            <strong>loading</strong> și valoarea <strong>lazy</strong>.
+            Pentru a rezolva această problemă vom folosi atributul
+            {' '}
+            <strong>loading</strong>
+            {' '}
+            și valoarea
+            <strong>lazy</strong>
+            .
           </p>
           <Highlight
             className="my-5"
@@ -284,10 +317,15 @@ export default function ImagesLesson() {
           />
           <p>
             Acum browserul va descărca imaginea doar când ne
-            <em>"apropiem"</em> de ea. Fiecare browser are propriile metrici
+            <em>"apropiem"</em>
+            {' '}
+            de ea. Fiecare browser are propriile metrici
             legate de ce înseamnă această apropiere, însă nu trebuie să ne batem
-            capul cu asta. Regula generală e să adăugăm atributul{' '}
-            <FormattedText as="strong">loading="lazy"</FormattedText> dacă avem
+            capul cu asta. Regula generală e să adăugăm atributul
+            {' '}
+            <FormattedText as="strong">loading="lazy"</FormattedText>
+            {' '}
+            dacă avem
             multe imagini în pagină.
           </p>
         </section>
@@ -298,8 +336,10 @@ export default function ImagesLesson() {
           <p>
             Am pornit de la imagini simple, am optimizat experiența folosind
             atributele width/height iar apoi am reușit să incărcăm doar
-            imaginile de care avem nevoie folosind atributul{' '}
-            <FormattedText as="strong">loading</FormattedText>. Acum e momentul
+            imaginile de care avem nevoie folosind atributul
+            {' '}
+            <FormattedText as="strong">loading</FormattedText>
+            . Acum e momentul
             să mergem un pas mai departe în călătoria spre performanță și să
             încărcăm imaginea cea mai potrivită din punct de vedere al
             rezoluției.
@@ -349,7 +389,10 @@ export default function ImagesLesson() {
             </LessonHeading>
             <p>
               Din fericire putem rezolva această problemă folosindu-ne de
-              atributul <strong>srcset</strong>. Hai să luăm imaginea noastră și
+              atributul
+              {' '}
+              <strong>srcset</strong>
+              . Hai să luăm imaginea noastră și
               să facem resize la 3 rezoluții diferite:
             </p>
             <LessonFigure
@@ -358,8 +401,13 @@ export default function ImagesLesson() {
               alt="Aceeași imagine în 3 dimensiuni diferite"
             />
             <LessonTip>
-              Pe Windows putem face resize cu <strong>Paint</strong> iar pe
-              MacOS folosind{' '}
+              Pe Windows putem face resize cu
+              {' '}
+              <strong>Paint</strong>
+              {' '}
+              iar pe
+              MacOS folosind
+              {' '}
               <strong>
                 <a
                   href="https://support.apple.com/guide/preview/resize-rotate-or-flip-an-image-prvw2015/mac"
@@ -368,11 +416,16 @@ export default function ImagesLesson() {
                 >
                   Preview App
                 </a>
-              </strong>{' '}
+              </strong>
+              {' '}
               .
             </LessonTip>
             <p>
-              Apoi vom adăuga atributul <strong>srcset</strong> unde definim
+              Apoi vom adăuga atributul
+              {' '}
+              <strong>srcset</strong>
+              {' '}
+              unde definim
               diferitele surse ale imaginii împreună cu dimensiunea (în lățime)
               a fiecăreia:
             </p>
@@ -404,9 +457,15 @@ export default function ImagesLesson() {
             Astfel ne asiguram ca imaginile nu vor iesi din pagina.
           </LessonTip> */}
             <p>
-              Șiiii voilà. Dacă mergem în{' '}
-              <a href="/intro/devtools">modul responsive</a> - și ținem tabul{' '}
-              <strong>network</strong> deschis vom observa cum diferite surse
+              Șiiii voilà. Dacă mergem în
+              {' '}
+              <a href="/intro/devtools">modul responsive</a>
+              {' '}
+              - și ținem tabul
+              {' '}
+              <strong>network</strong>
+              {' '}
+              deschis vom observa cum diferite surse
               ale imaginii se încarcă la rezoluții diferite.
             </p>
             <LessonFigure
@@ -417,12 +476,17 @@ export default function ImagesLesson() {
               alt="Diferite surse ale imaginii se încarcă la rezoluții diferite"
             />
             <p>
-              Te încurajăm să experimentezi și cu opțiunea{' '}
+              Te încurajăm să experimentezi și cu opțiunea
+              {' '}
               <Link href="intro/devtools">
                 <a target="_blank">DRP (Device Pixel Ratio)</a>
-              </Link>{' '}
+              </Link>
+              {' '}
               De exemplu, cu o valoare de 2 și o lățime de 650px se va incărca
-              imaginea <strong>red_bycicle__med.jpg</strong>.
+              imaginea
+              {' '}
+              <strong>red_bycicle__med.jpg</strong>
+              .
             </p>
           </section>
           <section>
@@ -431,13 +495,20 @@ export default function ImagesLesson() {
             </LessonHeading>
             <p>
               Până de curând singurul mod de a face imaginile din CSS (cele puse
-              prin <FormattedText as="strong">background-image:</FormattedText>{' '}
-              ) responsive a fost să punem mai multe reguli{' '}
-              <FormattedText as="strong">@media-query</FormattedText> și să
+              prin
+              {' '}
+              <FormattedText as="strong">background-image:</FormattedText>
+              {' '}
+              ) responsive a fost să punem mai multe reguli
+              {' '}
+              <FormattedText as="strong">@media-query</FormattedText>
+              {' '}
+              și să
               specificăm pentru fiecare o altă imagine.
             </p>
             <p>
-              Dar odată cu introducerea proprietății{' '}
+              Dar odată cu introducerea proprietății
+              {' '}
               <a
                 target="_blank"
                 className="text-bold"
@@ -445,7 +516,8 @@ export default function ImagesLesson() {
                 rel="noreferrer"
               >
                 image-set()
-              </a>{' '}
+              </a>
+              {' '}
               putem lăsa browserul să aleagă cea mai bună imagine în funcție de
               rezoluția ecranului:
             </p>
@@ -471,8 +543,11 @@ export default function ImagesLesson() {
             />
             <LessonTip icon={faQuestion}>
               Această proprietate nu are încă suport nativ în toate Browserele,
-              așa că în exemplul de mai sus am prefixat regulat cu{' '}
-              <FormattedText as="span">-webkit</FormattedText> pentru a
+              așa că în exemplul de mai sus am prefixat regulat cu
+              {' '}
+              <FormattedText as="span">-webkit</FormattedText>
+              {' '}
+              pentru a
               funcționa și în Chrome sau Safari.
             </LessonTip>
           </section>
@@ -482,20 +557,36 @@ export default function ImagesLesson() {
             {'Elementul <picture>'}
           </LessonHeading>
           <p>
-            După cum ai văzut până acum, elementul{' '}
-            <FormattedText as="strong">{'<img>'}</FormattedText> - deși destul
+            După cum ai văzut până acum, elementul
+            {' '}
+            <FormattedText as="strong">{'<img>'}</FormattedText>
+            {' '}
+            - deși destul
             de simplu în utilizare - ne oferă mai multe funcționalități care ne
             permit să optimizăm imaginile și experiența utilizatorilor. Cu toate
             acestea, a mai rămas totuși o ultimă optimizare, și anume folosirea
             unor formate moderne pentru imagini.
           </p>
           <blockquote>
-            De ce am vrea alte formate? Nu sunt <strong>JPG</strong> sau{' '}
-            <strong>PNG</strong> de ajuns?
+            De ce am vrea alte formate? Nu sunt
+            {' '}
+            <strong>JPG</strong>
+            {' '}
+            sau
+            {' '}
+            <strong>PNG</strong>
+            {' '}
+            de ajuns?
           </blockquote>
           <p>
-            Hmmm.... nu chiar. Există formate mai moderne precum{' '}
-            <strong>WebP</strong> sau <strong>AVIF</strong> care oferă aceeași
+            Hmmm.... nu chiar. Există formate mai moderne precum
+            {' '}
+            <strong>WebP</strong>
+            {' '}
+            sau
+            <strong>AVIF</strong>
+            {' '}
+            care oferă aceeași
             calitate a imaginii la o dimensiune mai mică. Uite diferențele de
             dimensiune ale acestei imagini în funcție de format:
           </p>
@@ -507,7 +598,8 @@ export default function ImagesLesson() {
             formate.
           </p>
           <p>
-            După cum vedem pe{' '}
+            După cum vedem pe
+            {' '}
             <a href="https://CanIUse.com" target="_blank" rel="noreferrer">
               Can I use...
             </a>
@@ -531,15 +623,26 @@ export default function ImagesLesson() {
             }}
           />
           <p>
-            Deci avem nevoie de o modalitate prin care browsere care înțeleg{' '}
-            <strong>WebP</strong> sau <strong> Avif</strong> să descarce aceste
+            Deci avem nevoie de o modalitate prin care browsere care înțeleg
+            {' '}
+            <strong>WebP</strong>
+            {' '}
+            sau
+            <strong> Avif</strong>
+            {' '}
+            să descarce aceste
             formate, în timp ce celelalte să rămână la JPG. Această tehnică se
-            numește general{' '}
-            <a href="/concepte/graceful-degradation">graceful degradation</a>.
+            numește general
+            {' '}
+            <a href="/concepte/graceful-degradation">graceful degradation</a>
+            .
           </p>
           <p>
-            Thankfully, această soluție ne este permisă de tag-ul{' '}
-            <FormattedText as="strong">{'<picture>'}</FormattedText> , unde
+            Thankfully, această soluție ne este permisă de tag-ul
+            {' '}
+            <FormattedText as="strong">{'<picture>'}</FormattedText>
+            {' '}
+            , unde
             putem specifica mai multe surse pentru o imagine și să lăsăm
             browserul să o aleagă pe cea pe care o înțelege.
           </p>
@@ -581,25 +684,42 @@ export default function ImagesLesson() {
           />
         </section>
         <p>
-          Ordinea elementelor{' '}
-          <FormattedText as="strong">{'<source>'}</FormattedText> este extrem de
+          Ordinea elementelor
+          {' '}
+          <FormattedText as="strong">{'<source>'}</FormattedText>
+          {' '}
+          este extrem de
           importantă căci browserul le va parcurge de sus-in-jos și o va alege
           pe prima compatibilă. De asemenea, în fiecare dintre ele trebuie
-          adăugat - via atributul <strong>srcset</strong> - mai multe surse de
+          adăugat - via atributul
+          <strong>srcset</strong>
+          {' '}
+          - mai multe surse de
           dimensiuni diferite. Astfel browserul nu alege numai formatul cel mai
           bun, cât și dimensiunea optimă a imaginii. Best of both worlds! 💪
         </p>
         <p>
-          PS: poate ai observat acel ultim{' '}
-          <FormattedText as="strong">{'<img>'}</FormattedText> tag. Ei bine,
+          PS: poate ai observat acel ultim
+          {' '}
+          <FormattedText as="strong">{'<img>'}</FormattedText>
+          {' '}
+          tag. Ei bine,
           avem nevoie de el pentru a specifica descrierea imaginii - în caz că
           aceasta nu poate fi încărcată, cât și pentru eventuala adaugare a unor
-          atribute extra - cum ar fi <strong>loading</strong>. Iar în cazurile
+          atribute extra - cum ar fi
+          <strong>loading</strong>
+          . Iar în cazurile
           mai rare în care utilizatorii folosesc browsere destul de vechi, ce nu
-          înțeleg elementul{' '}
-          <FormattedText as="strong">{'<picture>'}</FormattedText> , acestea vor
-          înțelege totuși tag-ul{' '}
-          <FormattedText as="strong">{'<img>'}</FormattedText> și îl vor arăta
+          înțeleg elementul
+          {' '}
+          <FormattedText as="strong">{'<picture>'}</FormattedText>
+          {' '}
+          , acestea vor
+          înțelege totuși tag-ul
+          {' '}
+          <FormattedText as="strong">{'<img>'}</FormattedText>
+          {' '}
+          și îl vor arăta
           pe acesta.
         </p>
         <div className="dots" />

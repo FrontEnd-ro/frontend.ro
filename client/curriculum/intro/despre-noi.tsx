@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import SEOTags from '~/components/SEOTags';
@@ -69,8 +70,11 @@ export default function Lesson0() {
           <p>
             Comunitatea gravitează în jurul unei serii de lecții și exerciții
             gratuite ce constituie - în opinia noastră - fundamentele unei
-            cariere moderne în FrontEnd Development. Deși abia la{' '}
-            <span className="line-through">prima</span> a doua iterație, acestea
+            cariere moderne în FrontEnd Development. Deși abia la
+            {' '}
+            <span className="line-through">prima</span>
+            {' '}
+            a doua iterație, acestea
             vor fi re-scrise, re-re-scrise și re-re-re-scrise în funcție de
             feedback-ul vostru până când vor ajunge una din cele mai calitative
             resurse de acest fel din România.
@@ -96,8 +100,10 @@ export default function Lesson0() {
             De ce e FrontEnd.ro gratuit?
           </LessonHeading>
           <p>
-            De la început ne-am dorit ca FrontEnd.ro să fie un{' '}
-            <strong>efort de comunitate, pentru comunitate</strong>. Lecțiile,
+            De la început ne-am dorit ca FrontEnd.ro să fie un
+            {' '}
+            <strong>efort de comunitate, pentru comunitate</strong>
+            . Lecțiile,
             exercițiile, acest site cât și feedback-ul pe care voi îl veți primi
             reprezintă o contribuție voluntară a unor developeri cu inimă mare
             din România.
@@ -113,7 +119,11 @@ export default function Lesson0() {
             Cum pot să ajut?
           </LessonHeading>
           <p>
-            Dacă folosești platforma să <strong>înveți FrontEnd</strong> și
+            Dacă folosești platforma să
+            {' '}
+            <strong>înveți FrontEnd</strong>
+            {' '}
+            și
             simți că te-a ajutat, atunci s-ar putea să fie de folos și
             prietenilor tăi. Am aprecia mult un share, așa putem avea un impact
             cât mai mare:
@@ -135,9 +145,13 @@ export default function Lesson0() {
             de mentor și să oferi înapoi comunității. 😄
           </p>
           <p>
-            Dacă <strong>ești FrontEnd Developer</strong>, atunci ne poți ajuta
+            Dacă
+            {' '}
+            <strong>ești FrontEnd Developer</strong>
+            , atunci ne poți ajuta
             prin oferirea de feedback cursanților, crearea de exerciții și
-            lecții sau dezvoltarea acestei platforme al cărei cod este{' '}
+            lecții sau dezvoltarea acestei platforme al cărei cod este
+            {' '}
             <a target="_blank" rel="noreferrer" href={GITHUB_URL}>
               open-source pe GitHub
             </a>
@@ -148,7 +162,8 @@ export default function Lesson0() {
                 . */}
           </p>
           <p>
-            Iar dacă{' '}
+            Iar dacă
+            {' '}
             <strong>
               ești o firmă tech și-ți place ce încercăm să facem aici
             </strong>
@@ -180,9 +195,16 @@ export default function Lesson0() {
             Totuși, fundamentele FrontEnd-ului nu se schimbă, și le vei folosi
             fie că construiești un site de prezentare, un magazin online sau
             următorul Instagram. De aceea, aici ne vom ocupa de fundamentele
-            celor 3 limbaje de programare ce compun FrontEnd-ul:{' '}
-            <strong>HTML</strong>, <strong>CSS</strong> și{' '}
-            <strong>JavaScript</strong>. Deocamdată avem lecții și exerciții
+            celor 3 limbaje de programare ce compun FrontEnd-ul:
+            {' '}
+            <strong>HTML</strong>
+            ,
+            <strong>CSS</strong>
+            {' '}
+            și
+            {' '}
+            <strong>JavaScript</strong>
+            . Deocamdată avem lecții și exerciții
             doar pentru primul, cel de HTML, însa după o rundă de feedback de la
             comunitate vom continua și cu celelalte două.
           </p>
@@ -195,10 +217,15 @@ export default function Lesson0() {
           <p>
             Focusul nostru este pe exerciții și feedback, acolo investim cel mai
             mult timp. Există deja o mulțime de articole și tutoriale extrem de
-            bune pe internet, așa că am decis ca lecțiile să reprezinte doar un{' '}
-            <strong>scurt rezumat</strong>, care la final va avea{' '}
-            <strong>link-uri către resurse mai detaliate</strong>. Din această
-            cauză, principala responsabilitate la partea de învățare este a ta.{' '}
+            bune pe internet, așa că am decis ca lecțiile să reprezinte doar un
+            {' '}
+            <strong>scurt rezumat</strong>
+            , care la final va avea
+            {' '}
+            <strong>link-uri către resurse mai detaliate</strong>
+            . Din această
+            cauză, principala responsabilitate la partea de învățare este a ta.
+            {' '}
           </p>
           <blockquote>
             Ne așteptăm să fii motivat și autodidact, să poți înțelege în mare
@@ -208,24 +235,29 @@ export default function Lesson0() {
             Pentru a învăța cât mai mult, începe cu lecția 0 (cea pe care o
             citești acum) și continuă pe rând cu fiecare lecție nouă. Citește
             rezumatul nostru, iar apoi aruncă un ochi pe resursele suplimentare,
-            înainte să te apuci de exerciții.{' '}
+            înainte să te apuci de exerciții.
+            {' '}
           </p>
           <p>
             <strong>
               Este foarte important să rezolvi toate exercițiile de la fiecare
               lecție.
-            </strong>{' '}
+            </strong>
+            {' '}
             Ai răbdare și încredere în noi, nu am încărcat site-ul cu exerciții
             inutile.
           </p>
           <p>
-            Apoi, după ce ne trimiți soluția ta vom ajunge la{' '}
-            <strong>partea de feedback</strong>. Fiind începător probabil vor fi
+            Apoi, după ce ne trimiți soluția ta vom ajunge la
+            {' '}
+            <strong>partea de feedback</strong>
+            . Fiind începător probabil vor fi
             undeva la 3-4-5 runde, în care-ți vom explica de ce anumite lucruri
             nu sunt bune și te vom ruga să le schimbi.
           </p>
           <p>
-            E extrem de important să{' '}
+            E extrem de important să
+            {' '}
             <strong>
               ai răbdare cu acest proces, și să nu fii prea dur cu tine
             </strong>
@@ -244,8 +276,14 @@ export default function Lesson0() {
           <p>
             Unul dintre cele mai faine lucruri la FrontEnd development este
             faptul că nu avem nevoie de prea multe lucruri înainte să începem.
-            În primul rând, un <strong>calculator</strong> și o{' '}
-            <strong>conexiune la internet</strong>.
+            În primul rând, un
+            {' '}
+            <strong>calculator</strong>
+            {' '}
+            și o
+            {' '}
+            <strong>conexiune la internet</strong>
+            .
           </p>
           <p> Apoi, specific pentru acest domeniu ai nevoie de:</p>
           <ol className="with--count">
@@ -253,7 +291,8 @@ export default function Lesson0() {
               <strong>un browser modern și cross-platform </strong>
               (ce poate fi instalat pe Windows, MacOS și Linux).
               <p>
-                Noi recomandăm unul dintre{' '}
+                Noi recomandăm unul dintre
+                {' '}
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -261,7 +300,8 @@ export default function Lesson0() {
                 >
                   Google Chrome
                 </a>
-                ,{' '}
+                ,
+                {' '}
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -270,7 +310,8 @@ export default function Lesson0() {
                   Mozilla Firefox
                 </a>
                 {'  '}
-                sau{' '}
+                sau
+                {' '}
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -295,10 +336,15 @@ export default function Lesson0() {
                 {' '}
                 Acest editor este extrem de popular printre developeri, așa că
                 hai să-l folosim chiar de la început pentru a ne familiariza cu
-                el. De asemenea, înainte să începi{' '}
-                <a href="/html/despre-html">Lecția 1</a> te invităm să arunci un
-                ochi pe acest{' '}
-                <a href="/intro/vs-code">mini-tutorial despre VSCode</a>.
+                el. De asemenea, înainte să începi
+                {' '}
+                <a href="/html/despre-html">Lecția 1</a>
+                {' '}
+                te invităm să arunci un
+                ochi pe acest
+                {' '}
+                <a href="/intro/vs-code">mini-tutorial despre VSCode</a>
+                .
               </p>
             </li>
           </ol>
@@ -323,7 +369,8 @@ export default function Lesson0() {
                 className="text-bold"
               >
                 MDN - Mozilla Developer Network
-              </a>{' '}
+              </a>
+              {' '}
               este locul unde găsim cele mai calitative și detaliate
               documentații despre HTML, CSS și JavaScript - cele 3 limbaje ce
               compun FrontEnd development-ul.
@@ -335,9 +382,11 @@ export default function Lesson0() {
               </p>
               <p>
                 De exemplu, poate am uitat cum schimbăm culoarea de fundal a
-                unui element din pagină, caz în care vom căuta{' '}
+                unui element din pagină, caz în care vom căuta
+                {' '}
                 {/* <span className="formatted">background color MDN</span> */}
-                <FormattedText as="span">background color MDN</FormattedText>.
+                <FormattedText as="span">background color MDN</FormattedText>
+                .
                 Recomandăm să pui “MDN” la final pentru ca pagina căutată să
                 apară printre primele rezultate.
               </p>
@@ -364,7 +413,8 @@ export default function Lesson0() {
                 className="text-bold"
               >
                 Stack Overflow
-              </a>{' '}
+              </a>
+              {' '}
               este o comunitate de developeri ce învață și codează împreună.
               <p>
                 Mai exact, este cea mai populară platformă de întrebări și
@@ -376,7 +426,8 @@ export default function Lesson0() {
               <p>
                 {' '}
                 Iar dacă ești curios, poți arunca un ochi pe ultimele întrebări
-                adăugate pentru limbajele ce le vom învăța aici:{' '}
+                adăugate pentru limbajele ce le vom învăța aici:
+                {' '}
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -384,15 +435,18 @@ export default function Lesson0() {
                 >
                   HTML
                 </a>
-                ,{' '}
+                ,
+                {' '}
                 <a
                   target="_blank"
                   rel="noreferrer"
                   href="https://stackoverflow.com/questions/tagged/css"
                 >
                   CSS
-                </a>{' '}
-                si{' '}
+                </a>
+                {' '}
+                si
+                {' '}
                 <a
                   target="_blank"
                   rel="noreferrer"

@@ -10,13 +10,16 @@ import { LessonTip } from '~/components/lessons';
 import FormattedText from '~/components/FormattedText';
 
 export default function LinksAroundBiggerChuncksOfContent() {
-  const title =
-    'Două modalități prin care putem folosi bucăți mari de cod în interiorul unui link și implicațiile lor';
+  const title = 'Două modalități prin care putem folosi bucăți mari de cod în interiorul unui link și implicațiile lor';
 
   return (
     <>
       <Head>
-        <title>{title} | DEMO - FrontEnd.ro</title>
+        <title>
+          {title}
+          {' '}
+          | DEMO - FrontEnd.ro
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
@@ -30,11 +33,19 @@ export default function LinksAroundBiggerChuncksOfContent() {
             Faptul că îl folosim așa, în interiorul link-ului, duce la
             implicații în ceea ce privește UX-ul. De exemplu, poate fi dificil
             să selectem textul din interior, iar întregul element are nevoie de
-            reguli de stilizare destul de complexe pentru a crea starea de{' '}
-            <i>focus</i> și <i>hover</i>.
+            reguli de stilizare destul de complexe pentru a crea starea de
+            {' '}
+            <i>focus</i>
+            {' '}
+            și
+            <i>hover</i>
+            .
           </p>
           <p>
-            Totodată trebuie să avem în vedere și <i>accesibilitatea</i>, cum ar
+            Totodată trebuie să avem în vedere și
+            {' '}
+            <i>accesibilitatea</i>
+            , cum ar
             fi faptul că întregul conținut va fi citit de către screen readere
             înainte de a fi "anunțat" ca fiind un link.
           </p>
@@ -214,7 +225,9 @@ export default function LinksAroundBiggerChuncksOfContent() {
           />
           <p>
             Al doilea exemplu are un link în titlu și link-ul are un
-            <a href="/css/pseudo-elements"> pseudo-element</a> definit care
+            <a href="/css/pseudo-elements"> pseudo-element</a>
+            {' '}
+            definit care
             "acoperă" întregul card.
           </p>
           <p>
@@ -427,10 +440,16 @@ export default function LinksAroundBiggerChuncksOfContent() {
 `}
           />
           <LessonTip icon={faQuestionCircle}>
-            Atributul <FormattedText as="strong">style</FormattedText> este
+            Atributul
+            {' '}
+            <FormattedText as="strong">style</FormattedText>
+            {' '}
+            este
             folosit pentru a adăuga reguli CSS elementelor. Incă nu am ajuns la
             acel capitol deci e absolut normal să nu știi ce face.
-            <br /> <br />
+            <br />
+            {' '}
+            <br />
             Totuși, te rugăm să-l pui acolo pentru a obține același rezultat ca
             cel de mai sus.
           </LessonTip>

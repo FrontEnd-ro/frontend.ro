@@ -47,13 +47,21 @@ export default function InternalCSS() {
         <Demo title={title}>
           <p>
             Metoda de integrare a codului CSS în pagina web se va face prin
-            inserarea elementului{' '}
-            <FormattedText as="strong">{'<style>'}</FormattedText> în secțiunea{' '}
-            <FormattedText as="strong">{'<head>'}</FormattedText> a documentului
-            HTML. Față de{' '}
+            inserarea elementului
+            {' '}
+            <FormattedText as="strong">{'<style>'}</FormattedText>
+            {' '}
+            în secțiunea
+            {' '}
+            <FormattedText as="strong">{'<head>'}</FormattedText>
+            {' '}
+            a documentului
+            HTML. Față de
+            {' '}
             <Link href="/demo/css/css-inline">
               <a>metoda inline</a>
-            </Link>{' '}
+            </Link>
+            {' '}
             , la aceasta trebuie să precizăm pentru ce elemente vom aplica
             regulile de stilizare folosind selectori.
           </p>
@@ -63,7 +71,8 @@ export default function InternalCSS() {
                 <h1>Frontend.ro</h1>
                 <p>
                   Învață alături de noi cum
-                  <span> să stilizezi </span>.
+                  <span> să stilizezi </span>
+                  .
                 </p>
               </main>
             </div>

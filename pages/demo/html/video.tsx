@@ -21,8 +21,11 @@ export default function Video() {
         <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
-            Exemplu de utilizare a elementului{' '}
-            <FormattedText as="strong">{'<video>'}</FormattedText> ce specifică
+            Exemplu de utilizare a elementului
+            {' '}
+            <FormattedText as="strong">{'<video>'}</FormattedText>
+            {' '}
+            ce specifică
             mai multe surse:
           </p>
           <DemoPreview>
@@ -39,7 +42,8 @@ export default function Video() {
               />
 
               <p>
-                Browser-ul tău nu suportă fișiere video. Folosește{' '}
+                Browser-ul tău nu suportă fișiere video. Folosește
+                {' '}
                 <a
                   href={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}
                 >

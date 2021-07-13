@@ -56,8 +56,7 @@ class MatchCommandMessageClassComponent extends React.Component<Props, State> {
     if (commands[currentIndex].command instanceof RegExp) {
       isMatch = (commands[currentIndex].command as RegExp).test(gitCommand);
     } else {
-      isMatch =
-        commands[currentIndex].command === gitCommand.trim().toLowerCase();
+      isMatch = commands[currentIndex].command === gitCommand.trim().toLowerCase();
     }
 
     const commandMessage: Message = {

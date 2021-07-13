@@ -8,11 +8,14 @@ module.exports = {
     'linebreak-style': 'off',
     'prefer-const': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
     /**
      * We'd normally want to keep this, but due to how the <Link> component in Next works,
      * we need to turn it off
-    */
+     */
     'jsx-a11y/anchor-is-valid': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/no-unescaped-entities': 'off',
@@ -34,15 +37,11 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
+  plugins: ['@typescript-eslint'],
   settings: {
     'import/resolver': {
       alias: {
-        map: [
-          ['~', './client'],
-        ],
+        map: [['~', './client']],
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
       },
     },

@@ -12,17 +12,27 @@ export default function LineBreak() {
   return (
     <>
       <Head>
-        <title>{title} | FrontEnd.ro</title>
+        <title>
+          {title}
+          {' '}
+          | FrontEnd.ro
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
         <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
-            Dând <FormattedText as="span">Enter</FormattedText> într-un paragraf
+            Dând
+            {' '}
+            <FormattedText as="span">Enter</FormattedText>
+            {' '}
+            într-un paragraf
             nu forțează textul pe o nouă linie. Pentru a obține acest rezultat
-            putem crea un nou paragraf, sau să folosim elementul{' '}
-            <FormattedText as="strong">{'<br>'}</FormattedText>.
+            putem crea un nou paragraf, sau să folosim elementul
+            {' '}
+            <FormattedText as="strong">{'<br>'}</FormattedText>
+            .
           </p>
           <DemoPreview>
             <p>

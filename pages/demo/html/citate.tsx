@@ -12,16 +12,26 @@ export default function Quotes() {
   return (
     <>
       <Head>
-        <title>{title} | FrontEnd.ro</title>
+        <title>
+          {title}
+          {' '}
+          | FrontEnd.ro
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
         <Header demoPage withNavMenu />
         <Demo title={title}>
           <p>
-            Putem folosi{' '}
-            <FormattedText as="strong">{'<blockquote>'}</FormattedText> sau{' '}
-            <FormattedText as="strong">{'<q>'}</FormattedText> pentru a marca
+            Putem folosi
+            {' '}
+            <FormattedText as="strong">{'<blockquote>'}</FormattedText>
+            {' '}
+            sau
+            {' '}
+            <FormattedText as="strong">{'<q>'}</FormattedText>
+            {' '}
+            pentru a marca
             citate.
           </p>
           <DemoPreview>

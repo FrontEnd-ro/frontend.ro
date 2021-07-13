@@ -2,15 +2,15 @@ import React from 'react';
 import styles from './FormattedText.module.scss';
 
 type FormattedTextProps = {
-  as?: React.ComponentType | keyof JSX.IntrinsicElements;
+  as?: keyof JSX.IntrinsicElements;
   children?: React.ReactNode;
-} & React.AllHTMLAttributes<HTMLOrSVGElement>;
+} & React.HTMLAttributes<HTMLOrSVGElement>;
 
-const FormattedText: React.FC<FormattedTextProps> = ({
+const FormattedText = ({
   as: Wrapper = 'div',
   children,
   ...props
-}) => {
+}: FormattedTextProps) => {
   return (
     <Wrapper {...props} className={styles.formatted}>
       {children}

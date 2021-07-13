@@ -7,6 +7,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 import { LessonTip } from '~/components/lessons';
+import FormattedText from '~/components/FormattedText';
 
 export default function LinksAroundBiggerChuncksOfContent() {
   const title = 'Două modalități prin care putem folosi bucăți mari de cod în interiorul unui link și implicațiile lor';
@@ -446,7 +447,7 @@ export default function LinksAroundBiggerChuncksOfContent() {
           <LessonTip icon={faQuestionCircle}>
             Atributul
             {' '}
-            <strong className="formatted">style</strong>
+            <FormattedText as="strong">style</FormattedText>
             {' '}
             este folosit pentru a adăuga reguli
             CSS elementelor. Incă nu am ajuns la acel capitol deci e absolut

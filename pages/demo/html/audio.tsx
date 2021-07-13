@@ -5,6 +5,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function Audio() {
   const title = 'Elementul <audio>';
@@ -22,7 +23,7 @@ export default function Audio() {
           <p>
             Exemplu de utilizare a elementului
             {' '}
-            <strong className="formatted">{'<audio>'}</strong>
+            <FormattedText as="strong">{'<audio>'}</FormattedText>
             {' '}
             ce specifică mai multe surse:
           </p>

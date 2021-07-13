@@ -5,6 +5,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function Video() {
   const title = 'Elementul <video>';
@@ -22,7 +23,7 @@ export default function Video() {
           <p>
             Exemplu de utilizare a elementului
             {' '}
-            <strong className="formatted">{'<video>'}</strong>
+            <FormattedText as="strong">{'<video>'}</FormattedText>
             {' '}
             ce specifică mai multe surse:
           </p>

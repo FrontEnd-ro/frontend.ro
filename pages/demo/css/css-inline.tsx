@@ -5,6 +5,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 import SEOTags from '~/components/SEOTags';
+import FormattedText from '~/components/FormattedText';
 
 export default function InlineMethod() {
   const title = 'CSS Inline';
@@ -22,14 +23,14 @@ export default function InlineMethod() {
           <p>
             Prin
             {' '}
-            <strong className="formatted">metoda inline</strong>
+            <FormattedText as="strong">metoda inline</FormattedText>
             {' '}
             putem aplica stilul unui singur element HTML.
           </p>
           <p>
             Scrierea codului CSS se va face prin adaugarea atributului
             {' '}
-            <strong className="formatted">style</strong>
+            <FormattedText as="strong">style</FormattedText>
             {' '}
             pe elementul căruia vrem să-i modificăm stilul:
           </p>

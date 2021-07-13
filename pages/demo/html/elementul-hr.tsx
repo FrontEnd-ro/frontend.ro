@@ -5,6 +5,7 @@ import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function HorizontalLine() {
   const title = 'Elementul <hr> adaugă o linie de separare';
@@ -24,9 +25,9 @@ export default function HorizontalLine() {
           <p>
             Elementul
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               {'<hr>'}
-            </strong>
+            </FormattedText>
             {' '}
             (horizontal line)
             este un separator între

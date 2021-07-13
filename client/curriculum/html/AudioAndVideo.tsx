@@ -14,6 +14,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import { DemoPreview } from '~/components/demo';
 
 import coverSvg from '~/public/images/lessons/audio-and-video__cover.svg';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [SebastianLatkolic];
 const chapters = [
@@ -59,13 +60,13 @@ export default function VideoAndAudioLesson() {
           <p>
             Elementul
             {' '}
-            <strong className="formatted">{'<audio>'}</strong>
+            <FormattedText as="strong">{'<audio>'}</FormattedText>
             {' '}
             este
             folosit pentru a adăuga fișiere audio paginii tale web. Următorul
             exemplu arată o simplă utilizare a lui, cu ajutorul atributului
             {' '}
-            <strong className="formatted">src</strong>
+            <FormattedText as="strong">src</FormattedText>
             :
           </p>
           <Highlight
@@ -78,18 +79,18 @@ export default function VideoAndAudioLesson() {
           <p>
             O altă metodă de a declara
             {' '}
-            <strong className="formatted">{'<audio>'}</strong>
+            <FormattedText as="strong">{'<audio>'}</FormattedText>
             {' '}
             este folosind două sau mai multe elemente
             {' '}
-            <strong className="formatted">{'<source>'}</strong>
+            <FormattedText as="strong">{'<source>'}</FormattedText>
             . Fiecare astfel de element va trebui să conțină atributul
             {' '}
-            <strong className="formatted">src</strong>
+            <FormattedText as="strong">src</FormattedText>
             {' '}
             împreună cu atributul
             {' '}
-            <strong className="formatted">type</strong>
+            <FormattedText as="strong">type</FormattedText>
             {' '}
             pentru a specifica formatul fișierului.
           </p>
@@ -143,7 +144,7 @@ export default function VideoAndAudioLesson() {
           <p>
             Elementul
             {' '}
-            <strong className="formatted">{'<p>'}</strong>
+            <FormattedText as="strong">{'<p>'}</FormattedText>
             {' '}
             din
             exemplul de mai sus, are rolul de fallback, acesta va fi afișat în
@@ -157,20 +158,20 @@ export default function VideoAndAudioLesson() {
           </LessonHeading>
           <ul className="with--bullets">
             <li className="mb-4">
-              <strong className="formatted">src</strong>
+              <FormattedText as="strong">src</FormattedText>
               {' '}
               – indică locația
               fișierului audio
               {' '}
             </li>
             <li className="mb-4">
-              <strong className="formatted">type</strong>
+              <FormattedText as="strong">type</FormattedText>
               {' '}
               – specifică tipul
               fișierului audio
             </li>
             <li className="mb-4">
-              <strong className="formatted">controls</strong>
+              <FormattedText as="strong">controls</FormattedText>
               {' '}
               – dacă acest
               atribut este prezent, browser-ul va oferi funcții pentru a permite
@@ -197,7 +198,7 @@ export default function VideoAndAudioLesson() {
           <LessonTip>
             Nu uita că ordinea elementelor
             {' '}
-            <strong className="formatted">{'<source>'}</strong>
+            <FormattedText as="strong">{'<source>'}</FormattedText>
             {' '}
             este extrem de
             importantă căci browserul le va parcurge de sus în jos și o va alege
@@ -211,13 +212,13 @@ export default function VideoAndAudioLesson() {
           <p>
             Elementul
             {' '}
-            <strong className="formatted">{'<video>'}</strong>
+            <FormattedText as="strong">{'<video>'}</FormattedText>
             {' '}
             ne
             permite adăugarea unui video pe pagina noastră. Cel mai simplu mod
             de utilizare este - similar ca la audio - prin atributul
             {' '}
-            <strong className="formatted">src</strong>
+            <FormattedText as="strong">src</FormattedText>
             .
           </p>
           <Highlight
@@ -232,7 +233,7 @@ export default function VideoAndAudioLesson() {
             , putem specifica mai multe surse ale
             clipului video folosind tagul
             {' '}
-            <strong className="formatted">{'<source>'}</strong>
+            <FormattedText as="strong">{'<source>'}</FormattedText>
             {' '}
             :
           </p>
@@ -281,7 +282,7 @@ export default function VideoAndAudioLesson() {
           <ul className="with--bullets">
             <li className="mb-4">
               {' '}
-              <strong className="formatted">width</strong>
+              <FormattedText as="strong">width</FormattedText>
               {' '}
               – specifica lățimea
               playerului video exprimată în pixeli;
@@ -289,7 +290,7 @@ export default function VideoAndAudioLesson() {
             </li>
             <li className="mb-4">
               {' '}
-              <strong className="formatted">height</strong>
+              <FormattedText as="strong">height</FormattedText>
               {' '}
               – specifica
               înălțimea playerului video exprimată în pixeli;
@@ -297,17 +298,17 @@ export default function VideoAndAudioLesson() {
             </li>
             <li className="mb-4">
               {' '}
-              <strong className="formatted">muted</strong>
+              <FormattedText as="strong">muted</FormattedText>
               {' '}
               – prin acest atribut browser-ul va initializa clipul audio
               cu volum 0. Acesta poate fi schimbat de utilizator daca atributul
               {' '}
-              <span className="formatted">controls</span>
+              <FormattedText as="span">controls</FormattedText>
               {' '}
               este specificat
             </li>
             <li>
-              <strong className="formatted">autoplay</strong>
+              <FormattedText as="strong">autoplay</FormattedText>
               {' '}
               – dacă acest
               atribut este prezent, browser-ul va da "play" la audio imediat

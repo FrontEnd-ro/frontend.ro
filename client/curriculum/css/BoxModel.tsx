@@ -15,6 +15,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import DevToolsClone from '~/components/DevToolsClone';
 import SideBySidePictures from '~/components/SideBySidePictures';
 import coverSvg from '~/public/images/lessons/box-model/cover.svg';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [CatalinPopusoi];
 const chapters = [
@@ -97,15 +98,15 @@ export default function BoxModelLesson() {
             elemente, în special pe tag-urile de tip heading
             (
             {' '}
-            <strong className="formatted">{'<h1>'}</strong>
+            <FormattedText as="strong">{'<h1>'}</FormattedText>
             {' '}
             -
             {' '}
-            <strong className="formatted">{'<h6>'}</strong>
+            <FormattedText as="strong">{'<h6>'}</FormattedText>
             {' '}
             ) și pe paragrafe (
             {' '}
-            <strong className="formatted">{'<p>'}</strong>
+            <FormattedText as="strong">{'<p>'}</FormattedText>
             {' '}
             ),
             dar nu vom intra acum în detaliu.
@@ -127,13 +128,13 @@ export default function BoxModelLesson() {
           <p>
             Așa cum se poate observa, ambele tag-uri
             {' '}
-            <strong className="formatted">{'<div>'}</strong>
+            <FormattedText as="strong">{'<div>'}</FormattedText>
             {' '}
             sunt lipite. Nu avem o spațiere definită, și nici vreo bordură pentru a le separa.
             Haideți să vedem cum putem folosi componentele box model-ului pentru a schimba modul în
             care cele două
             {' '}
-            <strong className="formatted">{'<div>'}</strong>
+            <FormattedText as="strong">{'<div>'}</FormattedText>
             -uri sunt afișate.
           </p>
         </section>
@@ -197,7 +198,7 @@ div {
           <LessonTip>
             Chiar dacă am setat 12px ca margin pentru ambele
             {' '}
-            <strong className="formatted">{'<div>'}</strong>
+            <FormattedText as="strong">{'<div>'}</FormattedText>
             -uri,
             distanța dintre cele două elemente nu va fi 24px (12px * 2), ci va rămâne 12px.
             Acest lucru se întâmplă din cauza conceptului numit
@@ -220,7 +221,7 @@ div {
           <p>
             Dacă deschidem DevTools și inspectăm unul dintre
             {' '}
-            <strong className="formatted">{'<div>'}</strong>
+            <FormattedText as="strong">{'<div>'}</FormattedText>
             -uri,
             vom vedea imaginea de mai jos. Concret, chenarul portocaliu reprezintă
             de fapt marginea pe care noi am setat-o în cod, adică 12px în toate
@@ -313,11 +314,11 @@ div {
           <p>
             Haideți să setăm și proprietățile
             {' '}
-            <strong className="formatted">width</strong>
+            <FormattedText as="strong">width</FormattedText>
             {' '}
             și
             {' '}
-            <strong className="formatted">height</strong>
+            <FormattedText as="strong">height</FormattedText>
             , pentru a le vedea modificate și în
             reprezentarea grafică.
           </p>
@@ -376,7 +377,7 @@ div {
             Pentru a înțelege ce s-a întâmplat, trebuie să vorbim puțin despre proprietatea
             {' '}
             {' '}
-            <strong className="formatted">box-sizing</strong>
+            <FormattedText as="strong">box-sizing</FormattedText>
             .
           </p>
           <p>
@@ -421,13 +422,13 @@ div {
           <LessonTip>
             De ce 8px * 2? Trebuie să luăm în considerare
             {' '}
-            <strong className="formatted">padding-left</strong>
+            <FormattedText as="strong">padding-left</FormattedText>
             {' '}
             și
             {' '}
-            <strong className="formatted">padding-right</strong>
+            <FormattedText as="strong">padding-right</FormattedText>
             . Același lucru este valabil și pentru
-            <strong className="formatted">border</strong>
+            <FormattedText as="strong">border</FormattedText>
             .
           </LessonTip>
           <p>
@@ -440,11 +441,11 @@ div {
           <p>
             Din fericire, CSS ne oferă o soluție: proprietatea
             {' '}
-            <strong className="formatted">box-sizing</strong>
+            <FormattedText as="strong">box-sizing</FormattedText>
             .
             Implicit, această proprietate are valoarea
             {' '}
-            <strong className="formatted">content-box</strong>
+            <FormattedText as="strong">content-box</FormattedText>
             ,
             adică
             {' '}
@@ -459,7 +460,7 @@ div {
           <p>
             Cealaltă valoare este
             {' '}
-            <strong className="formatted">border-box</strong>
+            <FormattedText as="strong">border-box</FormattedText>
             . Setarea acestei
             valori îi va spune browser-ului să țină cont
             pentru calcularea dimensiuni de orice border
@@ -504,7 +505,7 @@ div {
             și pentru a vedea în timp real cum este afectată dimensiunea elementului în funcție de
             valoarea proprietății
             {' '}
-            <strong className="formatted">box-sizing</strong>
+            <FormattedText as="strong">box-sizing</FormattedText>
             .
           </p>
           <LessonTip>

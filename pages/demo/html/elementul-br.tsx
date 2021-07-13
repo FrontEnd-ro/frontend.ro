@@ -5,6 +5,7 @@ import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function LineBreak() {
   const title = 'Elementul <br> pentru a adăuga o linie nouă';
@@ -24,14 +25,14 @@ export default function LineBreak() {
           <p>
             Dând
             {' '}
-            <span className="formatted">Enter</span>
+            <FormattedText as="span">Enter</FormattedText>
             {' '}
             într-un paragraf
             nu forțează textul pe o nouă linie.
             Pentru a obține acest rezultat putem crea un nou paragraf, sau să
             folosim elementul
             {' '}
-            <strong className="formatted">{'<br>'}</strong>
+            <FormattedText as="strong">{'<br>'}</FormattedText>
             .
           </p>
           <DemoPreview>

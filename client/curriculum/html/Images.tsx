@@ -16,6 +16,7 @@ import Lesson, {
 import { Pava } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [Pava];
 const chapters = [
@@ -182,7 +183,7 @@ export default function ImagesLesson() {
             de dispozitiv. Un exemplu ar putea fi logo-ul unei companii
             aflat de obicei în
             {' '}
-            <strong className="formatted">{'<header>'}</strong>
+            <FormattedText as="strong">{'<header>'}</FormattedText>
             {' '}
             -ul paginii.
           </p>
@@ -316,7 +317,7 @@ export default function ImagesLesson() {
             de ce înseamnă această apropiere, însă nu trebuie să ne batem
             capul cu asta. Regula generală e să adăugăm atributul
             {' '}
-            <strong className="formatted">loading="lazy"</strong>
+            <FormattedText as="strong">loading="lazy"</FormattedText>
             {' '}
             dacă avem multe imagini în pagină.
           </p>
@@ -330,9 +331,9 @@ export default function ImagesLesson() {
             atributele width/height iar apoi am reușit să incărcăm doar imaginile
             de care avem nevoie folosind atributul
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               loading
-            </strong>
+            </FormattedText>
             . Acum e momentul să mergem un pas mai departe în călătoria spre performanță
             și să încărcăm imaginea cea mai potrivită din punct de vedere al rezoluției.
           </p>
@@ -478,12 +479,12 @@ export default function ImagesLesson() {
             <p>
               Până de curând singurul mod de a face imaginile din CSS (cele puse prin
               {' '}
-              <strong className="formatted">background-image:</strong>
+              <FormattedText as="strong">background-image:</FormattedText>
               {' '}
               )
               responsive a fost să punem mai multe reguli
               {' '}
-              <strong className="formatted">@media-query</strong>
+              <FormattedText as="strong">@media-query</FormattedText>
               {' '}
               și să specificăm pentru fiecare o altă imagine.
             </p>
@@ -525,7 +526,7 @@ export default function ImagesLesson() {
               Această proprietate nu are încă suport nativ în toate Browserele,
               așa că în exemplul de mai sus am prefixat regulat cu
               {' '}
-              <span className="formatted">-webkit</span>
+              <FormattedText as="span">-webkit</FormattedText>
               {' '}
               pentru a funcționa și în Chrome sau Safari.
             </LessonTip>
@@ -538,7 +539,7 @@ export default function ImagesLesson() {
           <p>
             După cum ai văzut până acum, elementul
             {' '}
-            <strong className="formatted">{'<img>'}</strong>
+            <FormattedText as="span">{'<img>'}</FormattedText>
             {' '}
             - deși destul de simplu în utilizare - ne oferă mai multe funcționalități
             care ne permit să optimizăm imaginile și experiența utilizatorilor.
@@ -614,7 +615,7 @@ export default function ImagesLesson() {
           <p>
             Thankfully, această soluție ne este permisă de tag-ul
             {' '}
-            <strong className="formatted">{'<picture>'}</strong>
+            <FormattedText as="strong">{'<picture>'}</FormattedText>
             {' '}
             ,
             unde putem specifica mai multe surse pentru o imagine și să lăsăm
@@ -660,7 +661,7 @@ export default function ImagesLesson() {
         <p>
           Ordinea elementelor
           {' '}
-          <strong className="formatted">{'<source>'}</strong>
+          <FormattedText as="strong">{'<source>'}</FormattedText>
           {' '}
           este extrem de importantă căci browserul le va parcurge
           de sus-in-jos și o va alege pe prima compatibilă. De asemenea,
@@ -675,7 +676,7 @@ export default function ImagesLesson() {
         <p>
           PS: poate ai observat acel ultim
           {' '}
-          <strong className="formatted">{'<img>'}</strong>
+          <FormattedText as="strong">{'<img>'}</FormattedText>
           {' '}
           tag. Ei bine, avem nevoie de el pentru
           a specifica descrierea imaginii - în caz că aceasta nu poate fi încărcată,
@@ -685,12 +686,12 @@ export default function ImagesLesson() {
           . Iar în cazurile mai rare în care utilizatorii folosesc browsere
           destul de vechi, ce nu înțeleg elementul
           {' '}
-          <strong className="formatted">{'<picture>'}</strong>
+          <FormattedText as="strong">{'<picture>'}</FormattedText>
           {' '}
           , acestea vor înțelege
           totuși tag-ul
           {' '}
-          <strong className="formatted">{'<img>'}</strong>
+          <FormattedText as="strong">{'<img>'}</FormattedText>
           {' '}
           și îl vor arăta pe acesta.
         </p>

@@ -5,6 +5,7 @@ import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function NoopenerNoreferrerRel() {
   const title = 'Atributul rel cu valorile noopener și noreferrer';
@@ -31,7 +32,7 @@ export default function NoopenerNoreferrerRel() {
             Când folosim valoarea _blank, e recomandat să adăugăm un nou atribut
             pentru securitate și anume :
             {' '}
-            <strong className="formatted">rel cu valorile ”noopener noreferrer”.</strong>
+            <FormattedText as="strong">rel cu valorile ”noopener noreferrer”.</FormattedText>
             {' '}
           </p>
           <Highlight

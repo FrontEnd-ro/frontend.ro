@@ -12,6 +12,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/styling-methods__cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
 import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [DanielHutanu];
 const chapters = [
@@ -73,14 +74,14 @@ export default function CssStylingLesson() {
           <p>
             Prin
             {' '}
-            <strong className="formatted">CSS inline</strong>
+            <FormattedText as="strong">CSS inline</FormattedText>
             {' '}
             putem aplica stilul unui singur element HTML.
           </p>
           <p>
             Scrierea codului CSS se va face prin adaugarea atributului
             {' '}
-            <strong className="formatted">style</strong>
+            <FormattedText as="strong">style</FormattedText>
             {' '}
             pe elementul căruia vrem să-i modificăm stilul:
           </p>
@@ -159,11 +160,11 @@ export default function CssStylingLesson() {
             Metoda de integrare a codului CSS în pagina web se va face prin
             inserarea elementului
             {' '}
-            <strong className="formatted">{'<style>'}</strong>
+            <FormattedText as="strong">{'<style>'}</FormattedText>
             {' '}
             în secțiunea
             {' '}
-            <strong className="formatted">{'<head>'}</strong>
+            <FormattedText as="strong">{'<head>'}</FormattedText>
             {' '}
             a documentului
             HTML. Față de metoda anterioară, la aceasta trebuie să precizăm pentru ce elemente
@@ -185,7 +186,7 @@ export default function CssStylingLesson() {
             În exemplul de mai sus aplicăm regulile
             pe toate elementele de tip
             {' '}
-            <strong className="formatted">a</strong>
+            <FormattedText as="strong">a</FormattedText>
             {' '}
             ,
             {' '}
@@ -301,7 +302,7 @@ export default function CssStylingLesson() {
             Integrarea fișierului CSS în HTML se va face prin intermediul
             elementului
             {' '}
-            <strong className="formatted">{'<link>'}</strong>
+            <FormattedText as="strong">{'<link>'}</FormattedText>
             {' '}
             .
           </p>
@@ -316,7 +317,7 @@ export default function CssStylingLesson() {
             <li className="mb-4">
               atributul
               {' '}
-              <strong className="formatted">rel</strong>
+              <FormattedText as="strong">rel</FormattedText>
               {' '}
               specifică
               relația dintre documentul HTML curent și documentul extern pe care
@@ -326,7 +327,7 @@ export default function CssStylingLesson() {
             <li>
               atributul
               {' '}
-              <strong className="formatted">href</strong>
+              <FormattedText as="strong">href</FormattedText>
               {' '}
               specifică locația (URL-ul) unde găsim foaia de stiluri
             </li>
@@ -374,15 +375,15 @@ export default function CssStylingLesson() {
           <p>
             Poate v-ați întrebat de ce punem tagul
             {' '}
-            <strong className="formatted">{'<link>'}</strong>
+            <FormattedText as="strong">{'<link>'}</FormattedText>
             {' '}
             in
             {' '}
-            <strong className="formatted">{'<head>'}</strong>
+            <FormattedText as="strong">{'<head>'}</FormattedText>
             {' '}
             și nu în
             {' '}
-            <strong className="formatted">{'<body>'}</strong>
+            <FormattedText as="strong">{'<body>'}</FormattedText>
             {' '}
           </p>
           <p>
@@ -410,7 +411,7 @@ export default function CssStylingLesson() {
             De aceea ca și "good practice" vom includem fișierele
             de CSS externe în
             {' '}
-            <span className="formatted">{'<head>'}</span>
+            <FormattedText as="strong">{'<head>'}</FormattedText>
           </LessonTip>
         </section>
       </Lesson>

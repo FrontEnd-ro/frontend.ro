@@ -6,6 +6,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 import SEOTags from '~/components/SEOTags';
+import FormattedText from '~/components/FormattedText';
 
 export default function InternalCSS() {
   const title = 'CSS Intern';
@@ -48,11 +49,11 @@ export default function InternalCSS() {
             Metoda de integrare a codului CSS în pagina web se va face prin
             inserarea elementului
             {' '}
-            <strong className="formatted">{'<style>'}</strong>
+            <FormattedText as="strong">{'<style>'}</FormattedText>
             {' '}
             în secțiunea
             {' '}
-            <strong className="formatted">{'<head>'}</strong>
+            <FormattedText as="strong">{'<head>'}</FormattedText>
             {' '}
             a documentului
             HTML. Față de

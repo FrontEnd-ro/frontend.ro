@@ -17,6 +17,7 @@ import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/links-and-buttons/cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [Diana];
 const chapters = [
@@ -91,7 +92,7 @@ export default function LinksAndButtonsLesson() {
           <p>
             Elementul
             {' '}
-            <strong className="formatted">{'<a>'}</strong>
+            <FormattedText as="strong">{'<a>'}</FormattedText>
             {' '}
             denumit și
             {' '}
@@ -107,7 +108,7 @@ export default function LinksAndButtonsLesson() {
             acest element. Pentru a specifica destinația link-ului vom folosi
             atributul
             {' '}
-            <strong className="formatted">href</strong>
+            <FormattedText as="strong">href</FormattedText>
             {' '}
             .
           </p>
@@ -143,15 +144,15 @@ export default function LinksAndButtonsLesson() {
             pagina pe cară ne aflăm. În exemplul de mai jos avem același
             link atât în
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               about.html
-            </strong>
+            </FormattedText>
             {' '}
             cât și în
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               home.html
-            </strong>
+            </FormattedText>
             :
           </p>
           <Highlight
@@ -169,7 +170,7 @@ export default function LinksAndButtonsLesson() {
             Foarte utile sunt și link-urile care duc către o secțiune ale
             aceleiași pagini sau așa numitele
             {' '}
-            <strong className="formatted">jump links</strong>
+            <FormattedText as="strong">jump links</FormattedText>
             .
           </p>
           <Highlight
@@ -185,7 +186,7 @@ export default function LinksAndButtonsLesson() {
           <LessonTip>
             Observați atributul
             {' '}
-            <strong className="formatted">id</strong>
+            <FormattedText as="strong">id</FormattedText>
             .
             Aceasta este modalitatea prin care facem legătura între link și
             secțiunea paginii la care vrem să ajungem.
@@ -219,7 +220,7 @@ export default function LinksAndButtonsLesson() {
             . În cazul acesta ne
             vom folosi de
             {' '}
-            <strong className="formatted">mailto</strong>
+            <FormattedText as="strong">mailto</FormattedText>
             :
           </p>
           <Highlight
@@ -283,7 +284,7 @@ export default function LinksAndButtonsLesson() {
           <p>
             Împreuna cu atributul
             {' '}
-            <strong className="formatted">download</strong>
+            <FormattedText as="strong">download</FormattedText>
             {' '}
             putem instrui
             browser-ul să downloadeze fișierul din cadrul link-ului în loc să îl
@@ -317,7 +318,7 @@ export default function LinksAndButtonsLesson() {
           <p>
             În afară de atributele prezentate, un alt atribut des folosit este
             {' '}
-            <strong className="formatted"> target</strong>
+            <FormattedText as="strong"> target</FormattedText>
             {' '}
             , care ne indică cum
             să deschidem link-ul din href.
@@ -325,9 +326,9 @@ export default function LinksAndButtonsLesson() {
           <p>
             Ca și developeri cel mai des ne vom întâlni cu situația de a folosi
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               target="_blank"
-            </strong>
+            </FormattedText>
             {' '}
             (link-ul va fi deschis într-o fereastră sau un tab
             nou)
@@ -338,9 +339,9 @@ export default function LinksAndButtonsLesson() {
             , e recomandat să adăugăm un nou atribut
             pentru securitate și anume :
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               rel=”noopener noreferrer”
-            </strong>
+            </FormattedText>
             .
           </p>
           <Highlight
@@ -376,7 +377,7 @@ export default function LinksAndButtonsLesson() {
           <blockquote>
             Putem folosi doar un
             {' '}
-            <strong className="formatted">icon</strong>
+            <FormattedText as="strong">icon</FormattedText>
             {' '}
             în
             interiorul unui link?
@@ -431,7 +432,7 @@ export default function LinksAndButtonsLesson() {
           <LessonTip icon={faQuestionCircle}>
             Atributul
             {' '}
-            <strong className="formatted">style</strong>
+            <FormattedText as="strong">style</FormattedText>
             {' '}
             este folosit
             pentru a adăuga reguli CSS elementelor. Încă nu am ajuns la acel
@@ -442,7 +443,7 @@ export default function LinksAndButtonsLesson() {
           <blockquote>
             Putem folosi o
             {' '}
-            <strong className="formatted">imagine</strong>
+            <FormattedText as="strong">imagine</FormattedText>
             {' '}
             în
             interiorul unui link?
@@ -492,7 +493,7 @@ export default function LinksAndButtonsLesson() {
           <p>
             Elementul html
             {' '}
-            <strong className="formatted">{'<button>'}</strong>
+            <FormattedText as="strong">{'<button>'}</FormattedText>
             {' '}
             este folosit atunci când vrem să facem o acțiune (exemple: arată/ascunde
             un meniu, play sau pause la un video, trimite un comentariu, etc)
@@ -525,10 +526,10 @@ export default function LinksAndButtonsLesson() {
           </p>
           <ul className="with--bullets">
             <li>
-              <strong className="formatted">type="button"</strong>
+              <FormattedText as="strong">type="button"</FormattedText>
             </li>
             <li>
-              <strong className="formatted">type="submit"</strong>
+              <FormattedText as="strong">type="submit"</FormattedText>
               : (utilizate
               în cadrul formularelor - vom discuta mai multe în momentul în care
               vom ajunge la această lecție)
@@ -538,7 +539,7 @@ export default function LinksAndButtonsLesson() {
           <p>
             Pe lîngă submit și button, type mai pot avea și valoarea
             {' '}
-            <strong className="formatted">reset</strong>
+            <FormattedText as="strong">reset</FormattedText>
             . Uite un exemplu care le include pe toate 3:
           </p>
           <Highlight

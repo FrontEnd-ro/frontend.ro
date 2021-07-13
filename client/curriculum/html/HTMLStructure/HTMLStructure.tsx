@@ -14,6 +14,7 @@ import { Pava, IulianRedinciuc } from '~/services/contributors';
 import SideBySidePictures from '~/components/SideBySidePictures';
 
 import styles from './HTMLStructure.module.scss';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [IulianRedinciuc, Pava];
 const chapters = [
@@ -59,35 +60,35 @@ function HTMLStructure() {
               <p className="mb-4"> Fiecare pagină web este alcătuită din următoarele elemente principale: </p>
               <ol className="with--checkmark">
                 <li className="mb-4">
-                  <span className="formatted text-bold">
+                  <FormattedText as="strong">
                     {'<!DOCTYPE html>'}
-                  </span>
+                  </FormattedText>
                   {' '}
                   îi specifică browserului că acest document este de tipul HTML
                 </li>
                 <li className="mb-4">
-                  <span className="formatted text-bold">
+                  <FormattedText as="strong">
                     {'<html>'}
-                  </span>
+                  </FormattedText>
                   {' '}
                   este elementul părinte al fiecărei pagini
                 </li>
                 <li className="mb-4">
-                  <span className="formatted text-bold">
+                  <FormattedText as="strong">
                     {'<head>'}
-                  </span>
+                  </FormattedText>
                   {' '}
                   și
                   {' '}
-                  <span className="formatted text-bold">
+                  <FormattedText as="strong">
                     {'<body>'}
-                  </span>
+                  </FormattedText>
                   {' '}
                   sunt descendenți ai elementului
                   {' '}
-                  <span className="formatted text-bold">
+                  <FormattedText as="strong">
                     {'<html>'}
-                  </span>
+                  </FormattedText>
                   {' '}
                   și vor fi definiți o singură dată
                 </li>
@@ -120,9 +121,9 @@ function HTMLStructure() {
           <p>
             În
             {' '}
-            <span className="formatted text-bold">
+            <FormattedText as="strong">
               {'<head>'}
-            </span>
+            </FormattedText>
             {' '}
             vom introduce elemente ce ne descriu website-ul, precum:
           </p>
@@ -170,9 +171,9 @@ function HTMLStructure() {
           <p>
             Mai mult, via taguri
             {' '}
-            <span className="formatted text-bold">
+            <FormattedText as="strong">
               {'<meta>'}
-            </span>
+            </FormattedText>
             {' '}
             putem controla cum apare site-ul când e distribuit pe rețele sociale precum Facebook,
             LinkedIn etc. Adică noi ca și programatori alegem ce imagine, titlu și descriere
@@ -191,9 +192,9 @@ function HTMLStructure() {
           <p>
             Ca să obținem rezultatul de mai sus, am folosit următoarele taguri în
             {' '}
-            <span className="formatted text-bold">
+            <FormattedText as="strong">
               {'<head>'}
-            </span>
+            </FormattedText>
           </p>
           <Highlight
             className="my-5"
@@ -219,15 +220,15 @@ function HTMLStructure() {
           <LessonTip>
             Valorile pentru
             {' '}
-            <span className="formatted text-bold">
+            <FormattedText as="strong">
               property=""
-            </span>
+            </FormattedText>
             {' '}
             și
             {' '}
-            <span className="formatted text-bold">
+            <FormattedText as="strong">
               content=""
-            </span>
+            </FormattedText>
             {' '}
             din codul de mai sus sunt specifice standardului
             {' '}
@@ -239,9 +240,9 @@ function HTMLStructure() {
           <p className="my-5">
             Dar asta nu e tot. În
             {' '}
-            <span className="formatted text-bold">
+            <FormattedText as="strong">
               {'<head>'}
-            </span>
+            </FormattedText>
             {' '}
             vom adăuga și linkuri spre alte resurse folosite de site-ul nostru. De exemplu:
             foi de stiluri CSS, fișiere JavaScript etc.
@@ -258,13 +259,13 @@ function HTMLStructure() {
           <LessonTip>
             Nu uita că poți să vezi codul oricărui website prin
             {' '}
-            <span className="formatted">
+            <FormattedText as="span">
               Click Dreapta
               {' '}
               {'->'}
               {' '}
               View Page Source
-            </span>
+            </FormattedText>
           </LessonTip>
         </section>
         <section className="my-5">
@@ -321,9 +322,9 @@ function HTMLStructure() {
           <p>
             În
             {' '}
-            <span className="formatted text-bold">
+            <FormattedText as="strong">
               {'<head>'}
-            </span>
+            </FormattedText>
             {' '}
             adăugam două tipuri de elemente:
           </p>
@@ -346,9 +347,9 @@ function HTMLStructure() {
           <p>
             În
             {' '}
-            <span className="formatted text-bold">
+            <FormattedText as="strong">
               {'<body>'}
-            </span>
+            </FormattedText>
             {' '}
             adăugăm elementele ce fac parte efectiv din site-ul nostru,
             și cu care vor interacționa utilizatorii. Aproape toate elementele

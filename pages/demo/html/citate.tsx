@@ -5,6 +5,7 @@ import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function Quotes() {
   const title = 'Citate';
@@ -24,11 +25,11 @@ export default function Quotes() {
           <p>
             Putem folosi
             {' '}
-            <strong className="formatted">{'<blockquote>'}</strong>
+            <FormattedText as="strong">{'<blockquote>'}</FormattedText>
             {' '}
             sau
             {' '}
-            <strong className="formatted">{'<q>'}</strong>
+            <FormattedText as="strong">{'<q>'}</FormattedText>
             {' '}
             pentru a marca citate.
           </p>

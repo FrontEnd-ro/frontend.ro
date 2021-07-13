@@ -11,6 +11,7 @@ import Lesson, {
 import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/text-elements__cover.svg';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [Diana];
 const chapters = [
@@ -53,29 +54,29 @@ export default function TextsLesson() {
             HTML oferă șase elemente pentru titluri (headings), care pot fi marcate
             utilizînd tagurile:
             {' '}
-            <strong className="formatted">{'<h1>'}</strong>
+            <FormattedText as="strong">{'<h1>'}</FormattedText>
             ,
             {' '}
-            <strong className="formatted">{'<h2>'}</strong>
+            <FormattedText as="strong">{'<h2>'}</FormattedText>
             ,
             {' '}
-            <strong className="formatted">{'<h3>'}</strong>
+            <FormattedText as="strong">{'<h3>'}</FormattedText>
             ,
             {' '}
-            <strong className="formatted">{'<h4>'}</strong>
+            <FormattedText as="strong">{'<h4>'}</FormattedText>
             ,
             {' '}
-            <strong className="formatted">{'<h5>'}</strong>
+            <FormattedText as="strong">{'<h5>'}</FormattedText>
             {' '}
             și
             {' '}
-            <strong className="formatted">{'<h6>'}</strong>
+            <FormattedText as="strong">{'<h6>'}</FormattedText>
             .
           </p>
           <p>
-            <strong className="formatted">
+            <FormattedText as="strong">
               {'<h1>'}
-            </strong>
+            </FormattedText>
             {' '}
             este folosit pentru titlul principal al
             paginii, următoarele fiind utilizate pentru a marca subtitluri în
@@ -98,13 +99,13 @@ export default function TextsLesson() {
           <p>
             În principiu
             {' '}
-            <strong className="formatted">{'<h1>'}</strong>
+            <FormattedText as="strong">{'<h1>'}</FormattedText>
             {' '}
             va avea fontul cel mai mare, iar
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               {'<h6>'}
-            </strong>
+            </FormattedText>
             {' '}
             cel mai mic,
             deși aceasta nu este neapărat o regulă bătută în cuie.
@@ -156,7 +157,7 @@ export default function TextsLesson() {
           <p>
             Elementele de tip paragraf sunt marcate cu ajutorul tag-ului
             {' '}
-            <strong className="formatted">{'<p>'}</strong>
+            <FormattedText as="strong">{'<p>'}</FormattedText>
             . Vom folosi acest element pentru a insera paragrafe de text fără
             vreo proprietate sau înțeles special.
           </p>
@@ -169,7 +170,7 @@ export default function TextsLesson() {
           <p>
             De fiecare dată când va întâlni tag-ul
             {' '}
-            <strong className="formatted">{'<p>'}</strong>
+            <FormattedText as="strong">{'<p>'}</FormattedText>
             , browser-ul va afișa
             conținutul acestuia începînd cu o nouă linie (spunem că paragrafele
             sunt elemente de tip
@@ -189,15 +190,15 @@ export default function TextsLesson() {
           <p>
             Dacă ai experimentat cu codul până acum, poate ai observat că dând
             {' '}
-            <strong className="formatted">Enter</strong>
+            <FormattedText as="strong">Enter</FormattedText>
             {' '}
             într-un paragraf, nu va afișa textul pe o nouă linie.
             Ca să obținem asta putem fie să folosim un nou paragraf, fie
             tag-ul
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               {'<br>'}
-            </strong>
+            </FormattedText>
             .
           </p>
           <Highlight
@@ -226,9 +227,9 @@ export default function TextsLesson() {
           <p>
             Elementul
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               {'<hr>'}
-            </strong>
+            </FormattedText>
             {' '}
             (horizontal line)
             este un separator între
@@ -258,7 +259,7 @@ export default function TextsLesson() {
             Atunci când vrem să marcăm un text mai lung preluat dintr-o anumită
             sursă ne vom folosi de tag-ul
             {' '}
-            <strong className="formatted">{'<blockquote>'}</strong>
+            <FormattedText as="strong">{'<blockquote>'}</FormattedText>
             .
             Acest tag vine la pachet cu o indentare default.
           </p>
@@ -276,7 +277,7 @@ export default function TextsLesson() {
           <p>
             Dacă avem nevoie să marcăm un citat mai scurt, vom folosi tag-ul
             {' '}
-            <strong className="formatted">{'<q>'}</strong>
+            <FormattedText as="strong">{'<q>'}</FormattedText>
             (quote).
           </p>
           <Highlight
@@ -300,7 +301,7 @@ export default function TextsLesson() {
           <LessonTip>
             După cum poți observa mai sus, ambele elemente au atributul
             {' '}
-            <strong className="formatted">cite</strong>
+            <FormattedText as="strong">cite</FormattedText>
             {' '}
             pe care îl folosim pentru a marca sursa citatului.
           </LessonTip>
@@ -321,9 +322,9 @@ export default function TextsLesson() {
             .
             Unul dintre aceste elemente este tag-ul
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               {'<em>'}
-            </strong>
+            </FormattedText>
             {' '}
             .
           </p>
@@ -339,9 +340,9 @@ export default function TextsLesson() {
           <p>
             Mai avem la dispoziție și tag-ul
             {' '}
-            <strong className="formatted">
+            <FormattedText as="strong">
               {'<strong>'}
-            </strong>
+            </FormattedText>
             {' '}
             , folosit pentru a marca un element ca fiind
             foarte important. Fiind un element semantic, acesta este recunoscut
@@ -352,16 +353,16 @@ export default function TextsLesson() {
             {' '}
             <strong>nu ar trebui să folosim</strong>
             {' '}
-            <span className="formatted">
+            <FormattedText as="span">
               {'<strong>'}
-            </span>
+            </FormattedText>
             {' '}
             doar pentru a obține acest rezultat. Pentru a face asta
             vom folosi un element de tip
             {' '}
-            <span className="formatted">
+            <FormattedText as="span">
               {'<span>'}
-            </span>
+            </FormattedText>
             {' '}
             pe care vom aplica stiluri CSS.
           </p>

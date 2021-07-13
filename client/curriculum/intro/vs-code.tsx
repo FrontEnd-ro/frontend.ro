@@ -11,6 +11,7 @@ import Lesson, {
 } from '~/components/lessons';
 import { Diana } from '~/services/contributors';
 import { getLessonById } from '~/services/Constants';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [Diana];
 const chapters = [
@@ -144,7 +145,7 @@ export default function VSCodeLesson() {
           <p>
             Ca să creem un nou fișier, fie vom alege
             {' '}
-            <strong className="formatted">New file</strong>
+            <FormattedText as="strong">New file</FormattedText>
             {' '}
             (CTRL + N), fie vom
             selecta prima iconiță (de lângă denumirea proiectului).

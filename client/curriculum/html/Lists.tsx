@@ -12,6 +12,7 @@ import Lesson, {
 import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/lists__cover.svg';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [Diana];
 const chapters = [
@@ -65,14 +66,14 @@ export default function ListsLesson() {
           <p>Există două tipuri de liste des folosite în HTML:</p>
           <ul className="with--bullets">
             <li className="mb-4">
-              <strong className="formatted">Liste neordonate</strong>
+              <FormattedText as="strong">Liste neordonate</FormattedText>
               {' '}
               -
               utilizate pentru a grupa un set de elemente ce nu necesită o
               anumită ordine
             </li>
             <li>
-              <strong className="formatted">Liste ordonate</strong>
+              <FormattedText as="strong">Liste ordonate</FormattedText>
               {' '}
               - utilizate
               pentru a grupa un set de elemente ce au o ordine specifică
@@ -113,12 +114,12 @@ export default function ListsLesson() {
             Observă cum ne folosim de 2 tipuri de elemente pentru a defini o
             listă: în exterior avem
             {' '}
-            <strong className="formatted">{'<ul>'}</strong>
+            <FormattedText as="strong">{'<ul>'}</FormattedText>
             {' '}
             (unordered list)
             pentru a defini lista, iar apoi fiecare element în propriul tag
             {' '}
-            <strong className="formatted">{'<li>'}</strong>
+            <FormattedText as="strong">{'<li>'}</FormattedText>
             {' '}
             (list item) .
           </LessonTip>
@@ -177,7 +178,7 @@ export default function ListsLesson() {
             Acestea au o structura similară cu cele neordonate, singura
             diferență fiind tag-ul:
             {' '}
-            <strong className="formatted">{'<ol>'}</strong>
+            <FormattedText as="strong">{'<ol>'}</FormattedText>
             {' '}
             (ordered list). E
             evident că dacă vom schimba ordinea elementelor din cadrul listei,
@@ -198,14 +199,14 @@ export default function ListsLesson() {
             Dacă vrem ca enumerarea elementelor din listă să se facă cu un
             anumit tip de cifră sau cu litere, ne putem folosi de atributul
             {' '}
-            <strong className="formatted"> type</strong>
+            <FormattedText as="strong"> type</FormattedText>
             . Acesta acceptă ca
             valori:
           </p>
           <ul className="with--bullets">
             <li className="mb-4">
               {' '}
-              <strong className="formatted">1</strong>
+              <FormattedText as="strong">1</FormattedText>
               {' '}
               – pentru enumerare cu
               {' '}
@@ -213,22 +214,22 @@ export default function ListsLesson() {
             </li>
             <li className="mb-4">
               {' '}
-              <strong className="formatted">i</strong>
+              <FormattedText as="strong">i</FormattedText>
               {' '}
               sau
               {' '}
-              <strong className="formatted">I</strong>
+              <FormattedText as="strong">I</FormattedText>
               {' '}
               – pentru enumerare cu
               cifre romane mici, respectiv mari
             </li>
             <li className="mb-4">
               {' '}
-              <strong className="formatted">a</strong>
+              <FormattedText as="strong">a</FormattedText>
               {' '}
               sau
               {' '}
-              <strong className="formatted">A</strong>
+              <FormattedText as="strong">A</FormattedText>
               {' '}
               – pentru enumerare cu
               litere mici, respectiv mari.
@@ -255,7 +256,7 @@ export default function ListsLesson() {
             Dacă vrem ca lista să înceapă enumerarea de la cifra/litera cea mai
             avansată și să se termine cu prima, vom folosi atributul
             {' '}
-            <strong className="formatted">reversed</strong>
+            <FormattedText as="strong">reversed</FormattedText>
             {' '}
             .
           </p>
@@ -269,7 +270,7 @@ export default function ListsLesson() {
             Putem opta chiar să enumerăm elementele unei liste ordonate începând
             de la un anumit număr/literă. Pentru asta ne vom folosi de atributul
             {' '}
-            <strong className="formatted">start</strong>
+            <FormattedText as="strong">start</FormattedText>
             {' '}
             dând ca valoare numărul
             sau litera de la care vrem sa începem numărătoarea:
@@ -329,7 +330,7 @@ export default function ListsLesson() {
             Există și un al treilea tip de listă pe care-l vei întâlni mai rar
             dar e totuși bine să-l știi:
             {' '}
-            <strong className="formatted">{'<dl>'}</strong>
+            <FormattedText as="strong">{'<dl>'}</FormattedText>
             {' '}
             (description list).
             Îl vom folosi când definim termeni sau asociem perechi de valori, ca

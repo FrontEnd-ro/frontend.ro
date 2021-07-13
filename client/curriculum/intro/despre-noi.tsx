@@ -9,6 +9,7 @@ import { ShareButton } from '~/components/SocialMediaButtons';
 import { Ira, Pava } from '~/services/contributors';
 import { GITHUB_URL } from '~/services/Constants';
 import coverSvg from '~/public/images/lessons/lesson-0__cover.svg';
+import FormattedText from '~/components/FormattedText';
 
 const contributors = [Pava, Ira];
 
@@ -351,7 +352,7 @@ export default function Lesson0() {
                 De exemplu, poate am uitat cum schimbăm culoarea de fundal
                 a unui element din pagină, caz în care vom căuta
                 {' '}
-                <span className="formatted">background color MDN</span>
+                <FormattedText as="span">background color MDN</FormattedText>
                 .
                 Recomandăm să pui “MDN” la final pentru ca pagina căutată
                 să apară printre primele rezultate.

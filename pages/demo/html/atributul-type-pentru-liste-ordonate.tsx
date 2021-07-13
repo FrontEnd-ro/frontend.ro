@@ -5,6 +5,7 @@ import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
+import FormattedText from '~/components/FormattedText';
 
 export default function OrderedListsType() {
   const title = 'Atributul \'type\' pentru liste ordonate';
@@ -53,23 +54,23 @@ export default function OrderedListsType() {
           </p>
           <ul className="with--bullets">
             <li className="mb-4">
-              <strong className="formatted">1</strong>
+              <FormattedText as="strong">1</FormattedText>
               {' '}
               – pentru enumerare cu
               {' '}
               cifre arabe
             </li>
             <li className="mb-4">
-              <strong className="formatted">i</strong>
+              <FormattedText as="strong">i</FormattedText>
               {' '}
               – pentru enumerare cifre romane mici
             </li>
             <li>
-              <strong className="formatted">a</strong>
+              <FormattedText as="strong">a</FormattedText>
               {' '}
               sau
               {' '}
-              <strong className="formatted">A</strong>
+              <FormattedText as="strong">A</FormattedText>
               {' '}
               – pentru enumerare cu litere mici, respectiv mari
             </li>

@@ -8,6 +8,7 @@ import Lesson, {
   LessonTip,
   LessonFigure,
   LessonResources,
+  LessonFirstSentence,
 } from '~/components/lessons';
 import { SebastianLatkolic } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
@@ -44,15 +45,12 @@ export default function VideoAndAudioLesson() {
             }}
           />
         </LessonCover>
-        <p>
+        <LessonFirstSentence>
           În lecția anterioară am aflat cum putem adăuga imagini pe site-urile
-          noastre.
-        </p>
-        <p>
-          Cum ar fi dacă v-am spune că putem adăuga fișiere audio și video
+          noastre. Cum ar fi dacă v-am spune că putem adăuga fișiere audio și video
           pentru a oferi și mai multă interactivitate paginilor dezvoltate de
           noi? Ei bine, hai să vedem cum putem face asta.
-        </p>
+        </LessonFirstSentence>
         <section>
           <LessonHeading as="h3" id="audio-element">
             {'Elementul <audio>'}

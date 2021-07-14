@@ -8,6 +8,7 @@ import Lesson, {
   LessonHeading,
   LessonResources,
   LessonTip,
+  LessonFirstSentence,
 } from '~/components/lessons';
 import { Diana } from '~/services/contributors';
 import { getLessonById } from '~/services/Constants';
@@ -15,7 +16,6 @@ import FormattedText from '~/components/FormattedText';
 
 const contributors = [Diana];
 const chapters = [
-  { title: 'Introducere', id: 'introducere' },
   { title: 'Downloadează-l și instalează-l', id: 'downloadeaza-si-instaleaza' },
   { title: 'Workspace setup', id: 'workspace-setup' },
   { title: 'Componența VisualStudio Code', id: 'componenta-VSCode' },
@@ -44,51 +44,45 @@ export default function VSCodeLesson() {
         <LessonCover>
           <img src={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`} alt="Logo-ul VSCode" />
         </LessonCover>
-        <section>
-          <h2> Introducere </h2>
-          <LessonHeading as="h3" id="introducere">
-            VisualStudio Code
-          </LessonHeading>
-          <p>
-            A învăța programare poate părea intimidant, mai ales pentru cei ce
-            vin din domenii cu totul diferite. Ei bine, ținem să te anunțăm că ai
-            ajuns fix la locul potrivit, întrucât noi, developeri cu experiență,
-            te vom îndruma ca acest proces să fie unul cât mai interactiv și
-            plăcut.
-          </p>
-          <p>
-            Ca să fim aliniați în acest proces de învățare ne vom folosi de un
-            {' '}
-            <strong>tool</strong>
-            {' '}
-            ce are mare succes
-            printre developeri și anume
-            {' '}
-            <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
-              <strong>
-                Visual Studio Code
-              </strong>
-            </a>
-            {' '}
-            .
-            Acesta este un editor de cod
-            {' '}
-            <strong>open source</strong>
-            {' '}
-            , ce oferă foarte
-            multe facilități pentru a ne ajuta să codăm rapid. Rulează pe
-            desktop și este disponibil pentru toate sistemele de operare.
-          </p>
-          <p>
-            Este extrem de popular pentru partea de
-            {' '}
-            <strong>FrontEnd</strong>
-            {' '}
-            ,
-            dar printr-o serie de extensii poate fi folosit și pentru alte
-            limbaje/tehnologii.
-          </p>
-        </section>
+        <LessonFirstSentence>
+          A învăța programare poate părea intimidant, mai ales pentru cei ce
+          vin din domenii cu totul diferite. Ei bine, ținem să te anunțăm că ai
+          ajuns fix la locul potrivit, întrucât noi, developeri cu experiență,
+          te vom îndruma ca acest proces să fie unul cât mai interactiv și
+          plăcut.
+        </LessonFirstSentence>
+        <p>
+          Ca să fim aliniați în acest proces de învățare ne vom folosi de un
+          {' '}
+          <strong>tool</strong>
+          {' '}
+          ce are mare succes
+          printre developeri și anume
+          {' '}
+          <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
+            <strong>
+              Visual Studio Code
+            </strong>
+          </a>
+          {' '}
+          .
+          Acesta este un editor de cod
+          {' '}
+          <strong>open source</strong>
+          {' '}
+          , ce oferă foarte
+          multe facilități pentru a ne ajuta să codăm rapid. Rulează pe
+          desktop și este disponibil pentru toate sistemele de operare.
+        </p>
+        <p>
+          Este extrem de popular pentru partea de
+          {' '}
+          <strong>FrontEnd</strong>
+          {' '}
+          ,
+          dar printr-o serie de extensii poate fi folosit și pentru alte
+          limbaje/tehnologii.
+        </p>
         <section>
           <LessonHeading as="h3" id="downloadeaza-si-instaleaza">
             Downloadează-l și instalează-l

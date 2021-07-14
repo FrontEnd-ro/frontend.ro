@@ -5,6 +5,7 @@ import Lesson, {
   LessonHeading,
   LessonFigure,
   LessonTip,
+  LessonFirstSentence,
 } from '~/components/lessons';
 import { DanielHutanu } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
@@ -45,28 +46,28 @@ export default function CssStylingLesson() {
             }}
           />
         </LessonCover>
-        <p>
+        <LessonFirstSentence>
           În acest articol vom vorbi despre cele trei modalități prin care putem
           aplica stilul unei pagini web:
           {' '}
-          <strong>
+          <span className="border-bottom-1px">
             CSS inline
-          </strong>
+          </span>
           ,
           {' '}
-          <strong>
+          <span className="border-bottom-1px">
             CSS intern
-          </strong>
+          </span>
           {' '}
           sau
           {' '}
-          <strong>
+          <span className="border-bottom-1px">
             CSS extern
-          </strong>
+          </span>
           .
           Fiecare metoda vine cu avantaje și dezavantaje, despre care vom vorbi
           în cele ce urmează.
-        </p>
+        </LessonFirstSentence>
         <section>
           <LessonHeading as="h3" id="css-inline">
             CSS inline

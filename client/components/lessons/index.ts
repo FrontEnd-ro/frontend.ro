@@ -7,6 +7,7 @@ import LessonFigure from './LessonFigure/LessonFigure';
 import LessonHeading from './LessonHeading/LessonHeading';
 import LessonResources from './LessonResources/LessonResources';
 import LessonContributors from './LessonContributors/LessonContributors';
+import LessonFirstSentence from './LessonFirstSentence/LessonFirstSentence';
 import Lesson from './Lesson';
 
 export {
@@ -19,6 +20,7 @@ export {
   LessonHeading,
   LessonResources,
   LessonContributors,
+  LessonFirstSentence,
 };
 
 export type LessonTableProps = _LessonTableProps;

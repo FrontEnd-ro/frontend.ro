@@ -5,6 +5,7 @@ import Lesson, {
   LessonContributors,
   LessonCover,
   LessonFigure,
+  LessonFirstSentence,
   LessonHeading,
   LessonQuote,
   LessonResources,
@@ -46,11 +47,11 @@ export default function BoxModelLesson() {
           }}
           />
         </LessonCover>
-        <p>
+        <LessonFirstSentence>
           Până acum, am învățat ce înseamnă CSS, la ce îl putem folosi, și, foarte important,
           cum să îl folosim. CSS este un limbaj cu care putem crea site-uri cu un design excelent.
           La bază, fiecare element e doar un dreptunghi cu câteva proprietăți mai speciale.
-        </p>
+        </LessonFirstSentence>
         <p>
           În această lecție vom învăța despre box-model: din ce este compus și cum este folosit
           “în spate” pentru a crea acele design-uri WOW. Înțelegerea modului în care

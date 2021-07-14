@@ -13,6 +13,7 @@ import Lesson, {
   LessonResources,
   LessonTip,
   LessonQuote,
+  LessonFirstSentence,
 } from '~/components/lessons';
 import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
@@ -75,17 +76,13 @@ export default function LinksAndButtonsLesson() {
             }}
           />
         </LessonCover>
-        <p>
+        <LessonFirstSentence>
           Deși la prima vedere pare un subiect simplu, sunt totuși multe de
           știut despre link-uri și butoane în HTML. În acest articol vom discuta
           despre markup, atribute și cele mai bune practici. Totodată, vom trata
           împreună cele două concepte pentru că de multe ori se folosesc
           link-uri în loc de butoane și invers.
-        </p>
-        <p>
-          Astfel, la sfârșitul articolului vom ști exact cum
-          să implementăm un UX corect folosind cele 2 elemente.
-        </p>
+        </LessonFirstSentence>
         <section>
           <LessonHeading as="h2" id="a-element">
             {'<a> element'}

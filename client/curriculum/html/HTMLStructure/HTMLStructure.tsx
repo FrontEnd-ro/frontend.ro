@@ -7,6 +7,7 @@ import Lesson, {
   LessonTip,
   LessonFigure,
   LessonResources,
+  LessonFirstSentence,
 } from '~/components/lessons';
 import { getLessonById } from '~/services/Constants';
 import Highlight from '~/components/Highlight/Highlight';
@@ -46,11 +47,11 @@ function HTMLStructure() {
             src={`${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_2400w.jpg`}
           />
         </LessonCover>
-        <p className="text-2xl font-light">
+        <LessonFirstSentence>
           Orice website, fie că este un site de prezentare sau un complex
           editor video, conține aceeași structură de bază cu mai
           multe elemente descriptive și nu numai.
-        </p>
+        </LessonFirstSentence>
         <section>
           <LessonHeading as="h2" id="structura">
             Structura de bază

@@ -5,6 +5,7 @@ import Lesson, {
   LessonContributors,
   LessonCover,
   LessonFigure,
+  LessonFirstSentence,
   LessonHeading,
   LessonTip,
 } from '~/components/lessons';
@@ -41,11 +42,11 @@ export default function TextsLesson() {
           }}
           />
         </LessonCover>
-        <p>
+        <LessonFirstSentence>
           Acest articol explică modul în care HTML poate fi utilizat pentru a structura o
           pagină de text prin adăugarea de titluri și paragrafe,
           accentuarea cuvintelor și multe altele.
-        </p>
+        </LessonFirstSentence>
         <section>
           <LessonHeading as="h3" id="titluri">
             Titluri (Headings)

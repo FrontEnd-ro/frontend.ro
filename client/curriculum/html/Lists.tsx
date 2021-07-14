@@ -8,6 +8,7 @@ import Lesson, {
   LessonTip,
   LessonFigure,
   LessonResources,
+  LessonFirstSentence,
 } from '~/components/lessons';
 import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
@@ -49,16 +50,12 @@ export default function ListsLesson() {
           }}
           />
         </LessonCover>
-        <p>
-          Listele sunt folosite pentru a grupa informații, astfel încât să fie
-          clar asociate între ele și ușor de citit.
-        </p>
-        <p>
+        <LessonFirstSentence>
           În dezvoltarea modernă a web-ului, listele sunt elemente HTML
           utilizate frecvent atât pentru navigație cât și pentru conținut
           general, contribuind la crearea unui document bine structurat,
           accesibil și ușor de întreținut.
-        </p>
+        </LessonFirstSentence>
         <section>
           <LessonHeading as="h3" id="tipuri-de-liste">
             Tipuri de liste

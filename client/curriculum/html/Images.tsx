@@ -12,6 +12,7 @@ import Lesson, {
   LessonTable,
   LessonTableProps,
   LessonTip,
+  LessonFirstSentence,
 } from '~/components/lessons';
 import { Pava } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
@@ -77,12 +78,12 @@ export default function ImagesLesson() {
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_2400w.jpg`}
           />
         </LessonCover>
-        <p className="text-2xl font-light">
+        <LessonFirstSentence>
           Cred că putem cu toții admite că un Internet fără imagini ar
           fi destul de plictisitor. Deci hai să
           încheiem așteptarea și să vedem cum adăugăm imagini
           în site-urile noastre și care sunt cele mai bune practici legate de acest subiect.
-        </p>
+        </LessonFirstSentence>
         <section>
           <LessonHeading as="h2" id="elementul-img">
             {'Elementul <img>'}

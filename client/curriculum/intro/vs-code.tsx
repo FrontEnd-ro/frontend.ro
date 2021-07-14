@@ -30,16 +30,17 @@ const chapters = [
 ];
 
 export default function VSCodeLesson() {
-  const lesson = getLessonById('vs-code');
+  const lessonInfo = getLessonById('vs-code');
+
   return (
     <>
       <SEOTags
-        title={`${lesson.title} | Lecție introductivă`}
+        title={`${lessonInfo.title} | Lecție introductivă`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`}
-        description={lesson.description}
-        url={`https://FrontEnd.ro/${lesson.url}`}
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
       />
-      <Lesson id="vs-code" withExercises={false} title={lesson.title} chapters={chapters}>
+      <Lesson id={lessonInfo.id} withExercises={false} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
           <img src={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`} alt="Logo-ul VSCode" />

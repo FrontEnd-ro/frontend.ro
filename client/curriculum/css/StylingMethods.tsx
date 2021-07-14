@@ -7,15 +7,14 @@ import Lesson, {
   LessonTip,
   LessonFirstSentence,
 } from '~/components/lessons';
-import { DanielHutanu } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 // eslint-disable-next-line import/no-unresolved
 import coverSvg from '~/public/images/lessons/styling-methods__cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
 import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import FormattedText from '~/components/FormattedText';
+import { getLessonById } from '~/services/Constants';
 
-const contributors = [DanielHutanu];
 const chapters = [
   { title: 'CSS Inline', id: 'css-inline' },
   {
@@ -27,16 +26,18 @@ const chapters = [
 ];
 
 export default function CssStylingLesson() {
+  const lessonInfo = getLessonById('moduri-stilizare');
+
   return (
     <>
       <SEOTags
-        title="Cele 3 moduri de stilizare | Lecție CSS"
+        title={`${lessonInfo.title} | Lecție CSS`}
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage="https://frontend.ro/seo/styling-methods.jpg"
-        description="Învață modurile prin care putem aplica stiluri paginilor Web."
-        url="https://FrontEnd.ro/css/moduri-stilizare"
       />
-      <Lesson id="moduri-stilizare" title="Cele 3 moduri de stilizare" chapters={chapters}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
           <div
             // eslint-disable-next-line react/no-danger

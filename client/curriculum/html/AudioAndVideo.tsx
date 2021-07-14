@@ -10,14 +10,13 @@ import Lesson, {
   LessonResources,
   LessonFirstSentence,
 } from '~/components/lessons';
-import { SebastianLatkolic } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import { DemoPreview } from '~/components/demo';
 
 import coverSvg from '~/public/images/lessons/audio-and-video__cover.svg';
 import FormattedText from '~/components/FormattedText';
+import { getLessonById } from '~/services/Constants';
 
-const contributors = [SebastianLatkolic];
 const chapters = [
   { title: 'Elementul <audio>', id: 'audio-element' },
   { title: 'Atributele elementului <audio>', id: 'atributele-elementului-audio' },
@@ -26,16 +25,18 @@ const chapters = [
 ];
 
 export default function VideoAndAudioLesson() {
+  const lessonInfo = getLessonById('audio-video');
+
   return (
     <>
       <SEOTags
-        title="Audio și Video | Lecție HTML"
+        title={`${lessonInfo.title} | Lecție HTML`}
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage="https://d3tycb976jpudc.cloudfront.net/seo/html-audio-video.jpg"
-        description="Imaginile aduc mai multă viață site-urilor noastre, dar putem merge un pas mai departe folosind elemente video și audio."
-        url="https://FrontEnd.ro/html/audio-video"
       />
-      <Lesson id="audio-video" title="Audio și Video" chapters={chapters}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover resizeOffset={250}>
           <div
             // eslint-disable-next-line react/no-danger

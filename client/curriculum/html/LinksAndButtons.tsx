@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import {
   faQuestionCircle,
   faThumbsDown,
@@ -15,13 +14,12 @@ import Lesson, {
   LessonQuote,
   LessonFirstSentence,
 } from '~/components/lessons';
-import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/links-and-buttons/cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
 import FormattedText from '~/components/FormattedText';
+import { getLessonById } from '~/services/Constants';
 
-const contributors = [Diana];
 const chapters = [
   { title: '<a> element', id: 'a-element' },
   {
@@ -52,21 +50,23 @@ const chapters = [
 ];
 
 export default function LinksAndButtonsLesson() {
+  const lessonInfo = getLessonById('linkuri-si-butoane');
+
   return (
     <>
       <SEOTags
-        title="Link-uri și butoane | Lecție HTML"
+        title={`${lessonInfo.title} | Lecție HTML`}
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons.jpg`}
-        description="Învață să folosești link-uri și butoane în HTML și diferența dintre acestea."
-        url="https://FrontEnd.ro/html/linkuri-si-butoane"
       />
       <Lesson
-        id="linkuri-si-butoane"
-        title="Link-uri si butoane"
+        id={lessonInfo.id}
+        title={lessonInfo.title}
         chapters={chapters}
         withExercises
       >
-        <LessonContributors className="absolute" contributors={contributors} />
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
           <div
             // eslint-disable-next-line react/no-danger

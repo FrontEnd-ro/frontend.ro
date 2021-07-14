@@ -11,13 +11,11 @@ import Lesson, {
 } from '~/components/lessons';
 import { getLessonById } from '~/services/Constants';
 import Highlight from '~/components/Highlight/Highlight';
-import { Pava, IulianRedinciuc } from '~/services/contributors';
 import SideBySidePictures from '~/components/SideBySidePictures';
 
 import styles from './HTMLStructure.module.scss';
 import FormattedText from '~/components/FormattedText';
 
-const contributors = [IulianRedinciuc, Pava];
 const chapters = [
   { title: 'Structura de bază', id: 'structura' },
   { title: 'Elementul <head>', id: 'head' },
@@ -26,21 +24,20 @@ const chapters = [
 ];
 
 function HTMLStructure() {
-  const lessonId = 'structura-pagina-html';
-  const lessonInfo = getLessonById(lessonId);
+  const lessonInfo = getLessonById('structura-pagina-html');
 
   return (
     <>
       <SEOTags
-        description={lessonInfo.description}
         title={`${lessonInfo.title} | Lecție HTML`}
-        url={`https://FrontEnd.ro/${lessonInfo.url}`}
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`}
       >
         <link rel="preload" as="image" href={`${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`} />
       </SEOTags>
-      <Lesson id={lessonId} title={lessonInfo.title} chapters={chapters} withExercises={false}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises={false}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
           <img
             alt="Stickman reprezentând elementele Head și Body"

@@ -11,14 +11,13 @@ import Lesson, {
   LessonResources,
   LessonTip,
 } from '~/components/lessons';
-import { CatalinPopusoi } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import DevToolsClone from '~/components/DevToolsClone';
 import SideBySidePictures from '~/components/SideBySidePictures';
 import coverSvg from '~/public/images/lessons/box-model/cover.svg';
 import FormattedText from '~/components/FormattedText';
+import { getLessonById } from '~/services/Constants';
 
-const contributors = [CatalinPopusoi];
 const chapters = [
   { title: 'Componentele Box Model', id: 'componentele-box-model' },
   { title: 'Border', id: 'border' },
@@ -30,16 +29,18 @@ const chapters = [
 ];
 
 export default function BoxModelLesson() {
+  const lessonInfo = getLessonById('box-model');
+
   return (
     <>
       <SEOTags
-        title="Box Model | Lecție CSS"
+        title={`${lessonInfo.title} | Lecție CSS`}
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`}
-        description="Deși unele site-uri sunt cu adevărat WOW, fiecare element e de fapt un dreptunghi cu câteva proprietăți mai speciale numit Box Model. Aici învățăm despre el."
-        url="https://FrontEnd.ro/css/box-model"
       />
-      <Lesson id="box-model" title="Box Model" chapters={chapters} withExercises={false}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises={false}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{

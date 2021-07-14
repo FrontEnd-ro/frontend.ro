@@ -6,12 +6,9 @@ import {
   LessonCover, LessonContributors, LessonHeading, LessonFigure, LessonQuote,
 } from '~/components/lessons';
 import { ShareButton } from '~/components/SocialMediaButtons';
-import { Ira, Pava } from '~/services/contributors';
-import { GITHUB_URL } from '~/services/Constants';
+import { getLessonById, GITHUB_URL } from '~/services/Constants';
 import coverSvg from '~/public/images/lessons/lesson-0__cover.svg';
 import FormattedText from '~/components/FormattedText';
-
-const contributors = [Pava, Ira];
 
 let chapters = [
   { title: 'Ce e FrontEnd.ro?', id: 'introducere' },
@@ -28,6 +25,8 @@ export default function Lesson0() {
   const router = useRouter();
   const [urlToShare, setUrlToShare] = useState(router.pathname);
 
+  const lessonInfo = getLessonById('despre-noi');
+
   useEffect(() => {
     setUrlToShare(`${window.location.origin}${router.pathname}`);
   }, []);
@@ -35,13 +34,13 @@ export default function Lesson0() {
   return (
     <>
       <SEOTags
-        title="Introducere | FrontEnd.ro"
+        title={`${lessonInfo.title} | FrontEnd.ro`}
         shareImage="https://frontend.ro/seo/intro-about.jpg"
-        description="Detalii despre noi, despre platformă și cum vom lucra împreună."
-        url="https://FrontEnd.ro/intro/despre-noi"
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
       />
-      <Lesson id="despre-noi" title="Introducere" chapters={chapters} withExercises={false}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises={false}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover resizeOffset={100}>
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{

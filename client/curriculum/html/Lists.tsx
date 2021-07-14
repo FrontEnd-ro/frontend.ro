@@ -10,12 +10,11 @@ import Lesson, {
   LessonResources,
   LessonFirstSentence,
 } from '~/components/lessons';
-import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/lists__cover.svg';
 import FormattedText from '~/components/FormattedText';
+import { getLessonById } from '~/services/Constants';
 
-const contributors = [Diana];
 const chapters = [
   { title: 'Tipuri de liste', id: 'tipuri-de-liste' },
   {
@@ -32,16 +31,18 @@ const chapters = [
 ];
 
 export default function ListsLesson() {
+  const lessonInfo = getLessonById('liste');
+
   return (
     <>
       <SEOTags
-        title="Liste | Lecție HTML"
+        title={`${lessonInfo.title} | Lecție HTML`}
         shareImage="https://frontend.ro/seo/html-lists.jpg"
-        description="Învață despre tipurile de liste în HTML"
-        url="https://FrontEnd.ro/html/liste"
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
       />
-      <Lesson id="liste" title="Liste" chapters={chapters}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{

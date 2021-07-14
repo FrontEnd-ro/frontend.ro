@@ -9,12 +9,11 @@ import Lesson, {
   LessonHeading,
   LessonTip,
 } from '~/components/lessons';
-import { Diana } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/text-elements__cover.svg';
 import FormattedText from '~/components/FormattedText';
+import { getLessonById } from '~/services/Constants';
 
-const contributors = [Diana];
 const chapters = [
   { title: 'Titluri (Headings)', id: 'titluri' },
   { title: 'Paragrafe', id: 'paragrafe' },
@@ -24,16 +23,18 @@ const chapters = [
 ];
 
 export default function TextsLesson() {
+  const lessonInfo = getLessonById('texte');
+
   return (
     <>
       <SEOTags
-        title="Texte | Lecție HTML"
+        title={`${lessonInfo.title} | Lecție HTML`}
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage="https://frontend.ro/seo/html-text-elements.jpg"
-        description="Avem la dispoziție mai multe elemente când vine vorba de texte, iar aici învățăm când și cum să le folosim."
-        url="https://FrontEnd.ro/html/texte"
       />
-      <Lesson id="texte" title="Texte" chapters={chapters}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover resizeOffset={150}>
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{

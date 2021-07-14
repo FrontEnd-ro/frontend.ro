@@ -108,7 +108,7 @@ export const LESSONS: LessonDescription[] = [
     written: true,
     title: 'Link-uri și butoane',
     description:
-      'Pentru a putea naviga de la o secțiune la alta sau de la o pagină la alta avem nevoie de link-uri. Totodată dacă vrem să facem acțiuni, vom avea nevoie de butoane. Hai să aflăm mai multe despre cum le folosim. ',
+      'Învață să folosești link-uri și butoane în HTML și diferența dintre acestea.',
     url: '/html/linkuri-si-butoane',
     type: 'html',
     contributors: [Diana],
@@ -138,7 +138,7 @@ export const LESSONS: LessonDescription[] = [
     written: true,
     title: 'Imagini',
     description:
-      'Fără imagini web-ul ar fi mult mai plicticos, deci hai să vedem cum le putem adăuga și care sunt cele mai bune practici legate de acestea.',
+      'Învață să adaugi și să optimizezi imagini în paginile Web.',
     contributors: [Pava],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
     url: '/html/imagini',
@@ -178,7 +178,7 @@ export const LESSONS: LessonDescription[] = [
     written: true,
     title: 'Cele 3 moduri de stilizare',
     description:
-      'Browserul ne oferă mai multe moduri prin care putem aplica stiluri paginilor noastre. Hai să vobim despre fiecare în parte.',
+      'Învață modurile prin care putem aplica stiluri paginilor Web.',
     url: '/css/moduri-stilizare',
     cover: '/images/lessons/styling-methods__cover.svg',
     type: 'css',

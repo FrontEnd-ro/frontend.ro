@@ -14,12 +14,11 @@ import Lesson, {
   LessonTip,
   LessonFirstSentence,
 } from '~/components/lessons';
-import { Pava } from '~/services/contributors';
 import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
 import FormattedText from '~/components/FormattedText';
+import { getLessonById } from '~/services/Constants';
 
-const contributors = [Pava];
 const chapters = [
   { title: 'Elementul <img>', id: 'elementul-img' },
   { title: 'Width & Height', id: 'width-height' },
@@ -61,16 +60,18 @@ const sizesTable: LessonTableProps = {
 };
 
 export default function ImagesLesson() {
+  const lessonInfo = getLessonById('imagini');
+
   return (
     <>
       <SEOTags
-        title="Imagini | Lecție HTML"
-        url="https://FrontEnd.ro/html/imagini"
-        description="Învață să adaugi și să optimizezi imagini în paginile Web."
+        title={`${lessonInfo.title} | Lecție HTML`}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
+        description={lessonInfo.description}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`}
       />
-      <Lesson id="imagini" title="Imagini" chapters={chapters}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
           <img
             alt="Doodle cu rama unei imagini"

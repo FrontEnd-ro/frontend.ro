@@ -5,7 +5,7 @@ import Lesson, {
   LessonCover,
   LessonHeading,
   LessonTip,
-  LessonFirstSentence
+  LessonFirstSentence,
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
 import { getLessonById } from '~/services/Constants';
@@ -37,18 +37,18 @@ const chapters = [
   },
 ];
 export default function FormsLesson() {
-  const lessonConfig = getLessonById('formulare');
+  const lessonInfo = getLessonById('formulare');
 
   return (
     <>
       <SEOTags
-        title="Formulare | Lecție HTML"
+        title={`${lessonInfo.title} | Lecție HTML`}
+        description={lessonInfo.description}
+        url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/forms_1200w.jpg`}
-        description={lessonConfig.description}
-        url="https://FrontEnd.ro/html/liste"
       />
-      <Lesson id="formulare" title="Formulare" chapters={chapters}>
-        <LessonContributors className="absolute" contributors={lessonConfig.contributors} />
+      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
+        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
           <img
             alt="Doodle cu elemente din formulare"

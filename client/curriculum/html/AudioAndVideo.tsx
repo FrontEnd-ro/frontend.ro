@@ -23,7 +23,6 @@ const chapters = [
   { title: 'Atributele elementului <audio>', id: 'atributele-elementului-audio' },
   { title: 'Elementul <video>', id: 'video-element' },
   { title: 'Atributele elementului <video>', id: 'atributele-elementului-video' },
-  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 export default function VideoAndAudioLesson() {

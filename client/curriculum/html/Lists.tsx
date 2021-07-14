@@ -29,7 +29,6 @@ const chapters = [
   },
   { title: 'Sub-liste', id: 'sub-liste' },
   { title: 'Bonus tips și concluzii', id: 'bonus-tips-si-concluzii' },
-  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 export default function ListsLesson() {

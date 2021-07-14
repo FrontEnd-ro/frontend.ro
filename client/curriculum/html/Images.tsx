@@ -36,7 +36,6 @@ const chapters = [
     }],
   },
   { title: 'Elementul <picture>', id: 'elementul-picture' },
-  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 const sizesTable: LessonTableProps = {

@@ -21,7 +21,6 @@ const chapters = [
   { title: 'Elementul <hr>', id: 'elementul-hr' },
   { title: 'Citate', id: 'citate' },
   { title: 'Elementele <em> & <strong>', id: 'em-strong' },
-  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 export default function TextsLesson() {

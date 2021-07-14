@@ -24,7 +24,6 @@ const chapters = [
   },
   { title: 'CSS Extern', id: 'css-extern' },
   { title: 'BONUS', id: 'bonus' },
-  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 export default function CssStylingLesson() {

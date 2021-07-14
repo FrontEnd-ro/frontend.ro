@@ -39,8 +39,17 @@ export default function Lesson({
     articleWrapper.current.scrollTo(0, 0);
   };
 
-  const parseChapters = (chapters: { title: string; id: string }[]) => {
-    return chapters.map(parseOneChapter);
+  const parseChapters = (chapters: { title: string; id: string }[], withExercises: boolean) => {
+    const result = chapters.map(parseOneChapter);
+
+    if (withExercises) {
+      return [
+        ...result,
+        { title: 'Exerciții', id: 'exercitii', href: '#exercitii' },
+      ];
+    }
+
+    return result;
 
     function parseOneChapter(chapter: Chapter) {
       return {
@@ -51,7 +60,7 @@ export default function Lesson({
     }
   };
 
-  const chaptersWithHref = parseChapters(chapters);
+  const chaptersWithHref = parseChapters(chapters, withExercises);
 
   useEffect(() => {
     LessonService

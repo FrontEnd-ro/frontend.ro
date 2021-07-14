@@ -49,7 +49,6 @@ const chapters = [
   { title: 'Atributul type', id: 'atributul-type' },
   { title: 'Atributul disabled', id: 'atributul-disabled' },
   { title: 'Link-uri vs butoane', id: 'linkuri-vs-butoane' },
-  { title: 'Exerciții', id: 'exercitii' },
 ];
 
 export default function LinksAndButtonsLesson() {

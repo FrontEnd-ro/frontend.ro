@@ -71,16 +71,6 @@
       [class*='CoverIllustration'] {
         display: block;
       }
-
-      [class*='LessonPreview'] {
-        [class*='cover'] {
-          display: none;
-        }
-
-        h3 {
-          margin-top: 0;
-        }
-      }
     }
 
     @media screen and (min-width: 1001px) {

@@ -44,9 +44,11 @@ export default function ContentShifting() {
               srcSet="
                 https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__high.jpg 4000w,
                 https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.jpg 2000w,
-                https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__low.jpg 800w,
+                https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__low.jpg 800w
               "
+              sizes="(max-width: 800px) 700px, 1000px"
               style={{ maxWidth: '100%' }}
+              src="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.jpg"
               alt="Red bycicle wheel"
             />
           </DemoPreview>
@@ -54,13 +56,16 @@ export default function ContentShifting() {
             className="my-5"
             language="html"
             code={`
-<img srcset="
-    /red_bycicle__high.jpg 4000w,
-    /red_bycicle__med.jpg 2000w,
-    /red_bycicle__low.jpg 800w,
-  " 
-  style="max-width: 100%" 
-  alt="Red bycicle wheel" 
+<img
+  srcset="
+    https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__high.jpg 4000w,
+    https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.jpg 2000w,
+    https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__low.jpg 800w
+  "
+  sizes="(max-width: 800px) 700px, 1000px"
+  style="maxWidth: 100%"
+  src="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.jpg"
+  alt="Red bycicle wheel"
 />`}
           />
         </Demo>

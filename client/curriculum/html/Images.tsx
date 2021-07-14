@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle, faExclamationTriangle, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -356,7 +356,10 @@ export default function ImagesLesson() {
             {/* Pentru imaginea folosita ca demo in acest capitol inseamna o dimensiune de xMB. */}
           </p>
           <p>
-            Deși soluția ar funcționa, ea nu e deloc eficientă, căci vom încărca
+            <strong>
+              Deși soluția ar funcționa, ea nu e deloc eficientă
+            </strong>
+            , căci vom încărca
             mereu aceeași imagine de rezoluție înaltă și mulți MBs.
             Pe telefon de exemplu, unde ecranul e mai mic, nu avem nevoie
             de toți cei 8+ milioane de pixeli (3840 x 2160).
@@ -379,9 +382,13 @@ export default function ImagesLesson() {
               Atributul srcset
             </LessonHeading>
             <p>
-              Din fericire putem rezolva această problemă folosindu-ne de atributul
+              Din fericire putem rezolva această problemă folosindu-ne de atributele
               {' '}
               <strong>srcset</strong>
+              {' '}
+              și
+              {' '}
+              <strong>sizes</strong>
               . Hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
             </p>
             <LessonFigure
@@ -408,7 +415,11 @@ export default function ImagesLesson() {
               <strong>srcset</strong>
               {' '}
               unde definim diferitele
-              surse ale imaginii împreună cu dimensiunea (în lățime) a fiecăreia:
+              surse ale imaginii împreună cu dimensiunea (în lățime) a fiecăreia.
+              Iar cu atributul
+              <strong>sizes</strong>
+              vom specifica ce dimensiuni va avea imaginea
+              în funcție de dimensiunea ecranului:
             </p>
             <Highlight
               className="my-5"
@@ -419,7 +430,9 @@ export default function ImagesLesson() {
     /red_bycicle__med.jpg 2000w,
     /red_bycicle__low.jpg 800w,
   " 
-  alt="Red bycicle wheel" 
+  sizes="(max-width: 800px) 700px, 1000px"
+  alt="Red bycicle wheel"
+  src="/red_bycicle__med.jpg"
 />`}
             />
             {/* <LessonTip icon={faQuestionCircle}>
@@ -456,6 +469,27 @@ export default function ImagesLesson() {
               src="https://d3tycb976jpudc.cloudfront.net/demo-assets/img-srcset.mp4"
               alt="Diferite surse ale imaginii se încarcă la rezoluții diferite"
             />
+            <LessonTip icon={faExclamationCircle}>
+              O imagine cu
+              {' '}
+              <FormattedText as="span">srcset=""</FormattedText>
+              {' '}
+              trebuie să conțină și atributul
+              {' '}
+              <FormattedText as="span">src=""</FormattedText>
+              {' '}
+              pentru a fi validă.
+              Motivul îl reprezintă browserele mai vechi
+              ce nu înțeleg atributul
+              {' '}
+              <FormattedText as="span">srcset</FormattedText>
+              , așadar îl vor ignora și
+              vor arăta imaginea de la
+              {' '}
+              <FormattedText as="span">src</FormattedText>
+              .
+            </LessonTip>
+
             <p>
               Te încurajăm să experimentezi și cu opțiunea
               {' '}
@@ -654,7 +688,9 @@ export default function ImagesLesson() {
       red_bycicle__high.jpg 4000w, 
       red_bycicle__med.jpg 2000w, 
       red_bycicle__low.jpg 800w
-    ">
+    "
+    src="red_bycicle__med.jpg"
+  >
 </picture>`}
           />
         </section>

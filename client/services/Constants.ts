@@ -84,13 +84,15 @@ export const LESSONS: LessonDescription[] = [
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
   },
   {
-    id: 'validarea-paginilor-html',
-    written: false,
+    id: 'validare',
+    written: true,
     title: 'Validarea paginilor HTML',
     description:
       'Deși putem "scăpa" fără să scriem HTML valid, acest lucru nu e deloc încurajat. Hai să vedem de ce, și cum ne putem asigura că scriem cod corect.',
-    url: '/html/validarea-paginilor-html',
+    url: '/html/validare',
     type: 'html',
+    contributors: [Pava],
+    cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/lesson-gallery__cover.png`,
   },
   {
     id: 'texte',

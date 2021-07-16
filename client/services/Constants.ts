@@ -112,7 +112,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/html/linkuri-si-butoane',
     type: 'html',
     contributors: [Diana],
-    cover: '/images/lessons/links__cover.svg',
+    cover: '/images/lessons/links-and-buttons/cover.svg',
   },
   {
     id: 'liste',

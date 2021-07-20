@@ -130,11 +130,13 @@ export const LESSONS: LessonDescription[] = [
   },
   {
     id: 'containere',
-    written: false,
+    written: true,
     title: 'Containere',
     description:
-      'Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru a crea layout-uri mai complexe.',
+      'Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru a crea layout-uri mai complexe. Aici intervin elementele de tip “container”.',
     url: '/html/containere',
+    contributors: [Pava],
+    cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
     type: 'html',
   },
   {
@@ -328,6 +330,7 @@ export interface Figure {
   src: string;
   demo?: string;
   isVideo?: boolean;
+  width?: number;
 }
 
 export const IMAGES_MIME_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/svg+xml'];

@@ -5,7 +5,7 @@ import styles from './LessonFigure.module.scss';
 
 export default function LessonFigure(
   {
-    src, alt, demo, withBorder, isVideo,
+    src, alt, demo, withBorder, isVideo, width,
   }:
   Figure & { withBorder?: boolean},
 ) {
@@ -20,7 +20,7 @@ export default function LessonFigure(
       )
         : (
           <a href={demo || src} target="_blank" rel="noreferrer">
-            <img src={src} alt={alt} />
+            <img src={src} alt={alt} width={width} />
           </a>
         )}
       <figcaption>

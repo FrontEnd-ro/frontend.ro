@@ -21,7 +21,6 @@ function HTMLValidationLesson() {
     { title: 'Cum validăm o pagină HTML?', id: 'cum-validam' },
     { title: 'De ce merg site-urile invalide?', id: 'pagini-invalide' },
     { title: 'De ce e importantă validarea?', id: 'de-ce-validam' },
-    { title: 'Exerciții', id: 'exercitii' },
   ];
 
   return (

@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 
-const Banner = new mongoose.Schema({
+
+/**
+ * This controls whether or not we show an "ad"
+ * card on the Landing Page.
+ * 
+ * It's usefull if we want to promote
+ * the latest features, lessons, etc.
+ */
+const Ad = new mongoose.Schema({
   id: { type: String, required: true },
   text: { type: String, required: true },
   cta: { type: String, required: false },
@@ -8,7 +16,7 @@ const Banner = new mongoose.Schema({
 })
 
 const ApplicationConfigSchema = new mongoose.Schema({
-  banner: { type: Banner, required: true },
+  ad: { type: Ad, required: true },
 })
 
 const ApplicationConfig = mongoose.models.ApplicationConfig

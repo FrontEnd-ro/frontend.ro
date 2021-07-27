@@ -1,5 +1,5 @@
 export interface ApplicationConfig {
-  banner?: {
+  ad?: {
     id: string;
     text: string;
     cta?: string;
@@ -15,7 +15,7 @@ export const loadConfig = (config: ApplicationConfig) => ({
 });
 
 export const defaultApplicationConfigState = {
-  banner: undefined,
+  ad: undefined,
 };
 
 const initialState: ApplicationConfig = defaultApplicationConfigState;

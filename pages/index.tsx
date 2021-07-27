@@ -2,7 +2,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import SEOTags from '~/components/SEOTags';
 import {
-  LandingAdBanner,
+  LandingAdCard,
   LandingHero,
   LandingHowItWorks,
   LandingStats,
@@ -19,7 +19,7 @@ function Home({ applicationConfig }: ConnectedProps<typeof connector>) {
         description="Vrei să înveți FrontEnd? Aici ai parte de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun."
       />
       <>
-        {applicationConfig.banner && <LandingAdBanner banner={applicationConfig.banner} />}
+        {applicationConfig.ad && <LandingAdCard ad={applicationConfig.ad} />}
         <LandingHero />
         <LandingHowItWorks />
         {/* <LandingThanks /> */}

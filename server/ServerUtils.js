@@ -8,6 +8,13 @@ const MAX_NAME_LENGTH = 255;
 const MAX_DESCRIPTION_LENGTH = 255;
 const MAX_USERNAME_LENGTH = 100;
 
+const HOUR_IN_MILLISECONDS = 1000 * 60 * 60;
+const COOKIE_CONFIG = {
+  maxAge: (HOUR_IN_MILLISECONDS * 24) * AUTH_EXPIRATION,
+  // In production only allow this cookie with HTTPS Only 👇
+  secure: process.env.APP_ENV === 'production' ? true : false
+};
+
 class ServerError extends Error {
   code;
 
@@ -37,7 +44,7 @@ class ServerError extends Error {
 }
 
 function setTokenCookie(token, res) {
-  res.cookie('token', token);
+  res.cookie('token', token, COOKIE_CONFIG);
 }
 
 /** Verify that payload doesn't have extra props not present on the Schema */

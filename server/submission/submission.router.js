@@ -155,9 +155,9 @@ submissionRouter.put('/:submissionId', [PrivateMiddleware], async function updat
 
 });
 
-submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExercise], async function submitSolution(req, res) {
+submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExercise], async function createSubmission(req, res) {
   const { exerciseId } = req.params;
-  const { code, user } = req.body;
+  const { code, user, status } = req.body;
 
   const existingSubmission = await SubmissionModel.getByExerciseId(user._id, exerciseId);
   let updatedSubmission;
@@ -166,16 +166,16 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
     console.log("[submitSolution] First solution for this exercise. Let's create it");
     await SubmissionModel.create({
       code,
+      status,
       user: user._id,
       exercise: exerciseId,
-      status: SUBMISSION_STATUS.AWAITING_REVIEW
     })
     updatedSubmission = await SubmissionModel.getByExerciseId(user._id, exerciseId);
   } else {
     console.log("[submitSolution] Existing solution for this exercise. Let's update it");
     await SubmissionModel.update(existingSubmission._id, {
       code,
-      status: SUBMISSION_STATUS.AWAITING_REVIEW,
+      status,
     });
     updatedSubmission = await SubmissionModel.get(existingSubmission._id);
   }

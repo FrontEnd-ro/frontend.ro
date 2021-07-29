@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
+import debounce from 'lodash/debounce';
 
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
@@ -42,11 +43,18 @@ interface Submission {
   }[]
 }
 
+enum AutoSave {
+  NONE,
+  IN_PROGRESS,
+  DONE,
+}
+
 function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector> & Props) {
   const solutionRef = useRef(null);
   const [submission, setSubmission] = useState<Submission>(null);
   const [fetchError, setFetchError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [autoSaved, setAutoSaved] = useState<AutoSave>(AutoSave.NONE);
   const [lessonExercises, setLessonExercises] = useState<LessonExercise[]>([]);
 
   const readonly = submission && (
@@ -64,6 +72,42 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
     }
 
     return JSON.parse(submission.code || submission.exercise.example);
+  }, [submission]);
+
+  const autoSaveSolution = async (code) => {
+    if (!code) {
+      // Do not save empty editors
+      return;
+    }
+
+    setAutoSaved(AutoSave.IN_PROGRESS);
+
+    let updatedSubmission;
+
+    try {
+      if (submission._id) {
+        updatedSubmission = await SubmissionService.updateSubmission(submission._id, {
+          status: SUBMISSION_STATUS.IN_PROGRESS,
+          code,
+        });
+      } else {
+        updatedSubmission = await SubmissionService.createSubmission(
+          exerciseId,
+          code,
+          SUBMISSION_STATUS.IN_PROGRESS,
+        );
+      }
+
+      setSubmission(updatedSubmission);
+      setAutoSaved(AutoSave.DONE);
+    } catch (err) {
+      setAutoSaved(AutoSave.NONE);
+      console.error('[autoSaveSolution] failed with', err);
+    }
+  };
+
+  const debouncedAutoSaveSolution = React.useMemo(() => {
+    return debounce(autoSaveSolution, 2000);
   }, [submission]);
 
   const submitSolution = async () => {
@@ -96,7 +140,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
         code,
       });
     } else {
-      updatedSubmission = await SubmissionService.submitSubmission(exerciseId, code);
+      updatedSubmission = await SubmissionService.createSubmission(exerciseId, code);
     }
 
     setIsSubmitting(false);
@@ -262,30 +306,41 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
             key={exerciseId}
             ref={solutionRef}
             askTooltip={false}
+            onChange={(code) => {
+              setAutoSaved(AutoSave.NONE);
+              debouncedAutoSaveSolution(code);
+            }}
             onFeedbackDone={onFeedbackDone}
             feedbacks={submission.feedbacks}
             folderStructure={folderStructure}
           />
         </section>
         <section className="my-5 d-flex align-items-center justify-content-between">
-          <Button
-            disabled={readonly}
-            loading={isSubmitting}
-            variant="success"
-            onClick={withAuthModal(!!userInfo, submitSolution)}
-          >
-            {userInfo ? 'Trimite' : 'Autentifică-te și trimite soluția'}
-          </Button>
-          {
-            (submission.status !== SUBMISSION_STATUS.IN_PROGRESS)
-            && (exerciseIndex + 1 < lessonExercises.length) && (
-              <Link href={`/rezolva/${lessonExercises[exerciseIndex + 1]._id}`}>
-                <a className="btn btn--default no-underline">
-                  Rezolvă următorul exercițiu!
-                </a>
-              </Link>
-            )
-          }
+          <p className="text-silver m-0">
+            {autoSaved === AutoSave.IN_PROGRESS && ('Auto saving...')}
+            {autoSaved === AutoSave.DONE && ('✔ Progres salvat cu succes!')}
+          </p>
+          <div>
+            <Button
+              disabled={readonly}
+              loading={isSubmitting}
+              variant="success"
+              onClick={withAuthModal(!!userInfo, submitSolution)}
+            >
+              {userInfo ? 'Trimite' : 'Autentifică-te și trimite soluția'}
+            </Button>
+            {
+              (submission.status !== SUBMISSION_STATUS.IN_PROGRESS)
+              && (exerciseIndex + 1 < lessonExercises.length) && (
+                <Link href={`/rezolva/${lessonExercises[exerciseIndex + 1]._id}`}>
+                  <a className="btn btn--default no-underline ml-2">
+                    Rezolvă următorul exercițiu!
+                  </a>
+                </Link>
+              )
+            }
+          </div>
+
         </section>
       </PageContainer>
     </PageWithAsideMenu>

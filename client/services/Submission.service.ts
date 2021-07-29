@@ -1,5 +1,6 @@
 import HttpService from './Http.service';
 import { Submission } from '~/redux/exercise-submissions/types';
+import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
 
 class SubmissionService {
   static searchSubmissions(page = 0, query = '') {
@@ -19,9 +20,13 @@ class SubmissionService {
       .then((resp) => resp.json());
   }
 
-  static submitSubmission(exerciseId: string, code: string) {
+  static createSubmission(
+    exerciseId: string,
+    code: string,
+    status = SUBMISSION_STATUS.AWAITING_REVIEW,
+  ) {
     return HttpService
-      .post(`${process.env.ENDPOINT}/submissions/exercise/${exerciseId}`, { code })
+      .post(`${process.env.ENDPOINT}/submissions/exercise/${exerciseId}`, { code, status })
       .then((resp) => resp.json());
   }
 

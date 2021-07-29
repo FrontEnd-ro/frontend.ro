@@ -22,7 +22,7 @@ const lessonRouter = require('./lesson/lesson.router');
 const presentationRouter = require('./presentation/presentation.router');
 const applicationConfigRouter = require('./application-config/application-config.router');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3300;
 const app = express();
 const nextApp = next({ dev: process.env.NODE_ENV !== 'production' })
 const nextHandler = nextApp.getRequestHandler()
@@ -32,7 +32,7 @@ app.use(
     credentials: true,
     origin: process.env.APP_ENV === 'production'
       ? 'https://frontend.ro'
-      : 'http://localhost:3000'
+      : 'http://localhost:3300'
   })
 );
 

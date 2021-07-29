@@ -2,7 +2,7 @@ const next = require('next')
 const cors = require('cors');
 const express = require('express');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3300;
 const app = express();
 const nextApp = next({ dev: process.env.NODE_ENV !== 'production' })
 const nextHandler = nextApp.getRequestHandler()

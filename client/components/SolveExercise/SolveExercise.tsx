@@ -75,8 +75,9 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   }, [submission]);
 
   const autoSaveSolution = async (code) => {
-    if (!code) {
-      // Do not save empty editors
+    if (!code || !userInfo) {
+      // Do not save empty editors or if the user
+      // is not logged in
       return;
     }
 

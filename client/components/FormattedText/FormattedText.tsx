@@ -7,7 +7,7 @@ type FormattedTextProps = {
 } & React.HTMLAttributes<HTMLOrSVGElement>;
 
 const FormattedText = ({
-  as: Wrapper = 'div',
+  as: Wrapper = 'span',
   children,
   ...props
 }: FormattedTextProps) => {

@@ -139,8 +139,6 @@ class TableOfContents extends React.Component<Props, State> {
       return window.location.href.includes(chapter.href);
     });
 
-    console.log('REFRESH');
-
     if (match !== undefined) {
       this.setState({
         activeChapterId: match.id,

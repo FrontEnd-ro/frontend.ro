@@ -5,6 +5,10 @@ const { validateAgainstSchemaProps } = require('./ServerUtils');
 const SubscribersSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+}, {
+  timestamps: {
+    updatedAt: 'updatedAt',
+  },
 });
 
 SubscribersSchema.plugin(uniqueValidator);

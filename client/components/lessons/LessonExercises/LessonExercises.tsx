@@ -8,7 +8,7 @@ import Spinner from '~/components/Spinner';
 import ExercisePreview from '~/components/ExercisePreview';
 import { RootState } from '~/redux/root.reducer';
 import { Submission } from '~/redux/exercise-submissions/types';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/SharedConstants';
 import ExerciseService from '~/services/Exercise.service';
 
 import styles from './LessonExercises.module.scss';
@@ -92,11 +92,11 @@ function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof conne
                 exercise={sub.exercise}
                 isPrivate={false}
                 feedbackCount={sub.feedbacks.filter((f) => f.type === 'improvement').length}
-                isApproved={sub.status === SUBMISSION_STATUS.DONE}
+                isApproved={sub.status === SubmissionStatus.DONE}
                 viewMode="STUDENT"
                 readOnly={[
-                  SUBMISSION_STATUS.AWAITING_REVIEW,
-                  SUBMISSION_STATUS.DONE,
+                  SubmissionStatus.AWAITING_REVIEW,
+                  SubmissionStatus.DONE,
                 ].includes(sub.status)}
                 href={`/rezolva/${sub.exercise._id}`}
               />

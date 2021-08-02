@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('./user/user.model');
-const { ServerError } = require('./ServerUtils');
+import { ServerError } from './ServerUtils';
 const ExerciseModel = require('./exercise/exercise.model');
 const LessonExerciseModel = require('./lesson-exercise/lesson-exercise.model');
-const { USER_ROLE } = require('../shared/SharedConstants');
+import { UserRole }from '../shared/SharedConstants';
 
 /****************** User Middleware */
 /** 
@@ -69,9 +69,9 @@ function PrivateMiddleware(req, res, next) {
   );
 }
 
-function UserRoleMiddleware(role) {
-  if (!role in USER_ROLE) {
-    const availableUserRoles = Object.values(USER_ROLE).join(',');
+function UserRoleMiddleware(role : UserRole) {
+  if (!(role in UserRole)) {
+    const availableUserRoles = Object.values(UserRole).join(',');
     console.error(`[UserRoleMiddleware] 'role' must be one of: ${availableUserRoles}.`);
 
     return (_, res) => {
@@ -167,7 +167,7 @@ async function SolvableExercise(req, res, next) {
   }
 }
 
-module.exports = {
+export {
   PublicMiddleware,
   PrivateMiddleware,
   PublicOrOwnExercise,

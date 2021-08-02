@@ -7,6 +7,7 @@ import SharedUserModel from '~/../shared/user.shared-model';
 import SharedExerciseModel from '~/../shared/exercise.shared-model';
 import { Exercise } from '~/redux/user/types';
 import { ViewOrEditExercise } from '~/components/create-view-edit-exercise';
+// import UserInterface from '~/../server/types/user.types';
 
 function EditExercisePage({ exercise }: { exercise?: Exercise }) {
   const authorNameOrUsername = exercise?.user?.name || exercise?.user?.username;

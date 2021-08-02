@@ -10,7 +10,7 @@ import { RootState } from '~/redux/root.reducer';
 import { UserState } from '~/redux/user/types';
 import ExerciseService from '~/services/Exercise.service';
 import NoActivity from '../NoActivity/NoActivity';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/SharedConstants';
 import styles from './UserActivity.module.scss';
 
 interface Props {
@@ -68,10 +68,10 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
             href={`rezolva/${submission.exercise._id}`}
             viewMode="STUDENT"
             feedbackCount={submission.feedbacks.filter(f => f.type === 'improvement').length}
-            isApproved={submission.status === SUBMISSION_STATUS.DONE}
+            isApproved={submission.status === SubmissionStatus.DONE}
             readOnly={[
-              SUBMISSION_STATUS.AWAITING_REVIEW,
-              SUBMISSION_STATUS.DONE,
+              SubmissionStatus.AWAITING_REVIEW,
+              SubmissionStatus.DONE,
             ].includes(submission.status)}
           />
         ))}

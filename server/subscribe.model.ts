@@ -1,15 +1,16 @@
-const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
-const { validateAgainstSchemaProps } = require('./ServerUtils');
+import { Schema, model, models } from "mongoose";
+import { SubscribersInterface } from "./types/type";
+const uniqueValidator = require("mongoose-unique-validator");
+const { validateAgainstSchemaProps } = require("./ServerUtils");
 
-const SubscribersSchema = new mongoose.Schema({
+const SubscribersSchema = new Schema<SubscribersInterface>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
 });
 
 SubscribersSchema.plugin(uniqueValidator);
 
-const Subscriber = mongoose.models?.Subscriber || mongoose.model('Subscriber', SubscribersSchema);
+const Subscriber = models?.Subscriber || model("Subscriber", SubscribersSchema);
 
 class SubscriberModel {
   static async exists(email) {
@@ -27,7 +28,7 @@ class SubscriberModel {
 
     const subscriber = new Subscriber({ name, email });
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       subscriber.save((err) => {
         if (err) {
           reject(err);
@@ -40,4 +41,4 @@ class SubscriberModel {
   }
 }
 
-module.exports = SubscriberModel;
+export default SubscriberModel;

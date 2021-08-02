@@ -1,6 +1,6 @@
-const express = require('express');
-const PresentationModel = require('./presentation.model');
-const { ServerError } = require('../ServerUtils');
+import express from 'express';
+import PresentationModel from './presentation.model';
+import { ServerError } from '../ServerUtils';
 
 const presentationRouter = express.Router();
 

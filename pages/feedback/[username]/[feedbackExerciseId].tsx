@@ -7,7 +7,7 @@ import Footer from '~/components/Footer';
 import OfferFeedback from '~/components/OfferFeedback';
 import { RootState } from '~/redux/root.reducer';
 import { useLoggedInOnly } from '~/services/Hooks';
-import { USER_ROLE } from '~/../shared/SharedConstants';
+import { UserRole } from '~/../shared/SharedConstants';
 import PageContainer from '~/components/PageContainer';
 
 function FeedbackExercisePage({ userInfo }: ConnectedProps<typeof connector>) {
@@ -26,7 +26,7 @@ function FeedbackExercisePage({ userInfo }: ConnectedProps<typeof connector>) {
       />
       <Header />
       {
-        userInfo?.role !== USER_ROLE.ADMIN
+        userInfo?.role !== UserRole.ADMIN
           ? (
             <PageContainer>
               <h1>

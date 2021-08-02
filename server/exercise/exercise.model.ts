@@ -1,18 +1,20 @@
-const mongoose = require('mongoose');
-const {
+// const mongoose from 'mongoose');
+import {
   ServerError,
   validateAgainstSchemaProps,
   validateObjectId
-} = require('../ServerUtils');
+} from '../ServerUtils';
 
-const { ExercisesSchema, Exercise, getById, sanitize } = require('../../shared/exercise.shared-model');
+import { ExercisesSchema, Exercise, getById, sanitize } from '../../shared/exercise.shared-model';
+import { Schema } from 'mongoose'
+import {Query} from '../types/type';
 class ExerciseModel {
   static getAllPublic() {
     return Exercise.find({ private: false });
   }
 
-  static getUserExercises(userId, publicOnly = false) {
-    const query = {
+  static getUserExercises(userId:Schema.Types.ObjectId, publicOnly:Boolean = false) {
+    const query : Query =  {
       user: userId
     }
 
@@ -64,7 +66,7 @@ class ExerciseModel {
       throw new ServerError(404, `Couldn't delete non-existent exercise with id=${_id}.`);
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       exercise.delete((err) => {
         if (err) {
           reject(err);
@@ -79,4 +81,4 @@ class ExerciseModel {
   static sanitize = sanitize;
 }
 
-module.exports = ExerciseModel;
+export default ExerciseModel;

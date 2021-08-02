@@ -1,0 +1,117 @@
+import { Document, Schema } from "mongoose";
+//Each interface for a schema needs to extend a `Document` so the specific type has the functions available
+
+interface FeedbackInterface extends Document {
+  body: String;
+  file_key: String;
+  position: [Number];
+  type: String;
+  // createdAt: Date;
+}
+
+interface SubmissionInterface extends Document {
+  code: String;
+  user: Schema.Types.ObjectId;
+  assignee: Schema.Types.ObjectId;
+  exercise: Schema.Types.ObjectId;
+  status: String;
+  feedbacks: FeedbackInterface;
+}
+
+interface UserInterface extends Document {
+  avatar: String;
+  name: String;
+  email: String;
+  username: String;
+  description: String;
+  password: String;
+  github_access_token: String;
+  lastLogin: Date;
+  role: String;
+}
+
+interface PresentationInterface extends Document {
+  presentationId: String;
+  views: Number;
+  title: String;
+  thumb: String;
+  description: String;
+  created: Number;
+  //Not sure about this one
+  // updatedAt:Date;
+}
+
+interface LeasonExercicesJsonInterface extends Document {
+  leason: String;
+}
+interface LeasonsInterface extends Document {
+  lessonId: String;
+  views: Number;
+}
+interface ExerciseJSONInterface extends Document {
+  user: Schema;
+  type: String;
+  tags: [String];
+  body: String;
+  example: String;
+  solution: String;
+  private: Boolean;
+  suggestion: String;
+}
+
+interface SubscribersInterface extends Document {
+  name?: String;
+  email?: String;
+}
+
+interface AttendeeInterface extends Document{
+  name:String;
+  tel:String;
+  email:String;
+} 
+
+interface EventInterface extends Document{
+  label:String;
+  total:Number;
+  attendees:AttendeeInterface;
+  waitList:AttendeeInterface
+}
+
+interface ChallengeParticipantInterface extends Document{
+  user:Schema.Types.ObjectId;
+  lastDoneTask:String|null;
+  meta:any;
+}
+
+interface ChallengeInterface extends Document{
+  id:String;
+  tasks:String
+  particitants:ChallengeParticipantInterface
+}
+
+interface SearchUser {
+  username?: String;
+  email?: String;
+}
+
+interface Query{
+  user:Schema.Types.ObjectId;
+  private?:Boolean
+}
+
+export {
+  UserInterface,
+  SubmissionInterface,
+  FeedbackInterface,
+  SearchUser,
+  PresentationInterface,
+  LeasonExercicesJsonInterface,
+  ExerciseJSONInterface,
+  LeasonsInterface,
+  SubscribersInterface,
+  Query,
+  AttendeeInterface,
+  EventInterface,
+  ChallengeInterface,
+ChallengeParticipantInterface
+};

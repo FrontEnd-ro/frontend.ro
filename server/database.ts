@@ -1,3 +1,5 @@
+
+export {};
 const mongoose = require('mongoose')
 
 function connectToDb() {
@@ -29,7 +31,8 @@ function extractDbErrorMessage(err) {
   return err._message || 'Oops, something went wrong...';
 }
 
-module.exports = {
+
+export{
   connectToDb,
-  extractDbErrorMessage,
+  extractDbErrorMessage
 }

@@ -13,7 +13,7 @@ import Markdown from '../Markdown';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 import { FEEDBACK_TYPES } from '~/services/Constants';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/SharedConstants';
 
 import styles from './OfferFeedback.module.scss';
 import Button from '../Button';
@@ -39,7 +39,7 @@ function OfferFeedback({
   const authorNameOrUsername = submission
     ? (submission.user.name || submission.user.username)
     : '';
-  const canOfferFeedback = submission && submission.status === SUBMISSION_STATUS.AWAITING_REVIEW;
+  const canOfferFeedback = submission && submission.status === SubmissionStatus.AWAITING_REVIEW;
 
   const folderStructure = React.useMemo(() => {
     if (!submission) {
@@ -127,7 +127,7 @@ function OfferFeedback({
           text-bold
         `}
         >
-          {submission.status === SUBMISSION_STATUS.DONE ? (
+          {submission.status === SubmissionStatus.DONE ? (
             'Exercițiul a fost deja aprobat'
           ) : (
             <>

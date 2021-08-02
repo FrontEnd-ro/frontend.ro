@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
+import { Schema, model, models } from "mongoose";
+import { LeasonsInterface } from "server/types/type"
 const { ServerError } = require('../ServerUtils');
 
-const LessonsSchema = new mongoose.Schema({
+const LessonsSchema = new Schema<LeasonsInterface>({
   lessonId: { type: String, required: true, unique: true },
   views: { type: Number, required: true },
 }, {
@@ -10,7 +11,7 @@ const LessonsSchema = new mongoose.Schema({
   },
 });
 
-const Lesson = mongoose.models.Lesson || mongoose.model('Lesson', LessonsSchema);
+const Lesson = models.Lesson || model('Lesson', LessonsSchema);
 
 class LessonModel {
   static get(lessonId) {
@@ -38,7 +39,7 @@ class LessonModel {
 
     lesson.views = views;
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       lesson.save((err) => {
         if (err) {
           console.error(`
@@ -56,4 +57,4 @@ class LessonModel {
   }
 }
 
-module.exports = LessonModel;
+export default LessonModel;

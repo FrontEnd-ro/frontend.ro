@@ -9,7 +9,7 @@ import LessonExerciseService from '~/services/LessonExercise.service';
 import ExercisePreview from '../ExercisePreview';
 import PageContainer from '../PageContainer';
 import Spinner from '../Spinner';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/SharedConstants';
 import { RootState } from '~/redux/root.reducer';
 
 import styles from './ExercisesPage.module.scss';
@@ -116,10 +116,10 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
                 href={`rezolva/${submission.exercise._id}`}
                 viewMode="STUDENT"
                 feedbackCount={submission.feedbacks.filter((f) => f.type === 'improvement').length}
-                isApproved={submission.status === SUBMISSION_STATUS.DONE}
+                isApproved={submission.status === SubmissionStatus.DONE}
                 readOnly={[
-                  SUBMISSION_STATUS.AWAITING_REVIEW,
-                  SUBMISSION_STATUS.DONE,
+                  SubmissionStatus.AWAITING_REVIEW,
+                  SubmissionStatus.DONE,
                 ].includes(submission.status)}
               />
             ))}

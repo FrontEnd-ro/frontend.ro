@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const mongoose = require('mongoose');
-const { validateObjectId } = require('../server/ServerUtils');
-const { sanitize: userSanitize } = require('./user.shared-model');
+import { Schema, model, models } from 'mongoose';
+import { ExerciseJSONInterface } from '../server/types/type';
 
+import { validateObjectId } from '../server/ServerUtils';
+// import { sanitize as userSanitize} from './user.shared-model';
+import UserSharedModel from './user.shared-model';
+// import userSharedModel from './user.shared-model'
+const userSanitize = UserSharedModel.sanitize;
 const ExerciseJSONSchema = {
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
   type: { type: String, enum: ['html', 'css', 'js'] },
   tags: [{ type: String }],
   body: { type: String, required: true },
@@ -14,14 +18,14 @@ const ExerciseJSONSchema = {
   suggestion: { type: String, required: false },
 };
 
-const ExercisesSchema = new mongoose.Schema(
+const ExercisesSchema = new Schema<ExerciseJSONInterface>(
   ExerciseJSONSchema,
   {
     timestamps: true,
   },
 );
 
-const Exercise = mongoose.models.Exercise || mongoose.model('Exercise', ExercisesSchema);
+const Exercise = models.Exercise || model('Exercise', ExercisesSchema);
 
 function getById(_id) {
   validateObjectId(_id);
@@ -39,7 +43,15 @@ function sanitize(exercise) {
   return JSON.parse(JSON.stringify(sanitizedExercise));
 }
 
-module.exports = {
+export default {
+  Exercise,
+  ExercisesSchema,
+  ExerciseJSONSchema,
+  getById,
+  sanitize,
+};
+
+export {
   Exercise,
   ExercisesSchema,
   ExerciseJSONSchema,

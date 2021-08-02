@@ -1,9 +1,9 @@
 
-const express = require('express');
-const fetch = require('node-fetch');
-const { PrivateMiddleware } = require('../Middlewares');
-const { ServerError } = require('../ServerUtils');
-const UserModel = require('../user/user.model');
+import express from 'express';
+import fetch from 'node-fetch';
+import { PrivateMiddleware } from '../Middlewares';
+import { ServerError } from '../ServerUtils';
+import UserModel from '../user/user.model';
 
 const githubRouter = express.Router();
 

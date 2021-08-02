@@ -25,6 +25,8 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+package-lock.json
+*node_modules*
 
 public/robots.txt
 public/sitemap.xml

@@ -2,17 +2,17 @@
 const MAX_MEDIA_MB = 10;
 const MAX_MEDIA_BYTES = MAX_MEDIA_MB * 1024 * 1024;
 
-const USER_ROLE = {
-  ADMIN: 'admin',
-  TEACHER: 'teacher',
-  STUDENT: 'student',
-};
+enum UserRole {
+  ADMIN= 'admin',
+  TEACHER= 'teacher',
+  STUDENT= 'student',
+}
 
-const SUBMISSION_STATUS = {
-  IN_PROGRESS: 'in_progress',
-  AWAITING_REVIEW: 'awaiting_review',
-  DONE: 'done',
-};
+enum SubmissionStatus {
+  IN_PROGRESS = 'in_progress',
+  AWAITING_REVIEW= 'awaiting_review',
+  DONE= 'done',
+}
 
 const LESSONS_WITH_EXERCISES = [
   'texte',
@@ -23,10 +23,11 @@ const LESSONS_WITH_EXERCISES = [
 
 // Use NodeJS style exports because this file is consumed
 // both from the server & client
-module.exports = {
+
+export {
   MAX_MEDIA_MB,
   MAX_MEDIA_BYTES,
-  USER_ROLE,
-  SUBMISSION_STATUS,
+  UserRole,
+  SubmissionStatus,
   LESSONS_WITH_EXERCISES,
 };

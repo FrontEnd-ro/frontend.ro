@@ -1,20 +1,20 @@
-const multer = require('multer');
-const express = require('express');
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+import multer from 'multer';
+import express from 'express';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-const ExerciseModel = require('./exercise.model');
-const SubmissionModel = require('../submission/submission.model');
+import ExerciseModel from './exercise.model';
+import SubmissionModel from '../submission/submission.model';
 
-const {
+import {
   PublicMiddleware,
   PrivateMiddleware,
   PublicOrOwnExercise,
   OwnExercise
-} = require('../Middlewares');
+} from '../Middlewares';
 
-const { ServerError } = require('../ServerUtils');
-const { MAX_MEDIA_BYTES } = require('../../shared/SharedConstants');
-const UserModel = require('../user/user.model');
+import { ServerError } from '../ServerUtils';
+import { MAX_MEDIA_BYTES, MAX_MEDIA_MB } from '../../shared/SharedConstants';
+import UserModel from '../user/user.model';
 
 const exerciseRouter = express.Router();
 

@@ -1,4 +1,4 @@
-import { USER_ROLE } from '~/../shared/SharedConstants';
+// import { UserRole } from '~/../shared/SharedConstants';
 import { ChapterType } from '../exercise-submissions/types';
 
 export interface UserState {

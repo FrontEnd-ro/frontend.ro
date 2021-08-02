@@ -1,13 +1,10 @@
 require('dotenv').config();
 
-const { connectToDb } = require('../database');
-const EmailService = require('../Email.service');
-const EventModel = require('../event/event.model');
-
-
+import { connectToDb } from '../database';
+import EmailService from '../Email.service';
+import EventModel from '../event/event.model';
 
 const trainingId = "git-incepatori-2";
-
 
 connectToDb()
   .catch(err => {

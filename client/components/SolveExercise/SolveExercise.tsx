@@ -13,7 +13,7 @@ import PageContainer from '~/components/PageContainer';
 import StatusBanner from './StatusBanner/StatusBanner';
 import SubmissionService from '~/services/Submission.service';
 import { UserState, LessonExercise } from '~/redux/user/types';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/SharedConstants';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
@@ -50,8 +50,8 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   const [lessonExercises, setLessonExercises] = useState<LessonExercise[]>([]);
 
   const readonly = submission && (
-    submission.status === SUBMISSION_STATUS.DONE
-    || submission.status === SUBMISSION_STATUS.AWAITING_REVIEW
+    submission.status === SubmissionStatus.DONE
+    || submission.status === SubmissionStatus.AWAITING_REVIEW
   );
 
   const exerciseIndex = lessonExercises.findIndex((ex) => {
@@ -92,7 +92,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
     let updatedSubmission;
     if (submission._id) {
       updatedSubmission = await SubmissionService.updateSubmission(submission._id, {
-        status: SUBMISSION_STATUS.AWAITING_REVIEW,
+        status: SubmissionStatus.AWAITING_REVIEW,
         code,
       });
     } else {
@@ -110,7 +110,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
 
   const exitReadonly = () => {
     return SubmissionService.updateSubmission(submission._id, {
-      status: SUBMISSION_STATUS.IN_PROGRESS,
+      status: SubmissionStatus.IN_PROGRESS,
     })
       .then(setSubmission)
       .catch((err) => {
@@ -132,7 +132,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
           code: null,
           feedbacks: [],
           assignee: null,
-          status: SUBMISSION_STATUS.IN_PROGRESS,
+          status: SubmissionStatus.IN_PROGRESS,
         });
       })
       .catch((err) => {
@@ -277,7 +277,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
             {userInfo ? 'Trimite' : 'Autentifică-te și trimite soluția'}
           </Button>
           {
-            (submission.status !== SUBMISSION_STATUS.IN_PROGRESS)
+            (submission.status !== SubmissionStatus.IN_PROGRESS)
             && (exerciseIndex + 1 < lessonExercises.length) && (
               <Link href={`/rezolva/${lessonExercises[exerciseIndex + 1]._id}`}>
                 <a className="btn btn--default no-underline">

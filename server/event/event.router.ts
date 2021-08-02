@@ -109,4 +109,4 @@ eventRouter.post('/:label/waitlist', async function addToWaitlist(req, res) {
   }
 });
 
-module.exports = eventRouter;
+export default eventRouter;

@@ -1,15 +1,16 @@
 /* eslint-disable camelcase */
-const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
-const { PAGE_SIZE, ServerError, validateAgainstSchemaProps } = require('../ServerUtils');
+import { Schema, model, models } from "mongoose";
+import uniqueValidator from 'mongoose-unique-validator';
+import { PAGE_SIZE, ServerError, validateAgainstSchemaProps } from '../ServerUtils';
+import {AttendeeInterface,EventInterface} from '../types/type'
 
-const AttendeeSchema = new mongoose.Schema({
+const AttendeeSchema = new Schema<AttendeeInterface>({
   name: { type: String, required: true },
   email: { type: String, required: true },
   tel: { type: String, required: true }
 })
 
-const EventSchema = new mongoose.Schema(
+const EventSchema = new Schema<EventInterface>(
   {
     label: { type: String, required: true, unique: true },
     total: { type: Number, required: true },
@@ -24,8 +25,8 @@ const EventSchema = new mongoose.Schema(
   },
 );
 
-const Event = mongoose.models.Event || mongoose.model('Event', EventSchema);
-const Attendee = mongoose.models.Attendee || mongoose.model('Attendee', AttendeeSchema);
+const Event = models.Event || model('Event', EventSchema);
+const Attendee = models.Attendee || model('Attendee', AttendeeSchema);
 
 class EventModel {
   static getByLabel(label) {
@@ -76,4 +77,4 @@ class EventModel {
   }
 }
 
-module.exports = EventModel;
+export default EventModel;

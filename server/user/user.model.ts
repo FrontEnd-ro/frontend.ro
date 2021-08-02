@@ -1,7 +1,9 @@
+import { Schema } from 'mongoose'
+import { SearchUser, UserInterface } from 'server/types/type'
+import  SharedUserModel from '../../shared/user.shared-model';
+import  { AUTH_EXPIRATION, ServerError, validateAgainstSchemaProps, validateObjectId, MAX_USERNAME_LENGTH } from '../ServerUtils';
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const SharedUserModel = require('../../shared/user.shared-model');
-const { AUTH_EXPIRATION, ServerError, validateAgainstSchemaProps, validateObjectId, MAX_USERNAME_LENGTH } = require('../ServerUtils');
 
 const { UsersSchema, User } = SharedUserModel
 
@@ -28,12 +30,12 @@ class UserModel {
     }
   }
 
-  static create(payload) {
+  static create (payload){
     validateAgainstSchemaProps(payload, UsersSchema);
 
     const user = new User(payload);
 
-    return new Promise((resolve, reject) => {
+    return new Promise<UserInterface>((resolve, reject) => {
       user.save((err) => {
         if (err) {
           reject(err);
@@ -50,7 +52,7 @@ class UserModel {
   static async getUser({
     username,
     email,
-  }) {
+  }:SearchUser) {
     const user = await User.findOne({
       $or: [{ username }, { email }],
     });
@@ -77,7 +79,7 @@ class UserModel {
     await User.findOneAndDelete({ _id })
   }
 
-  static generateJwtForUser(_id) {
+  static generateJwtForUser(_id:Schema.Types.ObjectId) {
     return jwt.sign(
       { _id },
       process.env.TOKEN_SECRET,
@@ -131,4 +133,4 @@ class UserModel {
   }
 }
 
-module.exports = UserModel;
+export default UserModel;

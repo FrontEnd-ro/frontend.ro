@@ -1,27 +1,29 @@
-const mongoose = require('mongoose');
-const {
+import { Schema, model, models } from "mongoose";
+
+import {
   validateObjectId
-} = require('../ServerUtils');
-const { LESSONS_WITH_EXERCISES } = require('../../shared/SharedConstants');
-const { ExerciseJSONSchema } = require('../../shared/exercise.shared-model');
+} from '../ServerUtils';
+import { LESSONS_WITH_EXERCISES } from '../../shared/SharedConstants';
+import { ExerciseJSONSchema } from '../../shared/exercise.shared-model';
+import { LeasonExercicesJsonInterface } from "server/types/type"
 
 const LessonExercisesJSONSchema = {
   ...ExerciseJSONSchema,
   lesson: { type: String, enum: LESSONS_WITH_EXERCISES, required: true }
 }
 
-const LessonExercisesSchema = new mongoose.Schema(
+const LessonExercisesSchema = new Schema<LeasonExercicesJsonInterface>(
   LessonExercisesJSONSchema,
   {
     timestamps: true,
   },
 );
 
-const LessonExercise = mongoose.models.LessonExercise || mongoose.model('LessonExercise', LessonExercisesSchema);
+const LessonExercise = models.LessonExercise || model('LessonExercise', LessonExercisesSchema);
 
 class LessonExerciseModel {
   static get(_id) {
-    validateObjectId();
+    validateObjectId(_id);
 
     return LessonExercise
       .findById(_id)
@@ -41,4 +43,4 @@ class LessonExerciseModel {
   }
 }
 
-module.exports = LessonExerciseModel;
+export default LessonExerciseModel;

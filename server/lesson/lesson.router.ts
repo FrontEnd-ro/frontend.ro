@@ -1,6 +1,6 @@
-const express = require('express');
-const LessonModel = require('./lesson.model');
-const { ServerError } = require('../ServerUtils');
+import express from 'express' ;
+import LessonModel from './lesson.model' ;
+import { ServerError } from '../ServerUtils' ;
 
 const lessonRouter = express.Router();
 

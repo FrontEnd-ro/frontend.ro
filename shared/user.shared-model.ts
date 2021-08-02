@@ -1,11 +1,13 @@
+import { Schema, models, model } from 'mongoose';
+import { UserInterface } from '../server/types/type';
+import { ServerError } from '../server/ServerUtils';
+import { UserRole } from './SharedConstants';
 /* eslint-disable @typescript-eslint/no-var-requires */
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-const { ServerError } = require('../server/ServerUtils');
-const { USER_ROLE } = require('./SharedConstants');
 
-const UsersSchema = new mongoose.Schema({
+const UsersSchema = new Schema<UserInterface>({
   avatar: { type: String, required: true },
   name: { type: String, required: false, default: '' },
   email: { type: String, required: true, unique: true },
@@ -16,20 +18,16 @@ const UsersSchema = new mongoose.Schema({
   lastLogin: { type: Date, default: Date.now() },
   role: {
     type: String,
-    enum: [
-      USER_ROLE.ADMIN,
-      USER_ROLE.TEACHER,
-      USER_ROLE.STUDENT,
-    ],
-    default: USER_ROLE.STUDENT,
+    enum: [UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT],
+    default: UserRole.STUDENT,
   },
 });
 
 UsersSchema.plugin(uniqueValidator);
 
-const User = mongoose.models.User || mongoose.model('User', UsersSchema);
+const User = models.User || model('User', UsersSchema);
 
-async function ping(token) {
+async function ping(token): Promise < UserInterface > {
   return new Promise((resolve, reject) => {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedInfo) => {
       if (err) {
@@ -41,7 +39,7 @@ async function ping(token) {
 
       const user = await findUserBy({ _id });
       if (!user) {
-        reject(new ServerError(404, "User doesn't exist anymore!"));
+        reject(new ServerError(404, 'User doesn\'t exist anymore!'));
         return;
       }
 
@@ -50,7 +48,7 @@ async function ping(token) {
   });
 }
 
-function sanitize(user) {
+function sanitize(user : UserInterface) {
   const sanitizedUser = { ...user.toObject() };
   const propsToDelete = ['_id', '__v', 'password', 'github_access_token'];
 
@@ -61,11 +59,17 @@ function sanitize(user) {
 
 async function findUserBy(filters) {
   const user = await User.findOne(filters);
-
   return user || null;
 }
 
-module.exports = {
+export default {
+  User,
+  UsersSchema,
+  ping,
+  sanitize,
+  findUserBy,
+};
+export {
   User,
   UsersSchema,
   ping,

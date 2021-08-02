@@ -29,7 +29,7 @@ function sendTemplateWithAlias(email, TemplateAlias, TemplateModel) {
   })
 }
 
-module.exports = {
+export default {
   sendEmailWithTemplate,
   sendTemplateWithAlias,
 }

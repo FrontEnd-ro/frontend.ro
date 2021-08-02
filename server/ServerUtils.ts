@@ -1,3 +1,6 @@
+import { Schema } from "mongoose"
+
+export {};
 const mongoose = require('mongoose');
 const { extractDbErrorMessage } = require('./database');
 
@@ -52,13 +55,13 @@ function validateAgainstSchemaProps(payload, Schema) {
   }
 }
 
-function validateObjectId(_id) {
+function validateObjectId(_id:Schema.Types.ObjectId) {
   if (!mongoose.isValidObjectId(_id)) {
     throw new ServerError(400, `Value '${_id}' is not a valid ObjectId identifier`);
   }
 }
 
-module.exports = {
+export  {
   ServerError,
   PAGE_SIZE,
   AUTH_EXPIRATION,

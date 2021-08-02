@@ -1,9 +1,9 @@
+import  UserModel from '../user/user.model';
+import  SubmissionModel from './submission.model';
+import  { PublicMiddleware, PrivateMiddleware, SolvableExercise, UserRoleMiddleware } from '../Middlewares';
+import  { ServerError } from '../ServerUtils';
+import  { SubmissionStatus, UserRole } from '../../shared/SharedConstants';
 const express = require('express');
-const UserModel = require('../user/user.model');
-const SubmissionModel = require('./submission.model');
-const { PublicMiddleware, PrivateMiddleware, SolvableExercise, UserRoleMiddleware } = require('../Middlewares');
-const { ServerError } = require('../ServerUtils');
-const { SUBMISSION_STATUS, USER_ROLE } = require('../../shared/SharedConstants');
 
 const submissionRouter = express.Router();
 
@@ -49,7 +49,7 @@ submissionRouter.get('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerci
   }
 });
 
-submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(USER_ROLE.ADMIN), SolvableExercise], async function getUserSubmission(req, res) {
+submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMIN), SolvableExercise], async function getUserSubmission(req, res) {
   const { username, exerciseId } = req.params;
   const { user } = req.body;
 
@@ -79,7 +79,7 @@ submissionRouter.post('/', [PrivateMiddleware], async function createSubmission(
   res.json(submission);
 });
 
-submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], async function approveSubmission(req, res) {
+submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware(UserRole.ADMIN)], async function approveSubmission(req, res) {
   const { submissionId } = req.params;
   const { feedbacks } = req.body;
 
@@ -90,12 +90,12 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
       throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
     }
 
-    if (submission.status !== SUBMISSION_STATUS.AWAITING_REVIEW) {
+    if (submission.status !== SubmissionStatus.AWAITING_REVIEW) {
       throw new ServerError(400, 'Poți aproba doar submisii ce așteaptă feedback-ul tău.');
     }
 
     await SubmissionModel.update(submissionId, {
-      status: SUBMISSION_STATUS.DONE,
+      status: SubmissionStatus.DONE,
       feedbacks
     });
 
@@ -106,7 +106,7 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
   }
 });
 
-submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], async function approveSubmission(req, res) {
+submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware(UserRole.ADMIN)], async function approveSubmission(req, res) {
   const { submissionId } = req.params;
   const { feedbacks } = req.body;
 
@@ -117,12 +117,12 @@ submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], 
       throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
     }
 
-    if (submission.status !== SUBMISSION_STATUS.AWAITING_REVIEW) {
+    if (submission.status !== SubmissionStatus.AWAITING_REVIEW) {
       throw new ServerError(400, 'Poți da feedback doar las submisii ce așteaptă feedback-ul tău.');
     }
 
     await SubmissionModel.update(submissionId, {
-      status: SUBMISSION_STATUS.IN_PROGRESS,
+      status: SubmissionStatus.IN_PROGRESS,
       feedbacks
     });
 
@@ -168,14 +168,14 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
       code,
       user: user._id,
       exercise: exerciseId,
-      status: SUBMISSION_STATUS.AWAITING_REVIEW
+      status: SubmissionStatus.AWAITING_REVIEW
     })
     updatedSubmission = await SubmissionModel.getByExerciseId(user._id, exerciseId);
   } else {
     console.log("[submitSolution] Existing solution for this exercise. Let's update it");
     await SubmissionModel.update(existingSubmission._id, {
       code,
-      status: SUBMISSION_STATUS.AWAITING_REVIEW,
+      status: SubmissionStatus.AWAITING_REVIEW,
     });
     updatedSubmission = await SubmissionModel.get(existingSubmission._id);
   }
@@ -199,7 +199,7 @@ submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async func
       throw new ServerError(404, `Nu am gasit feedback-ul asta.`);
     }
 
-    if (match.status !== SUBMISSION_STATUS.IN_PROGRESS) {
+    if (match.status !== SubmissionStatus.IN_PROGRESS) {
       throw new ServerError(400, 'Submisia așteaptă feedback. Până atunci nu o poți edita');
     }
 

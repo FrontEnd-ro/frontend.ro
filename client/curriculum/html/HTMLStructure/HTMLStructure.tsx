@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, PropsWithChildren } from 'react';
+import React from 'react';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -15,6 +15,7 @@ import SideBySidePictures from '~/components/SideBySidePictures';
 
 import styles from './HTMLStructure.module.scss';
 import FormattedText from '~/components/FormattedText';
+import ResponsiveFlex from '~/components/ResponsiveFlex';
 
 const chapters = [
   { title: 'Structura de bază', id: 'structura' },
@@ -53,7 +54,7 @@ function HTMLStructure() {
           <LessonHeading as="h2" id="structura">
             Structura de bază
           </LessonHeading>
-          <ResponsiveFlex className="justify-content-between">
+          <ResponsiveFlex breakpoint={1000}>
             <div>
               <p className="mb-4"> Fiecare pagină web este alcătuită din următoarele elemente principale: </p>
               <ol className="with--checkmark">
@@ -368,18 +369,5 @@ function HTMLStructure() {
     </>
   );
 }
-
-type ResponsiveFlexProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>>;
-
-const ResponsiveFlex = React.forwardRef<
-  HTMLDivElement,
-  ResponsiveFlexProps
->(({ children, ...rest }: ResponsiveFlexProps, ref) => {
-  return (
-    <div {...rest} ref={ref} className={`${styles['responsive-flex']} ${rest.className ?? ''}`}>
-      {children}
-    </div>
-  );
-});
 
 export default HTMLStructure;

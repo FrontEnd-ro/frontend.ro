@@ -84,4 +84,4 @@ async function getGithubUser(access_token) {
   }
 }
 
-module.exports = githubRouter;
+export default githubRouter;

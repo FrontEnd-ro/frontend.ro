@@ -25,8 +25,10 @@ const FeedbackSchema = new Schema<FeedbackInterface>(
     },
   },
   {
-    createdAt: "submittedAt",
-    updatedAt: "updatedAt",
+    timestamps: {
+      createdAt: "submittedAt",
+      updatedAt: "updatedAt",
+    },
   }
 );
 

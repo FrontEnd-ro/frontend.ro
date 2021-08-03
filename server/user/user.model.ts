@@ -1,20 +1,29 @@
-import { Schema } from 'mongoose'
-import { SearchUser, UserInterface } from 'server/types/type'
-import  SharedUserModel from '../../shared/user.shared-model';
-import  { AUTH_EXPIRATION, ServerError, validateAgainstSchemaProps, validateObjectId, MAX_USERNAME_LENGTH } from '../ServerUtils';
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-
-const { UsersSchema, User } = SharedUserModel
+import { Schema } from "mongoose";
+import {
+  IReturnValidateUser,
+  SearchUser,
+  UserDocumentInterface,
+  UserInterface,
+} from "server/types/type";
+import { UsersSchema, User,ping,findUserBy,sanitize } from "../../shared/user.shared-model";
+import {
+  AUTH_EXPIRATION,
+  ServerError,
+  validateAgainstSchemaProps,
+  validateObjectId,
+  MAX_USERNAME_LENGTH,
+} from "../ServerUtils";
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 class UserModel {
   static search() {
     return User.find({});
   }
 
-  static ping = SharedUserModel.ping;
+  static ping = ping;
 
-  static async verify(username, password) {
+  static async verify(username:String, password:String): Promise<boolean> {
     const user = await UserModel.findUserBy({ username });
 
     if (!user) {
@@ -25,17 +34,17 @@ class UserModel {
       const result = await bcrypt.compare(password, user.password);
       return !!result;
     } catch (err) {
-      console.error('[UserModel.verify]', err)
+      console.error("[UserModel.verify]", err);
       return false;
     }
   }
 
-  static create (payload){
+  static create(payload:UserInterface): Promise<UserDocumentInterface> {
     validateAgainstSchemaProps(payload, UsersSchema);
 
     const user = new User(payload);
 
-    return new Promise<UserInterface>((resolve, reject) => {
+    return new Promise<UserDocumentInterface>((resolve, reject) => {
       user.save((err) => {
         if (err) {
           reject(err);
@@ -47,12 +56,12 @@ class UserModel {
     });
   }
 
-  static findUserBy = SharedUserModel.findUserBy;
+  static findUserBy = findUserBy;
 
   static async getUser({
     username,
     email,
-  }:SearchUser) {
+  }: SearchUser): Promise<UserDocumentInterface | null> {
     const user = await User.findOne({
       $or: [{ username }, { email }],
     });
@@ -60,12 +69,16 @@ class UserModel {
     return user || null;
   }
 
-  static async update(_id, payload) {
+  //Payload need a specific type that resemble the user posible updates
+  static async update(_id:Schema.Types.ObjectId, payload:any): Promise<UserDocumentInterface> {
     validateObjectId(_id);
     const user = await User.findById(_id);
 
     if (!user) {
-      throw new ServerError(404, `Couldn't update non-existent exercise with id=${_id}.`);
+      throw new ServerError(
+        404,
+        `Couldn't update non-existent user with id=${_id}.`
+      );
     }
 
     validateAgainstSchemaProps(payload, UsersSchema);
@@ -75,29 +88,21 @@ class UserModel {
     return user;
   }
 
-  static async delete(_id) {
-    await User.findOneAndDelete({ _id })
+  static async delete(_id:Schema.Types.ObjectId): Promise<void> {
+    await User.findOneAndDelete({ _id });
   }
 
-  static generateJwtForUser(_id:Schema.Types.ObjectId) {
-    return jwt.sign(
-      { _id },
-      process.env.TOKEN_SECRET,
-      {
-        expiresIn: `${AUTH_EXPIRATION}d`,
-        algorithm: process.env.TOKEN_ALGORITHM,
-      },
-    );
+  static generateJwtForUser(_id: Schema.Types.ObjectId): String {
+    return jwt.sign({ _id }, process.env.TOKEN_SECRET, {
+      expiresIn: `${AUTH_EXPIRATION}d`,
+      algorithm: process.env.TOKEN_ALGORITHM,
+    });
   }
 
-  static sanitize = SharedUserModel.sanitize;
+  static sanitize = sanitize;
 
-  static validateUsername(username) {
-    const RESTRICTED_USERNAMES = [
-      'lectii',
-      'settings',
-      '',
-    ];
+  static validateUsername(username:string): IReturnValidateUser {
+    const RESTRICTED_USERNAMES = ["lectii", "settings", ""];
 
     if (!username.length || username.length > MAX_USERNAME_LENGTH) {
       return {
@@ -109,7 +114,7 @@ class UserModel {
     if (RESTRICTED_USERNAMES.includes(username)) {
       return {
         result: false,
-        reason: 'Username-ul conincide cu una dintre paginile noastre.',
+        reason: "Username-ul conincide cu una dintre paginile noastre.",
       };
     }
 
@@ -118,12 +123,18 @@ class UserModel {
     };
   }
 
-  static async setGithubAccessToken(_id, github_access_token) {
+  static async setGithubAccessToken(
+    _id:Schema.Types.ObjectId,
+    github_access_token:String
+  ): Promise<UserDocumentInterface> {
     validateObjectId(_id);
     const user = await User.findById(_id);
 
     if (!user) {
-      throw new ServerError(404, `Couldn't set Github Access Token for non-existent user with id=${_id}.`);
+      throw new ServerError(
+        404,
+        `Couldn't set Github Access Token for non-existent user with id=${_id}.`
+      );
     }
 
     user.github_access_token = github_access_token;

@@ -140,4 +140,4 @@ function saveChallenge(challenge) {
   });
 }
 
-module.exports = ChallengeModel;
+export default ChallengeModel;

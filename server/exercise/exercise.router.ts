@@ -133,4 +133,4 @@ exerciseRouter.delete('/:exerciseId', [PrivateMiddleware, OwnExercise], async fu
   res.status(200).end();
 })
 
-module.exports = exerciseRouter;
+export default exerciseRouter;

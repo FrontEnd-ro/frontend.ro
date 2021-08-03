@@ -222,4 +222,4 @@ submissionRouter.delete('/:submissionId', [PrivateMiddleware], async function de
   res.status(200).end();
 })
 
-module.exports = submissionRouter;
+export default submissionRouter;

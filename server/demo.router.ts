@@ -25,4 +25,4 @@ demoRouter.get('/slow-image', async function getSlowImage(req, res) {
     });
 });
 
-module.exports = demoRouter;
+export default demoRouter;

@@ -1,5 +1,5 @@
 import { Schema, models, model } from 'mongoose';
-import { UserInterface } from '../server/types/type';
+import { UserDocumentInterface } from '../server/types/type';
 import { ServerError } from '../server/ServerUtils';
 import { UserRole } from './SharedConstants';
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 // const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const UsersSchema = new Schema<UserInterface>({
+const UsersSchema = new Schema<UserDocumentInterface>({
   avatar: { type: String, required: true },
   name: { type: String, required: false, default: '' },
   email: { type: String, required: true, unique: true },
@@ -27,7 +27,7 @@ UsersSchema.plugin(uniqueValidator);
 
 const User = models.User || model('User', UsersSchema);
 
-async function ping(token): Promise < UserInterface > {
+async function ping(token): Promise < UserDocumentInterface > {
   return new Promise((resolve, reject) => {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedInfo) => {
       if (err) {
@@ -48,7 +48,7 @@ async function ping(token): Promise < UserInterface > {
   });
 }
 
-function sanitize(user : UserInterface) {
+function sanitize(user : UserDocumentInterface) {
   const sanitizedUser = { ...user.toObject() };
   const propsToDelete = ['_id', '__v', 'password', 'github_access_token'];
 
@@ -62,13 +62,6 @@ async function findUserBy(filters) {
   return user || null;
 }
 
-export default {
-  User,
-  UsersSchema,
-  ping,
-  sanitize,
-  findUserBy,
-};
 export {
   User,
   UsersSchema,

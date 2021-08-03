@@ -44,4 +44,4 @@ presentationRouter.post('/:presentationId/views', async function increaseViews(r
 });
 
 
-module.exports = presentationRouter;
+export default presentationRouter;

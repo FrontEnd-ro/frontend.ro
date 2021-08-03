@@ -9,6 +9,7 @@ import { SubmissionStatus } from "../../shared/SharedConstants";
 import { Schema, model, models } from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 import { FeedbackInterface, SubmissionInterface } from "../types/type";
+// import { } from 'express'
 /** Initialize the User Schema because we need it when referencing & populating the results */
 require("../user/user.model");
 require("../exercise/exercise.model");
@@ -67,13 +68,13 @@ SubmissionSchema.plugin(uniqueValidator);
 const Submission = models.Submission || model("Submission", SubmissionSchema);
 
 class SubmissionModel {
-  static get(_id:Schema.Types.ObjectId){
+  static get(_id:Schema.Types.ObjectId|string){
     return Submission.findById(_id)
       .populate({ path: "user" })
       .populate({ path: "exercise" });
   }
 
-  static getByExerciseId(userId:Schema.Types.ObjectId, exerciseId:Schema.Types.ObjectId){
+  static getByExerciseId(userId:Schema.Types.ObjectId|string, exerciseId:Schema.Types.ObjectId|string){
     validateObjectId(exerciseId);
 
     return Submission.findOne({
@@ -90,7 +91,7 @@ class SubmissionModel {
       });
   }
 
-  static getUserSubmission(userId:Schema.Types.ObjectId, exerciseId:Schema.Types.ObjectId) {
+  static getUserSubmission(userId:Schema.Types.ObjectId|string, exerciseId:Schema.Types.ObjectId|string) {
     validateObjectId(exerciseId);
     validateObjectId(userId);
 
@@ -119,7 +120,7 @@ class SubmissionModel {
     });
   }
 
-  static async search(page:number = 0, query:string = "") {
+  static async search(page:number = 0, query:string  = "") {
     const all = await Submission.find({
       status: SubmissionStatus.AWAITING_REVIEW,
     })
@@ -159,7 +160,7 @@ class SubmissionModel {
     return results;
   }
 
-  static async update(_id:Schema.Types.ObjectId, payload) {
+  static async update(_id:Schema.Types.ObjectId|string, payload) {
     const submission = await Submission.findById(_id);
 
     if (!submission) {
@@ -198,7 +199,7 @@ class SubmissionModel {
     });
   }
 
-  static async delete(_id:Schema.Types.ObjectId) {
+  static async delete(_id:Schema.Types.ObjectId|string) {
     const submission = await Submission.findById(_id);
 
     if (!submission) {

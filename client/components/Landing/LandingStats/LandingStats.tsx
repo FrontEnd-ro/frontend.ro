@@ -7,11 +7,13 @@ import {
   StatsCardLayout4,
   StatsCardLayout6,
 } from '~/components/PlatformStats/v2/StatsCards';
-import { GITHUB_ORG_URL, GITHUB_URL } from '~/services/Constants';
+import { GITHUB_ORG_URL, GITHUB_URL, LESSONS } from '~/services/Constants';
 
 import styles from './LandingStats.module.scss';
 
 function LandingStats() {
+  const lessonsWritten = LESSONS.filter((lesson) => lesson.written);
+
   return (
     <section className={styles['landing-stats']}>
       <div className={styles.grid}>
@@ -27,7 +29,7 @@ function LandingStats() {
         </a>
         <a className={styles.card2} href={`${GITHUB_URL}/graphs/contributors`} target="_blank" rel="noreferrer">
           <StatsCardLayout1
-            counter={9}
+            counter={11}
             colorText="#2980b9"
             description="Contribuitori cu inimă mare"
             src={`${process.env.CLOUDFRONT_PUBLIC}/seo/default-schmoes-seo.jpg`}
@@ -46,7 +48,7 @@ function LandingStats() {
           <a className={styles.card4}>
             <StatsCardLayout3
               text1="Am scris"
-              text2="5 lecții"
+              text2={`${lessonsWritten.length} lecții`}
               colorText="#1b1b15"
               src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/vintage-typewriter.jpg`}
             />

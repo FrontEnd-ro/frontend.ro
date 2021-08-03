@@ -1,11 +1,9 @@
+import jwt from 'jsonwebtoken';
+import uniqueValidator from 'mongoose-unique-validator';
 import { Schema, models, model } from 'mongoose';
 import { UserDocumentInterface } from '../server/types/type';
 import { ServerError } from '../server/ServerUtils';
 import { UserRole } from './SharedConstants';
-/* eslint-disable @typescript-eslint/no-var-requires */
-const jwt = require('jsonwebtoken');
-// const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 
 const UsersSchema = new Schema<UserDocumentInterface>({
   avatar: { type: String, required: true },
@@ -27,7 +25,7 @@ UsersSchema.plugin(uniqueValidator);
 
 const User = models.User || model('User', UsersSchema);
 
-async function ping(token): Promise < UserDocumentInterface > {
+async function ping(token:string): Promise<UserDocumentInterface> {
   return new Promise((resolve, reject) => {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedInfo) => {
       if (err) {
@@ -48,7 +46,7 @@ async function ping(token): Promise < UserDocumentInterface > {
   });
 }
 
-function sanitize(user : UserDocumentInterface) {
+function sanitize(user: UserDocumentInterface) {
   const sanitizedUser = { ...user.toObject() };
   const propsToDelete = ['_id', '__v', 'password', 'github_access_token'];
 

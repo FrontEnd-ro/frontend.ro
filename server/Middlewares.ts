@@ -4,13 +4,13 @@ import { ServerError } from './ServerUtils';
 const ExerciseModel = require('./exercise/exercise.model');
 const LessonExerciseModel = require('./lesson-exercise/lesson-exercise.model');
 import { UserRole }from '../shared/SharedConstants';
-
+import { Request, Response,NextFunction } from "express"
 /****************** User Middleware */
 /** 
  * Everyone can access the API. 
  * If you have a token, it will be added into the req.body 
  */
-function PublicMiddleware(req, res, next) {
+function PublicMiddleware(req:Request,res:Response, next:NextFunction) {
   const authToken = req.cookies.token;
 
   if (!authToken) {
@@ -39,7 +39,7 @@ function PublicMiddleware(req, res, next) {
 }
 
 /** Only authorized users can access this API */
-function PrivateMiddleware(req, res, next) {
+function PrivateMiddleware(req:Request,res:Response, next:NextFunction) {
   const authToken = req.cookies.token;
 
   if (!authToken) {
@@ -80,7 +80,7 @@ function UserRoleMiddleware(role : UserRole) {
     }
   }
 
-  return (req, res, next) => {
+  return (req:Request,res:Response, next:NextFunction) => {
     PrivateMiddleware(req, res, () => {
       if (req.body.user.role === role) {
         next();
@@ -93,7 +93,7 @@ function UserRoleMiddleware(role : UserRole) {
 }
 
 /****************** Exercise Middleware */
-async function PublicOrOwnExercise(req, res, next) {
+async function PublicOrOwnExercise(req:Request,res:Response, next:NextFunction) {
   const { exerciseId } = req.params;
 
   try {
@@ -119,7 +119,7 @@ async function PublicOrOwnExercise(req, res, next) {
   }
 }
 
-async function OwnExercise(req, res, next) {
+async function OwnExercise(req:Request,res:Response, next:NextFunction) {
   const { exerciseId } = req.params;
 
   try {
@@ -146,7 +146,7 @@ async function OwnExercise(req, res, next) {
   }
 }
 
-async function SolvableExercise(req, res, next) {
+async function SolvableExercise(req:Request,res:Response, next:NextFunction) {
   const { exerciseId } = req.params;
 
   try {

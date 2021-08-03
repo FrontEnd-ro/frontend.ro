@@ -1,4 +1,4 @@
-const postmark = require('postmark');
+import  postmark from 'postmark';
 
 const client = new postmark.ServerClient(process.env.EMAIL_TOKEN);
 

@@ -67,13 +67,13 @@ SubmissionSchema.plugin(uniqueValidator);
 const Submission = models.Submission || model("Submission", SubmissionSchema);
 
 class SubmissionModel {
-  static get(_id) {
+  static get(_id:Schema.Types.ObjectId){
     return Submission.findById(_id)
       .populate({ path: "user" })
       .populate({ path: "exercise" });
   }
 
-  static getByExerciseId(userId, exerciseId) {
+  static getByExerciseId(userId:Schema.Types.ObjectId, exerciseId:Schema.Types.ObjectId){
     validateObjectId(exerciseId);
 
     return Submission.findOne({
@@ -90,7 +90,7 @@ class SubmissionModel {
       });
   }
 
-  static getUserSubmission(userId, exerciseId) {
+  static getUserSubmission(userId:Schema.Types.ObjectId, exerciseId:Schema.Types.ObjectId) {
     validateObjectId(exerciseId);
     validateObjectId(userId);
 
@@ -108,7 +108,7 @@ class SubmissionModel {
       });
   }
 
-  static getAllUserSubmissions(userId) {
+  static getAllUserSubmissions(userId:Schema.Types.ObjectId) {
     validateObjectId(userId);
 
     return Submission.find({ user: userId }).populate({
@@ -119,7 +119,7 @@ class SubmissionModel {
     });
   }
 
-  static async search(page = 0, query = "") {
+  static async search(page:number = 0, query:string = "") {
     const all = await Submission.find({
       status: SubmissionStatus.AWAITING_REVIEW,
     })
@@ -159,7 +159,7 @@ class SubmissionModel {
     return results;
   }
 
-  static async update(_id, payload) {
+  static async update(_id:Schema.Types.ObjectId, payload) {
     const submission = await Submission.findById(_id);
 
     if (!submission) {
@@ -198,7 +198,7 @@ class SubmissionModel {
     });
   }
 
-  static async delete(_id) {
+  static async delete(_id:Schema.Types.ObjectId) {
     const submission = await Submission.findById(_id);
 
     if (!submission) {

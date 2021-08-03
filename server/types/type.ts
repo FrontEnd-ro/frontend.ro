@@ -22,7 +22,7 @@ interface SubmissionInterface extends Document {
 interface UserInterface {
   email: String;
   username: String;
-  password: String;
+  password: string;
   avatar: String;
 }
 
@@ -53,7 +53,7 @@ interface LeasonsInterface extends Document {
   views: Number;
 }
 interface ExerciseJSONInterface extends Document {
-  user: Schema;
+  user: UserDocumentInterface;
   type: String;
   tags: [String];
   body: String;

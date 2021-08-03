@@ -1,25 +1,25 @@
-const next = require('next')
-const cors = require('cors');
-const express = require('express');
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const cookieParser = require('cookie-parser');
-const { connectToDb } = require('./database');
-const { default: sslRedirect } = require('heroku-ssl-redirect');
-
+import next  from 'next';
+import cors  from 'cors';
+import express  from 'express';
+import bodyParser  from 'body-parser';
+import compression  from 'compression';
+import cookieParser  from 'cookie-parser';
+import { connectToDb }  from './database';
+import sslRedirect from 'heroku-ssl-redirect';
+import {parse} from 'url'
 require('dotenv').config();
 
 /** API routers */
-const userRouter = require('./user/user.router');
-const exerciseRouter = require('./exercise/exercise.router');
-const submissionRouter = require('./submission/submission.router');
-const lessonExerciseRouter = require('./lesson-exercise/lesson-exercise.router');
-const demoRouter = require('./demo.router');
-const eventRouter = require('./event/event.router');
-const githubRouter = require('./github/github.router.js');
-const challengeRouter = require('./challenge/challenge.router.js');
-const lessonRouter = require('./lesson/lesson.router');
-const presentationRouter = require('./presentation/presentation.router');
+import userRouter  from './user/user.router';
+import exerciseRouter  from './exercise/exercise.router';
+import submissionRouter  from './submission/submission.router';
+import lessonExerciseRouter  from './lesson-exercise/lesson-exercise.router';
+import demoRouter  from './demo.router';
+import eventRouter  from './event/event.router';
+import githubRouter  from './github/github.router.js';
+import challengeRouter  from './challenge/challenge.router.js';
+import lessonRouter  from './lesson/lesson.router';
+import presentationRouter  from './presentation/presentation.router';
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -58,7 +58,7 @@ app.use('/api/lessons', lessonRouter);
 app.use('/api/presentations', presentationRouter);
 
 app.get('*', (req, res) => {
-  nextHandler(req, res, req.url);
+  nextHandler(req, res, parse(req.url,true));
 });
 
 connectToDb()

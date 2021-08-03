@@ -1,4 +1,5 @@
 import  UserModel from './user.model';
+import UserController from './user.controller'
 import  SubscribeModel from '../subscribe.model';
 import  { ServerError, setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '../ServerUtils';
 import  { PrivateMiddleware } from '../Middlewares';
@@ -14,35 +15,9 @@ const userRouter = express.Router();
 const s3 = new S3Client({ region: process.env.AWS_REGION });
 const upload = multer({ storage: multer.memoryStorage() });
 
-userRouter.get('/check-username/:username', async function checkUsername(req, res) {
-  const { username } = req.params;
+userRouter.get('/check-username/:username', UserController.checkUsername)
 
-  const user = await UserModel.findUserBy({ username });
-
-  if (user) {
-    res.status(200).end();
-  } else {
-    new ServerError(404, `Username ${username} is not registered`).send(res);
-  }
-})
-
-userRouter.get('/ping', async function pingCurrentuser(req, res) {
-  const { token } = req.cookies;
-
-  const notAuthenticatedArror = new ServerError(401, 'Not authenticated');
-
-  if (!token) {
-    throw notAuthenticatedArror;
-  }
-
-  const user = await UserModel.ping(token);
-
-  if (!user) {
-    new ServerError(404, 'User doesn\'t exist any more').send(res);
-  } else {
-    res.json(UserModel.sanitize(user));
-  }
-})
+userRouter.get('/ping', )
 
 userRouter.post('/login', async function login(req, res) {
   let { emailOrUsername, password } = req.body;
@@ -370,4 +345,4 @@ async function updateUserFields({ _id, username, password }, fields) {
   return UserModel.update(_id, fields);
 }
 
-module.exports = userRouter
+export default userRouter

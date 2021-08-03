@@ -39,4 +39,4 @@ lessonRouter.post('/:lessonId/views', async function increaseViews(req, res) {
 });
 
 
-module.exports = lessonRouter;
+export default lessonRouter;

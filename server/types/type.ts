@@ -18,16 +18,20 @@ interface SubmissionInterface extends Document {
   feedbacks: FeedbackInterface;
 }
 
-interface UserInterface extends Document {
-  avatar: String;
-  name: String;
+
+interface UserInterface {
   email: String;
   username: String;
-  description: String;
   password: String;
-  github_access_token: String;
-  lastLogin: Date;
-  role: String;
+  avatar: String;
+}
+
+interface UserDocumentInterface extends UserInterface,Document {
+  name?: String;
+  description?: String;
+  github_access_token?: String;
+  lastLogin?: string;
+  role?: String;
 }
 
 interface PresentationInterface extends Document {
@@ -64,29 +68,29 @@ interface SubscribersInterface extends Document {
   email?: String;
 }
 
-interface AttendeeInterface extends Document{
-  name:String;
-  tel:String;
-  email:String;
-} 
-
-interface EventInterface extends Document{
-  label:String;
-  total:Number;
-  attendees:AttendeeInterface;
-  waitList:AttendeeInterface
+interface AttendeeInterface extends Document {
+  name: String;
+  tel: String;
+  email: String;
 }
 
-interface ChallengeParticipantInterface extends Document{
-  user:Schema.Types.ObjectId;
-  lastDoneTask:String|null;
-  meta:any;
+interface EventInterface extends Document {
+  label: String;
+  total: Number;
+  attendees: AttendeeInterface;
+  waitList: AttendeeInterface;
 }
 
-interface ChallengeInterface extends Document{
-  id:String;
-  tasks:String
-  particitants:ChallengeParticipantInterface
+interface ChallengeParticipantInterface extends Document {
+  user: Schema.Types.ObjectId;
+  lastDoneTask: String | null;
+  meta: any;
+}
+
+interface ChallengeInterface extends Document {
+  id: String;
+  tasks: String;
+  particitants: ChallengeParticipantInterface;
 }
 
 interface SearchUser {
@@ -94,13 +98,17 @@ interface SearchUser {
   email?: String;
 }
 
-interface Query{
-  user:Schema.Types.ObjectId;
-  private?:Boolean
+interface Query {
+  user: Schema.Types.ObjectId;
+  private?: Boolean;
+}
+interface IReturnValidateUser {
+  result: Boolean;
+  reason?: String;
 }
 
 export {
-  UserInterface,
+  UserDocumentInterface,
   SubmissionInterface,
   FeedbackInterface,
   SearchUser,
@@ -113,5 +121,7 @@ export {
   AttendeeInterface,
   EventInterface,
   ChallengeInterface,
-ChallengeParticipantInterface
+  ChallengeParticipantInterface,
+  IReturnValidateUser,
+  UserInterface
 };

@@ -1,225 +1,31 @@
-import  UserModel from '../user/user.model';
-import  SubmissionModel from './submission.model';
 import  { PublicMiddleware, PrivateMiddleware, SolvableExercise, UserRoleMiddleware } from '../Middlewares';
-import  { ServerError } from '../ServerUtils';
-import  { SubmissionStatus, UserRole } from '../../shared/SharedConstants';
-const express = require('express');
-
+import  { UserRole } from '../../shared/SharedConstants';
+import express from 'express';
+import SubmissionController from './submissions.controller';
 const submissionRouter = express.Router();
 
 
-submissionRouter.get('/', [PublicMiddleware], async function getSubmissions(req, res) {
-  const { page, query } = req.query;
-  const results = await SubmissionModel.search(+page, query);
+submissionRouter.get('/', [PublicMiddleware], SubmissionController.getSubmissions);
 
-  res.json(results);
-});
+submissionRouter.get('/:submissionId', SubmissionController.getSubmission);
 
-submissionRouter.get('/:submissionId', async function getSubmission(req, res) {
-  const { submissionId } = req.params;
+submissionRouter.get('/exercise/:exerciseId', [PrivateMiddleware, SolvableExercise],  SubmissionController.getSubmissionByExercise);
 
-  try {
-    const submission = await SubmissionModel.get(submissionId);
-    if (!submission) {
-      new ServerError(404, `No submission with id='${submissionId}' found`).send(res);
-    } else {
-      res.json(submission);
-    }
-  } catch (err) {
-    new ServerError(400, err.message).send(res);
-  }
+submissionRouter.get('/:username/:exerciseId', 
+[UserRoleMiddleware(UserRole.ADMIN), SolvableExercise], SubmissionController.getUserSubmission );
 
-});
+submissionRouter.post('/', [PrivateMiddleware],  SubmissionController.createSubmission);
 
-submissionRouter.get('/exercise/:exerciseId', [PrivateMiddleware, SolvableExercise], async function getSubmissionByExercise(req, res) {
-  const { exerciseId } = req.params;
-  const { user } = req.body;
+submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware(UserRole.ADMIN)], SubmissionController.approveSubmission);
 
-  try {
-    const submission = await SubmissionModel.getByExerciseId(user._id, exerciseId);
-    if (!submission) {
-      new ServerError(404, `No submission for exercise='${exerciseId}' found`).send(res);
-      return;
-    } else {
-      res.json(submission);
-    }
-  } catch (err) {
-    console.log("[API][getSubmissionByExercise]", err);
-    new ServerError(err.code, err.message).send(res);
-  }
-});
+submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware(UserRole.ADMIN)],  SubmissionController.approveSubmissionFeedback);
 
-submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMIN), SolvableExercise], async function getUserSubmission(req, res) {
-  const { username, exerciseId } = req.params;
-  const { user } = req.body;
+submissionRouter.put('/:submissionId', [PrivateMiddleware], SubmissionController.updateSubmission);
 
-  try {
-    const targetUser = await UserModel.getUser({ username });
+submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExercise], SubmissionController.submitSolution);
 
-    if (!targetUser) {
-      new ServerError(404, `User '${username}' doesn't exist.`).send(res);
-    }
+submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware],  SubmissionController.markFeedbackAsDone)
 
-    const submission = await SubmissionModel.getUserSubmission(targetUser._id, exerciseId);
-
-    if (!submission) {
-      new ServerError(404, `No submission for exercise='${exerciseId}' found`).send(res);
-      return;
-    } else {
-      res.json(submission);
-    }
-  } catch (err) {
-    console.log("[API][getSubmissionByExercise]", err);
-    new ServerError(err.code, err.message).send(res);
-  }
-});
-
-submissionRouter.post('/', [PrivateMiddleware], async function createSubmission(req, res) {
-  const submission = await SubmissionModel.create(req.body);
-  res.json(submission);
-});
-
-submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware(UserRole.ADMIN)], async function approveSubmission(req, res) {
-  const { submissionId } = req.params;
-  const { feedbacks } = req.body;
-
-  try {
-    const submission = await SubmissionModel.get(submissionId);
-
-    if (!submission) {
-      throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
-    }
-
-    if (submission.status !== SubmissionStatus.AWAITING_REVIEW) {
-      throw new ServerError(400, 'Poți aproba doar submisii ce așteaptă feedback-ul tău.');
-    }
-
-    await SubmissionModel.update(submissionId, {
-      status: SubmissionStatus.DONE,
-      feedbacks
-    });
-
-    res.status(200).send();
-  } catch (err) {
-    console.log("[API][approveSubmission]", err);
-    new ServerError(err.code, err.message).send(res);
-  }
-});
-
-submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware(UserRole.ADMIN)], async function approveSubmission(req, res) {
-  const { submissionId } = req.params;
-  const { feedbacks } = req.body;
-
-  try {
-    const submission = await SubmissionModel.get(submissionId);
-
-    if (!submission) {
-      throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
-    }
-
-    if (submission.status !== SubmissionStatus.AWAITING_REVIEW) {
-      throw new ServerError(400, 'Poți da feedback doar las submisii ce așteaptă feedback-ul tău.');
-    }
-
-    await SubmissionModel.update(submissionId, {
-      status: SubmissionStatus.IN_PROGRESS,
-      feedbacks
-    });
-
-    res.status(200).send();
-  } catch (err) {
-    console.log("[API][approveSubmission]", err);
-    new ServerError(err.code, err.message).send(res);
-  }
-});
-
-submissionRouter.put('/:submissionId', [PrivateMiddleware], async function updateSubmission(req, res) {
-  const { submissionId } = req.params;
-  const { user, payload } = req.body;
-
-  try {
-    const submission = await SubmissionModel.get(submissionId);
-    if (submission.user._id.toString() !== user._id.toString()) {
-      new ServerError(401, 'Nu poți actualiza submisiile altcuiva').send(res);
-      return;
-    }
-
-    await SubmissionModel.update(submission._id, payload);
-    const updatedSubmission = await SubmissionModel.get(submissionId);
-
-    res.json(updatedSubmission);
-  } catch (err) {
-    console.error("[API][put.updateSubmission]", err);
-    new ServerError(err.code, err.message).send(res);
-  }
-
-});
-
-submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExercise], async function submitSolution(req, res) {
-  const { exerciseId } = req.params;
-  const { code, user } = req.body;
-
-  const existingSubmission = await SubmissionModel.getByExerciseId(user._id, exerciseId);
-  let updatedSubmission;
-
-  if (!existingSubmission) {
-    console.log("[submitSolution] First solution for this exercise. Let's create it");
-    await SubmissionModel.create({
-      code,
-      user: user._id,
-      exercise: exerciseId,
-      status: SubmissionStatus.AWAITING_REVIEW
-    })
-    updatedSubmission = await SubmissionModel.getByExerciseId(user._id, exerciseId);
-  } else {
-    console.log("[submitSolution] Existing solution for this exercise. Let's update it");
-    await SubmissionModel.update(existingSubmission._id, {
-      code,
-      status: SubmissionStatus.AWAITING_REVIEW,
-    });
-    updatedSubmission = await SubmissionModel.get(existingSubmission._id);
-  }
-
-  res.json(updatedSubmission);
-});
-
-
-submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async function markFeedbackAsDone(req, res) {
-  const { feedbackId } = req.params;
-  const {user} = req.body;
-
-  try {
-    const allUserSubmissions = await SubmissionModel.getAllUserSubmissions(user._id);
-
-    // FIXME: optimize this to send the submissionId in the request
-    const match = allUserSubmissions.find(sub => sub.feedbacks.find(f => f._id.toString() === feedbackId) !== undefined);
-
-    if (!match) {
-      console.log(`[API][delete.markFeedbackAsDone] No feedback with id ${feedbackId} found`);
-      throw new ServerError(404, `Nu am gasit feedback-ul asta.`);
-    }
-
-    if (match.status !== SubmissionStatus.IN_PROGRESS) {
-      throw new ServerError(400, 'Submisia așteaptă feedback. Până atunci nu o poți edita');
-    }
-
-    const newFeedbacks = match.feedbacks.filter(f => f._id.toString() !== feedbackId);
-    await SubmissionModel.update(match._id, {
-      feedbacks: newFeedbacks
-    });
-
-    res.status(200).send();
-  } catch(err) {
-    console.error("[API][delete.markFeedbackAsDone]", err);
-    new ServerError(err.code, err.message).send(res);
-  }
-})
-
-submissionRouter.delete('/:submissionId', [PrivateMiddleware], async function deleteSubmission(req, res) {
-  const { submissionId } = req.query;
-
-  await SubmissionModel.delete(submissionId);
-  res.status(200).end();
-})
+submissionRouter.delete('/:submissionId', [PrivateMiddleware], SubmissionController.deleteSubmission )
 
 export default submissionRouter;

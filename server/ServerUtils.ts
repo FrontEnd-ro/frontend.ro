@@ -52,7 +52,7 @@ function validateAgainstSchemaProps(payload, Schema) {
   }
 }
 
-function validateObjectId(_id:Schema.Types.ObjectId) {
+function validateObjectId(_id:Schema.Types.ObjectId|string) {
   if (!isValidObjectId(_id)) {
     throw new ServerError(400, `Value '${_id}' is not a valid ObjectId identifier`);
   }

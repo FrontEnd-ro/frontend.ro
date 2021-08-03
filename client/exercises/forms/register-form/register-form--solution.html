@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register form</title>
+</head>
+<body>
+  <form>
+    <h2> Sign up </h2>
+    <p> It's quick and easy </p>
+    <button type="button"> ✖ </button>
+
+    <hr>
+
+    <div>
+      <input type="text" placeholder="First Name" name="firstName" required />
+      <input type="text" placeholder="Last Name" name="lastName" required />
+    </div>
+    <input type="text" placeholder="Mobile number or email" name="mobileOrEmail" required />
+    <input type="password" placeholder="New Password" name="password" required />
+
+    <div>
+      <label> Birthday </label>
+      <select required name="birthMonth">
+        <option value=""> Please select a month </option>
+        <option value="01"> Jan </option>
+        <option value="02" selected> Feb </option>
+        <option value="03"> Mar </option>
+      </select>
+      <select required name="birthDay">
+        <option value=""> Please select a day </option>
+        <option value="14"> 14 </option>
+        <option value="15" selected> 15 </option>
+        <option value="16"> 16 </option>
+      </select>
+      <select required name="birthYear">
+        <option value=""> Please select a year </option>
+        <option value="2020"> 2020 </option>
+        <option value="2021" selected> 2021 </option>
+        <option value="2022"> 2022 </option>
+      </select>
+    </div>
+
+    <div>
+      <label> Gender </label>
+      <label>
+        <span> Female </span>
+        <input type="radio" name="gender" value="female">
+      </label>
+      <label>
+        <span> Male </span>
+        <input type="radio" name="gender" value="male">
+      </label>
+      <label>
+        <span> Custom </span>
+        <input type="radio" name="gender" value="custom">
+      </label>
+    </div>
+    <p>
+      By clicking Sign Up, you agree to our 
+      <a href="https://www.facebook.com/legal/terms/update"> Terms</a>. 
+      Learn how we collect, use and 
+      share your data in our 
+      <a href="https://www.facebook.com/about/privacy/update">Data Policy</a>
+      and how we use cookies and similar technology in our 
+      <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>
+      . You may receive SMS Notifications from us and can opt out 
+      any time.
+    </p>
+  </form>
+</body>
+</html>

@@ -14,11 +14,11 @@ const LessonsSchema = new Schema<LeasonsInterface>({
 const Lesson = models.Lesson || model('Lesson', LessonsSchema);
 
 class LessonModel {
-  static get(lessonId) {
+  static async get(lessonId):Promise<LeasonsInterface> {
     return Lesson.findOne({ lessonId });
   }
 
-  static async updateViews(lessonId, views) {
+  static async updateViews(lessonId, views):Promise<void> {
     let lesson = null;
 
     try {

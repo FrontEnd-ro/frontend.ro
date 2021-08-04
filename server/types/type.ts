@@ -11,11 +11,11 @@ interface FeedbackInterface extends Document {
 
 interface SubmissionInterface extends Document {
   code: String;
-  user: Schema.Types.ObjectId;
+  user: UserDocumentInterface;
   assignee: Schema.Types.ObjectId;
   exercise: Schema.Types.ObjectId;
   status: String;
-  feedbacks: FeedbackInterface;
+  feedbacks: [FeedbackInterface];
 }
 
 
@@ -36,7 +36,7 @@ interface UserDocumentInterface extends UserInterface,Document {
 
 interface PresentationInterface extends Document {
   presentationId: String;
-  views: Number;
+  views: number;
   title: String;
   thumb: String;
   description: String;

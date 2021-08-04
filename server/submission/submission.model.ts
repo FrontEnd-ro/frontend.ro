@@ -68,16 +68,15 @@ SubmissionSchema.plugin(uniqueValidator);
 const Submission = models.Submission || model("Submission", SubmissionSchema);
 
 class SubmissionModel {
-  static get(_id:Schema.Types.ObjectId|string){
-    return Submission.findById(_id)
+  static async  get(_id:Schema.Types.ObjectId|string):Promise<SubmissionInterface>{
+    return await Submission.findById(_id)
       .populate({ path: "user" })
       .populate({ path: "exercise" });
   }
 
-  static getByExerciseId(userId:Schema.Types.ObjectId|string, exerciseId:Schema.Types.ObjectId|string){
+  static async getByExerciseId(userId:Schema.Types.ObjectId|string, exerciseId:Schema.Types.ObjectId|string):Promise<SubmissionInterface>{
     validateObjectId(exerciseId);
-
-    return Submission.findOne({
+    return await Submission.findOne({
       user: userId,
       exercise: exerciseId,
     })
@@ -91,7 +90,7 @@ class SubmissionModel {
       });
   }
 
-  static getUserSubmission(userId:Schema.Types.ObjectId|string, exerciseId:Schema.Types.ObjectId|string) {
+  static async getUserSubmission(userId:Schema.Types.ObjectId|string, exerciseId:Schema.Types.ObjectId|string) :Promise<SubmissionInterface>{
     validateObjectId(exerciseId);
     validateObjectId(userId);
 
@@ -109,10 +108,10 @@ class SubmissionModel {
       });
   }
 
-  static getAllUserSubmissions(userId:Schema.Types.ObjectId) {
+  static async getAllUserSubmissions(userId:Schema.Types.ObjectId):Promise<SubmissionInterface[]> {
     validateObjectId(userId);
 
-    return Submission.find({ user: userId }).populate({
+    return await Submission.find({ user: userId }).populate({
       path: "exercise",
       populate: {
         path: "user",
@@ -120,8 +119,8 @@ class SubmissionModel {
     });
   }
 
-  static async search(page:number = 0, query:string  = "") {
-    const all = await Submission.find({
+  static async search(page:number = 0, query:string  = "") :Promise<SubmissionInterface[]> {
+    const all:SubmissionInterface[] = await Submission.find({
       status: SubmissionStatus.AWAITING_REVIEW,
     })
       .populate({
@@ -161,7 +160,7 @@ class SubmissionModel {
   }
 
   static async update(_id:Schema.Types.ObjectId|string, payload) {
-    const submission = await Submission.findById(_id);
+    const submission:SubmissionInterface = await Submission.findById(_id);
 
     if (!submission) {
       throw new ServerError(
@@ -183,12 +182,12 @@ class SubmissionModel {
     });
   }
 
-  static async create(payload) {
+  static async create(payload):Promise<SubmissionInterface> {
     validateAgainstSchemaProps(payload, SubmissionSchema);
 
-    const submission = new Submission(payload);
+    const submission:SubmissionInterface = new Submission(payload);
 
-    return new Promise((resolve, reject) => {
+    return new Promise<SubmissionInterface>((resolve, reject) => {
       submission.save((err, data) => {
         if (err) {
           return reject(err);
@@ -199,8 +198,8 @@ class SubmissionModel {
     });
   }
 
-  static async delete(_id:Schema.Types.ObjectId|string) {
-    const submission = await Submission.findById(_id);
+  static async delete(_id:Schema.Types.ObjectId|string):Promise<void> {
+    const submission:SubmissionInterface = await Submission.findById(_id);
 
     if (!submission) {
       throw new ServerError(

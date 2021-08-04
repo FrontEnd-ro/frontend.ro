@@ -186,7 +186,7 @@ class SubmissionController{
   
     try {
       const allUserSubmissions = await SubmissionModel.getAllUserSubmissions(user._id);
-  
+      
       // FIXME: optimize this to send the submissionId in the request
       const match = allUserSubmissions.find(sub => sub.feedbacks.find(f => f._id.toString() === feedbackId) !== undefined);
   

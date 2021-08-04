@@ -52,7 +52,8 @@
     "deploy:master-prod": "git push heroku master:master",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "deploy-storybook": "gh-pages -d storybook-static"
+    "deploy-storybook": "gh-pages -d storybook-static",
+    "ts":"tsc -watch"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.3.0",

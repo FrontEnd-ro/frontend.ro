@@ -55,8 +55,8 @@ function sanitize(user: UserDocumentInterface) {
   return sanitizedUser;
 }
 
-async function findUserBy(filters) {
-  const user = await User.findOne(filters);
+async function findUserBy(filters):Promise<UserDocumentInterface|null> {
+  const user:UserDocumentInterface = await User.findOne(filters);
   return user || null;
 }
 

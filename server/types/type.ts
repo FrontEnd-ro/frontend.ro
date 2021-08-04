@@ -50,7 +50,7 @@ interface LeasonExercicesJsonInterface extends Document {
 }
 interface LeasonsInterface extends Document {
   lessonId: String;
-  views: Number;
+  views: number;
 }
 interface ExerciseJSONInterface extends Document {
   user: UserDocumentInterface;

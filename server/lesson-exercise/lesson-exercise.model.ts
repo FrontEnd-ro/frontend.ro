@@ -22,22 +22,22 @@ const LessonExercisesSchema = new Schema<LeasonExercicesJsonInterface>(
 const LessonExercise = models.LessonExercise || model('LessonExercise', LessonExercisesSchema);
 
 class LessonExerciseModel {
-  static get(_id) {
+  static async  get(_id):Promise<LeasonExercicesJsonInterface> {
     validateObjectId(_id);
 
-    return LessonExercise
+    return await LessonExercise
       .findById(_id)
       .populate('user');
   }
 
-  static getAll() {
-    return LessonExercise
+  static async getAll():Promise<LeasonExercicesJsonInterface[]> {
+    return await LessonExercise
       .find({})
       .populate('user');
   }
 
-  static getAllFromLesson(lessonId) {
-    return LessonExercise
+  static async getAllFromLesson(lessonId):Promise<LeasonExercicesJsonInterface[]> {
+    return await LessonExercise
       .find({ lesson: lessonId })
       .populate('user');
   }

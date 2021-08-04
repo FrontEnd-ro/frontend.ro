@@ -1,47 +1,13 @@
 import express from 'express';
-import PresentationModel from './presentation.model';
 import { ServerError } from '../ServerUtils';
-
+import PresentationController from './presentation.controller';
 const presentationRouter = express.Router();
 
-presentationRouter.get('/', async function getAllPresentations(req, res) {
-  const presentations = await PresentationModel.getAll();
-  res.json(presentations);
-});
+presentationRouter.get('/', PresentationController.getAllPresentations);
 
-presentationRouter.get('/:presentationId', async function getPresentation(req, res) {
-  const { presentationId } = req.params;
-  const presentation = await PresentationModel.get(presentationId);
+presentationRouter.get('/:presentationId', PresentationController.getPresentation);
 
-  if (!presentation) {
-    new ServerError(404, `Presentation with id=${presentationId} doesn't exist!`).send(res);
-    return;
-  }
-
-  res.json(presentation);
-});
-
-presentationRouter.post('/:presentationId/views', async function increaseViews(req, res) {
-  const { presentationId } = req.params;
-
-  const presentation = await PresentationModel.get(presentationId);
-
-  try {
-    if (!presentation) {
-      await PresentationModel.updateViews(presentationId, 1);
-    } else {
-      await PresentationModel.updateViews(presentationId, presentation.views + 1);
-    }
-
-    const updatedPresentation = await PresentationModel.get(presentationId);
-    res.json(updatedPresentation);
-  } catch (err) {
-    new ServerError(
-      err.code || 500, 
-      err.message || 'Oops! A apărut o problemă. Încearcă din nou!'
-    );
-  }
-});
+presentationRouter.post('/:presentationId/views', PresentationController.increaseViews);
 
 
 export default presentationRouter;

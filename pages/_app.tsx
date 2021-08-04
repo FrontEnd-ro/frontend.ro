@@ -48,13 +48,13 @@ MyApp.getInitialProps = async ({ ctx, req }) => {
   }
 
   try {
-    const [databaseImport, userModelImport] = await Promise.all([
+    const [databaseImport, { ping, sanitize }] = await Promise.all([
       import('../server/database'),
       import('../shared/user.shared-model'),
     ]);
 
     const { connectToDb } = databaseImport;
-    const UserModel = userModelImport.default;
+    // const UserModel = userModelImport;
     const { token } = ctx.req.cookies;
 
     if (!token) {
@@ -63,8 +63,8 @@ MyApp.getInitialProps = async ({ ctx, req }) => {
 
     connectToDb();
 
-    const user = await UserModel.ping(token);
-    const sanitizedUser = UserModel.sanitize(user);
+    const user = await ping(token);
+    const sanitizedUser = sanitize(user);
 
     sanitizedUser.lastLogin = sanitizedUser.lastLogin.toString();
     pageProps._serverUser = sanitizedUser;

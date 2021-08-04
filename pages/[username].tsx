@@ -1,7 +1,9 @@
 import React from 'react';
 import NotFoundPage from './404';
 import UserProfile from '~/components/user-profile/UserProfile';
-import SharedUserModel from '../shared/user.shared-model';
+// FIX later 👇
+// @ts-ignore
+import SharedUserModel from '../shared/user.shared-model'; 
 
 export default function Username(props: any) {
   // eslint-disable-next-line react/destructuring-assignment

@@ -3,8 +3,11 @@ import NotFoundPage from '../404';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
-import SharedUserModel from '~/../shared/user.shared-model';
-import SharedExerciseModel from '~/../shared/exercise.shared-model';
+import { ping } from '~/../shared/user.shared-model';
+import {
+  getById,
+  sanitize,
+} from '~/../shared/exercise.shared-model';
 import { Exercise } from '~/redux/user/types';
 import { ViewOrEditExercise } from '~/components/create-view-edit-exercise';
 // import UserDocumentInterface from '~/../server/types/user.types';
@@ -39,7 +42,7 @@ export async function getServerSideProps({ req, res, params }) {
   const { exerciseId } = params;
 
   try {
-    const exercise = await SharedExerciseModel.getById(exerciseId);
+    const exercise = await getById(exerciseId);
 
     if (!exercise) {
       return send404();
@@ -51,12 +54,12 @@ export async function getServerSideProps({ req, res, params }) {
       }
       return {
         props: {
-          exercise: SharedExerciseModel.sanitize(exercise),
+          exercise: sanitize(exercise),
         },
       };
     }
 
-    const user = await SharedUserModel.ping(token);
+    const user = await ping(token);
 
     if (exercise.private && (!user || (user.username !== exercise.user.username))) {
       return send404();
@@ -64,7 +67,7 @@ export async function getServerSideProps({ req, res, params }) {
 
     return {
       props: {
-        exercise: SharedExerciseModel.sanitize(exercise),
+        exercise: sanitize(exercise),
       },
     };
   } catch (err) {

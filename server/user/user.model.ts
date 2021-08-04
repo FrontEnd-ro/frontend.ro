@@ -1,3 +1,5 @@
+import  jwt,{Algorithm} from "jsonwebtoken";
+import  bcrypt from "bcrypt";
 import { Schema } from "mongoose";
 import {
   IReturnValidateUser,
@@ -13,11 +15,9 @@ import {
   validateObjectId,
   MAX_USERNAME_LENGTH,
 } from "../ServerUtils";
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 
 class UserModel {
-  static search() {
+  static async search():Promise<UserDocumentInterface[]> {
     return User.find({});
   }
 
@@ -95,7 +95,7 @@ class UserModel {
   static generateJwtForUser(_id: Schema.Types.ObjectId): String {
     return jwt.sign({ _id }, process.env.TOKEN_SECRET, {
       expiresIn: `${AUTH_EXPIRATION}d`,
-      algorithm: process.env.TOKEN_ALGORITHM,
+      algorithm: <Algorithm>process.env.TOKEN_ALGORITHM,
     });
   }
 
@@ -128,7 +128,7 @@ class UserModel {
     github_access_token:String
   ): Promise<UserDocumentInterface> {
     validateObjectId(_id);
-    const user = await User.findById(_id);
+    const user:UserDocumentInterface = await User.findById(_id);
 
     if (!user) {
       throw new ServerError(

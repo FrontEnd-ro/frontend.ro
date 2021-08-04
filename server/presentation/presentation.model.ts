@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import { Schema, model, models,Query } from "mongoose";
 import { PresentationInterface } from "server/types/type";
 
 const PresentationSchema = new Schema< PresentationInterface >(
@@ -21,17 +21,16 @@ const Presentation =
   models.Presentation || model("Presentation", PresentationSchema);
 
 class PresentationModel {
-  static get(presentationId) {
-    return Presentation.findOne({ presentationId });
+  static async get(presentationId:Schema.Types.ObjectId|string):Promise<PresentationInterface>{
+    return await Presentation.findOne({ presentationId });
   }
 
-  static getAll() {
-    return Presentation.find({});
+  static async getAll():Promise<PresentationInterface[]> {
+    return await Presentation.find({});
   }
 
-  static async updateViews(presentationId, views) {
-    let presentation = null;
-
+  static async updateViews(presentationId:Schema.Types.ObjectId|string, views:number) {
+    let presentation:PresentationInterface|null = null;
     try {
       presentation = await PresentationModel.get(presentationId);
     } catch (err) {

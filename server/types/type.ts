@@ -68,29 +68,33 @@ interface SubscribersInterface extends Document {
   email?: String;
 }
 
-interface AttendeeInterface extends Document {
+
+interface AttendeInterface {
   name: String;
   tel: String;
   email: String;
+
+}
+interface IAttendeDocument extends Document,AttendeInterface {
 }
 
 interface EventInterface extends Document {
   label: String;
   total: number;
-  attendees: [AttendeeInterface];
-  waitlist: [AttendeeInterface];
+  attendees: [IAttendeDocument|AttendeInterface];
+  waitlist: [IAttendeDocument|AttendeInterface];
 }
 
 interface ChallengeParticipantInterface extends Document {
-  user: Schema.Types.ObjectId;
+  user: UserDocumentInterface;
   lastDoneTask: String | null;
   meta: any;
 }
 
 interface ChallengeInterface extends Document {
   id: String;
-  tasks: String;
-  particitants: ChallengeParticipantInterface;
+  tasks: [String];
+  participants: [ChallengeParticipantInterface];
 }
 
 interface SearchUser {
@@ -107,6 +111,12 @@ interface IReturnValidateUser {
   reason?: String;
 }
 
+
+interface LastDoneTask{
+  meta:any;
+  lastDoneTask:String;
+}
+
 export {
   UserDocumentInterface,
   SubmissionInterface,
@@ -118,10 +128,12 @@ export {
   LeasonsInterface,
   SubscribersInterface,
   Query,
-  AttendeeInterface,
+  IAttendeDocument,
   EventInterface,
   ChallengeInterface,
   ChallengeParticipantInterface,
   IReturnValidateUser,
-  UserInterface
+  UserInterface,
+  LastDoneTask,
+  AttendeInterface
 };

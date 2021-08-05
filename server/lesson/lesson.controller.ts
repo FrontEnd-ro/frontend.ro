@@ -1,7 +1,6 @@
 import LessonModel from './lesson.model' ;
 import { ServerError } from '../ServerUtils' ;
 import {Request,Response} from 'express'
-// (req:Request, res:Response)
 
 export default class LessonController{
   static async getLesson (req:Request, res:Response) {

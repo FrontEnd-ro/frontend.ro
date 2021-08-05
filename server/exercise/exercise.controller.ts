@@ -1,6 +1,5 @@
 import { ServerError } from '../ServerUtils'
 import { Request, Response } from 'express'
-// (req:Request, res:Response)
 import { MAX_MEDIA_BYTES, MAX_MEDIA_MB } from '../../shared/SharedConstants'
 import UserModel from '../user/user.model'
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'

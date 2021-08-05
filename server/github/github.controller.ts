@@ -3,7 +3,6 @@ import fetch from 'node-fetch';
 import UserModel from '../user/user.model';
 import {Request,Response} from 'express'
 import { UserDocumentInterface } from 'server/types/type'
-// (req:Request, res:Response)
 
 export default class GithubController {
   static async getLoggedInUser(req:Request, res:Response) {

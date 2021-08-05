@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    // "sourceMap": true,
+    "outDir": "server_build"
+  },
+  // "outDir": "server_build",
+  // "target": "es5",
+  // "allowJs": true,
+  // "include": [
+  //   "**/*.ts"
+  // ]
+}

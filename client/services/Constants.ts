@@ -198,7 +198,6 @@ export const LESSONS: LessonDescription[] = [
       'Pentru a stiliza un element, sau mai multe, trebuie să le putem diferenția față de celelalte. Putem face acest lucru după tag, clase sau id-uri.',
     url: '/css/taguri-clase-si-id-uri',
     type: 'css',
-    contributors: [NicolaeMaties],
   },
   {
     id: 'box-model',

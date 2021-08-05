@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-import { Schema, model, models } from "mongoose";
-import uniqueValidator from 'mongoose-unique-validator';
-import { PAGE_SIZE, ServerError, validateAgainstSchemaProps } from '../ServerUtils';
-import {AttendeeInterface,EventInterface} from '../types/type'
+import { Schema, model, models } from "mongoose"
+import uniqueValidator from 'mongoose-unique-validator'
+import { PAGE_SIZE, ServerError, validateAgainstSchemaProps } from '../ServerUtils'
+import { AttendeeInterface, EventInterface } from '../types/type'
 
 const AttendeeSchema = new Schema<AttendeeInterface>({
   name: { type: String, required: true },
@@ -23,58 +23,58 @@ const EventSchema = new Schema<EventInterface>(
       updatedAt: 'updatedAt',
     },
   },
-);
+)
 
-const Event = models.Event || model('Event', EventSchema);
-const Attendee = models.Attendee || model('Attendee', AttendeeSchema);
+const Event = models.Event || model('Event', EventSchema)
+const Attendee = models.Attendee || model('Attendee', AttendeeSchema)
 
 class EventModel {
-  static getByLabel(label) {
-    return Event.findOne({ label: label });
+  static async getByLabel(label): Promise<EventInterface> {
+    return Event.findOne({ label: label })
   }
 
-  static async addAttendee(label, attendee) {
-    const event = await EventModel.getByLabel(label);
+  static async addAttendee(label, attendee): Promise<EventInterface> {
+    const event = await EventModel.getByLabel(label)
     if (!event) {
-      throw new ServerError(400, `Nu există evenimentul cu label=${label}`);
+      throw new ServerError(400, `Nu există evenimentul cu label=${label}`)
     }
 
-    validateAgainstSchemaProps(attendee, AttendeeSchema);
+    validateAgainstSchemaProps(attendee, AttendeeSchema)
 
-    event.attendees.push(attendee);
+    event.attendees.push(attendee)
 
     return new Promise((resolve, reject) => {
       event.save((err, data) => {
         if (err) {
-          return reject(err);
+          return reject(err)
         }
 
-        resolve(data);
-      });
-    });
+        resolve(data)
+      })
+    })
   }
 
-  static async addToWaitlist(label, attendee) {
-    const event = await EventModel.getByLabel(label);
+  static async addToWaitlist(label, attendee): Promise<EventInterface> {
+    const event = await EventModel.getByLabel(label)
 
     if (!event) {
-      throw new ServerError(400, `Nu există evenimentul cu label=${label}`);
+      throw new ServerError(400, `Nu există evenimentul cu label=${label}`)
     }
 
-    validateAgainstSchemaProps(attendee, AttendeeSchema);
+    validateAgainstSchemaProps(attendee, AttendeeSchema)
 
-    event.waitlist.push(attendee);
+    event.waitlist.push(attendee)
 
     return new Promise((resolve, reject) => {
       event.save((err, data) => {
         if (err) {
-          return reject(err);
+          return reject(err)
         }
 
-        resolve(data);
-      });
-    });
+        resolve(data)
+      })
+    })
   }
 }
 
-export default EventModel;
+export default EventModel

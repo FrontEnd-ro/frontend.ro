@@ -76,7 +76,7 @@ interface AttendeeInterface extends Document {
 
 interface EventInterface extends Document {
   label: String;
-  total: Number;
+  total: number;
   attendees: [AttendeeInterface];
   waitlist: [AttendeeInterface];
 }

@@ -23,12 +23,12 @@ const ExercisesSchema = new Schema<ExerciseJSONInterface>(ExerciseJSONSchema, {
 
 const Exercise = models.Exercise || model('Exercise', ExercisesSchema);
 
-function getById(_id: ObjectId) {
+async function getById(_id: ObjectId|string):Promise<ExerciseJSONInterface> {
   validateObjectId(_id);
   return Exercise.findById(_id).populate('user');
 }
 
-function sanitize(exercise: ExerciseJSONInterface) {
+function sanitize(exercise: ExerciseJSONInterface):ExerciseJSONInterface {
   const sanitizedExercise = { ...exercise.toObject() };
   const propsToDelete = ['__v', 'updatedAt', 'createdAt'];
 

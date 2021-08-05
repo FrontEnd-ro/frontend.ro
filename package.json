@@ -53,7 +53,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
-    "ts":"tsc -watch"
+    "ts":"tsc -watch",
+    "ts:build":"tsc -p ./server/"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.3.0",

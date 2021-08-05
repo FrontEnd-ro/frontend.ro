@@ -2,9 +2,9 @@
 import { Schema, model, models } from "mongoose"
 import uniqueValidator from 'mongoose-unique-validator'
 import { PAGE_SIZE, ServerError, validateAgainstSchemaProps } from '../ServerUtils'
-import { AttendeeInterface, EventInterface } from '../types/type'
+import { IAttendeDocument, EventInterface, AttendeInterface } from '../types/type'
 
-const AttendeeSchema = new Schema<AttendeeInterface>({
+const AttendeeSchema = new Schema<IAttendeDocument>({
   name: { type: String, required: true },
   email: { type: String, required: true },
   tel: { type: String, required: true }
@@ -29,11 +29,11 @@ const Event = models.Event || model('Event', EventSchema)
 const Attendee = models.Attendee || model('Attendee', AttendeeSchema)
 
 class EventModel {
-  static async getByLabel(label): Promise<EventInterface> {
+  static async getByLabel(label:String): Promise<EventInterface> {
     return Event.findOne({ label: label })
   }
 
-  static async addAttendee(label, attendee): Promise<EventInterface> {
+  static async addAttendee(label:String, attendee:AttendeInterface|IAttendeDocument): Promise<EventInterface> {
     const event = await EventModel.getByLabel(label)
     if (!event) {
       throw new ServerError(400, `Nu există evenimentul cu label=${label}`)
@@ -54,7 +54,7 @@ class EventModel {
     })
   }
 
-  static async addToWaitlist(label, attendee): Promise<EventInterface> {
+  static async addToWaitlist(label:string, attendee:AttendeInterface|IAttendeDocument): Promise<EventInterface> {
     const event = await EventModel.getByLabel(label)
 
     if (!event) {

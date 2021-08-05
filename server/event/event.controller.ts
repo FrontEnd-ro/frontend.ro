@@ -1,8 +1,5 @@
 import { ServerError } from '../ServerUtils'
 import { Request, Response } from 'express'
-// (req:Request, res:Response)
-
-
 import  EventModel from './event.model';
 import  EmailService from '../Email.service';
 

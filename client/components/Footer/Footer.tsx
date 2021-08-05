@@ -56,8 +56,8 @@ export default function Footer() {
             </a>
           </p>
           <p>
-            <a href="https://twitter.com/FrontEndRo">
-              Twitter
+            <a href="https://www.youtube.com/channel/UC2p6MkYMKNok7pjo7z5TK0Q">
+              YouTube
             </a>
           </p>
         </div>

@@ -7,22 +7,20 @@ import {
 
 import { ExercisesSchema, Exercise, getById, sanitize } from '../../shared/exercise.shared-model';
 import { Schema } from 'mongoose'
-import {Query} from '../types/type';
+import {ExerciseJSONInterface, Query} from '../types/type';
 class ExerciseModel {
-  static getAllPublic() {
-    return Exercise.find({ private: false });
+  static async  getAllPublic():Promise<ExerciseJSONInterface[]> {
+    return await Exercise.find({ private: false });
   }
 
-  static getUserExercises(userId:Schema.Types.ObjectId, publicOnly:Boolean = false) {
+  static async getUserExercises(userId:Schema.Types.ObjectId, publicOnly:Boolean = false) :Promise<ExerciseJSONInterface[]> {
     const query : Query =  {
       user: userId
     }
-
     if (publicOnly) {
       query.private = false
     }
-
-    return Exercise.find(query).populate("user");
+    return await Exercise.find(query).populate("user");
   }
 
   static get = getById;
@@ -32,7 +30,7 @@ class ExerciseModel {
 
     const exercise = new Exercise(payload);
 
-    return new Promise((resolve, reject) => {
+    return new Promise<ExerciseJSONInterface>((resolve, reject) => {
       exercise.save((err, data) => {
         if (err) {
           return reject(err);
@@ -43,7 +41,7 @@ class ExerciseModel {
     });
   }
 
-  static async update(_id, payload) {
+  static async update(_id, payload):Promise<ExerciseJSONInterface> {
     validateObjectId(_id);
     const exercise = await Exercise.findById(_id);
 

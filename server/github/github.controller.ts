@@ -6,7 +6,7 @@ import { UserDocumentInterface } from 'server/types/type'
 // (req:Request, res:Response)
 
 export default class GithubController {
-  static async getLoggedInUser(req, res) {
+  static async getLoggedInUser(req:Request, res:Response) {
     const { user } = req.body;
   
     if (!user.github_access_token) {
@@ -34,7 +34,7 @@ export default class GithubController {
     });
   }
 
-  static async gitHubAuth(req, res) {
+  static async gitHubAuth(req:Request, res:Response) {
     const { user } = req.body;
     const { code, error, error_description, error_uri } = req.query;
   

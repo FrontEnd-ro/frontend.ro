@@ -5,22 +5,18 @@ enum AppStatus {
   REFRESH_REQUIRED = 'REFRESH_REQUIRED'
 }
 
-class StatusBar extends React.Component<{ appStatus: AppStatus }> {
-  render() {
-    const { appStatus } = this.props;
+function StatusBar({ appStatus }: { appStatus: AppStatus }) {
+  return (
+    <p>
+      {appStatus === AppStatus.OK && (
+        'Everything is OK ✔'
+      )}
 
-    return (
-      <p>
-        {appStatus === AppStatus.OK && (
-          'Everything is OK ✔'
-        )}
-
-        {appStatus === AppStatus.REFRESH_REQUIRED && (
-          'Please refresh the app to get the latest version'
-        )}
-      </p>
-    );
-  }
+      {appStatus === AppStatus.REFRESH_REQUIRED && (
+        'Please refresh the app to get the latest version'
+      )}
+    </p>
+  );
 }
 
 export default StatusBar;

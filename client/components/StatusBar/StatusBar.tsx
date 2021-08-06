@@ -1,23 +1,21 @@
-// FIXME: use camelCase
-/* eslint-disable camelcase */
 import React from 'react';
 
-enum App_Status {
+enum AppStatus {
   OK = 'OK',
   REFRESH_REQUIRED = 'REFRESH_REQUIRED'
 }
 
-class StatusBar extends React.Component<{ app_status: App_Status }> {
+class StatusBar extends React.Component<{ appStatus: AppStatus }> {
   render() {
-    const { app_status } = this.props;
+    const { appStatus } = this.props;
 
     return (
       <p>
-        {app_status === App_Status.OK && (
+        {appStatus === AppStatus.OK && (
           'Everything is OK ✔'
         )}
 
-        {app_status === App_Status.REFRESH_REQUIRED && (
+        {appStatus === AppStatus.REFRESH_REQUIRED && (
           'Please refresh the app to get the latest version'
         )}
       </p>

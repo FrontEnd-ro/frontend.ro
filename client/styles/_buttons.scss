@@ -32,14 +32,8 @@
   }
 
   &.btn--light {
-    color: color(black);
     border: 1px solid color(black);
-    background-image: linear-gradient(
-      to right,
-      #ecf0f1 0%,
-      #fff 51%,
-      #ecf0f1 100%
-    );
+    @extend %whiteGradientBackground;
   }
 
   &.btn--success {

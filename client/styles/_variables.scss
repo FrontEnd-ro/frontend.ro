@@ -33,6 +33,16 @@ $width-grid: 4.5vw;
   background-position: left center;
 }
 
+%whiteGradientBackground {
+  color: color(black);
+  background-image: linear-gradient(
+    to right,
+    #ecf0f1 0%,
+    #fff 51%,
+    #ecf0f1 100%
+  );
+}
+
 %blackGradientBackground {
   color: color(white);
   background-image: linear-gradient(

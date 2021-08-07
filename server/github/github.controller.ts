@@ -2,7 +2,7 @@ import { ServerError } from '../ServerUtils';
 import fetch from 'node-fetch';
 import UserModel from '../user/user.model';
 import {Request,Response} from 'express'
-import { UserDocumentInterface } from 'server/types/type'
+import { UserDocumentInterface } from '../types/type'
 
 export default class GithubController {
   static async getLoggedInUser(req:Request, res:Response) {

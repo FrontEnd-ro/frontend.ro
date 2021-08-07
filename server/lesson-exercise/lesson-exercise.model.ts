@@ -5,7 +5,7 @@ import {
 } from '../ServerUtils';
 import { LESSONS_WITH_EXERCISES } from '../../shared/SharedConstants';
 import { ExerciseJSONSchema } from '../../shared/exercise.shared-model';
-import { LeasonExercicesJsonInterface } from "server/types/type"
+import { LeasonExercicesJsonInterface } from "../types/type"
 
 const LessonExercisesJSONSchema = {
   ...ExerciseJSONSchema,

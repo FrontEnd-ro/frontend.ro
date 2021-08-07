@@ -3,8 +3,11 @@ import { Submission } from '~/redux/exercise-submissions/types';
 import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
 
 class SubmissionService {
-  static searchSubmissions(page = 0, query = '') {
-    return HttpService.get(`${process.env.ENDPOINT}/submissions?page=${page}&query=${query}`)
+  static searchSubmissions(page = 0, query = '', statuses = [SUBMISSION_STATUS.AWAITING_REVIEW]) {
+    const base = `${process.env.ENDPOINT}/submissions`;
+    const statusParams = statuses.map((status) => `status=${status}`).join('&');
+
+    return HttpService.get(`${base}?page=${page}&query=${query}&${statusParams}`)
       .then((response) => response.json()) as unknown as Promise<Submission[]>;
   }
 

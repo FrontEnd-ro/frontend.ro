@@ -9,9 +9,22 @@ const submissionRouter = express.Router();
 
 
 submissionRouter.get('/', [PublicMiddleware], async function getSubmissions(req, res) {
-  const { page, query } = req.query;
-  const results = await SubmissionModel.search(+page, query);
+  const { page, query, status } = req.query;
 
+  // The query param is called status so it makes sense when
+  // reading the URL: ?status=A&status=B. However, here
+  // we're creating a `statuses` (plural) variable so it's clear
+  // we're working with a list.
+  let statuses = status;
+
+  // If it's string, create an array from it.
+  // Otherwise it's already an Array or `undefined`
+  // in which case we're not doing anything
+  if (typeof statuses === 'string') {
+    statuses = [statuses];
+  }
+
+  const results = await SubmissionModel.search(+page, query, statuses);
   res.json(results);
 });
 
@@ -186,7 +199,7 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
 
 submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async function markFeedbackAsDone(req, res) {
   const { feedbackId } = req.params;
-  const {user} = req.body;
+  const { user } = req.body;
 
   try {
     const allUserSubmissions = await SubmissionModel.getAllUserSubmissions(user._id);
@@ -209,7 +222,7 @@ submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async func
     });
 
     res.status(200).send();
-  } catch(err) {
+  } catch (err) {
     console.error("[API][delete.markFeedbackAsDone]", err);
     new ServerError(err.code, err.message).send(res);
   }

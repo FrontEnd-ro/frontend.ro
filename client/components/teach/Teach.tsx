@@ -11,8 +11,11 @@ import { loadSubmissions, searchSubmissions } from '~/redux/exercise-submissions
 import PageContainer from '../PageContainer';
 import Button from '~/components/Button';
 
-import styles from './Teach.module.scss';
 import SubmissionService from '~/services/Submission.service';
+import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { Submission } from '~/redux/exercise-submissions/types';
+
+import styles from './Teach.module.scss';
 
 interface State { loading: boolean; }
 
@@ -72,7 +75,7 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
     this.setState({ loading: true });
 
     try {
-      const newSubmissions = await SubmissionService.searchSubmissions(submissions.page, '');
+      const newSubmissions = await SubmissionService.searchSubmissions(submissions.page, '', Object.values(SUBMISSION_STATUS));
       dispatch(loadSubmissions(newSubmissions));
     } catch (err) {
       SweetAlertService.toast({ type: 'error', text: err });
@@ -108,39 +111,76 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
     const { submissions } = this.props;
     const { loading } = this.state;
 
+    let inProgressSubmissions = [];
+    let awaitingReviewSubmissions = [];
+    let doneSubmissions = [];
+
+    // This is undefined while we're fetching the data
+    // from the server. That's why we need this check.
+    if (submissions.submissions) {
+      inProgressSubmissions = submissions.submissions.filter(
+        (s) => s.status === SUBMISSION_STATUS.IN_PROGRESS,
+      );
+      awaitingReviewSubmissions = submissions.submissions.filter(
+        (s) => s.status === SUBMISSION_STATUS.AWAITING_REVIEW,
+      );
+      doneSubmissions = submissions.submissions.filter(
+        (s) => s.status === SUBMISSION_STATUS.DONE,
+      );
+    }
+
     return (
       <PageContainer className={styles.teach}>
         <h1> Exerciții rezolvate </h1>
-        <h2>
+        <p className="text-2xl font-light mb-8">
           Oferă feedback celor ce au rezolvat exercițiile de mai
           jos și ajută-i să devină mai buni.
-        </h2>
-        {/* <Search query={submissions.search} onSearch={this.searchData} /> */}
-        <ul className={`${styles['cards-wrapper']}`}>
-          {submissions.submissions && submissions.submissions.map((submission) => (
-            <li key={submission._id}>
-              <ExerciseSubmission submission={submission} />
-            </li>
-          ))}
-          {loading && Array.from(Array(5), (_, index) => (
-            <li key={index}>
-              <ExerciseSubmissionSkeleton />
-            </li>
-          ))}
-        </ul>
-        {!submissions.submissions?.length && !loading && (
-        <p className={`${styles['no-results']} text-center`}>
-          Căutarea nu a întors nici un rezultat...
         </p>
+        {/* <Search query={submissions.search} onSearch={this.searchData} /> */}
+
+        {loading && <SubmissionsSkeletonLoading />}
+
+        {!submissions.submissions?.length && !loading && (
+          <p className={`${styles['no-results']} text-center`}>
+            Căutarea nu a întors nici un rezultat...
+          </p>
+        )}
+
+        {submissions.submissions?.length > 0 && (
+          <>
+            {awaitingReviewSubmissions.length > 0 && (
+            <SubmissionsSection
+              className="mb-8"
+              title="Exerciții ce așteaptă feedback"
+              submissions={awaitingReviewSubmissions}
+            />
+            )}
+            {inProgressSubmissions.length > 0 && (
+            <SubmissionsSection
+              className="mb-8"
+              title="Exerciții în progres"
+              description="Exercițiile de mai jos sunt începute de studenți dar încă nu le-au trimis către feedback."
+              submissions={inProgressSubmissions}
+            />
+            )}
+            {doneSubmissions.length > 0 && (
+            <SubmissionsSection
+              className="mb-8"
+              title="Exerciții corect rezolvate"
+              description="Exercițiile de mai jos au fost aprobate de către noi. Ele sunt corect rezolvate."
+              submissions={doneSubmissions}
+            />
+            )}
+          </>
         )}
         {!submissions.end && (
-        <Button
-          variant="blue"
-          onClick={this.getData}
-          loading={loading}
-        >
-          Next page
-        </Button>
+          <Button
+            variant="blue"
+            onClick={this.getData}
+            loading={loading}
+          >
+            Next page
+          </Button>
         )}
 
         <div
@@ -151,6 +191,43 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
     );
   }
 }
+
+const SubmissionsSection = ({
+  title,
+  description,
+  submissions,
+  className,
+}: { title: string, description?: string, submissions: Submission[], className?: string }) => (
+  <section className={className ?? ''}>
+    <h2 className="mb-0">
+      👇
+      {' '}
+      {title}
+    </h2>
+    {description && (
+      <p>
+        {description}
+      </p>
+    )}
+    <ul className={`${styles['cards-wrapper']}`}>
+      {submissions && submissions.map((submission) => (
+        <li key={submission._id}>
+          <ExerciseSubmission submission={submission} />
+        </li>
+      ))}
+    </ul>
+  </section>
+);
+
+const SubmissionsSkeletonLoading = () => (
+  <ul className={`${styles['cards-wrapper']}`}>
+    {Array.from(Array(5), (_, index) => (
+      <li key={index}>
+        <ExerciseSubmissionSkeleton />
+      </li>
+    ))}
+  </ul>
+);
 
 const mapStateToProps = (state: RootState) => ({
   submissions: state.submissions,

@@ -101,9 +101,12 @@ class SubmissionModel {
       });
   }
 
-  static async search(page = 0, query = '') {
+  static async search(page = 0, query = '', statuses = [SUBMISSION_STATUS.AWAITING_REVIEW]) {
     const all = await Submission
-      .find({ status: SUBMISSION_STATUS.AWAITING_REVIEW })
+      .find({
+        // Filter by one or more statuses
+        $or: statuses.map(status => ({ status }))
+      })
       .populate({
         path: 'user',
         match: {

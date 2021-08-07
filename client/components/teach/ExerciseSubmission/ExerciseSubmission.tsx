@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Submission, SubmissionType } from '../../../redux/exercise-submissions/types';
 import { timeAgo } from '../../../services/Utils';
+import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
 
 import styles from './ExerciseSubmission.module.scss';
 
@@ -9,6 +10,39 @@ interface Props {
     submission: Submission,
 }
 function ExSubmission({ submission } : Props) {
+  // This refers to the main link that navigates
+  // us to the actual submission
+  const mainLinkConfig = computeMainLinkConfig();
+  function computeMainLinkConfig() {
+    switch (submission.status) {
+      case SUBMISSION_STATUS.IN_PROGRESS:
+        return {
+          label: 'Vezi progresul',
+          className: 'btn--default',
+        };
+      case SUBMISSION_STATUS.AWAITING_REVIEW:
+        return {
+          label: 'Oferă feedback',
+          className: 'btn--danger',
+        };
+      case SUBMISSION_STATUS.DONE:
+        return {
+          label: 'Vezi rezolvarea',
+          className: 'btn--success',
+        };
+      default:
+        console.error(`[ExSubmission] Unrecognized submission status. Got: ${submission.status}`);
+
+        // Since this is an Admin only panel so far,
+        // let's default to an empty text so that it's obvious
+        // something went wrong and we can identify/fix it.
+        return {
+          label: '',
+          className: 'btn--default',
+        };
+    }
+  }
+
   return (
     <div
       className={`${styles.card} rounded-md capitalize`}
@@ -35,8 +69,8 @@ function ExSubmission({ submission } : Props) {
           </span>
         </div>
         <Link href={`/feedback/${submission.user.username}/${submission.exercise._id}`}>
-          <a className="btn btn--default">
-            Oferă feedback
+          <a className={`btn ${mainLinkConfig.className}`}>
+            {mainLinkConfig.label}
           </a>
         </Link>
         {/* {

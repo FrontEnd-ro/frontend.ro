@@ -18,6 +18,7 @@ import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
+import HowToResolveFeedbackBanner from './HowToResolveFeedbackBanner/HowToResolveFeedbackBanner';
 
 import styles from './SolveExercise.module.scss';
 import { getLessonById } from '~/services/Constants';
@@ -282,6 +283,9 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
           status={submission.status}
           onExitReadonly={exitReadonly}
         />
+      )}
+      {!readonly && submission.feedbacks.length > 0 && (
+        <HowToResolveFeedbackBanner />
       )}
       <PageContainer className="relative">
         <h1 className="mb-0">

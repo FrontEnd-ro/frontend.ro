@@ -122,8 +122,8 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
               <ExerciseSubmission submission={submission} />
             </li>
           ))}
-          {loading && Array.from(Array(5), (i) => (
-            <li key={i}>
+          {loading && Array.from(Array(5), (_, index) => (
+            <li key={index}>
               <ExerciseSubmissionSkeleton />
             </li>
           ))}

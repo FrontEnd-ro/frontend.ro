@@ -6,7 +6,7 @@ import {
   SearchUser,
   UserDocumentInterface,
   UserInterface,
-} from "server/types/type";
+} from "../types/type";
 import { UsersSchema, User,ping,findUserBy,sanitize } from "../../shared/user.shared-model";
 import {
   AUTH_EXPIRATION,

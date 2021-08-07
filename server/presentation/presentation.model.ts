@@ -1,5 +1,5 @@
 import { Schema, model, models,Query } from "mongoose";
-import { PresentationInterface } from "server/types/type";
+import { PresentationInterface } from "../types/type";
 
 const PresentationSchema = new Schema< PresentationInterface >(
   {

@@ -1,14 +1,23 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitAny": true,
-    // "sourceMap": true,
-    "outDir": "server_build"
-  },
-  // "outDir": "server_build",
-  // "target": "es5",
-  // "allowJs": true,
-  // "include": [
-  //   "**/*.ts"
-  // ]
+    // "module": "commonjs",
+    "target": "ES6",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "module": "esnext",
+    "strict": false,
+    "importHelpers": true,
+    "outDir": "../build/",
+    // "esModuleInterop":true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports":true,
+    "rootDir": "../",
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "jsx": "preserve",
+    "baseUrl": ".",
+  }
 }

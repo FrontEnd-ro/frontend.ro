@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import { LeasonsInterface } from "server/types/type"
+import { LeasonsInterface } from "../types/type"
 const { ServerError } = require('../ServerUtils');
 
 const LessonsSchema = new Schema<LeasonsInterface>({

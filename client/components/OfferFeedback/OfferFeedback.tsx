@@ -160,7 +160,13 @@ function OfferFeedback({
         <CompleteEditorLazy
           readOnly
           askTooltip
-          feedbacks={feedbacks}
+          // If we can offer feedback then pass the newly
+          // created empty array of feedbacks which will be
+          // populated on every new feedback given.
+          // If however we cannot offer feedback, this means
+          // the exercise is still IN_PROGRESS or DONE. In this
+          // case we still want to see what feedbacks are still unresolved.
+          feedbacks={canOfferFeedback ? feedbacks : submission.feedbacks}
           key={exerciseId}
           ref={solutionRef}
           folderStructure={folderStructure}

@@ -160,7 +160,6 @@ class MonacoEditor extends MonacoBase {
           this.state.cursorSelection.endLineNumber,
           this.state.cursorSelection.endColumn,
         ],
-        readOnly: true,
         file_key: this.state.selectedFileKey,
       }),
     )[0];
@@ -329,6 +328,7 @@ class MonacoEditor extends MonacoBase {
           />
         )}
         <ViewTooltip
+          readOnly={readOnly}
           onFeedbackDone={this.onFeedbackDone}
           visible={this.state.tooltips.view.visible}
           feedback={this.Feedbacks.get(this.state.tooltips.view.id || {})}

@@ -12,7 +12,6 @@ interface Feedback {
   // This should be tied to feedback types!
   type: string;
   body: string;
-  readOnly: boolean;
 }
 
 interface State {
@@ -21,6 +20,7 @@ interface State {
 }
 
 interface Props {
+  readOnly: boolean;
   visible: boolean;
   feedback: Feedback,
   onFeedbackDone: (feedbackId: string) => void;
@@ -94,7 +94,7 @@ class ViewTooltip extends React.Component<Props, State> {
   }
 
   render() {
-    const { feedback, visible } = this.props;
+    const { readOnly, feedback, visible } = this.props;
     const { forceShow, loading } = this.state;
 
     return (
@@ -111,7 +111,7 @@ class ViewTooltip extends React.Component<Props, State> {
         {/* eslint-disable-next-line react/no-danger */}
         <div className="markdown" dangerouslySetInnerHTML={{ __html: marked(feedback.body || '') }} />
 
-        {!feedback.readOnly && (
+        {!readOnly && (
           <div className="feedback-tooltip__controls">
             <Button loading={loading} variant="light" onClick={this.onFeedbackDone}>
               <span>Done</span>

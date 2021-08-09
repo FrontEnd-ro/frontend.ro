@@ -169,6 +169,7 @@ class AskTooltip extends React.Component<Props, State> {
           <div>
             {Object.keys(FEEDBACK_TYPES).map((feedbackType) => (
               <Checkbox
+                key={feedbackType}
                 className="d-block"
                 type="radio"
                 name="feedback-type"

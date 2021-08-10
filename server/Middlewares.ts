@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
-const UserModel = require('./user/user.model');
+import jwt, { Algorithm } from 'jsonwebtoken';
+import UserModel from './user/user.model';
 import { ServerError } from './ServerUtils';
-const ExerciseModel = require('./exercise/exercise.model');
-const LessonExerciseModel = require('./lesson-exercise/lesson-exercise.model');
+import ExerciseModel from './exercise/exercise.model';
+import LessonExerciseModel from './lesson-exercise/lesson-exercise.model';
 import { UserRole }from '../shared/SharedConstants';
 import { Request, Response,NextFunction } from "express"
 /****************** User Middleware */
@@ -20,7 +20,7 @@ function PublicMiddleware(req:Request,res:Response, next:NextFunction) {
       authToken,
       process.env.TOKEN_SECRET,
       {
-        algorithms: [process.env.TOKEN_ALGORITHM]
+        algorithms: [process.env.TOKEN_ALGORITHM as Algorithm]
       },
       (err, payload) => {
         if (err) {
@@ -51,7 +51,7 @@ function PrivateMiddleware(req:Request,res:Response, next:NextFunction) {
     authToken,
     process.env.TOKEN_SECRET,
     {
-      algorithms: [process.env.TOKEN_ALGORITHM]
+      algorithms: [process.env.TOKEN_ALGORITHM as Algorithm]
     },
     (err, payload) => {
       if (err) {

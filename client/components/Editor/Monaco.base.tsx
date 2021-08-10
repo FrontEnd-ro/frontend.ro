@@ -65,8 +65,23 @@ class MonacoBase extends React.Component<any, any> {
 
   componentDidUpdate(prevProps) {
     const { folderStructure: folderStructureProp, readOnly } = this.props;
+    // FIXME|TODO
+    // Both editors (the complete and basic one) keep the folder
+    // structure on the state, but it doesn't act like a normal
+    // state prop (ie: it's not updated itself, but just a property of it,
+    // without the reference change)
+    // THIS ☝☝ is super weird. Let's investigate and implement
+    // better
+    const { folderStructure: folderStructureState } = this.state;
 
-    if (JSON.stringify(prevProps.folderStructure) !== JSON.stringify(folderStructureProp)) {
+    if (JSON.stringify(prevProps.folderStructure) !== JSON.stringify(folderStructureProp) && (
+      // When auto-saving: the before and after props are different, but
+      // `state.folderStructure` is equal to the new props because we modify
+      // the state on every `onChange`.
+      // Thus, by adding this check we prevent re-rendering the editor on every auto-save
+      // https://github.com/FrontEnd-ro/frontend.ro/issues/286
+      folderStructureState.toJSON() !== JSON.stringify(folderStructureProp)
+    )) {
       const folderStructure = new FolderStructure(folderStructureProp);
       const firstFile = folderStructure.files[0];
 

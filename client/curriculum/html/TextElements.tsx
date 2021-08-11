@@ -10,7 +10,6 @@ import Lesson, {
   LessonTip,
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
-import coverSvg from '~/public/images/lessons/text-elements__cover.svg';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 
@@ -31,15 +30,14 @@ export default function TextsLesson() {
         title={`${lessonInfo.title} | Lecție HTML`}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
-        shareImage="https://frontend.ro/seo/html-text-elements.jpg"
+        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`}
       />
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
-        <LessonCover resizeOffset={150}>
-          {/* eslint-disable-next-line react/no-danger */}
-          <div dangerouslySetInnerHTML={{
-            __html: coverSvg,
-          }}
+        <LessonCover>
+          <img
+            alt="Elemente HTML pentru texte"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/seo/texts_2400w.jpg`}
           />
         </LessonCover>
         <LessonFirstSentence>

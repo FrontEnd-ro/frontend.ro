@@ -13,6 +13,7 @@ import SEOTags from '~/components/SEOTags';
 import { LessonTip } from '~/components/lessons';
 import { SubscribeFormWithText } from '~/components/SubscribeForm';
 import { EventDate } from '~/components/event/RegisterEventCard';
+import List from '~/components/List';
 
 function EventDetailsPage() {
   const title = 'Introducere practică în Git & GitHub pentru toți';
@@ -66,33 +67,33 @@ function EventDetailsPage() {
           <strong>training practic</strong>
           , unde vom învăța despre:
         </p>
-        <ol className="with--checkmark">
+        <List as="ol" variant="checkmark">
           <li> De ce Git?</li>
           <li> Git clients (CLI și aplicații desktop)</li>
           <li> Ce e un "repo" și cum creem unul?</li>
           <li> Ce sunt branch-urile si de ce vrem să le folosim?</li>
           <li>
             <span> Git în contextul VSCode  </span>
-            <ul className="with--bullets">
+            <List variant="bullets">
               <li> clone</li>
               <li> commit & push </li>
               <li> checkout & merge </li>
-            </ul>
+            </List>
           </li>
           <li>
             <span> Git CLI (command line interface) </span>
-            <ul className="with--bullets">
+            <List variant="bullets">
               <li> clone</li>
               <li> status</li>
               <li> add </li>
               <li> commit</li>
               <li> log</li>
               <li> push</li>
-            </ul>
+            </List>
           </li>
           <li> Ce e un "pull-request" si cum creem unul? </li>
           <li> Rezolvarea conflictelor la merge </li>
-        </ol>
+        </List>
 
         <p>
           PS: Trainingul se desfășoară pe

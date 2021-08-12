@@ -18,6 +18,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
+import List from '~/components/List';
 
 const chapters = [
   { title: 'Elementul <img>', id: 'elementul-img' },
@@ -95,7 +96,7 @@ export default function ImagesLesson() {
             {' '}
             alături de 2 atribute:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li>
               <strong>src</strong>
               : pentru a specifica URL-ul imaginii
@@ -104,7 +105,7 @@ export default function ImagesLesson() {
               <strong>alt</strong>
               : pentru a descrie conținutul imaginii - în caz că aceasta nu poate fi încărcată
             </li>
-          </ul>
+          </List>
           <Highlight
             className="my-5"
             language="html"

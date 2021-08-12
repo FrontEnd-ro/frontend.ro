@@ -14,6 +14,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import coverSvg from '~/public/images/lessons/lists__cover.svg';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
+import List from '~/components/List';
 
 const chapters = [
   { title: 'Tipuri de liste', id: 'tipuri-de-liste' },
@@ -61,7 +62,7 @@ export default function ListsLesson() {
             Tipuri de liste
           </LessonHeading>
           <p>Există două tipuri de liste des folosite în HTML:</p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li className="mb-4">
               <FormattedText as="strong">Liste neordonate</FormattedText>
               {' '}
@@ -75,7 +76,7 @@ export default function ListsLesson() {
               - utilizate
               pentru a grupa un set de elemente ce au o ordine specifică
             </li>
-          </ul>
+          </List>
           <p>
             Fiecare tip de listă are un înțeles și un scop specific într-o
             pagină web. Să le luam pe rînd:
@@ -200,7 +201,7 @@ export default function ListsLesson() {
             . Acesta acceptă ca
             valori:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li className="mb-4">
               {' '}
               <FormattedText as="strong">1</FormattedText>
@@ -231,7 +232,7 @@ export default function ListsLesson() {
               – pentru enumerare cu
               litere mici, respectiv mari.
             </li>
-          </ul>
+          </List>
           <Highlight
             className="my-5"
             language="html"

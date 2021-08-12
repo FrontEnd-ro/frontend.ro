@@ -6,6 +6,7 @@ import { RootState } from '~/redux/root.reducer';
 import UserService from '~/services/User.service';
 import { logoutUser } from '~/redux/user/user.actions';
 import Button from '~/components/Button';
+import List from '../List';
 
 import styles from './NavLinks.module.scss';
 
@@ -23,7 +24,7 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
 
   return (
     <nav className={styles['nav-links']}>
-      <ol>
+      <List as="ol">
         <li>
           <Link href="/lectii">
             <a>
@@ -74,7 +75,7 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
             </a>
           </Link>
         </li>
-      </ol>
+      </List>
     </nav>
   );
 }

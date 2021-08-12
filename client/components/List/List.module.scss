@@ -1,11 +1,17 @@
-ul,
-ol {
+@import '../../styles/variables';
+
+%none {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-ul.with--bullets {
+.none {
+  @extend %none;
+}
+
+.bullets {
+  @extend %none;
   padding-left: 2em;
 
   li::before {
@@ -19,7 +25,8 @@ ul.with--bullets {
   }
 }
 
-ol.with--count {
+.count {
+  @extend %none;
   counter-reset: ol;
 
   li {
@@ -38,7 +45,8 @@ ol.with--count {
   }
 }
 
-ol.with--checkmark {
+.checkmark {
+  @extend %none;
   margin-left: 2em;
 
   & > li::before {

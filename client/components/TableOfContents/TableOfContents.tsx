@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import List from '../List';
 import styles from './TableOfContents.module.scss';
 
 interface State {
@@ -152,7 +153,7 @@ class TableOfContents extends React.Component<Props, State> {
 
     return (
       <nav className={styles.tableOfContents}>
-        <ul>
+        <List>
           {chapters.map((item) => (
             <ChapterListItem
               key={item.id}
@@ -161,7 +162,7 @@ class TableOfContents extends React.Component<Props, State> {
               activeChapterId={activeChapterId}
             />
           ))}
-        </ul>
+        </List>
       </nav>
     );
   }
@@ -192,7 +193,7 @@ function ChapterListItem({
           {item.title}
         </a>
       </Link>
-      <ul>
+      <List>
         {item.subchapters && item.subchapters.map((subchapter) => (
           <ChapterListItem
             isSubchapter
@@ -202,7 +203,7 @@ function ChapterListItem({
             activeChapterId={activeChapterId}
           />
         ))}
-      </ul>
+      </List>
     </li>
   );
 }

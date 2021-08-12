@@ -12,6 +12,7 @@ import { getLessonById } from '~/services/Constants';
 import FormattedText from '~/components/FormattedText';
 import Highlight from '~/components/Highlight/Highlight';
 import CodePenEmbed from '~/components/CodePenEmbed/CodePenEmbed';
+import List from '~/components/List';
 
 import styles from './AboutHtml.module.scss';
 
@@ -320,7 +321,7 @@ export default function AboutHtmlLesson() {
             .
           </p>
           <p>Exista trei tipuri de elemente, în funcție de aceste relații:</p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li>
               elemente de tip părinte -
               {' '}
@@ -336,7 +337,7 @@ export default function AboutHtmlLesson() {
               {' '}
               <strong>sibling elements</strong>
             </li>
-          </ul>
+          </List>
           <p>
             În exemplul de mai sus, titlul (
             <FormattedText as="strong">

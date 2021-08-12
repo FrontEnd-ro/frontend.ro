@@ -11,6 +11,7 @@ import { useClipboard, useOutsideClick } from '~/services/Hooks';
 import Button from '~/components/Button';
 
 import styles from './SocialMediaButtons.module.scss';
+import List from '../List';
 
 interface Props {
   url: string;
@@ -40,7 +41,7 @@ export function ShareButton({ url, config, variant = 'blue' }: Props) {
         <FontAwesomeIcon icon={faShare} height="24" className="mr-2" />
         Share
       </Button>
-      <ul>
+      <List>
         {config.copy && (
           <li>
             <CopyLinkToClipboard onCopy={toggle} className="btn btn--light btn--with-icon" text={url} />
@@ -66,7 +67,7 @@ export function ShareButton({ url, config, variant = 'blue' }: Props) {
             <WhatsAppButton url={url} />
           </li>
         )}
-      </ul>
+      </List>
     </div>
 
   );

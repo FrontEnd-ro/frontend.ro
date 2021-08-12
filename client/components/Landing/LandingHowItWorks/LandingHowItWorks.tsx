@@ -1,4 +1,5 @@
 import React from 'react';
+import List from '~/components/List';
 import styles from './LandingHowItWorks.module.scss';
 
 export default function LandingHowItWorks() {
@@ -11,7 +12,7 @@ export default function LandingHowItWorks() {
       </h2>
       <br />
       <br />
-      <ol>
+      <List as="ol">
         <li className="d-flex align-items-center">
           <img src="/images/landing/doodles/reading_doodle.png" width="160" alt="Stick figure reading" />
           <div>
@@ -58,7 +59,7 @@ export default function LandingHowItWorks() {
             </p>
           </div>
         </li>
-      </ol>
+      </List>
     </section>
   );
 }

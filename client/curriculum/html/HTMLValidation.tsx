@@ -12,6 +12,7 @@ import Lesson, {
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
 import FormattedText from '~/components/FormattedText';
+import List from '~/components/List';
 
 function HTMLValidationLesson() {
   const lessonId = 'validare';
@@ -154,7 +155,7 @@ function HTMLValidationLesson() {
           <LessonQuote variant="centered">
             Pe scurt, un site valid este un site bine făcut!
           </LessonQuote>
-          <ol className="with--checkmark">
+          <List as="ol" variant="checkmark">
             <li>
               ajută la partea de
               <a
@@ -172,7 +173,7 @@ function HTMLValidationLesson() {
               iar în final, nu lăsăm nimic la "ghici". Site-ul arată și
               se comportă exact cum vrem în toate browserele
             </li>
-          </ol>
+          </List>
 
         </section>
       </Lesson>

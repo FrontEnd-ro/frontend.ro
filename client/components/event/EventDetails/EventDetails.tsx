@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import List from '~/components/List';
 
 import PageContainer from '~/components/PageContainer';
 import { Contributor } from '~/services/contributors';
@@ -49,7 +50,7 @@ export default function EventDetails({
           />
         )}
         <h2 className="text-center"> Cine sunt trainerii? </h2>
-        <ul className={`${styles['lesson-contributors']} relative d-flex justify-content-between text-center my-5`}>
+        <List className={`${styles['lesson-contributors']} relative d-flex justify-content-between text-center my-5`}>
           {contributors.map((contributor) => (
             <li key={contributor.url}>
               <a target="_blank" rel="noreferrer" href={contributor.url} className="no-underline">
@@ -63,7 +64,7 @@ export default function EventDetails({
               </a>
             </li>
           ))}
-        </ul>
+        </List>
       </section>
     </PageContainer>
   );

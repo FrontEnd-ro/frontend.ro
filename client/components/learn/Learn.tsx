@@ -3,6 +3,7 @@ import LessonPreview from './LessonPreview/LessonPreview';
 import WriteLessonLink from './WriteLessonLink/WriteLessonLink';
 import CoverIllustration from './CoverIllustration/CoverIllustration';
 import { LESSONS } from '~/services/Constants';
+import List from '../List';
 
 import styles from './Learn.module.scss';
 
@@ -38,7 +39,7 @@ function Learn() {
           <h2>
             <span>{title}</span>
           </h2>
-          <ol className="d-flex">
+          <List as="ol" className="d-flex">
             {lessons.map((lesson) => (
               <li key={lesson.title}>
                 <LessonPreview {...lesson} />
@@ -47,7 +48,7 @@ function Learn() {
             <li>
               <WriteLessonLink />
             </li>
-          </ol>
+          </List>
           <CoverIllustration src={cover} position={index % 2 === 0 ? 'left' : 'right'} />
         </section>
       ))}

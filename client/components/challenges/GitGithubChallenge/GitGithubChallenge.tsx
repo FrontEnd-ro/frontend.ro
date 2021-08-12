@@ -15,6 +15,7 @@ import Button from '~/components/Button';
 import { tasks, Task } from './GitGithubChallenge.model';
 import GitHubService from '~/services/api/GitHub.service';
 import ChallengesService from '~/services/api/Challenge.service';
+import List from '~/components/List';
 
 import styles from './GitGithubChallenge.module.scss';
 
@@ -122,7 +123,7 @@ function GitGithubChallenge({ user }: ConnectedProps<typeof connector>) {
       <p>
         Dacă ai ajuns la acestă pagină înseamnă că faci parte
         din grupul de Alpha Testeri care ne ajută cu feedback,
-        sau ne-ai stalkuit pe repo-ul din GitHub să vezi cum 
+        sau ne-ai stalkuit pe repo-ul din GitHub să vezi cum
         se numesc rutele 👀
       </p>
       <p>
@@ -136,7 +137,7 @@ function GitGithubChallenge({ user }: ConnectedProps<typeof connector>) {
       </Button>
       )}
 
-      <ul className={styles['task-list']}>
+      <List className={styles['task-list']}>
         {tasks.map((task, index) => {
           let state: TaskState = 'available';
           const isDisabled = !user.info
@@ -188,12 +189,12 @@ function GitGithubChallenge({ user }: ConnectedProps<typeof connector>) {
                 <p className={styles.task__error}>
                   {errorForTask.message}
                 </p>
-              )}
+                )}
               </div>
             </li>
           );
         })}
-      </ul>
+      </List>
 
       {lastDoneTask === tasks[tasks.length - 1].id && (
         <>

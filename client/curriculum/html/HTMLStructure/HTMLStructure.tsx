@@ -13,9 +13,10 @@ import { getLessonById } from '~/services/Constants';
 import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
 
-import styles from './HTMLStructure.module.scss';
 import FormattedText from '~/components/FormattedText';
 import ResponsiveFlex from '~/components/ResponsiveFlex';
+import List from '~/components/List';
+import styles from './HTMLStructure.module.scss';
 
 const chapters = [
   { title: 'Structura de bază', id: 'structura' },
@@ -57,7 +58,7 @@ function HTMLStructure() {
           <ResponsiveFlex breakpoint={1000}>
             <div>
               <p className="mb-4"> Fiecare pagină web este alcătuită din următoarele elemente principale: </p>
-              <ol className="with--checkmark">
+              <List as="ol" variant="checkmark">
                 <li className="mb-4">
                   <FormattedText as="strong">
                     {'<!DOCTYPE html>'}
@@ -91,7 +92,7 @@ function HTMLStructure() {
                   {' '}
                   și vor fi definiți o singură dată
                 </li>
-              </ol>
+              </List>
             </div>
             <Highlight
               language="html"
@@ -126,7 +127,7 @@ function HTMLStructure() {
             {' '}
             vom introduce elemente ce ne descriu website-ul, precum:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li>
               titlul paginii
             </li>
@@ -136,7 +137,7 @@ function HTMLStructure() {
             <li>
               descrierea
             </li>
-          </ul>
+          </List>
           <Highlight
             className="my-5"
             language="html"
@@ -327,7 +328,7 @@ function HTMLStructure() {
             {' '}
             adăugam două tipuri de elemente:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li>
               <strong>
                 Elemente descriptive
@@ -342,7 +343,7 @@ function HTMLStructure() {
               precum: foi de stiluri
               CSS, fisiere JavaScript, imagini și fonturi pentu a îmbunătăți performanța, etc.
             </li>
-          </ul>
+          </List>
           <p>
             În
             {' '}

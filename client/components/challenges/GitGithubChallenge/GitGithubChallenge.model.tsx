@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import List from '~/components/List';
 /* eslint-disable import/prefer-default-export */
 import GitHubService from '~/services/api/GitHub.service';
 import UserService from '~/services/User.service';
@@ -266,7 +267,7 @@ const tasks: Task[] = [
       <>
         Într-un proiect de obicei vei lucra în echipă, așă
         că invită pe unul dintre noi ca și colaborator la repo:
-        <ul className="with--bullets">
+        <List variant="bullets">
           <li>
             <a href="https://github.com/iampava" target="_blank" rel="noreferrer">iampava</a>
           </li>
@@ -276,7 +277,7 @@ const tasks: Task[] = [
           <li>
             <a href="https://github.com/andreeatoma" target="_blank" rel="noreferrer">andreeatoma</a>
           </li>
-        </ul>
+        </List>
       </>
     ),
     verify: ({ username, repo }) => inviteAsCollaboratorVerify({ username, repo }, ['iampava', 'catalinpopusoi', 'andreeatoma', 'silidragos']),

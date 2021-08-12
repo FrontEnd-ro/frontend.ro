@@ -16,6 +16,7 @@ import { DemoPreview } from '~/components/demo';
 import coverSvg from '~/public/images/lessons/audio-and-video__cover.svg';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
+import List from '~/components/List';
 
 const chapters = [
   { title: 'Elementul <audio>', id: 'audio-element' },
@@ -154,7 +155,7 @@ export default function VideoAndAudioLesson() {
           <LessonHeading as="h3" id="atributele-elementului-audio">
             {'Atributele principale ale elementului <audio>'}
           </LessonHeading>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li className="mb-4">
               <FormattedText as="strong">src</FormattedText>
               {' '}
@@ -175,7 +176,7 @@ export default function VideoAndAudioLesson() {
               atribut este prezent, browser-ul va oferi funcții pentru a permite
               user-ului să dea play/pause, să controleze volumul, etc
             </li>
-          </ul>
+          </List>
           <Highlight
             className="my-5"
             language="html"
@@ -277,7 +278,7 @@ export default function VideoAndAudioLesson() {
             .
             Pe lângă acestea, unui video putem să-i specificăm și:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li className="mb-4">
               {' '}
               <FormattedText as="strong">width</FormattedText>
@@ -312,7 +313,7 @@ export default function VideoAndAudioLesson() {
               atribut este prezent, browser-ul va da "play" la audio imediat
               ce acesta este încărcat în pagină
             </li>
-          </ul>
+          </List>
           <Highlight
             className="my-5"
             language="html"

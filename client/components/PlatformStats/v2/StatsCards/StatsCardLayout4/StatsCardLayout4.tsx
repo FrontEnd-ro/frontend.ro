@@ -1,4 +1,5 @@
 import React from 'react';
+import List from '~/components/List';
 import Background from '../Background/Background';
 import styles from './StatsCardLayout4.module.scss';
 
@@ -35,7 +36,7 @@ function StatsCardLayout4({
           </p>
         </div>
 
-        <ul className={styles['stats-list']}>
+        <List className={styles['stats-list']}>
           <li className="d-flex flex-column align-items-center justify-content-center">
             <span className={styles.counter}>{counter1}</span>
             <p className={styles.description}>
@@ -48,7 +49,7 @@ function StatsCardLayout4({
               {text2}
             </p>
           </li>
-        </ul>
+        </List>
       </div>
     </Background>
 

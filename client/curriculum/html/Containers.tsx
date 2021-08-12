@@ -13,6 +13,7 @@ import SideBySidePictures from '~/components/SideBySidePictures';
 import FormattedText from '~/components/FormattedText';
 import Highlight from '~/components/Highlight/Highlight';
 import CodePenEmbed from '~/components/CodePenEmbed/CodePenEmbed';
+import List from '~/components/List';
 
 function Containers() {
   const lessonInfo = getLessonById('containere');
@@ -123,7 +124,7 @@ function Containers() {
 </body>`}
             />
           </div>
-          <ol className="with--checkmark mr-2 ml-0">
+          <List as="ol" variant="checkmark" className="mr-2 ml-0">
             <li className="mb-4">
               Elementul
               {' '}
@@ -156,7 +157,7 @@ function Containers() {
               De obicei vom găsi aici logo-ul cât și alte link-uri de navigație
               pentru pagini mai puțin importante din site-ul nostrue
             </li>
-          </ol>
+          </List>
           <p>
             Cam orice pagina web are aceste 3 elemente (lăsăm mai jos 2 exemple).
           </p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '~/components/Button';
+import List from '~/components/List';
 import styles from './LessonContributors.module.scss';
 
 interface Contributor {
@@ -29,7 +30,7 @@ export default function LessonContributors({
   displayNumber = 5,
 }: Props) {
   return (
-    <ul className={`${styles['lesson-contributors']} ${className}`}>
+    <List className={`${styles['lesson-contributors']} ${className}`}>
 
       {contributors.slice(0, displayNumber).map((contributor, index, arr) => (
         <li
@@ -72,6 +73,6 @@ export default function LessonContributors({
           </Button>
         </li>
       )}
-    </ul>
+    </List>
   );
 }

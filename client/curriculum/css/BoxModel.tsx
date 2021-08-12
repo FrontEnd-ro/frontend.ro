@@ -17,6 +17,7 @@ import SideBySidePictures from '~/components/SideBySidePictures';
 import coverSvg from '~/public/images/lessons/box-model/cover.svg';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
+import List from '~/components/List';
 
 const chapters = [
   { title: 'Componentele Box Model', id: 'componentele-box-model' },
@@ -68,7 +69,7 @@ export default function BoxModelLesson() {
             {' '}
             este compus din 4 proprietăți:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li>
               <strong>Content</strong>
               : Conținutul "cutiei", adică locul unde se afișează textul / imaginea / etc.
@@ -86,7 +87,7 @@ export default function BoxModelLesson() {
               : O suprafață transparentă din afara border-ului
               care ajută la spațierea dintre elemente
             </li>
-          </ul>
+          </List>
 
           <LessonFigure
             withBorder

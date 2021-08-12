@@ -2,6 +2,7 @@ import React from 'react';
 import noop from 'lodash/noop';
 import FileIcons from '~/services/utils/FileIcons';
 import Button from '~/components/Button';
+import List from '~/components/List';
 
 import styles from './FilesList.module.scss';
 
@@ -19,7 +20,7 @@ function FilesList({
   feedbacks,
 }: any) {
   return (
-    <ul className={styles['files-list']}>
+    <List className={styles['files-list']}>
       {files.map((f) => (
         <li
           key={f.key}
@@ -60,7 +61,7 @@ function FilesList({
           </form>
         </li>
       ))}
-    </ul>
+    </List>
   );
 }
 

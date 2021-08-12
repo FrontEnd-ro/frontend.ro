@@ -11,6 +11,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import { getLessonById } from '~/services/Constants';
 import CodePenEmbed from '~/components/CodePenEmbed/CodePenEmbed';
 import FormattedText from '~/components/FormattedText';
+import List from '~/components/List';
 
 const chapters = [
   { title: 'Elementul <form>', id: 'form' },
@@ -382,7 +383,7 @@ export default function FormsLesson() {
               <span className="text-bold">label</span>
               :
             </p>
-            <ol className="with--checkmark">
+            <List as="ol" variant="checkmark">
               <li>
                 prin atributul
                 {' '}
@@ -414,7 +415,7 @@ export default function FormsLesson() {
 </label>`}
                 />
               </li>
-            </ol>
+            </List>
             <p>
               Este recomandat să adaugăm un label fiecărui
               {' '}
@@ -422,7 +423,7 @@ export default function FormsLesson() {
               {' '}
               pentru că:
             </p>
-            <ol className="with--checkmark">
+            <List as="ol" variant="checkmark">
               <li>
                 utilizatorului îi va fi mai ușor să înțeleagă ce
                 trebuie completat, iar spre deosebire de un
@@ -451,7 +452,7 @@ export default function FormsLesson() {
                   className="mt-4"
                 />
               </li>
-            </ol>
+            </List>
           </section>
           <section>
             <LessonHeading as="h3" id={chapters[4].subchapters[1].id}>

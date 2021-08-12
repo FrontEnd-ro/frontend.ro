@@ -18,6 +18,7 @@ import Notification from './notification/Notification';
 import Button from '~/components/Button';
 
 import styles from './NotificationTooltip.module.scss';
+import List from '../List';
 
 interface State {
   loading: boolean;
@@ -149,7 +150,7 @@ class NotificationsTooltip extends React.Component<
         </div>
         {isOpen && (
 
-          <ul className={styles.notifications}>
+          <List className={styles.notifications}>
             <li className="text-right">
               <Button
                 className={`${styles['mark-all-as-read-btn']} outline-none d-inline-block border-none`}
@@ -175,7 +176,7 @@ class NotificationsTooltip extends React.Component<
               </>
             )}
             <li className="invisible" ref={this.hiddenRef} />
-          </ul>
+          </List>
         )}
       </div>
     );

@@ -18,6 +18,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
+import List from '~/components/List';
 
 const chapters = [
   { title: '<a> element', id: 'a-element' },
@@ -258,14 +259,14 @@ export default function LinksAndButtonsLesson() {
             Apasă pe unul din numerele de mai jos pentru a vedea cum sunt
             precompletate pe telefon (poți să dai click fără griji, nu le vei apela dacă faci asta)
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li>
               <a href="tel:+49.157.0156">+49 157 0156</a>
             </li>
             <li>
               <a href="tel:+1(555)5309">(555) 5309</a>
             </li>
-          </ul>
+          </List>
           <LessonFigure
             isVideo
             withBorder
@@ -518,7 +519,7 @@ export default function LinksAndButtonsLesson() {
             Cele 2 tipuri de butoane pe care le vom folosi cel mai des în
             aplicațiile noastre sunt :
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li>
               <FormattedText as="strong">type="button"</FormattedText>
             </li>
@@ -528,7 +529,7 @@ export default function LinksAndButtonsLesson() {
               în cadrul formularelor - vom discuta mai multe în momentul în care
               vom ajunge la această lecție)
             </li>
-          </ul>
+          </List>
           <p>O bună practică este să specificăm mereu tipul acestora.</p>
           <p>
             Pe lîngă submit și button, type mai pot avea și valoarea
@@ -592,7 +593,7 @@ export default function LinksAndButtonsLesson() {
             alt="Atributul disabled"
             demo="/demo/html/butoane-atributul-disabled"
           /> */}
-          <ol style={{ listStyle: 'revert' }}>
+          <List as="ol" style={{ listStyle: 'revert' }}>
             <li>
               completăm formularul
             </li>
@@ -614,7 +615,7 @@ export default function LinksAndButtonsLesson() {
               explicăm de ce nu a putut avea loc și să facem enabled la buton abia
               la final, pentru a reîncerca.
             </li>
-          </ol>
+          </List>
           <LessonFigure
             isVideo
             withBorder

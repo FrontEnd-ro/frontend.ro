@@ -1,4 +1,5 @@
 import React from 'react';
+import List from '~/components/List';
 import styles from './LessonResources.module.scss';
 
 interface Props {
@@ -12,13 +13,13 @@ export default function LessonResources({ links, className }: Props) {
   return (
     <section className={`${styles['lesson-resources']} ${className} relative w-100`}>
       <h3 className="absolute m-0"> Resurse suplimentare </h3>
-      <ol className="with--count">
+      <List as="ol" variant="count">
         {links.map(({ text, url }) => (
           <li key={url}>
             <a href={url} target="_blank" rel="noreferrer">{text}</a>
           </li>
         ))}
-      </ol>
+      </List>
     </section>
   );
 }

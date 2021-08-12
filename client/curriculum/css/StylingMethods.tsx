@@ -14,6 +14,7 @@ import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
 import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
+import List from '~/components/List';
 
 const chapters = [
   { title: 'CSS Inline', id: 'css-inline' },
@@ -120,7 +121,7 @@ export default function CssStylingLesson() {
             și din această cauză majoritatea programatorilor o evită. Hai să
             vedem de ce nu e indicată:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li className="mb-4">
               dacă avem de stilizat mai multe elemente similare, (să zicem mai
               multe paragrafe care vrem să arate la fel) , prin metoda inline va
@@ -136,7 +137,7 @@ export default function CssStylingLesson() {
               ). Așadar, ne va fi dificil să înțelegem și să facem modificări pe un astfel de
               cod.
             </li>
-          </ul>
+          </List>
           <LessonTip>
             Aceasta este prima și cea mai ușor de înțeles metodă prin care
             putem stiliza o pagină web, dar după cum am menționat mai sus, nu este recomandată.
@@ -314,7 +315,7 @@ export default function CssStylingLesson() {
 <link rel="stylesheet" href="./style.css">`}
           />
           <p>Unde:</p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li className="mb-4">
               atributul
               {' '}
@@ -332,7 +333,7 @@ export default function CssStylingLesson() {
               {' '}
               specifică locația (URL-ul) unde găsim foaia de stiluri
             </li>
-          </ul>
+          </List>
           <p>
             Mai concret,
             {' '}
@@ -353,7 +354,7 @@ export default function CssStylingLesson() {
           <p>
             Prin această metodă rezolvăm ambele probleme:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li className="mb-4">
               în ceea ce privește copy-paste'ul, avand un fisier
               inclus in mai multe pagini e de ajuns sa modificam stilul
@@ -363,7 +364,7 @@ export default function CssStylingLesson() {
               legat de spaghetti code, avand separat stilurile de HTML
               e mult mai usor sa intelegem si sa modificam codul
             </li>
-          </ul>
+          </List>
           <LessonTip>
             Psst: într-un document HTML pot fi adăugate mai multe foi de stil externe,
             fiecare printr-un element link diferit.

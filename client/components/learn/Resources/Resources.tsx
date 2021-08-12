@@ -1,6 +1,7 @@
 import React from 'react';
 import { RESOURCES, ResourceCategory } from './resources-model';
 import ResourcePreview from './ResourcePreview/ResourcePreview';
+import List from '~/components/List';
 
 import styles from './Resources.module.scss';
 
@@ -75,7 +76,7 @@ function Resources() {
           cu resursele care te ajută pe tine și le vom adăuga aici.
         </p>
       </div>
-      <ol className={styles['category-list']}>
+      <List as="ol" className={styles['category-list']}>
         {sections.map(({ id, title, description }) => (
           <li key={title} className={`${styles.category} relative`}>
             <h2>
@@ -86,16 +87,16 @@ function Resources() {
                 { description}
               </p>
             )}
-            <ol className={styles['resources-list']}>
+            <List as="ol" className={styles['resources-list']}>
               {RESOURCES[id].map((resource) => (
                 <li key={resource.title}>
                   <ResourcePreview {...resource} />
                 </li>
               ))}
-            </ol>
+            </List>
           </li>
         ))}
-      </ol>
+      </List>
     </main>
   );
 }

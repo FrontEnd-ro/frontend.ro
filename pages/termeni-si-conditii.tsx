@@ -5,6 +5,7 @@ import Header from '~/components/Header';
 import PageContainer from '~/components/PageContainer';
 import SEOTags from '~/components/SEOTags';
 import { GITHUB_URL } from '~/services/Constants';
+import List from '~/components/List';
 
 function TermsAndConditions() {
   return (
@@ -30,7 +31,7 @@ function TermsAndConditions() {
           <p>
             Asta înseamnă că:
           </p>
-          <ul className="with--bullets">
+          <List variant="bullets">
             <li>
               îți oferim transparență, atât a codului (proiectul este
               {' '}
@@ -54,7 +55,7 @@ function TermsAndConditions() {
                 </a>
               </Link>
             </li>
-          </ul>
+          </List>
           <br />
           <hr />
           <p>

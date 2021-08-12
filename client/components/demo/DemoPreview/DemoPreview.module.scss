@@ -4,12 +4,5 @@
   padding: 2em;
   border-radius: 1em;
 
-  ul,
-  ol {
-    margin: revert;
-    list-style: revert;
-    padding: revert;
-  }
-
   @include linearGradient(color(darker-white), darken(color(darker-white), 5%));
 }

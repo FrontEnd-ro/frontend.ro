@@ -14,6 +14,7 @@ import Button from '~/components/Button';
 import SubmissionService from '~/services/Submission.service';
 import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
 import { Submission } from '~/redux/exercise-submissions/types';
+import List from '../List';
 
 import styles from './Teach.module.scss';
 
@@ -209,24 +210,24 @@ const SubmissionsSection = ({
         {description}
       </p>
     )}
-    <ul className={`${styles['cards-wrapper']}`}>
+    <List className={`${styles['cards-wrapper']}`}>
       {submissions && submissions.map((submission) => (
         <li key={submission._id}>
           <ExerciseSubmission submission={submission} />
         </li>
       ))}
-    </ul>
+    </List>
   </section>
 );
 
 const SubmissionsSkeletonLoading = () => (
-  <ul className={`${styles['cards-wrapper']}`}>
+  <List className={`${styles['cards-wrapper']}`}>
     {Array.from(Array(5), (_, index) => (
       <li key={index}>
         <ExerciseSubmissionSkeleton />
       </li>
     ))}
-  </ul>
+  </List>
 );
 
 const mapStateToProps = (state: RootState) => ({

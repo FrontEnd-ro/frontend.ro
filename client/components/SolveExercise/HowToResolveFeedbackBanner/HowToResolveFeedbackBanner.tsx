@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import Button from '~/components/Button';
+import List from '~/components/List';
 
 import styles from './HowToResolveFeedbackBanner.module.scss';
+
 
 function HowToResolveFeedbackBanner() {
   const [showExplanation, setShowExplanation] = useState(false);
@@ -29,7 +31,7 @@ function HowToResolveFeedbackBanner() {
       </div>
       {showExplanation && (
       <>
-        <ol className="with--count">
+        <List as="ol" variant="count">
           <li> fiecare fișier cu feedback va fi marcat cu o linie roșie </li>
           <li> înăuntrul său, codul cu probleme va fi hașurat cu roșu </li>
           <li> pune mouse-ul deasupra codului marcat și așteaptă câteva secunde </li>
@@ -43,7 +45,7 @@ function HowToResolveFeedbackBanner() {
             după ce ai rezolvat toate feedback-urile poți trimite exercițiul
             din nou
           </li>
-        </ol>
+        </List>
         <p>
           Dacă dai de probleme scrie-ne la
           {' '}

@@ -19,6 +19,7 @@ import FilesList from '../FileList/FilesList';
 import FolderBrowse from '../FolderBrowser/FolderBrowse';
 import Feedbacks from '../Feedbacks';
 import Button from '~/components/Button';
+import List from '~/components/List';
 
 import styles from './FileSwitcher.module.scss';
 
@@ -347,7 +348,7 @@ class FileSwitcher extends React.Component<Props, State> {
           />
         </div>
         {/* </Scroll> */}
-        <ul className={styles['dropdown-menu']} style={dropdownStyle}>
+        <List className={styles['dropdown-menu']} style={dropdownStyle}>
           {ctxMenuType === 'FOLDER' && (
             <>
               <li>
@@ -376,7 +377,7 @@ class FileSwitcher extends React.Component<Props, State> {
               Delete
             </Button>
           </li>
-        </ul>
+        </List>
         <HResizable onResize={this.onResize} />
       </div>
     );

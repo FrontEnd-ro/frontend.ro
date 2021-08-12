@@ -13,6 +13,7 @@ import Lesson, {
 import { Diana } from '~/services/contributors';
 import { getLessonById } from '~/services/Constants';
 import FormattedText from '~/components/FormattedText';
+import List from '~/components/List';
 
 const contributors = [Diana];
 const chapters = [
@@ -191,7 +192,7 @@ export default function VSCodeLesson() {
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/activity-bar.png`}
             alt="Bara de activitate în VS Code."
           />
-          <ol className="with--count">
+          <List as="ol" variant="count">
             <li>
               Începem cu prima opțiune de sus denumită
               {' '}
@@ -249,7 +250,7 @@ export default function VSCodeLesson() {
               </Link>
               .
             </li>
-          </ol>
+          </List>
         </section>
         <section>
           <LessonHeading as="h3" id="scurtaturi">
@@ -403,7 +404,7 @@ export default function VSCodeLesson() {
             Așa că un feature ce s-ar putea să-ți placă este
             customizarea paletei de culori.
           </p>
-          <ol className="with--count">
+          <List as="ol" variant="count">
             <li>
               Deschide
               {' '}
@@ -428,7 +429,7 @@ export default function VSCodeLesson() {
               <strong>ENTER</strong>
               .
             </li>
-          </ol>
+          </List>
           <p>
             psst: poți instala și alte teme via Extensii. Nouă ne
             place foarte mult

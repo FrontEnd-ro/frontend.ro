@@ -9,6 +9,7 @@ import { ShareButton } from '~/components/SocialMediaButtons';
 import { getLessonById, GITHUB_URL } from '~/services/Constants';
 import coverSvg from '~/public/images/lessons/lesson-0__cover.svg';
 import FormattedText from '~/components/FormattedText';
+import List from '~/components/List';
 
 let chapters = [
   { title: 'Ce e FrontEnd.ro?', id: 'introducere' },
@@ -281,7 +282,7 @@ export default function Lesson0() {
             .
           </p>
           <p> Apoi, specific pentru acest domeniu ai nevoie de:</p>
-          <ol className="with--count">
+          <List as="ol" variant="count">
             <li>
               <strong>un browser modern și cross-platform </strong>
               (ce poate fi instalat pe
@@ -323,7 +324,7 @@ export default function Lesson0() {
                 .
               </p>
             </li>
-          </ol>
+          </List>
         </section>
         <div className="dots" />
         <section>
@@ -335,7 +336,7 @@ export default function Lesson0() {
             unde poți învăța mai multe. Totuși, nu putem să nu menționăm două site-uri extrem de
             utile și fără de care job-ul de FrontEnd developer ar fi mult mai frustrant:
           </p>
-          <ol className="with--count">
+          <List as="ol" variant="count">
             <li>
               <a target="_blank" rel="noreferrer" href="https://developer.mozilla.org/en-US/" className="text-bold">MDN - Mozilla Developer Network</a>
               {' '}
@@ -398,7 +399,7 @@ export default function Lesson0() {
                 .
               </p>
             </li>
-          </ol>
+          </List>
         </section>
         {/* FIXME: uncomment this */}
         {/* <div className="text-center my-5">

@@ -9,6 +9,7 @@ import Button from '~/components/Button';
 import styles from './AccountTooltip.module.scss';
 import { useOutsideClick } from '~/services/Hooks';
 import { logoutUser } from '~/redux/user/user.actions';
+import List from '~/components/List';
 
 function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
   const ref = useRef(null);
@@ -40,7 +41,7 @@ function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
         />
       </Button>
       {isOpen && (
-        <ul className="menu">
+        <List className="menu">
           <li>
             <Link href={`/${user.info.username}`}>
               <a className="no-underline">
@@ -60,7 +61,7 @@ function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
               Sign out
             </a>
           </li>
-        </ul>
+        </List>
       )}
     </div>
   );

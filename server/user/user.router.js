@@ -109,6 +109,7 @@ userRouter.post('/register', async function register(req, res) {
   const existingUser = await UserModel.getUser({ email, username });
   if (existingUser) {
     new ServerError(400, '⛔ Ai uitat că te-ai înregistrat cu acest email?').send(res);
+    return;
   }
 
   const hashedPassword = await bcrypt.hash(password, +process.env.SALT_ROUNDS);

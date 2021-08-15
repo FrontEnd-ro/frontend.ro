@@ -60,7 +60,7 @@ async function findUserBy(filters):Promise<UserDocumentInterface|null> {
   return user || null;
 }
 
-export {
+export default {
   User,
   UsersSchema,
   ping,

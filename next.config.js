@@ -2,7 +2,7 @@
 const path = require('path');
 
 module.exports = {
-  distDir: 'dist',
+  distDir: 'build/dist',
   env: {
     APP_ENV: process.env.APP_ENV,
     ENDPOINT: process.env.ENDPOINT,

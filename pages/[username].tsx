@@ -1,7 +1,7 @@
 import React from 'react';
 import NotFoundPage from './404';
 import UserProfile from '~/components/user-profile/UserProfile';
-import { findUserBy, sanitize } from '../shared/user.shared-model';
+import SharedUserModel from '../shared/user.shared-model'; 
 
 export default function Username(props: any) {
   // eslint-disable-next-line react/destructuring-assignment
@@ -9,7 +9,7 @@ export default function Username(props: any) {
 }
 
 export async function getServerSideProps({ res, params }) {
-  const user = await findUserBy({ username: params.username });
+  const user = await SharedUserModel.findUserBy({ username: params.username });
 
   if (!user) {
     res.statusCode = 404;
@@ -19,7 +19,7 @@ export async function getServerSideProps({ res, params }) {
     };
   }
 
-  const sanitizedUser = sanitize(user);
+  const sanitizedUser = SharedUserModel.sanitize(user);
   delete sanitizedUser.lastLogin;
 
   return {

@@ -7,7 +7,8 @@ import {
   UserDocumentInterface,
   UserInterface,
 } from "../types/type";
-import { UsersSchema, User,ping,findUserBy,sanitize } from "../../shared/user.shared-model";
+import UserSharedModel from "../../shared/user.shared-model";
+// { UsersSchema, User,ping,findUserBy,sanitize } 
 import {
   AUTH_EXPIRATION,
   ServerError,
@@ -18,10 +19,10 @@ import {
 
 class UserModel {
   static async search():Promise<UserDocumentInterface[]> {
-    return User.find({});
+    return UserSharedModel.User.find({});
   }
 
-  static ping = ping;
+  static ping = UserSharedModel.ping;
 
   static async verify(username:String, password:String): Promise<boolean> {
     const user = await UserModel.findUserBy({ username });
@@ -40,9 +41,9 @@ class UserModel {
   }
 
   static create(payload:UserInterface): Promise<UserDocumentInterface> {
-    validateAgainstSchemaProps(payload, UsersSchema);
+    validateAgainstSchemaProps(payload, UserSharedModel.UsersSchema);
 
-    const user = new User(payload);
+    const user = new UserSharedModel.User(payload);
 
     return new Promise<UserDocumentInterface>((resolve, reject) => {
       user.save((err) => {
@@ -56,13 +57,13 @@ class UserModel {
     });
   }
 
-  static findUserBy = findUserBy;
+  static findUserBy = UserSharedModel.findUserBy;
 
   static async getUser({
     username,
     email,
   }: SearchUser): Promise<UserDocumentInterface | null> {
-    const user = await User.findOne({
+    const user = await UserSharedModel.User.findOne({
       $or: [{ username }, { email }],
     });
 
@@ -72,7 +73,7 @@ class UserModel {
   //Payload need a specific type that resemble the user posible updates
   static async update(_id:Schema.Types.ObjectId, payload:any): Promise<UserDocumentInterface> {
     validateObjectId(_id);
-    const user = await User.findById(_id);
+    const user = await UserSharedModel.User.findById(_id);
 
     if (!user) {
       throw new ServerError(
@@ -81,7 +82,7 @@ class UserModel {
       );
     }
 
-    validateAgainstSchemaProps(payload, UsersSchema);
+    validateAgainstSchemaProps(payload, UserSharedModel.UsersSchema);
     Object.assign(user, payload);
 
     await user.save();
@@ -89,7 +90,7 @@ class UserModel {
   }
 
   static async delete(_id:Schema.Types.ObjectId): Promise<void> {
-    await User.findOneAndDelete({ _id });
+    await UserSharedModel.User.findOneAndDelete({ _id });
   }
 
   static generateJwtForUser(_id: Schema.Types.ObjectId): String {
@@ -99,7 +100,7 @@ class UserModel {
     });
   }
 
-  static sanitize = sanitize;
+  static sanitize = UserSharedModel.sanitize;
 
   static validateUsername(username:string): IReturnValidateUser {
     const RESTRICTED_USERNAMES = ["lectii", "settings", ""];
@@ -128,7 +129,7 @@ class UserModel {
     github_access_token:String
   ): Promise<UserDocumentInterface> {
     validateObjectId(_id);
-    const user:UserDocumentInterface = await User.findById(_id);
+    const user:UserDocumentInterface = await UserSharedModel.User.findById(_id);
 
     if (!user) {
       throw new ServerError(

@@ -117,7 +117,7 @@ interface LastDoneTask{
   lastDoneTask:String;
 }
 
-export {
+export type {
   UserDocumentInterface,
   SubmissionInterface,
   FeedbackInterface,

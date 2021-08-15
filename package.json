@@ -44,19 +44,17 @@
     "dev:local": "nodemon server/server.js --watch server",
     "dev": "node server/local-server.js",
     "prebuild": "yarn lint",
-    "build": "next build",
+    "build": "rm -rf build && tsc -p ./server/ && next build && cp .env build",
     "postbuild": "next-sitemap --config sitemap.js",
-    "start": "node server/server.js",
+    "start": "tsc -p ./server/",
     "lint": "eslint pages/**/*.tsx client/**/*.tsx",
     "deploy:master-dev": "git push dev master:master",
     "deploy:master-prod": "git push heroku master:master",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
-    "ts":"tsc -watch",
-    "test":"rmdir /F/S \"./build\" && ls",
-    "ts:build":" tsc -p ./server/",
-    "dev:server":"node ./build/server/server.js"
+    "ts:build":"tsc -p ./server/",
+    "dev:server":"node ./server/build/server.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.3.0",

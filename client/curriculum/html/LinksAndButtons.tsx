@@ -15,7 +15,6 @@ import Lesson, {
   LessonFirstSentence,
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
-import coverSvg from '~/public/images/lessons/links-and-buttons/cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
@@ -58,7 +57,7 @@ export default function LinksAndButtonsLesson() {
         title={`${lessonInfo.title} | Lecție HTML`}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons.jpg`}
+        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_1200w.jpg`}
       />
       <Lesson
         id={lessonInfo.id}
@@ -68,11 +67,9 @@ export default function LinksAndButtonsLesson() {
       >
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: coverSvg,
-            }}
+          <img
+            alt="Doodle reprezentând un buton și mai multe linkuri"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_2400w.jpg`}
           />
         </LessonCover>
         <LessonFirstSentence>

@@ -11,7 +11,6 @@ import Lesson, {
   LessonFirstSentence,
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
-import coverSvg from '~/public/images/lessons/lists__cover.svg';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 
@@ -37,17 +36,16 @@ export default function ListsLesson() {
     <>
       <SEOTags
         title={`${lessonInfo.title} | Lecție HTML`}
-        shareImage="https://frontend.ro/seo/html-lists.jpg"
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
+        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_1200w.jpg`}
       />
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          {/* eslint-disable-next-line react/no-danger */}
-          <div dangerouslySetInnerHTML={{
-            __html: coverSvg,
-          }}
+          <img
+            alt="Doodle pentru un todo list"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_2400w.jpg`}
           />
         </LessonCover>
         <LessonFirstSentence>

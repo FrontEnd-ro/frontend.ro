@@ -125,7 +125,7 @@ export const LESSONS: LessonDescription[] = [
     description: 'Hai să vorbim despre cele 3 tipuri de liste și când să-l folosești pe fiecare.',
     url: '/html/liste',
     contributors: [Diana],
-    cover: '/images/lessons/lists__cover.svg',
+    cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
     type: 'html',
   },
   {

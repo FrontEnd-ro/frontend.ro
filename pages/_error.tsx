@@ -1,4 +1,6 @@
-function Error({ statusCode }) {
+import { NextPageContext } from 'next';
+
+function Error({ statusCode }: { statusCode: number }) {
   return (
     <p>
       {statusCode
@@ -8,8 +10,18 @@ function Error({ statusCode }) {
   );
 }
 
-Error.getInitialProps = ({ res, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+Error.getInitialProps = ({ res, err }: NextPageContext) => {
+  // Default code
+  let statusCode = 500;
+
+  if (res) {
+    statusCode = res.statusCode;
+  } else if (err) {
+    statusCode = err.statusCode;
+  } else {
+    console.error('[Error.getInitialProps] Neither `res` nor `err` are defined. ');
+  }
+
   return { statusCode };
 };
 

@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
-import React, { useState, PropsWithChildren, ReactElement } from 'react';
+import React, {
+  useState, PropsWithChildren, ReactElement, useEffect,
+} from 'react';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import AsideMenu from '../AsideMenu/AsideMenu';
@@ -17,7 +19,14 @@ function PageWithAsideMenu({ children, menu }: PropsWithChildren<Props>) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
-  router.events.on('routeChangeStart', () => setIsMenuOpen(false));
+  useEffect(() => {
+    const handleRouteChange = () => setIsMenuOpen(false);
+    router.events.on('routeChangeStart', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+  }, []);
 
   return (
     <div className={`${styles['page-with-aside-menu']} d-flex`}>

@@ -6,7 +6,7 @@ import {
   StatsCardLayout3,
   StatsCardLayout4,
   StatsCardLayout6,
-} from '~/components/PlatformStats/v2/StatsCards';
+} from '~/components/PlatformStats';
 
 function EventsStats() {
   return (

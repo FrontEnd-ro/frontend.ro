@@ -6,7 +6,7 @@ import {
   StatsCardLayout4,
   StatsCardLayout5,
   StatsCardLayout6,
-} from '~/components/PlatformStats/v2/StatsCards';
+} from '~/components/PlatformStats';
 import { Pava } from '~/services/contributors.storybook';
 
 export default {

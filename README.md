@@ -10,9 +10,17 @@
 ## Install & Run 
 
 1. Install all the dependencies by running `yarn` in the root folder.
-2. Create a `.env` file in root and add the following line 
+2. Create a `.env` file in root and add the following content
 
 ```
+PORT=3300
+
+# App environment
+APP_ENV=development
+
+# Aws
+CLOUDFRONT_PUBLIC=https://d3tycb976jpudc.cloudfront.net
+
 ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
 ```
 

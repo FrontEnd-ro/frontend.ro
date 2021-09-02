@@ -34,8 +34,11 @@ function PasswordReveal({
           className="absolute text-grey"
           onClick={() => setVisible(!visible)}
           title={visible ? 'Hide password' : 'Show password'}
+          style={{
+            marginTop: "-6px"
+          }}
         >
-          <FontAwesomeIcon icon={visible ? faEye : faEyeSlash} />
+          <FontAwesomeIcon icon={visible ? faEye : faEyeSlash} className="position" />
         </Button>
       </div>
       {passwordError

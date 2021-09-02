@@ -38,7 +38,7 @@ function PasswordReveal({
             marginTop: "-6px"
           }}
         >
-          <FontAwesomeIcon icon={visible ? faEye : faEyeSlash} className="position" />
+          <FontAwesomeIcon icon={visible ? faEye : faEyeSlash} />
         </Button>
       </div>
       {passwordError

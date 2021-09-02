@@ -28,6 +28,7 @@ function Containers() {
     },
     { title: 'Nav', id: 'nav' },
     { title: 'Article', id: 'article' },
+    { title: 'Section', id: 'section' },
     { title: 'Div', id: 'div' },
     {
       title: 'De ce e important ce container folosim?',
@@ -223,6 +224,43 @@ function Containers() {
             {chapters[4].title}
           </LessonHeading>
           <p>
+            Elementul
+            {' '}
+            <FormattedText as="strong">
+              {'<section>'}
+            </FormattedText>
+            {' '}
+            îl vom folosi pentru secțiuni generice dintr-un document/articol, fiecare cu
+            titlul (heading) propriu.
+          </p>
+          <p>
+            În această pagină de exemplu, fiecare sub-capitol se află într-o secțiune proprie:
+          </p>
+          <Highlight
+            language="html"
+            className="my-5"
+            code={`
+<article>
+  <section>
+    <h2> De ce e important ce container folosim? </h2>
+    <p>
+      ...
+    </p>
+  </section>
+  <section>
+    <h2> Exerciții </h2>
+    <p>
+      ...
+    </p>
+  </section>
+</article>`}
+          />
+        </section>
+        <section>
+          <LessonHeading as="h2" id={chapters[5].id}>
+            {chapters[5].title}
+          </LessonHeading>
+          <p>
             Și am ajuns în sfârșit și la
             {' '}
             <FormattedText as="strong">
@@ -283,8 +321,8 @@ function Containers() {
           />
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[5].id}>
-            {chapters[5].title}
+          <LessonHeading as="h2" id={chapters[6].id}>
+            {chapters[6].title}
           </LessonHeading>
           <p>
             La prima vedere ai putea crede că nu prea contează ce containere folosim.

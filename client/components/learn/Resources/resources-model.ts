@@ -276,6 +276,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/bundlephobia_500w.png`,
     },
     {
+      title: 'SVGOMG - Optimize SVGs',
+      url: 'https://jakearchibald.github.io/svgomg/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/svgomg_500w.png`,
+    },
+    {
       title: 'TinyPNG',
       url: 'https://tinypng.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/tinypng_500w.jpg`,

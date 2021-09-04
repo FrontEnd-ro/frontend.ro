@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from '../client/redux/root.reducer';
 
-import { withNextRouter } from 'storybook-addon-next-router';
+import  { withNextRouter } from '@gogaille/storybook-addon-next-router';
 
 export const decorators = [withNextRouter()];
 

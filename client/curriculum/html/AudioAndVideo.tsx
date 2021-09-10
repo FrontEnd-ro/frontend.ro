@@ -53,8 +53,8 @@ export default function VideoAndAudioLesson() {
           noi? Ei bine, hai să vedem cum putem face asta.
         </LessonFirstSentence>
         <section>
-          <LessonHeading as="h3" id="audio-element">
-            {'Elementul <audio>'}
+          <LessonHeading as="h3" id={chapters[0].id}>
+            {chapters[0].title}
           </LessonHeading>
           <p>
             Elementul
@@ -152,8 +152,8 @@ export default function VideoAndAudioLesson() {
 
         </section>
         <section>
-          <LessonHeading as="h3" id="atributele-elementului-audio">
-            {'Atributele principale ale elementului <audio>'}
+          <LessonHeading as="h3" id={chapters[1].id}>
+            {chapters[1].title}
           </LessonHeading>
           <List variant="bullets">
             <li className="mb-4">
@@ -205,8 +205,8 @@ export default function VideoAndAudioLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h3" id="video-element">
-            {'Elementul <video>'}
+          <LessonHeading as="h3" id={chapters[2].id}>
+            {chapters[2].title}
           </LessonHeading>
           <p>
             Elementul
@@ -262,8 +262,8 @@ export default function VideoAndAudioLesson() {
           />
         </section>
         <section>
-          <LessonHeading as="h3" id="atributele-elementului-video">
-            {'Atributele principale elementului <video>'}
+          <LessonHeading as="h3" id={chapters[3].id}>
+            {chapters[3].id}
           </LessonHeading>
           <p>
             Trebuie să știi că toate

@@ -36,7 +36,7 @@ export default function VideoAndAudioLesson() {
         url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage="https://d3tycb976jpudc.cloudfront.net/seo/html-audio-video.jpg"
       />
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
+      <Lesson withExercises={false} id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover resizeOffset={250}>
           <div

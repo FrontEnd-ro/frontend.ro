@@ -31,20 +31,20 @@ export default function Audio() {
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <audio style={{ border: '1px solid #000' }} controls>
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.mp3`}
-                type="audio/mpeg"
+                src={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}
+                type="audio/mp4"
               />
 
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.aac`}
-                type="audio/aac"
+                src={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.mp3`}
+                type="audio/mpeg"
               />
 
               <p>
                 Browser-ul tău nu suportă fișiere audio.
                 Folosește
                 {' '}
-                <a href={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.mp3`}>acest link</a>
+                <a href={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}>acest link</a>
                 pentru a-l putea vizualiza.
               </p>
             </audio>
@@ -55,18 +55,18 @@ export default function Audio() {
             code={`
 <audio controls>
   <source
-    src="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.mp3"
+    src="${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a"
     type="audio/mpeg"
   />
 
   <source
-    src="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.aac"
-    type="audio/aac"
+    src="${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.mp3"
+    type="audio/mpeg"
   />
 
   <p>
     Browser-ul tău nu suportă fișiere audio. Folosește
-    <a href="${process.env.CLOUDFRONT_PUBLIC} /demo-assets/audio-video/big-buck-bunny-audio.mp3">
+    <a href="${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a">
       acest link
     </a>
     pentru a-l putea vizualiza.

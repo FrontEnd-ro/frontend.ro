@@ -29,22 +29,22 @@ export default function Video() {
           </p>
           <DemoPreview>
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-            <video muted autoPlay controls width="350" height="250">
+            <video muted autoPlay controls width="480" height="270">
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}
+                src={`${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4`}
                 type="video/mp4"
               />
 
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.avi`}
-                type="video/avi"
+                src={`${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mkv`}
+                type="video/x-matroska"
               />
 
               <p>
                 Browser-ul tău nu suportă fișiere video.
                 Folosește
                 {' '}
-                <a href={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}>acest link</a>
+                <a href={`${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4`}>acest link</a>
                 pentru a-l putea vizualiza.
               </p>
 
@@ -56,18 +56,18 @@ export default function Video() {
             code={`
 <video muted autoplay controls width="350" height="250">
   <source
-    src="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4"
+    src="${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4"
     type="video/mp4"
   />
 
   <source
-    src="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.avi"
-    type="video/avi"
+    src="${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mkv"
+    type="video/x-matroska"
   />
 
   <p>
     Browser-ul tău nu suportă fișiere video. Folosește
-    <a href="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4">
+    <a href="${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4">
       acest link
     </a>
     pentru a-l putea vizualiza.

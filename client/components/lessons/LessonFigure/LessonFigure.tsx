@@ -13,7 +13,7 @@ export default function LessonFigure(
     <figure className={`${styles.figure} ${withBorder && styles['figure--border']} d-flex flex-column justify-content-between text-center`}>
       {isVideo ? (
         <div>
-          <video muted autoPlay loop>
+          <video muted autoPlay loop controls>
             <source src={src} type="video/mp4" />
           </video>
         </div>

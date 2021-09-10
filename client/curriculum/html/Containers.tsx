@@ -52,7 +52,7 @@ function Containers() {
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img alt="TODO" src={coverImage} />
+          <img alt="Doodle cu o cutie" src={coverImage} />
         </LessonCover>
         <LessonFirstSentence>
           Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru

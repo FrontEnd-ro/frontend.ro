@@ -19,10 +19,25 @@ import { getLessonById } from '~/services/Constants';
 import List from '~/components/List';
 
 const chapters = [
-  { title: 'Elementul <audio>', id: 'audio-element' },
-  { title: 'Atributele elementului <audio>', id: 'atributele-elementului-audio' },
-  { title: 'Elementul <video>', id: 'video-element' },
-  { title: 'Atributele elementului <video>', id: 'atributele-elementului-video' },
+  {
+    title: 'Elementul <audio>',
+    id: 'audio-element',
+    subchapters: [{
+      title: 'Atributele elementului <audio>',
+      id: 'atributele-elementului-audio',
+    }],
+  },
+  {
+    title: 'Elementul <video>',
+    id: 'video-element',
+    subchapters: [{
+      title: 'Atributele elementului <video>',
+      id: 'atributele-elementului-video',
+    }, {
+      title: 'Subtitrări sau Captions',
+      id: 'subtitles-captions',
+    }],
+  },
 ];
 
 export default function VideoAndAudioLesson() {
@@ -117,20 +132,19 @@ export default function VideoAndAudioLesson() {
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <audio style={{ border: '1px solid #000' }} controls className="mb-2">
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.mp3`}
-                type="audio/mpeg"
+                src={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}
+                type="audio/mp4"
               />
-
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.aac`}
-                type="audio/aac"
+                src={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.mp3`}
+                type="audio/mpeg"
               />
 
               <p>
                 Browser-ul tău nu suportă fișiere audio.
                 Folosește
                 {' '}
-                <a href={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-audio.mp3`}>acest link</a>
+                <a href={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}>acest link</a>
                 pentru a-l putea vizualiza.
               </p>
             </audio>
@@ -152,9 +166,22 @@ export default function VideoAndAudioLesson() {
 
         </section>
         <section>
-          <LessonHeading as="h3" id={chapters[1].id}>
-            {chapters[1].title}
+          <LessonHeading as="h3" id={chapters[0].subchapters[0].id}>
+            {chapters[0].subchapters[0].title}
           </LessonHeading>
+          <p>
+            Pentru a vedea lista întreaga a atributelor,
+            {' '}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#attributes"
+            >
+              accesează MDN
+            </a>
+            .
+            Aici le vom prezenta pe cele mai des întâlnite:
+          </p>
           <List variant="bullets">
             <li className="mb-4">
               <FormattedText as="strong">src</FormattedText>
@@ -205,8 +232,8 @@ export default function VideoAndAudioLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h3" id={chapters[2].id}>
-            {chapters[2].title}
+          <LessonHeading as="h3" id={chapters[1].id}>
+            {chapters[1].title}
           </LessonHeading>
           <p>
             Elementul
@@ -256,14 +283,14 @@ export default function VideoAndAudioLesson() {
           <LessonFigure
             isVideo
             withBorder
-            src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4`}
             alt="Exemplu de utilizare a elementului <video>"
             demo="/demo/html/video"
           />
         </section>
         <section>
-          <LessonHeading as="h3" id={chapters[3].id}>
-            {chapters[3].id}
+          <LessonHeading as="h3" id={chapters[1].subchapters[0].id}>
+            {chapters[1].subchapters[0].title}
           </LessonHeading>
           <p>
             Trebuie să știi că toate
@@ -331,20 +358,116 @@ export default function VideoAndAudioLesson() {
 </video>
 `}
           />
+          <LessonTip>
+            Aici am prezentat doar cele mai des întâlnite atribute. Pentru lista întreagă,
+            aruncă un ochi pe
+            {' '}
+            <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes" rel="noreferrer">
+              MDN
+            </a>
+            .
+          </LessonTip>
+        </section>
+        <section>
+          <LessonHeading as="h3" id={chapters[1].subchapters[1].id}>
+            {chapters[1].subchapters[1].title}
+          </LessonHeading>
+          <p>
+            Unui element video putem să-i atașăm subtitrări sau captions.
+            Mai întâi creem un fișier în format
+            {' '}
+            <FormattedText>
+              .vtt
+            </FormattedText>
+            {' '}
+            unde vom configura timpii subitrării:
+          </p>
+          <Highlight
+            language="html"
+            className="my-5"
+            code={`
+WEBVTT
+
+00:00.700 --> 00:04.000
+Ca și FrontEnd developer vei lucra cu 3 limbaje de programare:
+
+00:04.500 --> 00:08.000
+HTML (Hyper Text Markup Language)
+CSS (Cascading Style Sheets)
+și JavaScript`}
+          />
+          <p>
+            iar apoi îl legăm de
+            <strong> video </strong>
+            prin elementul
+            {' '}
+            <FormattedText>
+              {'<track>'}
+            </FormattedText>
+          </p>
+
+          <Highlight
+            language="html"
+            code={`
+<video muted autoplay controls>
+  
+  <source 
+    type="video/mp4"
+    src="https://d3tycb976jpudc.cloudfront.net/public/video/video-element-demo.mp4"  
+  />
+  
+  <track default srclang="ro" src="/video/captions.vtt" />
+
+</video>
+`}
+          />
+
+          <LessonTip>
+            Sursa elementului
+            {' '}
+            <strong> track </strong>
+            {' '}
+            trebuie să fie pe aceeași origine cu pagina
+            pentru a funcționa.
+          </LessonTip>
+
+          <video muted autoPlay controls style={{ maxWidth: '100%' }}>
+            <source
+              src={`${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4`}
+              type="video/mp4"
+            />
+
+            <source
+              src={`${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mkv`}
+              type="video/x-matroska"
+            />
+
+            <track
+              default
+              srcLang="ro"
+              src="/video/captions.vtt"
+            />
+          </video>
+
         </section>
         <div className="dots" />
         <LessonResources
           className="my-5"
           links={[
             {
-              text: 'Documentatia completa a elementului <audio> pe MDN',
+              text: 'Documentatia elementului <audio> pe MDN',
               url:
                 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio',
             },
             {
-              text: 'Documentatia completa a elementului <video> pe MDN',
+              text: 'Documentatia elementului <video> pe MDN',
               url:
                 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video',
+            },
+            {
+              text: 'Documentatia elementului <track> pe MDN',
+              url:
+                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track',
             },
           ]}
         />

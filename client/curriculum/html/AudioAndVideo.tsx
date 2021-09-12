@@ -281,7 +281,7 @@ export default function VideoAndAudioLesson() {
           <LessonFigure
             isVideo
             withBorder
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4`}
+            src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}
             alt="Exemplu de utilizare a elementului <video>"
             demo="/demo/html/video"
           />

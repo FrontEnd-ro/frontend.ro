@@ -66,7 +66,7 @@ export default function VideoAndAudioLesson() {
           noi? Ei bine, hai să vedem cum putem face asta.
         </LessonFirstSentence>
         <section>
-          <LessonHeading as="h3" id={chapters[0].id}>
+          <LessonHeading as="h2" id={chapters[0].id}>
             {chapters[0].title}
           </LessonHeading>
           <p>
@@ -230,7 +230,7 @@ export default function VideoAndAudioLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h3" id={chapters[1].id}>
+          <LessonHeading as="h2" id={chapters[1].id}>
             {chapters[1].title}
           </LessonHeading>
           <p>

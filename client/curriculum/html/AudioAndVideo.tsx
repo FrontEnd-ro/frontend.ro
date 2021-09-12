@@ -13,7 +13,6 @@ import Lesson, {
 import Highlight from '~/components/Highlight/Highlight';
 import { DemoPreview } from '~/components/demo';
 
-import coverSvg from '~/public/images/lessons/audio-and-video__cover.svg';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 import List from '~/components/List';
@@ -43,23 +42,22 @@ const chapters = [
 export default function VideoAndAudioLesson() {
   const lessonInfo = getLessonById('audio-video');
 
+  // SEO image must be exactly 1200x630
+  const seoImage = `${process.env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_1200w.jpg`;
+  const coverImage = `${process.env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_2400w.jpg`;
+
   return (
     <>
       <SEOTags
         title={`${lessonInfo.title} | Lecție HTML`}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
-        shareImage="https://d3tycb976jpudc.cloudfront.net/seo/html-audio-video.jpg"
+        shareImage={seoImage}
       />
       <Lesson withExercises={false} id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
-        <LessonCover resizeOffset={250}>
-          <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: coverSvg,
-            }}
-          />
+        <LessonCover>
+          <img alt="Doodle cu un audio waveform și un video" src={coverImage} />
         </LessonCover>
         <LessonFirstSentence>
           În lecția anterioară am aflat cum putem adăuga imagini pe site-urile

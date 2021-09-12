@@ -429,7 +429,7 @@ CSS (Cascading Style Sheets)
             pentru a funcționa.
           </LessonTip>
 
-          <video muted autoPlay controls style={{ maxWidth: '100%' }} loop>
+          <video muted autoPlay controls loop className="max-w-full">
             <source
               src={`${process.env.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4`}
               type="video/mp4"

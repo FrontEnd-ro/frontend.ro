@@ -53,6 +53,23 @@ ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
 
 Then run the local server using `yarn dev:local`. Get in touch with us for more details.
 
+## Database Backup & Restore
+
+To reduce costs we're currently doing manual backups of our MongoDB database.
+
+We're using the [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), specifically [mongodump](https://docs.mongodb.com/database-tools/mongodump) and [mongorestore](https://docs.mongodb.com/database-tools/mongorestore/).
+
+We have 2 NPM scripts
+
+```
+yarn mongodump
+yarn mongorestore
+```
+
+that we use for backup/restore. We "hook" into the same `.env` file to get the `DB_CONNECT` string and the `MONGODB_DUMP_DIR`.
+
+> Both of them assume that MongoDB Tools is already installed. Have a look here for [instructions depending on your OS](https://docs.mongodb.com/database-tools/installation/installation/).
+
 ## License
 
 This project has a dual-licence split between the source code of the UI components used and the curriculum content.

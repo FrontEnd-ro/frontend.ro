@@ -33,3 +33,5 @@ storybook-static/
 
 #IDE
 .idea/
+
+mongodb_dump

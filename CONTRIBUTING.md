@@ -16,19 +16,27 @@ For points 2 & 3 get in touch with us via **social media** or **email** at [hell
 
 ## Commit Messages
 
-Every commit should be "tagged" in such a way that it's easy to scan through them:
+Every commit message should have an associated issue that describes the feature/bug/idea in more details.
 
-1. `[FeatureName] Description` -> general commit when adding new features
+The name of the commit should follow this format:
 
-2. `[BUGFIX][FeatureName] Description` -> fixing bugs
+```
+{issue_name} ({issue_url})
+```
 
-3. `[FIXUP][FeatureName] Description` -> when immediately after a merge we discovered some bugs related to that feature.
+For example, the commit message for this issue: https://github.com/FrontEnd-ro/frontend.ro/issues/297 should be:
 
-4. `[DOCS] Description` -> modifying README.md, CONTRIBUTORS.md or anything related to documentation
+```
+Upgrade to Next11 (https://github.com/FrontEnd-ro/frontend.ro/issues/297)
+```
 
-5. `[COSMETIC] Description` -> when commiting cosmetic fixes like indentation, eslint fixes, so on...
 
-6. `[REFACTOR][FeatureName] Description` -> when refactoring code without adding any new functionality
+
+### Exceptions
+
+If we have commits that are only COSMETIC (ie: changing formatting but not actual code), we can simply name them by prepending `[COSMETIC]`.
+
+Example: `[COSMETIC] Fix eslint warnings`.
 
 ## FrontEnd Style Guide
 

@@ -53,9 +53,10 @@ ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
 
 Then run the local server using `yarn dev:local`. Get in touch with us for more details.
 
-## Database Backup & Restore
+## Database Dump, Restore and Backup
 
-To reduce costs we're currently doing manual backups of our MongoDB database.
+To reduce costs we're currently doing manual dumps and backup of our MongoDB database.
+## Dump & Restore
 
 We're using the [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), specifically [mongodump](https://docs.mongodb.com/database-tools/mongodump) and [mongorestore](https://docs.mongodb.com/database-tools/mongorestore/).
 
@@ -66,9 +67,22 @@ yarn mongodump
 yarn mongorestore
 ```
 
-that we use for backup/restore. We "hook" into the same `.env` file to get the `DB_CONNECT` string and the `MONGODB_DUMP_DIR`.
+that we use for dump/restore. We "hook" into the same `.env` file to get the `DB_CONNECT` string and the `MONGODB_DUMP_DIR`.
 
 > Both of them assume that MongoDB Tools is already installed. Have a look here for [instructions depending on your OS](https://docs.mongodb.com/database-tools/installation/installation/).
+
+## Backup
+
+For backup we're storing the dumps on AWS S3 by using the [AWS Cli v2](https://docs.aws.amazon.com/cli/).
+
+We have an NPM script that reads from `.env` and calls a specific **cli command**.
+
+```
+yarn upload-mongodump-s3
+```
+
+> This doesn't work unless you're authenticated into AWS Cli with a pair Access key ID / Secret access key that has Write permission to our S3 bucket.
+
 
 ## License
 

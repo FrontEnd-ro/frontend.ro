@@ -58,7 +58,8 @@
     "build-storybook": "build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
     "mongodump": "node mongodump.js",
-    "mongorestore": "node mongorestore.js"
+    "mongorestore": "node mongorestore.js",
+    "upload-mongodump-s3": "node upload-mongodump-s3"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.3.0",

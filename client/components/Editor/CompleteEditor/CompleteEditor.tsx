@@ -207,7 +207,7 @@ class MonacoEditor extends MonacoBase {
           return Promise.all(
             emptyDecorations.map((dec) => SubmissionService.markFeedbackAsDone(dec._id)),
           ).then((resp) => {
-            resp.forEach((_, index) => this.onFeedbackDone(emptyDecorations[index].id));
+            resp.forEach((_, index) => this.onFeedbackDone(emptyDecorations[index]._id));
             return resp;
           });
         },

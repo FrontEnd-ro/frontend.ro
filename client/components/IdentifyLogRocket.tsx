@@ -15,6 +15,11 @@ function IdentifyLogrocket({ userInfo }: ConnectedProps<typeof connector>) {
       return;
     }
 
+    if (userInfo?.role === 'admin') {
+      console.info("Don't initialize LogRocket for admin users.");
+      return;
+    }
+
     LogRocketService.init();
 
     if (userInfo) {

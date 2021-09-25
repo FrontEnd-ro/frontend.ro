@@ -5,7 +5,6 @@ import debounce from 'lodash/debounce';
 
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-import Spinner from '~/components/Spinner';
 import Markdown from '~/components/Markdown';
 import { RootState } from '~/redux/root.reducer';
 import { withAuthModal } from '~/services/Hooks';
@@ -25,6 +24,7 @@ import { getLessonById } from '~/services/Constants';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 import Feedbacks from '../Editor/Feedbacks';
 import Button from '../Button';
+import SolveExerciseSkeleton from './SolveExercise.skeleton';
 
 interface Props {
   exerciseId: string;
@@ -258,9 +258,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   }
   if (!submission) {
     return (
-      <PageContainer className="relative">
-        <Spinner showText />
-      </PageContainer>
+      <SolveExerciseSkeleton />
     );
   }
 

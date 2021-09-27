@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '~/components/Button';
+import HorizontalSeparator from '~/components/HorizontalSeparator';
 import styles from './LoginButtons.module.scss';
 
 interface Props {
@@ -24,7 +25,7 @@ export default function LoginButtons({
       >
         Intră în cont
       </Button>
-      <p className="relative"> sau </p>
+      <HorizontalSeparator text="sau" className={styles.separator} />
       <Button
         variant="light"
         type={mode === 'register' ? 'submit' : 'button'}

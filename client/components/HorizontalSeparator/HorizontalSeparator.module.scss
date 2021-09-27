@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+
+.horizontal-separator {
+  background-color: color(white);
+
+  span {
+    z-index: 1;
+    padding: 0 0.5em;
+    background-color: inherit;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    top: 50%;
+    width: 40%;
+    position: absolute;
+    border-top: 1px solid color(silver);
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
+}

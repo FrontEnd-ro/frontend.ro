@@ -10,6 +10,7 @@ interface Props {
   name?: string;
   autoComplete?: string;
   passwordError?: boolean;
+  onInput?: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 const PasswordReveal = React.forwardRef(({
@@ -17,6 +18,7 @@ const PasswordReveal = React.forwardRef(({
   name = 'password',
   autoComplete = 'on',
   passwordError = false,
+  onInput,
 }: Props, forwardRef: React.RefObject<HTMLInputElement>) => {
   const [visible, setVisible] = useState(false);
 
@@ -29,6 +31,7 @@ const PasswordReveal = React.forwardRef(({
           name={name}
           required={required}
           autoComplete={autoComplete}
+          onInput={onInput}
         />
 
         <Button

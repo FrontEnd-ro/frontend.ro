@@ -12,18 +12,19 @@ interface Props {
   passwordError?: boolean;
 }
 
-function PasswordReveal({
+const PasswordReveal = React.forwardRef(({
   required = true,
   name = 'password',
   autoComplete = 'on',
   passwordError = false,
-}: Props) {
+}: Props, forwardRef: React.RefObject<HTMLInputElement>) => {
   const [visible, setVisible] = useState(false);
 
   return (
     <div className={styles['password-reveal']}>
       <div className="relative">
         <input
+          ref={forwardRef}
           type={visible ? 'text' : 'password'}
           name={name}
           required={required}
@@ -43,6 +44,6 @@ function PasswordReveal({
         : null}
     </div>
   );
-}
+});
 
 export default PasswordReveal;

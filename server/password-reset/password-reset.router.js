@@ -25,7 +25,7 @@ passwordResetRouter.post('/', async function generateResetCode(req, res) {
     EmailService.sendTemplateWithAlias(email, "password-reset", {
       "name": user.name,
       "resetCode": resetCode.code,
-      "resetLink": "https://frontend.ro?reset_password",
+      "resetLink": "https://frontend.ro/auth?reset_password",
       "sender_name": "Păvă",
     })
     res.status(200).send();

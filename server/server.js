@@ -21,6 +21,7 @@ const challengeRouter = require('./challenge/challenge.router.js');
 const lessonRouter = require('./lesson/lesson.router');
 const presentationRouter = require('./presentation/presentation.router');
 const applicationConfigRouter = require('./application-config/application-config.router');
+const passwordResetRouter = require('./password-reset/password-reset.router');
 
 const port = process.env.PORT || 3300;
 const app = express();
@@ -58,6 +59,7 @@ app.use('/api/challenges', challengeRouter);
 app.use('/api/lessons', lessonRouter);
 app.use('/api/presentations', presentationRouter);
 app.use('/api/application-config', applicationConfigRouter);
+app.use('/api/password-reset', passwordResetRouter);
 
 app.get('*', (req, res) => {
   nextHandler(req, res, req.url);

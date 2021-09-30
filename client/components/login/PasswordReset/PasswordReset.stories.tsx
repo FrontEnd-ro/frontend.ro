@@ -22,12 +22,14 @@ PasswordReset.args = {
 export const PasswordResetLoading = Template.bind({});
 PasswordResetLoading.args = {
   loading: true,
+  buttonVariant: 'success',
   onReset: (resetCode, newPassword) => console.log(resetCode, newPassword),
 };
 
 export const PasswordResetDisabled = Template.bind({});
 PasswordResetDisabled.args = {
   disabled: true,
+  buttonVariant: 'light',
   onReset: (resetCode, newPassword) => console.log(resetCode, newPassword),
 };
 

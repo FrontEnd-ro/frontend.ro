@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import Button from '~/components/Button';
+import Button, { Variant } from '~/components/Button';
 import Form, { FormGroup, PasswordReveal } from '../../Form';
 
 import styles from './PasswordReset.module.scss';
@@ -12,6 +12,7 @@ interface Props {
   disabled?: boolean;
   className?: string;
   characterCount?: number;
+  buttonVariant?: Variant;
 }
 
 const PasswordReset = ({
@@ -20,6 +21,7 @@ const PasswordReset = ({
   loading = false,
   disabled = false,
   characterCount = 4,
+  buttonVariant = 'blue',
 }: Props) => {
   const formRef = useRef(null);
   const passwordRef = useRef(null);
@@ -123,7 +125,7 @@ const PasswordReset = ({
       <Button
         className="w-100"
         type="submit"
-        variant="blue"
+        variant={buttonVariant}
         loading={loading}
         disabled={disabled || loading}
       >

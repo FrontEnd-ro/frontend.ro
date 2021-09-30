@@ -82,6 +82,22 @@
       }
     }
   }
+
+  &.btn--link {
+    padding: 0;
+    color: initial;
+    border-radius: 0;
+    background: none;
+    border-bottom: 1px solid currentColor;
+
+    &.btn--loading {
+      border: 0;
+
+      &:before {
+        bottom: 0;
+      }
+    }
+  }
 }
 
 .btn--transparent {

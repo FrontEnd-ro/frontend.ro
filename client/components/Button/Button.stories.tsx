@@ -80,3 +80,14 @@ export const Grey = () => (
     <Button variant="grey" outline> Outline Grey </Button>
   </>
 );
+
+export const Link = () => (
+  <>
+    <Button variant="link" className="mr-2"> Link </Button>
+    <Button variant="link" className="mr-2" disabled> Disabled Link </Button>
+    <Button variant="link" className="mr-2" loading> Loading Link </Button>
+    <Button variant="link" className="mr-2" bouncy> Bouncy Link </Button>
+    <Button variant="link" className="mr-2" withIcon icon={faShare}> Link with icon </Button>
+    <Button variant="link" outline> Outline Link </Button>
+  </>
+);

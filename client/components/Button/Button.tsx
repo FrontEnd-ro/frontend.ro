@@ -12,6 +12,7 @@ interface Props {
   | 'transparent'
   | 'yellow'
   | 'grey'
+  | 'link'
   // We define here the form property because
   // even if it's a valid attribute on buttons, React or TS complain about it.
   form?: string;

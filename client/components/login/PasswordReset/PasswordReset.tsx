@@ -5,9 +5,9 @@ import Form, { FormGroup, PasswordReveal } from '../../Form';
 import styles from './PasswordReset.module.scss';
 
 interface Props {
-  // Returns a Promise that resolves to an error message
-  // or null if the request succeeded.
-  onReset: (code: string, newPassword: string) => Promise<string | null>;
+  // Returns a Promise that rejects with a string error message
+  // or resolves if it worked.
+  onReset: (code: string, newPassword: string) => Promise<void>;
   loading?: boolean;
   disabled?: boolean;
   className?: string;
@@ -35,9 +35,7 @@ const PasswordReset = ({
       resetCode += data[`char${i}`];
     }
 
-    // Do not catch error here.
-    // It should be treated in the parent component
-    onReset(resetCode, data.newPassword).then((errorMessage) => {
+    onReset(resetCode, data.newPassword).catch((errorMessage: string) => {
       setError(errorMessage);
     });
   };

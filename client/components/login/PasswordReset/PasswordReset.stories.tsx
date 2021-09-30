@@ -42,6 +42,10 @@ PasswordResetCode6.args = {
 export const PasswordResetWithError = Template.bind({});
 PasswordResetWithError.args = {
   characterCount: 6,
-  errReason: 'Something went wrong',
-  onReset: (resetCode, newPassword) => console.log(resetCode, newPassword),
+  onReset: (resetCode, newPassword) => {
+    return new Promise((resolve, reject) => {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      reject('Something went wrong!');
+    });
+  },
 };

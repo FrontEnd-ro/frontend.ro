@@ -9,6 +9,7 @@ interface Props {
   // or null if the request succeeded.
   onReset: (code: string, newPassword: string) => Promise<string | null>;
   loading?: boolean;
+  disabled?: boolean;
   className?: string;
   characterCount?: number;
 }
@@ -17,6 +18,7 @@ const PasswordReset = ({
   onReset,
   className = '',
   loading = false,
+  disabled = false,
   characterCount = 4,
 }: Props) => {
   const formRef = useRef(null);
@@ -94,6 +96,7 @@ const PasswordReset = ({
                 maxLength={1}
                 style={{ width: `${80 / characterCount}% ` }}
                 name={`char${index}`}
+                disabled={disabled || loading}
                 onInput={(e) => onCodeInput(e, index)}
                 className="text-center"
               />
@@ -122,7 +125,7 @@ const PasswordReset = ({
         type="submit"
         variant="blue"
         loading={loading}
-        disabled={loading}
+        disabled={disabled || loading}
       >
         Schimbă parola
       </Button>

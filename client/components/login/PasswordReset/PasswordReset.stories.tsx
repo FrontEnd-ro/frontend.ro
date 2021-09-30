@@ -19,6 +19,18 @@ PasswordReset.args = {
   onReset: (resetCode, newPassword) => console.log(resetCode, newPassword),
 };
 
+export const PasswordResetLoading = Template.bind({});
+PasswordResetLoading.args = {
+  loading: true,
+  onReset: (resetCode, newPassword) => console.log(resetCode, newPassword),
+};
+
+export const PasswordResetDisabled = Template.bind({});
+PasswordResetDisabled.args = {
+  disabled: true,
+  onReset: (resetCode, newPassword) => console.log(resetCode, newPassword),
+};
+
 export const PasswordResetCode6 = Template.bind({});
 PasswordResetCode6.args = {
   characterCount: 6,

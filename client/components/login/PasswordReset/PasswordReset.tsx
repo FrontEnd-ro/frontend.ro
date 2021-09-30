@@ -84,7 +84,7 @@ const PasswordReset = ({
     <Form ref={formRef} onSubmit={onSubmit} className={className}>
       <FormGroup className="mb-4">
         <label>
-          <span className="label"> Secret code received via email </span>
+          <span className="label"> Cod primit prin email </span>
           <div className={`${styles['reset-code']} d-flex justify-content-between`}>
             {Array.from(Array(characterCount), (_, index) => (
               <input
@@ -103,7 +103,7 @@ const PasswordReset = ({
       </FormGroup>
       <FormGroup className="mb-4">
         <label>
-          <span className="label">New password </span>
+          <span className="label">Noua parolă </span>
           <PasswordReveal
             ref={passwordRef}
             name="newPassword"
@@ -124,7 +124,7 @@ const PasswordReset = ({
         loading={loading}
         disabled={loading}
       >
-        Change password
+        Schimbă parola
       </Button>
     </Form>
   );

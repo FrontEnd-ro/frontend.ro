@@ -7,11 +7,12 @@ interface Props {
   mode: 'login' | 'register';
   onLogin: () => void;
   onRegister: () => void;
+  onResetPassword: () => void;
   loading?: boolean
 }
 
 export default function LoginButtons({
-  mode, onLogin, onRegister, loading,
+  mode, onLogin, onRegister, onResetPassword, loading,
 }: Props) {
   return (
     <div className={`${styles['login-buttons']} ${mode === 'register' ? styles['register-mode'] : ''} text-center`}>
@@ -36,7 +37,11 @@ export default function LoginButtons({
       >
         Înregistrează-te
       </Button>
-
+      <div className="text-right mt-4 text-xs">
+        <Button variant="link" type="button" onClick={onResetPassword}>
+          Ai uitat parola?
+        </Button>
+      </div>
     </div>
   );
 }

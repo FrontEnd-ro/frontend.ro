@@ -139,6 +139,12 @@ class UserService {
       .then((resp) => resp.json());
   }
 
+  static resetPassword(payload: { newPassword: string, emailOrUsername: string, code: string }) {
+    return HttpService
+      .post(`${process.env.ENDPOINT}/auth/password/reset`, payload)
+      .then((resp) => resp.json());
+  }
+
   static uploadAvatar(file: Blob): Promise<any> {
     const formData = new FormData();
     formData.append('file', file);

@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import UserService from '~/services/User.service';
+import PasswordResetService from '~/services/api/PasswordReset.service';
+import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LoginButtons from './LoginButtons/LoginButtons';
 import Form, {
   FormGroup,
@@ -12,6 +14,9 @@ import Form, {
   InputWithIcon,
   PasswordReveal,
 } from '~/components/Form';
+import Button from '../Button';
+import HorizontalSeparator from '../HorizontalSeparator';
+import PasswordReset from './PasswordReset/PasswordReset';
 import { loadInfo } from '~/redux/user/user.actions';
 import { UserState } from '~/redux/user/types';
 import { getStore } from '~/redux/store';
@@ -23,11 +28,14 @@ interface MyProps {
   onSuccess?: (user?: UserState['info']) => void
 }
 
+type Mode = 'login' | 'register' | 'getResetCode' | 'resetPassword'
+
 interface MyState {
-  mode: 'login' | 'register',
+  mode: Mode,
   loading: boolean;
   username: string;
   serverError: string;
+  emailToReset: string | null;
   usernameExists: boolean;
 }
 
@@ -42,6 +50,7 @@ class Login extends Component<MyProps, MyState> {
       loading: false,
       serverError: null,
       username: '',
+      emailToReset: null,
       usernameExists: undefined,
     };
   }
@@ -78,9 +87,13 @@ class Login extends Component<MyProps, MyState> {
     this.checkUsernameDebouncedFn();
   }
 
-  changeMode = (newMode: 'login' | 'register') => {
+  changeMode = (newMode: Mode) => {
     const { mode } = this.state;
 
+    this.setState({
+      serverError: null,
+      emailToReset: null,
+    });
     if (newMode === mode) {
       // Do nothing since we handle the submit separately
       return;
@@ -111,6 +124,47 @@ class Login extends Component<MyProps, MyState> {
       .finally(() => this.setState({ loading: false }));
   }
 
+  generateResetCode = ({ email }: { email: string }) => {
+    this.setState({ loading: true });
+
+    PasswordResetService.generateResetCode(email)
+      .then(() => {
+        this.setState({
+          mode: 'resetPassword',
+          emailToReset: email,
+        });
+        SweetAlertService.toast({
+          text: 'Codul pentru resetarea parolei a fost trimis prin email!',
+          timer: 5000,
+        });
+      })
+      .catch((error) => this.setState({ serverError: error.message }))
+      .finally(() => this.setState({ loading: false }));
+  }
+
+  resetPassword = (code: string, newPassword: string) => {
+    const { onSuccess } = this.props;
+    const { emailToReset } = this.state;
+    this.setState({ loading: true });
+
+    return UserService.resetPassword({
+      code,
+      newPassword,
+      emailOrUsername: emailToReset,
+    })
+      .then((user: UserState['info']) => {
+        getStore().dispatch(loadInfo(user));
+
+        if (onSuccess) {
+          onSuccess(user);
+        }
+      })
+      .catch((error) => {
+        this.setState({ loading: false });
+        throw error.message;
+      });
+  }
+
   render() {
     const {
       mode,
@@ -123,75 +177,127 @@ class Login extends Component<MyProps, MyState> {
 
     return (
       <div className={`${styles['login-form']} ${className || ''}`}>
-        <Form onSubmit={this.submit} onInput={() => this.setState({ serverError: null })}>
-          <FormGroup className="mb-4">
-            <label>
-              <span className="label">
-                {mode === 'register'
-                  ? 'Email'
-                  : 'Email sau username'}
-              </span>
-              <input
-                required
-                type="text"
-                autoCapitalize="none"
-                name={mode === 'register' ? 'email' : 'emailOrUsername'}
-              />
-            </label>
-          </FormGroup>
-
-          {mode === 'register' && (
+        {(mode === 'login' || mode === 'register') && (
+          <Form onSubmit={this.submit} onInput={() => this.setState({ serverError: null })}>
             <FormGroup className="mb-4">
               <label>
-                <span className="label"> Username </span>
-                <InputWithIcon
+                <span className="label">
+                  {mode === 'register'
+                    ? 'Email'
+                    : 'Email sau username'}
+                </span>
+                <input
                   required
                   type="text"
-                  name="username"
-                  onChange={this.onUsernameChange}
-                >
-                  {usernameExists && <FontAwesomeIcon width="1em" className="text-red" icon={faTimes} />}
-                  {usernameExists === false && <FontAwesomeIcon width="1em" className="text-green" icon={faCheck} />}
-                  {usernameExists === undefined && username && <FontAwesomeIcon width="1em" className="rotate" icon={faSpinner} />}
-                </InputWithIcon>
+                  autoCapitalize="none"
+                  name={mode === 'register' ? 'email' : 'emailOrUsername'}
+                />
               </label>
             </FormGroup>
-          )}
 
-          <FormGroup className="mb-4">
-            <label>
-              <span className="label"> Parola </span>
-              <PasswordReveal />
-            </label>
-          </FormGroup>
+            {mode === 'register' && (
+              <FormGroup className="mb-4">
+                <label>
+                  <span className="label"> Username </span>
+                  <InputWithIcon
+                    required
+                    type="text"
+                    name="username"
+                    onChange={this.onUsernameChange}
+                  >
+                    {usernameExists && <FontAwesomeIcon width="1em" className="text-red" icon={faTimes} />}
+                    {usernameExists === false && <FontAwesomeIcon width="1em" className="text-green" icon={faCheck} />}
+                    {usernameExists === undefined && username && <FontAwesomeIcon width="1em" className="rotate" icon={faSpinner} />}
+                  </InputWithIcon>
+                </label>
+              </FormGroup>
+            )}
 
-          {(mode === 'register') && (
-            <Checkbox
-              required
-              name="confirm"
-              className="d-flex mb-4"
+            <FormGroup className="mb-4">
+              <label>
+                <span className="label"> Parola </span>
+                <PasswordReveal />
+              </label>
+            </FormGroup>
+
+            {(mode === 'register') && (
+              <Checkbox
+                required
+                name="confirm"
+                className="d-flex mb-4"
+              >
+                <span style={{ fontSize: '0.85em' }}>
+                  Am citit și sunt de acord cu
+                  {' '}
+                  <a href="/termeni-si-conditii" className="link">
+                    Termenii și Condițiile
+                  </a>
+                  {' '}
+                  de utilizare.
+                </span>
+              </Checkbox>
+            )}
+
+            {serverError && <p className={`${styles['server-error']} text-red text-bold`}>{serverError}</p>}
+
+            <LoginButtons
+              mode={mode}
+              loading={loading}
+              onLogin={() => this.changeMode('login')}
+              onRegister={() => this.changeMode('register')}
+              onResetPassword={() => this.changeMode('getResetCode')}
+            />
+          </Form>
+        )}
+        {(mode === 'getResetCode' || mode === 'resetPassword') && (
+          <>
+            <Form
+              onSubmit={this.generateResetCode}
+              onInput={() => this.setState({ serverError: null })}
             >
-              <span style={{ fontSize: '0.85em' }}>
-                Am citit și sunt de acord cu
-                {' '}
-                <a href="/termeni-si-conditii" className="link">
-                  Termenii și Condițiile
-                </a>
-                {' '}
-                de utilizare.
-              </span>
-            </Checkbox>
-          )}
-
-          {serverError && <p className={`${styles['server-error']} text-red text-bold`}>{serverError}</p>}
-
-          <LoginButtons
-            mode={mode}
-            loading={loading}
-            onLogin={() => this.changeMode('login')}
-            onRegister={() => this.changeMode('register')}
-          />
-        </Form>
+              <FormGroup className="mb-4">
+                <label>
+                  <span className="label">
+                    Email
+                  </span>
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    autoCapitalize="none"
+                  />
+                </label>
+              </FormGroup>
+              {serverError && (
+                <p className={`${styles['server-error']} text-red text-bold`}>
+                  {serverError}
+                </p>
+              )}
+              <Button
+                type="submit"
+                className="w-100"
+                variant={mode === 'getResetCode' ? 'blue' : 'light'}
+                loading={mode === 'getResetCode' && loading}
+                disabled={mode === 'resetPassword' || loading}
+              >
+                Generează cod de resetare
+              </Button>
+            </Form>
+            <HorizontalSeparator className="my-5" />
+            <PasswordReset
+              buttonVariant={mode === 'getResetCode' ? 'light' : 'blue'}
+              onReset={this.resetPassword}
+              loading={mode === 'resetPassword' && loading}
+              disabled={mode === 'getResetCode' || loading}
+              characterCount={+process.env.RESET_CODE_LENGTH}
+            />
+            <div className="text-right mt-4 text-xs">
+              <Button variant="link" type="button" onClick={() => this.changeMode('login')}>
+                Login/Register?
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     );
   }

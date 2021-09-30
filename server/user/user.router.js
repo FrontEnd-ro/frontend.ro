@@ -298,6 +298,10 @@ userRouter.post('/password/reset', async function resetPassword(req, res) {
     const hashedPassword = await bcrypt.hash(newPassword, +process.env.SALT_ROUNDS);
     const updatedUser = await UserModel.update(user._id, { password: hashedPassword });
 
+    // Create and set JTW as cookie
+    const token = UserModel.generateJwtForUser(user._id);
+    setTokenCookie(token, res);
+
     res.json(UserModel.sanitize(updatedUser));
   } catch (err) {
     console.error('[UserRouter.resetPassword]', err);

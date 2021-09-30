@@ -8,7 +8,7 @@ module.exports = {
     ENDPOINT: process.env.ENDPOINT,
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-
+    RESET_CODE_LENGTH: process.env.RESET_CODE_LENGTH,
   },
   webpack: (config) => {
     config.module.rules.push(

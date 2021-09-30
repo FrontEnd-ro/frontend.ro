@@ -90,6 +90,6 @@ function useApplicationConfig(callback: (config: ApplicationConfig) => void) {
 
   useEffect(() => {
     fetchApplicationConfig();
-    setInterval(fetchApplicationConfig, 30 * 1000);
+    setInterval(fetchApplicationConfig, 30 * 60 * 1000); // 30 mins
   }, []);
 }

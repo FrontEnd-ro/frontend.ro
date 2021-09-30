@@ -5,6 +5,7 @@ const EmailService = require('../Email.service');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const UserModel = require('./user.model');
 const SubscribeModel = require('../subscribe.model');
+const PasswordResetModel = require('../password-reset/password-reset.model');
 const { ServerError, setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } = require('../ServerUtils');
 const { PrivateMiddleware } = require('../Middlewares');
 const { MAX_MEDIA_MB, MAX_MEDIA_BYTES } = require('../../shared/SharedConstants')
@@ -261,6 +262,48 @@ userRouter.post('/password', [
     }
   }
 ]);
+
+userRouter.post('/password/reset', async function resetPassword(req, res) {
+  try {
+    const newPassword = req.body.newPassword.toString().trim();
+    const { emailOrUsername, code } = req.body;
+
+    if (newPassword.length === 0) {
+      new ServerError(400, 'Noua parolă nu poate fi goală').send(res);
+      return;
+    }
+
+    const user = await UserModel.getUser({
+      email: emailOrUsername,
+      username: emailOrUsername,
+    });
+    if (!user) {
+      new ServerError(
+        400,
+        '⛔ Nu există nici un utilizator cu acest email sau username!',
+      ).send(res);
+      return
+    }
+
+    const isValidResetCode = await PasswordResetModel.validate(user.email, code);
+
+    if (!isValidResetCode) {
+      new ServerError(
+        400,
+        '⛔ Codul pentru resetarea parolei nu este valid sau a expirat.',
+      ).send(res);
+      return
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, +process.env.SALT_ROUNDS);
+    const updatedUser = await UserModel.update(user._id, { password: hashedPassword });
+
+    res.json(UserModel.sanitize(updatedUser));
+  } catch (err) {
+    console.error('[UserRouter.resetPassword]', err);
+    new ServerError(500, err.message || 'Oops! Se pare că nu am putut reseta parola. Încearcă din nou.').send(res);
+  }
+});
 
 userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(req, res) {
   const userId = req.body.user._id;

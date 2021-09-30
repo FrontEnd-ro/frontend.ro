@@ -1,44 +1,48 @@
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 
 class Http {
-  get(url: string, options = {}) {
-    return this.httpGeneric(url, { ...options, method: 'GET' });
+  get(url: string, options = {}, preventErrorAlert = false) {
+    return this.httpGeneric(url, { ...options, method: 'GET' }, preventErrorAlert);
   }
 
-  post(url: string, body = {}, options = {}) {
+  post(url: string, body = {}, options = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, {
       ...options,
       method: 'POST',
       body,
-    });
+    }, preventErrorAlert);
   }
 
-  put(url: string, body = {}, options = {}) {
+  put(url: string, body = {}, options = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, {
       ...options,
       method: 'PUT',
       body,
-    });
+    }, preventErrorAlert);
   }
 
-  patch(url: string, body = {}, options = {}) {
+  patch(url: string, body = {}, options = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, {
       ...options,
       method: 'PATCH',
       body,
-    });
+    }, preventErrorAlert);
   }
 
-  delete(url: string, body = {}, options = {}) {
+  delete(url: string, body = {}, options = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, {
       ...options,
       method: 'DELETE',
       body,
-    });
+    }, preventErrorAlert);
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private httpGeneric(url: string, options: Record<string, any> = {}) {
+  private httpGeneric(
+    url: string,
+    options: Record<string, any> = {},
+    preventErrorAlert = false,
+  ) {
     const headersInit: HeadersInit = {
       'content-type': 'application/json',
     };
@@ -64,7 +68,7 @@ class Http {
         });
       })
       .catch((err) => {
-        if (!err || !err.code || err.code === 500) {
+        if ((!err || !err.code || err.code === 500) && !preventErrorAlert) {
           SweetAlertService.error({
             text: err.message || 'Refresh-uiește pagina și încearcă din nou.',
             buttonText: 'Ok!',

@@ -25,6 +25,7 @@ import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 import Feedbacks from '../Editor/Feedbacks';
 import Button from '../Button';
 import SolveExerciseSkeleton from './SolveExercise.skeleton';
+import FolderStructure from '~/services/utils/FolderStructure';
 
 interface Props {
   exerciseId: string;
@@ -141,7 +142,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   };
 
   const validateSubmissionCanBeSent = (code: string, submission: Submission) => {
-    if (!code) {
+    if (!code || FolderStructure.isEmpty(JSON.parse(code))) {
       SweetAlertService.toast({
         timer: 5000,
         type: 'error',

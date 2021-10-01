@@ -45,6 +45,20 @@ class FolderStructure {
     return !!this.getFile(key, subFolder).file;
   }
 
+  static isEmpty(root: { files: ExerciseFile[]; folders: ExerciseFolder[]; }) {
+    let allFilesEmpty = root.files.every((file) => file.content.trim() === '');
+
+    if (!allFilesEmpty) {
+      return false;
+    }
+
+    if (root.folders.length === 0) {
+      return true;
+    }
+
+    return root.folders.every((folder) => FolderStructure.isEmpty(folder));
+  }
+
   getFile(key, subFolder: any = this) {
     let foundFile = subFolder.files.find((file) => file.key === key);
     if (foundFile) {

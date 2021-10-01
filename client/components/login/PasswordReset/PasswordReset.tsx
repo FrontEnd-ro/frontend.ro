@@ -25,6 +25,7 @@ const PasswordReset = ({
 }: Props) => {
   const formRef = useRef(null);
   const passwordRef = useRef(null);
+  const codeInputsRef = useRef<HTMLInputElement[]>([]);
 
   const [error, setError] = useState(null);
 
@@ -59,18 +60,30 @@ const PasswordReset = ({
     }
   };
 
+  const onCodePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const { clipboardData } = e;
+    const text = clipboardData.getData('text');
+
+    if (text.length === characterCount) {
+      codeInputsRef.current.forEach((codeInput, index) => {
+        codeInput.value = text[index];
+      });
+      focusPasswordInput();
+    }
+  };
+
   const focusCodeInput = (index: number) => {
     if (!formRef.current) {
       console.log(`[PasswordReset.focusInput] Tried to focus input with index=${index} but the form reference is null.`);
       return;
     }
 
-    const inputEl: HTMLInputElement = formRef.current.querySelector(`[name="char${index}"]`);
-    if (!inputEl) {
+    const inputRef = codeInputsRef.current[index];
+    if (!inputRef) {
       console.log(`[PasswordReset.focusInput] Tried to focus input with index=${index} but the input couldn't be found.`);
       return;
     }
-    inputEl.focus();
+    inputRef.focus();
   };
 
   const focusPasswordInput = () => {
@@ -97,6 +110,12 @@ const PasswordReset = ({
                 style={{ width: `${80 / characterCount}% ` }}
                 name={`char${index}`}
                 disabled={disabled || loading}
+                ref={(ref) => {
+                  // Keep a reference of each code input
+                  // inside the codeInputsRef Array
+                  codeInputsRef.current[index] = ref;
+                }}
+                onPaste={index === 0 ? onCodePaste : undefined}
                 onInput={(e) => onCodeInput(e, index)}
                 className="text-center"
               />

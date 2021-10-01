@@ -115,21 +115,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   const submitSolution = async () => {
     const code = solutionRef.current.getFolderStructure();
 
-    if (!code) {
-      SweetAlertService.toast({
-        timer: 5000,
-        type: 'error',
-        text: 'Hmm, dacă nu introduci o soluție pe ce să-ți dăm feedback?',
-      });
-      return;
-    }
-
-    if (submission.feedbacks.length > 0) {
-      SweetAlertService.toast({
-        timer: 5000,
-        type: 'error',
-        text: 'Mai sunt câteva feedback-uri nerezolvate.',
-      });
+    if (!validateSubmissionCanBeSent(code, submission)) {
       return;
     }
 
@@ -152,6 +138,37 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
       type: 'success',
       text: 'Ai trimis soluția cu succes',
     });
+  };
+
+  const validateSubmissionCanBeSent = (code: string, submission: Submission) => {
+    if (!code) {
+      SweetAlertService.toast({
+        timer: 5000,
+        type: 'error',
+        text: 'Hmm, dacă nu introduci o soluție pe ce să-ți dăm feedback?',
+      });
+      return false;
+    }
+
+    if (submission.feedbacks.length > 0) {
+      SweetAlertService.toast({
+        timer: 5000,
+        type: 'error',
+        text: 'Mai sunt câteva feedback-uri nerezolvate.',
+      });
+      return false;
+    }
+
+    if (code === submission.exercise.example) {
+      SweetAlertService.toast({
+        timer: 5000,
+        type: 'error',
+        text: 'Se pare că nu ai modificat soluția...',
+      });
+      return false;
+    }
+
+    return true;
   };
 
   const exitReadonly = () => {

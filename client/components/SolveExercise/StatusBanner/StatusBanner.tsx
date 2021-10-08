@@ -14,7 +14,7 @@ function StatusBanner({ status, onExitReadonly }: Props) {
 
   const exitReadonly = () => {
     setIsExitingReadonly(true);
-    onExitReadonly().finally(() => setIsExitingReadonly(false));
+    onExitReadonly();
   };
 
   return (

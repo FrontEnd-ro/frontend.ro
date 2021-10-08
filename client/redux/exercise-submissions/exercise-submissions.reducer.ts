@@ -27,6 +27,11 @@ export const submissionReducer = (state = initialState, action: { type: string; 
       if (!Array.isArray(id)) {
         id = [id];
       }
+
+      if (state.submissions === undefined) {
+        return state;
+      }
+
       return {
         ...state,
         submissions: state.submissions.filter((submission) => !id.includes(submission._id)),

@@ -14,6 +14,7 @@ import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 import { FEEDBACK_TYPES } from '~/services/Constants';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { removeSubmission } from '~/redux/exercise-submissions/exercise-submissions.actions';
 
 import styles from './OfferFeedback.module.scss';
 import Button from '../Button';
@@ -27,6 +28,7 @@ function OfferFeedback({
   exerciseId,
   username,
   userInfo,
+  dispatch,
 }: ConnectedProps<typeof connector> & Props) {
   const router = useRouter();
   const solutionRef = useRef(null);
@@ -78,6 +80,7 @@ function OfferFeedback({
           type: 'success',
           text: isCorrect ? 'Exercițiul aprobat cu succes' : 'Feedback trimis cu succes',
         });
+        dispatch(removeSubmission(submission._id));
         router.push('/exercitii-rezolvate');
       })
       .catch((err) => {

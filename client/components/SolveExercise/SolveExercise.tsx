@@ -113,6 +113,23 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
     return debounce(autoSaveSolution, 2000);
   }, [submission]);
 
+  useEffect(() => {
+    // The reference to the 'debouncedAutoSaveSolution' variable
+    // changes when the submission changes. Thus, we want to cancel the
+    // previous debounced auto save function.
+    // Otherwise we'll have a memory leak inside our application
+    // > Eg 1: write in editor, then send solution before the auto save
+    // is done. The submission will be sent, but then the auto save will ru
+    // which will revert it back to previous state
+    // > Eg 2: write in editor, then change page before the auto save
+    // is done. When it will kick in, it will throw and error because the
+    // component has been disposed.
+    return () => {
+      debouncedAutoSaveSolution.cancel();
+    };
+  }, [debouncedAutoSaveSolution]);
+
+
   const submitSolution = async () => {
     const code = solutionRef.current.getFolderStructure();
 

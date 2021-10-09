@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import debounce from 'lodash/debounce';
 
+import noop from 'lodash/noop';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Markdown from '~/components/Markdown';
@@ -109,26 +110,17 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
     }
   };
 
-  const debouncedAutoSaveSolution = React.useMemo(() => {
-    return debounce(autoSaveSolution, 2000);
-  }, [submission]);
-
+  const debouncedAutoSaveRef = useRef(debounce(noop));
   useEffect(() => {
-    // The reference to the 'debouncedAutoSaveSolution' variable
-    // changes when the submission changes. Thus, we want to cancel the
-    // previous debounced auto save function.
-    // Otherwise we'll have a memory leak inside our application
-    // > Eg 1: write in editor, then send solution before the auto save
-    // is done. The submission will be sent, but then the auto save will ru
-    // which will revert it back to previous state
-    // > Eg 2: write in editor, then change page before the auto save
-    // is done. When it will kick in, it will throw and error because the
-    // component has been disposed.
+    if (!isSubmitting) {
+      debouncedAutoSaveRef.current = debounce(autoSaveSolution, 2000);
+    }
     return () => {
-      debouncedAutoSaveSolution.cancel();
+      // We want to cancel the previous debounced auto save function,
+      // otherwise we'll have a memory leak inside our application.
+      debouncedAutoSaveRef.current.cancel();
     };
-  }, [debouncedAutoSaveSolution]);
-
+  }, [submission, isSubmitting]);
 
   const submitSolution = async () => {
     const code = solutionRef.current.getFolderStructure();
@@ -350,7 +342,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
             askTooltip={false}
             onChange={(code) => {
               setAutoSaved(AutoSave.NONE);
-              debouncedAutoSaveSolution(code);
+              debouncedAutoSaveRef.current(code);
             }}
             onFeedbackDone={onFeedbackDone}
             feedbacks={submission.feedbacks}

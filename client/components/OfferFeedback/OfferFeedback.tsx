@@ -51,8 +51,6 @@ function OfferFeedback({
     return JSON.parse(submission.code || submission.exercise.example);
   }, [submission]);
 
-  console.log({ isCorrect });
-
   const fetchSubmission = () => {
     SubmissionService
       .getUserSubmission(username, exerciseId)
@@ -176,15 +174,15 @@ function OfferFeedback({
           onFeedbackAdded={(f) => setFeedbacks(f.getAll())}
         />
         {canOfferFeedback && (
-        <div className="text-right my-5">
-          <Button
-            loading={isSendingFeedback}
-            variant={isCorrect ? 'success' : 'blue'}
-            onClick={approveOrSendFeedback}
-          >
-            {isCorrect ? 'Aprobă exercițiul' : 'Trimite feedback-ul'}
-          </Button>
-        </div>
+          <div className="text-right my-5">
+            <Button
+              loading={isSendingFeedback}
+              variant={isCorrect ? 'success' : 'blue'}
+              onClick={approveOrSendFeedback}
+            >
+              {isCorrect ? 'Aprobă exercițiul' : 'Trimite feedback-ul'}
+            </Button>
+          </div>
         )}
       </PageContainer>
     </>

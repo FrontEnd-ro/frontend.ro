@@ -147,7 +147,7 @@ class MonacoBase extends React.Component<any, any> {
     Monaco.setModelLanguage(this.editor.getModel(), language);
   }
 
-  createFirstFile = ({ name }: {name: string}) => {
+  createFirstFile = ({ name }: { name: string }) => {
     const { folderStructure } = this.state;
 
     let newFileKey = folderStructure.addFile(null, { name });
@@ -271,7 +271,8 @@ class MonacoBase extends React.Component<any, any> {
         preConfirm: () => {
           const feedbacksInFile = this.Feedbacks.getAll().filter((f) => f.file_key === key);
           SweetAlertService.toggleLoading();
-          return Promise.all(feedbacksInFile.map((f) => SubmissionService.markFeedbackAsDone(f._id)))
+          return Promise
+            .all(feedbacksInFile.map((f) => SubmissionService.markFeedbackAsDone(f._id)))
             .then((resp) => {
               resp.forEach((_, index) => this.onFeedbackDone(feedbacksInFile[index].id));
             });
@@ -334,7 +335,8 @@ class MonacoBase extends React.Component<any, any> {
             .filter((f) => folderStructure.getFile(f.file_key, folder).file);
 
           SweetAlertService.toggleLoading();
-          return Promise.all(feedbacksInFolder.map((f) => SubmissionService.markFeedbackAsDone(f._id)))
+          return Promise
+            .all(feedbacksInFolder.map((f) => SubmissionService.markFeedbackAsDone(f._id)))
             .then((resp) => {
               resp.forEach((_, index) => this.onFeedbackDone(feedbacksInFolder[index].id));
             });

@@ -240,16 +240,32 @@ class MonacoBase extends React.Component<any, any> {
   onFileDelete = async (key) => {
     const { folderStructure, selectedFileKey } = this.state;
 
-    if (this.Feedbacks && this.Feedbacks.getAll().find((f) => f.file_key === key)) {
-      try {
-        await this.confirmFileDelete(key);
-      } catch (err) {
+    let feedbacksInFile = [];
+    if (this.Feedbacks) {
+      feedbacksInFile = this.Feedbacks.getAll().filter((f) => f.file_key === key);
+    }
+
+    if (feedbacksInFile.length > 0) {
+      const didConfirm = await MonacoBase.confirmFileDelete(() => {
+        Promise.all(feedbacksInFile.map(
+          (f) => SubmissionService.markFeedbackAsDone(f._id),
+        ));
+      });
+      if (!didConfirm) {
+        // If the user changed his mind exit the deletion flow
         return;
       }
     }
 
     try {
       folderStructure.deleteFile(key);
+
+      // Because of the fucked up way we implemented the Monaco Editor
+      // we have to do make sure we run the line below after modifying
+      // the folder structure, otherwise we'll have state conflicts!
+      // Will be fixed here: https://github.com/FrontEnd-ro/frontend.ro/issues/151
+      feedbacksInFile.forEach((f) => this.onFeedbackDone(f._id, this.getFolderStructure()));
+
       this.setState(
         {
           folderStructure,
@@ -262,29 +278,15 @@ class MonacoBase extends React.Component<any, any> {
     }
   }
 
-  confirmFileDelete(key) {
-    return new Promise<void>((resolve, reject) => {
-      SweetAlertService.confirm({
-        title: 'Hold on!',
-        text: 'Urmează să ștergi un fișier ce conține feedback. Ești sigur?',
-        confirmButtonText: 'Continuă',
-        preConfirm: () => {
-          const feedbacksInFile = this.Feedbacks.getAll().filter((f) => f.file_key === key);
-          SweetAlertService.toggleLoading();
-          return Promise
-            .all(feedbacksInFile.map((f) => SubmissionService.markFeedbackAsDone(f._id)))
-            .then((resp) => {
-              resp.forEach((_, index) => this.onFeedbackDone(feedbacksInFile[index].id));
-            });
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          resolve();
-        } else {
-          reject();
-        }
-      });
+  static async confirmFileDelete(preConfirm?: () => void) {
+    const { isConfirmed } = await SweetAlertService.confirm({
+      title: 'Hold on!',
+      text: 'Urmează să ștergi un fișier ce conține feedback. Ești sigur?',
+      confirmButtonText: 'Continuă',
+      preConfirm,
     });
+
+    return isConfirmed;
   }
 
   onFolderDelete = async (key) => {

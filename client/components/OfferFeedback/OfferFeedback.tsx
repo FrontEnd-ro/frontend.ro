@@ -79,7 +79,7 @@ function OfferFeedback({
           text: isCorrect ? 'Exercițiul aprobat cu succes' : 'Feedback trimis cu succes',
         });
         dispatch(removeSubmission(submission._id));
-        router.push('/exercitii-rezolvate');
+        // router.push('/exercitii-rezolvate');
       })
       .catch((err) => {
         console.error('[OfferFeedback][approveOrSendFeedback]', err);

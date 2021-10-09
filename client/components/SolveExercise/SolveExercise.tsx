@@ -249,10 +249,14 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
       });
   };
 
-  const onFeedbackDone = (_id: string) => {
+  // FIXME
+  // Because of https://github.com/FrontEnd-ro/frontend.ro/issues/151
+  // let's also "optionally" send the code so that everything is in sync.
+  const onFeedbackDone = (_id: string, code?: string) => {
     console.log(_id, submission.feedbacks.filter((f) => f._id !== _id));
     setSubmission({
       ...submission,
+      code: code ?? submission.code,
       feedbacks: submission.feedbacks.filter((f) => f._id !== _id),
     });
   };

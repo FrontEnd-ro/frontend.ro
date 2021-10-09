@@ -1,4 +1,12 @@
 import React from 'react';
+/**
+ * FIXME: right now we're importing Monaco Editor via
+ * a hack (see `loadMonaco.ts` file). We should import it
+ * properly via Webpack. When that is done, let's revisit
+ * this ESLint error
+ */
+// eslint-disable-next-line import/no-unresolved
+import { editor as MonacoTypes } from 'monaco-editor';
 import * as Monaco from '../monaco';
 import FileIcons from '~/services/utils/FileIcons';
 import SubmissionService from '~/services/Submission.service';
@@ -128,8 +136,8 @@ class MonacoEditor extends MonacoBase {
     return this.editor.getConfiguration();
   }
 
-  onFeedbackDone = (feedbackId) => {
-    this.props.onFeedbackDone(feedbackId);
+  onFeedbackDone = (feedbackId, code?: string) => {
+    this.props.onFeedbackDone(feedbackId, code);
     this.Feedbacks.delete(feedbackId);
   }
 
@@ -143,7 +151,7 @@ class MonacoEditor extends MonacoBase {
     }
 
     let decorationEntry = Object.entries(this.editor.decorationsMap).find(
-      (entry: any) => entry[1].id === idOrtimestamp || entry[1].timestamp === idOrtimestamp,
+      (entry: any) => entry[1]._id === idOrtimestamp || entry[1].timestamp === idOrtimestamp,
     );
 
     if (decorationEntry) {
@@ -183,60 +191,100 @@ class MonacoEditor extends MonacoBase {
     });
   }
 
-  onModelChange = () => {
+  onModelChange = async (e: MonacoTypes.IModelContentChangedEvent) => {
     const { folderStructure, selectedFileKey } = this.state;
     folderStructure.setContent(selectedFileKey, this.editor.getValue());
 
-    if (typeof this.props.onChange === 'function') {
+    const isChangeValid = await this.verifyValidityOfModelChange(e);
+    if (isChangeValid && typeof this.props.onChange === 'function') {
       this.props.onChange(this.getFolderStructure());
     }
+  }
 
-    const emptyDecorations = this.editor.getEmptyDecorations();
+  verifyValidityOfModelChange = async (e: MonacoTypes.IModelContentChangedEvent) => {
+    /**
+     * Verifies whether or not the current model change is valid.
+     * 1. If it doesn't intersect any feedbacks, then it's valid
+     * by default
+     * 2. If however this modification is in conflict with
+     * some highlighted pieces of code, we want to have
+     * the user acknowledge that this will mark the feedback as done.
+     */
 
-    if (!emptyDecorations.length) {
-      this.oldDecorations = this.editor.getCustomDecorations();
-    } else {
-      emptyDecorations.forEach((dec) => this.unDecorate(dec.id));
+    const { folderStructure, selectedFileKey } = this.state;
 
-      SweetAlertService.confirm({
-        title: 'Hold on!',
-        text: 'Urmează să ștergi niște cod ce conține feedback-uri. Ești sigur?',
-        confirmButtonText: 'Continue',
-        preConfirm: () => {
-          SweetAlertService.toggleLoading();
-          return Promise.all(
-            emptyDecorations.map((dec) => SubmissionService.markFeedbackAsDone(dec._id)),
-          ).then((resp) => {
-            resp.forEach((_, index) => this.onFeedbackDone(emptyDecorations[index]._id));
-            return resp;
-          });
-        },
-      }).then((result) => {
-        // FIXME 👇 (correct types)
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        if (result.value) {
-          // mark feedback as done
-        } else {
-          this._baseModelChangeListener.dispose();
+    // We may have multiple change ranges
+    // (ie: select a specified word multiple times via Ctrl + D)
+    const changeRanges = e.changes.map((change) => change.range);
+    const decorationsThatIntersect = Object
+      .keys(this.editor.decorationsMap)
+      .filter((id) => changeRanges.some((range) => (
+        window.monaco.Range.areIntersectingOrTouching(
+          this.editor.getModel().getDecorationRange(id),
+          range,
+        )
+      )))
+      .map((id) => this.editor.decorationsMap[id]);
 
-          this.editor.getModel().undo();
-
-          emptyDecorations.forEach((dec) => {
-            const matchingOldDecId = Object.keys(
-              this.oldDecorations,
-            ).find((decId) => this.oldDecorations[decId].data.id === dec.id);
-            this.editor.decorate(dec, this.oldDecorations[matchingOldDecId].range);
-          });
-
-          this._baseModelChangeListener = this.editor.onDidChangeModelContent(this.onModelChange);
-
-          if (typeof this.props.onChange === 'function') {
-            this.props.onChange(this.getFolderStructure());
-          }
-        }
-      });
+    if (decorationsThatIntersect.length === 0) {
+      return true;
     }
+
+    // Approach used:
+    // 1. Remove decorations
+    // 2. If user doesn't want to remove feedback -> re'apply them
+    // You might wonder why we don't remove them only if the
+    // user wants to continue? Unfortunalty that doesn't work
+    // in this event trigger - as this is happening when the model
+    // changed. We'll probably need to hook into "beforeModelChanged"
+    // if we want this variant to work.
+    decorationsThatIntersect.forEach((dec) => this.unDecorate(dec._id));
+
+    const result = await SweetAlertService.confirm({
+      title: 'Hold on!',
+      text: 'Urmează să modifici niște cod ce conține un feedback. Dacă continui, feedback-ul va fi șters. Ești sigur?',
+      confirmButtonText: 'Continue',
+      preConfirm: () => {
+        SweetAlertService.toggleLoading();
+        return Promise.all(
+          decorationsThatIntersect.map((dec) => SubmissionService.markFeedbackAsDone(dec._id)),
+        ).then((resp) => {
+          resp.forEach((_, index) => this.onFeedbackDone(
+            decorationsThatIntersect[index]._id,
+            this.getFolderStructure(),
+          ));
+          return resp;
+        });
+      },
+    });
+
+    if (result.isConfirmed) {
+      return true;
+    }
+
+    // Temporarily disable the model change listener,
+    // so we don't get into an infinite loop.
+    this._baseModelChangeListener.dispose();
+    this.editor.getModel().undo();
+    folderStructure.setContent(selectedFileKey, this.editor.getValue());
+
+    // Re-add the decorations
+    decorationsThatIntersect.forEach((dec) => {
+      const matchingOldDecId = Object
+        .keys(this.oldDecorations)
+        .find((decId) => this.oldDecorations[decId].data._id === dec._id);
+
+      if (!matchingOldDecId) {
+        return;
+      }
+
+      this.editor.decorate(dec, this.oldDecorations[matchingOldDecId].range);
+    });
+
+    // Re-add the event listener
+    this._baseModelChangeListener = this.editor.onDidChangeModelContent(this.onModelChange);
+
+    return false;
   }
 
   render() {

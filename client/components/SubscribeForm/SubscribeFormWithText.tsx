@@ -3,9 +3,11 @@ import SubscribeForm from './SubscribeForm';
 
 import styles from './SubscribeForm.module.scss';
 
-function SubscribeFormWithText({ children }: { children: ReactNode }) {
+function SubscribeFormWithText(
+  { children, className = '' }: { children: ReactNode, className?: string },
+) {
   return (
-    <div className={`${styles['subscribe-form--with-text']} d-flex justify-content-between`}>
+    <div className={`${styles['subscribe-form--with-text']} ${className} d-flex justify-content-between`}>
       <div>
         {children}
       </div>

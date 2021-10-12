@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import SubscribeForm from './SubscribeForm';
 
 import styles from './SubscribeForm.module.scss';

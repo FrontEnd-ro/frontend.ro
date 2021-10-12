@@ -1,0 +1,53 @@
+@import '../../../styles/variables';
+
+@mixin BlogArticlePreview-row {
+  flex-direction: row;
+
+  .cover-wrapper {
+    width: 37%;
+  }
+
+  .content {
+    width: 60%;
+  }
+
+  .title {
+    margin-top: 0;
+  }
+}
+
+@mixin BlogArticlePreview-column {
+  flex-direction: column;
+}
+
+.BlogArticlePreview {
+  align-items: stretch;
+
+  &.row {
+    @include BlogArticlePreview-row;
+  }
+
+  &.column {
+    @include BlogArticlePreview-column;
+  }
+
+  &:hover .cover {
+    transform: scale(1.05);
+  }
+}
+
+.cover {
+  transition: transform 0.5s $cubic;
+}
+
+.title {
+  font-size: 1.5em;
+}
+
+.date {
+  font-family: monospace;
+}
+
+.read-more svg {
+  height: 0.85em;
+}

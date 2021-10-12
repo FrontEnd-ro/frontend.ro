@@ -10,6 +10,9 @@ module.exports = {
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     RESET_CODE_LENGTH: process.env.RESET_CODE_LENGTH,
   },
+  images: {
+    domains: ['d3tycb976jpudc.cloudfront.net'],
+  },
   webpack: (config) => {
     config.module.rules.push(
       {

@@ -9,8 +9,19 @@ import rootReducer from '../client/redux/root.reducer';
 
 import  { withNextRouter } from '@gogaille/storybook-addon-next-router';
 
-export const decorators = [withNextRouter()];
+/**
+ * How to make 'next/image' work with Storybook:
+ * https://xenox.dev/next-image-with-storybookjs/
+ */
+ import * as NextImage from 'next/image';
+ Object.defineProperty(NextImage, 'default', {
+   configurable: true,
+   // Overwrite `width` and `height` to `auto` since
+   // we're not using the Next Image component.
+   value: props => <img {...props} width="auto" height="auto" />
+ });
 
+export const decorators = [withNextRouter()];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

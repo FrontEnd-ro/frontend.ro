@@ -19,7 +19,7 @@ interface Props {
 }
 
 const BlogArticlePreview = ({
-  title, href, cover, firstParagraph, variant, timestamp, className = '',
+  title, href, cover, firstParagraph, variant = 'row', timestamp, className = '',
 }: Props) => {
   return (
     <Link href={href}>

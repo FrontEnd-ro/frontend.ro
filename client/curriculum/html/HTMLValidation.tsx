@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import { getLessonById } from '~/services/Constants';
 import Lesson, {
@@ -37,7 +38,9 @@ function HTMLValidationLesson() {
       <Lesson id={lessonId} title={lessonInfo.title} chapters={chapters} withExercises>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img
+          <Image
+            width="2400"
+            height="1260"
             alt="Angry doodle to Valid HTML"
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_2400w.jpg`}
           />

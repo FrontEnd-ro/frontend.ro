@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
@@ -44,7 +45,9 @@ export default function ListsLesson() {
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img
+          <Image
+            width="2400"
+            height="1260"
             alt="Doodle pentru un todo list"
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_2400w.jpg`}
           />

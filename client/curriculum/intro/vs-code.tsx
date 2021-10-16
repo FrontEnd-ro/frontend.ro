@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -44,7 +45,12 @@ export default function VSCodeLesson() {
       <Lesson id={lessonInfo.id} withExercises={false} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={contributors} />
         <LessonCover>
-          <img src={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`} alt="Logo-ul VSCode" />
+          <Image
+            width="1200"
+            height="630"
+            alt="Logo-ul VSCode"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`}
+          />
         </LessonCover>
         <LessonFirstSentence>
           A învăța programare poate părea intimidant, mai ales pentru cei ce

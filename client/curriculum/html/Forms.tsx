@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -51,7 +52,9 @@ export default function FormsLesson() {
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img
+          <Image
+            width="2400"
+            height="1260"
             alt="Doodle cu elemente din formulare"
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/forms_2400w.jpg`}
           />

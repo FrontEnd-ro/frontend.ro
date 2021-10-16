@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import { getLessonById } from '~/services/Constants';
 import Lesson, {
@@ -52,7 +53,7 @@ function Containers() {
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img alt="Doodle cu o cutie" src={coverImage} />
+          <Image width="2400" height="1260" alt="Doodle cu o cutie" src={coverImage} />
         </LessonCover>
         <LessonFirstSentence>
           Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru

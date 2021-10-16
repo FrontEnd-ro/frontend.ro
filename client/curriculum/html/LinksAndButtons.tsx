@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import {
   faQuestionCircle,
   faThumbsDown,
@@ -68,7 +69,9 @@ export default function LinksAndButtonsLesson() {
       >
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img
+          <Image
+            width="2400"
+            height="1260"
             alt="Doodle reprezentând un buton și mai multe linkuri"
             src={`${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_2400w.jpg`}
           />

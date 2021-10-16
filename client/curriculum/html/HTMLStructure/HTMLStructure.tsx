@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -41,7 +42,9 @@ function HTMLStructure() {
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises={false}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img
+          <Image
+            width="2400"
+            height="1260"
             alt="Stickman reprezentând elementele Head și Body"
             src={`${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_2400w.jpg`}
           />

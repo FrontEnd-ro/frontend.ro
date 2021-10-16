@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -57,7 +58,7 @@ export default function VideoAndAudioLesson() {
       <Lesson withExercises={false} id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img alt="Doodle cu un audio waveform și un video" src={coverImage} />
+          <Image width="2400" height="1260" alt="Doodle cu un audio waveform și un video" src={coverImage} />
         </LessonCover>
         <LessonFirstSentence>
           În lecția anterioară am aflat cum putem adăuga imagini pe site-urile

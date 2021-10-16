@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonCover,
@@ -41,7 +42,9 @@ export default function AboutHtmlLesson() {
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img
+          <Image
+            width="2400"
+            height="1260"
             alt="Road-sign doodle with HTML, CSS and JS"
             src={`${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_2400w.jpg`}
           />

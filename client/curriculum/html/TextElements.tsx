@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
   LessonContributors,
@@ -35,7 +36,9 @@ export default function TextsLesson() {
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img
+          <Image
+            width="2400"
+            height="1260"
             alt="Elemente HTML pentru texte"
             src={`${process.env.CLOUDFRONT_PUBLIC}/seo/texts_2400w.jpg`}
           />

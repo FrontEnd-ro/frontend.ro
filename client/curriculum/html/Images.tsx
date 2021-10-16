@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { faExclamationCircle, faExclamationTriangle, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
@@ -74,7 +75,9 @@ export default function ImagesLesson() {
       <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
         <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
-          <img
+          <Image
+            width="2400"
+            height="1260"
             alt="Doodle cu rama unei imagini"
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_2400w.jpg`}
           />

@@ -1,39 +1,52 @@
 @import '../../../styles/variables';
 
 @mixin BlogArticlePreview-row {
-  flex-direction: row;
+  article {
+    flex-direction: row;
+  }
 
-  .cover-wrapper {
+  [class*='cover-wrapper'] {
     width: 37%;
   }
 
-  .content {
+  [class*='content-wrapper'] {
     width: 60%;
   }
 
-  .title {
+  [class*='title'] {
     margin-top: 0;
   }
 }
 
 @mixin BlogArticlePreview-column {
-  flex-direction: column;
+  article {
+    flex-direction: column;
+  }
+
+  [class*='cover-wrapper'],
+  [class*='content-wrapper'] {
+    width: 100%;
+  }
+
+  [class*='title'] {
+    margin-top: 0.75em;
+  }
 }
 
 .BlogArticlePreview {
   align-items: stretch;
 
-  &.row {
-    @include BlogArticlePreview-row;
-  }
-
-  &.column {
-    @include BlogArticlePreview-column;
-  }
-
   &:hover .cover {
     transform: scale(1.05);
   }
+}
+
+.row {
+  @include BlogArticlePreview-row;
+}
+
+.column {
+  @include BlogArticlePreview-column;
 }
 
 .cover {

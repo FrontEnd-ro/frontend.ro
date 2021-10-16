@@ -23,14 +23,9 @@ const BlogArticlePreview = ({
 }: Props) => {
   return (
     <Link href={href}>
-      <a className={`${className} no-underline`}>
-        <article className={`
-          ${styles.BlogArticlePreview} 
-          ${styles[variant]} 
-          d-flex justify-content-between align-items-start
-          `}
-        >
-          <div className={`${styles['cover-wrapper']} overflow-hidden`}>
+      <a className={`${className} ${styles.BlogArticlePreview} ${styles[variant]} no-underline`}>
+        <article className="d-flex justify-content-between align-items-start">
+          <div className="cover-wrapper overflow-hidden">
             <Image
               className={styles.cover}
               width={cover.width}
@@ -39,7 +34,7 @@ const BlogArticlePreview = ({
               alt={`${title} cover photo `}
             />
           </div>
-          <div className={`${styles.content} d-flex justify-content-between flex-column`}>
+          <div className="content-wrapper d-flex justify-content-between flex-column">
             <div>
               <h2 className={styles.title}>
                 {title}

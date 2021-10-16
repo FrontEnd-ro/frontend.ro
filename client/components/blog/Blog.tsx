@@ -40,7 +40,7 @@ const Blog = ({ articles, isLoggedIn }: ConnectedProps<typeof connector> & Props
       <List as="ol" className={styles.articles}>
         {articles.map(({ id, ...rest }) => (
           <li key={id}>
-            <BlogArticlePreview href={`/blog/${id}`} {...rest} />
+            <BlogArticlePreview className={styles['article-preview']} href={`/blog/${id}`} {...rest} />
           </li>
         ))}
       </List>

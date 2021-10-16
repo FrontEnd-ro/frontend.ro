@@ -44,7 +44,7 @@ const BlogArticlePreview = ({
               <h2 className={styles.title}>
                 {title}
               </h2>
-              <p className="text-2xl font-light">
+              <p className="text-xl font-light">
                 {firstParagraph}
               </p>
             </div>
@@ -56,7 +56,7 @@ const BlogArticlePreview = ({
                 {timeAgo(new Date(timestamp))}
               </time>
               <span className={`${styles['read-more']} border-bottom-1px`}>
-                Citeste mai mult
+                Citește mai mult
                 <FontAwesomeIcon className="ml-2" icon={faArrowRight} />
               </span>
             </div>

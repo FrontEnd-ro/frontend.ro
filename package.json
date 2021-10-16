@@ -45,12 +45,12 @@
     }
   ],
   "scripts": {
-    "dev:local": "nodemon server/server.js --watch server",
+    "dev:local": "nodemon server/server.ts --watch server",
     "dev": "node server/local-server.js",
-    "prebuild": "yarn lint",
-    "build": "next build",
+    "prebuild": "rm -rf server-build && yarn lint",
+    "build": "tsc -p ./server/ && next build",
     "postbuild": "next-sitemap --config sitemap.js",
-    "start": "node server/server.js",
+    "start": "node server-build/server/server.js",
     "lint": "eslint pages/**/*.tsx client/**/*.tsx",
     "deploy:master-dev": "git push dev master:master",
     "deploy:master-prod": "git push heroku master:master",
@@ -150,6 +150,7 @@
     "raw-loader": "^4.0.2",
     "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",
+    "ts-node": "^10.3.0",
     "typescript": "^4.4.2"
   }
 }

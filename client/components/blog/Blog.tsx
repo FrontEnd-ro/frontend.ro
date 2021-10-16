@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import List from '~/components/List';
+import { RootState } from '~/redux/root.reducer';
 import { BlogArticle } from '~/components/blog/types';
 import PageContainer from '~/components/PageContainer';
 import { SubscribeFormWithText } from '~/components/SubscribeForm';
@@ -11,7 +13,7 @@ interface Props {
   articles: BlogArticle[]
 }
 
-const Blog = ({ articles }: Props) => {
+const Blog = ({ articles, isLoggedIn }: ConnectedProps<typeof connector> & Props) => {
   return (
     <PageContainer className={styles.blog}>
       <h1 className="mb-0"> Blogul FrontEnd.ro</h1>
@@ -43,16 +45,26 @@ const Blog = ({ articles }: Props) => {
         ))}
       </List>
 
-      <SubscribeFormWithText className={styles['subscribe-form']}>
-        <h2>Rămâi conectat la noutăți</h2>
-        <p>
-          Dacă-ți place proiectul și vrei să te ținem la curent
-          cu noutățile - atunci lasă-ți email-ul aici și hai în comunitate.
-        </p>
-      </SubscribeFormWithText>
+      {!isLoggedIn && (
+        <SubscribeFormWithText className={styles['subscribe-form']}>
+          <h2>Rămâi conectat la noutăți</h2>
+          <p>
+            Dacă-ți place proiectul și vrei să te ținem la curent
+            cu noutățile - atunci lasă-ți email-ul aici și hai în comunitate.
+          </p>
+        </SubscribeFormWithText>
+      )}
 
     </PageContainer>
   );
 };
 
-export default Blog;
+function mapStateToProps(state: RootState) {
+  return {
+    isLoggedIn: !!state.user.info,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
+export default connector(Blog);

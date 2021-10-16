@@ -27,5 +27,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.js",
+    "../shared/**/*.ts",
+    "../shared/**/*.js",
   ]
 } 

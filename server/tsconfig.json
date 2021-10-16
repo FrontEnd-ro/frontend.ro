@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "outDir": "../server-build",
+    "target": "ES2020",
     "lib": [
       "dom",
       "dom.iterable",
@@ -10,26 +11,21 @@
     "skipLibCheck": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "downlevelIteration": true,
     "jsx": "preserve",
-    "baseUrl": "./client",
-    "paths": {
-      "~/*": ["./*"],
-    },
+    "baseUrl": ".",
   },
   "exclude": [
-    "node_modules",
-    "server",
+    "node_modules"
   ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.js",
   ]
-}
+} 

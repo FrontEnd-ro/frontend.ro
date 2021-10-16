@@ -40,6 +40,13 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
           </Link>
         </li>
         <li>
+          <Link href="/blog">
+            <a>
+              Blog
+            </a>
+          </Link>
+        </li>
+        {/* <li>
           <Link href="/evenimente">
             <a>
               Evenimente
@@ -52,7 +59,7 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
               Slide-uri
             </a>
           </Link>
-        </li>
+        </li> */}
         {isLoggedIn ? (
           <li className={styles.login}>
             <Button variant="transparent" onClick={logout}>

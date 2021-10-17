@@ -1,0 +1,16 @@
+@import '../../../../../client/styles/variables';
+
+.prep-list {
+  padding: 1em;
+  list-style: none;
+  background: color(darker-white);
+
+  li {
+    margin-bottom: 0.75em;
+  }
+
+  img {
+    margin-right: 0.5em;
+    vertical-align: middle;
+  }
+}

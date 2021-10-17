@@ -1,0 +1,12 @@
+{
+  "Name": "Password Reset",
+  "Alias": "password-reset",
+  "Subject": "Resetare parolă",
+  "TemplateType": "Standard",
+  "LayoutTemplate": "basic",
+  "TestRenderModel": {
+    "name": "Bob",
+    "resetCode": "123456",
+    "resetLink": "https://frontend.ro/auth?reset_password"
+  }
+}

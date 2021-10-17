@@ -1,0 +1,56 @@
+---
+layout: basic/content.hbs
+---
+<table>
+  <tbody>
+    <tr>
+      <td>
+        {{> greeting}}
+        <p>
+          Ne bucurăm că te-ai înscris la trainingul <strong>\{{ product_name }}</strong>, organizat cu mare drag de
+          echipa noastră de FrontEnd :D
+        </p>
+        <p>
+          Acesta va avea loc <strong> online, pe Zoom</strong> în următoarele 2 weekend-uri:
+        </p>
+        <ul>
+          <li>
+            <p>Sâmbătă 10 Aprilie de la ora 10:00</p>
+            <a
+              href="https://us02web.zoom.us/j/84187123325?pwd=SW9LWXNVMFd0UUR5WDN6RUYwYTUwUT09">https://us02web.zoom.us/j/84187123325?pwd=SW9LWXNVMFd0UUR5WDN6RUYwYTUwUT09</a>
+          </li>
+          <li>
+            <p>Duminică 18 Aprilie de la ora 10:00</p>
+            <a
+              href="https://us02web.zoom.us/j/82371288798?pwd=VWRVVm1NSThiS0ZRRVN1U3RCK1dWdz09">https://us02web.zoom.us/j/82371288798?pwd=VWRVVm1NSThiS0ZRRVN1U3RCK1dWdz09</a>
+          </li>
+        </ul>
+        <p>
+          <strong>Te vom contacta prin telefon cu o zi înainte de eveniment pentru a ne confirma participarea.</strong>
+          Locurile sunt limitate pentru că vrem să avem timp pentru fiecare, deci dacă cumva nu mai poți ajunge te rugăm
+          să ne scrii ca să oferim locul altcuiva.
+        </p>
+        <p>Pentru ca training-ul să se desfășoare în condiții optime, te rugăm să pregătești următoarele:</p>
+        <ul class="prep-list">
+          <li>
+            <img width="40" src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <span>Să downloadezi și să instalezi Git (<a href="https://git-scm.com/downloads">Download Git</a>)</span>
+          </li>
+          <li style="margin-bottom: 10px">
+            <img width="40" src="https://image.flaticon.com/icons/png/512/25/25231.png" />
+            <span> Să îți faci cont pe GitHub (<a href="https://github.com/">Link către GitHub</a>)</span>
+          </li>
+          <li style="margin-bottom: 10px">
+            <img width="40"
+              src="https://www.pngitem.com/pimgs/m/80-800968_vscode-visual-studio-logo-png-transparent-png.png" />
+            <span>Să îți instalezi <a href="https://code.visualstudio.com/download">VSCode</a> pe care-l vom folosi
+              pentru a edita cod și a rula primele comenzi de Git</span>
+          </li>
+        </ul>
+        {{> email_signature}}
+        <p class="font-light">PS: Dacă ai orice nelămuriri sau vrei să ne scrii, dă reply la acest email și îți
+          răspundem cu drag :D.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>

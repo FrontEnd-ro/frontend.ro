@@ -1,0 +1,11 @@
+{
+  "Name": "Git & GitHub Registered",
+  "Alias": "git-incepatori-registered",
+  "Subject": "{{ product_name }} | FrontEnd.ro",
+  "TemplateType": "Standard",
+  "LayoutTemplate": "basic",
+  "TestRenderModel": {
+    "name": "Bob",
+    "product_name": "Git & GitHub"
+  }
+}

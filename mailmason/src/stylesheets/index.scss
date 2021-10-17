@@ -1,0 +1,19 @@
+// Re-usable from Client
+@import '../../../client/styles/buttons';
+@import '../../../client/styles/utils.scss';
+@import '../../../client/styles/variables.scss';
+
+// Global for emails
+@import 'scss/common';
+@import 'scss/typography';
+
+// Components
+@import 'scss/components/prep-list';
+@import 'scss/components/call-to-action';
+
+/*Media Queries ------------------------------ */
+@media only screen and (max-width: 600px) {
+  .content-cell {
+    padding: 5vw 6vw 8vw 6vw !important;
+  }
+}

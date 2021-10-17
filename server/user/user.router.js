@@ -126,9 +126,9 @@ userRouter.post('/register', async function register(req, res) {
   const token = UserModel.generateJwtForUser(user._id);
   setTokenCookie(token, res);
 
-  EmailService.sendEmailWithTemplate(
+  EmailService.sendTemplateWithAlias(
     email,
-    Number(process.env.EMAIL_REGISTER_TEMPLATE),
+    "register",
     {
       name: username,
       sender_name: 'Păvă'
@@ -373,9 +373,9 @@ userRouter.post('/subscribe', async (req, res) => {
 
   await SubscribeModel.subscribe({ name, email });
 
-  EmailService.sendEmailWithTemplate(
+  EmailService.sendTemplateWithAlias(
     email,
-    Number(process.env.EMAIL_WELCOME_TEMPLATE),
+    "register",
     {
       name,
       sender_name: 'Păvă'

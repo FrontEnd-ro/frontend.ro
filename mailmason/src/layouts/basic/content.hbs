@@ -1,0 +1,43 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="supported-color-schemes" content="light dark" />
+  <title>{{ subject }}</title>
+  <link href="../../stylesheets/index.css?__inline=true" />
+</head>
+
+<body>
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="pt-5" align="center">
+        <table class="email-card" width="100%" cellpadding="0" cellspacing="0">
+          {{!-- <tr colspan="2">
+            <td class="email-card__header">
+              <a href="https://FrontEnd.ro">
+                <!-- Remove 'alt' attribute. Otherwise it will be in the GMail preview -->
+                <img src="https://d3tycb976jpudc.cloudfront.net/public/logo.png" height="40" alt="" />
+              </a>
+            </td>
+          </tr> --}}
+          <tr >
+            <td colspan="2">
+              <div class="f-fallback">
+                {{ body }}
+              </div>
+            </td>
+          </tr>
+          {{> address_footer}}
+        </table>
+      </td>
+    </tr>
+  </table>
+  {{> schmoes_footer}}
+</body>
+
+</html>

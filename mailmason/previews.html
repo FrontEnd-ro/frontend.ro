@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <title>Postmark Template Previews</title>
+  <script src="http://localhost:3000/livereload.js"></script>
+  <script>
+    var templates = {
+      "register": {
+        "name": "Register",
+        "description": "When signing up with an account or just to get notified, via the contact form",
+      },
+      "password-reset": {
+        "name": "Password Reset",
+        "description": "Email with code/link to reset password!",
+      },
+      "git-incepatori-registered": {
+        "name": "Git & GitHub Registered",
+        "description": "When successfully registering for an event",
+      },
+      "git-incepatori-waitlist": {
+        "name": "Git & GitHub Waitlist",
+        "description": "When there are no available seats and you've been added to the waitlist.",
+      },
+      "git-incepatori-info": {
+        "name": "Git & GitHub Info",
+        "description": "Newsletter about an upcoming event.",
+      },
+    }
+  </script>
+  <style>
+    body {
+      border-top: 8px solid #FEDF32;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      padding: 24px;
+      margin: 0;
+      /* Width is just big enough to fit desktop and mobile views side-by-side */
+    }
+
+    a {
+      color: #137FC9;
+      display: inline-block;
+      padding: 2px 4px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    a[href="#toc"] {
+      float: right;
+      font-size: 120%;
+      font-weight: bold;
+      margin-top: -24px;
+      padding: 4px 8px;
+    }
+
+    a[href="#toc"]:after {
+      content: "\0020\21e7";
+      font-size: 120%;
+    }
+
+    a:hover {
+      background-color: #EFF5FC;
+    }
+
+    ol {
+      line-height: 1.6;
+    }
+
+    h1,
+    hr {
+      clear: both;
+    }
+
+    h1 {
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    iframe {
+      border: 1px solid #ddd;
+    }
+
+    hr {
+      display: block;
+      border-top: 1px solid #ccc;
+      border-bottom: none;
+      border-right: none;
+      border-left: none;
+      margin-top: 48px;
+      margin-bottom: 48px;
+    }
+
+    nav {
+      border-bottom: 1px solid #ccc;
+      display: block;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li:first-child {
+      border-right: 1px solid #ccc;
+      font-weight: bold;
+      padding-right: 16px;
+      margin-right: 8px;
+    }
+
+    nav li {
+      display: inline-block;
+    }
+
+    nav a {
+      font-weight: normal;
+      margin-right: 8px;
+    }
+
+    nav a:after {
+      content: " \0020\2197";
+    }
+
+    div.container {
+      width: 1128px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    a.mailmason-logo {
+      float: right;
+    }
+
+    div.table-of-contents {
+      float: left;
+      padding-bottom: 24px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <nav>
+      <ul>
+        <li>MailMason</li>
+        <li><a href="https://github.com/wildbit/mailmason/wiki">Repository</a></li>
+        <li><a href="https://github.com/wildbit/mailmason/wiki">Documentation</a></li>
+        <li><a href="https://postmarkapp.com/why/templates">Postmark Templates</a></li>
+      </ul>
+    </nav>
+
+    <a href="https://github.com/wildbit/mailmason" class="mailmason-logo"><img
+        src="http://assets.wildbit.com/wildbit/repos/mailmason/mailmason.png" alt="MailMason" width="150"></a>
+
+    <div class="table-of-contents">
+      <h1>MailMason Template Previews</h1>
+
+      <ol id="toc">
+        <!--
+            The table of contents is generated from the templates hash at the top
+            of the page using the JavaScript at the bottom of the page
+          -->
+      </ol>
+    </div>
+
+    <hr>
+
+    <div id="previews">
+      <!--
+          The previews are generated from the templates hash at the top
+          of the page using the JavaScript at the bottom of the page
+        -->
+    </div>
+  </div>
+
+  <script>
+    // This is the block of JavaScript that generates the TOC and previews
+
+    // Find the table of contents and previews area
+    var toc = document.getElementById("toc");
+    var previews = document.getElementById("previews");
+
+    // Iterate over the templates to generate the TOC and previews
+    for (var key in templates) {
+      // Build the table of contents for the various templates
+      var list_item = document.createElement("li");
+      var anchor = document.createElement("a");
+      anchor.setAttribute("href", "#" + key);
+      anchor.appendChild(document.createTextNode(templates[key]["name"]));
+      list_item.appendChild(anchor);
+      list_item.appendChild(document.createTextNode(" - " + templates[key]["description"]));
+      toc.appendChild(list_item);
+
+      // Build the heading for the template
+      var heading = document.createElement("h1");
+      var description = document.createElement("p");
+      var guide_link = document.createElement("a");
+      var top_link = document.createElement("a");
+      top_link.setAttribute("href", "#toc");
+      top_link.appendChild(document.createTextNode("Back to Top"));
+      guide_link.setAttribute("href", templates[key]["guide"]);
+      guide_link.setAttribute("target", "_blank");
+      guide_link.setAttribute("rel", "noopener noreferrer");
+      guide_link.appendChild(document.createTextNode("📖 View Best Practices Guide"));
+      heading.appendChild(document.createTextNode(templates[key]["name"]));
+      heading.setAttribute("id", key);
+      description.appendChild(document.createTextNode(templates[key]["description"]));
+      description.appendChild(guide_link)
+      previews.appendChild(heading);
+      previews.appendChild(top_link);
+      previews.appendChild(description);
+
+      // Build the wide iframe preview for wide view of the template
+      var wide_preview = document.createElement("iframe")
+      wide_preview.setAttribute("width", "640")
+      wide_preview.setAttribute("height", "800")
+      wide_preview.setAttribute("src", "dist/compiled/" + key + "/content.html")
+      wide_preview.setAttribute("frameBorder", 0)
+      previews.appendChild(wide_preview);
+
+      // Build the wide iframe preview for narrow view of the template
+      var narrow_preview = document.createElement("iframe");
+      narrow_preview.setAttribute("width", "480")
+      narrow_preview.setAttribute("height", "800")
+      narrow_preview.setAttribute("src", "dist/compiled/" + key + "/content.html")
+      narrow_preview.setAttribute("frameBorder", 0)
+      previews.appendChild(narrow_preview);
+
+      // Build the wide iframe preview for wide view of the template
+      var wide_preview = document.createElement("iframe");
+      wide_preview.setAttribute("width", "640")
+      wide_preview.setAttribute("height", "400")
+      wide_preview.setAttribute("src", "dist/compiled/" + key + "/content.txt")
+      wide_preview.setAttribute("frameBorder", 0)
+      previews.appendChild(wide_preview);
+
+      // Build the wide iframe preview for narrow view of the template
+      var narrow_preview = document.createElement("iframe");
+      narrow_preview.setAttribute("width", "480")
+      narrow_preview.setAttribute("height", "400")
+      narrow_preview.setAttribute("src", "dist/compiled/" + key + "/content.txt")
+      narrow_preview.setAttribute("frameBorder", 0)
+      previews.appendChild(narrow_preview);
+
+    };
+  </script>
+</body>
+
+</html>

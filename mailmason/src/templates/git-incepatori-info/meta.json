@@ -1,0 +1,10 @@
+{
+  "Name": "Git & GitHub Info",
+  "Alias": "git-incepatori-info",
+  "Subject": "Git & GitHub pentru începători | FrontEnd.ro",
+  "TemplateType": "Standard",
+  "LayoutTemplate": "basic",
+  "TestRenderModel": {
+    "name": "Bob"
+  }
+}

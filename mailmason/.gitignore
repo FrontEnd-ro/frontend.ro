@@ -1,0 +1,9 @@
+.DS_Store
+.idea
+.ftppass
+.ruby-version
+node_modules
+npm-debug.log
+config.pm.json
+secrets.json
+dist/

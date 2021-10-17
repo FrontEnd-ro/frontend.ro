@@ -1,0 +1,29 @@
+---
+layout: basic/content.hbs
+---
+<table>
+  <tbody>
+    <tr>
+      <td>
+        {{> greeting}}
+        <p>
+          Pentru a-ți reseta parola folosește codul:
+        </p>
+        <p style="font-weight: bold; border-left: 2px solid #bbb; padding-left: 0.5em;">
+          <span style="font-size: 24px;">
+            \{{ resetCode }}
+          </span>
+        </p>
+        <p>
+          Dacă cumva ai închis pagina noastră, poți reveni la ea
+          <a href="\{{ resetLink }}">prin acest link</a>.
+        </p>
+        {{> email_signature}}
+        <p class="font-light">
+          PS: dacă cererea de resetare a parolei nu a fost inițiată de tine, dă-ne un semn la
+          <a href="mailto:hello@frontend.ro">hello@frontend.ro</a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,11 @@
+{
+  "Name": "Git & GitHub Waitlist",
+  "Alias": "git-incepatori-waitlist",
+  "Subject": "Listă de așteptare {{ product_name }}",
+  "TemplateType": "Standard",
+  "LayoutTemplate": "basic",
+  "TestRenderModel": {
+    "name": "Bob",
+    "product_name": "Git & GitHub"
+  }
+}

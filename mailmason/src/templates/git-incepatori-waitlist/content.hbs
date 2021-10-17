@@ -1,0 +1,36 @@
+---
+layout: basic/content.hbs
+---
+<table>
+  <tbody>
+    <tr>
+      <td>
+        {{> greeting}}
+        <p>
+          Din păcate locurile la trainingul <strong>\{{ product_name }}</strong> s-au ocupat deja.
+          Îți vom da un semn dacă se eliberează vreun loc.
+        </p>
+
+        <p>
+          Dacă totuși nu reușești să participi la această sesiune,
+          stai fără griji căci lucrăm la niște fucționalități noi
+          care vor simula experiența și challenge-urile dintr-un training și-ți vor permită să înveți
+          Git direct de pe site.
+        </p>
+        <div class="call-to-action">
+          <p>
+            Între timp, dacă <strong>vrei să înveți</strong> FrontEnd, lecțiile noastre
+            sunt gratuite iar la final vei găsi o serie de exerciții pentru a pune în
+            practică ce tocmai ai învățat.
+          </p>
+          <a href="https://FrontEnd.ro" class="btn btn--blue"> Începe să înveți </a>
+        </div>
+        {{> email_signature}}
+        <p class="font-light">
+          PS: Dacă ai orice nelămuriri sau vrei să ne scrii, dă reply la acest email și îți
+          răspundem cu drag :D.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>

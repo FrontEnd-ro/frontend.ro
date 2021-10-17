@@ -1,0 +1,10 @@
+{
+  "Name": "Register",
+  "Alias": "register",
+  "Subject": "Bine ai venit în comunitatea FrontEnd.ro",
+  "TemplateType": "Standard",
+  "LayoutTemplate": "basic",
+  "TestRenderModel": {
+    "name": "Bob"
+  }
+}

@@ -45,7 +45,6 @@ AWS_BUCKET=
 CLOUDFRONT_UPLOAD=
 
 # Postmark
-EMAIL_WELCOME_TEMPLATE=
 EMAIL_TOKEN=
 
 ENDPOINT=https://frontend-ro-dev.herokuapp.com/api

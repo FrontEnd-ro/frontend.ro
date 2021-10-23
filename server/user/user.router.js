@@ -126,6 +126,8 @@ userRouter.post('/register', async function register(req, res) {
   const token = UserModel.generateJwtForUser(user._id);
   setTokenCookie(token, res);
 
+  // No "await" here since the email is not
+  // critical for the continuation of the flow.
   EmailService.sendTemplateWithAlias(
     email,
     "register",
@@ -373,6 +375,8 @@ userRouter.post('/subscribe', async (req, res) => {
 
   await SubscribeModel.subscribe({ name, email });
 
+  // No "await" here since the email is not
+  // critical for the continuation of the flow.
   EmailService.sendTemplateWithAlias(
     email,
     "register",

@@ -50,6 +50,8 @@ eventRouter.post('/:label/register', async function registerToEvent(req, res) {
     if (freeSeatsCount >= 1) {
       await EventModel.addAttendee(label, { name, email, tel });
 
+      // No "await" here since the email is not
+      // critical for the continuation of the flow.
       EmailService.sendTemplateWithAlias(
         email,
         `${label}-registered`,
@@ -93,6 +95,9 @@ eventRouter.post('/:label/waitlist', async function addToWaitlist(req, res) {
     }
 
     await EventModel.addToWaitlist(label, { name, email, tel });
+
+    // No "await" here since the email is not
+    // critical for the continuation of the flow.
     EmailService.sendTemplateWithAlias(
       email,
       `${label}-waitlist`,

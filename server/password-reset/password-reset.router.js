@@ -22,12 +22,21 @@ passwordResetRouter.post('/', async function generateResetCode(req, res) {
     }
 
     const resetCode = await PasswordResetModel.create(email);
-    EmailService.sendTemplateWithAlias(email, "password-reset", {
+
+    // Using "await" because sending the Reset Code via
+    // email is critical for the user to continue the flow
+    const emailResponse = await EmailService.sendTemplateWithAlias(email, "password-reset", {
       "name": user.name,
       "resetCode": resetCode.code,
       "resetLink": "https://frontend.ro/auth?reset_password",
       "sender_name": "Păvă",
-    })
+    });
+
+    if (!emailResponse.success) {
+      new ServerError(400, emailResponse.Message).send(res);
+      return;
+    }
+
     res.status(200).send();
   } catch (err) {
     console.error("[generateResetCode]", err);

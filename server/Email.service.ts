@@ -56,6 +56,6 @@ async function sendTemplateWithAlias(
   }
 }
 
-module.exports = {
+export default {
   sendTemplateWithAlias,
 }

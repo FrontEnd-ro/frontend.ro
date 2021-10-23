@@ -1,0 +1,37 @@
+---
+layout: basic/content.hbs
+---
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <p class="
+          notification-header
+          \{{#success}} success \{{/success}}
+          \{{#info}} info \{{/info}}
+          \{{#danger}} danger \{{/danger}}
+        ">
+          \{{#success}} ✔️ \{{/success}}
+          \{{#info}} ℹ️ \{{/info}}
+          \{{#danger}} ⚠️ \{{/danger}}
+
+          \{{ subject }}
+        </p>
+        {{> light_greeting}}
+        <p>
+          \{{ body }}
+        </p>
+        \{{#cta_text}}
+          <div class="text-center my-5">
+            <a href="\{{ ../cta_link }}" class="btn btn--light no-underline"> \{{ . }} </a>
+          </div>
+        \{{/cta_text}}
+        {{> email_signature}}
+        <p class="font-light">
+          PS: Dacă ai orice nelămuriri sau vrei să ne scrii, dă reply la acest email și îți
+          răspundem cu drag :D.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,22 @@
+@import '../../../../../client/styles/variables';
+
+.notification-header {
+  text-align: center;
+  font-size: 1.75em;
+  font-weight: bold;
+  border-width: 2px;
+  border-style: solid;
+  padding: 0.5em;
+
+  &.success {
+    border-color: color(green);
+  }
+
+  &.info {
+    border-color: color(grey);
+  }
+
+  &.danger {
+    border-color: color(red);
+  }
+}

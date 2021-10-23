@@ -1,0 +1,15 @@
+{
+  "Name": "Notification",
+  "Alias": "notification",
+  "Subject": "{{ subject }}",
+  "TemplateType": "Standard",
+  "LayoutTemplate": "basic",
+  "TestRenderModel": {
+    "name": "Bob",
+    "success": true,
+    "subject": "Ai completat cu succes jumătate de curs",
+    "body": "Felicitări! Ai rezolvat cu succes jumătate din exercițiile din cursul de HTML. Suntem mândri de tine, și-ți ținem pumnii pentru exercițiile rămase!",
+    "cta_text": "Continuă cursul",
+    "cta_link": "https://frontend.ro"
+  }
+}

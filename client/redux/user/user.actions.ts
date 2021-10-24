@@ -1,9 +1,10 @@
-import { Notification } from './types';
+import { ParsedNotificationI } from '../../../shared/types/notification.types';
 
 const LOAD_INFO = 'user/LOAD_INFO';
 
 const ADD_NOTIFICATIONS = 'user/ADD_NOTIFICATIONS';
 const LOAD_NOTIFICATIONS = 'user/LOAD_NOTIFICATIONS';
+const REPLACE_NOTIFICATIONS = 'user/REPLACE_NOTIFICATIONS';
 
 const MARK_AS_READ = 'user/MARK_NOTIFICATIONS_AS_READ';
 const MARK_AS_UNREAD = 'user/MARK_NOTIFICATIONS_AS_UNREAD';
@@ -16,6 +17,7 @@ export const USER_INFO = {
 export const USER_NOTIFICATIONS = {
   ADD: ADD_NOTIFICATIONS,
   LOAD: LOAD_NOTIFICATIONS,
+  REPLACE: REPLACE_NOTIFICATIONS,
   MARK_AS_READ,
   MARK_AS_UNREAD,
   MARK_ALL_AS_READ,
@@ -30,7 +32,9 @@ export const loadInfo = (info: any) => ({
 });
 
 /** Notifications */
-export const addNotification = (notification: Notification | Notification[], index = 0) => ({
+export const addNotification = (
+  notification: ParsedNotificationI | ParsedNotificationI[], index = 0,
+) => ({
   type: ADD_NOTIFICATIONS,
   payload: {
     notification,
@@ -38,10 +42,17 @@ export const addNotification = (notification: Notification | Notification[], ind
   },
 });
 
-export const loadNotificationsSuccess = (newNotifications: Notification[]) => ({
+export const loadNotificationsSuccess = (newNotifications: ParsedNotificationI[]) => ({
   type: LOAD_NOTIFICATIONS,
   payload: {
     newNotifications,
+  },
+});
+
+export const replaceNotificationsSuccess = (notifications: ParsedNotificationI[]) => ({
+  type: REPLACE_NOTIFICATIONS,
+  payload: {
+    notifications,
   },
 });
 

@@ -1,10 +1,12 @@
+import { ParsedNotificationI } from '~/../shared/types/notification.types';
 import { UserState } from './types';
 import { USER_INFO, USER_NOTIFICATIONS } from './user.actions';
 
 export const defaultUserState = {
   info: undefined,
   notifications: {
-    list: undefined, unread: 0, unreadCount: 0, page: 0, end: false,
+    // Make sure we add then in descending order (by timestamp)
+    list: undefined, unreadCount: 0, page: 0, end: false,
   },
 };
 
@@ -21,37 +23,66 @@ export const userReducer = (state = initialState, action: { type: string; payloa
     }
 
     case USER_NOTIFICATIONS.ADD: {
-      let { index, notifications } = action.payload;
+      let {
+        index,
+        notifications,
+      }: {
+        index: number, notifications: ParsedNotificationI | ParsedNotificationI[]
+      } = action.payload;
 
       if (!Array.isArray(notifications)) {
         notifications = [notifications];
       }
+
+      const allNotifications = [
+        ...state.notifications.list.slice(0, index),
+        ...notifications,
+        ...state.notifications.list.slice(index),
+      ];
+
       return {
         ...state,
         notifications: {
           ...state.notifications,
-          list: [...state.notifications.list.slice(0, index),
-            ...notifications,
-            ...state.notifications.list.slice(index)],
+          list: allNotifications,
+          unreadCount: getUnreadCount(allNotifications),
         },
       };
     }
 
     case USER_NOTIFICATIONS.LOAD: {
       const { newNotifications } = action.payload;
+      const allNotifications = state.notifications.list
+        ? [...state.notifications.list, ...newNotifications]
+        : newNotifications;
 
       return {
         ...state,
         notifications: {
           ...state.notifications,
-          list: state.notifications.list
-            ? [...state.notifications.list, ...newNotifications]
-            : newNotifications,
+          list: allNotifications,
           page: state.notifications.page + 1,
           end: newNotifications.length === 0,
+          unreadCount: getUnreadCount(allNotifications),
         },
       };
     }
+
+    case USER_NOTIFICATIONS.REPLACE: {
+      const { notifications }: {notifications: ParsedNotificationI[]} = action.payload;
+
+      return {
+        ...state,
+        notifications: {
+          list: notifications.sort((a, b) => b.timestamp - a.timestamp),
+          page: 1,
+          // TODO: remove when changing to a page-based API
+          end: true,
+          unreadCount: getUnreadCount(notifications),
+        },
+      };
+    }
+
     case USER_NOTIFICATIONS.MARK_AS_READ: {
       let { id } = action.payload;
 
@@ -63,7 +94,7 @@ export const userReducer = (state = initialState, action: { type: string; payloa
             if (n._id === id) {
               return {
                 ...n,
-                isUnread: false,
+                read: true,
               };
             }
             return n;
@@ -83,7 +114,7 @@ export const userReducer = (state = initialState, action: { type: string; payloa
             if (n._id === id) {
               return {
                 ...n,
-                isUnread: true,
+                read: false,
               };
             }
             return n;
@@ -97,7 +128,7 @@ export const userReducer = (state = initialState, action: { type: string; payloa
         ...state,
         notifications: {
           ...state.notifications,
-          list: state.notifications.list.map((n) => ({ ...n, isUnread: false })),
+          list: state.notifications.list.map((n) => ({ ...n, read: true })),
           unreadCount: 0,
         },
       };
@@ -107,3 +138,13 @@ export const userReducer = (state = initialState, action: { type: string; payloa
   }
 };
 export default userReducer;
+
+function getUnreadCount(notifications: ParsedNotificationI[]) {
+  return notifications.reduce((acc, cur) => {
+    if (!cur.read) {
+      return acc + 1;
+    }
+
+    return acc;
+  }, 0);
+}

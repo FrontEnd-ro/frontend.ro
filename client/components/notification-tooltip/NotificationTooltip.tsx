@@ -1,187 +1,175 @@
-import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-
+import React, { useEffect, useRef, useState } from 'react';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faSpinner } from '@fortawesome/free-solid-svg-icons';
+
+import List from '../List';
+import Button from '~/components/Button';
+import Notification from './notification/Notification';
+
 import {
-  loadNotificationsSuccess,
   markNotificationAsRead,
   markNotificationAsUnread,
-  markAllAsRead,
+  markAllAsRead as markAllAsReadAction,
+  replaceNotificationsSuccess,
 } from '../../redux/user/user.actions';
-import UserService from '../../services/User.service';
-
-import NotificationSkeleton from './notification/NotificationSkeleton';
 import { RootState } from '~/redux/root.reducer';
+import { useOutsideClick } from '~/services/Hooks';
+import SkeletonNotificationList from './skeleton-list/SkeletonList';
+import NotificationService from '~/services/api/Notification.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
-import Notification from './notification/Notification';
-import Button from '~/components/Button';
 
 import styles from './NotificationTooltip.module.scss';
-import List from '../List';
 
-interface State {
-  loading: boolean;
-  isOpen: boolean;
-}
+type Props = {
+  className?: string
+} & ConnectedProps<typeof connector>;
 
-class NotificationsTooltip extends React.Component<
-  ConnectedProps<typeof connector>,
-  State
-  > {
-  hiddenRef: React.RefObject<HTMLLIElement>;
+const NotificationsTooltip = ({ className, user, dispatch }: Props) => {
+  const [error, setError] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  private observer: IntersectionObserver;
+  const hiddenRef = useRef<HTMLDivElement>(null);
+  const componentRef = useRef<HTMLDivElement>(null);
+  const notifications = user.notifications.list || [];
 
-  constructor(props) {
-    super(props);
+  const toggle = () => setIsOpen(!isOpen);
 
-    this.state = {
-      loading: false,
-      /** at this point isOpen is true so we can see the notifications when we enter the page */
-      isOpen: true,
-    };
-
-    this.hiddenRef = React.createRef();
-  }
-
-  componentDidMount() {
-    const { user } = this.props;
-    const { notifications } = user;
-
-    if (!notifications.end) {
-      this.initIntersectionObserver();
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { user } = this.props;
-
-    if (prevProps.user.notifications.end !== user.notifications.end && user.notifications.end) {
-      this.observer.disconnect();
-    }
-
-    if (prevProps.user.notifications.end !== user.notifications.end && !user.notifications.end) {
-      this.initIntersectionObserver();
-    }
-  }
-
-  componentWillUnmount() {
-    const { user } = this.props;
-    const { notifications } = user;
-
-    if (!notifications.end) {
-      this.observer.disconnect();
-    }
-  }
-
-  initIntersectionObserver = () => {
-    const options = {
-      threshold: 0.3,
-    };
-    this.observer = new IntersectionObserver(this.loadMore, options);
-    this.observer.observe(this.hiddenRef.current);
-  };
-
-  loadMore = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        this.loadNextPage();
-      }
-    });
-  };
-
-  loadNextPage = async () => {
-    const { user, dispatch } = this.props;
-    const { notifications } = user;
-    this.setState({ loading: true });
+  const loadNextPage = async () => {
+    setLoading(true);
 
     try {
-      const newNotifications = await UserService.getNotifications(notifications.page);
-      dispatch(loadNotificationsSuccess(newNotifications));
+      const newNotifications = await NotificationService.fetchAll();
+      dispatch(replaceNotificationsSuccess(newNotifications));
     } catch (err) {
-      SweetAlertService.toast({ type: 'error', text: err });
+      setError(true);
+      console.error('NotificationsTooltip.loadNextPage', err);
     } finally {
-      this.setState({ loading: false });
+      setLoading(false);
     }
   };
 
-  markAsRead = async (id) => {
-    const { user } = this.props;
+  const markAsRead = async (id) => {
     const { notifications } = user;
-    const { dispatch } = this.props;
 
-    if (notifications.list.find((n) => n._id === id).isUnread) {
+    if (notifications.list.find((n) => n._id === id).read === false) {
       try {
         dispatch(markNotificationAsRead(id));
-        await UserService.markAsRead(id);
+        await NotificationService.markAsRead(id);
       } catch (err) {
         dispatch(markNotificationAsUnread(id));
       }
     }
   };
 
-  markAllAsRead = async () => {
-    const { dispatch } = this.props;
-
+  const markAllAsRead = async () => {
     try {
-      dispatch(markAllAsRead());
-      await UserService.markAllAsRead();
+      dispatch(markAllAsReadAction());
+      await NotificationService.markAllAsRead();
     } catch (err) {
       SweetAlertService.toast({ type: 'error', text: err });
     }
   };
 
-  render() {
-    const { user } = this.props;
-    const { loading, isOpen } = this.state;
+  useEffect(() => {
+    if (isOpen && !user.notifications.list) {
+      loadNextPage();
+    }
+  }, [isOpen]);
 
-    const notifications = user.notifications.list || [];
+  useOutsideClick(componentRef, () => setIsOpen(false));
 
-    return (
-      <div className={`${styles['notification-tooltip']}`}>
-        <div className={styles.icon}>
-          <FontAwesomeIcon width="16" icon={loading ? faSpinner : faBell} />
-          {user.notifications.unreadCount > 0 && (
-            <span className={`${styles['unread-badge']} text-white text-center text-xs`}>
-              {user.notifications.unreadCount}
-            </span>
-          )}
-        </div>
-        {isOpen && (
+  /** For the moment disable pagination */
+  // const observer = useRef<IntersectionObserver>(null);
+  // const initIntersectionObserver = () => {
+  //   const options = {
+  //     threshold: 0.3,
+  //   };
+  //   observer.current = new IntersectionObserver(loadMore, options);
+  //   observer.current.observe(hiddenRef.current);
+  // };
 
-          <List className={styles.notifications}>
-            <li className="text-right">
-              <Button
-                className={`${styles['mark-all-as-read-btn']} outline-none d-inline-block border-none`}
-                onClick={this.markAllAsRead}
-              >
-                Mark all as read
-              </Button>
-            </li>
-            {notifications.map((notificationProps) => (
-              <Notification
-                {...notificationProps}
-                key={notificationProps._id}
-                onMarkAsRead={() => this.markAsRead(notificationProps._id)}
-              />
-            ))}
-            {loading && (
-              <>
-                <NotificationSkeleton />
-                <NotificationSkeleton />
-                <NotificationSkeleton />
-                <NotificationSkeleton />
-                <NotificationSkeleton />
-              </>
-            )}
-            <li className="invisible" ref={this.hiddenRef} />
-          </List>
+  // const loadMore = (entries) => {
+  //   entries.forEach((entry) => {
+  //     if (entry.isIntersecting) {
+  //       loadNextPage();
+  //     }
+  //   });
+  // };
+  // useEffect(() => {
+  //   if (user.notifications.end && observer.current) {
+  //     observer.current.disconnect();
+  //   }
+  // }, [user.notifications.end]);
+
+  // useEffect(() => {
+  //   if (isOpen && !user.notifications.end) {
+  //     initIntersectionObserver();
+  //     return () => observer.current.disconnect();
+  //   }
+
+  //   return noop;
+  // }, [isOpen, user.notifications.end]);
+
+  return (
+    <div ref={componentRef} className={`${className ?? ''} relative`}>
+      <Button
+        onClick={toggle}
+        variant="transparent"
+        className={`${styles.icon} relative`}
+      >
+        <FontAwesomeIcon style={{ minWidth: '20px' }} width="20px" icon={loading ? faSpinner : faBell} />
+        {user.notifications.unreadCount > 0 && (
+          <span className={`${styles['unread-badge']} text-white text-center text-xs`}>
+            {user.notifications.unreadCount}
+          </span>
         )}
-      </div>
-    );
-  }
-}
+      </Button>
+      {isOpen && (
+        <div className={`${styles.tooltip} bg-white`}>
+          {notifications.length > 0 && (
+            <div className="text-right p-3 text-xs text-blue">
+              <Button
+                variant="transparent"
+                onClick={markAllAsRead}
+              >
+                Marchează notificările drept citite
+              </Button>
+            </div>
+          )}
+          {notifications.length > 0 && (
+            <List>
+              {notifications.map((notificationProps) => (
+                <Notification
+                  key={notificationProps._id}
+                  notification={notificationProps}
+                  onMarkAsRead={() => markAsRead(notificationProps._id)}
+                />
+              ))}
+            </List>
+          )}
+          {loading && (<SkeletonNotificationList />)}
+          {notifications.length === 0 && !loading && (
+            <p className="font-light text-center"> Deocamdată nu ai notificări... </p>
+          )}
+          {error && (
+            <div className="font-light text-center">
+              <p className="mb-4">
+                Nu am putut încărca notificările...😔
+              </p>
+              <p>
+                Încearcă să refresh-uiești pagina
+              </p>
+            </div>
+          )}
+          <div className="invisible" ref={hiddenRef} />
+        </div>
+      )}
+    </div>
+  );
+};
 
 function mapStateToProps(state: RootState) {
   return {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faLink } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import { RootState } from '~/redux/root.reducer';
 import styles from './Header.module.scss';
 import AsideMenu from '../layout/AsideMenu/AsideMenu';
 import NavLinks from '../NavLinks/NavLinks';
+import NotificationTooltip from '../notification-tooltip/NotificationTooltip';
 
 interface Props {
   href?: string;
@@ -28,7 +29,6 @@ function Header({
   withNavMenu = false,
 }: ConnectedProps<typeof connector> & Props) {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
-
   return (
     <>
 
@@ -67,7 +67,12 @@ function Header({
           )}
         </div>
         <div className="d-flex align-items-center">
-          {isLoggedIn ? <AccountTooltip /> : null}
+          {isLoggedIn ? (
+            <>
+              <NotificationTooltip className="mr-2" />
+              <AccountTooltip />
+            </>
+          ) : null}
           {withNavMenu && (
             <Button className={styles['nav-menu']} variant="light" onClick={() => setIsNavMenuOpen(true)}>
               Nav

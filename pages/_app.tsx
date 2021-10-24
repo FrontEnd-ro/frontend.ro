@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
+import LoadNotifications from '~/components/LoadNotifications/LoadNotifications';
 import { ApplicationConfig, loadConfig } from '~/redux/application-config.reducer';
 import { createStoreWithPreloadedData } from '~/redux/store';
 import { defaultUserState } from '~/redux/user/user.reducer';
@@ -21,6 +22,7 @@ export default function MyApp({ Component, pageProps }: any) {
   return (
     <Provider store={store}>
       <IdentifyLogRocket />
+      <LoadNotifications />
       <Component {...pageProps} />
     </Provider>
   );

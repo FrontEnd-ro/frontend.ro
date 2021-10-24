@@ -1,5 +1,5 @@
-import { USER_ROLE } from '~/../shared/SharedConstants';
 import { ChapterType } from '../exercise-submissions/types';
+import { ParsedNotificationI } from '~/../shared/types/notification.types';
 
 export interface UserState {
   info: {
@@ -15,22 +15,10 @@ export interface UserState {
 }
 
 export interface Notifications {
-  list: Notification[];
-  unread: number;
+  list: ParsedNotificationI[];
   unreadCount: number;
   page: number;
   end: boolean;
-}
-
-export interface Notification {
-  _id: string;
-  username: string;
-  name: string;
-  avatar: string;
-  message: string;
-  timestamp: number;
-  isUnread: boolean;
-  url: string;
 }
 
 export interface Exercise {

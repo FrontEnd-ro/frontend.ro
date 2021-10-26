@@ -176,3 +176,9 @@ header.header-menu-open .mobile-menu {
     transform: none;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .notification-tooltip {
+    right: -10em !important;
+  }
+}

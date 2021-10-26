@@ -24,9 +24,10 @@ import styles from './NotificationTooltip.module.scss';
 
 type Props = {
   className?: string
+  tooltipClassName?: string;
 } & ConnectedProps<typeof connector>;
 
-const NotificationsTooltip = ({ className, user, dispatch }: Props) => {
+const NotificationsTooltip = ({ className, tooltipClassName, user, dispatch }: Props) => {
   const [error, setError] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -128,7 +129,7 @@ const NotificationsTooltip = ({ className, user, dispatch }: Props) => {
         )}
       </Button>
       {isOpen && (
-        <div className={`${styles.tooltip} bg-white`}>
+        <div className={`${styles.tooltip} ${tooltipClassName ?? ''} bg-white`}>
           {notifications.length > 0 && (
             <div className="text-right p-3 text-xs text-blue">
               <Button

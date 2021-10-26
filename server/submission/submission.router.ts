@@ -1,3 +1,6 @@
+import NotificationModel from '../notification/notification.model';
+import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
+
 const express = require('express');
 const UserModel = require('../user/user.model');
 const SubmissionModel = require('./submission.model');
@@ -94,7 +97,7 @@ submissionRouter.post('/', [PrivateMiddleware], async function createSubmission(
 
 submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], async function approveSubmission(req, res) {
   const { submissionId } = req.params;
-  const { feedbacks } = req.body;
+  const { feedbacks, user: admin } = req.body;
 
   try {
     const submission = await SubmissionModel.get(submissionId);
@@ -112,6 +115,22 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
       feedbacks
     });
 
+    const notification: NotificationI = {
+      to: submission.user,
+      short_message: 'ți-a aprobat exercițiul. Congrats!',
+      long_message: 'ți-a aprobat exercițiul. Congrats!',
+      timestamp: Date.now(),
+      href: `/rezolva/${submission.exercise._id.toString()}`,
+      from: admin._id,
+      type: NotificationType.INFO,
+      urgency: NotificationUrgency.REGULAR
+    }
+
+    const { success, responses } = await NotificationModel.notify(notification, [NotificationChannel.IN_APP]);
+    if (!success) {
+      console.error("approveSubmission.notify", responses);
+    }
+
     res.status(200).send();
   } catch (err) {
     console.log("[API][approveSubmission]", err);
@@ -119,9 +138,9 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
   }
 });
 
-submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], async function approveSubmission(req, res) {
+submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], async function feedbackSubmission(req, res) {
   const { submissionId } = req.params;
-  const { feedbacks } = req.body;
+  const { feedbacks, user: admin } = req.body;
 
   try {
     const submission = await SubmissionModel.get(submissionId);
@@ -139,9 +158,25 @@ submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], 
       feedbacks
     });
 
+    const notification: NotificationI = {
+      to: submission.user,
+      short_message: 'ți-a trimis feedback pentru soluția ta.',
+      long_message: 'ți-a trimis feedback pentru soluția ta.',
+      timestamp: Date.now(),
+      href: `/rezolva/${submission.exercise._id.toString()}`,
+      from: admin._id,
+      type: NotificationType.INFO,
+      urgency: NotificationUrgency.REGULAR
+    }
+
+    const { success, responses } = await NotificationModel.notify(notification, [NotificationChannel.IN_APP]);
+    if (!success) {
+      console.error("[API][feedbackSubmission.notify]", responses);
+    }
+
     res.status(200).send();
   } catch (err) {
-    console.log("[API][approveSubmission]", err);
+    console.log("[API][feedbackSubmission]", err);
     new ServerError(err.code, err.message).send(res);
   }
 });

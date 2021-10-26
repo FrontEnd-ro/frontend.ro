@@ -69,7 +69,10 @@ function Header({
         <div className="d-flex align-items-center">
           {isLoggedIn ? (
             <>
-              <NotificationTooltip className="mr-2" />
+              <NotificationTooltip
+                className="mr-2"
+                tooltipClassName={styles['notification-tooltip']}
+              />
               <AccountTooltip />
             </>
           ) : null}

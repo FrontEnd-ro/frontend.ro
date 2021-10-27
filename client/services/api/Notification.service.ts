@@ -4,7 +4,7 @@ import { ParsedNotificationI } from '../../../shared/types/notification.types';
 class NotificationService {
   static fetchAll(): Promise<ParsedNotificationI[]> {
     return HttpService
-      .get(`${process.env.ENDPOINT}/notifications/`)
+      .get(`${process.env.ENDPOINT}/notifications/`, undefined, true)
       .then((resp) => resp.json());
   }
 

@@ -89,6 +89,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://joeschmoe.io/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/schmoe_500w.png`,
     },
+    {
+      title: 'Blobs.app',
+      url: 'https://blobs.app',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/blobs_500w.png`,
+    },
   ],
   [ResourceCategory.ICONS]: [
     {

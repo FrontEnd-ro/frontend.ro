@@ -121,6 +121,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://thenounproject.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/nounproject_500w.png`,
     },
+    {
+      title: 'OpenMoji',
+      url: 'https://openmoji.org/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/openmoji_500w.png`,
+    },
   ],
   [ResourceCategory.CSS_SPINNERS]: [
     {

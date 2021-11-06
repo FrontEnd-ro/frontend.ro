@@ -16,6 +16,7 @@ function AllPresentationsPage({ presentations }: { presentations: PresentationI[
       </p>
       {sortedPresentations.map((presentation) => (
         <PresentationLink
+          className="my-5"
           key={presentation.presentationId}
           id={presentation.presentationId}
           created={presentation.created}

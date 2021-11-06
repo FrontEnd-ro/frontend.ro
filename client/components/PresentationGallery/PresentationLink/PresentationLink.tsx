@@ -11,10 +11,11 @@ interface Props {
   description: string;
   created: number;
   views?: number;
+  className?: string;
 }
 
 function PresentationLink({
-  id, href, title, description, thumb, created, views,
+  id, href, title, description, thumb, created, views, className = '',
 }: Props) {
   const formattedDate = new Date(created).toLocaleDateString('ro-RO', {
     year: 'numeric', month: 'long', day: 'numeric',
@@ -22,7 +23,7 @@ function PresentationLink({
 
   return (
     <Link href={href ?? `/slides/${id}`}>
-      <a className={styles['presentation-link']}>
+      <a className={`${styles['presentation-link']} ${className}`}>
         <img width="256" height="256" src={thumb} alt={`${title} slides thumb`} />
         <div
           className="img"

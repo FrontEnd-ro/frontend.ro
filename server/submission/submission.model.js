@@ -1,5 +1,5 @@
-/* eslint-disable camelcase */
 const mongoose = require('mongoose');
+import { SubmissionSchema } from './submission.schema';
 const uniqueValidator = require('mongoose-unique-validator');
 const { PAGE_SIZE, ServerError, validateAgainstSchemaProps, validateObjectId } = require('../ServerUtils');
 const { SUBMISSION_STATUS } = require('../../shared/SharedConstants');
@@ -7,36 +7,6 @@ const { SUBMISSION_STATUS } = require('../../shared/SharedConstants');
 /** Initialize the User Schema because we need it when referencing & populating the results */
 require('../user/user.model');
 require('../exercise/exercise.model');
-
-const FeedbackSchema = new mongoose.Schema(
-  {
-    body: { type: String, required: true },
-    file_key: { type: String, required: true },
-    position: { type: [Number], required: true },
-    type: { type: String, enum: ['praise', 'opinion', 'improvement'], required: true },
-  },
-  {
-    createdAt: 'submittedAt',
-    updatedAt: 'updatedAt',
-  }
-)
-
-const SubmissionSchema = new mongoose.Schema(
-  {
-    code: { type: String, required: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    assignee: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
-    exercise: { type: mongoose.Schema.Types.ObjectId, ref: 'LessonExercise', required: true },
-    status: { type: String, enum: Object.values(SUBMISSION_STATUS), default: SUBMISSION_STATUS.IN_PROGRESS },
-    feedbacks: [FeedbackSchema],
-  },
-  {
-    timestamps: {
-      createdAt: 'submittedAt',
-      updatedAt: 'updatedAt',
-    },
-  },
-);
 
 SubmissionSchema.index({ user: 1, exercise: 1 }, { unique: true });
 SubmissionSchema.plugin(uniqueValidator);

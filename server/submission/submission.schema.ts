@@ -27,4 +27,4 @@ const SubmissionSchema = new mongoose.Schema(
   },
 );
 
-export { SubmissionSchema }
+export { SubmissionSchema, FeedbackSchema }

@@ -1,5 +1,7 @@
 import NotificationModel from '../notification/notification.model';
+import { SubmissionVersion } from './submission-version/submission-version.model';
 import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
+import submissionVersionRouter from './submission-version/submission-version.router';
 
 const express = require('express');
 const UserModel = require('../user/user.model');
@@ -10,6 +12,9 @@ const { SUBMISSION_STATUS, USER_ROLE } = require('../../shared/SharedConstants')
 
 const submissionRouter = express.Router();
 
+// Since those two are interconnected (same base types)
+// let's not use a separate main route, rather use a sub-route here.
+submissionRouter.use('/versions', submissionVersionRouter);
 
 submissionRouter.get('/', [PublicMiddleware], async function getSubmissions(req, res) {
   const { page, query, status } = req.query;
@@ -115,6 +120,16 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
       feedbacks
     });
 
+    // Not using async-await because we don't want to block the execution of this function
+    new SubmissionVersion({
+      approved: true,
+      feedbacks: [],
+      code: submission.code,
+      submission: submissionId
+    }).save().catch(err => {
+      console.error("[submissionRouter.approveSubmission] Failed to persist submission version", err);
+    });
+
     const notification: NotificationI = {
       to: submission.user,
       short_message: 'ți-a aprobat exercițiul. Congrats!',
@@ -156,6 +171,16 @@ submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], 
     await SubmissionModel.update(submissionId, {
       status: SUBMISSION_STATUS.IN_PROGRESS,
       feedbacks
+    });
+
+    // Not using async-await because we don't want to block the execution of this function
+    new SubmissionVersion({
+      feedbacks,
+      approved: false,
+      code: submission.code,
+      submission: submissionId
+    }).save().catch(err => {
+      console.error("[submissionRouter.feedbackSubmission] Failed to persist submission version", err);
     });
 
     const notification: NotificationI = {

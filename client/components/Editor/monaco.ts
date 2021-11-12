@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-var */
 
-import { FEEDBACK_TYPES } from '~/services/Constants';
+import { FeedbackType } from '~/../shared/types/submission.types';
 
 declare global {
   var monaco: any;
@@ -17,7 +17,7 @@ function extendWithDecorate(editor) {
 
   editor.decorate = function decorate(data, ...args) {
     let currentRange = new window.monaco.Range(...args);
-    data.type = data.type || FEEDBACK_TYPES.PRAISE;
+    data.type = data.type || FeedbackType.PRAISE;
 
     if (args.length === 1 && args[0] instanceof window.monaco.Range) {
       [currentRange] = args;

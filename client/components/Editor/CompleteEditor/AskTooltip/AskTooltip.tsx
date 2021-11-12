@@ -1,7 +1,7 @@
 import React from 'react';
 // FIXME
 import marked from 'marked';
-import { FEEDBACK_TYPES } from '~/services/Constants';
+import { FeedbackType } from '~/../shared/types/submission.types';
 import Form, { Checkbox } from '~/components/Form';
 
 import styles from './AskTooltip.module.scss';
@@ -32,7 +32,7 @@ class AskTooltip extends React.Component<Props, State> {
     super(props);
     this.state = {
       body: '',
-      type: FEEDBACK_TYPES.IMPROVEMENT,
+      type: FeedbackType.IMPROVEMENT,
       forceShow: false,
       showMarkdown: false,
     };
@@ -167,17 +167,17 @@ class AskTooltip extends React.Component<Props, State> {
         />
         <div className={styles['feedback-tooltip__controls']}>
           <div>
-            {Object.keys(FEEDBACK_TYPES).map((feedbackType) => (
+            {Object.keys(FeedbackType).map((feedbackType) => (
               <Checkbox
                 key={feedbackType}
                 className="d-block"
                 type="radio"
                 name="feedback-type"
-                onChange={() => this.changeType(FEEDBACK_TYPES[feedbackType])}
-                checked={type === FEEDBACK_TYPES[feedbackType]}
+                onChange={() => this.changeType(FeedbackType[feedbackType])}
+                checked={type === FeedbackType[feedbackType]}
                 value={type}
               >
-                {FEEDBACK_TYPES[feedbackType]}
+                {FeedbackType[feedbackType]}
               </Checkbox>
             ))}
 

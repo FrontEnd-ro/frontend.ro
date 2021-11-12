@@ -335,12 +335,6 @@ export interface Figure {
 export const IMAGES_MIME_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/svg+xml'];
 export const IMAGES_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'svg'];
 
-export const FEEDBACK_TYPES = {
-  PRAISE: 'praise',
-  OPINION: 'opinion',
-  IMPROVEMENT: 'improvement',
-};
-
 export const MONACO = {
   TOPIC_MARKDOWN_MAX_LENGTH: 2048,
   EXERCISE_MARKDOWN_MAX_LENGTH: 5000,

@@ -11,7 +11,7 @@ import { Submission } from '~/redux/exercise-submissions/types';
 import { timeAgo } from '~/services/Utils';
 import Markdown from '../Markdown';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
-import { FEEDBACK_TYPES } from '~/services/Constants';
+import { FeedbackType } from '~/../shared/types/submission.types';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
 import { removeSubmission } from '~/redux/exercise-submissions/exercise-submissions.actions';
@@ -37,7 +37,7 @@ function OfferFeedback({
   const [submission, setSubmission] = useState<Submission>(null);
   const [feedbacks, setFeedbacks] = useState([]);
 
-  const isCorrect = feedbacks.find((f) => f.type === FEEDBACK_TYPES.IMPROVEMENT) === undefined;
+  const isCorrect = feedbacks.find((f) => f.type === FeedbackType.IMPROVEMENT) === undefined;
   const authorNameOrUsername = submission
     ? (submission.user.name || submission.user.username)
     : '';

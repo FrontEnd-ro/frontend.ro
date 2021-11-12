@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const { ServerError } = require('../server/ServerUtils');
-const { USER_ROLE } = require('./SharedConstants');
+const { UserRole } = require('./types/user.types');
 
 const UsersSchema = new mongoose.Schema({
   avatar: { type: String, required: true },
@@ -17,11 +17,11 @@ const UsersSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: [
-      USER_ROLE.ADMIN,
-      USER_ROLE.TEACHER,
-      USER_ROLE.STUDENT,
+      UserRole.ADMIN,
+      UserRole.TEACHER,
+      UserRole.STUDENT,
     ],
-    default: USER_ROLE.STUDENT,
+    default: UserRole.STUDENT,
   },
 });
 

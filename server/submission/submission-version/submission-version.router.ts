@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { ServerError } from '../../ServerUtils';
 import { PrivateMiddleware } from '../../Middlewares';
 import { SubmissionVersion } from './submission-version.model';
-import { USER_ROLE } from '../../../shared/SharedConstants';
+import { UserRole } from '../../../shared/types/user.types';
 
 const SubmissionModel = require('../submission.model');
 
@@ -27,7 +27,7 @@ submissionVersionRouter.get('/:submissionId', [
       return;
     }
 
-    if (submission.user._id.toString() !== user._id.toString() && user.role !== USER_ROLE.ADMIN) {
+    if (submission.user._id.toString() !== user._id.toString() && user.role !== UserRole.ADMIN) {
       new ServerError(403, "Doar adminii sau owner-ul exercițiului poate să citească versiunile unei submisii.").send(res);
       return;
     }

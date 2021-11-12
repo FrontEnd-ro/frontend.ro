@@ -2,13 +2,14 @@ import NotificationModel from '../notification/notification.model';
 import { SubmissionVersion } from './submission-version/submission-version.model';
 import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
 import submissionVersionRouter from './submission-version/submission-version.router';
+import { UserRole } from '../../shared/types/user.types';
 
 const express = require('express');
 const UserModel = require('../user/user.model');
 const SubmissionModel = require('./submission.model');
 const { PublicMiddleware, PrivateMiddleware, SolvableExercise, UserRoleMiddleware } = require('../Middlewares');
 const { ServerError } = require('../ServerUtils');
-const { SUBMISSION_STATUS, USER_ROLE } = require('../../shared/SharedConstants');
+const { SUBMISSION_STATUS } = require('../../shared/SharedConstants');
 
 const submissionRouter = express.Router();
 
@@ -70,7 +71,7 @@ submissionRouter.get('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerci
   }
 });
 
-submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(USER_ROLE.ADMIN), SolvableExercise], async function getUserSubmission(req, res) {
+submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMIN), SolvableExercise], async function getUserSubmission(req, res) {
   const { username, exerciseId } = req.params;
   const { user } = req.body;
 

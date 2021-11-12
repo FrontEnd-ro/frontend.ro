@@ -1,3 +1,4 @@
+import { UserRole } from '~/../shared/types/user.types';
 import { ChapterType } from '../exercise-submissions/types';
 import { ParsedNotificationI } from '~/../shared/types/notification.types';
 
@@ -7,8 +8,7 @@ export interface UserState {
     username: string;
     email: string;
     avatar: string;
-    // FIXME: exact types from SharedConstants
-    role: string,
+    role: UserRole,
     description?: string;
   };
   notifications: Notifications;

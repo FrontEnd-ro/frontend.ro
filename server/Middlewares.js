@@ -3,7 +3,7 @@ const UserModel = require('./user/user.model');
 const { ServerError } = require('./ServerUtils');
 const ExerciseModel = require('./exercise/exercise.model');
 const LessonExerciseModel = require('./lesson-exercise/lesson-exercise.model');
-const { USER_ROLE } = require('../shared/SharedConstants');
+const { UserRole } = require('../shared/types/user.types');
 
 /****************** User Middleware */
 /** 
@@ -70,8 +70,8 @@ function PrivateMiddleware(req, res, next) {
 }
 
 function UserRoleMiddleware(role) {
-  if (!role in USER_ROLE) {
-    const availableUserRoles = Object.values(USER_ROLE).join(',');
+  if (!role in UserRole) {
+    const availableUserRoles = Object.values(UserRole).join(',');
     console.error(`[UserRoleMiddleware] 'role' must be one of: ${availableUserRoles}.`);
 
     return (_, res) => {

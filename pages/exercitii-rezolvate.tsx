@@ -6,7 +6,7 @@ import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import { useLoggedInOnly } from '~/services/Hooks';
 import { RootState } from '~/redux/root.reducer';
-import { USER_ROLE } from '../shared/SharedConstants';
+import { UserRole } from '../shared/types/user.types';
 import PageContainer from '~/components/PageContainer';
 
 function TeachPage({ userInfo }: ConnectedProps<typeof connector>) {
@@ -22,7 +22,7 @@ function TeachPage({ userInfo }: ConnectedProps<typeof connector>) {
       <Header withNavMenu />
 
       {
-        userInfo?.role !== USER_ROLE.ADMIN
+        userInfo?.role !== UserRole.ADMIN
           ? (
             <PageContainer>
               <h1>

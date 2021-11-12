@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
+import { UserRole } from '~/../shared/types/user.types';
 import { RootState } from '~/redux/root.reducer';
 import LogRocketService from '~/services/utils/LogRocket.service';
 
@@ -15,7 +16,7 @@ function IdentifyLogrocket({ userInfo }: ConnectedProps<typeof connector>) {
       return;
     }
 
-    if (userInfo?.role === 'admin') {
+    if (userInfo?.role === UserRole.ADMIN) {
       console.info("Don't initialize LogRocket for admin users.");
       return;
     }

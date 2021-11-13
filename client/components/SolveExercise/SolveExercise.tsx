@@ -4,12 +4,12 @@ import { connect, ConnectedProps } from 'react-redux';
 import debounce from 'lodash/debounce';
 
 import noop from 'lodash/noop';
+import { useRouter } from 'next/router';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Markdown from '~/components/Markdown';
 import { RootState } from '~/redux/root.reducer';
 import { withAuthModal } from '~/services/Hooks';
-import TableOfContents from '~/components/TableOfContents';
 import PageContainer from '~/components/PageContainer';
 import StatusBanner from './StatusBanner/StatusBanner';
 import SubmissionService from '~/services/Submission.service';
@@ -27,6 +27,10 @@ import Feedbacks from '../Editor/Feedbacks';
 import Button from '../Button';
 import SolveExerciseSkeleton from './SolveExercise.skeleton';
 import FolderStructure from '~/services/utils/FolderStructure';
+import AsideNav from './AsideNav/AsideNav';
+import { SubmissionVersionI } from '~/../shared/types/submission.types';
+import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
+import RoutingUtils from '~/services/utils/Routing.utils';
 
 interface Props {
   exerciseId: string;
@@ -52,13 +56,19 @@ enum AutoSave {
   DONE,
 }
 
+// TODO: refactor to get rid of duplicate code
+// https://github.com/FrontEnd-ro/frontend.ro/issues/411
 function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connector> & Props) {
+  const router = useRouter();
   const solutionRef = useRef(null);
   const [submission, setSubmission] = useState<Submission>(null);
+  const [versions, setVersions] = useState<SubmissionVersionI[]>([]);
   const [fetchError, setFetchError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [autoSaved, setAutoSaved] = useState<AutoSave>(AutoSave.NONE);
   const [lessonExercises, setLessonExercises] = useState<LessonExercise[]>([]);
+
+  const activeVersionIndex = versions.findIndex((v) => v._id === RoutingUtils.getQueryString(router, 'version'));
 
   const readonly = submission && (
     submission.status === SUBMISSION_STATUS.DONE
@@ -195,6 +205,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
       });
   };
 
+  // This fetch happens if you're not logged in
   const fetchExercise = () => {
     return LessonExerciseService
       .getLessonExercise(exerciseId)
@@ -207,6 +218,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
           assignee: null,
           status: SUBMISSION_STATUS.IN_PROGRESS,
         });
+        setVersions([]);
       })
       .catch((err) => {
         console.error('[fetchExercise]', err);
@@ -214,6 +226,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
       });
   };
 
+  // This fetch happens if you're logged in
   const fetchSubmission = () => {
     return SubmissionService
       .getOwnSubmission(exerciseId)
@@ -235,9 +248,20 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
       .getAllExercisesForLessons(lessonId)
       .then((lessonExercises) => setLessonExercises(lessonExercises))
       .catch((err) => {
+        setLessonExercises([]);
         // Do nothing since the default value is empty Array
         // so the UI is non-breaking
         console.error('[SolveExercise.fetchExercisesFromLesson]', err);
+      });
+  };
+
+  const fetchSubmissionVersions = (submissionId) => {
+    return SubmissionService
+      .getSubmissionVersions(submissionId)
+      .then((versions) => setVersions(versions))
+      .catch((err) => {
+        setVersions([]);
+        console.error('[SolveExercise.fetchSubmissionVersions] Failed to fetch versions', err);
       });
   };
 
@@ -262,10 +286,15 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
   }, [exerciseId]);
 
   useEffect(() => {
-    if (submission?.exercise?.lesson === undefined) {
-      return;
+    if (isLoggedIn && submission?._id) {
+      fetchSubmissionVersions(submission._id);
     }
-    fetchExercisesFromLesson(submission.exercise.lesson);
+  }, [isLoggedIn, submission?._id]);
+
+  useEffect(() => {
+    if (submission?.exercise?.lesson) {
+      fetchExercisesFromLesson(submission.exercise.lesson);
+    }
   }, [submission?.exercise?.lesson]);
 
   if (fetchError) {
@@ -281,13 +310,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
     <PageWithAsideMenu menu={{
       title: getLessonById(submission.exercise.lesson).title,
       Component: (
-        <TableOfContents
-          chapters={lessonExercises.map((lessonEx, index) => ({
-            id: lessonEx._id,
-            title: `Exercițiu #${index + 1}`,
-            href: `/rezolva/${lessonEx._id}`,
-          }))}
-        />
+        <AsideNav lessonExercises={lessonExercises} versions={versions} />
       ),
     }}
     >
@@ -361,6 +384,13 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
 
         </section>
       </PageContainer>
+      {activeVersionIndex !== -1 && (
+        <SubmissionPreview
+          onClose={() => RoutingUtils.removeQuery(router, 'version')}
+          className={styles.SubmissionPreview}
+          submission={versions[activeVersionIndex]}
+        />
+      )}
     </PageWithAsideMenu>
   );
 }

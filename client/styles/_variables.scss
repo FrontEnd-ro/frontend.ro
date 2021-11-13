@@ -141,3 +141,11 @@ $width-grid: 4.5vw;
     background-color: #cdcdcd;
   }
 }
+
+%slideUpTransition {
+  transition: transform 0.5s $cubic;
+
+  &:hover {
+    transform: translateY(-0.5em);
+  }
+}

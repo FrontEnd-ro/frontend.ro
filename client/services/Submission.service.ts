@@ -17,6 +17,12 @@ class SubmissionService {
       .then((resp) => resp.json());
   }
 
+  static getSubmissionVersions(submissionId: string) {
+    return HttpService
+      .get(`${process.env.ENDPOINT}/submissions/versions/${submissionId}`, undefined, true)
+      .then((resp) => resp.json());
+  }
+
   static getUserSubmission(username: string, exerciseId: string) {
     return HttpService
       .get(`${process.env.ENDPOINT}/submissions/${username}/${exerciseId}`)

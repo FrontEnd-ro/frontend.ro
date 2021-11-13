@@ -1,0 +1,44 @@
+@import '../../styles/variables';
+
+.overlay {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    background: rgba(color(silver), 50%);
+  }
+}
+
+.SubmissionPreview {
+  padding: 2em;
+  border-radius: 1em;
+  box-shadow: 0 2px 6px color(silver);
+  z-index: 999;
+  position: fixed;
+  right: 0;
+  bottom: -1em;
+  margin: 0 2em;
+  transform: translateY(100%);
+  transition: transform 0.5s $cubic;
+  
+  &.active {
+    // Do not use `transform: translateY(0)` because it will create another
+    // context for fixed children to be positioned against.
+    transform: none;
+  }
+}
+
+.close-button {
+  // If we try and add this via the `d-flex` utily
+  // it will get overwritten by the Button's styles
+  display: flex;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  transform: translate(40%, -40%);
+}
+

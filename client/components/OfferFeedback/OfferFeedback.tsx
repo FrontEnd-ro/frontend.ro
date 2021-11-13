@@ -11,23 +11,30 @@ import { Submission } from '~/redux/exercise-submissions/types';
 import { timeAgo } from '~/services/Utils';
 import Markdown from '../Markdown';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
-import { FeedbackType } from '~/../shared/types/submission.types';
+import { FeedbackType, SubmissionVersionI } from '~/../shared/types/submission.types';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
 import { removeSubmission } from '~/redux/exercise-submissions/exercise-submissions.actions';
 
 import styles from './OfferFeedback.module.scss';
 import Button from '../Button';
+import PageWithAsideMenu from '../layout/PageWithAsideMenu/PageWithAsideMenu';
+import { getLessonById } from '~/services/Constants';
+import AsideNav from '../SolveExercise/AsideNav/AsideNav';
+import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
+import RoutingUtils from '~/services/utils/Routing.utils';
 
 interface Props {
   username: string;
   exerciseId: string;
 }
 
+// TODO: refactor to get rid of duplicate code
+// https://github.com/FrontEnd-ro/frontend.ro/issues/411
 function OfferFeedback({
   exerciseId,
   username,
-  userInfo,
+  isLoggedIn,
   dispatch,
 }: ConnectedProps<typeof connector> & Props) {
   const router = useRouter();
@@ -36,12 +43,14 @@ function OfferFeedback({
   const [isSendingFeedback, setIsSendingFeedback] = useState(false);
   const [submission, setSubmission] = useState<Submission>(null);
   const [feedbacks, setFeedbacks] = useState([]);
+  const [versions, setVersions] = useState<SubmissionVersionI[]>([]);
 
   const isCorrect = feedbacks.find((f) => f.type === FeedbackType.IMPROVEMENT) === undefined;
   const authorNameOrUsername = submission
     ? (submission.user.name || submission.user.username)
     : '';
   const canOfferFeedback = submission && submission.status === SUBMISSION_STATUS.AWAITING_REVIEW;
+  const activeVersionIndex = versions.findIndex((v) => v._id === RoutingUtils.getQueryString(router, 'version'));
 
   const folderStructure = React.useMemo(() => {
     if (!submission) {
@@ -92,7 +101,22 @@ function OfferFeedback({
       .finally(() => setIsSendingFeedback(false));
   };
 
+  const fetchSubmissionVersions = (submissionId) => {
+    return SubmissionService
+      .getSubmissionVersions(submissionId)
+      .then((versions) => setVersions(versions))
+      .catch((err) => {
+        setVersions([]);
+        console.error('[SolveExercise.fetchSubmissionVersions] Failed to fetch versions', err);
+      });
+  };
+
   useEffect(fetchSubmission, [exerciseId]);
+  useEffect(() => {
+    if (isLoggedIn && submission?._id) {
+      fetchSubmissionVersions(submission._id);
+    }
+  }, [submission?.exercise?.lesson, submission?._id]);
 
   if (fetchError) {
     return (
@@ -119,7 +143,13 @@ function OfferFeedback({
   }
 
   return (
-    <>
+    <PageWithAsideMenu menu={{
+      title: getLessonById(submission.exercise.lesson).title,
+      Component: (
+        <AsideNav lessonExercises={[]} versions={versions} />
+      ),
+    }}
+    >
       {!canOfferFeedback && (
         <p className={`
           ${styles.banner}
@@ -139,8 +169,7 @@ function OfferFeedback({
           )}
         </p>
       )}
-      <PageContainer>
-        <p />
+      <PageContainer className="relative">
         <h1 className="mb-0">
           Feedback pentru
           {' '}
@@ -185,13 +214,20 @@ function OfferFeedback({
           </div>
         )}
       </PageContainer>
-    </>
+      {activeVersionIndex !== -1 && (
+        <SubmissionPreview
+          onClose={() => RoutingUtils.removeQuery(router, 'version')}
+          className={styles.SubmissionPreview}
+          submission={versions[activeVersionIndex]}
+        />
+      )}
+    </PageWithAsideMenu>
   );
 }
 
 function mapStateToProps(state: RootState) {
   return {
-    userInfo: state.user.info,
+    isLoggedIn: !!state.user.info,
   };
 }
 

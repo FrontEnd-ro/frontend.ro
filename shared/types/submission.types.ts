@@ -13,8 +13,10 @@ export interface FeedbackI {
 }
 
 export interface SubmissionVersionI {
+  _id: string;
   feedbacks: FeedbackI[];
   code: string;
   approved: boolean;
   submission: string;
+  createdAt: string;
 }

@@ -181,6 +181,10 @@
   margin-top: 0;
 }
 
+.mt-2 {
+  margin-top: 0.25em;
+}
+
 .mt-4 {
   margin-top: 1em;
 }
@@ -309,8 +313,16 @@
   padding-top: 2em;
 }
 
+.pb-5 {
+  padding-bottom: 2em;;
+}
+
 .p-3 {
   padding: 0.75em;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 /** Animations */

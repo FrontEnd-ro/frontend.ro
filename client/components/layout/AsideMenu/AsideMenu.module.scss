@@ -1,6 +1,8 @@
 @import "../../../styles/variables";
 
 .aside-menu {
+  @extend %mini-scrollbar;
+
   z-index: 999;
   height: 100%;
   position: fixed;
@@ -11,6 +13,7 @@
   transition: transform 0.25s ease-out;
   
   > header {
+    width: 100%;
     max-width: $max-width;
     margin-left: auto;
     margin-right: auto;

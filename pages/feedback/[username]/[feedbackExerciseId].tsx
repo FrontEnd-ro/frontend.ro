@@ -24,15 +24,18 @@ function FeedbackExercisePage({ userInfo }: ConnectedProps<typeof connector>) {
         description="Oferă feedback la acest exercițiu"
         url={`https://FrontEnd.ro/feedback/${feedbackExerciseId}`}
       />
-      <Header />
+
       {
         userInfo?.role !== UserRole.ADMIN
           ? (
-            <PageContainer>
-              <h1>
-                Pentru moment doar echipa FrontEnd.ro are poate da feedback la exercițiile submise
-              </h1>
-            </PageContainer>
+            <>
+              <Header />
+              <PageContainer>
+                <h1>
+                  Pentru moment doar echipa FrontEnd.ro are poate da feedback la exercițiile submise
+                </h1>
+              </PageContainer>
+            </>
           )
           : (
             <OfferFeedback

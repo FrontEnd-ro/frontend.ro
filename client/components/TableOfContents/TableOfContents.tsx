@@ -9,6 +9,7 @@ interface State {
 
 interface Props {
   chapters: Chapter[];
+  className?: string;
   onChapterClick?: (id: string) => void
 }
 
@@ -148,11 +149,11 @@ class TableOfContents extends React.Component<Props, State> {
   }
 
   render() {
-    const { chapters } = this.props;
+    const { chapters, className } = this.props;
     const { activeChapterId } = this.state;
 
     return (
-      <nav className={styles.tableOfContents}>
+      <nav className={`${className ?? ''} ${styles.tableOfContents}`}>
         <List>
           {chapters.map((item) => (
             <ChapterListItem

@@ -13,3 +13,11 @@
 .banner-done {
   @extend %greenGradientBackground;
 }
+
+.SubmissionPreview {
+  left: #{$aside-menu-width};
+
+  @media screen and (max-width: 1400px) {
+    left: 0;
+  }
+}

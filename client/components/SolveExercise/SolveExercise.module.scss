@@ -19,3 +19,11 @@
   margin-top: 3em;
   margin-bottom: 7em;
 }
+
+.SubmissionPreview {
+  left: #{$aside-menu-width};
+
+  @media screen and (max-width: 1400px) {
+    left: 0;
+  }
+}

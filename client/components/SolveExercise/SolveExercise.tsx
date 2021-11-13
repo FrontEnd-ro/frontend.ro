@@ -52,7 +52,7 @@ enum AutoSave {
   DONE,
 }
 
-function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector> & Props) {
+function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connector> & Props) {
   const solutionRef = useRef(null);
   const [submission, setSubmission] = useState<Submission>(null);
   const [fetchError, setFetchError] = useState(false);
@@ -78,7 +78,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   }, [submission]);
 
   const autoSaveSolution = async (code) => {
-    if (!code || !userInfo) {
+    if (!code || !isLoggedIn) {
       // Do not save empty editors or if the user
       // is not logged in
       return;
@@ -254,8 +254,6 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
   };
 
   useEffect(() => {
-    const isLoggedIn = !!userInfo;
-
     if (isLoggedIn) {
       fetchSubmission();
     } else {
@@ -359,9 +357,9 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
               disabled={readonly}
               loading={isSubmitting}
               variant="success"
-              onClick={withAuthModal(!!userInfo, submitSolution)}
+              onClick={withAuthModal(isLoggedIn, submitSolution)}
             >
-              {userInfo ? 'Trimite' : 'Autentifică-te și trimite soluția'}
+              {isLoggedIn ? 'Trimite' : 'Autentifică-te și trimite soluția'}
             </Button>
             {
               (submission.status !== SUBMISSION_STATUS.IN_PROGRESS)
@@ -383,7 +381,7 @@ function SolveExercise({ exerciseId, userInfo }: ConnectedProps<typeof connector
 
 function mapStateToProps(state: RootState) {
   return {
-    userInfo: state.user.info,
+    isLoggedIn: !!state.user.info,
   };
 }
 

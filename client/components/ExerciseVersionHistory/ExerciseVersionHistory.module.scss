@@ -1,0 +1,19 @@
+@import '../../styles/variables';
+
+.ExerciseVersion {
+  @extend %slideUpTransition;
+  
+  border-radius: 0.5em;
+  border: 1px solid color(silver);
+}
+
+.ExerciseVersion--active .index {
+  @extend %gradientBackground;
+  @extend %blueGradientBackground;
+}
+
+.index {
+  border-radius: 0.3em 0 0 0.3em;
+  border-right: 1px solid color(silver);
+}
+

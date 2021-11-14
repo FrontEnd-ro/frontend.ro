@@ -262,10 +262,11 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
   }, [exerciseId]);
 
   useEffect(() => {
-    if (submission) {
-      fetchExercisesFromLesson(submission.exercise.lesson);
+    if (submission?.exercise?.lesson === undefined) {
+      return;
     }
-  }, [submission]);
+    fetchExercisesFromLesson(submission.exercise.lesson);
+  }, [submission?.exercise?.lesson]);
 
   if (fetchError) {
     return (<ExerciseNotFound />);

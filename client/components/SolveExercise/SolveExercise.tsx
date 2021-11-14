@@ -268,22 +268,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
   }, [submission]);
 
   if (fetchError) {
-    return (
-      <>
-        <Header withNavMenu />
-        <PageContainer className="text-center">
-          <h1> Oops 😟</h1>
-          <h2> Exercițiul e privat sau nu există </h2>
-
-          <Link href="/">
-            <a className="btn btn--blue">
-              Navighează acasă
-            </a>
-          </Link>
-        </PageContainer>
-        <Footer />
-      </>
-    );
+    return (<ExerciseNotFound />);
   }
   if (!submission) {
     return (
@@ -378,6 +363,23 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
     </PageWithAsideMenu>
   );
 }
+
+const ExerciseNotFound = () => (
+  <>
+    <Header withNavMenu />
+    <PageContainer className="text-center">
+      <h1> Oops 😟</h1>
+      <h2> Exercițiul e privat sau nu există </h2>
+
+      <Link href="/">
+        <a className="btn btn--blue">
+          Navighează acasă
+        </a>
+      </Link>
+    </PageContainer>
+    <Footer />
+  </>
+);
 
 function mapStateToProps(state: RootState) {
   return {

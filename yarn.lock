@@ -9568,10 +9568,10 @@ monaco-editor-webpack-plugin@^2.1.0:
   dependencies:
     loader-utils "^2.0.0"
 
-monaco-editor@^0.21.3:
-  version "0.21.3"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.21.3.tgz#3381b66614b64d1c5e3b77dd5564ad496d1b4e5d"
-  integrity sha512-9N7wATLpi+googstvtm6IKg97vPQ77FDYEpkow5tLriM/VJ0DaTRyUP4UVzcoH7KlPDX+e/rE7/imcOUeGkT6g==
+monaco-editor@0.30.1:
+  version "0.30.1"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.30.1.tgz#47f8d18a0aa2264fc5654581741ab8d7bec01689"
+  integrity sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==
 
 mongodb-connection-string-url@^2.0.0:
   version "2.1.0"

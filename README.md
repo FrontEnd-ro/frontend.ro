@@ -83,6 +83,14 @@ yarn upload-mongodump-s3
 > This doesn't work unless you're authenticated into AWS Cli with a pair Access key ID / Secret access key that has Write permission to our S3 bucket.
 
 
+## Monaco Editor
+
+NextJS is incompatible with the default way of loading monaco-editor (via Webpack and `monaco-editor-webpack-plugin`). It fails when monaco tries to load it's CSS from node_modules: https://nextjs.org/docs/messages/css-npm.
+
+All solutions to this meant adding very custom code to our Webpack Config, which we worry it might break in the future or negatively interact with other packages. 
+
+Thus, the solution we went for is to load `monaco-editor` from a CDN (cloudfront) with the `<script>` tag. We feel this "old-school" way is less error-prone than custom modifications to the webpack config. And, to get minimize manual work we created the `monacoEditorCDN.yml` GitHub action which will upload the files on every push.
+
 ## License
 
 This project has a dual-licence split between the source code of the UI components used and the curriculum content.

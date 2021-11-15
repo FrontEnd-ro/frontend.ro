@@ -4,6 +4,7 @@
 /* eslint-disable vars-on-top */
 /* eslint-disable no-var */
 
+import monacoPackageJson from 'monaco-editor/package.json';
 declare global {
   // @ts-ignore
   var require: any;
@@ -26,7 +27,7 @@ const loadMonaco = (function loadMonacoIIFE() {
     }
 
     const script = document.createElement('script');
-    script.src = `${process.env.CLOUDFRONT_PUBLIC}/lib/vs/loader.js`;
+    script.src = `${process.env.CLOUDFRONT_PUBLIC}/lib/monaco-editor/${monacoPackageJson.version}/vs/loader.js`;
 
     loadInProgress = true;
     document.body.appendChild(script);
@@ -37,7 +38,7 @@ const loadMonaco = (function loadMonacoIIFE() {
       script.addEventListener('load', () => {
         const require: any = window.require;
 
-        require.config({ paths: { vs: `${process.env.CLOUDFRONT_PUBLIC}/lib/vs` } });
+        require.config({ paths: { vs: `${process.env.CLOUDFRONT_PUBLIC}/lib/monaco-editor/${monacoPackageJson.version}/vs` } });
         require(['vs/editor/editor.main'], () => {
           monaco = window.monaco;
 

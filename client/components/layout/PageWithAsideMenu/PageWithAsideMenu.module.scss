@@ -45,4 +45,11 @@
       top: 3.3em;
     }
   }
+
+  @media screen and (max-width: 600px) {
+    .aside-menu {
+      left: -100%;
+      width: 100%;
+    }
+  }
 }

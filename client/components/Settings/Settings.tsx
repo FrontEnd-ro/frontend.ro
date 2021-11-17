@@ -5,6 +5,7 @@ import { RootState } from '~/redux/root.reducer';
 import { loadInfo, logoutUser } from '~/redux/user/user.actions';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import PageContainer from '../PageContainer';
+import ChangeAvatar from './components/ChangeAvatar/ChangeAvatar';
 import ChangeDescription from './components/ChangeDescription';
 import ChangeEmail from './components/ChangeEmail';
 import ChangeName from './components/ChangeName';
@@ -39,6 +40,7 @@ function Settings({ user, dispatch }: ConnectedProps<typeof connector>) {
     <PageContainer className={styles.settings}>
       <h1 className="mb-4"> Setări </h1>
       <section>
+        <ChangeAvatar user={user} onSuccess={updateUserStore} />
         <ChangeName onSuccess={updateUserStore} />
         <ChangeDescription onSuccess={updateUserStore} />
         <ChangeUsername onSuccess={updateUserStore} />

@@ -1,0 +1,21 @@
+@import '../../../../../styles/variables';
+
+.ImagePicker {
+  width: 14em;
+  cursor: pointer;
+
+  &:hover .overlay {
+    transform: scale(1);
+  }
+
+  .overlay,
+  .spinner-overlay {
+    transform: scale(0);
+    transition: transform 0.5s $cubic;
+    background: rgba(color(black), 0.5);
+  }
+
+  .spinner-overlay {
+    transform: scale(1);
+  }
+}

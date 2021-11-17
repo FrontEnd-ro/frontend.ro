@@ -5,7 +5,6 @@ import { RootState } from '~/redux/root.reducer';
 import { UserState } from '~/redux/user/types';
 
 import styles from './UserBio.module.scss';
-import ChangeAvatar from '../ChangeAvatar/ChangeAvatar';
 
 interface Props {
   user: UserState['info'],
@@ -17,10 +16,7 @@ function UserBio({ user, currentUser, className }: ConnectedProps<typeof connect
 
   return (
     <aside className={`${styles['user-bio']} ${className || ''}`}>
-      {isOwnBio ? (
-        <ChangeAvatar />
-      )
-        : <img src={user.avatar} alt={`${user.name || user.username} avatar`} />}
+      <img src={user.avatar} alt={`${user.name || user.username} avatar`} />
       {user.name ? (
         <div>
           <h1>{user.name}</h1>

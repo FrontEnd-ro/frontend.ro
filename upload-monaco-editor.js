@@ -13,6 +13,8 @@ spawn('aws', [
   'cp',
   '--region',
   'eu-west-1',
+  '--acl',
+  'public-read',
   'node_modules/monaco-editor/min/',
   `${process.env.BASE_S3_URI}/lib/monaco-editor/${monacoVersion}`,
   '--recursive',

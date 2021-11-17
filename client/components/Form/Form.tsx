@@ -40,7 +40,9 @@ const Form = React.forwardRef(({
       elements
         .filter((el) => el.name)
         .forEach((el) => {
-          if (el.hasOwnProperty('checked')) {
+          if (el.tagName === 'INPUT' && el.type === 'file') {
+            data[el.name] = el.files;
+          } else if (el.hasOwnProperty('checked')) {
             if (el.type === 'checkbox') {
               data[el.name] = el.checked;
             }

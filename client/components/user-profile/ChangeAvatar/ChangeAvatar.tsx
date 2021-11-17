@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import { IMAGES_MIME_TYPES } from '~/services/Constants';
-import { cropImage, filterFiles, loadImage } from '~/services/utils/FileUtils';
+import { squareCrop, filterFiles, loadImage } from '~/services/utils/FileUtils';
 import Button from '~/components/Button';
 
 import UserService from '~/services/User.service';
@@ -30,7 +30,7 @@ function ChangeAvatar({ user, dispatch }: ConnectedProps<typeof connector>) {
     setIsLoadingBlob(true);
 
     const imgUrl = URL.createObjectURL(e.target.files[0]);
-    cropedImage.current = await cropImage(imgUrl);
+    cropedImage.current = await squareCrop(imgUrl);
 
     const src = URL.createObjectURL(cropedImage.current);
     await loadImage(src);

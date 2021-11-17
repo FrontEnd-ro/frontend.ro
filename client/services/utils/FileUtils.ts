@@ -67,7 +67,7 @@ function entryToTextMiddleware(entry) {
   });
 }
 
-export function cropImage(src: string): Promise<Blob> {
+export function squareCrop(src: string): Promise<Blob> {
   const image = new Image();
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');

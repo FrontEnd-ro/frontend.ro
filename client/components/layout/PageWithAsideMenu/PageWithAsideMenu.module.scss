@@ -21,7 +21,7 @@
 
   @media screen and (max-width: 1400px) {
     .aside-menu {
-      left: -#{$lesson-menu-width};
+      left: -#{$aside-menu-width};
     }
 
     :global .lesson-menu__header button,

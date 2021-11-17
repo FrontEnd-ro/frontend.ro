@@ -6,8 +6,8 @@
 
   main {
     position: relative;
-    left: #{$lesson-menu-width};
-    width: calc(100% - #{$lesson-menu-width});
+    left: #{$aside-menu-width};
+    width: calc(100% - #{$aside-menu-width});
 
     > header {
       position: sticky;
@@ -40,7 +40,7 @@
 
   @media screen and (max-width: 1400px) {
     .lesson-menu {
-      left: -#{$lesson-menu-width};
+      left: -#{$aside-menu-width};
     }
 
     :global .lesson-menu__header button,

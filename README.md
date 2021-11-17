@@ -89,7 +89,7 @@ NextJS is incompatible with the default way of loading monaco-editor (via Webpac
 
 All solutions to this meant adding very custom code to our Webpack Config, which we worry it might break in the future or negatively interact with other packages. 
 
-Thus, the solution we went for is to load `monaco-editor` from a CDN (cloudfront) with the `<script>` tag. We feel this "old-school" way is less error-prone than custom modifications to the webpack config. And, to get minimize manual work we created the `monacoEditorCDN.yml` GitHub action which will upload the files on every push.
+Thus, the solution we went for is to load `monaco-editor` from a CDN (cloudfront) with the `<script>` tag. We feel this "old-school" way is less error-prone than custom modifications to the webpack config. And, to get minimize manual work we created the `monacoEditorCDN.yml` GitHub action which will upload the files on every push (if they are not there).
 
 ## License
 

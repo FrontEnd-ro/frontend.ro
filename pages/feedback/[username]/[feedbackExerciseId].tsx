@@ -35,6 +35,7 @@ function FeedbackExercisePage({ userInfo }: ConnectedProps<typeof connector>) {
                   Pentru moment doar echipa FrontEnd.ro are poate da feedback la exercițiile submise
                 </h1>
               </PageContainer>
+              <Footer />
             </>
           )
           : (
@@ -48,7 +49,6 @@ function FeedbackExercisePage({ userInfo }: ConnectedProps<typeof connector>) {
             />
           )
       }
-      <Footer />
     </>
   );
 }

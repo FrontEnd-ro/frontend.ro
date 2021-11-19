@@ -13,10 +13,10 @@ export default function Checkbox({
 }: PropsWithChildren<Props>) {
   return (
     <label className={`${styles['checkbox-wrapper']} ${className}`}>
-      <div className={styles.checkbox}>
+      <span className={styles.checkbox}>
         <input className="absolute" type="checkbox" {...props} />
         <span className={`${styles['control-indicator']} d-inline-block`} />
-      </div>
+      </span>
       {children}
     </label>
   );

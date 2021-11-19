@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import loadMonaco from '../loadMonaco';
-
-import styles from '../Editor.module.scss';
+import EditorPlaceholder from '../EditorPlaceholder/EditorPlaceholder';
 
 const BasicEditorLazy = React.forwardRef(({ folderStructure, ...rest }: any, forwardRef) => {
   const [BasicEditor, setBasicEditor] = useState(null);
@@ -15,7 +14,7 @@ const BasicEditorLazy = React.forwardRef(({ folderStructure, ...rest }: any, for
   }, []);
 
   if (!BasicEditor) {
-    return <Placeholder />;
+    return <EditorPlaceholder />;
   }
 
   return (
@@ -29,17 +28,5 @@ const BasicEditorLazy = React.forwardRef(({ folderStructure, ...rest }: any, for
     />
   );
 });
-
-function Placeholder() {
-  return (
-    <div className={`
-      ${styles['editor-wrapper']} 
-      ${styles['editor-wrapper--loading']}
-    `}
-    >
-      <p>Loading editor...</p>
-    </div>
-  );
-}
 
 export default BasicEditorLazy;

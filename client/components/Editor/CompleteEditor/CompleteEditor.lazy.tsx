@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import loadMonaco from '../loadMonaco';
-
-import styles from '../Editor.module.scss';
+import EditorPlaceholder from '../EditorPlaceholder/EditorPlaceholder';
 
 const CompleteEditorLazy = React.forwardRef(({ folderStructure, feedbacks, ...rest }: any, forwardRef) => {
   const [CompleteEditor, setCompleteEditor] = useState(null);
@@ -15,7 +14,7 @@ const CompleteEditorLazy = React.forwardRef(({ folderStructure, feedbacks, ...re
   }, []);
 
   if (!CompleteEditor) {
-    return <Placeholder />;
+    return <EditorPlaceholder />;
   }
 
   return (
@@ -30,17 +29,5 @@ const CompleteEditorLazy = React.forwardRef(({ folderStructure, feedbacks, ...re
     />
   );
 });
-
-function Placeholder() {
-  return (
-    <div className={`
-      ${styles['editor-wrapper']} 
-      ${styles['editor-wrapper--loading']}
-    `}
-    >
-      <p>Loading editor...</p>
-    </div>
-  );
-}
 
 export default CompleteEditorLazy;

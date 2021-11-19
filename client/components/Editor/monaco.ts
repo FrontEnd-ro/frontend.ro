@@ -192,11 +192,12 @@ function formatCode(editor) {
   // FIXME
 }
 
-const { create, setModelLanguage } = window.monaco.editor;
+const { create, createDiffEditor, setModelLanguage } = window.monaco.editor;
 const { Range } = window.monaco;
 
 export {
   create,
+  createDiffEditor,
   setModelLanguage,
   Range,
   extendWithDecorate,

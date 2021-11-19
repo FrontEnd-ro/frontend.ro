@@ -3,6 +3,7 @@
 /* eslint-disable react/sort-comp */
 import React from 'react';
 import noop from 'lodash/noop';
+import { editor as MonacoTypes } from 'monaco-editor';
 import * as Monaco from './monaco';
 import SubmissionService from '~/services/Submission.service';
 import { extractExtension, filesToFolderStructure, fsEntriesToFolderStructure } from '~/services/utils/FileUtils';
@@ -10,7 +11,7 @@ import FolderStructure from '~/services/utils/FolderStructure';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { MONACO } from '~/services/Constants';
 
-class MonacoBase extends React.Component<any, any> {
+class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
   protected _baseModelChangeListener: any;
 
   protected editorRef: React.RefObject<HTMLDivElement>
@@ -147,6 +148,15 @@ class MonacoBase extends React.Component<any, any> {
     Monaco.setModelLanguage(this.editor.getModel(), language);
   }
 
+  updateDiffLanguageBasedOnFileName(name: string) {
+    const diffEditor: MonacoTypes.IStandaloneDiffEditor = this.editor;
+    const extension = extractExtension(name);
+    const language = extension === 'js' ? 'javascript' : extension;
+
+    Monaco.setModelLanguage(diffEditor.getModel().modified, language);
+    Monaco.setModelLanguage(diffEditor.getModel().original, language);
+  }
+
   createFirstFile = ({ name }: { name: string }) => {
     const { folderStructure } = this.state;
 
@@ -209,6 +219,31 @@ class MonacoBase extends React.Component<any, any> {
       this.Feedbacks.getAll()
         .filter((f) => f.file_key === file.key)
         .forEach((f) => this.decorate(f.getDecorationData()));
+    }
+  }
+
+  onDiffFileSelect = (key: string) => {
+    this.setState({ selectedFileKey: key });
+
+    const diffEditor: MonacoTypes.IStandaloneDiffEditor = this.editor;
+
+    const {
+      modifiedFolderStructure,
+      originalFolderStructure,
+    } = this.state;
+    const modifiedFile = modifiedFolderStructure.getFile(key).file;
+    const originalFile = originalFolderStructure.getFile(key).file;
+
+    const modifiedModel: MonacoTypes.ITextModel = monaco.editor.createModel(modifiedFile?.content ?? '');
+    const orignalModel: MonacoTypes.ITextModel = monaco.editor.createModel(originalFile?.content ?? '');
+
+    diffEditor.setModel({
+      original: orignalModel,
+      modified: modifiedModel,
+    });
+
+    if (modifiedFile) {
+      this.updateDiffLanguageBasedOnFileName(modifiedFile.name);
     }
   }
 

@@ -4,8 +4,9 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Button from '../Button';
+import { Checkbox } from '../Form';
 import { timeAgo } from '~/services/Utils';
-import { useOutsideClick } from '~/services/Hooks';
+import DiffEditorLazy from '../Editor/DiffEditor/DiffEditor.lazy';
 import { SubmissionVersionI } from '~/../shared/types/submission.types';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 
@@ -15,11 +16,15 @@ interface Props {
   onClose: () => void;
   submission: SubmissionVersionI;
   className?: string
+  previousSubmission?: SubmissionVersionI;
 }
 
-const SubmissionPreview = ({ submission, onClose, className = '' }: Props) => {
-  const ref = useRef(null);
+const SubmissionPreview = ({
+  submission, onClose, previousSubmission, className = '',
+}: Props) => {
+  const cardRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+  const [showDiff, setShowDiff] = useState(false);
 
   const folderStructure = React.useMemo(() => {
     if (!submission) {
@@ -29,12 +34,26 @@ const SubmissionPreview = ({ submission, onClose, className = '' }: Props) => {
     return JSON.parse(submission.code);
   }, [submission._id]);
 
+  const previousFolderStructure = React.useMemo(() => {
+    if (!previousSubmission) {
+      return null;
+    }
+
+    return JSON.parse(previousSubmission.code);
+  }, [previousSubmission?._id]);
+
   const close = () => {
     setActive(false);
     onClose();
   };
 
-  useOutsideClick(ref, close);
+  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (cardRef.current.contains(e.target as HTMLElement)) {
+      return;
+    }
+
+    close();
+  };
 
   useEffect(() => {
     // Without this  delay, the element won't transition up the way we want.
@@ -43,9 +62,9 @@ const SubmissionPreview = ({ submission, onClose, className = '' }: Props) => {
   }, []);
 
   return (
-    <div className={styles.overlay}>
+    <div onClick={onClick} className={styles.overlay}>
       <section
-        ref={ref}
+        ref={cardRef}
         className={`
           ${className} 
           ${styles.SubmissionPreview} 
@@ -60,25 +79,44 @@ const SubmissionPreview = ({ submission, onClose, className = '' }: Props) => {
         >
           <FontAwesomeIcon icon={faTimes} width="16" />
         </Button>
-        <p className="text-bold m-0 text-xl">
-          {submission.approved ? (
-            <> Soluție corectă </>
-          ) : (
-            <> Soluție respinsă </>
-          )}
-        </p>
-        <time
-          className="d-block text-grey mt-2"
-          dateTime={format(new Date(submission.createdAt).getTime(), 'yyyy-MM-dd')}
+        <div className="d-flex align-items-center">
+          <p className="text-bold mr-2 text-xl">
+            {submission.approved ? (
+              <> Soluție corectă </>
+            ) : (
+              <> Soluție respinsă </>
+            )}
+          </p>
+          <time
+            className="d-block text-grey"
+            dateTime={format(new Date(submission.createdAt).getTime(), 'yyyy-MM-dd')}
+          >
+            /
+            {' '}
+            {timeAgo(new Date(submission.createdAt))}
+          </time>
+        </div>
+        <Checkbox
+          checked={showDiff}
+          onChange={() => { setShowDiff(!showDiff); }}
         >
-          {timeAgo(new Date(submission.createdAt))}
-        </time>
-        <CompleteEditorLazy
-          readOnly
-          askTooltip
-          feedbacks={submission.feedbacks}
-          folderStructure={folderStructure}
-        />
+          Vezi progresul față de versiunea precedentă
+        </Checkbox>
+
+        {showDiff ? (
+          <DiffEditorLazy
+            originalFolderStructure={previousFolderStructure}
+            modifiedFolderStructure={folderStructure}
+          />
+        ) : (
+          <CompleteEditorLazy
+            readOnly
+            askTooltip
+            feedbacks={submission.feedbacks}
+            folderStructure={folderStructure}
+          />
+        )}
+
       </section>
     </div>
   );

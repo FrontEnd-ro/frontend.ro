@@ -389,6 +389,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
           onClose={() => RoutingUtils.removeQuery(router, 'version')}
           className={styles.SubmissionPreview}
           submission={versions[activeVersionIndex]}
+          previousSubmission={versions[activeVersionIndex + 1]}
         />
       )}
     </PageWithAsideMenu>

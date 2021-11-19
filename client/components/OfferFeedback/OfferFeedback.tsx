@@ -219,6 +219,7 @@ function OfferFeedback({
           onClose={() => RoutingUtils.removeQuery(router, 'version')}
           className={styles.SubmissionPreview}
           submission={versions[activeVersionIndex]}
+          previousSubmission={versions[activeVersionIndex + 1]}
         />
       )}
     </PageWithAsideMenu>

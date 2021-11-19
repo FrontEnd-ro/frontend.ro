@@ -16,11 +16,11 @@ interface Props {
   onClose: () => void;
   submission: SubmissionVersionI;
   className?: string
-  previousSubmission?: SubmissionVersionI;
+  previousSubmissionCode?: string;
 }
 
 const SubmissionPreview = ({
-  submission, onClose, previousSubmission, className = '',
+  submission, onClose, previousSubmissionCode, className = '',
 }: Props) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
@@ -35,12 +35,12 @@ const SubmissionPreview = ({
   }, [submission._id]);
 
   const previousFolderStructure = React.useMemo(() => {
-    if (!previousSubmission) {
+    if (!previousSubmissionCode) {
       return null;
     }
 
-    return JSON.parse(previousSubmission.code);
-  }, [previousSubmission?._id]);
+    return JSON.parse(previousSubmissionCode);
+  }, [previousSubmissionCode]);
 
   const close = () => {
     setActive(false);

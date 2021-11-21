@@ -1,7 +1,6 @@
 @import "../../styles/variables";
 
 .share-wrapper {
-  $transition-delay: 0.1;
   $transform-distance: -2em;
 
   width: 15em;
@@ -33,21 +32,17 @@
 
   li:nth-child(2) {
     transform: translateY(#{$transform-distance * 2});
-    transition-delay: #{$transition-delay}s;
   }
 
   li:nth-child(3) {
-    transition-delay: #{$transition-delay * 2}s;
     transform: translateY(#{$transform-distance * 3});
   }
 
   li:nth-child(4) {
-    transition-delay: #{$transition-delay * 3}s;
     transform: translateY(#{$transform-distance * 4});
   }
 
   li:nth-child(5) {
-    transition-delay: #{$transition-delay * 4}s;
     transform: translateY(#{$transform-distance * 5});
   }
 }

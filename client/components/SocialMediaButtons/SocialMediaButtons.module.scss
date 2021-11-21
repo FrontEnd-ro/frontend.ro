@@ -1,8 +1,6 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .share-wrapper {
-  $transform-distance: -2em;
-
   width: 15em;
   position: relative;
 
@@ -13,8 +11,7 @@
 
   ul {
     position: absolute;
-    top: 100%;
-    left: 0;
+    display: flex;
     width: 100%;
     text-align: center;
     opacity: 0;
@@ -26,24 +23,24 @@
     opacity: 0;
     padding: 0.5em 1em;
     background: color(white);
-    transform: translateY(-2em);
+    transform: translateY(var(--transform-distance));
     transition: all 0.25s ease-out;
   }
 
   li:nth-child(2) {
-    transform: translateY(#{$transform-distance * 2});
+    transform: translateY(calc(var(--transform-distance) * 2));
   }
 
   li:nth-child(3) {
-    transform: translateY(#{$transform-distance * 3});
+    transform: translateY(calc(var(--transform-distance) * 3));
   }
 
   li:nth-child(4) {
-    transform: translateY(#{$transform-distance * 4});
+    transform: translateY(calc(var(--transform-distance) * 4));
   }
 
   li:nth-child(5) {
-    transform: translateY(#{$transform-distance * 5});
+    transform: translateY(calc(var(--transform-distance) * 5));
   }
 }
 
@@ -56,6 +53,26 @@
   li {
     opacity: 1;
     transform: translateY(0) !important;
+  }
+}
+
+.share-wrapper--up {
+  --transform-distance: 2em;
+
+  ul {
+    left: 0;
+    bottom: 100%;
+    flex-direction: column-reverse;
+  }
+}
+
+.share-wrapper--down {
+  --transform-distance: -2em;
+
+  ul {
+    left: 0;
+    top: 100%;
+    flex-direction: column;
   }
 }
 

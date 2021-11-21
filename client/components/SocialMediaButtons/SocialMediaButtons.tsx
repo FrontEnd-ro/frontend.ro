@@ -23,9 +23,12 @@ interface Props {
     whatsapp?: boolean;
   }
   variant?: 'blue' | 'light';
+  direction?: 'up' | 'down',
 }
 
-export function ShareButton({ url, config, variant = 'blue' }: Props) {
+export function ShareButton({
+  url, config, variant = 'blue', direction = 'down',
+}: Props) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,7 +39,14 @@ export function ShareButton({ url, config, variant = 'blue' }: Props) {
   };
 
   return (
-    <div ref={ref} className={`${styles['share-wrapper']} ${isOpen ? styles['share-wrapper--open'] : ''}`}>
+    <div
+      ref={ref}
+      className={`
+      ${styles['share-wrapper']}
+      ${styles[`share-wrapper--${direction}`]}
+      ${isOpen ? styles['share-wrapper--open'] : ''}
+      `}
+    >
       <Button variant={variant} onClick={toggle}>
         <FontAwesomeIcon icon={faShare} height="24" className="mr-2" />
         Share

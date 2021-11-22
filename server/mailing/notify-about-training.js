@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const { connectToDb } = require('../database');
-const EmailService = require('../Email.service');
+import EmailService from '../Email.service';
 const EventModel = require('../event/event.model');
 
 

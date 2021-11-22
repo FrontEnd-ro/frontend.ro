@@ -1,7 +1,7 @@
 const express = require('express');
 
 const ChallengeModel = require('./challenge.model');
-const EmailService = require('../Email.service');
+import EmailService from '../Email.service';
 const { ServerError } = require('../ServerUtils');
 const { PrivateMiddleware } = require('../Middlewares');
 

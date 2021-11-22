@@ -1,5 +1,5 @@
 const express = require('express');
-const EmailService = require('../Email.service');
+import EmailService from '../Email.service';
 const { ServerError } = require('../ServerUtils');
 const UserModel = require('../user/user.model');
 const PasswordResetModel = require('./password-reset.model');

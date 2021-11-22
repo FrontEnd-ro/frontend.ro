@@ -1,7 +1,7 @@
 const express = require('express');
 
 const EventModel = require('./event.model');
-const EmailService = require('../Email.service');
+import EmailService from '../Email.service';
 const { ServerError } = require('../ServerUtils');
 
 const eventRouter = express.Router();

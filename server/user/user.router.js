@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
-const EmailService = require('../Email.service');
+import EmailService from '../Email.service';
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const UserModel = require('./user.model');
 const SubscribeModel = require('../subscribe.model');

@@ -132,6 +132,10 @@
   display: flex;
 }
 
+.inline-flex {
+  display: inline-flex;
+}
+
 .flex-column {
   flex-direction: column;
 }
@@ -162,6 +166,10 @@
 
 .align-items-center {
   align-items: center;
+}
+
+.align-items-end {
+  align-items: flex-end;
 }
 
 .flex-row {
@@ -250,6 +258,11 @@
 
 .border-bottom-1px {
   border-bottom: 1px solid currentColor;
+}
+
+.mx-4 {
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .mx-5 {

@@ -1,0 +1,133 @@
+@import '../../../styles/variables';
+
+.Diploma {
+  padding: 1em 0 0 0;
+  font-weight: lighter;
+  border: 0.25em solid color(blue);
+  box-shadow: 0 0 15px color(black);
+
+  time {
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 0.5em;
+    text-align: right;
+    font-size: 1.25em;
+  }
+
+  footer {
+    width: 80%;
+    margin: 5em auto 0 auto;
+    padding-bottom: 1em;
+  }
+}
+
+.main {
+  margin: 0 1em;
+  font-size: 2em;
+}
+
+.student {
+  --border-radius: 0.5em;
+
+  margin: 0 auto;
+  max-width: 500px;
+  border: 1px solid color(silver);
+  border-radius: var(--border-radius);
+  transition: transform 0.2s ease-out;
+
+  &:hover {
+    transform: translateY(-0.25em);
+  }
+
+  .student-info {
+    max-width: 300px;
+    overflow: hidden;
+  }
+
+  img {
+    width: 200px;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  }
+}
+
+.qrcode {
+  border-radius: 0.5em;
+  border: 1px solid color(silver);
+}
+
+.share-button-wrapper {
+  bottom: 0;
+  left: 50%;
+  padding: 0.5em 0;
+  transform: translateX(-50%);
+}
+
+@mixin diploma-medium {
+  time {
+    padding: 0;
+    position: static;
+    text-align: center;
+  }
+
+  footer {
+    padding-bottom: 5em;
+  }
+}
+
+@mixin diploma-small {
+  .main {
+    font-size: 1.5em;
+  }
+
+  .student {
+    margin: 0;
+    width: 250px;
+    max-width: 100%;
+    flex-direction: column;
+
+    img {
+      margin-top: 1em;
+      width: 100%;
+      height: auto;
+      max-width: 250px;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
+  }
+
+  footer {
+    margin-top: 3em;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .signature {
+    width: 132px;
+    margin: 0 0 1em 0;
+  }
+}
+
+.Diploma-medium {
+  @include diploma-medium;
+}
+
+.Diploma-small {
+  @include diploma-medium;
+  @include diploma-small;
+}
+
+// # Responsive Styles
+//
+// Here we'll control how this component looks depending on where
+// it's "embedded".
+//
+// Usually we control the child styles from the parent,
+// but due to the nature of CSS Modules and how they create
+// the hash name for the styles, that aproach is only possible with
+// some "hacks" (take a look in the BlogArticlePreview.module.scss file)
+//
+// Thus, to prevent using [className=*""], we're reverting the aproach
+// and declaring the styles here. In other words, now this component
+// knows all the places where it's being embedded.
+// The big disadvantage with this is we can't really reuse this
+// component outside this app (like a component libary).

@@ -1,9 +1,9 @@
 import HttpService from './Http.service';
 import { Submission } from '~/redux/exercise-submissions/types';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/types/submission.types';
 
 class SubmissionService {
-  static searchSubmissions(page = 0, query = '', statuses = [SUBMISSION_STATUS.AWAITING_REVIEW]) {
+  static searchSubmissions(page = 0, query = '', statuses = [SubmissionStatus.AWAITING_REVIEW]) {
     const base = `${process.env.ENDPOINT}/submissions`;
     const statusParams = statuses.map((status) => `status=${status}`).join('&');
 
@@ -32,7 +32,7 @@ class SubmissionService {
   static createSubmission(
     exerciseId: string,
     code: string,
-    status = SUBMISSION_STATUS.AWAITING_REVIEW,
+    status = SubmissionStatus.AWAITING_REVIEW,
   ) {
     return HttpService
       .post(`${process.env.ENDPOINT}/submissions/exercise/${exerciseId}`, { code, status })

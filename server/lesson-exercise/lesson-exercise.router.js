@@ -2,7 +2,8 @@ const express = require('express');
 const { ServerError } = require('../ServerUtils');
 const { PublicMiddleware } = require('../Middlewares');
 const LessonExerciseModel = require('./lesson-exercise.model');
-const { LESSONS_WITH_EXERCISES, SUBMISSION_STATUS } = require('../../shared/SharedConstants');
+import { SubmissionStatus } from '../../shared/types/submission.types';
+const { LESSONS_WITH_EXERCISES } = require('../../shared/SharedConstants');
 const SubmissionModel = require('../submission/submission.model');
 
 const lessonExerciseRouter = express.Router();
@@ -54,7 +55,7 @@ lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function
       return {
         ...ex.toObject(),
         feedbackCount: submissionMatch?.feedbacks?.length ?? 0,
-        isApproved: submissionMatch ? submissionMatch.status === SUBMISSION_STATUS.DONE : false
+        isApproved: submissionMatch ? submissionMatch.status === SubmissionStatus.DONE : false
       }
     });
 

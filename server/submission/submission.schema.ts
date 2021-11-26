@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-const { SUBMISSION_STATUS } = require('../../shared/SharedConstants');
+import { SubmissionStatus } from '../../shared/types/submission.types';
 
 const FeedbackSchema = new mongoose.Schema(
   {
@@ -16,7 +16,7 @@ const SubmissionSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     assignee: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
     exercise: { type: mongoose.Schema.Types.ObjectId, ref: 'LessonExercise', required: true },
-    status: { type: String, enum: Object.values(SUBMISSION_STATUS), default: SUBMISSION_STATUS.IN_PROGRESS },
+    status: { type: String, enum: Object.values(SubmissionStatus), default: SubmissionStatus.IN_PROGRESS },
     feedbacks: [FeedbackSchema],
   },
   {

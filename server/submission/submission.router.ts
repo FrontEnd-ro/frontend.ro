@@ -3,13 +3,13 @@ import { SubmissionVersion } from './submission-version/submission-version.model
 import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
 import submissionVersionRouter from './submission-version/submission-version.router';
 import { UserRole } from '../../shared/types/user.types';
+import { SubmissionStatus } from '../../shared/types/submission.types';
 
 const express = require('express');
 const UserModel = require('../user/user.model');
 const SubmissionModel = require('./submission.model');
 const { PublicMiddleware, PrivateMiddleware, SolvableExercise, UserRoleMiddleware } = require('../Middlewares');
 const { ServerError } = require('../ServerUtils');
-const { SUBMISSION_STATUS } = require('../../shared/SharedConstants');
 
 const submissionRouter = express.Router();
 
@@ -112,12 +112,12 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
       throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
     }
 
-    if (submission.status !== SUBMISSION_STATUS.AWAITING_REVIEW) {
+    if (submission.status !== SubmissionStatus.AWAITING_REVIEW) {
       throw new ServerError(400, 'Poți aproba doar submisii ce așteaptă feedback-ul tău.');
     }
 
     await SubmissionModel.update(submissionId, {
-      status: SUBMISSION_STATUS.DONE,
+      status: SubmissionStatus.DONE,
       feedbacks
     });
 
@@ -165,12 +165,12 @@ submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], 
       throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
     }
 
-    if (submission.status !== SUBMISSION_STATUS.AWAITING_REVIEW) {
+    if (submission.status !== SubmissionStatus.AWAITING_REVIEW) {
       throw new ServerError(400, 'Poți da feedback doar las submisii ce așteaptă feedback-ul tău.');
     }
 
     await SubmissionModel.update(submissionId, {
-      status: SUBMISSION_STATUS.IN_PROGRESS,
+      status: SubmissionStatus.IN_PROGRESS,
       feedbacks
     });
 
@@ -273,7 +273,7 @@ submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async func
       throw new ServerError(404, `Nu am gasit feedback-ul asta.`);
     }
 
-    if (match.status !== SUBMISSION_STATUS.IN_PROGRESS) {
+    if (match.status !== SubmissionStatus.IN_PROGRESS) {
       throw new ServerError(400, 'Submisia așteaptă feedback. Până atunci nu o poți edita');
     }
 

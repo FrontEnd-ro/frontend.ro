@@ -14,7 +14,7 @@ import PageContainer from '~/components/PageContainer';
 import StatusBanner from './StatusBanner/StatusBanner';
 import SubmissionService from '~/services/Submission.service';
 import { UserState, LessonExercise } from '~/redux/user/types';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/types/submission.types';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
@@ -42,7 +42,7 @@ interface Submission {
   exercise: LessonExercise;
   code: string;
   assignee: UserState['info'];
-  status: string;
+  status: SubmissionStatus;
   feedbacks: {
     _id: string;
     type: string;
@@ -71,8 +71,8 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
   const activeVersionIndex = versions.findIndex((v) => v._id === RoutingUtils.getQueryString(router, 'version'));
 
   const readonly = submission && (
-    submission.status === SUBMISSION_STATUS.DONE
-    || submission.status === SUBMISSION_STATUS.AWAITING_REVIEW
+    submission.status === SubmissionStatus.DONE
+    || submission.status === SubmissionStatus.AWAITING_REVIEW
   );
 
   const exerciseIndex = lessonExercises.findIndex((ex) => {
@@ -101,14 +101,14 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
     try {
       if (submission._id) {
         updatedSubmission = await SubmissionService.updateSubmission(submission._id, {
-          status: SUBMISSION_STATUS.IN_PROGRESS,
+          status: SubmissionStatus.IN_PROGRESS,
           code,
         });
       } else {
         updatedSubmission = await SubmissionService.createSubmission(
           exerciseId,
           code,
-          SUBMISSION_STATUS.IN_PROGRESS,
+          SubmissionStatus.IN_PROGRESS,
         );
       }
 
@@ -144,7 +144,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
     let updatedSubmission;
     if (submission._id) {
       updatedSubmission = await SubmissionService.updateSubmission(submission._id, {
-        status: SUBMISSION_STATUS.AWAITING_REVIEW,
+        status: SubmissionStatus.AWAITING_REVIEW,
         code,
       });
     } else {
@@ -193,7 +193,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
 
   const exitReadonly = () => {
     return SubmissionService.updateSubmission(submission._id, {
-      status: SUBMISSION_STATUS.IN_PROGRESS,
+      status: SubmissionStatus.IN_PROGRESS,
     })
       .then(setSubmission)
       .catch((err) => {
@@ -216,7 +216,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
           code: null,
           feedbacks: [],
           assignee: null,
-          status: SUBMISSION_STATUS.IN_PROGRESS,
+          status: SubmissionStatus.IN_PROGRESS,
         });
         setVersions([]);
       })
@@ -371,7 +371,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
               {isLoggedIn ? 'Trimite' : 'Autentifică-te și trimite soluția'}
             </Button>
             {
-              (submission.status !== SUBMISSION_STATUS.IN_PROGRESS)
+              (submission.status !== SubmissionStatus.IN_PROGRESS)
               && (exerciseIndex + 1 < lessonExercises.length) && (
                 <Link href={`/rezolva/${lessonExercises[exerciseIndex + 1]._id}`}>
                   <a className="btn btn--default no-underline ml-2">

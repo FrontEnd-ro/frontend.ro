@@ -12,7 +12,7 @@ import PageContainer from '../PageContainer';
 import Button from '~/components/Button';
 
 import SubmissionService from '~/services/Submission.service';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/types/submission.types';
 import { Submission } from '~/redux/exercise-submissions/types';
 import List from '../List';
 
@@ -76,7 +76,7 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
     this.setState({ loading: true });
 
     try {
-      const newSubmissions = await SubmissionService.searchSubmissions(submissions.page, '', Object.values(SUBMISSION_STATUS));
+      const newSubmissions = await SubmissionService.searchSubmissions(submissions.page, '', Object.values(SubmissionStatus));
       dispatch(loadSubmissions(newSubmissions));
     } catch (err) {
       SweetAlertService.toast({ type: 'error', text: err });
@@ -120,13 +120,13 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
     // from the server. That's why we need this check.
     if (submissions.submissions) {
       inProgressSubmissions = submissions.submissions.filter(
-        (s) => s.status === SUBMISSION_STATUS.IN_PROGRESS,
+        (s) => s.status === SubmissionStatus.IN_PROGRESS,
       );
       awaitingReviewSubmissions = submissions.submissions.filter(
-        (s) => s.status === SUBMISSION_STATUS.AWAITING_REVIEW,
+        (s) => s.status === SubmissionStatus.AWAITING_REVIEW,
       );
       doneSubmissions = submissions.submissions.filter(
-        (s) => s.status === SUBMISSION_STATUS.DONE,
+        (s) => s.status === SubmissionStatus.DONE,
       );
     }
 

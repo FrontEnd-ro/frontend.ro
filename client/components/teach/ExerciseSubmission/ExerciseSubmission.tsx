@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Submission, SubmissionType } from '../../../redux/exercise-submissions/types';
 import { timeAgo } from '../../../services/Utils';
-import { SUBMISSION_STATUS } from '~/../shared/SharedConstants';
+import { SubmissionStatus } from '~/../shared/types/submission.types';
 
 import styles from './ExerciseSubmission.module.scss';
 
@@ -15,17 +15,17 @@ function ExSubmission({ submission } : Props) {
   const mainLinkConfig = computeMainLinkConfig();
   function computeMainLinkConfig() {
     switch (submission.status) {
-      case SUBMISSION_STATUS.IN_PROGRESS:
+      case SubmissionStatus.IN_PROGRESS:
         return {
           label: 'Vezi progresul',
           className: 'btn--default',
         };
-      case SUBMISSION_STATUS.AWAITING_REVIEW:
+      case SubmissionStatus.AWAITING_REVIEW:
         return {
           label: 'Oferă feedback',
           className: 'btn--danger',
         };
-      case SUBMISSION_STATUS.DONE:
+      case SubmissionStatus.DONE:
         return {
           label: 'Vezi rezolvarea',
           className: 'btn--success',

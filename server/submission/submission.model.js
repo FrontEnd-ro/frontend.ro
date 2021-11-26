@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 import { SubmissionSchema } from './submission.schema';
 const uniqueValidator = require('mongoose-unique-validator');
 const { PAGE_SIZE, ServerError, validateAgainstSchemaProps, validateObjectId } = require('../ServerUtils');
-const { SUBMISSION_STATUS } = require('../../shared/SharedConstants');
+import { SubmissionStatus } from '../../shared/types/submission.types';
 
 /** Initialize the User Schema because we need it when referencing & populating the results */
 require('../user/user.model');
@@ -71,7 +71,7 @@ class SubmissionModel {
       });
   }
 
-  static async search(page = 0, query = '', statuses = [SUBMISSION_STATUS.AWAITING_REVIEW]) {
+  static async search(page = 0, query = '', statuses = [SubmissionStatus.AWAITING_REVIEW]) {
     const all = await Submission
       .find({
         // Filter by one or more statuses

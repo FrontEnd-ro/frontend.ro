@@ -20,3 +20,9 @@ export interface SubmissionVersionI {
   submission: string;
   createdAt: string;
 }
+
+export enum SubmissionStatus {
+  IN_PROGRESS = 'in_progress',
+  AWAITING_REVIEW = 'awaiting_review',
+  DONE = 'done',
+}

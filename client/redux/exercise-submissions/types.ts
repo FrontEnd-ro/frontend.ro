@@ -1,4 +1,5 @@
 import { Exercise } from '../user/types';
+import { SubmissionStatus } from '~/../shared/types/submission.types';
 
 export enum ChapterType {
   HTML = 'html',
@@ -26,9 +27,7 @@ export interface Submission {
   _id: string;
   user: User;
   exercise: Exercise;
-  // FIXME 👇
-  // SUBMISSION_STATUS
-  status: string;
+  status: SubmissionStatus;
   submittedAt: number;
   updatedAt: number;
   code: string;

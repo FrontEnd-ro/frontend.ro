@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": ".",
+    "target": "ESNext",
+    "module": "CommonJS",
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  },
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}

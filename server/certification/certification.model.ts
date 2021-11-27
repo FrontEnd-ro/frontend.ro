@@ -2,12 +2,17 @@ import mongoose from 'mongoose';
 const SubmissionModel = require('../submission/submission.model')
 import { ExerciseType } from '../../shared/types/exercise.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
-import { CertificationI } from '../../shared/types/certification.types';
+import { CertificationI, CertificationModule } from '../../shared/types/certification.types';
+
+const ModuleSchema = new mongoose.Schema<CertificationModule>({
+  name: { type: String, required: true },
+  url: { type: String, required: true },
+})
 
 const CertificationSchema = new mongoose.Schema<CertificationI>({
-  name: { type: String, required: true },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   timestamp: { type: Number, required: true },
+  module: { type: ModuleSchema, required: true},
   lesson_exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'LessonExercise' }]
 });
 
@@ -18,9 +23,9 @@ const Certification: mongoose.Model<CertificationI, {}, {}> = mongoose.models.Ce
  * To be called manually by admins if the automatic
  * certification generation somehow fails.
  */
-async function createCertification(userId: string, name: string, moduleType: ExerciseType) {
+async function createCertification(userId: string, module: CertificationModule, moduleType: ExerciseType) {
   const certificationData: CertificationI = {
-    name,
+    module,
     user: userId,
     timestamp: Date.now(),
     lesson_exercises: []

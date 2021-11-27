@@ -16,7 +16,6 @@ import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 import BasicEditorLazy from '../Editor/BasicEditor/BasicEditor.lazy';
 import FolderStructure from '~/services/utils/FolderStructure';
-import { ChapterType } from '~/redux/exercise-submissions/types';
 import { UserState } from '~/redux/user/types';
 import {
   MediaUploadResp,
@@ -25,6 +24,7 @@ import {
   uploadMedia,
 } from '.';
 import { withAuthModal } from '~/services/Hooks';
+import { ExerciseType } from '~/../shared/types/exercise.types';
 
 function NewExercise({ user }: ConnectedProps<typeof connector>) {
   const router = useRouter();
@@ -58,7 +58,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
 
   const createExercise = async (
     formData: {
-      type: ChapterType,
+      type: ExerciseType,
       private: 'true' | 'false'
     },
     userInfo: UserState['info'] = user.info,

@@ -1,11 +1,11 @@
 import React from 'react';
+import { ExerciseType } from '~/../shared/types/exercise.types';
 import { Checkbox } from '~/components/Form';
-import { ChapterType } from '~/redux/exercise-submissions/types';
 
 import styles from './ChapterControls.module.scss';
 
-function ChapterControls({ form, defaultValue }: {form?: string, defaultValue?: ChapterType}) {
-  defaultValue = defaultValue || ChapterType.HTML;
+function ChapterControls({ form, defaultValue }: {form?: string, defaultValue?: ExerciseType}) {
+  defaultValue = defaultValue || ExerciseType.HTML;
 
   return (
     <div className={`${styles['chapter-controls']} d-flex`}>
@@ -14,8 +14,8 @@ function ChapterControls({ form, defaultValue }: {form?: string, defaultValue?: 
         className="d-block"
         type="radio"
         name="type"
-        value={ChapterType.HTML}
-        defaultChecked={defaultValue === ChapterType.HTML}
+        value={ExerciseType.HTML}
+        defaultChecked={defaultValue === ExerciseType.HTML}
       >
         HTML
       </Checkbox>
@@ -24,8 +24,8 @@ function ChapterControls({ form, defaultValue }: {form?: string, defaultValue?: 
         className="d-block"
         type="radio"
         name="type"
-        value={ChapterType.CSS}
-        defaultChecked={defaultValue === ChapterType.CSS}
+        value={ExerciseType.CSS}
+        defaultChecked={defaultValue === ExerciseType.CSS}
       >
         CSS
       </Checkbox>
@@ -34,8 +34,8 @@ function ChapterControls({ form, defaultValue }: {form?: string, defaultValue?: 
         className="d-block"
         type="radio"
         name="type"
-        value={ChapterType.JS}
-        defaultChecked={defaultValue === ChapterType.JS}
+        value={ExerciseType.JS}
+        defaultChecked={defaultValue === ExerciseType.JS}
       >
         JS
       </Checkbox>

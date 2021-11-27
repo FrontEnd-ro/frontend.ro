@@ -1,12 +1,6 @@
 import { Exercise } from '../user/types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 
-export enum ChapterType {
-  HTML = 'html',
-  CSS = 'css',
-  JS = 'js',
-}
-
 interface SubmissionFeedback {
     _id: string;
     // FIXME: use a type for SubmissionFeedback types

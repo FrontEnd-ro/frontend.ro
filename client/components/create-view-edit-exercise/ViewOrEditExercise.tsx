@@ -24,8 +24,8 @@ import viewCover from './the-search.svg';
 import editCover from './coding.svg';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import ExerciseService from '~/services/Exercise.service';
-import { ChapterType } from '~/redux/exercise-submissions/types';
 import Button from '~/components/Button';
+import { ExerciseType } from '~/../shared/types/exercise.types';
 
 function ViewOrEditExercise({
   exercise,
@@ -67,7 +67,7 @@ function ViewOrEditExercise({
 
   const updateExercise = async (
     formData: {
-      type: ChapterType,
+      type: ExerciseType,
       private: 'true' | 'false'
     },
   ) => {

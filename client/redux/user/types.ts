@@ -1,6 +1,6 @@
 import { UserRole } from '~/../shared/types/user.types';
-import { ChapterType } from '../exercise-submissions/types';
 import { ParsedNotificationI } from '~/../shared/types/notification.types';
+import { ExerciseType } from '~/../shared/types/exercise.types';
 
 export interface UserState {
   info: {
@@ -29,7 +29,7 @@ export interface Exercise {
   solution: string;
   suggestion?: string;
   tags: string[];
-  type: ChapterType;
+  type: ExerciseType;
   user: UserState['info'];
   lesson?: string;
 }
@@ -42,7 +42,7 @@ export interface LessonExercise {
   solution: string;
   lesson: string;
   tags: string[];
-  type: ChapterType;
+  type: ExerciseType;
   isApproved: boolean;
   feedbackCount: number;
   user: UserState['info'];

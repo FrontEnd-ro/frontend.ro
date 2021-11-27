@@ -1,4 +1,5 @@
-import { PopulatedDoc } from 'mongoose';
+import { PopulatedDoc, Document } from 'mongoose';
+import { LessonExerciseI, WIPPopulatedLessonExerciseI } from './exercise.types';
 import { UserI } from './user.types';
 
 export interface CertificationModule {
@@ -19,7 +20,24 @@ export interface CertificationI {
   // Nanos
   timestamp: number;
 
-  // IDs of Lesson Exercises
+  // UUIDs of Lesson Exercises
   // eslint-disable-next-line camelcase
-  lesson_exercises: string[];
+  lesson_exercises: PopulatedDoc<LessonExerciseI>[];
+}
+
+// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
+export interface WIPPopulatedCertificationI {
+  // TODO: what is the correct way of defining IDs?
+  // https://github.com/FrontEnd-ro/frontend.ro/issues/442
+  _id?: string;
+
+  module: CertificationModule;
+
+  user: UserI;
+
+  // Nanos
+  timestamp: number;
+
+  // eslint-disable-next-line camelcase
+  lesson_exercises: WIPPopulatedLessonExerciseI[];
 }

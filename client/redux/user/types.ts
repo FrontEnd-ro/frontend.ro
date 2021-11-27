@@ -4,7 +4,7 @@ import { ExerciseType } from '~/../shared/types/exercise.types';
 
 export interface UserState {
   info: {
-    name: string;
+    name?: string;
     username: string;
     email: string;
     avatar: string;

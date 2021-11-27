@@ -1,5 +1,5 @@
 interface IdentityData {
-  name: string;
+  name?: string;
   username: string;
   email: string;
 }

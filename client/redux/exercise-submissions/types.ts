@@ -11,7 +11,7 @@ interface SubmissionFeedback {
     position: number[];
 }
 interface User {
-  name: string;
+  name?: string;
   username: string;
   email: string;
   avatar: string;

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 const { validateAgainstSchemaProps } = require('./ServerUtils');
 
 const SubscribersSchema = new mongoose.Schema({
@@ -10,8 +9,6 @@ const SubscribersSchema = new mongoose.Schema({
     updatedAt: 'updatedAt',
   },
 });
-
-SubscribersSchema.plugin(uniqueValidator);
 
 const Subscriber = mongoose.models?.Subscriber || mongoose.model('Subscriber', SubscribersSchema);
 

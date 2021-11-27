@@ -7,11 +7,7 @@ function connectToDb() {
   }
 
   return mongoose.connect(process.env.DB_CONNECT, {
-    poolSize: 1,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
+    maxPoolSize: 1,
   });
 }
 

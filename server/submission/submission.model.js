@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 import { SubmissionSchema } from './submission.schema';
-const uniqueValidator = require('mongoose-unique-validator');
 const { PAGE_SIZE, ServerError, validateAgainstSchemaProps, validateObjectId } = require('../ServerUtils');
 import { SubmissionStatus } from '../../shared/types/submission.types';
 
@@ -9,7 +8,6 @@ require('../user/user.model');
 require('../exercise/exercise.model');
 
 SubmissionSchema.index({ user: 1, exercise: 1 }, { unique: true });
-SubmissionSchema.plugin(uniqueValidator);
 
 const Submission = mongoose.models.Submission || mongoose.model('Submission', SubmissionSchema);
 

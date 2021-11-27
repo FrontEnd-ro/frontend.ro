@@ -1,4 +1,7 @@
 /* eslint-disable camelcase */
+import { PopulatedDoc } from 'mongoose';
+import { UserI } from './user.types';
+
 /** *************************** Notifications */
 export enum NotificationType {
   SUCCESS = 'success',
@@ -23,7 +26,7 @@ export interface NotificationI {
   _id?: string;
 
   // UUID of the user that receives this notification
-  to: string;
+  to: PopulatedDoc<UserI>;
 
   type: NotificationType;
 
@@ -57,7 +60,7 @@ export interface NotificationI {
 
   // The UUID of a user or undefined if it's an
   // automatically generated one (by the app).
-  from?: string;
+  from?: PopulatedDoc<UserI>;
 
   // How do we reach the user? In app notifications? Email? Something else?
   channels?: NotificationChannel[];

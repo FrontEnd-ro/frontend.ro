@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 const { ServerError, validateAgainstSchemaProps } = require('../ServerUtils');
 
 const ChallengeParticipantSchema = new mongoose.Schema(

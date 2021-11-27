@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 const { PAGE_SIZE, ServerError, validateAgainstSchemaProps } = require('../ServerUtils');
 
 const AttendeeSchema = new mongoose.Schema({

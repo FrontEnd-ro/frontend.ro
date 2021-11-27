@@ -1,3 +1,6 @@
+import { PopulatedDoc } from 'mongoose';
+import { UserI } from './user.types';
+
 export interface CertificationI {
   // Optional because when we create certifications
   // we don't know what ID will MongoDB use
@@ -7,7 +10,7 @@ export interface CertificationI {
   name: string;
 
   // UUID of the user that got the certification
-  user: string;
+  user: PopulatedDoc<UserI>;
 
   // Nanos
   timestamp: number;

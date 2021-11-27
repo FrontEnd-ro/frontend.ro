@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 const { ServerError } = require('../server/ServerUtils');
 const { UserRole } = require('./types/user.types');
 
@@ -24,8 +23,6 @@ const UsersSchema = new mongoose.Schema({
     default: UserRole.STUDENT,
   },
 });
-
-UsersSchema.plugin(uniqueValidator);
 
 const User = mongoose.models.User || mongoose.model('User', UsersSchema);
 

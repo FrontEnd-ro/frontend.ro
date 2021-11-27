@@ -13,6 +13,8 @@ export interface FeedbackI {
 }
 
 export interface SubmissionVersionI {
+  // TODO: is this the correct way of defining IDs?
+  // https://github.com/FrontEnd-ro/frontend.ro/issues/442
   _id: string;
   feedbacks: FeedbackI[];
   code: string;

@@ -1,8 +1,10 @@
-import mongoose from 'mongoose';
-const SubmissionModel = require('../submission/submission.model')
+import mongoose, { Document } from 'mongoose';
+const SharedUserModel = require('../../shared/user.shared-model');
+const SubmissionModel = require('../submission/submission.model');
 import { ExerciseType } from '../../shared/types/exercise.types';
+import SharedExerciseModel from '../../shared/exercise.shared-model';
 import { SubmissionStatus } from '../../shared/types/submission.types';
-import { CertificationI, CertificationModule } from '../../shared/types/certification.types';
+import { CertificationI, CertificationModule, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
 
 const ModuleSchema = new mongoose.Schema<CertificationModule>({
   name: { type: String, required: true },
@@ -18,6 +20,18 @@ const CertificationSchema = new mongoose.Schema<CertificationI>({
 
 const Certification: mongoose.Model<CertificationI, {}, {}> = mongoose.models.Certification
   || mongoose.model<CertificationI>('Certification', CertificationSchema);
+
+function sanitizeCertification(certification: Document<any, any, WIPPopulatedCertificationI> & WIPPopulatedCertificationI) {
+  // https://github.com/Automattic/mongoose/issues/2790
+  const sanitizedCertfication: WIPPopulatedCertificationI = JSON.parse(JSON.stringify(certification.toObject()));
+
+  sanitizedCertfication.user = SharedUserModel.sanitize(sanitizedCertfication.user);
+  sanitizedCertfication.lesson_exercises = sanitizedCertfication.lesson_exercises.map(lessonExercise => {
+    return SharedExerciseModel.sanitize(lessonExercise)
+  });
+
+  return sanitizedCertfication;
+}
 
 /**
  * To be called manually by admins if the automatic
@@ -46,4 +60,4 @@ async function createCertification(userId: string, module: CertificationModule, 
   console.log("createCertification: done ✔️");
 }
 
-export { Certification, createCertification };
+export { Certification, createCertification, sanitizeCertification };

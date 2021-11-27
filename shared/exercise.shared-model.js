@@ -29,7 +29,12 @@ function getById(_id) {
 }
 
 function sanitize(exercise) {
-  const sanitizedExercise = { ...exercise.toObject() };
+  // TODO: decide on an approach to use among all schema
+  // https://github.com/FrontEnd-ro/frontend.ro/issues/438
+  let sanitizedExercise = { ...exercise };
+  if (exercise instanceof mongoose.Document) {
+    sanitizedExercise = { ...exercise.toObject() };
+  }
   const propsToDelete = ['__v', 'updatedAt', 'createdAt'];
 
   propsToDelete.forEach((prop) => delete sanitizedExercise[prop]);

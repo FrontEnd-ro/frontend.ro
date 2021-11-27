@@ -48,7 +48,12 @@ async function ping(token) {
 }
 
 function sanitize(user) {
-  const sanitizedUser = { ...user.toObject() };
+  // TODO: decide on an approach to use among all schema
+  // https://github.com/FrontEnd-ro/frontend.ro/issues/438
+  let sanitizedUser = { ...user };
+  if (user instanceof mongoose.Document) {
+    sanitizedUser = { ...user.toObject() };
+  }
   const propsToDelete = ['_id', '__v', 'password', 'github_access_token'];
 
   propsToDelete.forEach((prop) => delete sanitizedUser[prop]);

@@ -131,3 +131,16 @@
 // knows all the places where it's being embedded.
 // The big disadvantage with this is we can't really reuse this
 // component outside this app (like a component libary).
+[data-certification-page] {
+  @media screen and (max-width: 1000px) {
+    .Diploma {
+      @include diploma-medium;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .Diploma {
+      @include diploma-small;
+    }
+  }
+}

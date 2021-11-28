@@ -26,7 +26,7 @@ export default function CertificationPage(
           <meta name="robots" content="noindex" />
         </Head>
         <Header withNavMenu />
-        <main>
+        <main data-certification-page>
           <CertificationComponent certification={certification} />
         </main>
         <Footer />

@@ -3,14 +3,18 @@ import { connect, ConnectedProps } from 'react-redux';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import ReactSelect from 'react-select';
+import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { RootState } from '~/redux/root.reducer';
 
 import EventService from '~/services/api/Event.service';
 import Form, { FormGroup } from '~/components/Form';
-import { ShareButton } from '~/components/SocialMediaButtons';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import WaitlistConfirmation from '../WaitListConfirmation/WaitListConfirmation';
 import Button from '~/components/Button';
+import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
+import {
+  CopyLinkButton, FacebookButton, LinkedInButton, WhatsAppButton,
+} from '~/components/SocialMediaButtons';
 
 import styles from './RegisterEventCard.module.scss';
 
@@ -215,16 +219,20 @@ function RegisterEventCard({
             <Button type="submit" variant="blue" loading={isLoading}>
               Înscrie-te
             </Button>
-            <ShareButton
-              variant="light"
-              url={urlToShare}
-              config={{
-                copy: true,
-                facebook: true,
-                whatsapp: true,
-                linkedin: true,
-              }}
-            />
+            <OptionsDrawer variant="light" trigger={{ text: 'Share', icon: faShare }}>
+              <OptionsDrawer.Element>
+                <CopyLinkButton text={urlToShare} />
+              </OptionsDrawer.Element>
+              <OptionsDrawer.Element>
+                <FacebookButton url={urlToShare} />
+              </OptionsDrawer.Element>
+              <OptionsDrawer.Element>
+                <LinkedInButton url={urlToShare} />
+              </OptionsDrawer.Element>
+              <OptionsDrawer.Element>
+                <WhatsAppButton url={urlToShare} />
+              </OptionsDrawer.Element>
+            </OptionsDrawer>
           </footer>
 
         )}

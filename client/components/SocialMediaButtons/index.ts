@@ -1,5 +1,5 @@
 export {
-  ShareButton,
+  CopyLinkButton,
   FacebookButton,
   TwitterButton,
   WhatsAppButton,

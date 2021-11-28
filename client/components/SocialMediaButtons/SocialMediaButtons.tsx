@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebook,
@@ -6,82 +6,9 @@ import {
   faTwitter,
   faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons';
-import { faLink, faShare } from '@fortawesome/free-solid-svg-icons';
-import { useClipboard, useOutsideClick } from '~/services/Hooks';
-import Button from '~/components/Button';
-
-import styles from './SocialMediaButtons.module.scss';
-import List from '../List';
-
-interface Props {
-  url: string;
-  config: {
-    copy?: boolean;
-    facebook?: boolean;
-    twitter?: boolean;
-    linkedin?: boolean;
-    whatsapp?: boolean;
-  }
-  variant?: 'blue' | 'light';
-  direction?: 'up' | 'down',
-}
-
-export function ShareButton({
-  url, config, variant = 'blue', direction = 'down',
-}: Props) {
-  const ref = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useOutsideClick(ref, () => setIsOpen(false));
-
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <div
-      ref={ref}
-      className={`
-      ${styles['share-wrapper']}
-      ${styles[`share-wrapper--${direction}`]}
-      ${isOpen ? styles['share-wrapper--open'] : ''}
-      `}
-    >
-      <Button variant={variant} onClick={toggle}>
-        <FontAwesomeIcon icon={faShare} height="24" className="mr-2" />
-        Share
-      </Button>
-      <List>
-        {config.copy && (
-          <li>
-            <CopyLinkToClipboard onCopy={toggle} className="btn btn--light btn--with-icon" text={url} />
-          </li>
-        )}
-        {config.facebook && (
-          <li>
-            <FacebookButton url={url} />
-          </li>
-        )}
-        {config.twitter && (
-          <li>
-            <TwitterButton url={url} />
-          </li>
-        )}
-        {config.linkedin && (
-          <li>
-            <LinkedInButton url={url} />
-          </li>
-        )}
-        {config.whatsapp && (
-          <li>
-            <WhatsAppButton url={url} />
-          </li>
-        )}
-      </List>
-    </div>
-
-  );
-}
+import { faLink } from '@fortawesome/free-solid-svg-icons';
+import Button, { Variant as ButtonVariant } from '~/components/Button';
+import { useClipboard } from '~/services/Hooks';
 
 export function FacebookButton({ url }: { url: string }) {
   const share = useSocialShare('Facebook');
@@ -161,17 +88,12 @@ function useSocialShare(providerName: string) {
   };
 }
 
-function CopyLinkToClipboard({ text, className, onCopy }: {
-  text: string,
-  className: string,
-  onCopy: () => void
-}) {
+export function CopyLinkButton({ text, variant = 'blue' }: { text: string, variant?: ButtonVariant }) {
   const ref = useRef(null);
-
-  useClipboard(ref, onCopy);
+  useClipboard(ref);
 
   return (
-    <Button variant="blue" className={className} data-clipboard-text={text} ref={ref}>
+    <Button variant={variant} className="btn--with-icon" data-clipboard-text={text} ref={ref}>
       <FontAwesomeIcon icon={faLink} height="24" className="mr-2" />
       Copy link
     </Button>

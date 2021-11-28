@@ -1,0 +1,70 @@
+@import '../../styles/variables';
+
+.options-drawer {
+  min-width: 15em;
+}
+
+.list {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-out;
+}
+
+.Element {
+  opacity: 0;
+  padding: 0.5em 1em;
+  transition: all 0.25s ease-out;
+  transform: translateY(var(--transform-distance));
+
+  & > * {
+    width: 100%;
+  }
+
+  &:nth-child(2) {
+    transform: translateY(calc(var(--transform-distance) * 2));
+  }
+
+  &:nth-child(3) {
+    transform: translateY(calc(var(--transform-distance) * 3));
+  }
+
+  &:nth-child(4) {
+    transform: translateY(calc(var(--transform-distance) * 4));
+  }
+
+  &:nth-child(5) {
+    transform: translateY(calc(var(--transform-distance) * 5));
+  }
+}
+
+.options-drawer--open {
+  .list {
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  .Element {
+    opacity: 1;
+    transform: translateY(0) !important;
+  }
+}
+
+.options-drawer--up {
+  --transform-distance: 2em;
+
+  .list {
+    left: 0;
+    bottom: 100%;
+    flex-direction: column-reverse;
+  }
+}
+
+.options-drawer--down {
+  --transform-distance: -2em;
+
+  .list {
+    left: 0;
+    top: 100%;
+    flex-direction: column;
+  }
+}

@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { faShare } from '@fortawesome/free-solid-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson from '~/components/lessons/Lesson';
 import {
   LessonCover, LessonContributors, LessonHeading, LessonFigure, LessonQuote,
 } from '~/components/lessons';
-import { ShareButton } from '~/components/SocialMediaButtons';
+import {
+  FacebookButton, LinkedInButton, WhatsAppButton, CopyLinkButton,
+} from '~/components/SocialMediaButtons';
 import { getLessonById, GITHUB_URL } from '~/services/Constants';
 import coverSvg from '~/public/images/lessons/lesson-0__cover.svg';
 import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
+import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
 
 let chapters = [
   { title: 'Ce e FrontEnd.ro?', id: 'introducere' },
@@ -120,15 +124,20 @@ export default function Lesson0() {
             tăi. Am aprecia mult un share, așa putem avea un impact cât mai mare:
           </p>
           <div className="d-flex justify-content-center my-5">
-            <ShareButton
-              url={urlToShare}
-              config={{
-                copy: true,
-                facebook: true,
-                whatsapp: true,
-                linkedin: true,
-              }}
-            />
+            <OptionsDrawer trigger={{ text: 'Share', icon: faShare }}>
+              <OptionsDrawer.Element>
+                <CopyLinkButton text={urlToShare} />
+              </OptionsDrawer.Element>
+              <OptionsDrawer.Element>
+                <FacebookButton url={urlToShare} />
+              </OptionsDrawer.Element>
+              <OptionsDrawer.Element>
+                <LinkedInButton url={urlToShare} />
+              </OptionsDrawer.Element>
+              <OptionsDrawer.Element>
+                <WhatsAppButton url={urlToShare} />
+              </OptionsDrawer.Element>
+            </OptionsDrawer>
           </div>
           <p>
             Iar după ce avansezi în skill-uri și capeți mai multă experiență, chiar ne-am bucura

@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import { format } from 'date-fns';
+import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '~/services/Utils';
-import { ShareButton } from '~/components/SocialMediaButtons';
+import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
+import { FacebookButton, LinkedInButton, CopyLinkButton } from '~/components/SocialMediaButtons';
 
 import styles from './Diploma.module.scss';
 
@@ -69,15 +71,23 @@ const Diploma = ({
         url={certification.url}
       />
       <div className={`${styles['share-button-wrapper']} absolute`}>
-        <ShareButton
-          url={certification.url}
-          config={{
-            copy: true,
-            facebook: true,
-            linkedin: true,
+        <OptionsDrawer
+          trigger={{
+            text: 'Share',
+            icon: faShare,
           }}
           direction="up"
-        />
+        >
+          <OptionsDrawer.Element>
+            <CopyLinkButton text={certification.url} />
+          </OptionsDrawer.Element>
+          <OptionsDrawer.Element>
+            <FacebookButton url={certification.url} />
+          </OptionsDrawer.Element>
+          <OptionsDrawer.Element>
+            <LinkedInButton url={certification.url} />
+          </OptionsDrawer.Element>
+        </OptionsDrawer>
       </div>
     </footer>
   </section>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '~/services/Utils';
@@ -124,20 +124,22 @@ const QRCode = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  import('qrcode').then((module) => {
-    module.default.toCanvas(canvasRef.current, url, {
-      color: {
-        light: background,
-      },
-      width,
-    }, (error) => {
-      if (error) console.error(error);
-      console.log('success!');
+  useEffect(() => {
+    import('qrcode').then((module) => {
+      module.default.toCanvas(canvasRef.current, url, {
+        color: {
+          light: background,
+        },
+        width,
+      }, (error) => {
+        if (error) console.error(error);
+        console.log('success!');
+      });
     });
-  });
+  }, []);
 
   return (
-    <canvas className={className} ref={canvasRef} />
+    <canvas width={width} className={className} ref={canvasRef} />
   );
 };
 

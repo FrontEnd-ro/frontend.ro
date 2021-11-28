@@ -145,7 +145,7 @@ const QRCode = ({
         console.log('success!');
       });
     });
-  }, []);
+  }, [url]);
 
   return (
     <canvas width={width} className={className} ref={canvasRef} />

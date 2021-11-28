@@ -23,6 +23,7 @@ export default function CertificationPage(
             {certification.module.name}
           </title>
           <link rel="icon" href="/favicon.ico" />
+          <meta name="robots" content="noindex" />
         </Head>
         <Header withNavMenu />
         <main>

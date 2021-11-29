@@ -34,7 +34,10 @@ const Diploma = ({
   }, []);
 
   return (
-    <section className={`${styles.Diploma} ${styles[`Diploma-${variant}`]} relative`}>
+    // If we ever change this attribute ID, make sure we also change
+    // the `diploma-screenshot` Lambda Function
+    // https://github.com/FrontEnd-ro/frontend.ro/issues/449
+    <section data-diploma className={`${styles.Diploma} ${styles[`Diploma-${variant}`]} relative`}>
       <time className="absolute d-block mb-4" dateTime={format(certification.date.getTime(), 'yyyy-MM-dd')}>
         {formatDate(certification.date)}
       </time>
@@ -78,7 +81,12 @@ const Diploma = ({
           className={styles.qrcode}
           url={fullCertificationUrl}
         />
-        <div className={`${styles['share-button-wrapper']} absolute`}>
+        {/*
+          This attribute means we'll remove this element when generating
+          the OG:IMAGE and PDF for the Diploma
+          https://github.com/FrontEnd-ro/frontend.ro/issues/449
+        */}
+        <div data-diploma-hidden className={`${styles['share-button-wrapper']} absolute`}>
           <OptionsDrawer
             trigger={{
               text: 'Share',

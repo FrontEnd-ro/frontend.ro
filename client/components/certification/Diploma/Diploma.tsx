@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload, faShare } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '~/services/Utils';
 import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
 import { FacebookButton, LinkedInButton, CopyLinkButton } from '~/components/SocialMediaButtons';
@@ -20,6 +21,7 @@ interface Props {
   certification: {
     date: Date;
     url: string;
+    pdf?: string;
     exerciseCount: number;
   },
   variant?: 'large' | 'medium' | 'small'
@@ -97,6 +99,17 @@ const Diploma = ({
             <OptionsDrawer.Element>
               <CopyLinkButton text={fullCertificationUrl} />
             </OptionsDrawer.Element>
+            {certification.pdf && (
+              <OptionsDrawer.Element>
+                <a
+                  href={certification.pdf}
+                  className="btn btn--light no-underline btn--with-icon"
+                >
+                  <FontAwesomeIcon icon={faDownload} height="24" className="mr-2" />
+                  Download PDF
+                </a>
+              </OptionsDrawer.Element>
+            )}
             <OptionsDrawer.Element>
               <FacebookButton url={fullCertificationUrl} />
             </OptionsDrawer.Element>

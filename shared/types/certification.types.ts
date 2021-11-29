@@ -23,6 +23,11 @@ export interface CertificationI {
   // UUIDs of Lesson Exercises
   // eslint-disable-next-line camelcase
   lesson_exercises: PopulatedDoc<LessonExerciseI>[];
+
+  // eslint-disable-next-line camelcase
+  og_image?: string;
+
+  pdf?: string;
 }
 
 // FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
@@ -40,4 +45,9 @@ export interface WIPPopulatedCertificationI {
 
   // eslint-disable-next-line camelcase
   lesson_exercises: WIPPopulatedLessonExerciseI[];
+
+  // eslint-disable-next-line camelcase
+  og_image?: string;
+
+  pdf?: string;
 }

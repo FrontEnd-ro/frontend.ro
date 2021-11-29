@@ -19,6 +19,7 @@ const Certification = ({ certification }: { certification: WIPPopulatedCertifica
           date: new Date(certification.timestamp),
           exerciseCount: certification.lesson_exercises.length,
           url: `/certificari/${certification._id}`,
+          pdf: certification.pdf,
         }}
       />
       <p className="mt-8 mb-12 text-2xl font-light">

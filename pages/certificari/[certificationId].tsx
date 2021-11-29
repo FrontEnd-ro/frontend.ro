@@ -1,6 +1,5 @@
 import React from 'react';
 import mongoose from 'mongoose';
-import Head from 'next/head';
 import NotFoundPage from '~/components/404/NotFound';
 import { UserI } from '~/../shared/types/user.types';
 import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
@@ -9,6 +8,7 @@ import { Certification, sanitizeCertification } from '../../server/certification
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import { WIPPopulatedLessonExerciseI } from '~/../shared/types/exercise.types';
+import SEOTags from '~/components/SEOTags';
 
 export default function CertificationPage(
   { certification }: { certification: WIPPopulatedCertificationI },
@@ -16,15 +16,14 @@ export default function CertificationPage(
   return certification !== null
     ? (
       <>
-        <Head>
-          <title>
-            Felicitări! Ai completat cu succes
-            {' '}
-            {certification.module.name}
-          </title>
-          <link rel="icon" href="/favicon.ico" />
+        <SEOTags
+          shareImage={certification.og_image ?? ''}
+          url={`https://FrontEnd.ro/certificari/${certification._id}`}
+          title={`Felicitări! Ai completat cu succes ${certification.module.name}`}
+          description={`${certification.user.name ?? certification.user.username} a rezolvat cu succes toate cele ${certification.lesson_exercises.length} exerciții.`}
+        >
           <meta name="robots" content="noindex" />
-        </Head>
+        </SEOTags>
         <Header withNavMenu />
         <main data-certification-page>
           <CertificationComponent certification={certification} />

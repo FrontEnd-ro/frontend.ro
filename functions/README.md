@@ -40,6 +40,7 @@ and then making POST requests at this endpoint
 POST http://localhost:9000/2015-03-31/functions/function/invocations
 ```
 
+⚠️ Make sure you update the package.json > version if you've changed the code. Otherwise the Docker image won't build acordingly.
 
 **4. Tag the docker image**
 

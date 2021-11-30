@@ -11,14 +11,14 @@ export default function Footer() {
         <p>
           Contribuie pe
           {' '}
-          <a href={GITHUB_URL}>
+          <a href={GITHUB_URL} target="_blank" rel="noreferrer">
             GitHub
           </a>
         </p>
         <p>
           Vezi componentele în
           {' '}
-          <a href="https://storybook.frontend.ro">
+          <a href="https://storybook.frontend.ro" target="_blank" rel="noreferrer">
             Storybook
           </a>
         </p>
@@ -41,22 +41,22 @@ export default function Footer() {
         <h5> Social </h5>
         <div>
           <p>
-            <a href="https://ro.linkedin.com/company/frontend-ro">
+            <a href="https://ro.linkedin.com/company/frontend-ro" target="_blank" rel="noreferrer">
               LinkedIn
             </a>
           </p>
           <p>
-            <a href="https://facebook.com/FrontEndRo">
+            <a href="https://facebook.com/FrontEndRo" target="_blank" rel="noreferrer">
               Facebook
             </a>
           </p>
           <p>
-            <a href="https://www.instagram.com/frontend.ro/">
+            <a href="https://www.instagram.com/frontend.ro/" target="_blank" rel="noreferrer">
               Instagram
             </a>
           </p>
           <p>
-            <a href="https://www.youtube.com/channel/UC2p6MkYMKNok7pjo7z5TK0Q">
+            <a href="https://www.youtube.com/channel/UC2p6MkYMKNok7pjo7z5TK0Q" target="_blank" rel="noreferrer">
               YouTube
             </a>
           </p>

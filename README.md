@@ -132,7 +132,7 @@ This project wouldn't be possible without our awesome contributors. Thank you >:
         <td align="center">
             <a href="https://www.facebook.com/melnic.ira/"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/images/contributors/iramelnic.jpg" width="120px;" alt="Ira Melnic"/><br /><sub><b>Ira Melnic</b></sub></a></td>
         <td align="center">
-            <a href="https://github.com/lazarnarcis"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/images/contributors/lazarnarcis.jpg" width="120px;" alt="Narcis Lazar"/><br /><sub><b>Narcis Lazar</b></sub></a></td>
+            <a href="https://github.com/lazarnarcis"><img src="https://raw.githubusercontent.com/FrontEnd-ro/frontend.ro/master/client/public/images/contributors/lazarnarcis.png" width="120px;" alt="Narcis Lazar"/><br /><sub><b>Narcis Lazar</b></sub></a></td>
     </tr></table>
 
 <br />

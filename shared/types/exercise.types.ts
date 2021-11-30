@@ -1,3 +1,6 @@
+import { PopulatedDoc } from 'mongoose';
+import { UserI } from './user.types';
+
 export enum ExerciseType {
   HTML = 'html',
   CSS = 'css',
@@ -5,8 +8,12 @@ export enum ExerciseType {
 }
 
 export interface ExerciseI {
+  // TODO: is this the correct way of defining IDs?
+  // https://github.com/FrontEnd-ro/frontend.ro/issues/442
+  _id: string;
+
   // UUID of the user that created it
-  user: string;
+  user: PopulatedDoc<UserI>;
 
   type: ExerciseType;
 
@@ -31,5 +38,11 @@ export interface ExerciseI {
 
 export interface LessonExerciseI extends ExerciseI {
   // Lesson to which this exercise is assigned to
+  // This is not an UUID
   lesson: string;
+}
+
+// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
+export interface WIPPopulatedLessonExerciseI extends LessonExerciseI {
+  user: UserI;
 }

@@ -94,6 +94,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://blobs.app',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/blobs_500w.png`,
     },
+    {
+      title: 'Rough.js',
+      url: 'https://roughjs.com/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/roughjs_500w.png`,
+    },
   ],
   [ResourceCategory.ICONS]: [
     {

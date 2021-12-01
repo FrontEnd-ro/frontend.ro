@@ -57,6 +57,11 @@ function Resources() {
     id: ResourceCategory.FONTS,
     title: 'Fonts',
     description: 'Adaugă mai multă personalitate site-ului tău schimbând fonturile.',
+  },
+  {
+    id: ResourceCategory.EXTRA,
+    title: 'Extra',
+    description: 'Îți îmbunătățesc întreaga experiență ca și developer.',
   }];
 
   return (

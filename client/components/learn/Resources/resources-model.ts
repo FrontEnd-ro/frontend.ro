@@ -16,6 +16,7 @@ export enum ResourceCategory {
   BOOKS = 'books',
   BACKGROUNDS_AND_COLORS = 'backgrounds-and-colors',
   PERFORMANCE = 'perf',
+  EXTRA = 'extra',
 }
 
 export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
@@ -309,6 +310,13 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       title: 'VideoSmaller',
       url: 'https://www.videosmaller.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/videosmaller_500w.png`,
+    },
+  ],
+  [ResourceCategory.EXTRA]: [
+    {
+      title: 'GitHub web editor',
+      url: 'https://github.dev',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/github-dev_500w.png`,
     },
   ],
 };

@@ -291,6 +291,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/svgomg_500w.png`,
     },
     {
+      title: 'Squoosh',
+      url: 'https://Squoosh.app',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/squoosh_500w.png`,
+    },
+    {
       title: 'TinyPNG',
       url: 'https://tinypng.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/tinypng_500w.jpg`,

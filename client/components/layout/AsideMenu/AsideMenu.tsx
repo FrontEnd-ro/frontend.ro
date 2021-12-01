@@ -44,7 +44,7 @@ function AsideMenu({
         </h2>
         {isOpen && (
           <button type="button" onClick={close} className="btn--transparent text-white">
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon icon={faTimes} height={20} />
           </button>
         )}
       </header>

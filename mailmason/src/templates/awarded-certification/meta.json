@@ -1,0 +1,16 @@
+{
+  "Name": "Awarded Certification",
+  "Alias": "awarded-certification",
+  "Subject": "{{#en}} Congratulations! You've successfully completed the {{ ../moduleName }} {{/en}} {{#ro}} Felicitări! Ai completat cu succes {{ ../moduleName }} {{/ro}}",
+  "TemplateType": "Standard",
+  "LayoutTemplate": "basic",
+  "TestRenderModel": {
+    "ro": true,
+    "name": "Teodora",
+    "nextModuleName": "",
+    "nextModuleUrl": "",
+    "moduleName": "Modulul de HTML",
+    "moduleUrl": "https://FrontEnd.ro/lectii",
+    "certificationUrl": "https://frontend.ro"
+  }
+}

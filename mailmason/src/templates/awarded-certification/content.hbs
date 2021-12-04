@@ -1,0 +1,70 @@
+---
+layout: basic/content.hbs
+---
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <h1 class="text-center mb-8">
+          \{{#en}} Congratulations! 👏 \{{/en}}
+          \{{#ro}} Felicitări! 👏 \{{/ro}}
+        </h1>
+        <p>
+          Hey \{{ name }},
+        </p>
+        <p>
+          \{{#en}}
+          I'm Alex from
+          <a href="https://FrontEndCademy.com">FrontEndCademy.com</a>
+          and I'm writing to congratulate you for
+          successfully completing the <a href="\{{../moduleUrl}}">\{{ ../moduleName }}</a>!
+          \{{/en}}
+          \{{#ro}}
+          Sunt Alex de la
+          <a href="https://FrontEnd.ro">FrontEnd.ro</a>
+          și-ți scriu pentru a te felicita că ai
+          completat cu succes <a href="\{{../moduleUrl}}">\{{ ../moduleName }}</a>!
+          \{{/ro}}
+        </p>
+        <p>
+          \{{#en}}
+          For each completed module you get a <span class="text-bold">certification</span> proving that you
+          wrote real code, production ready and validated by experienced developers. <br />
+          <a class="text-bold" href="\{{ ../certificationUrl }}">
+            You can access it here, or from your application profile.
+          </a>
+          \{{/en}}
+          \{{#ro}}
+          Pentru fiecare modul finalizat primești o <span class="text-bold">certificare</span> care dovedește 
+          că ai reușit să scrii cod real, gata de producție și validat de developeri cu experiență. <br />
+          <a class="text-bold" href="\{{ ../certificationUrl }}">
+            O poți accesa aici, sau de pe profilul tău din aplicație.
+          </a>
+          \{{/ro}}
+        </p>
+        </p>
+        <p>
+          \{{#en}}
+          Have a nice day and congratulations again, <br> Alex
+          \{{/en}}
+          \{{#ro}}
+          O zi faină și felicitări încă o dată, <br> Alex
+          \{{/ro}}
+        </p>
+        \{{#nextModuleName}}
+        \{{#../nextModuleUrl}}
+        <p class="font-light">
+          \{{#../../en}}
+          PS: now that you've finished the \{{ ../../../moduleName }}, how about continuing with the
+          \{{/../../en}}
+          \{{#../../ro}}
+          PS: acum că ai terminat \{{ ../../../moduleName }}, nu ai vrea să continui cu
+          \{{/../../ro}}
+          <a href="\{{ ../../nextModuleUrl }}">\{{ ../../nextModuleName }}</a>?
+        </p>
+        \{{/../nextModuleUrl}}
+        \{{/nextModuleName}}
+      </td>
+    </tr>
+  </tbody>
+</table>

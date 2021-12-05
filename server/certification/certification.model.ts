@@ -65,21 +65,42 @@ async function createCertification(userId: string, module: CertificationModule, 
     return;
   }
 
-  // Step 2: generate OG Image and PDF via the Lambda Function
-  const lambda = new LambdaClient({});
-
   // TODO: extract this outside this function
   // into a more generic way (per environment)
   const origin = process.env.APP_ENV === 'production'
     ? 'https://frontend.ro'
     : 'https://frontend-ro-dev.herokuapp.com';
+
+  // Step 2: generate assets
+  await refreshCertificationAssets(
+    certification.id,
+    `${origin}/certificari/${certification.id}`
+  );
+}
+
+/**
+ * Refresh the generated assets for each certification:
+ * - PDF Diploma
+ * - JPG OG Image
+ */
+async function refreshCertificationAssets(certificationId: string, certificationUrl: string) {
+  const certification = await Certification.findById(certificationId);
+
+  if (certification === null) {
+    console.error(`[refreshCertificationAssets] ceritification with id='${certificationId}' doesn't exist`);
+    return null;
+  }
+
+  const lambda = new LambdaClient({});
+  // TODO: extract this outside this function
+  // into a more generic way (per environment)
   const FunctionName = process.env.APP_ENV === 'production'
     ? 'diploma-screenshot'
     : 'diploma-test';
 
   const payload = {
-    certificationId: certification.id,
-    url: `${origin}/certificari/${certification.id}`,
+    certificationId,
+    url: certificationUrl,
   }
   const invokeCommand = new InvokeCommand({
     FunctionName,
@@ -112,7 +133,8 @@ async function createCertification(userId: string, module: CertificationModule, 
 
   await certification.save();
 
-  console.log("createCertification: done ✔️");
+  console.log("[refreshCertificationAssets] done ✔️");
+  return certification;
 }
 
-export { Certification, createCertification, sanitizeCertification };
+export { Certification, createCertification, sanitizeCertification, refreshCertificationAssets };

@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install deps
-        run: npm install
+        run: yarn
       - name: Upload to S3
         env:
           BASE_S3_URI: s3://frontend.ro

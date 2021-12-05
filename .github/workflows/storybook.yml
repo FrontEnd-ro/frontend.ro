@@ -10,8 +10,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install and Build
         run: |
-          npm install
-          npm run build-storybook
+          yarn
+          yarn run build-storybook
       - uses: "finnp/create-file-action@master"
         env:
           FILE_NAME: "storybook-static/CNAME"

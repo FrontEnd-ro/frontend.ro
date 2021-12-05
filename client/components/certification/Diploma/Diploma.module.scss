@@ -6,15 +6,6 @@
   border: 0.25em solid color(blue);
   box-shadow: 0 0 15px color(black);
 
-  time {
-    top: 0;
-    right: 0;
-    width: 100%;
-    padding: 0.5em;
-    text-align: right;
-    font-size: 1.25em;
-  }
-
   footer {
     width: 80%;
     margin: 5em auto 0 auto;
@@ -22,8 +13,16 @@
   }
 }
 
+.meta {
+  top: 0;
+  right: 0;
+  width: 100%;
+  padding: 0.5em 2em;
+  font-size: 1.25em;
+}
+
 .main {
-  margin: 0 1em;
+  margin: 0 0.5em;
   font-size: 2em;
 }
 
@@ -64,10 +63,11 @@
 }
 
 @mixin diploma-medium {
-  time {
+  .meta {
     padding: 0;
     position: static;
     text-align: center;
+    flex-direction: column;
   }
 
   footer {

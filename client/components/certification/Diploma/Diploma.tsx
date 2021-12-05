@@ -40,9 +40,14 @@ const Diploma = ({
     // the `diploma-screenshot` Lambda Function
     // https://github.com/FrontEnd-ro/frontend.ro/issues/449
     <section data-diploma className={`${styles.Diploma} ${styles[`Diploma-${variant}`]} relative`}>
-      <time className="absolute d-block mb-4" dateTime={format(certification.date.getTime(), 'yyyy-MM-dd')}>
-        {formatDate(certification.date)}
-      </time>
+      <div className={`${styles.meta} absolute d-flex justify-content-between align-items-center mb-4`}>
+        <a href="https://FrontEnd.ro">
+          FrontEnd.ro
+        </a>
+        <time dateTime={format(certification.date.getTime(), 'yyyy-MM-dd')}>
+          {formatDate(certification.date)}
+        </time>
+      </div>
       <div className={`${styles.main} text-center`}>
         <a
           href={`/${student.username}`}

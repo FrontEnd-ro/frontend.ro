@@ -170,13 +170,19 @@ async function uploadToS3(s3: S3Client, key: string, data: Buffer) {
   };
 
   try {
-    await s3.send(new PutObjectCommand({
+    const resp = await s3.send(new PutObjectCommand({
       ...baseUploadParams,
       Body: data,
       Key: key,
     }));
-    console.log('✔️ Successfully uploaded to S3:', key);
-    return `${process.env.CLOUDFRONT_UPLOAD}/${key}`;
+    console.log('✔️ Successfully uploaded to S3:', key, resp);
+
+    const cloudfrontUrl = `${process.env.CLOUDFRONT_UPLOAD}/${key}`;
+    if (resp.VersionId) {
+      return `${cloudfrontUrl}?versionId=${resp.VersionId}`;
+    }
+    console.warn('[uploadToS3] expected VersionId to be present on the upload response. Is the bucket misconfigured?', resp);
+    return cloudfrontUrl;
   } catch (err) {
     console.error('❌ Got while trying to upload PDF', err);
     return null;

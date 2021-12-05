@@ -6,8 +6,10 @@ FROM public.ecr.aws/lambda/nodejs:14
 # Function file is named "index.js", and there is a package.json file in the app directory 
 COPY index.js package.json  ${LAMBDA_TASK_ROOT}
 
+RUN npm install -g yarn
+
 # Install NPM dependencies for function
-RUN npm install
+RUN yarn
 
 # Set the CMD to your handler
 CMD [ "index.handler" ] 

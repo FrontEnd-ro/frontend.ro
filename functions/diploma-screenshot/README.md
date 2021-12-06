@@ -1,6 +1,6 @@
 # diploma-screenshot
 
-This documents just the specific features of the `diploma-screenshot` function. If you wanna find out how to provision and deploy function, read `functions/README.md`.
+This documents just the specific features of the `diploma-screenshot` function. If you wanna find out how to provision and deploy function, read `functions/README.md` or run `yarn deploy` with the correct arguments.
 
 ## About
 

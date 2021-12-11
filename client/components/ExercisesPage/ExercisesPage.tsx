@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import Link from 'next/link';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { Exercise } from '~/redux/user/types';
-import { getLessonById } from '~/services/Constants';
+import { LESSONS } from '~/services/Constants';
 import ExerciseService from '~/services/Exercise.service';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import ExercisePreview from '../ExercisePreview';
@@ -36,8 +36,9 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
     }
   }, []);
 
-  // merge submission & exercise data to show
-  // ExercisePreview component together with submitted/preview data
+  // Merge submissions & exercise data to show
+  // the <ExercisePreview> component complete with
+  // user context (ie: exercise status, no of feedbacks, etc)
   const mergedData = {};
   if (submissions && lessonExercises) {
     lessonExercises.forEach((ex) => {
@@ -100,32 +101,34 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
         </Link>
       </p>
       {(!lessonExercises || !submissions) && (<Spinner showText text="Încărcăm exercițiile" />)}
-      {Object.keys(mergedData).map((lesson) => (
-        <section className={styles['lesson-section']}>
-          <h2>
-            <span>
-              {getLessonById(lesson).type}
-            </span>
-            {getLessonById(lesson).title}
-          </h2>
-          <div className={styles['exercises-wrapper']}>
-            {mergedData[lesson].map((submission) => (
-              <ExercisePreview
-                key={submission._id}
-                exercise={submission.exercise}
-                href={`rezolva/${submission.exercise._id}`}
-                viewMode="STUDENT"
-                feedbackCount={submission.feedbacks.filter((f) => f.type === 'improvement').length}
-                isApproved={submission.status === SubmissionStatus.DONE}
-                readOnly={[
-                  SubmissionStatus.AWAITING_REVIEW,
-                  SubmissionStatus.DONE,
-                ].includes(submission.status)}
-              />
-            ))}
-          </div>
-        </section>
-      ))}
+      {LESSONS
+        .filter((lesson) => mergedData.hasOwnProperty(lesson.id))
+        .map((lesson) => (
+          <section className={styles['lesson-section']}>
+            <h2>
+              <span>
+                {lesson.type}
+              </span>
+              {lesson.title}
+            </h2>
+            <div className={styles['exercises-wrapper']}>
+              {mergedData[lesson.id].map((submission) => (
+                <ExercisePreview
+                  key={submission._id}
+                  exercise={submission.exercise}
+                  href={`rezolva/${submission.exercise._id}`}
+                  viewMode="STUDENT"
+                  feedbackCount={submission.feedbacks.filter((f) => f.type === 'improvement').length}
+                  isApproved={submission.status === SubmissionStatus.DONE}
+                  readOnly={[
+                    SubmissionStatus.AWAITING_REVIEW,
+                    SubmissionStatus.DONE,
+                  ].includes(submission.status)}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
     </PageContainer>
   );
 }

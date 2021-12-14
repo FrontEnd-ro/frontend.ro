@@ -1,0 +1,39 @@
+@import '../../../styles/variables';
+
+.ProgressBar {
+  --size: 0.75em;
+
+  display: flex;
+  border-radius: 3px;
+  background: color(silver);
+}
+
+.ProgressItem {
+  display: inline-block;
+
+  &:first-of-type {
+    border-radius: inherit;
+  }
+}
+
+.ProgressBar-horizontal {
+  height: var(--size);
+
+  .ProgressItem {
+    height: 100%;
+  }
+}
+
+.ProgressBar-vertical {
+  height: 100%;
+  width: var(--size);
+  flex-direction: column;
+
+  .ProgressItem {
+    width: 100%;
+  }
+}
+
+.ProgressBar-full .ProgressItem:last-of-type{
+  border-radius: inherit;
+}

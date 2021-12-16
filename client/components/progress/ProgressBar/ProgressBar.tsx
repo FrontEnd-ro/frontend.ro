@@ -1,19 +1,16 @@
 import React from 'react';
+import { ProgressItemI } from '../types';
+
 import styles from './ProgressBar.module.scss';
 
 interface Props {
   count: number;
-  items: ProgressItem[];
+  items: ProgressItemI[];
   className?: string;
   direction?: Direction;
 }
 
 type Direction = 'horizontal' | 'vertical';
-
-export interface ProgressItem {
-  count: number;
-  color: string;
-}
 
 const ProgressBar = ({
   direction = 'horizontal', count, items, className = '',

@@ -17,7 +17,8 @@
     "baseUrl": "./client",
     "paths": {
       "~/*": ["./*"]
-    }
+    },
+    "incremental": true
   },
   "exclude": ["node_modules", "server", "functions"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

@@ -1,0 +1,42 @@
+.Collapser {
+  --size: 20em;
+  --fade-size: 6em;
+
+  &::after {
+    content: '';
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    height: var(--fade-size);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
+
+  .content {
+    overflow: hidden;
+    max-height: var(--size);
+  }
+
+  .toggler {
+    top: 100%;
+    left: 50%;
+    z-index: 1;
+    position: absolute;
+    transform: translate(-50%, 0);
+  }
+
+  &.is-open {
+    &::after {
+      content: none;
+    }
+
+    .content {
+      max-width: initial;
+      max-height: initial;
+    }
+  }
+}

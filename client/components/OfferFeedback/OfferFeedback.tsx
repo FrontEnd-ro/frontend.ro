@@ -23,6 +23,8 @@ import { getLessonById } from '~/services/Constants';
 import AsideNav from '../SolveExercise/AsideNav/AsideNav';
 import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
 import RoutingUtils from '~/services/utils/Routing.utils';
+import { Checkbox } from '~/components/Form';
+import DiffEditorLazy from '../Editor/DiffEditor/DiffEditor.lazy';
 
 interface Props {
   username: string;
@@ -51,6 +53,9 @@ function OfferFeedback({
     : '';
   const canOfferFeedback = submission && submission.status === SubmissionStatus.AWAITING_REVIEW;
   const activeVersionIndex = versions.findIndex((v) => v._id === RoutingUtils.getQueryString(router, 'version'));
+
+  // Between 'Current cone <-> exercise starting code'
+  const [showDiff, setShowDiff] = useState(false);
 
   const folderStructure = React.useMemo(() => {
     if (!submission) {
@@ -187,23 +192,39 @@ function OfferFeedback({
 
         </time>
         <Markdown markdownString={submission.exercise.body} className={styles.bodyMarkdown} />
-        <CompleteEditorLazy
-          readOnly
-          askTooltip
-          // If we can offer feedback then pass the newly
-          // created empty array of feedbacks which will be
-          // populated on every new feedback given.
-          // If however we cannot offer feedback, this means
-          // the exercise is still IN_PROGRESS or DONE. In this
-          // case we still want to see what feedbacks are still unresolved.
-          feedbacks={canOfferFeedback ? feedbacks : submission.feedbacks}
-          key={exerciseId}
-          ref={solutionRef}
-          folderStructure={folderStructure}
-          onFeedbackAdded={(f) => setFeedbacks(f.getAll())}
-        />
+        {!showDiff ? (
+          <CompleteEditorLazy
+            readOnly
+            askTooltip
+            // If we can offer feedback then pass the newly
+            // created empty array of feedbacks which will be
+            // populated on every new feedback given.
+            // If however we cannot offer feedback, this means
+            // the exercise is still IN_PROGRESS or DONE. In this
+            // case we still want to see what feedbacks are still unresolved.
+            feedbacks={canOfferFeedback ? feedbacks : submission.feedbacks}
+            key={exerciseId}
+            ref={solutionRef}
+            folderStructure={folderStructure}
+            onFeedbackAdded={(f) => setFeedbacks(f.getAll())}
+          />
+        ) : (
+          <DiffEditorLazy
+            modifiedFolderStructure={folderStructure}
+            originalFolderStructure={JSON.parse(submission.exercise.example)}
+          />
+        )}
+
         {canOfferFeedback && (
-          <div className="text-right my-5">
+          <div className="my-5 d-flex justify-content-between align-items-centers">
+            <Checkbox
+              checked={showDiff}
+              onChange={() => { setShowDiff(!showDiff); }}
+            >
+              Vezi schimbările față de
+              <br />
+              codul de început al exercițiului
+            </Checkbox>
             <Button
               loading={isSendingFeedback}
               variant={isCorrect ? 'success' : 'blue'}

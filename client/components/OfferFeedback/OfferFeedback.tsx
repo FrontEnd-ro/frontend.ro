@@ -11,9 +11,8 @@ import { Submission } from '~/redux/exercise-submissions/types';
 import { timeAgo } from '~/services/Utils';
 import Markdown from '../Markdown';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
-import { FeedbackType, SubmissionVersionI } from '~/../shared/types/submission.types';
+import { FeedbackType, SubmissionVersionI, SubmissionStatus } from '~/../shared/types/submission.types';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
-import { SubmissionStatus } from '~/../shared/types/submission.types';
 import { removeSubmission } from '~/redux/exercise-submissions/exercise-submissions.actions';
 
 import styles from './OfferFeedback.module.scss';

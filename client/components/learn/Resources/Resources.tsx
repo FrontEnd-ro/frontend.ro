@@ -13,7 +13,7 @@ function Resources() {
   }, {
     id: ResourceCategory.IMAGES_VIDEOS,
     title: 'Imagini și Video-uri',
-    description: 'Vin cu o licență deschisă deci let poți folosi în orice proiect.',
+    description: 'Vin cu o licență deschisă deci le poți folosi în orice proiect.',
   },
   {
     id: ResourceCategory.VECTOR,

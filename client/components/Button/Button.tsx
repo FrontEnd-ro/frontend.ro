@@ -6,7 +6,7 @@ export type Variant = 'light' | 'blue' | 'success' | 'danger' | 'transparent' |
   'yellow' | 'grey' | 'link';
 interface Props {
   loading?: boolean;
-  variant?:Variant;
+  variant?: Variant;
   // We define here the form property because
   // even if it's a valid attribute on buttons, React or TS complain about it.
   form?: string;

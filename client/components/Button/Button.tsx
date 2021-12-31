@@ -36,16 +36,18 @@ const Button = React.forwardRef<
     forwardRef,
   ) => {
     let updatedClassName = className || '';
+
     if (loading) {
       updatedClassName += ' btn--loading';
-    } else if (withIcon) {
+    }
+    if (withIcon) {
       updatedClassName += ' btn--with-icon';
-    } else if (outline) {
+    }
+    if (outline) {
       updatedClassName += ' btn--outline';
-    } else if (bouncy) {
+    }
+    if (bouncy) {
       updatedClassName += ' btn--bouncy';
-    } else {
-      updatedClassName += '';
     }
 
     return (

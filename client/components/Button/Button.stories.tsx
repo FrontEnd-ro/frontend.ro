@@ -91,3 +91,18 @@ export const Link = () => (
     <Button variant="link" outline> Outline Link </Button>
   </>
 );
+
+const gradient = {
+  angle: 90,
+  colors: ['var(--green)', 'var(--red)']
+}
+export const Gradient = () => (
+  <>
+    <Button variant="gradient" className="mr-2" gradient={gradient}> Gradient </Button>
+    <Button variant="gradient" className="mr-2" disabled gradient={gradient}> Disabled Gradient </Button>
+    <Button variant="gradient" className="mr-2" loading gradient={gradient}> Loading Gradient </Button>
+    <Button variant="gradient" className="mr-2" bouncy gradient={gradient}> Bouncy Gradient </Button>
+    <Button variant="gradient" className="mr-2" withIcon icon={faShare} gradient={gradient}> Gradient with icon </Button>
+    <Button variant="gradient" outline gradient={gradient}> Outline Gradient </Button>
+  </>
+);

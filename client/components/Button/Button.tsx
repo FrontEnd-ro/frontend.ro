@@ -3,7 +3,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type Variant = 'light' | 'blue' | 'success' | 'danger' | 'transparent' |
-  'yellow' | 'grey' | 'link';
+  'yellow' | 'grey' | 'link' | 'gradient';
 interface Props {
   loading?: boolean;
   variant?: Variant;
@@ -14,6 +14,10 @@ interface Props {
   icon?: IconProp;
   outline?: boolean;
   bouncy?: boolean;
+  gradient?: {
+    angle: number,
+    colors: string[],
+  };
 }
 export type Ref = HTMLButtonElement;
 const Button = React.forwardRef<
@@ -31,10 +35,17 @@ const Button = React.forwardRef<
       withIcon = false,
       outline = false,
       bouncy = false,
+      gradient,
+      style = {},
       ...props
     }: PropsWithChildren<Props> & React.ButtonHTMLAttributes<HTMLButtonElement>,
     forwardRef,
   ) => {
+    if (variant === 'gradient' && (gradient === undefined || gradient.colors === undefined || gradient.colors.length === 0)) {
+      console.error('<Button> with `gradient` variant expected to have an array of `gradient.colors`. Defaulting to primary.');
+      variant = 'blue';
+    }
+
     let updatedClassName = className || '';
 
     if (loading) {
@@ -50,6 +61,13 @@ const Button = React.forwardRef<
       updatedClassName += ' btn--bouncy';
     }
 
+    const inlineCssStyles = {
+      ...style
+    }
+    if (variant == 'gradient') {
+      inlineCssStyles.backgroundImage = `linear-gradient(${gradient.angle ?? 90}deg, ${gradient.colors.map((color, index, arr) => `${color} ${index * 100 / arr.length}%`).join(',')})`;
+    }
+
     return (
       <button
         // eslint-disable-next-line react/button-has-type
@@ -61,6 +79,7 @@ const Button = React.forwardRef<
         `}
         disabled={loading || disabled}
         ref={forwardRef}
+        style={inlineCssStyles}
         {...props}
       >
         {withIcon && (

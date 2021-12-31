@@ -42,7 +42,7 @@ export default function MyApp({ Component, pageProps }: any) {
  * so we found a little "hack" by checking the `req` parameter.
  */
 
-MyApp.getInitialProps = async ({ ctx, req }) => {
+MyApp.getInitialProps = async ({ ctx }) => {
   const pageProps = {
     _serverUser: null,
   };

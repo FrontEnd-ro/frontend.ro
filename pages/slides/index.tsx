@@ -21,7 +21,7 @@ function Slides({ presentations }: {presentations: PresentationI[]}) {
   );
 }
 
-export async function getServerSideProps({ req, res, params }) {
+export async function getServerSideProps({ req }) {
   const { default: fetch } = await import('node-fetch');
   const { default: nextAbsoluteUrl } = await import('next-absolute-url');
 

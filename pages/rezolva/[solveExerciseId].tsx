@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import SEOTags from '~/components/SEOTags';
 import SolveExercise from '~/components/SolveExercise';
 
-function SolveExercisePage(...props) {
+function SolveExercisePage() {
   const router = useRouter();
   const { solveExerciseId } = router.query;
 

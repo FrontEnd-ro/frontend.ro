@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { default: appConfig } = require('./config');
 const { extractDbErrorMessage } = require('./database');
 
 const PAGE_SIZE = 25;
@@ -12,7 +13,7 @@ const HOUR_IN_MILLISECONDS = 1000 * 60 * 60;
 const COOKIE_CONFIG = {
   maxAge: (HOUR_IN_MILLISECONDS * 24) * AUTH_EXPIRATION,
   // In production only allow this cookie with HTTPS Only 👇
-  secure: process.env.APP_ENV === 'production' ? true : false
+  secure: appConfig.APP.env === 'production' ? true : false
 };
 
 class ServerError extends Error {

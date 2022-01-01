@@ -1,0 +1,10 @@
+{
+  "APP": {
+    "port": 3300,
+    "env": "development",
+    "endpoint": "https://frontend-ro-dev.herokuapp.com/api"
+  },
+  "CDN": {
+    "user_generated": "https://d3g5wqcc138su1.cloudfront.net"
+  }
+}

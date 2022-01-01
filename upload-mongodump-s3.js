@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { spawn } = require('child_process');
-require('dotenv').config();
+const { default: appConfig } = require('./server/config');
 
 // https://docs.aws.amazon.com/cli/latest/reference/s3/index.html
 spawn('aws', [
   's3',
   'cp',
-  process.env.MONGODB_DUMP_DIR,
-  `${process.env.BASE_S3_URI}/${process.env.MONGODB_DUMP_DIR}`,
+  appConfig.DB.dump_dir,
+  `${appConfig.AWS.s3}/${appConfig.DB.dump_dir}`,
   '--recursive',
 ], { stdio: 'inherit' });

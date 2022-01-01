@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const { ServerError } = require('../server/ServerUtils');
 const { UserRole } = require('./types/user.types');
+const { default: appConfig } = require('../server/config');
 
 const UsersSchema = new mongoose.Schema({
   avatar: { type: String, required: true },
@@ -28,7 +29,7 @@ const User = mongoose.models.User || mongoose.model('User', UsersSchema);
 
 async function ping(token) {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedInfo) => {
+    jwt.verify(token, appConfig.AUTH.secret, async (err, decodedInfo) => {
       if (err) {
         console.error('UserSharedModel.ping', err);
         reject(new ServerError(401, 'Not authenticated'));

@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const { PrivateMiddleware } = require('../Middlewares');
 const { ServerError } = require('../ServerUtils');
 const UserModel = require('../user/user.model');
+const { default: appConfig } = require('../config');
 
 const githubRouter = express.Router();
 
@@ -52,8 +53,8 @@ githubRouter.get("/callback", [PrivateMiddleware, function gitHubAuth(req, res) 
       Accept: "application/json"
     },
     body: JSON.stringify({
-      client_id: process.env.GITHUB_CLIENT_ID,
-      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      client_id: appConfig.GITHUB.id,
+      client_secret: appConfig.GITHUB.secret,
       code
     })
   })

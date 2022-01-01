@@ -1,0 +1,10 @@
+{
+  "APP": {
+    "port": 3300,
+    "env": "development",
+    "endpoint": "http://localhost:3300/api"
+  },
+  "CDN": {
+    "user_generated": "https://d3g5wqcc138su1.cloudfront.net"
+  }
+}

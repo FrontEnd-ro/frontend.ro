@@ -27,11 +27,10 @@ function PresentationPage({ presentation }: { presentation: PresentationI }) {
 
 export async function getServerSideProps({ req, res, params }) {
   const { default: fetch } = await import('node-fetch');
-  const { default: nextAbsoluteUrl } = await import('next-absolute-url');
+  const { default: appConfig } = await import('../../server/config');
 
   try {
-    const { origin } = nextAbsoluteUrl(req);
-    const resp = await fetch(`${origin}${process.env.ENDPOINT}/presentations/${params.presentationId}`);
+    const resp = await fetch(`${appConfig.APP.endpoint}/presentations/${params.presentationId}`);
     const presentation = await resp.json();
 
     if (!resp.ok) {

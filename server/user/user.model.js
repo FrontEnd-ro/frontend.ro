@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const SharedUserModel = require('../../shared/user.shared-model');
 const { AUTH_EXPIRATION, ServerError, validateAgainstSchemaProps, validateObjectId, MAX_USERNAME_LENGTH } = require('../ServerUtils');
+const { default: appConfig } = require('../config');
 
 const { UsersSchema, User } = SharedUserModel
 
@@ -80,10 +81,10 @@ class UserModel {
   static generateJwtForUser(_id) {
     return jwt.sign(
       { _id },
-      process.env.TOKEN_SECRET,
+      appConfig.AUTH.secret,
       {
         expiresIn: `${AUTH_EXPIRATION}d`,
-        algorithm: process.env.TOKEN_ALGORITHM,
+        algorithm: appConfig.AUTH.algorithm,
       },
     );
   }

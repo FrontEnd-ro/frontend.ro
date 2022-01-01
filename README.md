@@ -10,44 +10,47 @@
 ## Install & Run 
 
 1. Install all the dependencies by running `yarn` in the root folder.
-2. Create a `.env` file in root and add the following content
+2. Create a `.env` file in root and fill in the following content
 
+```ini
+; Environment based config
+NODE_CONFIG_ENV=local-client
+
+; Custom config dirs
+NODE_CONFIG_DIR=server/config
+
+; Used only when developing locally
+NODE_ENV=development
 ```
-PORT=3300
 
-# App environment
-APP_ENV=development
-
-# Aws
-CLOUDFRONT_PUBLIC=https://d3tycb976jpudc.cloudfront.net
-
-ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
-```
-
-3. Run `yarn dev:client`. This will run the FrontEnd locally and connect you to the development server.
+3. Run `yarn dev:client`. This will run only the FrontEnd locally and connect you to the development server.
 4. If you want to do server-side work you're gonna need to run the server and MongoDB on your local machine as well.  For this to happen you're gonna need to add the following variables inside `.env`:
 
-```
-# App environment
-APP_ENV=development
+```ini
+; Environment based config
+NODE_CONFIG_ENV=local-both
 
-# Auth
-SALT_ROUNDS=
-TOKEN_ALGORITHM=
+; Custom config dirs
+NODE_CONFIG_DIR=server/config
+
+; AUTH
 TOKEN_SECRET=
+
+; DB
 DB_CONNECT=
 
-# Aws
-AWS_REGION=
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
+; AWS
 AWS_BUCKET=
-CLOUDFRONT_UPLOAD=
 
-# Postmark
+; EMAIL
 EMAIL_TOKEN=
 
-ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
+; GITHUB
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+
+; Used only when developing locally
+NODE_ENV=development
 ```
 
 Then run the local server using `yarn dev`. Get in touch with us for more details.

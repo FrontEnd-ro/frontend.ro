@@ -41,6 +41,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://validator.w3.org/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/w3c-validator_500w.png`,
     },
+    {
+      title: 'Patterns Dev',
+      url: 'https://www.patterns.dev/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/patterns.dev.png`,
+    },
   ],
   [ResourceCategory.IMAGES_VIDEOS]: [
     {

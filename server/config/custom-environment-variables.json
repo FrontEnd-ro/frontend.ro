@@ -1,0 +1,21 @@
+{
+  "AUTH": {
+    "secret": "TOKEN_SECRET"
+  },
+  "APP": {
+    "port": "PORT"
+  },
+  "DB": {
+    "connect": "DB_CONNECT"
+  },
+  "AWS": {
+    "bucket": "AWS_BUCKET"
+  },
+  "EMAIL": {
+    "token": "EMAIL_TOKEN"
+  },
+  "GITHUB": {
+    "id": "GITHUB_CLIENT_ID",
+    "secret": "GITHUB_CLIENT_SECRET"
+  }
+}

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { spawn } = require('child_process');
-require('dotenv').config();
+const { default: appConfig } = require('./config');
 
 /**
  * $ mongodump <options> <connection-string>
@@ -8,4 +8,4 @@ require('dotenv').config();
  * For complete docs have a look at
  * https://docs.mongodb.com/database-tools/mongodump/
  */
-spawn('mongodump', [`-o=${process.env.MONGODB_DUMP_DIR}`, process.env.DB_CONNECT], { stdio: 'inherit' });
+spawn('mongodump', [`-o=${appConfig.DB.dump_dir}`, appConfig.DB.connect], { stdio: 'inherit' });

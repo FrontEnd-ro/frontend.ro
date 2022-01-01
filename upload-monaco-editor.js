@@ -4,9 +4,10 @@
 // to understand why we need this GitHub Action.
 const { spawn } = require('child_process');
 const packageJson = require('./package.json');
+const { default: appConfig } = require('./config');
 
 const monacoVersion = packageJson.dependencies['monaco-editor'];
-const monacoS3Path = `${process.env.BASE_S3_URI}/lib/monaco-editor/${monacoVersion}`;
+const monacoS3Path = `${appConfig.AWS.s3}/lib/monaco-editor/${monacoVersion}`;
 
 // https://docs.aws.amazon.com/cli/latest/reference/s3/index.html
 const verifyAlreadyUploaded = () => {

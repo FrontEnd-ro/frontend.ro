@@ -53,27 +53,29 @@ MyApp.getInitialProps = async ({ ctx }) => {
     return { pageProps };
   }
 
+  const { token } = ctx.req.cookies;
+  if (!token) {
+    return { pageProps };
+  }
+
   try {
-    const [databaseImport, userModelImport] = await Promise.all([
-      import('../server/database'),
-      import('../shared/user.shared-model'),
-    ]);
+    const { default: fetch } = await import('node-fetch');
 
-    const { connectToDb } = databaseImport;
-    const UserModel = userModelImport.default;
-    const { token } = ctx.req.cookies;
-
-    if (!token) {
+    // Accessing the DB code directly fails (cannot find module 'fs').
+    // It happened after adding the `node-config` package. Thus, to fix
+    // it we refactored this code to use `fetch`.
+    const resp = await fetch(`${process.env.ENDPOINT}/auth/ping`, {
+      headers: {
+        cookie: `token=${token}`,
+      },
+    });
+    if (!resp.ok) {
       return { pageProps };
     }
 
-    connectToDb();
+    const user = await resp.json();
 
-    const user = await UserModel.ping(token);
-    const sanitizedUser = UserModel.sanitize(user);
-
-    sanitizedUser.lastLogin = sanitizedUser.lastLogin.toString();
-    pageProps._serverUser = sanitizedUser;
+    pageProps._serverUser = user;
   } catch (err) {
     console.error('[getServerSideProps][pingUser]: ', err);
   }

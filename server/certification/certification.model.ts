@@ -6,6 +6,7 @@ import SharedExerciseModel from '../../shared/exercise.shared-model';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
 import { CertificationI, CertificationModule, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
+import appConfig from '../config';
 
 const ModuleSchema = new mongoose.Schema<CertificationModule>({
   name: { type: String, required: true },
@@ -65,12 +66,6 @@ async function createCertification(userId: string, module: CertificationModule, 
     return;
   }
 
-  // TODO: extract this outside this function
-  // into a more generic way (per environment)
-  const origin = process.env.APP_ENV === 'production'
-    ? 'https://frontend.ro'
-    : 'https://frontend-ro-dev.herokuapp.com';
-
   // Step 2: generate assets
   await refreshCertificationAssets(
     certification.id,
@@ -94,7 +89,7 @@ async function refreshCertificationAssets(certificationId: string, certification
   const lambda = new LambdaClient({});
   // TODO: extract this outside this function
   // into a more generic way (per environment)
-  const FunctionName = process.env.APP_ENV === 'production'
+  const FunctionName = appConfig.APP.env === 'production'
     ? 'diploma-screenshot'
     : 'diploma-test';
 

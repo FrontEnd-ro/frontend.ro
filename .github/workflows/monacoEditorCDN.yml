@@ -15,5 +15,5 @@ jobs:
           BASE_S3_URI: s3://frontend.ro
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: node upload-monaco-editor.js
+        run: yarn upload-monaco-editor-s3
           

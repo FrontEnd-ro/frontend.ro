@@ -2,15 +2,17 @@ const next = require('next')
 const cors = require('cors');
 const express = require('express');
 
-const port = process.env.PORT || 3300;
+import appConfig from "./config";
+
+const port = appConfig.APP.port || appConfig.APP.default_port;
 const app = express();
-const nextApp = next({ dev: process.env.NODE_ENV !== 'production' })
+const nextApp = next({ dev: true })
 const nextHandler = nextApp.getRequestHandler()
 
 app.use(
   cors({
     credentials: true,
-    origin: process.env.NODE_ENV === 'production'
+    origin: appConfig.APP.env === 'production'
       ? 'https://frontend.ro'
       : `http://localhost:${port}`
   })

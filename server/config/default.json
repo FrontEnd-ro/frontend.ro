@@ -1,0 +1,25 @@
+{
+  "AUTH": {
+    "rounds": 10,
+    "algorithm": "HS512"
+  },
+  "APP": {
+    "default_port": 3300,
+    "endpoint": "http://localhost:3300/api"
+  },
+  "DB": {
+    "dump_dir": "mongodb_dump"
+  },
+  "CDN": {
+    "static": "https://d3tycb976jpudc.cloudfront.net"
+  },
+  "PASS_RESET_CODE": {
+    "length": 5,
+    "expiration": 20,
+    "offset": 9119
+  },
+  "AWS": {
+    "s3": "s3://frontend.ro",
+    "region": "eu-central-1"
+  }
+}

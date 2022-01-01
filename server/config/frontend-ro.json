@@ -1,0 +1,13 @@
+{
+  "APP": {
+    "env": "production",
+    "endpoint": "https://frontend.ro/api"
+  },
+  "CDN": {
+    "user_generated": "https://d13frb9nho0eif.cloudfront.net"
+  },
+  "PASS_RESET_CODE": {
+    "expiration": 5,
+    "offset": 33121
+  }
+}

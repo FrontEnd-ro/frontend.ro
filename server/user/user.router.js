@@ -9,10 +9,11 @@ const PasswordResetModel = require('../password-reset/password-reset.model');
 const { ServerError, setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } = require('../ServerUtils');
 const { PrivateMiddleware } = require('../Middlewares');
 const { MAX_MEDIA_MB, MAX_MEDIA_BYTES } = require('../../shared/SharedConstants')
+const { default: appConfig } = require('../config');
 
 const userRouter = express.Router();
 
-const s3 = new S3Client({ region: process.env.AWS_REGION });
+const s3 = new S3Client({ region: appConfig.AWS.region });
 const upload = multer({ storage: multer.memoryStorage() });
 
 userRouter.get('/check-username/:username', async function checkUsername(req, res) {
@@ -121,7 +122,7 @@ userRouter.post('/register', async function register(req, res) {
     return;
   }
 
-  const hashedPassword = await bcrypt.hash(password, +process.env.SALT_ROUNDS);
+  const hashedPassword = await bcrypt.hash(password, +appConfig.AUTH.rounds);
 
   const user = await UserModel.create({
     email,
@@ -260,7 +261,7 @@ userRouter.post('/password', [
       return;
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, +process.env.SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(newPassword, +appConfig.AUTH.rounds);
 
     try {
       const updatedUser = await updateUserFields({ _id: user._id, username: user.username, password }, {
@@ -305,7 +306,7 @@ userRouter.post('/password/reset', async function resetPassword(req, res) {
       return
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, +process.env.SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(newPassword, +appConfig.AUTH.rounds);
     const updatedUser = await UserModel.update(user._id, { password: hashedPassword });
 
     // Create and set JTW as cookie
@@ -341,7 +342,7 @@ userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(req, res) 
     const Key = `${userId}/${name}`;
 
     const uploadParams = {
-      Bucket: process.env.AWS_BUCKET,
+      Bucket: appConfig.AWS.bucket,
       Key,
       Body: file.buffer,
       ACL: 'public-read',
@@ -350,7 +351,7 @@ userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(req, res) 
     try {
       await s3.send(new PutObjectCommand(uploadParams));
       const newUser = await UserModel.update(userId, {
-        avatar: `${process.env.CLOUDFRONT_UPLOAD}/${Key}`
+        avatar: `${appConfig.CDN.user_generated}/${Key}`
       });
 
       res.json(UserModel.sanitize(newUser));

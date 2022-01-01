@@ -1,6 +1,7 @@
 import { ServerClient } from 'postmark';
+import appConfig from './config';
 
-const client = new ServerClient(process.env.EMAIL_TOKEN);
+const client = new ServerClient(appConfig.EMAIL.token);
 
 
 /**
@@ -24,7 +25,7 @@ async function sendTemplateWithAlias(
   TemplateModel: Record<string, any>
 ) {
   const options = {
-    To: process.env.APP_ENV === 'production' ? email : 'pava@frontend.ro',
+    To: appConfig.APP.env === 'production' ? email : 'pava@frontend.ro',
     From: 'hello@frontend.ro',
     TemplateAlias,
     TemplateModel,

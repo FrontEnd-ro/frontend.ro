@@ -4,6 +4,7 @@ const { ServerError } = require('./ServerUtils');
 const ExerciseModel = require('./exercise/exercise.model');
 const LessonExerciseModel = require('./lesson-exercise/lesson-exercise.model');
 const { UserRole } = require('../shared/types/user.types');
+const { default: appConfig } = require('./config');
 
 /****************** User Middleware */
 /** 
@@ -18,9 +19,9 @@ function PublicMiddleware(req, res, next) {
   } else {
     jwt.verify(
       authToken,
-      process.env.TOKEN_SECRET,
+      appConfig.AUTH.secret,
       {
-        algorithms: [process.env.TOKEN_ALGORITHM]
+        algorithms: [appConfig.AUTH.algorithm]
       },
       (err, payload) => {
         if (err) {
@@ -49,9 +50,9 @@ function PrivateMiddleware(req, res, next) {
 
   jwt.verify(
     authToken,
-    process.env.TOKEN_SECRET,
+    appConfig.AUTH.secret,
     {
-      algorithms: [process.env.TOKEN_ALGORITHM]
+      algorithms: [appConfig.AUTH.algorithm]
     },
     (err, payload) => {
       if (err) {

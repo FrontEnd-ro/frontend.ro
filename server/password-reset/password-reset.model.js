@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { default: appConfig } = require('../config');
 
 const PasswordResetSchema = new mongoose.Schema({
   expiration: { type: Date, required: true },
@@ -26,12 +27,12 @@ class PasswordResetModel {
     const MINUTE_IN_MILLISECONDS = 1000 * 60;
 
     const code = generateCode(
-      process.env.RESET_CODE_LENGTH,
-      process.env.RESET_CODE_OFFSET
+      appConfig.PASS_RESET_CODE.length,
+      appConfig.PASS_RESET_CODE.offset
     );
 
     const expiration = new Date(
-      Date.now() + process.env.RESET_CODE_EXPIRATION * MINUTE_IN_MILLISECONDS
+      Date.now() + appConfig.PASS_RESET_CODE.expiration * MINUTE_IN_MILLISECONDS
     );
 
     const resetCode = new PasswordReset({

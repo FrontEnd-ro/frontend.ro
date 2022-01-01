@@ -1,6 +1,8 @@
 const multer = require('multer');
 const express = require('express');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { default: appConfig } = require('../config');
+
 
 const ExerciseModel = require('./exercise.model');
 const SubmissionModel = require('../submission/submission.model');
@@ -18,7 +20,7 @@ const UserModel = require('../user/user.model');
 
 const exerciseRouter = express.Router();
 
-const s3 = new S3Client({ region: process.env.AWS_REGION });
+const s3 = new S3Client({ region: appConfig.AWS.region });
 const upload = multer({ storage: multer.memoryStorage() });
 
 exerciseRouter.get('/', [PrivateMiddleware], async function getUserExercises(req, res) {
@@ -88,7 +90,7 @@ exerciseRouter.post('/media', [PrivateMiddleware], function createExercise(req, 
     const Key = `${userId}/${name}`;
 
     const uploadParams = {
-      Bucket: process.env.AWS_BUCKET,
+      Bucket: appConfig.AWS.bucket,
       Key,
       Body: file.buffer,
       ACL: 'public-read',
@@ -98,7 +100,7 @@ exerciseRouter.post('/media', [PrivateMiddleware], function createExercise(req, 
       await s3.send(new PutObjectCommand(uploadParams));
       res.json({
         name,
-        url: `${process.env.CLOUDFRONT_UPLOAD}/${Key}`,
+        url: `${appConfig.CDN.user_generated}/${Key}`,
       });
     } catch (err) {
       console.log('[s3Upload]', err);

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { default: appConfig } = require('./config');
 
 function connectToDb() {
   if (mongoose.connection && mongoose.connection.readyState === 1) {
@@ -6,7 +7,7 @@ function connectToDb() {
     return Promise.resolve(mongoose);
   }
 
-  return mongoose.connect(process.env.DB_CONNECT, {
+  return mongoose.connect(appConfig.DB.connect, {
     maxPoolSize: 1,
   });
 }

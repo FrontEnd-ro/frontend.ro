@@ -30,18 +30,26 @@ userRouter.get('/check-username/:username', async function checkUsername(req, re
 userRouter.get('/ping', async function pingCurrentuser(req, res) {
   const { token } = req.cookies;
 
-  const notAuthenticatedArror = new ServerError(401, 'Not authenticated');
-
   if (!token) {
-    throw notAuthenticatedArror;
+    new ServerError(401, 'Not authenticated').send(res);
+    return;
   }
 
-  const user = await UserModel.ping(token);
+  try {
+    const user = await UserModel.ping(token);
 
-  if (!user) {
-    new ServerError(404, 'User doesn\'t exist any more').send(res);
-  } else {
-    res.json(UserModel.sanitize(user));
+    if (!user) {
+      new ServerError(404, 'User doesn\'t exist any more').send(res);
+    } else {
+      res.json(UserModel.sanitize(user));
+    }
+  } catch (err) {
+    if (err instanceof ServerError) {
+      err.send(res);
+    } else {
+      console.error('userRouter.pingCurrentuser', err);
+      new ServerError(500, 'Oops, something went wrong').send(res);
+    }
   }
 })
 

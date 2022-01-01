@@ -30,6 +30,7 @@ async function ping(token) {
   return new Promise((resolve, reject) => {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedInfo) => {
       if (err) {
+        console.error('UserSharedModel.ping', err);
         reject(new ServerError(401, 'Not authenticated'));
         return;
       }

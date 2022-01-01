@@ -233,6 +233,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/ydkjs_500w.png`,
     },
     {
+      title: 'Patterns Dev',
+      url: 'https://patterns.dev/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/patterns-dev_500w.png`,
+    },
+    {
       title: 'JavaScript Design Patterns',
       url: 'https://addyosmani.com/resources/essentialjsdesignpatterns/book/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/js-design-patterns_500w.jpg`,

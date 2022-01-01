@@ -1,0 +1,14 @@
+@import "../../../../styles/variables";
+
+.Explanation li {
+  &::after {
+    content: "•";
+    margin: 0 1em;
+    color: initial;
+    display: inline-block;
+  }
+
+  &:last-of-type::after {
+    content: none;
+  }
+}

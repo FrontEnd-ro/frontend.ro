@@ -66,6 +66,17 @@ function validateObjectId(_id) {
   }
 }
 
+function parseBearerToken(req) {
+  const bearerHeader = req.headers['authorization'];
+
+  if (bearerHeader) {
+    const bearer = bearerHeader.split(' ');
+    return bearer[1] ?? '';
+  } else {
+    return null;
+  }
+}
+
 module.exports = {
   ServerError,
   PAGE_SIZE,
@@ -76,4 +87,5 @@ module.exports = {
   setTokenCookie,
   validateAgainstSchemaProps,
   validateObjectId,
+  parseBearerToken,
 }

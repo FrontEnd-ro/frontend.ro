@@ -38,7 +38,7 @@ export default function LoginButtons({
         Înregistrează-te
       </Button>
       <div className="text-right mt-4 text-xs">
-        <Button variant="link" type="button" onClick={onResetPassword}>
+        <Button variant="link" type="button" onClick={onResetPassword} className={`${styles['forgot-password']}`}>
           Ai uitat parola?
         </Button>
       </div>

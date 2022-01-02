@@ -14,7 +14,7 @@
 }
 
 .register-mode {
-  button:first-of-type {
+  button:first-of-type:not(.forgot-password) {
     transform: translateY(5em);
   }
 

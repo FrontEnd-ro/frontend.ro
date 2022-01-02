@@ -40,7 +40,7 @@ function sanitizeCertification(certification: Document<any, any, WIPPopulatedCer
  * To be called manually by admins if the automatic
  * certification generation somehow fails.
  */
-async function createCertification(userId: string, module: CertificationModule, moduleType: ExerciseType) {
+async function createCertification(userId: string, module: CertificationModule, moduleType: ExerciseType, certificationPath: string) {
   const certificationData: CertificationI = {
     module,
     user: userId,
@@ -74,7 +74,7 @@ async function createCertification(userId: string, module: CertificationModule, 
   // Step 2: generate assets
   await refreshCertificationAssets(
     certification.id,
-    `${origin}/certificari/${certification.id}`
+    certificationPath
   );
 }
 

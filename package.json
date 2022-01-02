@@ -45,8 +45,8 @@
     }
   ],
   "scripts": {
-    "dev:local": "nodemon server/server.ts --watch server",
-    "dev": "nodemon server/local-server.ts",
+    "dev": "nodemon server/server.ts --watch server",
+    "dev:client": "ts-node server/client-server.ts",
     "prebuild": "rm -rf server-build && yarn lint",
     "build": "tsc -p ./server/ && next build",
     "postbuild": "next-sitemap --config sitemap.js",

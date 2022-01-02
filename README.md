@@ -24,7 +24,7 @@ CLOUDFRONT_PUBLIC=https://d3tycb976jpudc.cloudfront.net
 ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
 ```
 
-3. Run `yarn dev`. This will run the FrontEnd locally and connect you to the development server.
+3. Run `yarn dev:client`. This will run the FrontEnd locally and connect you to the development server.
 4. If you want to do server-side work you're gonna need to run the server and MongoDB on your local machine as well.  For this to happen you're gonna need to add the following variables inside `.env`:
 
 ```
@@ -50,7 +50,7 @@ EMAIL_TOKEN=
 ENDPOINT=https://frontend-ro-dev.herokuapp.com/api
 ```
 
-Then run the local server using `yarn dev:local`. Get in touch with us for more details.
+Then run the local server using `yarn dev`. Get in touch with us for more details.
 
 ## Database Dump, Restore and Backup
 

@@ -99,6 +99,21 @@ function withAuthModal(isLoggedIn: boolean, cb: (...any) => any) {
   };
 }
 
+function useKeyDown(code: string, handler: (e: KeyboardEvent) => void) {
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.code === code) {
+        handler(event);
+      }
+    };
+    
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [code]);
+}
+
 export {
   useOutsideClick,
   useClipboard,
@@ -106,4 +121,5 @@ export {
   useLoggedInOnly,
   useAnonymousOnly,
   withAuthModal,
+  useKeyDown,
 };

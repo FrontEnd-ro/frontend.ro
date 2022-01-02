@@ -1,7 +1,7 @@
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, PropsWithChildren, useRef } from 'react';
-import { useOutsideClick } from '~/services/Hooks';
+import { useOutsideClick, useKeyDown } from '~/services/Hooks';
 
 import styles from './AsideMenu.module.scss';
 
@@ -23,6 +23,7 @@ function AsideMenu({
 }: PropsWithChildren<Props>) {
   const ref = useRef(null);
   useOutsideClick(ref, close);
+  useKeyDown("Escape", close);
 
   useEffect(() => {
     if (!hideScrollOnBody) {

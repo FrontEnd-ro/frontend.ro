@@ -19,7 +19,7 @@ export default function LoginButtons({
       <Button
         variant="light"
         type={mode === 'register' ? 'button' : 'submit'}
-        className={`${mode === 'register' ? 'btn--light' : 'btn--blue'} ${(loading && mode === 'login') ? 'btn--loading' : ''} btn w-100`}
+        className={`${mode === 'register' ? 'btn--light' : 'btn--blue'} ${(loading && mode === 'login') ? 'btn--loading' : ''} btn w-100 ${styles['login-button']}`}
         loading={loading && mode === 'login'}
         disabled={loading}
         onClick={onLogin}
@@ -30,7 +30,7 @@ export default function LoginButtons({
       <Button
         variant="light"
         type={mode === 'register' ? 'submit' : 'button'}
-        className={`${mode === 'register' ? 'btn--blue' : 'btn--light'} ${(loading && mode === 'register') ? 'btn--loading' : ''} btn w-100`}
+        className={`${mode === 'register' ? 'btn--blue' : 'btn--light'} ${(loading && mode === 'register') ? 'btn--loading' : ''} btn w-100 ${styles['register-button']}`}
         loading={loading && mode === 'register'}
         disabled={loading}
         onClick={onRegister}

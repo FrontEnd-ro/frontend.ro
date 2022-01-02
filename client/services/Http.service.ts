@@ -1,3 +1,4 @@
+import cookie from 'cookie';
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 
 class Http {
@@ -43,9 +44,15 @@ class Http {
     options: Record<string, any> = {},
     preventErrorAlert = false,
   ) {
+    const cookies = cookie.parse(document.cookie);
     const headersInit: HeadersInit = {
       'content-type': 'application/json',
     };
+
+    // https://github.com/FrontEnd-ro/frontend.ro/issues/505
+    if (cookies.token) {
+      headersInit.Authorization = `Bearer ${cookies.token}`;
+    }
 
     if (options.body && !(options.body instanceof FormData)) {
       // eslint-disable-next-line no-param-reassign

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('./user/user.model');
-const { ServerError } = require('./ServerUtils');
+const { ServerError, parseBearerToken } = require('./ServerUtils');
 const ExerciseModel = require('./exercise/exercise.model');
 const LessonExerciseModel = require('./lesson-exercise/lesson-exercise.model');
 const { UserRole } = require('../shared/types/user.types');
@@ -12,7 +12,8 @@ const { default: appConfig } = require('./config');
  * If you have a token, it will be added into the req.body 
  */
 function PublicMiddleware(req, res, next) {
-  const authToken = req.cookies.token;
+  // Accept token either via cookie or Bearer token sent via headers
+  const authToken = req.cookies.token ?? parseBearerToken(req);
 
   if (!authToken) {
     next();
@@ -41,7 +42,8 @@ function PublicMiddleware(req, res, next) {
 
 /** Only authorized users can access this API */
 function PrivateMiddleware(req, res, next) {
-  const authToken = req.cookies.token;
+  // Accept token either via cookie or Bearer token sent via headers
+  const authToken = req.cookies.token ?? parseBearerToken(req);
 
   if (!authToken) {
     new ServerError(401, 'Unauthorized!').send(res);

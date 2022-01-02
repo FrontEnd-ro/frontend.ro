@@ -14,11 +14,11 @@
 }
 
 .register-mode {
-  button:first-of-type {
+  .login-button {
     transform: translateY(5em);
   }
 
-  button:nth-of-type(2) {
+  .register-button {
     transform: translateY(-5em);
   }
 }

@@ -28,31 +28,13 @@ userRouter.get('/check-username/:username', async function checkUsername(req, re
   }
 })
 
-userRouter.get('/ping', async function pingCurrentuser(req, res) {
-  const { token } = req.cookies;
-
-  if (!token) {
-    new ServerError(401, 'Not authenticated').send(res);
-    return;
+userRouter.get('/ping', [
+  PrivateMiddleware,
+  async function pingCurrentuser(req, res) {
+    const { user } = req.body;
+    res.json(UserModel.sanitize(user));
   }
-
-  try {
-    const user = await UserModel.ping(token);
-
-    if (!user) {
-      new ServerError(404, 'User doesn\'t exist any more').send(res);
-    } else {
-      res.json(UserModel.sanitize(user));
-    }
-  } catch (err) {
-    if (err instanceof ServerError) {
-      err.send(res);
-    } else {
-      console.error('userRouter.pingCurrentuser', err);
-      new ServerError(500, 'Oops, something went wrong').send(res);
-    }
-  }
-})
+])
 
 userRouter.post('/login', async function login(req, res) {
   let { emailOrUsername, password } = req.body;

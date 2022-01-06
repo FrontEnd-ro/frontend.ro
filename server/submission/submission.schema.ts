@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { SubmissionStatus } from '../../shared/types/submission.types';
+import { SubmissionI, SubmissionStatus } from '../../shared/types/submission.types';
 
 const FeedbackSchema = new mongoose.Schema(
   {
@@ -10,7 +10,7 @@ const FeedbackSchema = new mongoose.Schema(
   }
 )
 
-const SubmissionSchema = new mongoose.Schema(
+const SubmissionSchema = new mongoose.Schema<SubmissionI>(
   {
     code: { type: String, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },

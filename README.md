@@ -24,7 +24,7 @@ NODE_ENV=development
 ```
 
 3. Run `yarn dev:client`. This will run only the FrontEnd locally and connect you to the development server.
-4. If you want to do server-side work you're gonna need to run the server and MongoDB on your local machine as well.  For this to happen you're gonna need to add the following variables inside `.env`:
+4. If you want to do server-side work you're gonna need to run the server and MongoDB on your local machine as well. For this to happen you're gonna need to add the following variables inside `.env`:
 
 ```ini
 ; Environment based config
@@ -53,7 +53,13 @@ GITHUB_CLIENT_SECRET=
 NODE_ENV=development
 ```
 
-Then run the local server using `yarn dev`. Get in touch with us for more details.
+Then provision the DB (see next step) and run the local server using `yarn dev`. Get in touch with us for more details at [hello@frontend.ro](hello@frontend.ro).
+
+## Provisioning (WIP)
+
+If you wanna fully run the app on your local machine, you'll have to provision a MongoDB database yourself.
+
+Have a look at the `server/_provisioning` folder. It's still work in progress, but you'll find there some scripts which will make it easier to insert data in bulk, for your local environment.
 
 ## Database Dump, Restore and Backup
 

@@ -1,3 +1,7 @@
+import { ObjectId } from "mongoose";
+import { UserI } from "./user.types";
+import { ExerciseI, LessonExerciseI } from "./exercise.types";
+
 export enum FeedbackType {
   PRAISE = 'praise',
   OPINION = 'opinion',
@@ -10,6 +14,38 @@ export interface FeedbackI {
   // eslint-disable-next-line camelcase
   file_key: string;
   position: number[];
+}
+
+export interface SubmissionI {
+  _id?: ObjectId;
+
+  code: string;
+
+  user: ObjectId;
+
+  assignee: ObjectId;
+
+  exercise: ObjectId;
+
+  status: SubmissionStatus;
+
+  feedbacks: ObjectId[]
+}
+
+export interface WIPPopulatedSubmissionI {
+  _id: ObjectId;
+
+  code: string;
+
+  user: UserI;
+
+  exercise: LessonExerciseI;
+
+  assignee: UserI;
+  
+  status: SubmissionStatus;
+
+  feedbacks: FeedbackI[];
 }
 
 export interface SubmissionVersionI {

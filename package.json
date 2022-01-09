@@ -58,8 +58,8 @@
     "build-storybook": "build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
     "mongodump": "ts-node -P server/tsconfig.json mongodump.js",
-    "mongorestore": "node -P server/tsconfig.json mongorestore.js",
-    "upload-mongodump-s3": "node -P server/tsconfig.json upload-mongodump-s3",
+    "mongorestore": "ts-node -P server/tsconfig.json mongorestore.js",
+    "upload-mongodump-s3": "ts-node -P server/tsconfig.json upload-mongodump-s3",
     "upload-monaco-editor-s3": "ts-node -P server/tsconfig.json upload-monaco-editor.js"
   },
   "dependencies": {

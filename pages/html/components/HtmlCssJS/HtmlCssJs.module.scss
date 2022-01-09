@@ -1,0 +1,160 @@
+@import "../../../../client/styles/variables";
+
+.HtmlCssJs {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.Checkbox {
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid color(silver);
+}
+
+.TodoExample-wrapper {
+  z-index: 2;
+  height: 320px;
+}
+
+.Explanation {
+  transition: all 1.75s cubic-bezier(0.18, 0.89, 0.32, 1);
+
+  &:hover path {
+    transform: scale(1.1);
+  }
+
+  path {
+    fill: transparent;
+    stroke-width: 10px;
+    transform-origin: center;
+    transition: transform 0.5s $cubic;
+  }
+}
+
+/***************** Media Queries ***/
+
+// Large screen size => blobs are around the <ToDo>
+@mixin blobExplanations {
+  .Explanation {
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    transform: translate(-50%, -50%) scale(0);
+
+    .explanation-text {
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .HTMLExplanation {
+    &.enabled {
+      opacity: 1;
+      transform: translate(-200%, -50%) scale(1);
+    }
+
+    .explanation-text {
+      top: 50%;
+      left: 60%;
+      width: 50%;
+    }
+  }
+
+  .CSSExplanation {
+    &.enabled {
+      opacity: 1;
+      transform: translate(-50%, 50%) scale(1);
+    }
+
+    .explanation-text {
+      top: 45%;
+      left: 55%;
+      width: 55%;
+    }
+  }
+
+  .JSExplanation {
+    &.enabled {
+      opacity: 1;
+      transform: translate(95%, -50%) scale(1);
+    }
+
+    .explanation-text {
+      top: 48%;
+      left: 53%;
+      width: 58%;
+    }
+  }
+}
+
+// Medium screen size => move the blobs towards the center
+@mixin blobExplanations-sm {
+  .HTMLExplanation.enabled {
+    transform: translate(-165%, 30%) scale(1);
+  }
+
+  .CSSExplanation.enabled {
+    transform: translate(-50%, 50%) scale(1);
+  }
+
+  .JSExplanation.enabled {
+    transform: translate(65%, 20%) scale(1);
+  }
+}
+
+// Phone screen size => change from blobs to cards
+@mixin cardExplanations {
+  .checkbox-wrapper {
+    top: 0;
+    z-index: 4;
+    position: sticky;
+    padding-bottom: 0.25em;
+    background: color(white);
+  }
+
+  .Explanation {
+    opacity: 0;
+    z-index: 3;
+    position: relative;
+    margin-bottom: 1em;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    transition-duration: 1s;
+    background: color(white);
+    border: 2px solid color(silver);
+
+    // Even elements should transition from right
+    &:nth-child(2n) {
+      transform: translateX(120%);
+    }
+
+    // Odd elements should transition from right
+    &:nth-child(2n + 1) {
+      transform: translateX(-120%);
+    }
+
+    // Hide blob
+    & > svg {
+      display: none;
+    }
+
+    &.enabled {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  @include blobExplanations;
+}
+
+@media screen and (max-width: 1250px) {
+  @include blobExplanations-sm;
+}
+
+@media screen and (max-width: 1000px) {
+  @include cardExplanations;
+}

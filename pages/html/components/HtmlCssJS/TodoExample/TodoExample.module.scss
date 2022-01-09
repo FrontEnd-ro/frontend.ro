@@ -1,0 +1,96 @@
+@import "../../../../../client/styles/variables";
+
+.TodoExample-base {
+  transition: font-size 0.25s linear, margin 0.5s linear;
+  * {
+    transition: font-size 0.25s linear, margin 0.5s linear;
+  }
+}
+
+.TodoExample {
+  border-radius: 1em;
+  background: color(white);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.239);
+
+  header {
+    padding: 1em 1em 0.5em 1em;
+    border-bottom: 1px solid color(silver);
+  }
+
+  time {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .count {
+    margin-top: 0.5em;
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    margin-top: 1.5em;
+
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: inherit;
+    }
+
+    button[type="submit"] {
+      font-size: 0.9em;
+      border-radius: 1em;
+    }
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    list-style: none;
+    max-height: 10em;
+  }
+}
+
+.TodoElement {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid color(darker-white);
+
+  &:hover {
+    background: lighten(color(blue), 35%);
+  }
+
+  &.done {
+    background: lighten(color(blue), 50%);
+  }
+
+  &:last-of-type {
+    border-bottom: 0;
+    border-radius: 0 0 1em 1em;
+  }
+
+  label {
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+
+  input {
+    margin-right: 0.5em;
+  }
+}
+
+.WarningToast {
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5em 0.5em 0.5em 1em;
+  justify-content: space-between;
+  align-items: center;
+  color: color(white);
+  @extend %gradientBackground;
+  @extend %redGradientBackground;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.75);
+}

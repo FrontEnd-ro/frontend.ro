@@ -120,3 +120,15 @@ export const removeScript = (src: string) => {
     script.remove();
   }
 }
+
+/**
+ * Returns a Promise which resolves when the number of
+ * milliseconds has passed.
+ * @param milliseconds number
+ * @returns Promise
+ */
+export const wait = (milliseconds: number) => {
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, milliseconds);
+  })
+}

@@ -116,6 +116,7 @@
     "sass": "^1.32.8",
     "sweetalert2": "^10.3.5",
     "sweetalert2-react-content": "^3.2.2",
+    "typed.js": "^2.0.12",
     "uuid": "^8.3.0"
   },
   "devDependencies": {

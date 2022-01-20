@@ -1,0 +1,90 @@
+@import "../../../../styles/variables";
+
+.ExplainerWrapper {
+  height: 100vh;
+  display: flex;
+  padding: 0 2em;
+  align-items: center;
+  justify-content: center;
+}
+
+.Explainer {
+  h3 {
+    font-size: 3.5em;
+    margin-bottom: 0;
+    display: inline-block;
+  }
+
+  p {
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
+
+  margin: 40vh 0 50vh 0;
+}
+
+.Highlight {
+  min-height: 50%;
+  max-height: 100%;
+}
+
+.Animation {
+  padding: 1em 2em;
+  height: 100%;
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  background: #282a36;
+}
+
+.ProgressBar {
+  font-size: 4em;
+}
+
+@media screen and (max-width: 800px) {
+  .ExplainerWrapper {
+    font-size: 2em;
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0 3em 0;
+  }
+  
+  .Explainer {
+    top: 1em;
+    margin: 0 0 0em 0;
+    position: sticky;
+
+    h3 {
+      margin: 0;
+      font-size: 1em;
+    }
+
+    p {
+      font-size: 0.5em;
+      line-height: initial;
+    }
+  }
+
+  .Animation {
+    padding: 1em 1em;
+
+    pre {
+      // FIXME: the one in Highlight.module.scss also has !important
+      padding: 0 !important;
+    }
+  }
+
+  .SolveTheExercise-wrapper {
+    overflow: auto;
+    font-size: min(16px, 3vh);
+  }
+}
+
+@media screen and (max-width: 800px) and (orientation: landscape) {
+  .Explainer {
+    top: 0.5em;
+  }
+}

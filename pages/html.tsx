@@ -1,18 +1,20 @@
-import React from 'react';
+import Footer from '~/components/Footer';
+import SEOTags from '~/components/SEOTags';
+import HtmlLanding from '~/components/HtmlLanding/HtmlLanding';
 
-const HTMLTutorial = () => {
-  return <></>;
-};
-
-// Redirect to the lessons page until we implement
-// the page for the HTML module.
-export async function getServerSideProps() {
-  return {
-    redirect: {
-      destination: '/lectii',
-      permanent: false,
-    },
-  };
+function HTMLTutorial() {
+  return (
+    <>
+      <SEOTags
+        title="Învață HTML de la zero"
+        shareImage="TBD"
+        description="Învață HTML printr-un curs online, focusat pe practică și feedback de la developeri cu experiență."
+        url="https://FrontEnd.ro/html"
+      />
+      <HtmlLanding />
+      <Footer />
+    </>
+  );
 }
 
 export default HTMLTutorial;

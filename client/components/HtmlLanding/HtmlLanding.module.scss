@@ -1,0 +1,136 @@
+@import "../../styles/variables";
+
+.HtmlLanding {
+  padding-bottom: 10em;
+}
+
+.hero {
+  min-height: 100vh;
+  margin-bottom: 5em;
+  flex-flow: column nowrap;
+  padding: 8em 2em 8em 2em;
+
+  h1 {
+    font-size: 5em;
+  }
+
+  p {
+    font-size: 2em;
+    font-weight: lighter;
+  }
+}
+
+.text-chip {
+  font-weight: normal;
+  display: inline-block;
+  color: color(black);
+  background: color(white);
+  padding: 0.15em 0.25em 0.25em 0.25em;
+}
+
+.hero-controls {
+  font-size: 1.5em;
+  margin-top: 3em;
+  margin-bottom: 6em;
+
+  a:first-of-type {
+    margin-right: 3em;
+  }
+}
+
+.hero-video {
+  @extend %containerConfig;
+
+  height: 40vw;
+  width: 100%;
+  border-radius: 1em;
+  background: color(silver);
+  box-shadow: 0 0 1em color(silver);
+}
+
+.HtmlCssJs-wrapper {
+  min-height: 48em;
+}
+
+.section {
+  @extend %containerConfig;
+  margin: 0 auto 5em auto;
+}
+
+.section-heading {
+  font-size: 3.5em;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.section-text {
+  font-size: 1.25em;
+  line-height: 1.25em;
+}
+
+.learn-list {
+  margin: 0;
+}
+
+.HtmlHowItWorks {
+  margin-top: 8em;
+  margin-bottom: 10em;
+}
+
+.login-wrapper {
+  width: 20em;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding-top: 4em;
+    padding-bottom: 4em;
+
+    h1 {
+      margin-top: 0;
+      font-size: 3.5em;
+    }
+
+    p {
+      font-size: 1.5em;
+    }
+  }
+
+  .hero-controls {
+    font-size: 1.25em;
+  }
+
+  .section-heading {
+    font-size: 2em;
+  }
+
+  .section-text {
+    font-size: 1.1em;
+  }
+
+  .HtmlHowItWorks {
+    margin-top: 4em;
+    margin-bottom: 5em;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .hero-controls {
+    min-width: 100%;
+    text-align: center;
+    flex-flow: column nowrap;
+
+    a {
+      width: 100%;
+      margin-bottom: 1em;
+      margin-right: 0 !important;
+    }
+  }
+
+  .HtmlCssJs-wrapper {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

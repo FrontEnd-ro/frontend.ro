@@ -20,7 +20,7 @@ export default function Highlight({ language, code, className }: Props) {
   useEffect(() => {
     import('~/services/highlight').then((module) => {
       const highlight = module.default;
-      highlight.highlightBlock(preRef.current);
+      highlight.highlightElement(preRef.current);
     });
   }, []);
 

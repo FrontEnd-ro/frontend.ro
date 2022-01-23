@@ -1,11 +1,11 @@
 import React from 'react';
-import { marked } from 'marked';
 import SubmissionService from '~/services/Submission.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
 import styles from './ViewTooltip.module.scss';
 import editorTooltipStyles from '../EditorTooltip.module.scss';
 import Button from '~/components/Button';
+import Markdown from '~/components/Markdown';
 
 interface Feedback {
   _id: string;
@@ -108,8 +108,7 @@ class ViewTooltip extends React.Component<Props, State> {
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
       >
-        {/* eslint-disable-next-line react/no-danger */}
-        <div className="markdown" dangerouslySetInnerHTML={{ __html: marked.parse(feedback.body || '') }} />
+        <Markdown variant='transparent' className={styles.markdown}  markdownString={feedback.body ?? ''} />
 
         {!readOnly && (
           <div className="feedback-tooltip__controls">

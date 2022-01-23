@@ -1,11 +1,10 @@
 import React from 'react';
-// FIXME
-import { marked } from 'marked';
 import { FeedbackType } from '~/../shared/types/submission.types';
 import Form, { Checkbox } from '~/components/Form';
 
 import styles from './AskTooltip.module.scss';
 import editorTooltipStyles from '../EditorTooltip.module.scss';
+import Markdown from '~/components/Markdown';
 
 interface State {
   body: string;
@@ -24,8 +23,6 @@ class AskTooltip extends React.Component<Props, State> {
 
   private formRef: React.RefObject<HTMLFormElement>;
 
-  private markdownRef: React.RefObject<HTMLDivElement>;
-
   private textareaRef: React.RefObject<HTMLTextAreaElement>;
 
   constructor(props) {
@@ -39,7 +36,6 @@ class AskTooltip extends React.Component<Props, State> {
 
     this.timeoutId = null;
     this.formRef = React.createRef();
-    this.markdownRef = React.createRef();
     this.textareaRef = React.createRef();
   }
 
@@ -112,15 +108,12 @@ class AskTooltip extends React.Component<Props, State> {
   }
 
   toggleMarkdown = () => {
-    const { body, showMarkdown } = this.state;
+    const { showMarkdown } = this.state;
     this.setState({
       showMarkdown: !showMarkdown,
     });
 
-    if (!showMarkdown) {
-      this.markdownRef.current.innerHTML = marked.parse(body);
-    } else {
-      this.markdownRef.current.innerHTML = null;
+    if (showMarkdown) {
       setTimeout(() => {
         this.textareaRef.current.focus();
       }, 100);
@@ -149,7 +142,9 @@ class AskTooltip extends React.Component<Props, State> {
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
       >
-        <div className={`${showMarkdown ? styles.markdown : ''}`} ref={this.markdownRef} />
+        {showMarkdown && (
+          <Markdown variant='transparent' className={styles.markdown} markdownString={body} />
+        )}
         <textarea
           required
           rows={8}

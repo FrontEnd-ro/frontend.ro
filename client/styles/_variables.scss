@@ -40,6 +40,8 @@ $cubic: cubic-bezier(0.18, 0.89, 0.32, 1.28);
 $aside-menu-width: 18em;
 $app-header-height: 3.3em;
 $width-grid: 4.5vw;
+$monospace: 'Source Code Pro', 'Courier New', Courier, monospace;
+
 @function color($x) {
   @return map-get($colors, $x);
 }

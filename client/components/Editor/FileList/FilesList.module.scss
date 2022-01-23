@@ -14,7 +14,7 @@
     width: 100%;
     padding: 0.25em;
     color: darken(color(grey), 5%);
-    font-family: 'Courier New', Courier, monospace;
+    font-family: $monospace;
 
     &.is--ctx-selected {
       background: color(darker-white);

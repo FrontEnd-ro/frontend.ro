@@ -83,7 +83,7 @@
     margin-right: 1em;
     border-radius: 4px;
     border: 1px solid color(silver);
-    font-family: 'Courier New', Courier, monospace;
+    font-family: $monospace;
   }
 
   button[type='submit'] {

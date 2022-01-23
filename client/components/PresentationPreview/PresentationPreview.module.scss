@@ -40,7 +40,7 @@
 .created {
   margin-top: 3em;
   display: block;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $monospace;
 
   &::before {
     content: '📅';

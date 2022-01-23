@@ -5,7 +5,6 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  font-size: 1.25em;
 
   &.is--inline {
     display: inline-block;
@@ -22,6 +21,7 @@
     margin: 0;
     border-radius: 1em;
     box-shadow: 0 0 1em color(black);
+    font-family: $monospace;
     padding: 0 3em 1em 1em !important; // Otherwise it will get overriden by the `dracula.css`
   }
 

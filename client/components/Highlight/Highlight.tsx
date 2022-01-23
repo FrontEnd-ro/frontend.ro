@@ -75,7 +75,7 @@ const CopyButton = ({ code }: { code: string }) => {
 
   return (
     <Button data-clipboard-text={code} ref={btnRef}>
-      <FontAwesomeIcon className="text-silver" icon={faCopy} width="32" />
+      <FontAwesomeIcon className="text-silver" icon={faCopy} width={20} />
       <span className="d-block"> Copy </span>
     </Button>
   )

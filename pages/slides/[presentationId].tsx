@@ -25,7 +25,7 @@ function PresentationPage({ presentation }: { presentation: PresentationI }) {
   );
 }
 
-export async function getServerSideProps({ req, res, params }) {
+export async function getServerSideProps({ res, params }) {
   const { default: fetch } = await import('node-fetch');
   const { default: appConfig } = await import('../../server/config');
 

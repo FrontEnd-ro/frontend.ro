@@ -21,7 +21,7 @@ function Slides({ presentations }: {presentations: PresentationI[]}) {
   );
 }
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps() {
   const { default: appConfig } = await import('../../server/config');
   const { default: fetch } = await import('node-fetch');
 

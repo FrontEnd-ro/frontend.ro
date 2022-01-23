@@ -23,11 +23,11 @@ function Markdown({ markdownString, className = '', variant = 'none' }: Props) {
       import('marked'),
       import('dompurify'),
     ]).then(([markedModule, dompurifyModule]) => {
-      const marked = markedModule.default;
+      const { marked } = markedModule;
       const dompurify = dompurifyModule.default;
 
       setDidLoadModules(true);
-      markdownRef.current.innerHTML = dompurify.sanitize(marked(markdownString));
+      markdownRef.current.innerHTML = dompurify.sanitize(marked.parse(markdownString));
     }).catch((err) => {
       setDidLoadModules(false);
       console.error('[Markdown.useEffect]', err);

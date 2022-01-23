@@ -1,6 +1,6 @@
 import React from 'react';
 // FIXME
-import marked from 'marked';
+import { marked } from 'marked';
 import { FeedbackType } from '~/../shared/types/submission.types';
 import Form, { Checkbox } from '~/components/Form';
 
@@ -118,7 +118,7 @@ class AskTooltip extends React.Component<Props, State> {
     });
 
     if (!showMarkdown) {
-      this.markdownRef.current.innerHTML = marked(body);
+      this.markdownRef.current.innerHTML = marked.parse(body);
     } else {
       this.markdownRef.current.innerHTML = null;
       setTimeout(() => {

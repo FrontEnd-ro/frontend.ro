@@ -1,5 +1,5 @@
 import React from 'react';
-import marked from 'marked';
+import { marked } from 'marked';
 import SubmissionService from '~/services/Submission.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
@@ -109,7 +109,7 @@ class ViewTooltip extends React.Component<Props, State> {
         onMouseLeave={this.onMouseLeave}
       >
         {/* eslint-disable-next-line react/no-danger */}
-        <div className="markdown" dangerouslySetInnerHTML={{ __html: marked(feedback.body || '') }} />
+        <div className="markdown" dangerouslySetInnerHTML={{ __html: marked.parse(feedback.body || '') }} />
 
         {!readOnly && (
           <div className="feedback-tooltip__controls">

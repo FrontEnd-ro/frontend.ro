@@ -78,9 +78,9 @@ function MarkdownTextarea({
       setIsFetchingMarked(true);
       import('marked')
         .then((module) => {
-          const marked = module.default;
+          const { marked } = module;
 
-          previewRef.current.innerHTML = marked(markdown);
+          previewRef.current.innerHTML = marked.parse(markdown);
         })
         .catch((err) => {
           previewRef.current.innerHTML = '<p style="color: red;"> Oops! Verifică conexiunea la net și încearcă din nou </p>';

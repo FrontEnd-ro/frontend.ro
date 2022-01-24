@@ -1,0 +1,65 @@
+@import "../../styles/variables";
+
+.ChipCarousel {
+  font-size: 1.5em;
+  overflow: hidden;
+}
+
+.row {
+  --animation-duration: 300s;
+
+  margin: 0.75em 0;
+  flex-flow: row nowrap;
+
+  &:nth-child(2n) {
+    animation: rowAnimationRight var(--animation-duration) linear infinite;
+  }
+
+  &:nth-child(2n + 1) {
+    animation: rowAnimationLeft var(--animation-duration) linear infinite;
+  }
+
+}
+
+.chip {
+  margin: 0 0.5em;
+  padding: 0.25em 0.4em;
+  border-radius: 0.25em;
+  font-family: $monospace;
+  border: 2px solid color(silver);
+  transition: transform 0.25s $cubic;
+
+  &:hover {
+    transform: scale(1.1);
+    @extend %gradientBackground;
+    @extend %blackGradientBackground;
+  }
+}
+
+@keyframes rowAnimationRight {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rowAnimationLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

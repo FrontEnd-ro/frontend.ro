@@ -5,9 +5,16 @@
 }
 
 .checkbox {
-  color: color(green);
   display: inline-block;
   vertical-align: middle;
+
+  &.success {
+    color: color(green);
+  }
+
+  &.black {
+    color: color(black);
+  }
 
   input {
     opacity: 0;

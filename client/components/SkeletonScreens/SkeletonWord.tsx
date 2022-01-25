@@ -4,11 +4,16 @@ import styles from './SkeletonScreens.module.scss';
 interface Props {
   text: string;
   className?: string;
+  withAnimation?: boolean;
 }
 
-const SkeletonWord = ({ text, className = '' }: Props) => {
+const SkeletonWord = ({ text, withAnimation = true, className = '' }: Props) => {
   return (
-    <span className={`${styles.word} ${className}`}>
+    <span className={`
+      ${styles.word}
+      ${withAnimation ? styles['with-animation'] : ''}
+      ${className}`}
+    >
       <span>
         {text}
       </span>

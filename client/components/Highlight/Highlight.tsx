@@ -14,9 +14,10 @@ interface Props {
   language: Language,
   className?: string;
   withCopy?: boolean;
+  onHighlight?: () => void;
 }
 
-export default function Highlight({ language, code, withCopy = true, className }: Props) {
+export default function Highlight({ language, code, withCopy = true, className, onHighlight = () => {} }: Props) {
   const highlightModule = useRef<HLJSApi>(null);
   const preRef = useRef<HTMLPreElement>(null);
 
@@ -54,6 +55,7 @@ export default function Highlight({ language, code, withCopy = true, className }
     }
 
     highlightModule.current.highlightElement(preRef.current);
+    onHighlight();
   }
 
   return (

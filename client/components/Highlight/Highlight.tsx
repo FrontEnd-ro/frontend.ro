@@ -2,6 +2,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef } from 'react';
 import { HLJSApi } from 'highlight.js';
+import { noop } from 'lodash';
 import { useClipboard } from '~/services/Hooks';
 import Button from '~/components/Button';
 
@@ -14,10 +15,14 @@ interface Props {
   language: Language,
   className?: string;
   withCopy?: boolean;
+  variant?: 'default' | 'minimalist';
+  textWrap?: 'wrap' | 'scroll';
   onHighlight?: () => void;
 }
 
-export default function Highlight({ language, code, withCopy = true, className, onHighlight = () => {} }: Props) {
+export default function Highlight({
+  language, code, withCopy = true, className, onHighlight = noop, variant = 'default', textWrap = 'scroll',
+}: Props) {
   const highlightModule = useRef<HLJSApi>(null);
   const preRef = useRef<HTMLPreElement>(null);
 
@@ -56,11 +61,17 @@ export default function Highlight({ language, code, withCopy = true, className, 
 
     highlightModule.current.highlightElement(preRef.current);
     onHighlight();
-  }
+  };
 
   return (
-    <div className={`${styles.highlight} ${className}`}>
-      <pre ref={preRef} className={language}>
+    <div className={`${styles.highlight} ${styles[variant]} ${className}`}>
+      <pre
+        ref={preRef}
+        className={`
+          ${language}
+          ${textWrap === 'wrap' ? styles['pre--wrap'] : ''}
+        `}
+      >
         <code>
           {code}
         </code>
@@ -80,5 +91,5 @@ const CopyButton = ({ code }: { code: string }) => {
       <FontAwesomeIcon className="text-silver" icon={faCopy} width={20} />
       <span className="d-block"> Copy </span>
     </Button>
-  )
-}
+  );
+};

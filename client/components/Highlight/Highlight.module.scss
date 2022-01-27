@@ -19,10 +19,13 @@
 
   pre {
     margin: 0;
-    border-radius: 1em;
-    box-shadow: 0 0 1em color(black);
     font-family: $monospace;
     padding: 0 3em 1em 1em !important; // Otherwise it will get overriden by the `dracula.css`
+  }
+
+  &.default pre {
+    border-radius: 1em;
+    box-shadow: 0 0 1em color(black);
   }
 
   code .formatted {
@@ -69,4 +72,8 @@
   }
 
   @import '../../styles/external/dracula';
+}
+
+.pre--wrap {
+  white-space: pre-wrap;
 }

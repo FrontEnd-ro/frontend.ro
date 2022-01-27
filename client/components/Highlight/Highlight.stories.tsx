@@ -12,7 +12,6 @@ const Template: ComponentStory<typeof HighlightComponent> = (args) => (
   <HighlightComponent {...args} />
 );
 
-
 const code = `
 <!DOCTYPE html>
 <html lang="en">
@@ -30,5 +29,7 @@ const code = `
 export const Highlight = Template.bind({});
 Highlight.args = {
   code,
-  language: 'html'
+  variant: 'default',
+  textWrap: 'wrap',
+  language: 'html',
 };

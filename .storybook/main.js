@@ -3,7 +3,6 @@ const path = require('path');
 module.exports = {
   "stories": [
     "../client/components/**/*.stories.@(js|jsx|ts|tsx)",
-    "../pages/**/*.stories.@(js|jsx|ts|tsx)",
   ],
   "addons": [
     "@storybook/addon-links",

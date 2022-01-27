@@ -7,7 +7,7 @@ import Button from '~/components/Button';
 
 import styles from './Highlight.module.scss';
 
-type Language = 'html' | 'css' | 'json' | 'javascript';
+export type Language = 'html' | 'css' | 'json' | 'javascript';
 
 interface Props {
   code: string,

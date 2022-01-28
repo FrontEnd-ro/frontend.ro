@@ -1,0 +1,12 @@
+@import '../../../../styles/variables';
+
+.SolutionApproved {
+  font-size: 2em;
+  padding: 0.5em;
+  font-weight: bold;
+  color: color(darker-white);
+
+  @media screen and (max-width: 800px) {
+    font-size: 1.5em;
+  }
+}

@@ -1,0 +1,40 @@
+@import '../../../../styles/variables';
+
+.ReadTheLesson {
+  max-height: 100%;
+  font-size: min(min(3vw, 2.5vh), 16px);
+}
+
+.skeleton-heading {
+  background: #8be9fd;
+  height: min(7vh, 40px);
+}
+
+// Either Word or Heading
+.skeleton-element {
+  opacity: 0;
+  transition: opacity 0.1s linear;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.SkeletonWord {
+  margin: 0.2em 0.5em 0.2em 0;
+  background: color(darker-white);
+
+  &:nth-child(5n + 5) {
+    background: #6272a4;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .ReadTheLesson {
+    font-size: 11px;
+  }
+
+  .skeleton-heading {
+    height: 30px;
+  }
+}

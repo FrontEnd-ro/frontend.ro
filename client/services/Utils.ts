@@ -132,3 +132,16 @@ export const wait = (milliseconds: number) => {
     setTimeout(resolve, milliseconds);
   })
 }
+
+
+/**
+ * Returns only the part of text representing {percentage} percent
+ * from the total text.
+ * @param text string
+ * @param percentage number
+ * @returns string
+ */
+export const getTextSection = (text: string, percentage: number) => {
+  const sectionLength = Math.round((text.length * percentage) / 100);
+  return text.substring(0, sectionLength );
+}

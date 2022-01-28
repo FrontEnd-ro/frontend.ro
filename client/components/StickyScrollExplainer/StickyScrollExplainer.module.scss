@@ -1,0 +1,36 @@
+@import "../../styles/variables";
+
+.StickyScrollExplainer {
+  width: 100%;
+  display: flex;
+
+  .explainer {
+    width: 50%;
+    flex: 1 1 0%;
+  }
+
+  .animation {
+    width: 50%;
+    flex: 1 1 0%;
+    position: sticky;
+  }
+}
+
+.StickyScrollExplainer-row .animation {
+  top: 0;
+  height: 100vh;
+}
+
+.StickyScrollExplainer-column {
+  display: block;
+
+  .explainer {
+    width: 100%;
+  }
+
+  .animation {
+    bottom: 0;
+    width: 100%;
+    height: 70vh;
+  }
+}

@@ -24,11 +24,12 @@ interface Props {
     pdf?: string;
     exerciseCount: number;
   },
-  variant?: 'large' | 'medium' | 'small'
+  variant?: 'large' | 'medium' | 'small',
+  shareControls?: boolean,
 }
 
 const Diploma = ({
-  student, module, certification, variant = 'large',
+  student, module, certification, variant = 'large', shareControls = true,
 }: Props) => {
   const [fullCertificationUrl, setFullCertificationUrl] = useState(certification.url);
   useEffect(() => {
@@ -88,11 +89,11 @@ const Diploma = ({
           className={styles.qrcode}
           url={fullCertificationUrl}
         />
-        {/*
-          This attribute means we'll remove this element when generating
-          the OG:IMAGE and PDF for the Diploma
-          https://github.com/FrontEnd-ro/frontend.ro/issues/449
-        */}
+
+        {shareControls && (
+        // This attribute means we'll remove this element when generating
+        // the OG:IMAGE and PDF for the Diploma
+        // https://github.com/FrontEnd-ro/frontend.ro/issues/449
         <div data-diploma-hidden className={`${styles['share-button-wrapper']} absolute`}>
           <OptionsDrawer
             trigger={{
@@ -105,15 +106,15 @@ const Diploma = ({
               <CopyLinkButton text={fullCertificationUrl} />
             </OptionsDrawer.Element>
             {certification.pdf && (
-              <OptionsDrawer.Element>
-                <a
-                  href={certification.pdf}
-                  className="btn btn--light no-underline btn--with-icon"
-                >
-                  <FontAwesomeIcon icon={faDownload} height="24" className="mr-2" />
-                  Download PDF
-                </a>
-              </OptionsDrawer.Element>
+            <OptionsDrawer.Element>
+              <a
+                href={certification.pdf}
+                className="btn btn--light no-underline btn--with-icon"
+              >
+                <FontAwesomeIcon icon={faDownload} height="24" className="mr-2" />
+                Download PDF
+              </a>
+            </OptionsDrawer.Element>
             )}
             <OptionsDrawer.Element>
               <FacebookButton url={fullCertificationUrl} />
@@ -123,6 +124,7 @@ const Diploma = ({
             </OptionsDrawer.Element>
           </OptionsDrawer>
         </div>
+        )}
       </footer>
     </section>
   );

@@ -27,7 +27,9 @@ type Props = {
   tooltipClassName?: string;
 } & ConnectedProps<typeof connector>;
 
-const NotificationsTooltip = ({ className, tooltipClassName, user, dispatch }: Props) => {
+const NotificationsTooltip = ({
+  className, tooltipClassName, user, dispatch,
+}: Props) => {
   const [error, setError] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);

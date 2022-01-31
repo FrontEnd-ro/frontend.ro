@@ -20,6 +20,7 @@ interface Props {
   withNavMenu?: boolean;
   onMenuClick?: () => void;
   theme?: 'default' | 'black';
+  className?: string;
 }
 
 function Header({
@@ -29,12 +30,13 @@ function Header({
   isLoggedIn,
   withNavMenu = false,
   theme = 'default',
+  className = '',
 }: ConnectedProps<typeof connector> & Props) {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   return (
     <>
 
-      <header className={`${styles.header} ${styles[`theme-${theme}`]}`}>
+      <header className={`${styles.header} ${styles[`theme-${theme}`]} ${className}`}>
         <div className="d-flex justify-content-between w-100 align-items-center h-100">
           {onMenuClick && (
             <Button

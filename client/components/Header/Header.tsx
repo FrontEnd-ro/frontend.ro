@@ -19,6 +19,7 @@ interface Props {
   demoPage?: boolean;
   withNavMenu?: boolean;
   onMenuClick?: () => void;
+  theme?: 'default' | 'black';
 }
 
 function Header({
@@ -27,12 +28,13 @@ function Header({
   onMenuClick,
   isLoggedIn,
   withNavMenu = false,
+  theme = 'default',
 }: ConnectedProps<typeof connector> & Props) {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   return (
     <>
 
-      <header className={styles.header}>
+      <header className={`${styles.header} ${styles[`theme-${theme}`]}`}>
         <div className="d-flex justify-content-between w-100 align-items-center h-100">
           {onMenuClick && (
             <Button
@@ -71,9 +73,10 @@ function Header({
             <>
               <NotificationTooltip
                 className="mr-2"
+                theme={theme}
                 tooltipClassName={styles['notification-tooltip']}
               />
-              <AccountTooltip />
+              <AccountTooltip theme={theme} />
             </>
           ) : null}
           {withNavMenu && (

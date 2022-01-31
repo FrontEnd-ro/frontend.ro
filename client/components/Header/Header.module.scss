@@ -8,8 +8,15 @@
   position: relative;
   justify-content: space-between;
   z-index: 11;
+}
+
+.theme-default {
   background-color: color(darker-white);
   border-bottom: 1px solid color(silver);
+}
+
+.theme-black {
+  background-color: color(black);
 }
 
 .menu {

@@ -14,6 +14,15 @@
   border: 1px solid color(silver);
 }
 
+.theme-black {
+  color: color(white);
+
+  .tooltip {
+    background: color(black);
+    border-color: color(grey);
+  }
+}
+
 // TODO: extract as a separate "Badge" component
 .unread-badge {
   position: absolute;

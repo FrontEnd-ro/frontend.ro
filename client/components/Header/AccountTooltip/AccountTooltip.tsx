@@ -11,7 +11,11 @@ import { useOutsideClick } from '~/services/Hooks';
 import { logoutUser } from '~/redux/user/user.actions';
 import List from '~/components/List';
 
-function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
+interface Props {
+  theme?: 'default' | 'black';
+}
+
+function AccountTooltip({ theme = 'default', user, dispatch }: Props & ConnectedProps<typeof connector>) {
   const ref = useRef(null);
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +33,7 @@ function AccountTooltip({ user, dispatch }: ConnectedProps<typeof connector>) {
   useOutsideClick(ref, () => setIsOpen(false));
 
   return (
-    <div ref={ref} className={styles['account-tooltip']}>
+    <div ref={ref} className={`${styles['account-tooltip']} ${styles[`theme-${theme}`]}`}>
       <Button className={styles.avatar} onClick={toggleToolip}>
         <img
           className="pointer"

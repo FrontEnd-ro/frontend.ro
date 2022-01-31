@@ -25,10 +25,11 @@ import styles from './NotificationTooltip.module.scss';
 type Props = {
   className?: string
   tooltipClassName?: string;
+  theme?: 'default' | 'black';
 } & ConnectedProps<typeof connector>;
 
 const NotificationsTooltip = ({
-  className, tooltipClassName, user, dispatch,
+  className, tooltipClassName, theme = 'default', user, dispatch,
 }: Props) => {
   const [error, setError] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -117,7 +118,7 @@ const NotificationsTooltip = ({
   // }, [isOpen, user.notifications.end]);
 
   return (
-    <div ref={componentRef} className={`${className ?? ''} relative`}>
+    <div ref={componentRef} className={`${className ?? ''} ${styles[`theme-${theme}`]} relative`}>
       <Button
         onClick={toggle}
         variant="transparent"

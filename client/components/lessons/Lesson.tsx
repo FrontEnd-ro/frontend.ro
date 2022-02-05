@@ -14,6 +14,7 @@ import { getLessonById, GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
 import { Chapter } from '../TableOfContents';
 import LessonService from '~/services/api/Lesson.service';
+import LessonContent from './LessonContent/LessonContent';
 
 interface Props {
   id: string;
@@ -84,12 +85,9 @@ export default function Lesson({
       <main>
         <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} withNavMenu />
         <div ref={articleWrapper} className={styles['article-wrapper']}>
-          <article>
-            <h1>
-              {title}
-            </h1>
+          <LessonContent title={title}>
             {children}
-          </article>
+          </LessonContent>
           <div className="my-5 text-right mr-2">
             <p>
               Ai vreo sugestie de îmbunătățire a acestei lecții?

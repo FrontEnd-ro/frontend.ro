@@ -1,0 +1,33 @@
+@import "../../../styles/variables";
+
+.LessonContent {
+  @extend %containerConfig;
+  position: relative;
+
+  h1 {
+    font-size: 2.25em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  [class*="LessonContributors"] {
+    right: 0;
+    top: 0.75em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .LessonContent {
+    h1 {
+      margin-bottom: 2em;
+    }
+
+    [class*="LessonContributors"] {
+      position: relative;
+      float: right;
+      top: -4em;
+    }
+  }
+}

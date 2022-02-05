@@ -4,7 +4,7 @@ import { faShare } from '@fortawesome/free-solid-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson from '~/components/lessons/Lesson';
 import {
-  LessonCover, LessonContributors, LessonHeading, LessonFigure, LessonQuote,
+  LessonCover, LessonHeading, LessonFigure, LessonQuote,
 } from '~/components/lessons';
 import {
   FacebookButton, LinkedInButton, WhatsAppButton, CopyLinkButton,
@@ -44,8 +44,13 @@ export default function Lesson0() {
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
       />
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises={false}>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        withExercises={false}
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover resizeOffset={100}>
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{

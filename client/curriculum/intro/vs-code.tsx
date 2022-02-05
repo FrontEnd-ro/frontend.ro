@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors,
   LessonCover,
   LessonFigure,
   LessonHeading,
@@ -42,8 +41,13 @@ export default function VSCodeLesson() {
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
       />
-      <Lesson id={lessonInfo.id} withExercises={false} title={lessonInfo.title} chapters={chapters}>
-        <LessonContributors className="absolute" contributors={contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        withExercises={false}
+        title={lessonInfo.title}
+        chapters={chapters}
+        contributors={contributors ?? []}
+      >
         <LessonCover>
           <Image
             width="1200"

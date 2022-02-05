@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors,
   LessonCover,
   LessonFigure,
   LessonFirstSentence,
@@ -40,8 +39,13 @@ export default function BoxModelLesson() {
         url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`}
       />
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises={false}>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        withExercises={false}
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{

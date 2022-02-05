@@ -7,7 +7,6 @@ import Lesson, {
   LessonCover,
   LessonFigure,
   LessonHeading,
-  LessonContributors,
   LessonQuote,
   LessonFirstSentence,
 } from '~/components/lessons';
@@ -35,8 +34,13 @@ function HTMLValidationLesson() {
       >
         <link rel="preload" as="image" href={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_1200w.jpg`} />
       </SEOTags>
-      <Lesson id={lessonId} title={lessonInfo.title} chapters={chapters} withExercises>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonId}
+        title={lessonInfo.title}
+        chapters={chapters}
+        withExercises
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           <Image
             width="2400"

@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors,
   LessonCover,
   LessonHeading,
   LessonTip,
@@ -55,8 +54,13 @@ export default function VideoAndAudioLesson() {
         url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={seoImage}
       />
-      <Lesson withExercises={false} id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        withExercises={false}
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           <Image width="2400" height="1260" alt="Doodle cu un audio waveform și un video" src={coverImage} />
         </LessonCover>

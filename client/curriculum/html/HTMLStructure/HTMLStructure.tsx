@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors,
   LessonCover,
   LessonHeading,
   LessonTip,
@@ -39,8 +38,13 @@ function HTMLStructure() {
       >
         <link rel="preload" as="image" href={`${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`} />
       </SEOTags>
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises={false}>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        withExercises={false}
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           <Image
             width="2400"

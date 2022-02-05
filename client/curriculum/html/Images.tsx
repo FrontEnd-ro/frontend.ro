@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { faExclamationCircle, faExclamationTriangle, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors,
   LessonCover,
   LessonFigure,
   LessonHeading,
@@ -72,8 +71,12 @@ export default function ImagesLesson() {
         description={lessonInfo.description}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`}
       />
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           <Image
             width="2400"

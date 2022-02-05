@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors,
   LessonCover,
   LessonFigure,
   LessonFirstSentence,
@@ -33,8 +32,12 @@ export default function TextsLesson() {
         url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`}
       />
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           <Image
             width="2400"

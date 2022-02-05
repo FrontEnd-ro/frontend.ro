@@ -6,7 +6,6 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors,
   LessonCover,
   LessonFigure,
   LessonHeading,
@@ -66,8 +65,8 @@ export default function LinksAndButtonsLesson() {
         title={lessonInfo.title}
         chapters={chapters}
         withExercises
+        contributors={lessonInfo.contributors ?? []}
       >
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
         <LessonCover>
           <Image
             width="2400"

@@ -6,7 +6,6 @@ import Lesson, {
   LessonFigure,
   LessonHeading,
   LessonResources,
-  LessonContributors,
   LessonFirstSentence,
 } from '~/components/lessons';
 import { getLessonById } from '~/services/Constants';
@@ -39,8 +38,12 @@ export default function AboutHtmlLesson() {
       >
         <link rel="preload" as="image" href={`${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`} />
       </SEOTags>
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           <Image
             width="2400"

@@ -7,7 +7,6 @@ import Lesson, {
   LessonCover,
   LessonFigure,
   LessonHeading,
-  LessonContributors,
   LessonFirstSentence,
 } from '~/components/lessons';
 import SideBySidePictures from '~/components/SideBySidePictures';
@@ -50,8 +49,13 @@ function Containers() {
       >
         <link rel="preload" as="image" href={coverImage} />
       </SEOTags>
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters} withExercises>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        withExercises
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           <Image width="2400" height="1260" alt="Doodle cu o cutie" src={coverImage} />
         </LessonCover>

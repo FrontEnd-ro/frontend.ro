@@ -15,11 +15,13 @@ import LessonExercises from './LessonExercises/LessonExercises';
 import { Chapter } from '../TableOfContents';
 import LessonService from '~/services/api/Lesson.service';
 import LessonContent from './LessonContent/LessonContent';
+import { Contributor } from '~/services/contributors';
 
 interface Props {
   id: string;
   title: string;
   chapters: { title: string; id: string; }[];
+  contributors: Contributor[];
   withExercises?: boolean;
 }
 
@@ -28,6 +30,7 @@ export default function Lesson({
   children,
   title,
   chapters,
+  contributors,
   withExercises = true,
 }: PropsWithChildren<Props>) {
   const articleWrapper = useRef(null);
@@ -85,7 +88,7 @@ export default function Lesson({
       <main>
         <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} withNavMenu />
         <div ref={articleWrapper} className={styles['article-wrapper']}>
-          <LessonContent title={title}>
+          <LessonContent title={title} contributors={contributors}>
             {children}
           </LessonContent>
           <div className="my-5 text-right mr-2">

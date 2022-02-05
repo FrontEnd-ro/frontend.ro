@@ -1,6 +1,5 @@
 import SEOTags from '~/components/SEOTags';
 import Lesson, {
-  LessonContributors,
   LessonCover,
   LessonHeading,
   LessonFigure,
@@ -37,8 +36,12 @@ export default function CssStylingLesson() {
         url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage="https://frontend.ro/seo/styling-methods.jpg"
       />
-      <Lesson id={lessonInfo.id} title={lessonInfo.title} chapters={chapters}>
-        <LessonContributors className="absolute" contributors={lessonInfo.contributors} />
+      <Lesson
+        id={lessonInfo.id}
+        title={lessonInfo.title}
+        chapters={chapters}
+        contributors={lessonInfo.contributors ?? []}
+      >
         <LessonCover>
           <div
             // eslint-disable-next-line react/no-danger

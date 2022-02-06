@@ -33,7 +33,7 @@ export default function VideoAndAudioLesson() {
         shareImage={seoImage}
       />
       <Lesson
-        withExercises={false}
+        withExercises={lessonInfo.withExercises}
         id={lessonInfo.id}
         title={lessonInfo.title}
         chapters={lessonInfo.chapters ?? []}

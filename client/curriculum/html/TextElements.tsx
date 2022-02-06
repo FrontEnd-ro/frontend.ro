@@ -28,6 +28,7 @@ export default function TextsLesson() {
         id={lessonInfo.id}
         title={lessonInfo.title}
         chapters={lessonInfo.chapters ?? []}
+        withExercises={lessonInfo.withExercises}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>

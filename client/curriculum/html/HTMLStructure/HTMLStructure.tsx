@@ -35,7 +35,7 @@ function HTMLStructure() {
         id={lessonInfo.id}
         title={lessonInfo.title}
         chapters={lessonInfo.chapters ?? []}
-        withExercises={false}
+        withExercises={lessonInfo.withExercises}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>

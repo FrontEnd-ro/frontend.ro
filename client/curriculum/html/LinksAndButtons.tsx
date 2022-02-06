@@ -35,7 +35,7 @@ export default function LinksAndButtonsLesson() {
         id={lessonInfo.id}
         title={lessonInfo.title}
         chapters={lessonInfo.chapters ?? []}
-        withExercises
+        withExercises={lessonInfo.withExercises}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>

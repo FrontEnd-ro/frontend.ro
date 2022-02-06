@@ -28,6 +28,7 @@ export type LessonDescription = {
       id: string
     }[]
   }[];
+  withExercises?: boolean;
 };
 
 export const LESSONS: LessonDescription[] = [
@@ -40,6 +41,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/intro/despre-noi',
     type: 'intro',
     contributors: [Pava],
+    withExercises: false,
     cover: '/images/lessons/lesson-0__cover.svg',
     chapters: [
       { title: 'Ce e FrontEnd.ro?', id: 'introducere' },
@@ -79,6 +81,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/intro/vs-code',
     type: 'intro',
     contributors: [Diana],
+    withExercises: false,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
     chapters: [
       { title: 'Downloadează-l și instalează-l', id: 'downloadeaza-si-instaleaza' },
@@ -104,6 +107,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/html/despre-html',
     type: 'html',
     contributors: [CatalinPopusoi],
+    withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/lesson-gallery__cover.png`,
     chapters: [
       { title: 'O simplă analogie', id: 'analogie' },
@@ -122,6 +126,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/html/structura-pagina-html',
     type: 'html',
     contributors: [IulianRedinciuc, Pava],
+    withExercises: false,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
     chapters: [
       { title: 'Structura de bază', id: 'structura' },
@@ -139,6 +144,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/html/validare',
     type: 'html',
     contributors: [Pava],
+    withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/lesson-gallery__cover.png`,
     chapters: [
       { title: 'Cum validăm o pagină HTML?', id: 'cum-validam' },
@@ -155,6 +161,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/html/texte',
     type: 'html',
     contributors: [Diana],
+    withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
     chapters: [
       { title: 'Titluri (Headings)', id: 'titluri' },
@@ -173,6 +180,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/html/linkuri-si-butoane',
     type: 'html',
     contributors: [Diana],
+    withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/lesson-gallery__cover.png`,
     chapters: [
       { title: '<a> element', id: 'a-element' },
@@ -210,6 +218,7 @@ export const LESSONS: LessonDescription[] = [
     description: 'Hai să vorbim despre cele 3 tipuri de liste și când să-l folosești pe fiecare.',
     url: '/html/liste',
     contributors: [Diana],
+    withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
     type: 'html',
     chapters: [
@@ -235,6 +244,7 @@ export const LESSONS: LessonDescription[] = [
       'Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru a crea layout-uri mai complexe. Aici intervin elementele de tip “container”.',
     url: '/html/containere',
     contributors: [Pava],
+    withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
     type: 'html',
     chapters: [
@@ -262,6 +272,7 @@ export const LESSONS: LessonDescription[] = [
     description:
       'Învață să adaugi și să optimizezi imagini în paginile Web.',
     contributors: [Pava],
+    withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
     url: '/html/imagini',
     type: 'html',
@@ -290,6 +301,7 @@ export const LESSONS: LessonDescription[] = [
     description: 'Imaginile aduc mai multă viață site-urilor noastre, dar putem merge un pas mai departe folosind elemente video și audio.',
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/video-audio/lesson-gallery__cover__1200w.png`,
     contributors: [SebastianLatkolic, Pava],
+    withExercises: false,
     url: '/html/audio-video',
     type: 'html',
     chapters: [
@@ -321,6 +333,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/html/formulare',
     description: 'Cu ce elemente putem construi formulare moderne, și care sunt cele mai bune practici legate de acestea?',
     contributors: [RobertParasca, Pava],
+    withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
     type: 'html',
     chapters: [
@@ -367,6 +380,7 @@ export const LESSONS: LessonDescription[] = [
     cover: '/images/lessons/styling-methods__cover.svg',
     type: 'css',
     contributors: [DanielHutanu],
+    withExercises: true,
     chapters: [
       { title: 'CSS Inline', id: 'css-inline' },
       {
@@ -396,6 +410,7 @@ export const LESSONS: LessonDescription[] = [
     url: '/css/box-model',
     type: 'css',
     contributors: [CatalinPopusoi],
+    withExercises: false,
     chapters: [
       { title: 'Componentele Box Model', id: 'componentele-box-model' },
       { title: 'Border', id: 'border' },

@@ -37,7 +37,7 @@ export default function Lesson0() {
         id={lessonInfo.id}
         title={lessonInfo.title}
         chapters={lessonInfo.chapters ?? []}
-        withExercises={false}
+        withExercises={lessonInfo.withExercises}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover resizeOffset={100}>

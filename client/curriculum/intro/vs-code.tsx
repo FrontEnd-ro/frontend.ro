@@ -30,7 +30,7 @@ export default function VSCodeLesson() {
       />
       <Lesson
         id={lessonInfo.id}
-        withExercises={false}
+        withExercises={lessonInfo.withExercises}
         title={lessonInfo.title}
         chapters={lessonInfo.chapters ?? []}
         contributors={contributors ?? []}

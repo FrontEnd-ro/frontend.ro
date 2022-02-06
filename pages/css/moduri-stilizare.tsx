@@ -5,6 +5,7 @@ import StylingMethodsContent from '~/curriculum/css/StylingMethods';
 
 const StylingMethodsLesson = () => {
   const lessonInfo = getLessonById('moduri-stilizare');
+  return (
     <>
       <SEOTags
         title={`${lessonInfo.title} | Lecție CSS`}
@@ -15,7 +16,8 @@ const StylingMethodsLesson = () => {
       <Lesson lessonInfo={lessonInfo}>
         <StylingMethodsContent />
       </Lesson>
-    </>;
+    </>
+  );
 };
 
 export default StylingMethodsLesson;

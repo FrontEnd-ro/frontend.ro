@@ -10,32 +10,19 @@ import { LessonMenu } from '~/components/lessons';
 
 import styles from './Lesson.module.scss';
 import { withSmoothScroll } from '~/services/Hooks';
-import { getLessonById, GITHUB_URL } from '~/services/Constants';
+import { getLessonById, GITHUB_URL, LessonDescription } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
 import { Chapter } from '../TableOfContents';
 import LessonService from '~/services/api/Lesson.service';
 import LessonContent from './LessonContent/LessonContent';
-import { Contributor } from '~/services/contributors';
-
-interface Props {
-  id: string;
-  title: string;
-  chapters: { title: string; id: string; }[];
-  contributors: Contributor[];
-  withExercises?: boolean;
-}
 
 export default function Lesson({
-  id,
+  lessonInfo,
   children,
-  title,
-  chapters,
-  contributors,
-  withExercises = true,
-}: PropsWithChildren<Props>) {
+}: PropsWithChildren<{ lessonInfo: LessonDescription }>) {
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const lesson = getLessonById(id);
+  const lesson = getLessonById(lessonInfo.id);
 
   withSmoothScroll(articleWrapper);
 
@@ -64,11 +51,11 @@ export default function Lesson({
     }
   };
 
-  const chaptersWithHref = parseChapters(chapters, withExercises);
+  const chaptersWithHref = parseChapters(lessonInfo.chapters ?? [], lessonInfo.withExercises);
 
   useEffect(() => {
     LessonService
-      .increaseViews(id)
+      .increaseViews(lessonInfo.id)
       .catch((err) => {
         console.error('[Lesson.tsx] got while trying to update view count', err);
       });
@@ -81,14 +68,14 @@ export default function Lesson({
         isOpen={isMenuOpen}
         close={() => setIsMenuOpen(false)}
         onScrollTop={scrollTop}
-        title={title}
+        title={lessonInfo.title}
         className={styles['lesson-menu']}
         chapters={chaptersWithHref}
       />
       <main>
         <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} withNavMenu />
         <div ref={articleWrapper} className={styles['article-wrapper']}>
-          <LessonContent title={title} contributors={contributors}>
+          <LessonContent title={lessonInfo.title} contributors={lessonInfo.contributors ?? []}>
             {children}
           </LessonContent>
           <div className="my-5 text-right mr-2">
@@ -100,7 +87,7 @@ export default function Lesson({
               </a>
             </p>
           </div>
-          {withExercises && <LessonExercises lessonId={id} />}
+          {lessonInfo.withExercises === true && <LessonExercises lessonId={lessonInfo.id} />}
           <Footer />
         </div>
       </main>

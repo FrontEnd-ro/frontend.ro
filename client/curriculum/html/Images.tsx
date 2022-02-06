@@ -20,24 +20,6 @@ import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 import List from '~/components/List';
 
-const chapters = [
-  { title: 'Elementul <img>', id: 'elementul-img' },
-  { title: 'Width & Height', id: 'width-height' },
-  { title: 'Lazy loading', id: 'lazy-loading' },
-  {
-    title: 'Imagini responsive',
-    id: 'imagini-responsive',
-    subchapters: [{
-      title: 'Atributul srcset',
-      id: 'srcset',
-    }, {
-      title: 'Proprietatea image-set',
-      id: 'image-set',
-    }],
-  },
-  { title: 'Elementul <picture>', id: 'elementul-picture' },
-];
-
 const sizesTable: LessonTableProps = {
   head: ['JPG', 'WebP', 'AVIF'],
   side: ['4000 x 2666', '2000 x 1333', '800 x 533'],
@@ -74,7 +56,7 @@ export default function ImagesLesson() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>

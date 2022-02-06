@@ -15,21 +15,6 @@ import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 import List from '~/components/List';
 
-const chapters = [
-  { title: 'Tipuri de liste', id: 'tipuri-de-liste' },
-  {
-    title: 'Liste neordonate',
-    id: 'liste-neordonate',
-  },
-  { title: 'Liste ordonate', id: 'liste-ordonate' },
-  {
-    title: 'Atributele acceptate de listele ordonate',
-    id: 'atributele-acceptate-de-listele-ordonate',
-  },
-  { title: 'Sub-liste', id: 'sub-liste' },
-  { title: 'Bonus tips și concluzii', id: 'bonus-tips-si-concluzii' },
-];
-
 export default function ListsLesson() {
   const lessonInfo = getLessonById('liste');
 
@@ -44,7 +29,7 @@ export default function ListsLesson() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>

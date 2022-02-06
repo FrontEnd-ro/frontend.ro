@@ -17,28 +17,6 @@ import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 import List from '~/components/List';
 
-const chapters = [
-  {
-    title: 'Elementul <audio>',
-    id: 'audio-element',
-    subchapters: [{
-      title: 'Atributele elementului <audio>',
-      id: 'atributele-elementului-audio',
-    }],
-  },
-  {
-    title: 'Elementul <video>',
-    id: 'video-element',
-    subchapters: [{
-      title: 'Atributele elementului <video>',
-      id: 'atributele-elementului-video',
-    }, {
-      title: 'Subtitrări sau Captions',
-      id: 'subtitles-captions',
-    }],
-  },
-];
-
 export default function VideoAndAudioLesson() {
   const lessonInfo = getLessonById('audio-video');
 
@@ -58,7 +36,7 @@ export default function VideoAndAudioLesson() {
         withExercises={false}
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>
@@ -71,8 +49,8 @@ export default function VideoAndAudioLesson() {
           noi? Ei bine, hai să vedem cum putem face asta.
         </LessonFirstSentence>
         <section>
-          <LessonHeading as="h2" id={chapters[0].id}>
-            {chapters[0].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+            {lessonInfo.chapters[0].title}
           </LessonHeading>
           <p>
             Elementul
@@ -169,8 +147,8 @@ export default function VideoAndAudioLesson() {
 
         </section>
         <section>
-          <LessonHeading as="h3" id={chapters[0].subchapters[0].id}>
-            {chapters[0].subchapters[0].title}
+          <LessonHeading as="h3" id={lessonInfo.chapters[0].subchapters[0].id}>
+            {lessonInfo.chapters[0].subchapters[0].title}
           </LessonHeading>
           <p>
             Pentru a vedea lista întreaga a atributelor,
@@ -235,8 +213,8 @@ export default function VideoAndAudioLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[1].id}>
-            {chapters[1].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+            {lessonInfo.chapters[1].title}
           </LessonHeading>
           <p>
             Elementul
@@ -292,8 +270,8 @@ export default function VideoAndAudioLesson() {
           />
         </section>
         <section>
-          <LessonHeading as="h3" id={chapters[1].subchapters[0].id}>
-            {chapters[1].subchapters[0].title}
+          <LessonHeading as="h3" id={lessonInfo.chapters[1].subchapters[0].id}>
+            {lessonInfo.chapters[1].subchapters[0].title}
           </LessonHeading>
           <p>
             Trebuie să știi că toate
@@ -372,8 +350,8 @@ export default function VideoAndAudioLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h3" id={chapters[1].subchapters[1].id}>
-            {chapters[1].subchapters[1].title}
+          <LessonHeading as="h3" id={lessonInfo.chapters[1].subchapters[1].id}>
+            {lessonInfo.chapters[1].subchapters[1].title}
           </LessonHeading>
           <p>
             Unui element video putem să-i atașăm subtitrări sau captions.

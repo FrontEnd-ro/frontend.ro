@@ -16,15 +16,6 @@ import List from '~/components/List';
 
 import styles from './AboutHtml.module.scss';
 
-const chapters = [
-  { title: 'O simplă analogie', id: 'analogie' },
-  { title: 'Ce este HTML?', id: 'intro' },
-  { title: 'Elemente', id: 'elemente' },
-  { title: 'Atribute', id: 'atribute' },
-  { title: 'Relații de rudenie', id: 'relatii' },
-  { title: 'Resurse', id: 'resurse' },
-];
-
 export default function AboutHtmlLesson() {
   const lessonInfo = getLessonById('despre-html');
 
@@ -41,7 +32,7 @@ export default function AboutHtmlLesson() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>
@@ -64,8 +55,8 @@ export default function AboutHtmlLesson() {
           ei bine fiecare are propriul scop bine definit.
         </LessonFirstSentence>
         <section>
-          <LessonHeading as="h2" id={chapters[0].id}>
-            {chapters[0].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+            {lessonInfo.chapters[0].title}
           </LessonHeading>
 
           <div className="my-10">
@@ -155,8 +146,8 @@ export default function AboutHtmlLesson() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[1].id}>
-            {chapters[1].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+            {lessonInfo.chapters[1].title}
           </LessonHeading>
           <p>
             <strong>HTML (Hyper Text Markup Language)</strong>
@@ -176,8 +167,8 @@ export default function AboutHtmlLesson() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[2].id}>
-            {chapters[2].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[2].id}>
+            {lessonInfo.chapters[2].title}
           </LessonHeading>
           <p>
             Orice fișier HTML este construit din elemente, numite și
@@ -273,8 +264,8 @@ export default function AboutHtmlLesson() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[3].id}>
-            {chapters[3].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[3].id}>
+            {lessonInfo.chapters[3].title}
           </LessonHeading>
           <p>
             Fiecare element poate avea o serie de atribute prin care noi putem fie
@@ -315,8 +306,8 @@ export default function AboutHtmlLesson() {
           />
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[4].id}>
-            {chapters[4].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[4].id}>
+            {lessonInfo.chapters[4].title}
           </LessonHeading>
           <p>
             Bineințeles că o aplicatie web nu contine doar unul sau două elemente.
@@ -386,8 +377,8 @@ export default function AboutHtmlLesson() {
         </section>
         <div className="dots" />
         <section>
-          <LessonHeading as="h2" id={chapters[5].id}>
-            {chapters[5].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[5].id}>
+            {lessonInfo.chapters[5].title}
           </LessonHeading>
           <p>
             Ceea ce am prezentat mai sus este doar vârful iceberg-ului.

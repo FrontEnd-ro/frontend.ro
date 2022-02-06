@@ -13,14 +13,6 @@ import Highlight from '~/components/Highlight/Highlight';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 
-const chapters = [
-  { title: 'Titluri (Headings)', id: 'titluri' },
-  { title: 'Paragrafe', id: 'paragrafe' },
-  { title: 'Elementul <hr>', id: 'elementul-hr' },
-  { title: 'Citate', id: 'citate' },
-  { title: 'Elementele <em> & <strong>', id: 'em-strong' },
-];
-
 export default function TextsLesson() {
   const lessonInfo = getLessonById('texte');
 
@@ -35,7 +27,7 @@ export default function TextsLesson() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>

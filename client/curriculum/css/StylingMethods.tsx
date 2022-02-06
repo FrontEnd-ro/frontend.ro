@@ -15,16 +15,6 @@ import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 import List from '~/components/List';
 
-const chapters = [
-  { title: 'CSS Inline', id: 'css-inline' },
-  {
-    title: 'CSS Intern',
-    id: 'css-intern',
-  },
-  { title: 'CSS Extern', id: 'css-extern' },
-  { title: 'BONUS', id: 'bonus' },
-];
-
 export default function CssStylingLesson() {
   const lessonInfo = getLessonById('moduri-stilizare');
 
@@ -39,7 +29,7 @@ export default function CssStylingLesson() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>

@@ -20,6 +20,14 @@ export type LessonDescription = {
   // 👇 Optional properties for lessons not written yet
   cover?: string;
   contributors?: Contributor[];
+  chapters?: {
+    title: string;
+    id: string;
+    subchapters?: {
+      title: string;
+      id: string
+    }[]
+  }[];
 };
 
 export const LESSONS: LessonDescription[] = [
@@ -33,6 +41,16 @@ export const LESSONS: LessonDescription[] = [
     type: 'intro',
     contributors: [Pava],
     cover: '/images/lessons/lesson-0__cover.svg',
+    chapters: [
+      { title: 'Ce e FrontEnd.ro?', id: 'introducere' },
+      { title: 'De ce e FrontEnd.ro diferit?', id: 'de-ce-suntem-diferiti' },
+      { title: 'De ce e FrontEnd.ro gratuit?', id: 'de-ce-e-frontend-gratuit' },
+      { title: 'Cum pot să ajut?', id: 'cum-pot-sa-ajut' },
+      { title: 'Skill-uri și concepte', id: 'skilluri-concepte' },
+      { title: 'Cum să folosești platforma', id: 'cum-sa-folosesti-platforma' },
+      { title: 'Tool-uri necesare', id: 'tooluri-necesare' },
+      { title: 'Resurse recomandate', id: 'resurse-recomandate' },
+    ],
   },
   {
     id: 'vreau-sa-ajut',
@@ -62,6 +80,19 @@ export const LESSONS: LessonDescription[] = [
     type: 'intro',
     contributors: [Diana],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
+    chapters: [
+      { title: 'Downloadează-l și instalează-l', id: 'downloadeaza-si-instaleaza' },
+      { title: 'Workspace setup', id: 'workspace-setup' },
+      { title: 'Componența VisualStudio Code', id: 'componenta-VSCode' },
+      { title: 'Scurtături', id: 'scurtaturi' },
+      {
+        title: 'Indentarea și formatarea codului',
+        id: 'indentarea-si-formatarea-codului',
+      },
+      { title: 'Formatarea codului la save', id: 'formatarea-codului-la-save' },
+      { title: 'Extensii', id: 'extensii' },
+      { title: 'BONUS - customizare', id: 'bonus-customizare' },
+    ],
   },
   /** HTML lessons */
   {
@@ -74,6 +105,14 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
     contributors: [CatalinPopusoi],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/lesson-gallery__cover.png`,
+    chapters: [
+      { title: 'O simplă analogie', id: 'analogie' },
+      { title: 'Ce este HTML?', id: 'intro' },
+      { title: 'Elemente', id: 'elemente' },
+      { title: 'Atribute', id: 'atribute' },
+      { title: 'Relații de rudenie', id: 'relatii' },
+      { title: 'Resurse', id: 'resurse' },
+    ],
   },
   {
     id: 'structura-pagina-html',
@@ -84,6 +123,12 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
     contributors: [IulianRedinciuc, Pava],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
+    chapters: [
+      { title: 'Structura de bază', id: 'structura' },
+      { title: 'Elementul <head>', id: 'head' },
+      { title: 'Elementul <body>', id: 'body' },
+      { title: 'Rezumat', id: 'rezumat' },
+    ],
   },
   {
     id: 'validare',
@@ -95,6 +140,11 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
     contributors: [Pava],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/lesson-gallery__cover.png`,
+    chapters: [
+      { title: 'Cum validăm o pagină HTML?', id: 'cum-validam' },
+      { title: 'De ce merg site-urile invalide?', id: 'pagini-invalide' },
+      { title: 'De ce e importantă validarea?', id: 'de-ce-validam' },
+    ],
   },
   {
     id: 'texte',
@@ -106,6 +156,13 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
     contributors: [Diana],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
+    chapters: [
+      { title: 'Titluri (Headings)', id: 'titluri' },
+      { title: 'Paragrafe', id: 'paragrafe' },
+      { title: 'Elementul <hr>', id: 'elementul-hr' },
+      { title: 'Citate', id: 'citate' },
+      { title: 'Elementele <em> & <strong>', id: 'em-strong' },
+    ],
   },
   {
     id: 'linkuri-si-butoane',
@@ -117,6 +174,34 @@ export const LESSONS: LessonDescription[] = [
     type: 'html',
     contributors: [Diana],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/lesson-gallery__cover.png`,
+    chapters: [
+      { title: '<a> element', id: 'a-element' },
+      {
+        title: 'Exemple unde folosim tag-ul a',
+        id: 'exemple-unde-folosim-tagul-a',
+      },
+      {
+        title: 'Link-uri către email-uri',
+        id: 'emails',
+      },
+      {
+        title: 'Link-uri către numere de telefon',
+        id: 'tel',
+      },
+      {
+        title: 'Link-uri de download',
+        id: 'download',
+      },
+      {
+        title: 'Atributul target=”_blank”',
+        id: 'atributul-target-blank',
+      },
+      { title: 'Întrebări BONUS', id: 'intrebari-bonus' },
+      { title: '<button> element', id: 'button-element' },
+      { title: 'Atributul type', id: 'atributul-type' },
+      { title: 'Atributul disabled', id: 'atributul-disabled' },
+      { title: 'Link-uri vs butoane', id: 'linkuri-vs-butoane' },
+    ],
   },
   {
     id: 'liste',
@@ -127,6 +212,20 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Diana],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
     type: 'html',
+    chapters: [
+      { title: 'Tipuri de liste', id: 'tipuri-de-liste' },
+      {
+        title: 'Liste neordonate',
+        id: 'liste-neordonate',
+      },
+      { title: 'Liste ordonate', id: 'liste-ordonate' },
+      {
+        title: 'Atributele acceptate de listele ordonate',
+        id: 'atributele-acceptate-de-listele-ordonate',
+      },
+      { title: 'Sub-liste', id: 'sub-liste' },
+      { title: 'Bonus tips și concluzii', id: 'bonus-tips-si-concluzii' },
+    ],
   },
   {
     id: 'containere',
@@ -138,6 +237,23 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Pava],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
     type: 'html',
+    chapters: [
+      {
+        title: 'De ce avem nevoie de aceste elemente?',
+        id: 'why',
+      }, {
+        title: 'Header, Main și Footer',
+        id: 'header-main-footer',
+      },
+      { title: 'Nav', id: 'nav' },
+      { title: 'Article', id: 'article' },
+      { title: 'Section', id: 'section' },
+      { title: 'Div', id: 'div' },
+      {
+        title: 'De ce e important ce container folosim?',
+        id: 'importanta-containerelor',
+      },
+    ],
   },
   {
     id: 'imagini',
@@ -149,6 +265,23 @@ export const LESSONS: LessonDescription[] = [
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
     url: '/html/imagini',
     type: 'html',
+    chapters: [
+      { title: 'Elementul <img>', id: 'elementul-img' },
+      { title: 'Width & Height', id: 'width-height' },
+      { title: 'Lazy loading', id: 'lazy-loading' },
+      {
+        title: 'Imagini responsive',
+        id: 'imagini-responsive',
+        subchapters: [{
+          title: 'Atributul srcset',
+          id: 'srcset',
+        }, {
+          title: 'Proprietatea image-set',
+          id: 'image-set',
+        }],
+      },
+      { title: 'Elementul <picture>', id: 'elementul-picture' },
+    ],
   },
   {
     id: 'audio-video',
@@ -159,6 +292,27 @@ export const LESSONS: LessonDescription[] = [
     contributors: [SebastianLatkolic, Pava],
     url: '/html/audio-video',
     type: 'html',
+    chapters: [
+      {
+        title: 'Elementul <audio>',
+        id: 'audio-element',
+        subchapters: [{
+          title: 'Atributele elementului <audio>',
+          id: 'atributele-elementului-audio',
+        }],
+      },
+      {
+        title: 'Elementul <video>',
+        id: 'video-element',
+        subchapters: [{
+          title: 'Atributele elementului <video>',
+          id: 'atributele-elementului-video',
+        }, {
+          title: 'Subtitrări sau Captions',
+          id: 'subtitles-captions',
+        }],
+      },
+    ],
   },
   {
     id: 'formulare',
@@ -169,6 +323,30 @@ export const LESSONS: LessonDescription[] = [
     contributors: [RobertParasca, Pava],
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
     type: 'html',
+    chapters: [
+      { title: 'Elementul <form>', id: 'form' },
+      {
+        title: 'Elementul <input>',
+        id: 'input',
+        subchapters: [{
+          title: 'Radio input',
+          id: 'radio',
+        }],
+      },
+      { title: 'Elementul <textarea>', id: 'textarea' },
+      { title: 'Elementul <select>', id: 'select' },
+      {
+        title: 'Bune practici',
+        id: 'bune-practici',
+        subchapters: [{
+          title: 'Elementul <label>',
+          id: 'label',
+        }, {
+          title: 'Submit button',
+          id: 'submit-button',
+        }],
+      },
+    ],
   },
   /** CSS Lessons */
   {
@@ -189,6 +367,15 @@ export const LESSONS: LessonDescription[] = [
     cover: '/images/lessons/styling-methods__cover.svg',
     type: 'css',
     contributors: [DanielHutanu],
+    chapters: [
+      { title: 'CSS Inline', id: 'css-inline' },
+      {
+        title: 'CSS Intern',
+        id: 'css-intern',
+      },
+      { title: 'CSS Extern', id: 'css-extern' },
+      { title: 'BONUS', id: 'bonus' },
+    ],
   },
   {
     id: 'taguri-clase-si-id-uri',
@@ -209,6 +396,15 @@ export const LESSONS: LessonDescription[] = [
     url: '/css/box-model',
     type: 'css',
     contributors: [CatalinPopusoi],
+    chapters: [
+      { title: 'Componentele Box Model', id: 'componentele-box-model' },
+      { title: 'Border', id: 'border' },
+      { title: 'Margin', id: 'margin' },
+      { title: 'Padding', id: 'padding' },
+      { title: 'DevTools Box Model', id: 'devtools-box-model' },
+      { title: 'Box-sizing', id: 'box-sizing' },
+      { title: 'Box Model interactiv', id: 'box-model-interactiv' },
+    ],
   },
   {
     id: 'tranzitii',

@@ -18,13 +18,6 @@ import ResponsiveFlex from '~/components/ResponsiveFlex';
 import List from '~/components/List';
 import styles from './HTMLStructure.module.scss';
 
-const chapters = [
-  { title: 'Structura de bază', id: 'structura' },
-  { title: 'Elementul <head>', id: 'head' },
-  { title: 'Elementul <body>', id: 'body' },
-  { title: 'Rezumat', id: 'rezumat' },
-];
-
 function HTMLStructure() {
   const lessonInfo = getLessonById('structura-pagina-html');
 
@@ -41,7 +34,7 @@ function HTMLStructure() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         withExercises={false}
         contributors={lessonInfo.contributors ?? []}
       >

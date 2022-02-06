@@ -18,23 +18,6 @@ import List from '~/components/List';
 function Containers() {
   const lessonInfo = getLessonById('containere');
 
-  const chapters = [
-    {
-      title: 'De ce avem nevoie de aceste elemente?',
-      id: 'why',
-    }, {
-      title: 'Header, Main și Footer',
-      id: 'header-main-footer',
-    },
-    { title: 'Nav', id: 'nav' },
-    { title: 'Article', id: 'article' },
-    { title: 'Section', id: 'section' },
-    { title: 'Div', id: 'div' },
-    {
-      title: 'De ce e important ce container folosim?',
-      id: 'importanta-containerelor',
-    },
-  ];
   // SEO image must be exactly 1200x630
   const seoImage = `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`;
   const coverImage = `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_2400w.jpg`;
@@ -52,7 +35,7 @@ function Containers() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         withExercises
         contributors={lessonInfo.contributors ?? []}
       >
@@ -64,8 +47,8 @@ function Containers() {
           a crea layout-uri mai complexe. Aici intervin elementele de tip “container”.
         </LessonFirstSentence>
         <section>
-          <LessonHeading as="h2" id={chapters[0].id}>
-            {chapters[0].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+            {lessonInfo.chapters[0].title}
           </LessonHeading>
           <p>
             Fiecare pagina Web are un layout specific - adică o structură
@@ -113,8 +96,8 @@ function Containers() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[1].id}>
-            {chapters[1].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+            {lessonInfo.chapters[1].title}
           </LessonHeading>
           <p> Așa cum sugerează și numele lor: </p>
           <div className="float-right">
@@ -180,8 +163,8 @@ function Containers() {
           />
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[2].id}>
-            {chapters[2].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[2].id}>
+            {lessonInfo.chapters[2].title}
           </LessonHeading>
           <p>
             Așa cum îi spune și numele, aici vom grupa elemente de navigație către
@@ -202,8 +185,8 @@ function Containers() {
           />
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[3].id}>
-            {chapters[3].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[3].id}>
+            {lessonInfo.chapters[3].title}
           </LessonHeading>
           <p>
             Este folosit pentru a marca un articol - cel mai des în
@@ -225,8 +208,8 @@ function Containers() {
           />
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[4].id}>
-            {chapters[4].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[4].id}>
+            {lessonInfo.chapters[4].title}
           </LessonHeading>
           <p>
             Elementul
@@ -262,8 +245,8 @@ function Containers() {
           />
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[5].id}>
-            {chapters[5].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[5].id}>
+            {lessonInfo.chapters[5].title}
           </LessonHeading>
           <p>
             Și am ajuns în sfârșit și la
@@ -326,8 +309,8 @@ function Containers() {
           />
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[6].id}>
-            {chapters[6].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[6].id}>
+            {lessonInfo.chapters[6].title}
           </LessonHeading>
           <p>
             La prima vedere ai putea crede că nu prea contează ce containere folosim.

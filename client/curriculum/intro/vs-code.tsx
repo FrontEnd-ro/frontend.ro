@@ -16,19 +16,6 @@ import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
 
 const contributors = [Diana];
-const chapters = [
-  { title: 'Downloadează-l și instalează-l', id: 'downloadeaza-si-instaleaza' },
-  { title: 'Workspace setup', id: 'workspace-setup' },
-  { title: 'Componența VisualStudio Code', id: 'componenta-VSCode' },
-  { title: 'Scurtături', id: 'scurtaturi' },
-  {
-    title: 'Indentarea și formatarea codului',
-    id: 'indentarea-si-formatarea-codului',
-  },
-  { title: 'Formatarea codului la save', id: 'formatarea-codului-la-save' },
-  { title: 'Extensii', id: 'extensii' },
-  { title: 'BONUS - customizare', id: 'bonus-customizare' },
-];
 
 export default function VSCodeLesson() {
   const lessonInfo = getLessonById('vs-code');
@@ -45,7 +32,7 @@ export default function VSCodeLesson() {
         id={lessonInfo.id}
         withExercises={false}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         contributors={contributors ?? []}
       >
         <LessonCover>

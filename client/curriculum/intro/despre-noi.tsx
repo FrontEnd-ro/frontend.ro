@@ -15,17 +15,6 @@ import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
 import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
 
-let chapters = [
-  { title: 'Ce e FrontEnd.ro?', id: 'introducere' },
-  { title: 'De ce e FrontEnd.ro diferit?', id: 'de-ce-suntem-diferiti' },
-  { title: 'De ce e FrontEnd.ro gratuit?', id: 'de-ce-e-frontend-gratuit' },
-  { title: 'Cum pot să ajut?', id: 'cum-pot-sa-ajut' },
-  { title: 'Skill-uri și concepte', id: 'skilluri-concepte' },
-  { title: 'Cum să folosești platforma', id: 'cum-sa-folosesti-platforma' },
-  { title: 'Tool-uri necesare', id: 'tooluri-necesare' },
-  { title: 'Resurse recomandate', id: 'resurse-recomandate' },
-];
-
 export default function Lesson0() {
   const router = useRouter();
   const [urlToShare, setUrlToShare] = useState(router.pathname);
@@ -47,7 +36,7 @@ export default function Lesson0() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         withExercises={false}
         contributors={lessonInfo.contributors ?? []}
       >

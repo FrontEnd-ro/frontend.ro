@@ -18,16 +18,6 @@ import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 import List from '~/components/List';
 
-const chapters = [
-  { title: 'Componentele Box Model', id: 'componentele-box-model' },
-  { title: 'Border', id: 'border' },
-  { title: 'Margin', id: 'margin' },
-  { title: 'Padding', id: 'padding' },
-  { title: 'DevTools Box Model', id: 'devtools-box-model' },
-  { title: 'Box-sizing', id: 'box-sizing' },
-  { title: 'Box Model interactiv', id: 'box-model-interactiv' },
-];
-
 export default function BoxModelLesson() {
   const lessonInfo = getLessonById('box-model');
 
@@ -42,7 +32,7 @@ export default function BoxModelLesson() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         withExercises={false}
         contributors={lessonInfo.contributors ?? []}
       >

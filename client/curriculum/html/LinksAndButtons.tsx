@@ -20,35 +20,6 @@ import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/Constants';
 import List from '~/components/List';
 
-const chapters = [
-  { title: '<a> element', id: 'a-element' },
-  {
-    title: 'Exemple unde folosim tag-ul a',
-    id: 'exemple-unde-folosim-tagul-a',
-  },
-  {
-    title: 'Link-uri către email-uri',
-    id: 'emails',
-  },
-  {
-    title: 'Link-uri către numere de telefon',
-    id: 'tel',
-  },
-  {
-    title: 'Link-uri de download',
-    id: 'download',
-  },
-  {
-    title: 'Atributul target=”_blank”',
-    id: 'atributul-target-blank',
-  },
-  { title: 'Întrebări BONUS', id: 'intrebari-bonus' },
-  { title: '<button> element', id: 'button-element' },
-  { title: 'Atributul type', id: 'atributul-type' },
-  { title: 'Atributul disabled', id: 'atributul-disabled' },
-  { title: 'Link-uri vs butoane', id: 'linkuri-vs-butoane' },
-];
-
 export default function LinksAndButtonsLesson() {
   const lessonInfo = getLessonById('linkuri-si-butoane');
 
@@ -63,7 +34,7 @@ export default function LinksAndButtonsLesson() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         withExercises
         contributors={lessonInfo.contributors ?? []}
       >

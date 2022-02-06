@@ -18,12 +18,6 @@ function HTMLValidationLesson() {
   const lessonId = 'validare';
   const lessonInfo = getLessonById(lessonId);
 
-  const chapters = [
-    { title: 'Cum validăm o pagină HTML?', id: 'cum-validam' },
-    { title: 'De ce merg site-urile invalide?', id: 'pagini-invalide' },
-    { title: 'De ce e importantă validarea?', id: 'de-ce-validam' },
-  ];
-
   return (
     <>
       <SEOTags
@@ -37,7 +31,7 @@ function HTMLValidationLesson() {
       <Lesson
         id={lessonId}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         withExercises
         contributors={lessonInfo.contributors ?? []}
       >
@@ -54,8 +48,8 @@ function HTMLValidationLesson() {
           Hai să vedem de ce, și cum ne putem asigura că scriem cod corect.
         </LessonFirstSentence>
         <section>
-          <LessonHeading as="h2" id={chapters[0].id}>
-            {chapters[0].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+            {lessonInfo.chapters[0].title}
           </LessonHeading>
           <p>
             Site-ul
@@ -91,8 +85,8 @@ function HTMLValidationLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[1].id}>
-            {chapters[1].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+            {lessonInfo.chapters[1].title}
           </LessonHeading>
           <p>
             Spre deosebire de alte limbaje,
@@ -156,8 +150,8 @@ function HTMLValidationLesson() {
           />
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[2].id}>
-            {chapters[2].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[2].id}>
+            {lessonInfo.chapters[2].title}
           </LessonHeading>
           <LessonQuote variant="centered">
             Pe scurt, un site valid este un site bine făcut!

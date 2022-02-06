@@ -13,30 +13,6 @@ import CodePenEmbed from '~/components/CodePenEmbed/CodePenEmbed';
 import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
 
-const chapters = [
-  { title: 'Elementul <form>', id: 'form' },
-  {
-    title: 'Elementul <input>',
-    id: 'input',
-    subchapters: [{
-      title: 'Radio input',
-      id: 'radio',
-    }],
-  },
-  { title: 'Elementul <textarea>', id: 'textarea' },
-  { title: 'Elementul <select>', id: 'select' },
-  {
-    title: 'Bune practici',
-    id: 'bune-practici',
-    subchapters: [{
-      title: 'Elementul <label>',
-      id: 'label',
-    }, {
-      title: 'Submit button',
-      id: 'submit-button',
-    }],
-  },
-];
 export default function FormsLesson() {
   const lessonInfo = getLessonById('formulare');
 
@@ -51,7 +27,7 @@ export default function FormsLesson() {
       <Lesson
         id={lessonInfo.id}
         title={lessonInfo.title}
-        chapters={chapters}
+        chapters={lessonInfo.chapters ?? []}
         contributors={lessonInfo.contributors ?? []}
       >
         <LessonCover>
@@ -71,8 +47,8 @@ export default function FormsLesson() {
           cu siguranță ai completat un formular.
         </LessonFirstSentence>
         <section>
-          <LessonHeading as="h2" id={chapters[0].id}>
-            {chapters[0].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+            {lessonInfo.chapters[0].title}
           </LessonHeading>
           <p>
             Indiferent de scopul pentru care construiești un formular,
@@ -113,8 +89,8 @@ export default function FormsLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[1].id}>
-            {chapters[1].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+            {lessonInfo.chapters[1].title}
           </LessonHeading>
           <p>
             Este cel mai popular element folosit în formulare iar prin atributul
@@ -269,8 +245,8 @@ export default function FormsLesson() {
           </section>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[2].id}>
-            {chapters[2].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[2].id}>
+            {lessonInfo.chapters[2].title}
           </LessonHeading>
           <p>
             Este similar cu
@@ -318,8 +294,8 @@ export default function FormsLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[3].id}>
-            {chapters[3].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[3].id}>
+            {lessonInfo.chapters[3].title}
           </LessonHeading>
           <p>
             Cu ajutorul elementului
@@ -367,8 +343,8 @@ export default function FormsLesson() {
           </LessonTip>
         </section>
         <section>
-          <LessonHeading as="h2" id={chapters[4].id}>
-            {chapters[4].title}
+          <LessonHeading as="h2" id={lessonInfo.chapters[4].id}>
+            {lessonInfo.chapters[4].title}
           </LessonHeading>
           <p>
             Așa cum sugerează și numele sunt
@@ -378,8 +354,8 @@ export default function FormsLesson() {
             {' '}
           </p>
           <section>
-            <LessonHeading as="h3" id={chapters[4].subchapters[0].id}>
-              {chapters[4].subchapters[0].title}
+            <LessonHeading as="h3" id={lessonInfo.chapters[4].subchapters[0].id}>
+              {lessonInfo.chapters[4].subchapters[0].title}
             </LessonHeading>
             <p>
               Cu ajutorul acestui element asociem o descriere unui câmp din
@@ -461,8 +437,8 @@ export default function FormsLesson() {
             </List>
           </section>
           <section>
-            <LessonHeading as="h3" id={chapters[4].subchapters[1].id}>
-              {chapters[4].subchapters[1].title}
+            <LessonHeading as="h3" id={lessonInfo.chapters[4].subchapters[1].id}>
+              {lessonInfo.chapters[4].subchapters[1].title}
             </LessonHeading>
             <p>
               O altă bună practică este ca fiecare formular să

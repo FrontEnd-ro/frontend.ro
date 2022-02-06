@@ -69,8 +69,8 @@ export default function VSCodeContent() {
         limbaje/tehnologii.
       </p>
       <section>
-        <LessonHeading as="h3" id="downloadeaza-si-instaleaza">
-          Downloadează-l și instalează-l
+        <LessonHeading as="h3" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <p>
           Dacă dăm click pe link-ul de mai jos, vom fi direcționați către
@@ -90,8 +90,8 @@ export default function VSCodeContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="workspace-setup">
-          Workspace setup
+        <LessonHeading as="h3" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <p>Ok, acum că l-am instalat, vom deschide VS Code.</p>
         <p>
@@ -156,8 +156,8 @@ export default function VSCodeContent() {
         </LessonTip>
       </section>
       <section>
-        <LessonHeading as="h3" id="componenta-VSCode">
-          Componența VisualStudio Code
+        <LessonHeading as="h3" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <p>
           OK, acum că am aflat cum putem deschide un proiect și crea fișiere
@@ -236,8 +236,8 @@ export default function VSCodeContent() {
         </List>
       </section>
       <section>
-        <LessonHeading as="h3" id="scurtaturi">
-          Scurtături
+        <LessonHeading as="h3" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           Ca și programatori
@@ -267,8 +267,8 @@ export default function VSCodeContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="indentarea-si-formatarea-codului">
-          Indentarea și formatarea codului
+        <LessonHeading as="h3" id={lessonInfo.chapters[4].id}>
+          {lessonInfo.chapters[4].title}
         </LessonHeading>
         <p>
           Este foarte important să indentăm codul și să îl formatăm de fiecare
@@ -297,8 +297,8 @@ export default function VSCodeContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="formatarea-codului-la-save">
-          Formatarea codului la save
+        <LessonHeading as="h3" id={lessonInfo.chapters[5].id}>
+          {lessonInfo.chapters[5].title}
         </LessonHeading>
         <p>
           Până acum am rulat manual o comandă pentru a formata codul nostru.
@@ -327,8 +327,8 @@ export default function VSCodeContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="extensii">
-          Extensii
+        <LessonHeading as="h3" id={lessonInfo.chapters[6].id}>
+          {lessonInfo.chapters[6].title}
         </LessonHeading>
         <p>
           Extensiile ne permit să adăugăm diverse funcționalități care să vină în sprijinul
@@ -373,8 +373,8 @@ export default function VSCodeContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h3" id="bonus-customizare">
-          BONUS - customizare
+        <LessonHeading as="h3" id={lessonInfo.chapters[7].id}>
+          {lessonInfo.chapters[7].title}
         </LessonHeading>
         <p>
           Sunt multe multe lucruri faine pe care le oferă VS Code. Nu reușim

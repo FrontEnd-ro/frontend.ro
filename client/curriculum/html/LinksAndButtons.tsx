@@ -40,8 +40,8 @@ export default function LinksAndButtonsContent() {
         link-uri în loc de butoane și invers.
       </LessonFirstSentence>
       <section>
-        <LessonHeading as="h2" id="a-element">
-          {'<a> element'}
+        <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <p>
           Elementul
@@ -68,8 +68,8 @@ export default function LinksAndButtonsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="exemple-unde-folosim-tagul-a">
-          Exemple unde folosim tag-ul a
+        <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <LessonHeading as="h3" id="cele-mai-uzuale">
           Cele mai uzuale
@@ -162,8 +162,8 @@ export default function LinksAndButtonsContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="emails">
-          Link-uri către email-uri
+        <LessonHeading as="h3" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <p>
           Sunt situații în care vrem să oferim unui utilizator posibilitatea de a
@@ -198,8 +198,8 @@ export default function LinksAndButtonsContent() {
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/mailto.mp4`}
           alt="Opțiunea mailto pentru a ușura trimiterea de email-uri"
         />
-        <LessonHeading as="h3" id="tel">
-          Link-uri către numere de telefon
+        <LessonHeading as="h3" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           Mai mult, dacă vrem să arătăm în pagină
@@ -232,8 +232,8 @@ export default function LinksAndButtonsContent() {
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/link-to-tel.mp4`}
           alt="Link-uri către numere de telefon"
         />
-        <LessonHeading as="h3" id="download">
-          Link-uri de download
+        <LessonHeading as="h3" id={lessonInfo.chapters[4].id}>
+          {lessonInfo.chapters[4].title}
         </LessonHeading>
         <p>
           Împreuna cu atributul
@@ -266,8 +266,8 @@ export default function LinksAndButtonsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="atributul-target-blank">
-          Atributul target=”_blank”
+        <LessonHeading as="h2" id={lessonInfo.chapters[5].id}>
+          {lessonInfo.chapters[5].title}
         </LessonHeading>
         <p>
           În afară de atributele prezentate, un alt atribut des folosit este
@@ -320,8 +320,8 @@ export default function LinksAndButtonsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="intrebari-bonus">
-          Întrebări BONUS
+        <LessonHeading as="h2" id={lessonInfo.chapters[6].id}>
+          {lessonInfo.chapters[6].title}
         </LessonHeading>
         <p>
           În continuare vom raspunde la câteva întrebări pe care noi ca și
@@ -441,8 +441,8 @@ export default function LinksAndButtonsContent() {
           /> */}
       </section>
       <section>
-        <LessonHeading as="h2" id="button-element">
-          {'<button> element'}
+        <LessonHeading as="h2" id={lessonInfo.chapters[7].id}>
+          {lessonInfo.chapters[7].title}
         </LessonHeading>
         <p>
           Elementul html
@@ -471,8 +471,8 @@ export default function LinksAndButtonsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="atributul-type">
-          Atributul type
+        <LessonHeading as="h2" id={lessonInfo.chapters[8].id}>
+          {lessonInfo.chapters[8].title}
         </LessonHeading>
         <p>
           Cele 2 tipuri de butoane pe care le vom folosi cel mai des în
@@ -525,8 +525,8 @@ export default function LinksAndButtonsContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h2" id="atributul-disabled">
-          Atributul disabled
+        <LessonHeading as="h2" id={lessonInfo.chapters[9].id}>
+          {lessonInfo.chapters[9].title}
         </LessonHeading>
         <p>
           Acest atribut boolean împiedică interactivitatea cu butonul: nu
@@ -583,8 +583,8 @@ export default function LinksAndButtonsContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h2" id="linkuri-vs-butoane">
-          Link-uri versus butoane
+        <LessonHeading as="h2" id={lessonInfo.chapters[10].id}>
+          {lessonInfo.chapters[10].title}
         </LessonHeading>
         <p>
           Ca o scurtă recapitulare, folosim link-uri dacă se schimbă pagina

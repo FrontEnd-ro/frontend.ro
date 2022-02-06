@@ -31,8 +31,8 @@ export default function TextsContent() {
         accentuarea cuvintelor și multe altele.
       </LessonFirstSentence>
       <section>
-        <LessonHeading as="h3" id="titluri">
-          Titluri (Headings)
+        <LessonHeading as="h3" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <p>
           HTML oferă șase elemente pentru titluri (headings), care pot fi marcate
@@ -135,8 +135,8 @@ export default function TextsContent() {
         </LessonTip>
       </section>
       <section>
-        <LessonHeading as="h3" id="paragrafe">
-          Paragrafe
+        <LessonHeading as="h3" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <p>
           Elementele de tip paragraf sunt marcate cu ajutorul tag-ului
@@ -205,8 +205,8 @@ export default function TextsContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="elementul-hr">
-          {'Elementul <hr>'}
+        <LessonHeading as="h3" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <p>
           Elementul
@@ -236,8 +236,8 @@ export default function TextsContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="citate">
-          Citate
+        <LessonHeading as="h3" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           Atunci când vrem să marcăm un text mai lung preluat dintr-o anumită
@@ -291,8 +291,8 @@ export default function TextsContent() {
         </LessonTip>
       </section>
       <section>
-        <LessonHeading as="h3" id="em-strong">
-          {'Elementele <em> & <strong>'}
+        <LessonHeading as="h3" id={lessonInfo.chapters[4].id}>
+          {lessonInfo.chapters[4].title}
         </LessonHeading>
         <p>
           În limbajul obișnuit, subliniem adesea cuvinte pentru a modifica

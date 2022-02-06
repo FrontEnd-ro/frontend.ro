@@ -61,8 +61,8 @@ export default function ImagesContent() {
         în site-urile noastre și care sunt cele mai bune practici legate de acest subiect.
       </LessonFirstSentence>
       <section>
-        <LessonHeading as="h2" id="elementul-img">
-          {'Elementul <img>'}
+        <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <p>
           Primul și cel mai comun mod de a adăuga o imagine este folosind elementul
@@ -137,8 +137,8 @@ export default function ImagesContent() {
         </LessonTip>
       </section>
       <section>
-        <LessonHeading as="h2" id="width-height">
-          Width & Height
+        <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <p>
           De multe ori imaginile de pe site-uri își vor adapta dimensiunea în funcție de
@@ -231,8 +231,8 @@ export default function ImagesContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="lazy-loading">
-          Lazy loading
+        <LessonHeading as="h2" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <LessonQuote>
           Most of the images on the web are downloaded,
@@ -300,8 +300,8 @@ export default function ImagesContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="imagini-responsive">
-          Responsive images
+        <LessonHeading as="h2" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           Am pornit de la imagini simple, am optimizat experiența folosind
@@ -355,8 +355,8 @@ export default function ImagesContent() {
           cât mai inaltă pe ecrane mari: desktop and beyond.
         </p>
         <section>
-          <LessonHeading as="h3" id="srcset">
-            Atributul srcset
+          <LessonHeading as="h3" id={lessonInfo.chapters[3].subchapters[0].id}>
+            {lessonInfo.chapters[3].subchapters[0].title}
           </LessonHeading>
           <p>
             Din fericire putem rezolva această problemă folosindu-ne de atributele
@@ -484,8 +484,8 @@ export default function ImagesContent() {
           </p>
         </section>
         <section>
-          <LessonHeading as="h3" id="image-set">
-            Proprietatea image-set
+          <LessonHeading as="h3" id={lessonInfo.chapters[3].subchapters[1].id}>
+            {lessonInfo.chapters[3].subchapters[1].title}
           </LessonHeading>
           <p>
             Până de curând singurul mod de a face imaginile din CSS (cele puse prin
@@ -544,8 +544,8 @@ export default function ImagesContent() {
         </section>
       </section>
       <section>
-        <LessonHeading as="h2" id="elementul-picture">
-          {'Elementul <picture>'}
+        <LessonHeading as="h2" id={lessonInfo.chapters[4].id}>
+          {lessonInfo.chapters[4].title}
         </LessonHeading>
         <p>
           După cum ai văzut până acum, elementul

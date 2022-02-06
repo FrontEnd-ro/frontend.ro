@@ -36,8 +36,8 @@ function HTMLStructureContent() {
         multe elemente descriptive și nu numai.
       </LessonFirstSentence>
       <section>
-        <LessonHeading as="h2" id="structura">
-          Structura de bază
+        <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <ResponsiveFlex breakpoint={1000}>
           <div>
@@ -99,8 +99,8 @@ function HTMLStructureContent() {
         </ResponsiveFlex>
       </section>
       <section className="my-5">
-        <LessonHeading as="h2" id="head">
-          {'Elementul <head>'}
+        <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <p>
           În
@@ -253,8 +253,8 @@ function HTMLStructureContent() {
         </LessonTip>
       </section>
       <section className="my-5">
-        <LessonHeading as="h2" id="body">
-          {'Elementul <body>'}
+        <LessonHeading as="h2" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <p>
           De la sine prin denumirea lui, elementul body (trupul) este responsabil
@@ -300,8 +300,8 @@ function HTMLStructureContent() {
         </LessonTip>
       </section>
       <section className="my-5">
-        <LessonHeading as="h2" id="rezumat">
-          Rezumat
+        <LessonHeading as="h2" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           În

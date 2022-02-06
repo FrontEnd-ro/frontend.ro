@@ -197,8 +197,8 @@ export default function FormsContent() {
         />
 
         <section>
-          <LessonHeading as="h3" id="radio">
-            Radio input
+          <LessonHeading as="h3" id={lessonInfo.chapters[1].subchapters[0].id}>
+            {lessonInfo.chapters[1].subchapters[0].title}
           </LessonHeading>
           <p>
             Un input ceva mai special decât celelalte este

@@ -34,8 +34,8 @@ export default function ListsContent() {
         accesibil și ușor de întreținut.
       </LessonFirstSentence>
       <section>
-        <LessonHeading as="h3" id="tipuri-de-liste">
-          Tipuri de liste
+        <LessonHeading as="h3" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <p>Există două tipuri de liste des folosite în HTML:</p>
         <List variant="bullets">
@@ -59,8 +59,8 @@ export default function ListsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h3" id="liste-neordonate">
-          Liste neordonate
+        <LessonHeading as="h3" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <p>
           Sunt utilizate cînd un set de elemente pot fi folosite în orice
@@ -126,8 +126,8 @@ export default function ListsContent() {
         </LessonTip>
       </section>
       <section>
-        <LessonHeading as="h3" id="liste-ordonate">
-          Liste ordonate
+        <LessonHeading as="h3" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <p>
           Listele ordonate afișează elementele enumerate într-o ordine
@@ -166,8 +166,8 @@ export default function ListsContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="atributele-acceptate-de-listele-ordonate">
-          Atributele acceptate de listele ordonate
+        <LessonHeading as="h3" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           Dacă vrem ca enumerarea elementelor din listă să se facă cu un
@@ -257,8 +257,8 @@ export default function ListsContent() {
         />
       </section>
       <section>
-        <LessonHeading as="h3" id="sub-liste">
-          Sub-liste
+        <LessonHeading as="h3" id={lessonInfo.chapters[4].id}>
+          {lessonInfo.chapters[4].title}
         </LessonHeading>
         <p>
           O listă poate conține o altă listă. Acest lucru este foarte util
@@ -297,8 +297,8 @@ export default function ListsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h3" id="bonus-tips-si-concluzii">
-          Bonus tips și concluzii
+        <LessonHeading as="h3" id={lessonInfo.chapters[5].id}>
+          {lessonInfo.chapters[5].title}
         </LessonHeading>
         <p>
           Există și un al treilea tip de listă pe care-l vei întâlni mai rar

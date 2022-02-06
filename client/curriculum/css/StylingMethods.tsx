@@ -50,8 +50,8 @@ export default function StylingMethodsContent() {
         în cele ce urmează.
       </LessonFirstSentence>
       <section>
-        <LessonHeading as="h3" id="css-inline">
-          CSS inline
+        <LessonHeading as="h3" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <p>
           Prin
@@ -124,8 +124,8 @@ export default function StylingMethodsContent() {
         </LessonTip>
       </section>
       <section>
-        <LessonHeading as="h3" id="css-intern">
-          CSS intern
+        <LessonHeading as="h3" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <p>
           Dacă prin metoda inline trebuie să stilizăm câte un element pe rând,
@@ -262,8 +262,8 @@ export default function StylingMethodsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h3" id="css-extern">
-          CSS extern
+        <LessonHeading as="h3" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <p>
           Ei bine, acestea fiind zise care ar fi totuși soluția pentru a face
@@ -351,8 +351,8 @@ export default function StylingMethodsContent() {
         </LessonTip>
       </section>
       <section>
-        <LessonHeading as="h3" id="bonus">
-          BONUS
+        <LessonHeading as="h3" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           Poate v-ați întrebat de ce punem tagul

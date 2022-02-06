@@ -41,8 +41,8 @@ export default function BoxModelContent() {
         rezolvi diverse probleme de layout ce pot apărea.
       </p>
       <section>
-        <LessonHeading as="h2" id="componentele-box-model">
-          Componentele Box Model
+        <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <p>
           <strong>Box model</strong>
@@ -122,8 +122,8 @@ export default function BoxModelContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="border">
-          Border
+        <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <p>
           Vom începe cu border. Border nu va adăuga spațiere propriu-zisă între elemente, însă va
@@ -154,8 +154,8 @@ div {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="margin">
-          Margin
+        <LessonHeading as="h2" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <Highlight
           className="my-5"
@@ -218,8 +218,8 @@ div {
         />
       </section>
       <section>
-        <LessonHeading as="h2" id="padding">
-          Padding
+        <LessonHeading as="h2" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           <strong>Padding-ul</strong>
@@ -251,8 +251,8 @@ div {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="devtools-box-model">
-          DevTools Box Model
+        <LessonHeading as="h2" id={lessonInfo.chapters[4].id}>
+          {lessonInfo.chapters[4].title}
         </LessonHeading>
         <p>
           Ok, acum că am învățat despre border, margin și padding, este momentul să vedem cum se
@@ -353,8 +353,8 @@ div {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="box-sizing">
-          Box-sizing
+        <LessonHeading as="h2" id={lessonInfo.chapters[5].id}>
+          {lessonInfo.chapters[5].title}
         </LessonHeading>
         <p>
           Pentru a înțelege ce s-a întâmplat, trebuie să vorbim puțin despre proprietatea
@@ -477,8 +477,8 @@ div {
         />
       </section>
       <section>
-        <LessonHeading as="h2" id="box-model-interactiv">
-          Box Model Interactiv
+        <LessonHeading as="h2" id={lessonInfo.chapters[6].id}>
+          {lessonInfo.chapters[6].title}
         </LessonHeading>
         <p>
           Ok, gata cu vorba. Hai să trecem și la ceva practic.

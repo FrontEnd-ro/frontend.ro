@@ -34,8 +34,8 @@ export default function AboutUsContent() {
 
       </LessonCover>
       <section>
-        <LessonHeading as="h2" id="introducere">
-          Ce e FrontEnd.ro?
+        <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
+          {lessonInfo.chapters[0].title}
         </LessonHeading>
         <p>
           FrontEnd.ro este o comunitate de oameni ce învață FrontEnd de la zero.
@@ -53,8 +53,8 @@ export default function AboutUsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="de-ce-suntem-diferiti">
-          De ce e FrontEnd.ro diferit?
+        <LessonHeading as="h2" id={lessonInfo.chapters[1].id}>
+          {lessonInfo.chapters[1].title}
         </LessonHeading>
         <p>
           Noi suntem convinși că:
@@ -70,8 +70,8 @@ export default function AboutUsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="de-ce-e-frontend-gratuit">
-          De ce e FrontEnd.ro gratuit?
+        <LessonHeading as="h2" id={lessonInfo.chapters[2].id}>
+          {lessonInfo.chapters[2].title}
         </LessonHeading>
         <p>
           De la început ne-am dorit ca FrontEnd.ro să fie un
@@ -91,8 +91,8 @@ export default function AboutUsContent() {
         </p>
       </section>
       <section>
-        <LessonHeading as="h2" id="cum-pot-sa-ajut">
-          Cum pot să ajut?
+        <LessonHeading as="h2" id={lessonInfo.chapters[3].id}>
+          {lessonInfo.chapters[3].title}
         </LessonHeading>
         <p>
           Dacă folosești platforma să
@@ -156,8 +156,8 @@ export default function AboutUsContent() {
       </section>
       <div className="dots" />
       <section>
-        <LessonHeading as="h2" id="skilluri-concepte">
-          Skill-uri și concepte
+        <LessonHeading as="h2" id={lessonInfo.chapters[4].id}>
+          {lessonInfo.chapters[4].title}
         </LessonHeading>
         <p>
           FrontEnd-ul, de fapt programarea în general, este un domeniu în continuă
@@ -189,8 +189,8 @@ export default function AboutUsContent() {
       </section>
       <div className="dots" />
       <section>
-        <LessonHeading as="h2" id="cum-sa-folosesti-platforma">
-          Cum să folosești platforma
+        <LessonHeading as="h2" id={lessonInfo.chapters[5].id}>
+          {lessonInfo.chapters[5].title}
         </LessonHeading>
         <p>
           Focusul nostru este pe exerciții și feedback, acolo investim cel
@@ -254,8 +254,8 @@ export default function AboutUsContent() {
         </LessonQuote>
       </section>
       <section>
-        <LessonHeading as="h2" id="tooluri-necesare">
-          Tool-uri necesare
+        <LessonHeading as="h2" id={lessonInfo.chapters[6].id}>
+          {lessonInfo.chapters[6].title}
         </LessonHeading>
         <p>
           Unul dintre cele mai faine lucruri la FrontEnd development
@@ -316,8 +316,8 @@ export default function AboutUsContent() {
       </section>
       <div className="dots" />
       <section>
-        <LessonHeading as="h2" id="resurse-recomandate">
-          Resurse recomandate
+        <LessonHeading as="h2" id={lessonInfo.chapters[7].id}>
+          {lessonInfo.chapters[7].title}
         </LessonHeading>
         <p>
           Pe partea de resurse, vom adăuga la finalul fiecărei lecții link-uri de

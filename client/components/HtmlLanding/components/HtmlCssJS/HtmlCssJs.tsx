@@ -30,7 +30,7 @@ const HtmlCssJs = () => {
 
   // When this component mounts, incrementally enable each
   // language. The state of this "demo" is captured here.
-  const [demoInProgress, setDemoInProgress] = useState(false);
+  const [demoInProgress, setDemoInProgress] = useState(true);
 
   // Milliseconds
   const BLOB_DELAY = 2000;
@@ -119,7 +119,11 @@ const HtmlCssJs = () => {
     <div className={`${styles.HtmlCssJs} w-100`}>
       <div className="relative">
         <div className={styles.CheckboxOnboarding}>
-          <CheckboxOnboarding />
+          {/*
+            We don't want to have content/layout shift when the demo finishes.
+            That's why we're using the `invisible` CSS class.
+           */}
+          <CheckboxOnboarding className={demoInProgress ? 'invisible' : ''} />
         </div>
         <div className={`d-flex justify-content-between w-100 mb-8 relative ${styles['checkbox-wrapper']}`}>
           <Checkbox

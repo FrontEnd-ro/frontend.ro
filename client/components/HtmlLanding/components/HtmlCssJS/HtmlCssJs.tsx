@@ -122,7 +122,7 @@ const HtmlCssJs = () => {
           name="html"
           checked={config.htmlEnabled}
           disabled={demoInProgress}
-          className={`${styles.Checkbox} ${styles.HtmlCheckbox}`}
+          className={styles.Checkbox}
           onChange={() => setConfig({ ...config, htmlEnabled: !config.htmlEnabled })}
         >
           HTML
@@ -132,7 +132,7 @@ const HtmlCssJs = () => {
           name="css"
           checked={config.cssEnabled}
           disabled={demoInProgress}
-          className={`${styles.Checkbox} ${styles.CssCheckbox}`}
+          className={styles.Checkbox}
           onChange={() => setConfig({ ...config, cssEnabled: !config.cssEnabled })}
         >
           CSS
@@ -142,7 +142,7 @@ const HtmlCssJs = () => {
           name="js"
           checked={config.jsEnabled}
           disabled={demoInProgress}
-          className={`${styles.Checkbox} ${styles.JsCheckbox}`}
+          className={styles.Checkbox}
           onChange={() => setConfig({ ...config, jsEnabled: !config.jsEnabled })}
         >
           JavaScript

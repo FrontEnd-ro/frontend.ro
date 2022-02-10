@@ -1,0 +1,101 @@
+@import '../../../../../styles/variables';
+
+.CheckboxOnboarding {
+  --background: var(--blue);
+
+  width: 17em;
+  position: relative;
+  border-radius: 0.5em;
+  font-weight: lighter;
+  color: color(white);
+  background: var(--background);
+  padding: 0.5em 1em 0.5em 0.75em;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: block;
+    border-width: 0.75em;
+    border-style: solid;
+  }
+}
+
+@mixin horizontal {
+  animation: slideHorizontal 5s linear infinite;
+
+  &::after {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-color: transparent var(--background) transparent transparent; 
+  }
+}
+
+@mixin vertical {
+  animation: slideVertical 5s linear infinite;
+
+  &::after {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-color: var(--background) transparent transparent transparent; 
+  }
+}
+
+@keyframes slideHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(0.5em);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(-0.5em);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideVertical {
+  0% {
+    transform: translateY(0);
+  }
+
+  25% {
+    transform: translateY(0.5em);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  75% {
+    transform: translateY(-0.5em);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .CheckboxOnboarding {
+    @include horizontal;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .CheckboxOnboarding {
+    @include vertical;
+  }
+}

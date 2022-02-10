@@ -6,6 +6,7 @@ import GradientText from '~/components/GradientText/GradientText';
 
 import styles from './HtmlCssJs.module.scss';
 import { wait } from '~/services/Utils';
+import CheckboxOnboarding from './CheckboxOnboarding/CheckboxOnboarding';
 
 interface Config {
   htmlEnabled: boolean;
@@ -116,37 +117,42 @@ const HtmlCssJs = () => {
 
   return (
     <div className={`${styles.HtmlCssJs} w-100`}>
-      <div className={`d-flex justify-content-between w-100 mb-8 ${styles['checkbox-wrapper']}`}>
-        <Checkbox
-          variant="black"
-          name="html"
-          checked={config.htmlEnabled}
-          disabled={demoInProgress}
-          className={styles.Checkbox}
-          onChange={() => setConfig({ ...config, htmlEnabled: !config.htmlEnabled })}
-        >
-          HTML
-        </Checkbox>
-        <Checkbox
-          variant="black"
-          name="css"
-          checked={config.cssEnabled}
-          disabled={demoInProgress}
-          className={styles.Checkbox}
-          onChange={() => setConfig({ ...config, cssEnabled: !config.cssEnabled })}
-        >
-          CSS
-        </Checkbox>
-        <Checkbox
-          variant="black"
-          name="js"
-          checked={config.jsEnabled}
-          disabled={demoInProgress}
-          className={styles.Checkbox}
-          onChange={() => setConfig({ ...config, jsEnabled: !config.jsEnabled })}
-        >
-          JavaScript
-        </Checkbox>
+      <div className="relative">
+        <div className={styles.CheckboxOnboarding}>
+          <CheckboxOnboarding />
+        </div>
+        <div className={`d-flex justify-content-between w-100 mb-8 relative ${styles['checkbox-wrapper']}`}>
+          <Checkbox
+            variant="black"
+            name="html"
+            checked={config.htmlEnabled}
+            disabled={demoInProgress}
+            className={styles.Checkbox}
+            onChange={() => setConfig({ ...config, htmlEnabled: !config.htmlEnabled })}
+          >
+            HTML
+          </Checkbox>
+          <Checkbox
+            variant="black"
+            name="css"
+            checked={config.cssEnabled}
+            disabled={demoInProgress}
+            className={styles.Checkbox}
+            onChange={() => setConfig({ ...config, cssEnabled: !config.cssEnabled })}
+          >
+            CSS
+          </Checkbox>
+          <Checkbox
+            variant="black"
+            name="js"
+            checked={config.jsEnabled}
+            disabled={demoInProgress}
+            className={styles.Checkbox}
+            onChange={() => setConfig({ ...config, jsEnabled: !config.jsEnabled })}
+          >
+            JavaScript
+          </Checkbox>
+        </div>
       </div>
       <div className="relative">
         <div className={`${styles['TodoExample-wrapper']} relative`}>

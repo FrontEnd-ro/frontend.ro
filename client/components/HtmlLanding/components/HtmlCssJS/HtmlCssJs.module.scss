@@ -8,6 +8,7 @@
 .Checkbox {
   padding: 0.5em;
   border-radius: 0.5em;
+  background: color(white);
   border: 1px solid color(silver);
 }
 
@@ -157,4 +158,24 @@
 
 @media screen and (max-width: 1000px) {
   @include cardExplanations;
+}
+
+
+@media screen and (min-width: 1150px) {
+  .CheckboxOnboarding {
+    position: absolute;
+    left: calc(100% + 2em);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .CheckboxOnboarding {
+    display: flex;
+    position: relative;
+    right: 1em;
+    margin-bottom: 1em;
+    justify-content: center;
+  }
 }

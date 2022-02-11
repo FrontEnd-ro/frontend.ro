@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import OptionsDrawerComponent from './OptionsDrawer';

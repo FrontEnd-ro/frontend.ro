@@ -36,19 +36,20 @@ const ReadTheLesson = ({ percentage, className }: Props) => {
 
   return (
     <article className={`relative ${styles.ReadTheLesson} ${className}`}>
-      <p className="mb-12">
-        <SkeletonRect
-          withAnimation={false}
-          width="200px"
-          className={`
-            ${styles['skeleton-heading']}
-            ${styles['skeleton-element']}
-            ${lastVisibleWordIndex > 0 ? styles.visible : ''}
-          `}
-        />
-      </p>
+      <SkeletonRect
+        withAnimation={false}
+        width="200px"
+        className={`
+          mb-12
+          ${styles['skeleton-heading']}
+          ${styles['skeleton-element']}
+          ${lastVisibleWordIndex > 0 ? styles.visible : ''}
+        `}
+      />
       {MOCK_SENTENCES.map((sentence, sentenceIndex) => {
         return (
+          // It's OK to use the index in this situation,
+          // because the order of the sentences doesn't change dynamically.
           // eslint-disable-next-line react/no-array-index-key
           <p key={sentenceIndex} className="mb-8">
             {sentence.split(' ').map((word, wordIndex) => {
@@ -56,6 +57,8 @@ const ReadTheLesson = ({ percentage, className }: Props) => {
 
               return (
                 <SkeletonWord
+                  // It's OK to use the index in this situation,
+                  // because the order of the words doesn't change dynamically.
                   // eslint-disable-next-line react/no-array-index-key
                   key={wordIndex}
                   text={word}

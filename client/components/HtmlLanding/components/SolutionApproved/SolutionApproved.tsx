@@ -13,7 +13,10 @@ const SolutionApproved = () => {
       target: canvasRef.current,
     });
     confetti.render();
+
+    return () => confetti.clear();
   }, []);
+
   return (
     <>
       <div className={styles.SolutionApproved}>

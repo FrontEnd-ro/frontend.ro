@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import ConfettiGenerator from 'confetti-js';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './SolutionApproved.module.scss';
 
@@ -20,8 +18,7 @@ const SolutionApproved = () => {
   return (
     <>
       <div className={styles.SolutionApproved}>
-        <FontAwesomeIcon icon={faCheck} width={32} className="mr-2" />
-        Soluția e corectă!
+        Felicitări!
       </div>
       <canvas className="absolute w-100 h-100" ref={canvasRef} />
     </>

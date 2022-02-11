@@ -1,6 +1,6 @@
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
-import HtmlLanding from '~/components/HtmlLanding/HtmlLanding';
+import HtmlLanding from '~/tutorials/html/HtmlLanding';
 
 function HTMLTutorial() {
   return (

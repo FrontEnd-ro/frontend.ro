@@ -24,6 +24,7 @@ import { getStore } from '~/redux/store';
 import styles from './Login.module.scss';
 
 interface MyProps {
+  mode?: Mode;
   className?: string;
   onSuccess?: (user?: UserState['info']) => void
 }
@@ -46,7 +47,7 @@ class Login extends Component<MyProps, MyState> {
     super(props);
 
     this.state = {
-      mode: 'login',
+      mode: props.mode ?? 'login',
       loading: false,
       serverError: null,
       username: '',

@@ -1,0 +1,50 @@
+@import "../../styles/variables";
+
+.TutorialChapterLink {
+  padding: 1em 0.5em;
+  border: 1px solid color(silver);
+}
+
+.link {
+  &.active::after,
+  &:hover::after {
+    content: "";
+    background: color(green);
+    position: absolute;
+    top: -2em;
+    right: -5em;
+    height: 4em;
+    width: 10em;
+    transform: rotate(41deg);
+    pointer-events: none;
+  }
+}
+
+.progress-wrapper {
+  min-width: 2em;
+  margin-right: 0.75em;
+}
+
+.check-icon {
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.title {
+  font-size: 1.2em;
+}
+
+.chapters {
+  margin-left: 0.25em;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0.75em;
+    height: 1.75em;
+    bottom: calc(100% + 0.25em);
+    border-left: 0.13em solid #77838b;
+  }
+}

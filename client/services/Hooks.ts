@@ -47,8 +47,17 @@ function useClipboard(ref: MutableRefObject<HTMLElement>, onCopy: () => void = n
   }, []);
 }
 
-function withSmoothScroll(ref: React.MutableRefObject<HTMLElement>) {
+/**
+ * Apply "scroll-behaviour: smooth" to the Ref Object.
+ * If none is supplied, then default to the root <html>
+ * element.
+ * @param ref React.MutableRefObject
+ */
+function withSmoothScroll(ref?: React.MutableRefObject<HTMLElement>) {
   useEffect(() => {
+    if (ref === undefined) {
+      ref = { current: document.documentElement };
+    }
     ref.current.style.scrollBehavior = 'smooth';
     return () => {
       ref.current.style.scrollBehavior = 'initial';
@@ -106,7 +115,7 @@ function useKeyDown(code: string, handler: (e: KeyboardEvent) => void) {
         handler(event);
       }
     };
-    
+
     window.addEventListener('keydown', handleEsc);
     return () => {
       window.removeEventListener('keydown', handleEsc);

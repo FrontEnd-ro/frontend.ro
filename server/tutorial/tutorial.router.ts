@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import UserModel from '../user/user.model';
 import { ServerError } from '../ServerUtils';
 import { UserI } from '../../shared/types/user.types';
 import Tutorial, { sanitizeTutorial } from './tutorial.model';
@@ -38,6 +39,36 @@ tutorialRouter.get('/:tutorialName', [
     res.json(sanitizedTutorial);
   }
 ]);
+
+tutorialRouter.post('/:tutorialId/start', [
+  PrivateMiddleware,
+  async function startTutorial(req: Request, res: Response) {
+    const { tutorialId } = req.params;
+    const { user } = req.body;
+
+    if (user.tutorials.includes(tutorialId)) {
+      new ServerError(422, `Ai început deja tutorialul cu ID=${tutorialId}`).send(res);
+      return;
+    }
+
+    try {
+      const tutorial = await Tutorial.findOne({ name: tutorialId });
+      if (tutorial === null) {
+        new ServerError(404, `Nu există nici un tutorial cu ID=${tutorialId}`).send(res);
+        return;
+      }
+
+      await UserModel.update(user._id, { tutorials: [...user.tutorials, tutorialId] });
+    } catch (err) {
+      new ServerError(
+        err.code || 500,
+        err.message || `Error tying to start tutorial with ID=${tutorialId}`,
+      ).send(res);
+    }
+
+    res.status(200).send();
+  }
+])
 
 tutorialRouter.get('/:tutorialName/progress', [
   PrivateMiddleware,

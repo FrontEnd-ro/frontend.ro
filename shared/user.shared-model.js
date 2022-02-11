@@ -23,6 +23,11 @@ const UsersSchema = new mongoose.Schema({
     ],
     default: UserRole.STUDENT,
   },
+
+  // Not using ObjectID, because we don't really need to
+  // populate this server side. We just want a list of IDs,
+  // which we'll use to fetch tutorial data on the client.
+  tutorials: [{ type: String }],
 });
 
 const User = mongoose.models.User || mongoose.model('User', UsersSchema);

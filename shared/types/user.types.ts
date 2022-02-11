@@ -27,4 +27,6 @@ export interface UserI {
   github_access_token?: string;
 
   role: UserRole;
+
+  tutorials: string[];
 }

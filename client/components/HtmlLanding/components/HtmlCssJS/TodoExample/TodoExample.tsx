@@ -197,7 +197,7 @@ const WarningToast = ({ text, onClose }: { text: string, onClose: () => void }) 
         {text}
       </p>
       <Button className="text-white" variant="transparent" onClick={onClose}>
-        <FontAwesomeIcon icon={faTimes} />
+        <FontAwesomeIcon width={16} icon={faTimes} />
       </Button>
     </div>
   );

@@ -89,10 +89,12 @@ tutorialRouter.get('/:tutorialName/progress', [
       name: tutorial.name,
       lessons: tutorial.lessons.map((lesson) => ({
         lessonId: lesson.lessonId,
+        // Initially undefined, we'll compute it later
+        locked: undefined,
         progress: {
           done: 0,
           inProgress: 0,
-          total: 0
+          total: 0,
         }
       }))
     };
@@ -119,6 +121,32 @@ tutorialRouter.get('/:tutorialName/progress', [
       lesson.progress.total = lessonExercises
         .filter((lessonExercise) => lessonExercise.lesson === lesson.lessonId)
         .length;
+    });
+
+    // Map over the lessons to fill in the 'locked' field
+    progress.lessons = progress.lessons.map((lesson, index, arr) => {
+      // First lesson is always unlocked
+      if (index === 0) {
+        return {
+          ...lesson,
+          locked: false,
+        };
+      }
+
+      const previousLesson = arr[index - 1];
+      // Sent solutions to all exercises. Some of them may be pending approval, which is fine,
+      // he/she can continue with the next lesson.
+      if (previousLesson.progress.inProgress + previousLesson.progress.done === previousLesson.progress.total) {
+        return {
+          ...lesson,
+          locked: false,
+        };
+      }
+
+      return {
+        ...lesson,
+        locked: true,
+      };
     });
 
     res.json(progress);

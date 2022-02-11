@@ -38,6 +38,10 @@ export interface TutorialProgressI {
 
     lessonId: string;
 
+    // A student can start solving a lesson only if
+    // he/she sent solutions to all the previous exercises.
+    locked: boolean;
+
     // By splitting into these 3 metrics, we can compute
     // completion percentages, which we'll show in the UI.
     progress: {

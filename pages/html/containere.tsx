@@ -7,7 +7,6 @@ const ContainersLesson = () => {
   const lessonInfo = getLessonById('containere');
 
   // SEO image must be exactly 1200x630
-  const seoImage = `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`;
   const coverImage = `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_2400w.jpg`;
 
   return (
@@ -16,7 +15,7 @@ const ContainersLesson = () => {
         description={lessonInfo.description}
         title={`${lessonInfo.title} | Lecție HTML`}
         url={`https://FrontEnd.ro/${lessonInfo.url}`}
-        shareImage={seoImage}
+        shareImage={lessonInfo.ogImage}
       >
         <link rel="preload" as="image" href={coverImage} />
       </SEOTags>

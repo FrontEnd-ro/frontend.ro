@@ -19,6 +19,7 @@ export type LessonDescription = {
   type: 'intro' | 'html' | 'css' | 'javascript' | 'extra';
   // 👇 Optional properties for lessons not written yet
   cover?: string;
+  ogImage?: string;
   contributors?: Contributor[];
   chapters?: {
     title: string;
@@ -83,6 +84,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Diana],
     withExercises: false,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`,
     chapters: [
       { title: 'Downloadează-l și instalează-l', id: 'downloadeaza-si-instaleaza' },
       { title: 'Workspace setup', id: 'workspace-setup' },
@@ -109,6 +111,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [CatalinPopusoi],
     withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`,
     chapters: [
       { title: 'O simplă analogie', id: 'analogie' },
       { title: 'Ce este HTML?', id: 'intro' },
@@ -128,6 +131,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [IulianRedinciuc, Pava],
     withExercises: false,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`,
     chapters: [
       { title: 'Structura de bază', id: 'structura' },
       { title: 'Elementul <head>', id: 'head' },
@@ -146,6 +150,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Pava],
     withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_1200w.jpg`,
     chapters: [
       { title: 'Cum validăm o pagină HTML?', id: 'cum-validam' },
       { title: 'De ce merg site-urile invalide?', id: 'pagini-invalide' },
@@ -163,6 +168,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Diana],
     withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`,
     chapters: [
       { title: 'Titluri (Headings)', id: 'titluri' },
       { title: 'Paragrafe', id: 'paragrafe' },
@@ -182,6 +188,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Diana],
     withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_1200w.jpg`,
     chapters: [
       { title: '<a> element', id: 'a-element' },
       {
@@ -220,6 +227,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Diana],
     withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_1200w.jpg`,
     type: 'html',
     chapters: [
       { title: 'Tipuri de liste', id: 'tipuri-de-liste' },
@@ -246,6 +254,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Pava],
     withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`,
     type: 'html',
     chapters: [
       {
@@ -274,6 +283,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [Pava],
     withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`,
     url: '/html/imagini',
     type: 'html',
     chapters: [
@@ -300,6 +310,7 @@ export const LESSONS: LessonDescription[] = [
     title: 'Video și Audio',
     description: 'Imaginile aduc mai multă viață site-urilor noastre, dar putem merge un pas mai departe folosind elemente video și audio.',
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/video-audio/lesson-gallery__cover__1200w.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_1200w.jpg`,
     contributors: [SebastianLatkolic, Pava],
     withExercises: false,
     url: '/html/audio-video',
@@ -335,6 +346,7 @@ export const LESSONS: LessonDescription[] = [
     contributors: [RobertParasca, Pava],
     withExercises: true,
     cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/forms_1200w.jpg`,
     type: 'html',
     chapters: [
       { title: 'Elementul <form>', id: 'form' },
@@ -378,6 +390,7 @@ export const LESSONS: LessonDescription[] = [
       'Învață modurile prin care putem aplica stiluri paginilor Web.',
     url: '/css/moduri-stilizare',
     cover: '/images/lessons/styling-methods__cover.svg',
+    ogImage: 'https://frontend.ro/seo/styling-methods.jpg',
     type: 'css',
     contributors: [DanielHutanu],
     withExercises: true,
@@ -405,6 +418,7 @@ export const LESSONS: LessonDescription[] = [
     written: true,
     title: 'Box model',
     cover: '/images/lessons/box-model/cover.svg',
+    ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`,
     description:
       'Deși unele site-uri sunt cu adevărat WOW, fiecare element e de fapt un dreptunghi cu câteva proprietăți mai speciale numit Box Model. Aici învățăm despre el.',
     url: '/css/box-model',

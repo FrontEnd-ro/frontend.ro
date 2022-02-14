@@ -5,8 +5,6 @@ import AudioAndVideoContent from '~/curriculum/html/AudioAndVideo';
 
 const AudioAndVideoLesson = () => {
   const lessonInfo = getLessonById('audio-video');
-  // SEO image must be exactly 1200x630
-  const seoImage = `${process.env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_1200w.jpg`;
 
   return (
     <>
@@ -14,7 +12,7 @@ const AudioAndVideoLesson = () => {
         title={`${lessonInfo.title} | Lecție HTML`}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
-        shareImage={seoImage}
+        shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo}>
         <AudioAndVideoContent />

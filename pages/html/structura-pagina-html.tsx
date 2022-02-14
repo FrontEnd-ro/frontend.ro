@@ -12,9 +12,9 @@ const HTMLStructureLesson = () => {
         title={`${lessonInfo.title} | Lecție HTML`}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`}
+        shareImage={lessonInfo.ogImage}
       >
-        <link rel="preload" as="image" href={`${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`} />
+        <link rel="preload" as="image" href={lessonInfo.ogImage} />
       </SEOTags>
       <Lesson lessonInfo={lessonInfo}>
         <HTMLStructureContent />

@@ -11,7 +11,7 @@ const StylingMethodsLesson = () => {
         title={`${lessonInfo.title} | Lecție CSS`}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
-        shareImage="https://frontend.ro/seo/styling-methods.jpg"
+        shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo}>
         <StylingMethodsContent />

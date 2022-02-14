@@ -10,11 +10,11 @@ const AboutHtmlLesson = () => {
     <>
       <SEOTags
         title={`${lessonInfo.title} | Lecție HTML`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`}
+        shareImage={lessonInfo.ogImage}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
       >
-        <link rel="preload" as="image" href={`${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`} />
+        <link rel="preload" as="image" href={lessonInfo.ogImage} />
       </SEOTags>
       <Lesson lessonInfo={lessonInfo}>
         <AboutHtmlContent />

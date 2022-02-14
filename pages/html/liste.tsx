@@ -12,7 +12,7 @@ const ListsLesson = () => {
         title={`${lessonInfo.title} | Lecție HTML`}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_1200w.jpg`}
+        shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo}>
         <ListsContent />

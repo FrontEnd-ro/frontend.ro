@@ -12,7 +12,7 @@ const BoxModelLesson = () => {
         title={`${lessonInfo.title} | Lecție CSS`}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`}
+        shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo}>
         <BoxModelContent />

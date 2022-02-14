@@ -12,9 +12,9 @@ const HTMLValidationLesson = () => {
         description={lessonInfo.description}
         title={`${lessonInfo.title} | Lecție HTML`}
         url={`https://FrontEnd.ro/${lessonInfo.url}`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_1200w.jpg`}
+        shareImage={lessonInfo.ogImage}
       >
-        <link rel="preload" as="image" href={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_1200w.jpg`} />
+        <link rel="preload" as="image" href={lessonInfo.ogImage} />
       </SEOTags>
       <Lesson lessonInfo={lessonInfo}>
         <HTMLValidationContent />

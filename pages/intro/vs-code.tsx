@@ -10,7 +10,7 @@ const VSCodeLesson = () => {
     <>
       <SEOTags
         title={`${lessonInfo.title} | Lecție introductivă`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`}
+        shareImage={lessonInfo.ogImage}
         description={lessonInfo.description}
         url={`https://FrontEnd.ro${lessonInfo.url}`}
       />

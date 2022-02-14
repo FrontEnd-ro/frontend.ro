@@ -10,6 +10,7 @@ export interface UserState {
     avatar: string;
     role: UserRole,
     description?: string;
+    tutorials: string[];
   };
   notifications: Notifications;
 }

@@ -19,7 +19,9 @@
     left: #{$aside-menu-width};
   }
 
-  @media screen and (max-width: 1400px) {
+  // TODO
+  // How can we extract this into a React Props and pass it dynamically?
+  @media screen and (max-width: 1000px) {
     .aside-menu {
       left: -#{$aside-menu-width};
     }

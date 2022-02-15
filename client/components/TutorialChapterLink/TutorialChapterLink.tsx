@@ -17,6 +17,7 @@ interface Props {
 
   // A number between [0, 100]
   completePercentage: number;
+  className?: string;
 }
 
 const TutorialChapterLink = ({
@@ -25,11 +26,12 @@ const TutorialChapterLink = ({
   completePercentage,
   chapters = [],
   showChapters = false,
+  className = '',
 }: Props) => {
   const router = useRouter();
 
   return (
-    <div className={`${styles.TutorialChapterLink} relative overflow-hidden rounded-md`}>
+    <div className={`${styles.TutorialChapterLink} ${className} relative overflow-hidden rounded-md`}>
       <Link href={href}>
         <a className={`
           ${styles.link}

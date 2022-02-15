@@ -5,6 +5,9 @@ import styles from './Collapser.module.scss';
 
 interface Props {
   onToggle: () => void;
+
+  // Height of the visible part inside the <Collapser>
+  size?: string;
   isOpen?: boolean;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
@@ -13,6 +16,7 @@ interface Props {
 
 const Collapser = ({
   onToggle,
+  size = '20em',
   isOpen = false,
   className = '',
   as: Wrapper = 'div',
@@ -27,7 +31,7 @@ const Collapser = ({
       relative
       `}
     >
-      <div className={styles.content}>
+      <div style={{ maxHeight: size }} className={styles.content}>
         {children}
       </div>
       <div className={`${styles.toggler} absolute`}>

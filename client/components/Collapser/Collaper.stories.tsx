@@ -46,16 +46,19 @@ const Template: ComponentStory<typeof CollapserComponent> = (args) => {
 
 export const DefaultClosed = Template.bind({});
 DefaultClosed.args = {
+  size: '20em',
   defaultOpen: false,
 };
 
 export const DefaultOpen = Template.bind({});
 DefaultOpen.args = {
+  size: '20em',
   defaultOpen: true,
 };
 
 export const WithCustomToggler = Template.bind({});
 WithCustomToggler.args = {
+  size: '10em',
   Toggler: ({ isOpen, onClick }: { isOpen: boolean, onClick: () => void }) => (
     <p
       style={{

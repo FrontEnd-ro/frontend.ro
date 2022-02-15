@@ -1,5 +1,4 @@
 .Collapser {
-  --size: 20em;
   --fade-size: 6em;
 
   &::after {
@@ -18,7 +17,6 @@
 
   .content {
     overflow: hidden;
-    max-height: var(--size);
   }
 
   .toggler {
@@ -36,7 +34,10 @@
 
     .content {
       max-width: initial;
-      max-height: initial;
+
+      // Must use important because the size is being
+      // set via the
+      max-height: initial !important;
     }
   }
 }

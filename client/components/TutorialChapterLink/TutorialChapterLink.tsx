@@ -31,7 +31,15 @@ const TutorialChapterLink = ({
   const router = useRouter();
 
   return (
-    <div className={`${styles.TutorialChapterLink} ${className} relative overflow-hidden rounded-md`}>
+    <div className={`
+      ${styles.TutorialChapterLink}
+      ${showChapters ? styles['show-chapters'] : ''}
+      ${className}
+      relative
+      overflow-hidden
+      rounded-md
+    `}
+    >
       <Link href={href}>
         <a className={`
           ${styles.link}

@@ -1,11 +1,16 @@
 @import "../../styles/variables";
 
 .TutorialChapterLink {
-  padding: 1em 0.5em;
   border: 1px solid color(silver);
+
+  &.show-chapters .link {
+    padding-bottom: 0;
+  }
 }
 
 .link {
+  padding: 1em 0.5em;
+
   &.active::after,
   &:hover::after {
     content: "";
@@ -36,7 +41,7 @@
 }
 
 .chapters {
-  margin-left: 0.25em;
+  margin-left: 0.75em;
   position: relative;
 
   &::before {

@@ -7,7 +7,7 @@ import {
   LessonResources,
   LessonFirstSentence,
 } from '~/components/lessons';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import FormattedText from '~/components/FormattedText';
 import Highlight from '~/components/Highlight/Highlight';
 import CodePenEmbed from '~/components/CodePenEmbed/CodePenEmbed';

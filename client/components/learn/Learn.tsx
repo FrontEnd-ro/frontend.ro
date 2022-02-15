@@ -2,7 +2,7 @@ import React from 'react';
 import LessonPreview from './LessonPreview/LessonPreview';
 import WriteLessonLink from './WriteLessonLink/WriteLessonLink';
 import CoverIllustration from './CoverIllustration/CoverIllustration';
-import { LESSONS } from '~/services/Constants';
+import { LESSONS } from '~/services/DataModel';
 import List from '../List';
 
 import styles from './Learn.module.scss';

@@ -11,7 +11,7 @@ import coverSvg from '~/public/images/lessons/styling-methods__cover.svg';
 import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
 import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import FormattedText from '~/components/FormattedText';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import List from '~/components/List';
 
 export default function StylingMethodsContent() {

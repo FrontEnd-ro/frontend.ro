@@ -10,7 +10,7 @@ import {
   LessonFirstSentence,
 } from '~/components/lessons';
 import { Diana } from '~/services/contributors';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
 

@@ -14,7 +14,7 @@ import DevToolsClone from '~/components/DevToolsClone';
 import SideBySidePictures from '~/components/SideBySidePictures';
 import coverSvg from '~/public/images/lessons/box-model/cover.svg';
 import FormattedText from '~/components/FormattedText';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import List from '~/components/List';
 
 export default function BoxModelContent() {

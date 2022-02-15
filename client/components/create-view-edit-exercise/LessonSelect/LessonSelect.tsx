@@ -2,7 +2,7 @@ import React from 'react';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactSelect from 'react-select';
-import { LESSONS } from '~/services/Constants';
+import { LESSONS } from '~/services/DataModel';
 
 import styles from './LessonSelect.module.scss';
 

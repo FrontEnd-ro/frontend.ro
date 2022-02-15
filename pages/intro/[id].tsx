@@ -4,7 +4,7 @@ import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
 import VSCodeContent from '~/curriculum/intro/vs-code';
 import AboutUsContent from '~/curriculum/intro/despre-noi';
-import { getLessonById, LessonDescription } from '~/services/Constants';
+import { getLessonById, LessonDescription } from '~/services/DataModel';
 
 const LESSON_TO_COMPONENT = {
   'despre-noi': <AboutUsContent />,

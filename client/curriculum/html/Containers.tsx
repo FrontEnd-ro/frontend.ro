@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import {
   LessonQuote,
   LessonCover,

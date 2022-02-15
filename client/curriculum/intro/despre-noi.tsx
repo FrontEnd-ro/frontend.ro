@@ -7,11 +7,12 @@ import {
 import {
   FacebookButton, LinkedInButton, WhatsAppButton, CopyLinkButton,
 } from '~/components/SocialMediaButtons';
-import { getLessonById, GITHUB_URL } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import coverSvg from '~/public/images/lessons/lesson-0__cover.svg';
 import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
 import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
+import { GITHUB_URL } from '~/services/Constants';
 
 export default function AboutUsContent() {
   const router = useRouter();

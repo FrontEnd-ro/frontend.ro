@@ -2,7 +2,8 @@ import React from 'react';
 import SEOTags from '../SEOTags';
 import Header from '../Header';
 import Footer from '../Footer';
-import { GITHUB_URL, LessonDescription } from '~/services/Constants';
+import { GITHUB_URL } from '~/services/Constants';
+import { LessonDescription } from '~/services/DataModel';
 
 import styles from './404.module.scss';
 import PageContainer from '../PageContainer';

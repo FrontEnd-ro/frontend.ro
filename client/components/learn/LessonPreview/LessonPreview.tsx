@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { LessonContributors } from '~/components/lessons';
-import { LessonDescription } from '~/services/Constants';
+import { LessonDescription } from '~/services/DataModel';
 
 import styles from './LessonPreview.module.scss';
 

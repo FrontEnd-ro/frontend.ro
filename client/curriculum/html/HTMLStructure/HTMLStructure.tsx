@@ -8,7 +8,7 @@ import {
   LessonResources,
   LessonFirstSentence,
 } from '~/components/lessons';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
 

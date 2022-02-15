@@ -10,11 +10,12 @@ import { LessonMenu } from '~/components/lessons';
 
 import styles from './Lesson.module.scss';
 import { withSmoothScroll } from '~/services/Hooks';
-import { getLessonById, GITHUB_URL, LessonDescription } from '~/services/Constants';
+import { GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
 import { Chapter } from '../TableOfContents';
 import LessonService from '~/services/api/Lesson.service';
 import LessonContent from './LessonContent/LessonContent';
+import { getLessonById, LessonDescription } from '~/services/DataModel';
 
 export default function Lesson({
   lessonInfo,

@@ -3,7 +3,7 @@ import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
 import AudioAndVideoContent from '~/curriculum/html/AudioAndVideo';
-import { getLessonById, LessonDescription } from '~/services/Constants';
+import { getLessonById, LessonDescription } from '~/services/DataModel';
 import ContainersContent from '~/curriculum/html/Containers';
 import AboutHtmlContent from '~/curriculum/html/AboutHtml/AboutHtml';
 import FormsContent from '~/curriculum/html/Forms';

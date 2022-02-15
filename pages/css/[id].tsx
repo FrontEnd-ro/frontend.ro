@@ -2,7 +2,7 @@ import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
-import { getLessonById, LessonDescription } from '~/services/Constants';
+import { getLessonById, LessonDescription } from '~/services/DataModel';
 import BoxModelContent from '~/curriculum/css/BoxModel';
 import StylingMethodsContent from '~/curriculum/css/StylingMethods';
 

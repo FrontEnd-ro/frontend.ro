@@ -21,7 +21,7 @@ import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsi
 import HowToResolveFeedbackBanner from './HowToResolveFeedbackBanner/HowToResolveFeedbackBanner';
 
 import styles from './SolveExercise.module.scss';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 import Feedbacks from '../Editor/Feedbacks';
 import Button from '../Button';

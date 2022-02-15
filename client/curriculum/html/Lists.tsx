@@ -11,7 +11,7 @@ import {
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
 import FormattedText from '~/components/FormattedText';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import List from '~/components/List';
 
 export default function ListsContent() {

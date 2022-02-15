@@ -13,7 +13,7 @@ import Highlight from '~/components/Highlight/Highlight';
 import { DemoPreview } from '~/components/demo';
 
 import FormattedText from '~/components/FormattedText';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import List from '~/components/List';
 
 export default function AudioAndVideoContent() {

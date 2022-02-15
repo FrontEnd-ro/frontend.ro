@@ -10,7 +10,7 @@ import {
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
 import FormattedText from '~/components/FormattedText';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 
 export default function TextsContent() {
   const lessonInfo = getLessonById('texte');

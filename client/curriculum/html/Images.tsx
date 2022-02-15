@@ -16,7 +16,7 @@ import {
 import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
 import FormattedText from '~/components/FormattedText';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import List from '~/components/List';
 
 const sizesTable: LessonTableProps = {

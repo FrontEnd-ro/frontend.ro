@@ -18,7 +18,7 @@ import { removeSubmission } from '~/redux/exercise-submissions/exercise-submissi
 import styles from './OfferFeedback.module.scss';
 import Button from '../Button';
 import PageWithAsideMenu from '../layout/PageWithAsideMenu/PageWithAsideMenu';
-import { getLessonById } from '~/services/Constants';
+import { getLessonById } from '~/services/DataModel';
 import AsideNav from '../SolveExercise/AsideNav/AsideNav';
 import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
 import RoutingUtils from '~/services/utils/Routing.utils';

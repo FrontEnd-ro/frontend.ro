@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { getUpcomingLesson } from '~/services/Constants';
 import { NotFound, NotWroteYet } from '~/components/404';
+import { getUpcomingLesson } from '~/services/DataModel';
 
 export default function Generic404() {
   const router = useRouter();

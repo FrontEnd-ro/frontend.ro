@@ -5,18 +5,16 @@ import styles from './Collapser.module.scss';
 
 interface Props {
   defaultOpen?: boolean;
-  openLabel?: string;
-  closeLabel?: string;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
+  Toggler?: ({ onClick, isOpen }: { onClick: () => void, isOpen: boolean }) => JSX.Element;
 }
 
 const Collapser = ({
   defaultOpen = false,
-  openLabel = 'Vezi mai mult',
-  closeLabel = 'Vezi mai puțin',
   className = '',
   as: Wrapper = 'div',
+  Toggler = DefaultToggler,
   children,
 }: PropsWithChildren<Props>) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -34,11 +32,17 @@ const Collapser = ({
       <div className={styles.content}>
         {children}
       </div>
-      <Button variant="link" className={`${styles.toggler} absolute`} onClick={toggle}>
-        {isOpen ? closeLabel : openLabel}
-      </Button>
+      <div className={`${styles.toggler} absolute`}>
+        <Toggler onClick={toggle} isOpen={isOpen} />
+      </div>
     </Wrapper>
   );
 };
+
+const DefaultToggler = ({ isOpen, onClick }: { isOpen: boolean, onClick: () => void }) => (
+  <Button variant="link" onClick={onClick}>
+    {isOpen ? 'Vezi mai puțin' : 'Vezi mai mult'}
+  </Button>
+);
 
 export default Collapser;

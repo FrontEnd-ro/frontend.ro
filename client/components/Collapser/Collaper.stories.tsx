@@ -40,19 +40,27 @@ const Template: ComponentStory<typeof CollapserComponent> = (args) => (
   </CollapserComponent>
 );
 
-const baseArgs = {
-  openLabel: 'See more',
-  closeLabel: 'See less',
-};
-
 export const DefaultClosed = Template.bind({});
 DefaultClosed.args = {
-  ...baseArgs,
   defaultOpen: false,
 };
 
 export const DefaultOpen = Template.bind({});
 DefaultOpen.args = {
-  ...baseArgs,
   defaultOpen: true,
+};
+
+export const WithCustomToggler = Template.bind({});
+WithCustomToggler.args = {
+  Toggler: ({ isOpen, onClick }: { isOpen: boolean, onClick: () => void }) => (
+    <p
+      style={{
+        padding: '0.5em',
+        border: '2px dashed red',
+      }}
+      onClick={onClick}
+    >
+      {isOpen ? 'Close' : 'Open'}
+    </p>
+  ),
 };

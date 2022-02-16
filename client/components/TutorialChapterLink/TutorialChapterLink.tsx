@@ -43,7 +43,7 @@ const TutorialChapterLink = ({
       <Link href={href}>
         <a className={`
           ${styles.link}
-          ${router.pathname === href ? styles.active : ''}
+          ${router.asPath === href ? styles.active : ''}
           d-flex
           align-items-center
           no-underline

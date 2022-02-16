@@ -4,7 +4,7 @@ import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
 import VSCodeContent from '~/curriculum/intro/vs-code';
 import AboutUsContent from '~/curriculum/intro/despre-noi';
-import { getLessonById, LessonDescription } from '~/services/DataModel';
+import { getLessonById, LessonDescription, LESSONS } from '~/services/DataModel';
 
 const LESSON_TO_COMPONENT = {
   'despre-noi': <AboutUsContent />,
@@ -35,13 +35,23 @@ const IntroLesson = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) =
   );
 };
 
-export async function getServerSideProps({ res, params }) {
+export function getStaticPaths() {
+  const paths = LESSONS
+    .filter((lesson) => lesson.type === 'intro')
+    .map((lesson) => ({
+      params: {
+        id: lesson.id,
+      },
+    }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
-
-  if (lessonInfo === null) {
-    res.statusCode = 404;
-  }
 
   return {
     props: {

@@ -53,7 +53,7 @@ MyApp.getInitialProps = async ({ ctx }) => {
     return { pageProps };
   }
 
-  const { token } = ctx.req.cookies;
+  const { token } = ctx.req?.cookies ?? {};
   if (!token) {
     return { pageProps };
   }

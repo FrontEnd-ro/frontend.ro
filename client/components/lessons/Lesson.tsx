@@ -12,7 +12,7 @@ import styles from './Lesson.module.scss';
 import { withSmoothScroll } from '~/services/Hooks';
 import { GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
-import { Chapter } from '../TableOfContents';
+import { Chapter, parseChapters } from '../TableOfContents';
 import LessonService from '~/services/api/Lesson.service';
 import LessonContent from './LessonContent/LessonContent';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
@@ -31,28 +31,12 @@ export default function Lesson({
     articleWrapper.current.scrollTo(0, 0);
   };
 
-  const parseChapters = (chapters: { title: string; id: string }[], withExercises: boolean) => {
-    const result = chapters.map(parseOneChapter);
-
-    if (withExercises) {
-      return [
-        ...result,
-        { title: 'Exerciții', id: 'exercitii', href: '#exercitii' },
-      ];
-    }
-
-    return result;
-
-    function parseOneChapter(chapter: Chapter) {
-      return {
-        ...chapter,
-        href: `#${chapter.id}`,
-        subchapters: chapter.subchapters?.map(parseOneChapter),
-      };
-    }
-  };
-
-  const chaptersWithHref = parseChapters(lessonInfo.chapters ?? [], lessonInfo.withExercises);
+  const chaptersWithHref: Chapter[] = lessonInfo.withExercises
+    ? [
+      ...parseChapters(lessonInfo.chapters ?? []),
+      { title: 'Exerciții', id: 'exercitii', href: '#exercitii' },
+    ]
+    : parseChapters(lessonInfo.chapters ?? []);
 
   useEffect(() => {
     LessonService

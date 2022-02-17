@@ -119,7 +119,7 @@ export const removeScript = (src: string) => {
   if (script !== null) {
     script.remove();
   }
-}
+};
 
 /**
  * Returns a Promise which resolves when the number of
@@ -130,9 +130,8 @@ export const removeScript = (src: string) => {
 export const wait = (milliseconds: number) => {
   return new Promise<void>((resolve) => {
     setTimeout(resolve, milliseconds);
-  })
-}
-
+  });
+};
 
 /**
  * Returns only the part of text representing {percentage} percent
@@ -143,5 +142,5 @@ export const wait = (milliseconds: number) => {
  */
 export const getTextSection = (text: string, percentage: number) => {
   const sectionLength = Math.round((text.length * percentage) / 100);
-  return text.substring(0, sectionLength );
-}
+  return text.substring(0, sectionLength);
+};

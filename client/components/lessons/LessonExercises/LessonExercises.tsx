@@ -41,7 +41,7 @@ function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof conne
     } else {
       setSubmissions([]);
     }
-  }, []);
+  }, [lessonId, user.info?.username]);
 
   const mergedData: Submission[] = [];
 

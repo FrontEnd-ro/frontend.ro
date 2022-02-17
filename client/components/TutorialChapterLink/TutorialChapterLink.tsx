@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ProgressDonut } from '~/components/progress';
@@ -17,6 +16,7 @@ interface Props {
 
   // A number between [0, 100]
   completePercentage: number;
+  active?: boolean;
   className?: string;
 }
 
@@ -26,10 +26,9 @@ const TutorialChapterLink = ({
   completePercentage,
   chapters = [],
   showChapters = false,
+  active = false,
   className = '',
 }: Props) => {
-  const router = useRouter();
-
   return (
     <div className={`
       ${styles.TutorialChapterLink}
@@ -43,7 +42,7 @@ const TutorialChapterLink = ({
       <Link href={href}>
         <a className={`
           ${styles.link}
-          ${router.asPath === href ? styles.active : ''}
+          ${active === true ? styles.active : ''}
           d-flex
           align-items-center
           no-underline

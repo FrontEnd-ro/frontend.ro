@@ -17,6 +17,7 @@ const BASE_PROPS: {
   title: string,
   chapters: Chapter[],
   showChapters: boolean,
+  active: boolean,
 } = {
   href: '#',
   title: 'HTML Lesson',
@@ -35,6 +36,7 @@ const BASE_PROPS: {
     title: 'Image elements',
   }],
   showChapters: false,
+  active: true,
 };
 
 export const Initial = Template.bind({});

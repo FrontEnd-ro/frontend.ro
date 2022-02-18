@@ -2,7 +2,7 @@ import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
-import { getLessonById, LessonDescription, LESSONS } from '~/services/DataModel';
+import { getLessonById, LessonDescription } from '~/services/DataModel';
 import BoxModelContent from '~/curriculum/css/BoxModel';
 import StylingMethodsContent from '~/curriculum/css/StylingMethods';
 
@@ -35,23 +35,16 @@ const CssLesson = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => 
   );
 };
 
-export function getStaticPaths() {
-  const paths = LESSONS
-    .filter((lesson) => lesson.type === 'css')
-    .map((lesson) => ({
-      params: {
-        id: lesson.id,
-      },
-    }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
+// We tried migrating to staticPaths BUT that conflicts
+// with the user fetch inside `_app.tsx` which means that navigating
+// directly to lesson pages leads to the website thinking you're logged out.
+export function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
+
+  if (lessonInfo === null) {
+    res.statusCode = 404;
+  }
 
   return {
     props: {

@@ -91,12 +91,18 @@ const TutorialNav = ({
         const isExercisesRouteActive = lesson.lessonId === lessonId && isExercisesPage;
 
         return (
-          <React.Fragment key={lesson.lessonId}>
+          <div
+            key={lesson.lessonId}
+            // We have a specific way we render lesson + exercises pairs,
+            // that's why we give this wrapper the 'chapter-link-pair' className.
+            className={lessonInfos[index].withExercises ? styles['chapter-link-pair'] : ''}
+          >
             <TutorialChapterLink
               className={`
+                ${styles.TutorialChapterLink}
                 ${lesson.locked ? styles['TutorialChapterLink--locked'] : ''}
                 ${isLessonRouteActive ? styles['TutorialChapterLink--active'] : ''}
-                mb-4
+                ${lessonInfos[index].withExercises ? '' : 'mb-12'}
               `}
               // FIXME: temp path until we move this to
               // a first-class page.
@@ -111,9 +117,10 @@ const TutorialNav = ({
             {lessonInfos[index].withExercises && (
               <TutorialChapterLink
                 className={`
+                ${styles.TutorialChapterLink}
                 ${lesson.locked ? styles['TutorialChapterLink--locked'] : ''}
                 ${isExercisesRouteActive ? styles['TutorialChapterLink--active'] : ''}
-                mb-4
+                mb-12
               `}
                 // FIXME: temp path until we move this to
                 // a first-class page.
@@ -122,9 +129,10 @@ const TutorialNav = ({
                 completePercentage={completePercentage}
                 showProgress={!lesson.locked}
                 active={isExercisesRouteActive}
+                ribbonPosition="bottom-right"
               />
             )}
-          </React.Fragment>
+          </div>
         );
       })}
     </nav>

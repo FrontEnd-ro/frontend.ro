@@ -123,14 +123,14 @@ tutorialRouter.get('/:tutorialName/progress', [
         .length;
     });
 
-    // Map over the lessons to fill in the 'locked' field
-    progress.lessons = progress.lessons.map((lesson, index, arr) => {
+    // Compute and fill in the `locked` field for all lessons.
+    // NOTE: using `forEach` instead of the functionally pure `.map` because
+    // there's also a situation in which we care about the previous computed value.
+    progress.lessons.forEach((lesson, index, arr) => {
       // First lesson is always unlocked
       if (index === 0) {
-        return {
-          ...lesson,
-          locked: false,
-        };
+        lesson.locked = false;
+        return;
       }
 
       const previousLesson = arr[index - 1];
@@ -139,25 +139,18 @@ tutorialRouter.get('/:tutorialName/progress', [
       // the current one should have the same locked
       // value as the previous.
       if (previousLesson.progress.total === 0) {
-        return {
-          ...lesson,
-          locked: previousLesson.locked,
-        }
+        lesson.locked = previousLesson.locked;
+        return;
       }
 
       // Sent solutions to all exercises. Some of them may be pending approval, which is fine,
       // he/she can continue with the next lesson.
       if (previousLesson.progress.inProgress + previousLesson.progress.done === previousLesson.progress.total) {
-        return {
-          ...lesson,
-          locked: false,
-        };
+        lesson.locked = false;
+        return;
       }
 
-      return {
-        ...lesson,
-        locked: true,
-      };
+      lesson.locked = true;
     });
 
     res.json(progress);

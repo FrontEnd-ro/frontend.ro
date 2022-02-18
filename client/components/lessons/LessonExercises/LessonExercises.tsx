@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { ConnectedProps, connect } from 'react-redux';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import { LessonExercise } from '~/redux/user/types';
-import Spinner from '~/components/Spinner';
 import ExercisePreview from '~/components/ExercisePreview';
 import { RootState } from '~/redux/root.reducer';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 import ExerciseService from '~/services/Exercise.service';
+import { SkeletonRect } from '~/components/SkeletonScreens';
 
 import styles from './LessonExercises.module.scss';
 
@@ -73,8 +73,15 @@ function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof conne
     `}
     >
       {isFetching && (
-        <div className={styles['spinner-wrapper']}>
-          <Spinner showText={false} />
+        <div className={styles['exercises-wrapper']}>
+          {new Array(3).fill('').map((_, index) => (
+            <SkeletonRect
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              height="350px"
+              className={`${styles.SkeletonRect} rounded-md`}
+            />
+          ))}
         </div>
       )}
 

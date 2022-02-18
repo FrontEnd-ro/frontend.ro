@@ -120,6 +120,7 @@ const TutorialNav = ({
                 href={`/${tutorialId}/tutorial/exercitii/${lesson.lessonId}`}
                 title={`Exerciții ${lessonInfos[index].title}`}
                 completePercentage={completePercentage}
+                showProgress
                 active={isExercisesRouteActive}
               />
             )}

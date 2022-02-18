@@ -134,6 +134,17 @@ tutorialRouter.get('/:tutorialName/progress', [
       }
 
       const previousLesson = arr[index - 1];
+
+      // If the previous lesson has no exercises,
+      // the current one should have the same locked
+      // value as the previous.
+      if (previousLesson.progress.total === 0) {
+        return {
+          ...lesson,
+          locked: previousLesson.locked,
+        }
+      }
+
       // Sent solutions to all exercises. Some of them may be pending approval, which is fine,
       // he/she can continue with the next lesson.
       if (previousLesson.progress.inProgress + previousLesson.progress.done === previousLesson.progress.total) {

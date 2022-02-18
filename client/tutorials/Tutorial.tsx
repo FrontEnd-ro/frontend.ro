@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withSmoothScroll } from '~/services/Hooks';
 import { getLessonById } from '~/services/DataModel';
-import { LessonHeading } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
-import { Chapter, parseChapters } from '~/components/TableOfContents';
+import { parseChapters } from '~/components/TableOfContents';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialChapterLink from '~/components/TutorialChapterLink';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
-import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 
 import styles from './Tutorial.module.scss';
@@ -17,9 +15,14 @@ interface Props {
   tutorialId: string;
   lessonId: string;
   lessonContent: JSX.Element;
+  // We have different sub-pages for the
+  // lesson and the exercises.
+  isExercisesPage?: boolean;
 }
 
-const Tutorial = ({ tutorialId, lessonId, lessonContent }: Props) => {
+const Tutorial = ({
+  tutorialId, lessonId, lessonContent, isExercisesPage = false,
+}: Props) => {
   const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
   const lessonInfo = getLessonById(lessonId);
 
@@ -41,51 +44,80 @@ const Tutorial = ({ tutorialId, lessonId, lessonContent }: Props) => {
       Component: tutorialProgress === undefined
         ? null
         : (
-          <nav className={styles['chapter-nav']}>
-            {tutorialProgress.lessons.map((lesson) => {
-              const lessonInfo = getLessonById(lesson.lessonId);
-              const chaptersWithHref: Chapter[] = lessonInfo.withExercises
-                ? [
-                  ...parseChapters(lessonInfo.chapters ?? []),
-                  { title: 'Exerciții', id: 'exercitii', href: '#exercitii' },
-                ]
-                : parseChapters(lessonInfo.chapters ?? []);
-
-              return (
-                <TutorialChapterLink
-                  className="mb-4"
-                  key={lesson.lessonId}
-                  // FIXME: temp path until we move this to
-                  // a first-class page.
-                  href={`/${tutorialId}/tutorial/${lesson.lessonId}`}
-                  showChapters={lesson.lessonId === lessonId}
-                  title={lessonInfo.title}
-                  chapters={chaptersWithHref}
-                  // We'll render Lessons and Exercises separately
-                  completePercentage={0}
-                  active={lesson.lessonId === lessonId}
-                />
-              );
-            })}
-          </nav>
+          <TutorialNav
+            lessonId={lessonId}
+            tutorialId={tutorialId}
+            isExercisesPage={isExercisesPage}
+            tutorialProgress={tutorialProgress}
+          />
         ),
     }}
     >
       <PageContainer>
         <LessonContent
-          title={lessonInfo.title}
-          contributors={lessonInfo.contributors ?? []}
+          title={!isExercisesPage ? lessonInfo.title : `Exerciții ${lessonInfo.title}`}
+          contributors={!isExercisesPage ? lessonInfo.contributors ?? [] : []}
         >
           {lessonContent}
         </LessonContent>
-        <div className={styles.exercises}>
-          <LessonHeading as="h3" id="exercitii">
-            Exerciții
-          </LessonHeading>
-          <LessonExercises lessonId={lessonId} />
-        </div>
       </PageContainer>
     </PageWithAsideMenu>
+  );
+};
+
+interface TutorialNavProps {
+  lessonId: string;
+  tutorialId: string;
+  isExercisesPage: boolean;
+  tutorialProgress: TutorialProgressI;
+}
+const TutorialNav = ({
+  lessonId, tutorialId, isExercisesPage, tutorialProgress,
+}: TutorialNavProps) => {
+  const lessonInfos = tutorialProgress.lessons
+    .map((lesson) => getLessonById(lesson.lessonId));
+  const lessonChapters = tutorialProgress.lessons
+    .map((_, index) => parseChapters(lessonInfos[index].chapters ?? []));
+
+  return (
+    <nav className={styles['chapter-nav']}>
+      {tutorialProgress.lessons.map((lesson, index) => {
+        let completePercentage = 0;
+        if (lesson.progress.total > 0) {
+          completePercentage = (lesson.progress.done / lesson.progress.total) * 100;
+        }
+
+        return (
+          <React.Fragment key={lesson.lessonId}>
+            <TutorialChapterLink
+              className="mb-4"
+              // FIXME: temp path until we move this to
+              // a first-class page.
+              href={`/${tutorialId}/tutorial/${lesson.lessonId}`}
+              showChapters={lesson.lessonId === lessonId && !isExercisesPage}
+              title={lessonInfos[index].title}
+              chapters={lessonChapters[index]}
+              // We'll render Lessons and Exercises separately
+              completePercentage={0}
+              active={lesson.lessonId === lessonId && !isExercisesPage}
+            />
+            {lessonInfos[index].withExercises && (
+              <TutorialChapterLink
+                className="mb-4"
+                // FIXME: temp path until we move this to
+                // a first-class page.
+                href={`/${tutorialId}/tutorial/exercitii/${lesson.lessonId}`}
+                showChapters={false}
+                title={`Exerciții ${lessonInfos[index].title}`}
+                chapters={[]}
+                completePercentage={completePercentage}
+                active={lesson.lessonId === lessonId && isExercisesPage}
+              />
+            )}
+          </React.Fragment>
+        );
+      })}
+    </nav>
   );
 };
 

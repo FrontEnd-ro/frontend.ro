@@ -15,6 +15,7 @@ import LessonExercises from './LessonExercises/LessonExercises';
 import { Chapter, parseChapters } from '../TableOfContents';
 import LessonService from '~/services/api/Lesson.service';
 import LessonContent from './LessonContent/LessonContent';
+import LessonHeading from './LessonHeading/LessonHeading';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
 
 export default function Lesson({
@@ -72,7 +73,14 @@ export default function Lesson({
               </a>
             </p>
           </div>
-          {lessonInfo.withExercises === true && <LessonExercises lessonId={lessonInfo.id} />}
+          {lessonInfo.withExercises === true && (
+            <div className={styles.exercises}>
+              <LessonHeading as="h3" id="exercitii">
+                Exerciții
+              </LessonHeading>
+              <LessonExercises lessonId={lessonInfo.id} />
+            </div>
+          )}
           <Footer />
         </div>
       </main>

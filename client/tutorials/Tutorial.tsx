@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { withSmoothScroll } from '~/services/Hooks';
 import { getLessonById } from '~/services/DataModel';
+import { LessonHeading } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
 import { Chapter, parseChapters } from '~/components/TableOfContents';
 import TutorialService from '~/services/api/Tutorial.service';
@@ -77,7 +78,12 @@ const Tutorial = ({ tutorialId, lessonId, lessonContent }: Props) => {
         >
           {lessonContent}
         </LessonContent>
-        <LessonExercises lessonId={lessonId} />
+        <div className={styles.exercises}>
+          <LessonHeading as="h3" id="exercitii">
+            Exerciții
+          </LessonHeading>
+          <LessonExercises lessonId={lessonId} />
+        </div>
       </PageContainer>
     </PageWithAsideMenu>
   );

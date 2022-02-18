@@ -1,3 +1,9 @@
+@import '../styles/variables';
+
 .chapter-nav {
   overflow: auto;
+}
+
+.exercises {
+  @extend %containerConfig;
 }

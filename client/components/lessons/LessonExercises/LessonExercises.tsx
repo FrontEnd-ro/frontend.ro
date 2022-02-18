@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ConnectedProps, connect } from 'react-redux';
-import LessonHeading from '../LessonHeading/LessonHeading';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import { LessonExercise } from '~/redux/user/types';
 import Spinner from '~/components/Spinner';
@@ -73,51 +72,45 @@ function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof conne
       ${exercises?.length === 0 ? styles['exercises--empty'] : ''}
     `}
     >
-      <section>
-        <LessonHeading as="h3" id="exercitii">
-          Exerciții
-        </LessonHeading>
+      {isFetching && (
+        <div className={styles['spinner-wrapper']}>
+          <Spinner showText={false} />
+        </div>
+      )}
 
-        {isFetching && (
-          <div className={styles['spinner-wrapper']}>
-            <Spinner showText={false} />
-          </div>
-        )}
-
-        {!isFetching && (exercises.length > 0 ? (
-          <div className={styles['exercises-wrapper']}>
-            {mergedData.map((sub) => (
-              <ExercisePreview
-                key={sub.exercise._id}
-                exercise={sub.exercise}
-                isPrivate={false}
-                feedbackCount={sub.feedbacks.filter((f) => f.type === 'improvement').length}
-                isApproved={sub.status === SubmissionStatus.DONE}
-                viewMode="STUDENT"
-                readOnly={[
-                  SubmissionStatus.AWAITING_REVIEW,
-                  SubmissionStatus.DONE,
-                ].includes(sub.status)}
-                href={`/rezolva/${sub.exercise._id}`}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className="mb-0">
-            <strong> În curând vom adăuga exerciții </strong>
-            {' '}
-            la această lecție.
-            Până atunci poți să rezolvi celelalte
-            {' '}
-            <Link href="/exercitii">
-              <a className="text-bold">
-                exerciții disponibile
-              </a>
-            </Link>
-            .
-          </p>
-        ))}
-      </section>
+      {!isFetching && (exercises.length > 0 ? (
+        <div className={styles['exercises-wrapper']}>
+          {mergedData.map((sub) => (
+            <ExercisePreview
+              key={sub.exercise._id}
+              exercise={sub.exercise}
+              isPrivate={false}
+              feedbackCount={sub.feedbacks.filter((f) => f.type === 'improvement').length}
+              isApproved={sub.status === SubmissionStatus.DONE}
+              viewMode="STUDENT"
+              readOnly={[
+                SubmissionStatus.AWAITING_REVIEW,
+                SubmissionStatus.DONE,
+              ].includes(sub.status)}
+              href={`/rezolva/${sub.exercise._id}`}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="mb-0">
+          <strong> În curând vom adăuga exerciții </strong>
+          {' '}
+          la această lecție.
+          Până atunci poți să rezolvi celelalte
+          {' '}
+          <Link href="/exercitii">
+            <a className="text-bold">
+              exerciții disponibile
+            </a>
+          </Link>
+          .
+        </p>
+      ))}
     </div>
   );
 }

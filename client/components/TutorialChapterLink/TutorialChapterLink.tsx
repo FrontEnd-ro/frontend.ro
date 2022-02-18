@@ -10,14 +10,14 @@ import styles from './TutorialChapterLink.module.scss';
 interface Props {
   href: string;
   title: string;
-
-  chapters: Chapter[];
-  showChapters: boolean;
-
   // A number between [0, 100]
   completePercentage: number;
+
+  // Optional
   active?: boolean;
   className?: string;
+  chapters?: Chapter[];
+  showChapters?: boolean;
 }
 
 const TutorialChapterLink = ({

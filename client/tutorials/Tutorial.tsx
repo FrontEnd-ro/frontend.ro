@@ -107,9 +107,7 @@ const TutorialNav = ({
                 // FIXME: temp path until we move this to
                 // a first-class page.
                 href={`/${tutorialId}/tutorial/exercitii/${lesson.lessonId}`}
-                showChapters={false}
                 title={`Exerciții ${lessonInfos[index].title}`}
-                chapters={[]}
                 completePercentage={completePercentage}
                 active={lesson.lessonId === lessonId && isExercisesPage}
               />

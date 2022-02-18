@@ -23,6 +23,13 @@
     transform: rotate(41deg);
     pointer-events: none;
   }
+
+  &.bottom-right.active::after,
+  &.bottom-right:hover::after {
+    top: initial;
+    bottom: -2em;
+    transform: rotate(-41deg);
+  }
 }
 
 .progress-wrapper {

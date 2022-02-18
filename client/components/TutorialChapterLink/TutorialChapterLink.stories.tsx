@@ -18,6 +18,7 @@ const BASE_PROPS: {
   chapters: Chapter[],
   showChapters: boolean,
   active: boolean,
+  ribbonPosition: 'top-right' | 'bottom-right';
 } = {
   href: '#',
   title: 'HTML Lesson',
@@ -37,6 +38,7 @@ const BASE_PROPS: {
   }],
   showChapters: false,
   active: true,
+  ribbonPosition: 'top-right',
 };
 
 export const Initial = Template.bind({});

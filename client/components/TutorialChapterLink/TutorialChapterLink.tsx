@@ -19,6 +19,7 @@ interface Props {
   chapters?: Chapter[];
   showChapters?: boolean;
   showProgress?: boolean;
+  ribbonPosition?: 'top-right' | 'bottom-right';
 }
 
 const TutorialChapterLink = ({
@@ -32,6 +33,7 @@ const TutorialChapterLink = ({
   // is greater than 0.
   showProgress = completePercentage > 0,
   className = '',
+  ribbonPosition = 'top-right',
 }: Props) => {
   return (
     <div className={`
@@ -47,6 +49,7 @@ const TutorialChapterLink = ({
         <a className={`
           ${styles.link}
           ${active === true ? styles.active : ''}
+          ${styles[ribbonPosition]}
           d-flex
           align-items-center
           no-underline

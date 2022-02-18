@@ -87,29 +87,40 @@ const TutorialNav = ({
           completePercentage = (lesson.progress.done / lesson.progress.total) * 100;
         }
 
+        const isLessonRouteActive = lesson.lessonId === lessonId && !isExercisesPage;
+        const isExercisesRouteActive = lesson.lessonId === lessonId && isExercisesPage;
+
         return (
           <React.Fragment key={lesson.lessonId}>
             <TutorialChapterLink
-              className="mb-4"
+              className={`
+                ${lesson.locked ? styles['TutorialChapterLink--locked'] : ''}
+                ${isLessonRouteActive ? styles['TutorialChapterLink--active'] : ''}
+                mb-4
+              `}
               // FIXME: temp path until we move this to
               // a first-class page.
               href={`/${tutorialId}/tutorial/${lesson.lessonId}`}
-              showChapters={lesson.lessonId === lessonId && !isExercisesPage}
+              showChapters={isLessonRouteActive}
               title={lessonInfos[index].title}
               chapters={lessonChapters[index]}
               // We'll render Lessons and Exercises separately
               completePercentage={0}
-              active={lesson.lessonId === lessonId && !isExercisesPage}
+              active={isLessonRouteActive}
             />
             {lessonInfos[index].withExercises && (
               <TutorialChapterLink
-                className="mb-4"
+                className={`
+                ${lesson.locked ? styles['TutorialChapterLink--locked'] : ''}
+                ${isExercisesRouteActive ? styles['TutorialChapterLink--active'] : ''}
+                mb-4
+              `}
                 // FIXME: temp path until we move this to
                 // a first-class page.
                 href={`/${tutorialId}/tutorial/exercitii/${lesson.lessonId}`}
                 title={`Exerciții ${lessonInfos[index].title}`}
                 completePercentage={completePercentage}
-                active={lesson.lessonId === lessonId && isExercisesPage}
+                active={isExercisesRouteActive}
               />
             )}
           </React.Fragment>

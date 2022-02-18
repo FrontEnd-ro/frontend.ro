@@ -7,3 +7,12 @@
 .exercises {
   @extend %containerConfig;
 }
+
+.TutorialChapterLink--locked {
+  opacity: 0.5;
+}
+
+.TutorialChapterLink--locked:hover,
+.TutorialChapterLink--active {
+  opacity: 1;
+}

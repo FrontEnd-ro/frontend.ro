@@ -53,6 +53,7 @@ const Tutorial = ({ tutorialId, lessonId, lessonContent }: Props) => {
               return (
                 <TutorialChapterLink
                   className="mb-4"
+                  key={lesson.lessonId}
                   // FIXME: temp path until we move this to
                   // a first-class page.
                   href={`/${tutorialId}/tutorial/${lesson.lessonId}`}

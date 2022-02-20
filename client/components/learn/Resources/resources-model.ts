@@ -63,6 +63,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://coverr.co/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/coverr_500w.png`,
     },
+    {
+      title: 'Lorem Picsum',
+      url: 'https://picsum.photos/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/lorem-picsum_500w.png`,
+    },
   ],
   [ResourceCategory.VECTOR]: [
     {
@@ -137,6 +142,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://openmoji.org/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/openmoji_500w.png`,
     },
+    {
+      title: 'Ionic Icons',
+      url: 'https://ionic.io/ionicons',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/ionic-icons_500w.png`,
+    },
   ],
   [ResourceCategory.CSS_SPINNERS]: [
     {
@@ -202,6 +212,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       title: 'DEV Community',
       url: 'https://dev.to/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/devto_500w.png`,
+    },
+    {
+      title: 'Dev Hints',
+      url: 'https://devhints.io/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/dev-hints_500w.png`,
     },
   ],
   [ResourceCategory.FONTS]: [
@@ -322,6 +337,16 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       title: 'GitHub web editor',
       url: 'https://github.dev',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/github-dev_500w.png`,
+    },
+    {
+      title: 'Fancy Border Radius Generator',
+      url: 'https://9elements.github.io/fancy-border-radius/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/fancy-border-radius_500w.png`,
+    },
+    {
+      title: 'Regex101',
+      url: 'https://regex101.com/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/regex101_500w.png`,
     },
   ],
 };

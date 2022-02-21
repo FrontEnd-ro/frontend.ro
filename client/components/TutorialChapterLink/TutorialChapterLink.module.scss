@@ -10,25 +10,15 @@
 
 .link {
   padding: 1em 0.5em;
+  transition: transform 0.25s $cubic;
 
-  &.active::after,
-  &:hover::after {
-    content: "";
-    background: color(green);
-    position: absolute;
-    top: -2em;
-    right: -5em;
-    height: 4em;
-    width: 10em;
-    transform: rotate(41deg);
-    pointer-events: none;
+  &.active {
+    font-weight: bold;
+    color: color(green);
   }
 
-  &.bottom-right.active::after,
-  &.bottom-right:hover::after {
-    top: initial;
-    bottom: -2em;
-    transform: rotate(-41deg);
+  &:not(.active):hover {
+    transform: translateX(0.25em);
   }
 }
 

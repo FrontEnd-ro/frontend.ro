@@ -1,0 +1,29 @@
+@import '../../styles/variables';
+
+.StackedImages {
+  // This is the image size
+  --size: 400px;
+
+  .links-wrapper {
+    width: var(--size);
+    height: var(--size);
+  }
+}
+
+.link {
+  top: 0;
+  left: 0;
+  border-radius: 0.5em;
+  transition: all 0.5s $cubic;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 1;
+  // In case the image is smaller
+  object-fit: cover;
+  border-radius: inherit;
+
+  // Don't show the alt text
+  color: transparent;
+}

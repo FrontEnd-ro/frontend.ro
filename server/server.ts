@@ -26,6 +26,7 @@ const passwordResetRouter = require('./password-reset/password-reset.router');
 import notificationRouter from './notification/notification.router';
 import certificationRouter from './certification/certification.router';
 import tutorialRouter from './tutorial/tutorial.router';
+import tidbitRouter from './tidbit/tidbit.router';
 
 const port = appConfig.APP.port || appConfig.APP.default_port;
 const app = express();
@@ -67,6 +68,7 @@ app.use('/api/password-reset', passwordResetRouter);
 app.use('/api/notifications', notificationRouter);
 app.use('/api/certifications', certificationRouter);
 app.use('/api/tutorials', tutorialRouter);
+app.use('/api/tidbits', tidbitRouter);
 
 app.get('*', (req, res) => {
   nextHandler(req, res, req.url);

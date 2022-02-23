@@ -5,95 +5,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
 import Button from '~/components/Button';
 import StackedImages from '~/components/StackedImages';
+import { TidbitI } from '~/../shared/types/tidbit.types';
 
 import styles from './LandingTidbits.module.scss';
 
-const LandingTidbits = () => {
-  const images = [{
-    textColor: '#fff',
-    backgroundColor: '#252734',
-    alt: 'Cum să animezi un Blob?',
-    href: 'https://www.instagram.com/p/CYn5OuCoOXm/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/blob-animation/2.jpg',
-  }, {
-    textColor: '#272936',
-    backgroundColor: '#fff',
-    alt: 'Nou feature pe FrontEnd.ro',
-    href: 'https://www.instagram.com/p/CYdnoW2IgVP/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/feature-tutorial-progress/2.jpg',
-  }, {
-    textColor: '#fff',
-    backgroundColor: '#1a1b16',
-    alt: 'Deci FrontEnd-ul e doar butoane?',
-    href: 'https://www.instagram.com/p/CV7wqmaIMxR/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/so-frontend-is-just-buttons/2.jpg',
-  }, {
-    textColor: '#eb4d4c',
-    backgroundColor: '#fff',
-    alt: 'Formulare Web',
-    href: 'https://www.instagram.com/p/CT_lyItoKRZ/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/html-forms/2.jpg',
-  }, {
-    textColor: '#fff',
-    backgroundColor: '#eb4d4c',
-    alt: 'Video și Audio',
-    href: 'https://www.instagram.com/p/CTuUpVflDuB/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/video-audio/2.jpg',
-  }, {
-    textColor: '#121212',
-    backgroundColor: '#fff',
-    alt: 'Imagini și cum le optimizăm?',
-    href: 'https://www.instagram.com/p/CTb5oOoIwBF/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/html-images/2.jpg',
-  }, {
-    textColor: '#fff',
-    backgroundColor: '#eb4d4c',
-    alt: 'Elemente de tip container',
-    href: 'https://www.instagram.com/p/CTT0Zs8o7Fr/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/container-elements/2.jpg',
-  }, {
-    textColor: '#eb4d4c',
-    backgroundColor: '#fff',
-    alt: 'Liste în HTML',
-    href: 'https://www.instagram.com/p/CTEdMftIghc/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/html-lists/2.jpg',
-  }, {
-    textColor: '#fff',
-    backgroundColor: '#eb4d4c',
-    alt: 'Linkuri și Butoane',
-    href: 'https://www.instagram.com/p/CSoGpI0o7ha/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/links-and-buttons/2.jpg',
-  }, {
-    textColor: '#121212',
-    backgroundColor: '#fff',
-    alt: 'Markup pentru texte',
-    href: 'https://www.instagram.com/p/CSdwjo5oSdt/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/text-markup/2.jpg',
-  }, {
-    textColor: '#fff',
-    backgroundColor: '#eb4d4c',
-    alt: 'Validarea paginii HTML',
-    href: 'https://www.instagram.com/p/CSV_UcHIE06/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/html-validation/2.jpg',
-  }, {
-    textColor: '#eb4d4c',
-    backgroundColor: '#fff',
-    alt: 'Structura unei pagini HTML',
-    href: 'https://www.instagram.com/p/CQidsvAnYtC/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/html-structure/2.jpg',
-  }, {
-    textColor: '#fff',
-    backgroundColor: '#eb4d4c',
-    alt: 'Despre Programare Web și HTML',
-    href: 'https://www.instagram.com/p/CSJU3miIEi5/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/about-web-development-and-html/2.jpg',
-  }, {
-    textColor: '#297fb8',
-    backgroundColor: '#fff',
-    alt: 'Cum să faci logo-ul responsive?',
-    href: 'https://www.instagram.com/p/CPK4UwYnVRx/',
-    src: 'https://d3tycb976jpudc.cloudfront.net/curriculum/tidbits/responsive-logo/2.jpg',
-  }];
+const LandingTidbits = ({ tidbits }: { tidbits: TidbitI[] }) => {
+  // Temporary hardcode the HREF to the instagram posts
+  // Remove when we fully implemented the Tidbits functionality,
+  // including separate pages.
+  const TIDBIT_HREF = [
+    'https://www.instagram.com/p/CYn5OuCoOXm/',
+    'https://www.instagram.com/p/CYdnoW2IgVP/',
+    'https://www.instagram.com/p/CV7wqmaIMxR/',
+    'https://www.instagram.com/p/CT_lyItoKRZ/',
+    'https://www.instagram.com/p/CTuUpVflDuB/',
+    'https://www.instagram.com/p/CTb5oOoIwBF/',
+    'https://www.instagram.com/p/CTT0Zs8o7Fr/',
+    'https://www.instagram.com/p/CTEdMftIghc/',
+    'https://www.instagram.com/p/CSoGpI0o7ha/',
+    'https://www.instagram.com/p/CSdwjo5oSdt/',
+    'https://www.instagram.com/p/CSV_UcHIE06/',
+    'https://www.instagram.com/p/CQidsvAnYtC/',
+    'https://www.instagram.com/p/CSJU3miIEi5/',
+    'https://www.instagram.com/p/CPK4UwYnVRx/',
+  ];
 
   const { ref, inView } = useInView({
     threshold: 0.4,
@@ -116,7 +51,7 @@ const LandingTidbits = () => {
   }, [currentIndex, inView]);
 
   const nextPage = () => {
-    if (currentIndex + 1 === images.length) {
+    if (currentIndex + 1 === tidbits.length) {
       setCurrentIndex(0);
     } else {
       setCurrentIndex(currentIndex + 1);
@@ -125,7 +60,7 @@ const LandingTidbits = () => {
 
   const previousPage = () => {
     if (currentIndex === 0) {
-      setCurrentIndex(images.length - 1);
+      setCurrentIndex(tidbits.length - 1);
     } else {
       setCurrentIndex(currentIndex - 1);
     }
@@ -140,8 +75,8 @@ const LandingTidbits = () => {
         justify-content-between
       `}
       style={{
-        backgroundColor: images[currentIndex].backgroundColor,
-        color: images[currentIndex].textColor,
+        backgroundColor: tidbits[currentIndex].backgroundColor,
+        color: tidbits[currentIndex].textColor,
       }}
       ref={ref}
     >
@@ -149,11 +84,11 @@ const LandingTidbits = () => {
         <a
           target="_blank"
           rel="noreferrer"
-          href={images[currentIndex].href}
+          href={TIDBIT_HREF[currentIndex]}
           className={`${styles['heading-link']} no-underline`}
         >
           <h2 className={`${styles.heading} m-0`}>
-            {images[currentIndex].alt}
+            {tidbits[currentIndex].title}
           </h2>
         </a>
         <div className={styles.controls}>
@@ -166,12 +101,16 @@ const LandingTidbits = () => {
             </Button>
           </div>
           {inView && (
-            <Progress key={currentIndex} color={images[currentIndex].textColor} />
+            <Progress key={currentIndex} color={tidbits[currentIndex].textColor} />
           )}
         </div>
       </div>
       <StackedImages
-        images={images}
+        images={tidbits.map((t, index) => ({
+          href: TIDBIT_HREF[index],
+          alt: t.title,
+          src: t.items[1].imageSrc,
+        }))}
         rotationDelta={15}
         currentIndex={currentIndex}
         className={styles.StackedImages}

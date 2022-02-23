@@ -9,6 +9,7 @@ import {
   LandingSubscribe,
 } from '~/components/Landing';
 import Footer from '~/components/Footer';
+import LandingTidbits from '~/components/Landing/LandingTidbits/LandingTidbits';
 
 function Home({ applicationConfig }: ConnectedProps<typeof connector>) {
   return (
@@ -23,6 +24,7 @@ function Home({ applicationConfig }: ConnectedProps<typeof connector>) {
         <LandingHero />
         <LandingHowItWorks />
         {/* <LandingThanks /> */}
+        <LandingTidbits />
         <LandingSubscribe />
         <LandingStats />
         <Footer />

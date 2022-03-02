@@ -108,7 +108,7 @@ function withAuthModal(isLoggedIn: boolean, cb: (...any) => any) {
   };
 }
 
-function useKeyDown(code: string, handler: (e: KeyboardEvent) => void) {
+function useKeyDown(code: string, handler: (e: KeyboardEvent) => void, dependencies: any[] = []) {
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.code === code) {
@@ -120,7 +120,7 @@ function useKeyDown(code: string, handler: (e: KeyboardEvent) => void) {
     return () => {
       window.removeEventListener('keydown', handleEsc);
     };
-  }, [code]);
+  }, [code, ...dependencies]);
 }
 
 export {

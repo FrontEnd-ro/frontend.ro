@@ -16,6 +16,8 @@ export interface TidbitI {
   items: TidbitItemI[];
 
   description?: string;
+
+  createdDate?: Date;
 }
 
 export interface TidbitItemI {

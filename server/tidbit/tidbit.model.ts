@@ -13,7 +13,8 @@ const TidbitSchema = new mongoose.Schema<TidbitI>({
   textColor: { type: String, required: true },
   backgroundColor: { type: String, required: true },
   items: [TidbitItemSchema],
-  description: { type: String }
+  description: { type: String },
+  createdDate: { type: Date, default: new Date() },
 });
 
 const Tidbit: mongoose.Model<TidbitI, {}, {}> = mongoose.models.Tidbit

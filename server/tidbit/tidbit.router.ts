@@ -9,7 +9,7 @@ const tidbitRouter = express.Router();
 tidbitRouter.get("/", [
   PublicMiddleware,
   async function getAllTidbits(req: Request, res: Response) {
-    const tidbits: TidbitI[] = await Tidbit.find();
+    const tidbits: TidbitI[] = await Tidbit.find().sort('-createdDate');
 
     res.json(tidbits);
   },

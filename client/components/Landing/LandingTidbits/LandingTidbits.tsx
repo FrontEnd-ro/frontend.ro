@@ -10,26 +10,6 @@ import { TidbitI } from '~/../shared/types/tidbit.types';
 import styles from './LandingTidbits.module.scss';
 
 const LandingTidbits = ({ tidbits }: { tidbits: TidbitI[] }) => {
-  // Temporary hardcode the HREF to the instagram posts
-  // Remove when we fully implemented the Tidbits functionality,
-  // including separate pages.
-  const TIDBIT_HREF = [
-    'https://www.instagram.com/p/CYn5OuCoOXm/',
-    'https://www.instagram.com/p/CYdnoW2IgVP/',
-    'https://www.instagram.com/p/CV7wqmaIMxR/',
-    'https://www.instagram.com/p/CT_lyItoKRZ/',
-    'https://www.instagram.com/p/CTuUpVflDuB/',
-    'https://www.instagram.com/p/CTb5oOoIwBF/',
-    'https://www.instagram.com/p/CTT0Zs8o7Fr/',
-    'https://www.instagram.com/p/CTEdMftIghc/',
-    'https://www.instagram.com/p/CSoGpI0o7ha/',
-    'https://www.instagram.com/p/CSdwjo5oSdt/',
-    'https://www.instagram.com/p/CSV_UcHIE06/',
-    'https://www.instagram.com/p/CQidsvAnYtC/',
-    'https://www.instagram.com/p/CSJU3miIEi5/',
-    'https://www.instagram.com/p/CPK4UwYnVRx/',
-  ];
-
   const { ref, inView } = useInView({
     threshold: 0.4,
     triggerOnce: true,
@@ -82,9 +62,8 @@ const LandingTidbits = ({ tidbits }: { tidbits: TidbitI[] }) => {
     >
       <div className={`${styles.about} d-flex flex-column justify-content-between`}>
         <a
-          target="_blank"
           rel="noreferrer"
-          href={TIDBIT_HREF[currentIndex]}
+          href={`/tidbits/${tidbits[currentIndex].tidbitId}/${currentIndex + 1}`}
           className={`${styles['heading-link']} no-underline`}
         >
           <h2 className={`${styles.heading} m-0`}>
@@ -107,7 +86,7 @@ const LandingTidbits = ({ tidbits }: { tidbits: TidbitI[] }) => {
       </div>
       <StackedImages
         images={tidbits.map((t, index) => ({
-          href: TIDBIT_HREF[index],
+          href: `/tidbits/${tidbits[currentIndex].tidbitId}/${currentIndex + 1}`,
           alt: t.title,
           src: t.items[1].imageSrc,
         }))}

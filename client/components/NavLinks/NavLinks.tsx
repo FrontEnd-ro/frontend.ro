@@ -40,9 +40,9 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
           </Link>
         </li>
         <li>
-          <Link href="/blog">
+          <Link href="/tidbits">
             <a>
-              Blog
+              Tidbits
             </a>
           </Link>
         </li>

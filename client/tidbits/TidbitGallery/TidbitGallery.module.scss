@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+
+.TidbitGallery {
+  margin-bottom: 10em;
+
+  h1 {
+    font-size: 4em;
+  }
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  @media screen and (max-width: $max-width) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

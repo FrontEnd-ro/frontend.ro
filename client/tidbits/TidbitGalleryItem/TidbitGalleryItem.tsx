@@ -24,11 +24,12 @@ const TidbitGalleryItem = ({
       className={`
         ${styles.TidbitGalleryItem}
         ${active ? styles['TidbitGalleryItem--active'] : ''}]
+        d-flex
         relative
         overflow-hidden
       `}
     >
-      <img className="h-100" src={tidbit.items[itemIndex].imageSrc} alt={tidbit.title} />
+      <img className="w-100" src={tidbit.items[itemIndex].imageSrc} alt={tidbit.title} />
     </a>
   </Link>
 );

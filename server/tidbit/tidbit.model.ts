@@ -1,5 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { TidbitI, TidbitItemI } from '../../shared/types/tidbit.types';
+
+
 
 const TidbitItemSchema = new mongoose.Schema<TidbitItemI>({
   imageSrc: { type: String, required: true },
@@ -20,4 +22,17 @@ const TidbitSchema = new mongoose.Schema<TidbitI>({
 const Tidbit: mongoose.Model<TidbitI, {}, {}> = mongoose.models.Tidbit
   || mongoose.model<TidbitI>('Tidbit', TidbitSchema);
 
+
+function sanitizeTidbit(tidbit: Document<TidbitI> & TidbitI): TidbitI {
+  const tidbitCopy = tidbit.toObject();
+  delete tidbitCopy._id;
+
+  tidbitCopy.items.forEach((item) => {
+    delete item._id;
+  })
+
+  return tidbitCopy;
+}
+
 export default Tidbit;
+export { sanitizeTidbit };

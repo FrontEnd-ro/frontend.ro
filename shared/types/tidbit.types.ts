@@ -21,6 +21,9 @@ export interface TidbitI {
 }
 
 export interface TidbitItemI {
+  // Mongo generated
+  _id?: ObjectId;
+
   imageSrc: string;
   language?: string;
   codeSnippets?: string[];

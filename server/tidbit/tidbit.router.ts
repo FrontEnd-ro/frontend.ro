@@ -1,17 +1,16 @@
 import express, { Request, Response } from "express";
-import Tidbit from "./tidbit.model";
 import { ServerError } from "../ServerUtils";
 import { PublicMiddleware } from "../Middlewares";
-import { TidbitI } from "../../shared/types/tidbit.types";
+import Tidbit, { sanitizeTidbit } from "./tidbit.model";
 
 const tidbitRouter = express.Router();
 
 tidbitRouter.get("/", [
   PublicMiddleware,
   async function getAllTidbits(req: Request, res: Response) {
-    const tidbits: TidbitI[] = await Tidbit.find().sort('-createdDate');
+    const tidbits = await Tidbit.find().sort('-createdDate');
 
-    res.json(tidbits);
+    res.json(tidbits.map(sanitizeTidbit));
   },
 ]);
 
@@ -19,14 +18,14 @@ tidbitRouter.get("/:tidbitId", [
   PublicMiddleware,
   async function getTidbit(req: Request, res: Response) {
     const { tidbitId } = req.params;
-    const tidbit: TidbitI = await Tidbit.findOne({ tidbitId });
+    const tidbit = await Tidbit.findOne({ tidbitId });
 
     if (tidbit === null) {
       new ServerError(404, "Not found").send(res);
       return;
     }
 
-    res.json(tidbit);
+    res.json(sanitizeTidbit(tidbit));
   },
 ]);
 
@@ -35,7 +34,7 @@ tidbitRouter.get("/:currentTidbitId/sides", [
   async function getPreviousAndNextTidbit(req: Request, res: Response) {
     const { currentTidbitId } = req.params;
 
-    const tidbits: TidbitI[] = await Tidbit.find().sort("-createdDate");
+    const tidbits = await Tidbit.find().sort("-createdDate");
     const indexOf = tidbits.findIndex(
       (tidbit) => tidbit.tidbitId === currentTidbitId
     );
@@ -46,8 +45,8 @@ tidbitRouter.get("/:currentTidbitId/sides", [
     }
 
     res.json({
-      previous: tidbits[indexOf - 1] ?? null,
-      next: tidbits[indexOf +1] ?? null,
+      previous: indexOf > 0 ? sanitizeTidbit(tidbits[indexOf - 1]) : null,
+      next: indexOf < tidbits.length - 1 ? sanitizeTidbit(tidbits[indexOf +1]) : null,
     });
   },
 ]);

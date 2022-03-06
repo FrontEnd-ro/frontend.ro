@@ -23,7 +23,7 @@ const TidbitGalleryItem = ({
       style={{ borderColor }}
       className={`
         ${styles.TidbitGalleryItem}
-        ${active ? styles['TidbitGalleryItem--active'] : ''}]
+        ${active ? styles['TidbitGalleryItem--active'] : ''}
         d-flex
         relative
         overflow-hidden

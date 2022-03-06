@@ -91,7 +91,7 @@ const Tidbit = ({ tidbit, index }: Props) => {
               // eslint-disable-next-line react/no-array-index-key
               key={index}
               code={codeSnippet}
-              className="mt-8 mb-8"
+              className={`${styles['code-snippet']} mt-8 mb-8`}
               language={currentItem.language as Language}
             />
           ))}

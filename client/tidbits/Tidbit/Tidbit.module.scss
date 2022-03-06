@@ -94,6 +94,10 @@ $hero-padding: 16px;
   @extend %containerConfig;
 }
 
+.code-snippet pre {
+  max-height: min(75vh, 650px);
+}
+
 .grid {
   gap: 0;
   display: grid;

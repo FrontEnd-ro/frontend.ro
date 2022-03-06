@@ -90,12 +90,6 @@ $hero-padding: 16px;
   }
 }
 
-.snippets {
-  @extend %containerConfig;
-  width: 60vmin;
-  margin-top: 5em;
-}
-
 .center-container {
   @extend %containerConfig;
 }

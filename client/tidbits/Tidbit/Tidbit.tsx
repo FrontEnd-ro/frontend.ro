@@ -7,6 +7,7 @@ import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-r
 import { useKeyDown } from '~/services/Hooks';
 import { TidbitI } from '~/../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
+import Highlight, { Language } from '~/components/Highlight/Highlight';
 import TidbitGalleryItem from '../TidbitGalleryItem/TidbitGalleryItem';
 
 import styles from './Tidbit.module.scss';
@@ -83,17 +84,19 @@ const Tidbit = ({ tidbit, index }: Props) => {
         {isLastItem && nextTidbit && (<NextTidbitLink nextTidbit={nextTidbit} />)}
       </div>
 
-      {/* {currentItem.codeSnippets !== undefined && (
-      <div className={styles.snippets}>
-        {currentItem.codeSnippets.map((codeSnippet, index) => (
-          <Highlight
-            key={index}
-            code={codeSnippet}
-            language={currentItem.language as Language}
-          />
-        ))}
-      </div>
-      )} */}
+      {currentItem.codeSnippets !== undefined && (
+        <div className={styles['center-container']}>
+          {currentItem.codeSnippets.map((codeSnippet, index) => (
+            <Highlight
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              code={codeSnippet}
+              className="mt-8 mb-8"
+              language={currentItem.language as Language}
+            />
+          ))}
+        </div>
+      )}
 
       <div className={styles['center-container']}>
         <div className={styles.grid}>

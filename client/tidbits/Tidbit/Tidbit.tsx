@@ -85,7 +85,7 @@ const Tidbit = ({ tidbit, index }: Props) => {
       </div>
 
       {currentItem.codeSnippets !== undefined && (
-        <div className={styles['center-container']}>
+        <div className={`${styles['center-container']} d-flex flex-column align-items-center`}>
           {currentItem.codeSnippets.map((codeSnippet, index) => (
             <Highlight
               // eslint-disable-next-line react/no-array-index-key

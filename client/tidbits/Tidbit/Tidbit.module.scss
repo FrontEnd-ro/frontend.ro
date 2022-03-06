@@ -30,14 +30,6 @@ $hero-padding: 16px;
   aspect-ratio: 1/1;
   border-radius: 0.5em;
   box-shadow: 0 0 0.5em color(silver);
-
-  @media screen and (max-width: $max-width) {
-    width: 65vmin;
-  }
-
-  @media screen and (max-width: 650px) {
-    width: 100%;
-  }
 }
 
 .next-tidbit,
@@ -94,14 +86,21 @@ $hero-padding: 16px;
   @extend %containerConfig;
 }
 
-.code-snippet pre {
-  max-height: min(75vh, 650px);
+.code-snippet {
+  width: auto;
+  max-width: 100%;
+  min-width: 60vmin;
+  display: inline-block;
+
+  pre {
+    max-height: min(75vh, 650px);
+  }
 }
 
 .grid {
   gap: 0;
   display: grid;
-  margin-top: 10em;
+  margin-top: 5em;
   margin-bottom: 5em;
   grid-template-columns: repeat(4, 1fr);
 
@@ -138,6 +137,20 @@ $hero-padding: 16px;
 
   .grid {
     margin-top: 7em;
+  }
+}
+
+@media screen and (max-width: $max-width) {
+  .main-image,
+  .code-snippet {
+    width: 65vmin;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .main-image,
+  .code-snippet {
+    width: 100%;
   }
 }
 

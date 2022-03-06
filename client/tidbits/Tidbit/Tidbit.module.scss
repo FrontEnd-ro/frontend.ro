@@ -15,23 +15,6 @@ $hero-padding: 16px;
   // clipped. We introduce this padding to make sure it is
   // fully displayed.
   padding: $hero-padding 0;
-
-  @media screen and (max-width: 800px) {
-    overflow: visible;
-
-    .arrow-link {
-      top: calc(100% + 1em);
-      position: absolute;
-
-      &--left {
-        margin-right: 20vw;
-      }
-
-      &--right {
-        margin-left: 20vw;
-      }
-    }
-  }
 }
 
 .arrow-link {
@@ -130,6 +113,33 @@ $hero-padding: 16px;
 
   @media screen and (max-width: 700px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .hero {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .arrow-link {
+    order: 1;
+    width: 20vw;
+    margin-top: 2em;
+
+    &--left {
+      margin-left: 20vw;
+      text-align: center;
+    }
+
+    &--right {
+      margin-right: 20vw;
+      text-align: center;
+    }
+  }
+
+  .grid {
+    margin-top: 7em;
   }
 }
 

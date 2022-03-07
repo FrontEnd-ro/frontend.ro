@@ -7,6 +7,8 @@ interface Props {
   description: string;
   shareImage?: string;
   bigShareImage?: boolean;
+  shareImageWidth?: number;
+  shareImageHeight?: number;
 }
 
 export default function SEOTags({
@@ -15,6 +17,8 @@ export default function SEOTags({
   url,
   shareImage = 'https://frontend.ro/main-seo-image.jpg',
   bigShareImage = true,
+  shareImageWidth = bigShareImage ? 1200 : 400,
+  shareImageHeight = bigShareImage ? 630 : 400,
   children,
 }: PropsWithChildren<Props>) {
   return (
@@ -33,8 +37,8 @@ export default function SEOTags({
       <meta property="og:locale" content="ro_RO" />
       <meta property="og:image" content={shareImage} />
       <meta property="og:image:type" content="image/jpeg" />
-      <meta property="og:image:width" content={bigShareImage ? '1200' : '400'} />
-      <meta property="og:image:height" content={bigShareImage ? '630' : '400'} />
+      <meta property="og:image:width" content={shareImageWidth.toString()} />
+      <meta property="og:image:height" content={shareImageHeight.toString()} />
 
       {/* Twitter */}
       <meta name="twitter:image" content={shareImage} />

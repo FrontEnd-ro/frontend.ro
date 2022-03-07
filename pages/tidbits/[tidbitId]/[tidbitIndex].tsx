@@ -29,6 +29,8 @@ const TidbitPage = ({ tidbit, tidbitIndex }: Props) => {
         title={`${tidbit.title} | FrontEnd.ro`}
         shareImage={tidbit.items[zeroBasedIndex].imageSrc}
         bigShareImage={false}
+        shareImageWidth={1080}
+        shareImageHeight={1080}
         description={tidbit.description ?? 'Tips & tricks vizuale despre FrontEnd development.'}
       />
       <Header withNavMenu />

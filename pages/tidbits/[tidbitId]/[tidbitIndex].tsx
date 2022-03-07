@@ -25,7 +25,7 @@ const TidbitPage = ({ tidbit, tidbitIndex }: Props) => {
   return (
     <>
       <SEOTags
-        url={`https://FrontEnd.ro/tidbits/${tidbit.tidbitId}/${zeroBasedIndex}`}
+        url={`https://FrontEnd.ro/tidbits/${tidbit.tidbitId}/${tidbitIndex}`}
         title={`${tidbit.title} | FrontEnd.ro`}
         shareImage={tidbit.items[zeroBasedIndex].imageSrc}
         bigShareImage={false}

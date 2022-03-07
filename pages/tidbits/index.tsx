@@ -11,6 +11,7 @@ const TidbitGalleryPage = ({ tidbits }: {tidbits: TidbitI[]}) => {
       <SEOTags
         url="https://FrontEnd.ro/tidbits"
         title="Tidbits | FrontEnd.ro"
+        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/tidbits_1200w.jpeg`}
         description="Tips & tricks vizuale despre FrontEnd development."
       />
       <Header withNavMenu />

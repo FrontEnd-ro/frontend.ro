@@ -17,6 +17,7 @@ const TidbitSchema = new mongoose.Schema<TidbitI>({
   items: [TidbitItemSchema],
   description: { type: String },
   createdDate: { type: Date, default: new Date() },
+  views: { type: Number, default: 0 },
 });
 
 const Tidbit: mongoose.Model<TidbitI, {}, {}> = mongoose.models.Tidbit
@@ -29,7 +30,8 @@ function sanitizeTidbit(tidbit: Document<TidbitI> & TidbitI): TidbitI {
 
   tidbitCopy.items.forEach((item) => {
     delete item._id;
-  })
+  });
+  delete tidbitCopy.views;
 
   return tidbitCopy;
 }

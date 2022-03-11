@@ -18,6 +18,8 @@ export interface TidbitI {
   description?: string;
 
   createdDate?: Date;
+
+  views: number;
 }
 
 export interface TidbitItemI {

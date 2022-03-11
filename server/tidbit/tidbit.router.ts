@@ -51,4 +51,27 @@ tidbitRouter.get("/:currentTidbitId/sides", [
   },
 ]);
 
+tidbitRouter.post('/:tidbitId/views', async function increaseViews(req, res) {
+  const { tidbitId } = req.params;
+
+  const tidbit = await Tidbit.findOne({ tidbitId });
+
+  if (tidbit === null) {
+    new ServerError(404, "Not found").send(res);
+    return;
+  }
+
+  tidbit.views += 1;
+
+  try {
+    await tidbit.save();
+    res.status(200).send();
+  } catch (err) {
+    new ServerError(
+      err.code || 500, 
+      err.message || 'Oops! A apărut o problemă. Încearcă din nou!'
+    ).send(res);
+  }
+});
+
 export default tidbitRouter;

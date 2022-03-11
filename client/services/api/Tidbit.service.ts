@@ -10,6 +10,10 @@ class TidbitService {
       `${process.env.ENDPOINT}/tidbits/${currentTidbitId}/sides`,
     ).then((resp) => resp.json());
   }
+
+  static increaseTidbitView(tidbitId: string): Promise<Response> {
+    return HttpService.post(`${process.env.ENDPOINT}/tidbits/${tidbitId}/views`);
+  }
 }
 
 export default TidbitService;

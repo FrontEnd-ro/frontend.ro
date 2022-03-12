@@ -1,29 +1,57 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import SEOTags from '~/components/SEOTags';
 import { LESSONS } from '~/services/DataModel';
+import { TutorialNav } from '~/tutorials/Tutorial';
+import PageContainer from '~/components/PageContainer';
+import TutorialService from '~/services/api/Tutorial.service';
+import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 
-// Naming this component `Temp` because eventually
-// will move this to the /html folder. So right now
-// it's just a Temporary solution while we're finishing
-// development on the Tutorial functionality.
-function HTMLTutorialTemp() {
-  const firstLessonId = LESSONS.find((lesson) => lesson.type === 'html')?.id;
+function HtmlTutorialDashboard() {
+  const TUTORIAL_ID = 'html';
+  const firstLessonId = LESSONS.find((lesson) => lesson.type === TUTORIAL_ID)?.id;
 
-  // After we move this to a first class page
-  // we'll probably want to redirect only if the user
-  // didn't start the tutorial.
+  const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
+
+  useEffect(() => {
+    TutorialService
+      .getProgress(TUTORIAL_ID)
+      .then((progress) => {
+        setTutorialProgress(progress);
+      })
+      .catch((err) => {
+        console.error('HtmlTutorialDashboard.useEffect', err);
+      });
+  }, []);
+
   return (
-    <RedirectToLesson lessonId={firstLessonId} />
+    <>
+      <SEOTags
+        title={`Tutorialul de ${TUTORIAL_ID.toUpperCase()}`}
+        description="Învață HTML printr-un curs online, focusat pe practică și feedback de la developeri cu experiență."
+        url={`https://FrontEnd.ro/${TUTORIAL_ID}`}
+      />
+      <PageWithAsideMenu menu={{
+        // FIXME: should come from server
+        title: `Modulul de ${TUTORIAL_ID.toUpperCase()}`,
+        Component: tutorialProgress !== undefined ? (
+          <TutorialNav
+            lessonId={firstLessonId}
+            tutorialId={TUTORIAL_ID}
+            isExercisesPage={false}
+            tutorialProgress={tutorialProgress}
+          />
+        ) : null,
+      }}
+      >
+        <PageContainer>
+          <h1>
+            {TUTORIAL_ID.toUpperCase()}
+          </h1>
+        </PageContainer>
+      </PageWithAsideMenu>
+    </>
   );
 }
 
-const RedirectToLesson = ({ lessonId }: {lessonId: string}) => {
-  const router = useRouter();
-  useEffect(() => {
-    router.replace(`/html/tutorial/${lessonId}`);
-  }, []);
-
-  return null;
-};
-
-export default HTMLTutorialTemp;
+export default HtmlTutorialDashboard;

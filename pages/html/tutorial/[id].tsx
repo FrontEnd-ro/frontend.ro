@@ -30,7 +30,10 @@ const LESSON_TO_COMPONENT = {
   validare: <HTMLValidationContent />,
 };
 
-// Same reason as index.tsx for adding `Temp` to the name.
+// Naming this component `Temp` because eventually
+// will move this to the /html folder. So right now
+// it's just a Temporary solution while we're finishing
+// development on the Tutorial functionality.
 const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => {
   if (lessonInfo === null) {
     return <NotFoundPage />;

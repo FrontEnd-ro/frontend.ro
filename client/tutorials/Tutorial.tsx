@@ -64,7 +64,7 @@ interface TutorialNavProps {
   isExercisesPage: boolean;
   tutorialProgress: TutorialProgressI;
 }
-const TutorialNav = ({
+export const TutorialNav = ({
   lessonId, tutorialId, isExercisesPage, tutorialProgress,
 }: TutorialNavProps) => {
   const lessonInfos = tutorialProgress.lessons

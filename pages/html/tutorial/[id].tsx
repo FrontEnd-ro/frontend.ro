@@ -3,6 +3,7 @@ import Tutorial from '~/tutorials/Tutorial';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
+import LessonContent from '~/components/lessons/LessonContent/LessonContent';
 
 // Curriculum components
 import ListsContent from '~/curriculum/html/Lists';
@@ -50,8 +51,14 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
       <Tutorial
         tutorialId="html"
         lessonId={lessonInfo.id}
-        lessonContent={LESSON_TO_COMPONENT[lessonInfo.id]}
-      />
+      >
+        <LessonContent
+          title={lessonInfo.title}
+          contributors={lessonInfo.contributors}
+        >
+          {LESSON_TO_COMPONENT[lessonInfo.id]}
+        </LessonContent>
+      </Tutorial>
     </>
   );
 };

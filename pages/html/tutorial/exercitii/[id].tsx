@@ -2,7 +2,9 @@ import SEOTags from '~/components/SEOTags';
 import Tutorial from '~/tutorials/Tutorial';
 import NotFoundPage from '~/components/404/NotFound';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
+import LessonContent from '~/components/lessons/LessonContent/LessonContent';
 import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
+
 // Same reason as index.tsx for adding `Temp` to the name.
 const HtmlLessonExercisesTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => {
   if (lessonInfo === null) {
@@ -21,14 +23,20 @@ const HtmlLessonExercisesTemp = ({ lessonInfo }: { lessonInfo: LessonDescription
         isExercisesPage
         tutorialId="html"
         lessonId={lessonInfo.id}
-        lessonContent={lessonInfo.withExercises ? (
-          <LessonExercises lessonId={lessonInfo.id} />
-        ) : (
-          <h2>
-            Această lecție nu are exerciții!
-          </h2>
-        )}
-      />
+      >
+        <LessonContent
+          title={`Exerciții ${lessonInfo.title}`}
+          contributors={[]}
+        >
+          {lessonInfo.withExercises ? (
+            <LessonExercises lessonId={lessonInfo.id} />
+          ) : (
+            <h2>
+              Această lecție nu are exerciții!
+            </h2>
+          )}
+        </LessonContent>
+      </Tutorial>
     </>
   );
 };

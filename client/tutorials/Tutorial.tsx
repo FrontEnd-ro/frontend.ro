@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { withSmoothScroll } from '~/services/Hooks';
 import { getLessonById } from '~/services/DataModel';
 import PageContainer from '~/components/PageContainer';
@@ -6,7 +6,6 @@ import { parseChapters } from '~/components/TableOfContents';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialChapterLink from '~/components/TutorialChapterLink';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
-import LessonContent from '~/components/lessons/LessonContent/LessonContent';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 
 import styles from './Tutorial.module.scss';
@@ -14,15 +13,14 @@ import styles from './Tutorial.module.scss';
 interface Props {
   tutorialId: string;
   lessonId: string;
-  lessonContent: JSX.Element;
   // We have different sub-pages for the
   // lesson and the exercises.
   isExercisesPage?: boolean;
 }
 
 const Tutorial = ({
-  tutorialId, lessonId, lessonContent, isExercisesPage = false,
-}: Props) => {
+  tutorialId, lessonId, children, isExercisesPage = false,
+}: PropsWithChildren<Props>) => {
   const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
   const lessonInfo = getLessonById(lessonId);
 
@@ -54,12 +52,7 @@ const Tutorial = ({
     }}
     >
       <PageContainer>
-        <LessonContent
-          title={!isExercisesPage ? lessonInfo.title : `Exerciții ${lessonInfo.title}`}
-          contributors={!isExercisesPage ? lessonInfo.contributors ?? [] : []}
-        >
-          {lessonContent}
-        </LessonContent>
+        {children}
       </PageContainer>
     </PageWithAsideMenu>
   );

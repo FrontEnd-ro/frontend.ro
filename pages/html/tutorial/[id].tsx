@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
+import { withSmoothScroll } from '~/services/Hooks';
+import { LessonHeading } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
-import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
+import TutorialService from '~/services/api/Tutorial.service';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
+import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
+import TableOfContents, { Chapter, parseChapters } from '~/components/TableOfContents';
 
 // Curriculum components
 import ListsContent from '~/curriculum/html/Lists';
@@ -20,7 +24,6 @@ import AboutHtmlContent from '~/curriculum/html/AboutHtml/AboutHtml';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
 import HTMLStructureContent from '~/curriculum/html/HTMLStructure/HTMLStructure';
-import TutorialService from '~/services/api/Tutorial.service';
 
 const LESSON_TO_COMPONENT = {
   'audio-video': <AudioAndVideoContent />,
@@ -41,8 +44,28 @@ const LESSON_TO_COMPONENT = {
 // development on the Tutorial functionality.
 const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => {
   const TUTORIAL_ID = 'html';
-
   const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
+
+  const getChapters = (lessonDescription: LessonDescription): Chapter[] => {
+    if (!lessonDescription.withExercises) {
+      return parseChapters(lessonDescription.chapters);
+    }
+
+    return [
+      {
+        title: 'Lectie',
+        id: 'lectie',
+        href: '#lectie',
+        subchapters: parseChapters(lessonInfo.chapters),
+      },
+      {
+        title: 'Exerciții',
+        id: 'exercitii',
+        href: '#exercitii',
+      },
+    ];
+  };
+
   useEffect(() => {
     TutorialService
       .getProgress(TUTORIAL_ID)
@@ -52,6 +75,8 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
       });
   }, []);
 
+  withSmoothScroll();
+
   if (lessonInfo === null) {
     return <NotFoundPage />;
   }
@@ -59,6 +84,8 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
   if (lessonInfo.written === false) {
     return <NotWroteYet lesson={lessonInfo} />;
   }
+
+  const chapters = getChapters(lessonInfo);
 
   return (
     <>
@@ -69,16 +96,16 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
         shareImage={lessonInfo.ogImage}
       />
       <PageWithAsideMenu menu={{
-      // FIXME: should come from server
-        title: `Modulul de ${TUTORIAL_ID.toUpperCase()}`,
+        title: lessonInfo.title,
         Component: tutorialProgress === undefined
           ? null
           : (
-            <TutorialNav
-              lessonId={lessonInfo.id}
-              tutorialId={TUTORIAL_ID}
-              isExercisesPage={false}
-              tutorialProgress={tutorialProgress}
+            <TableOfContents
+              onChapterClick={() => {
+                // FIXME
+                // THIS SHOULD CLOSE THE MENU
+              }}
+              chapters={chapters}
             />
           ),
       }}
@@ -89,6 +116,14 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
             contributors={lessonInfo.contributors}
           >
             {LESSON_TO_COMPONENT[lessonInfo.id]}
+            {lessonInfo.withExercises === true && (
+              <div>
+                <LessonHeading as="h3" id="exercitii">
+                  Exerciții
+                </LessonHeading>
+                <LessonExercises lessonId={lessonInfo.id} />
+              </div>
+            )}
           </LessonContent>
         </PageContainer>
       </PageWithAsideMenu>

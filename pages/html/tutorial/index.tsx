@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import SEOTags from '~/components/SEOTags';
-import { LESSONS } from '~/services/DataModel';
 import PageContainer from '~/components/PageContainer';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
@@ -9,8 +8,6 @@ import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsi
 
 function HtmlTutorialDashboard() {
   const TUTORIAL_ID = 'html';
-  const firstLessonId = LESSONS.find((lesson) => lesson.type === TUTORIAL_ID)?.id;
-
   const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
 
   useEffect(() => {
@@ -36,9 +33,7 @@ function HtmlTutorialDashboard() {
         title: `Modulul de ${TUTORIAL_ID.toUpperCase()}`,
         Component: tutorialProgress !== undefined ? (
           <TutorialNav
-            lessonId={firstLessonId}
             tutorialId={TUTORIAL_ID}
-            isExercisesPage={false}
             tutorialProgress={tutorialProgress}
           />
         ) : null,

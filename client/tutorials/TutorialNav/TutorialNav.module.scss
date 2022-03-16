@@ -4,10 +4,6 @@
   overflow: auto;
 }
 
-.exercises {
-  @extend %containerConfig;
-}
-
 .TutorialChapterLink--locked {
   opacity: 0.5;
 }
@@ -15,18 +11,4 @@
 .TutorialChapterLink--locked:hover,
 .TutorialChapterLink--active {
   opacity: 1;
-}
-
-.chapter-link-pair {
-  .TutorialChapterLink:first-child {
-    border-bottom: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  
-    & + .TutorialChapterLink {
-      border-top: 0;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-  }  
 }

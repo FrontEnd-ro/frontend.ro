@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import SEOTags from '~/components/SEOTags';
 import { LESSONS } from '~/services/DataModel';
-import { TutorialNav } from '~/tutorials/Tutorial';
 import PageContainer from '~/components/PageContainer';
 import TutorialService from '~/services/api/Tutorial.service';
+import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 

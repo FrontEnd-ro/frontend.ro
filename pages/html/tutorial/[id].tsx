@@ -1,9 +1,13 @@
+import { useEffect, useState } from 'react';
 import SEOTags from '~/components/SEOTags';
-import Tutorial from '~/tutorials/Tutorial';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
+import PageContainer from '~/components/PageContainer';
+import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
+import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
+import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 
 // Curriculum components
 import ListsContent from '~/curriculum/html/Lists';
@@ -16,6 +20,7 @@ import AboutHtmlContent from '~/curriculum/html/AboutHtml/AboutHtml';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
 import HTMLStructureContent from '~/curriculum/html/HTMLStructure/HTMLStructure';
+import TutorialService from '~/services/api/Tutorial.service';
 
 const LESSON_TO_COMPONENT = {
   'audio-video': <AudioAndVideoContent />,
@@ -35,6 +40,18 @@ const LESSON_TO_COMPONENT = {
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
 const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => {
+  const TUTORIAL_ID = 'html';
+
+  const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
+  useEffect(() => {
+    TutorialService
+      .getProgress(TUTORIAL_ID)
+      .then((progress) => {
+        setTutorialProgress(progress);
+        console.log(progress);
+      });
+  }, []);
+
   if (lessonInfo === null) {
     return <NotFoundPage />;
   }
@@ -51,17 +68,30 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
         url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={lessonInfo.ogImage}
       />
-      <Tutorial
-        tutorialId="html"
-        lessonId={lessonInfo.id}
+      <PageWithAsideMenu menu={{
+      // FIXME: should come from server
+        title: `Modulul de ${TUTORIAL_ID.toUpperCase()}`,
+        Component: tutorialProgress === undefined
+          ? null
+          : (
+            <TutorialNav
+              lessonId={lessonInfo.id}
+              tutorialId={TUTORIAL_ID}
+              isExercisesPage={false}
+              tutorialProgress={tutorialProgress}
+            />
+          ),
+      }}
       >
-        <LessonContent
-          title={lessonInfo.title}
-          contributors={lessonInfo.contributors}
-        >
-          {LESSON_TO_COMPONENT[lessonInfo.id]}
-        </LessonContent>
-      </Tutorial>
+        <PageContainer>
+          <LessonContent
+            title={lessonInfo.title}
+            contributors={lessonInfo.contributors}
+          >
+            {LESSON_TO_COMPONENT[lessonInfo.id]}
+          </LessonContent>
+        </PageContainer>
+      </PageWithAsideMenu>
     </>
   );
 };

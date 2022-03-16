@@ -1,62 +1,10 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { withSmoothScroll } from '~/services/Hooks';
+import React from 'react';
 import { getLessonById } from '~/services/DataModel';
-import PageContainer from '~/components/PageContainer';
 import { parseChapters } from '~/components/TableOfContents';
-import TutorialService from '~/services/api/Tutorial.service';
 import TutorialChapterLink from '~/components/TutorialChapterLink';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
-import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 
-import styles from './Tutorial.module.scss';
-
-interface Props {
-  tutorialId: string;
-  lessonId: string;
-  // We have different sub-pages for the
-  // lesson and the exercises.
-  isExercisesPage?: boolean;
-}
-
-const Tutorial = ({
-  tutorialId, lessonId, children, isExercisesPage = false,
-}: PropsWithChildren<Props>) => {
-  const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
-  const lessonInfo = getLessonById(lessonId);
-
-  withSmoothScroll();
-
-  useEffect(() => {
-    TutorialService
-      .getProgress(tutorialId)
-      .then((progress) => {
-        setTutorialProgress(progress);
-        console.log(progress);
-      });
-  }, [tutorialId]);
-
-  return (
-    <PageWithAsideMenu menu={{
-      // FIXME: should come from server
-      title: `Modulul de ${tutorialId.toUpperCase()}`,
-      Component: tutorialProgress === undefined
-        ? null
-        : (
-          <TutorialNav
-            lessonId={lessonId}
-            tutorialId={tutorialId}
-            isExercisesPage={isExercisesPage}
-            tutorialProgress={tutorialProgress}
-          />
-        ),
-    }}
-    >
-      <PageContainer>
-        {children}
-      </PageContainer>
-    </PageWithAsideMenu>
-  );
-};
+import styles from './TutorialNav.module.scss';
 
 interface TutorialNavProps {
   lessonId: string;
@@ -64,7 +12,7 @@ interface TutorialNavProps {
   isExercisesPage: boolean;
   tutorialProgress: TutorialProgressI;
 }
-export const TutorialNav = ({
+const TutorialNav = ({
   lessonId, tutorialId, isExercisesPage, tutorialProgress,
 }: TutorialNavProps) => {
   const lessonInfos = tutorialProgress.lessons
@@ -132,4 +80,4 @@ export const TutorialNav = ({
   );
 };
 
-export default Tutorial;
+export default TutorialNav;

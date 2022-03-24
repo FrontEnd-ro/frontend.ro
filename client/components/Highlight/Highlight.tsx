@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef } from 'react';
 import { HLJSApi } from 'highlight.js';
 import { noop } from 'lodash';
-import { useClipboard } from '~/services/Hooks';
+import { copyToClipboard } from '~/services/Utils';
 import Button from '~/components/Button';
 
 import styles from './Highlight.module.scss';
@@ -82,12 +82,8 @@ export default function Highlight({
 }
 
 const CopyButton = ({ code }: { code: string }) => {
-  const btnRef = useRef<HTMLButtonElement>(null);
-
-  useClipboard(btnRef);
-
   return (
-    <Button data-clipboard-text={code} ref={btnRef}>
+    <Button onClick={() => copyToClipboard(code)}>
       <FontAwesomeIcon className="text-silver" icon={faCopy} width={20} />
       <span className="d-block"> Copy </span>
     </Button>

@@ -1,3 +1,5 @@
+import SweetAlertService from './sweet-alert/SweetAlert.service';
+
 export { v4 as uuid } from 'uuid';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -143,4 +145,18 @@ export const wait = (milliseconds: number) => {
 export const getTextSection = (text: string, percentage: number) => {
   const sectionLength = Math.round((text.length * percentage) / 100);
   return text.substring(0, sectionLength);
+};
+
+export const copyToClipboard = (text: string) => {
+  return navigator.clipboard.writeText(text)
+    .then(() => {
+      SweetAlertService.toast({ text: 'Successfully copied to clipboard.' });
+    })
+    .catch((err) => {
+      console.error("Couldn't copy to the clipboard", { text, err });
+      SweetAlertService.toast({
+        type: 'error',
+        text: "Seems like your browser doesn't support clipboard copying. You have to copy it manually...",
+      });
+    });
 };

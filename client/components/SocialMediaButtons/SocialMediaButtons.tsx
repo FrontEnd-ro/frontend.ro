@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebook,
@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import Button, { Variant as ButtonVariant } from '~/components/Button';
-import { useClipboard } from '~/services/Hooks';
+import { copyToClipboard } from '~/services/Utils';
 
 export function FacebookButton({ url }: { url: string }) {
   const share = useSocialShare('Facebook');
@@ -89,11 +89,8 @@ function useSocialShare(providerName: string) {
 }
 
 export function CopyLinkButton({ text, variant = 'blue' }: { text: string, variant?: ButtonVariant }) {
-  const ref = useRef(null);
-  useClipboard(ref);
-
   return (
-    <Button variant={variant} className="btn--with-icon" data-clipboard-text={text} ref={ref}>
+    <Button onClick={() => copyToClipboard(text)} variant={variant} className="btn--with-icon">
       <FontAwesomeIcon icon={faLink} height="24" className="mr-2" />
       Copy link
     </Button>

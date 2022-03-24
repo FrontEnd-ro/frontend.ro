@@ -24,29 +24,6 @@ function useOutsideClick(ref: MutableRefObject<HTMLElement>, handler: (e: MouseE
   }, [ref, handler]);
 }
 
-function useClipboard(ref: MutableRefObject<HTMLElement>, onCopy: () => void = noop) {
-  const initClipboard = (ClipboardJS) => {
-    let clipboard = new ClipboardJS(ref.current);
-
-    clipboard.on('success', (e) => {
-      e.clearSelection();
-
-      SweetAlertService.toast({ text: 'Successfully copied to clipboard.' });
-      onCopy();
-    });
-
-    clipboard.on('error', () => {
-      SweetAlertService.toast({ type: 'error', text: "Seems like your browser doesn't support clipboard copying. You have to copy it manually..." });
-    });
-  };
-
-  useEffect(() => {
-    import('clipboard').then((module) => {
-      initClipboard(module.default);
-    });
-  }, []);
-}
-
 /**
  * Apply "scroll-behaviour: smooth" to the Ref Object.
  * If none is supplied, then default to the root <html>
@@ -125,7 +102,6 @@ function useKeyDown(code: string, handler: (e: KeyboardEvent) => void, dependenc
 
 export {
   useOutsideClick,
-  useClipboard,
   withSmoothScroll,
   useLoggedInOnly,
   useAnonymousOnly,

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faHourglass, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ProgressDonut } from '~/components/progress';
 
 import styles from './ProgressLink.module.scss';
@@ -15,6 +15,7 @@ interface Props {
   // Optional
   active?: boolean;
   className?: string;
+  variant?: 'default' | 'waiting' | 'error';
 }
 
 const ProgressLink = ({
@@ -23,10 +24,13 @@ const ProgressLink = ({
   completePercentage,
   active = false,
   className = '',
+  variant = 'default',
 }: Props) => {
   return (
     <div className={`
       ${styles.ProgressLink}
+      ${styles[variant]}
+      ${active ? styles.active : ''}
       ${className}
       relative
       overflow-hidden
@@ -34,16 +38,15 @@ const ProgressLink = ({
     `}
     >
       <Link href={href}>
-        <a className={`
-          ${styles.link}
-          ${active === true ? styles.active : ''}
-          d-flex
-          align-items-center
-          no-underline
-        `}
-        >
-          {completePercentage > 0 && (
+        <a className="d-flex align-items-center no-underline">
+          {variant === 'default' && completePercentage > 0 && (
             <ProgressIndicator completePercentage={completePercentage} />
+          )}
+          {variant === 'waiting' && (
+            <WaitingIndicator />
+          )}
+          {variant === 'error' && (
+            <ErrorIndicator />
           )}
           <span className={styles.title}>
             {title}
@@ -87,5 +90,37 @@ const ProgressIndicator = ({
     </div>
   );
 };
+
+const WaitingIndicator = () => (
+  <div className={`${styles['progress-wrapper']} relative`}>
+    <ProgressDonut
+      size="2em"
+      count={100}
+      strokeWidth={3}
+      items={[{ color: 'var(--grey)', count: 100 }]}
+    />
+    <FontAwesomeIcon
+      width={14}
+      icon={faHourglass}
+      className={`absolute text-grey ${styles['check-icon']}`}
+    />
+  </div>
+);
+
+const ErrorIndicator = () => (
+  <div className={`${styles['progress-wrapper']} relative`}>
+    <ProgressDonut
+      size="2em"
+      count={100}
+      strokeWidth={3}
+      items={[{ color: 'var(--red)', count: 100 }]}
+    />
+    <FontAwesomeIcon
+      width={14}
+      icon={faTimes}
+      className={`absolute text-red ${styles['check-icon']}`}
+    />
+  </div>
+);
 
 export default ProgressLink;

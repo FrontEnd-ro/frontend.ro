@@ -15,10 +15,12 @@ const BASE_PROPS: {
   href: string,
   title: string,
   active: boolean,
+  variant: 'default' | 'waiting' | 'error';
 } = {
   href: '#',
   title: 'HTML Lesson',
   active: true,
+  variant: 'default',
 };
 
 export const Initial = Template.bind({});
@@ -37,4 +39,16 @@ export const Done = Template.bind({});
 Done.args = {
   ...BASE_PROPS,
   completePercentage: 100,
+};
+
+export const Waiting = Template.bind({});
+Waiting.args = {
+  ...BASE_PROPS,
+  variant: 'waiting',
+};
+
+export const Error = Template.bind({});
+Error.args = {
+  ...BASE_PROPS,
+  variant: 'error',
 };

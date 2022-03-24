@@ -1,19 +1,31 @@
 @import "../../styles/variables";
 
 .ProgressLink {
-  border: 1px solid color(silver);
-}
-
-.link {
+  overflow: hidden;
   padding: 1em 0.5em;
-  transition: transform 0.25s $cubic;
+  border: 1px solid color(silver);
 
   &.active {
     font-weight: bold;
+  }
+
+  &.default.active {
     color: color(green);
   }
 
-  &:not(.active):hover {
+  &.waiting.active {
+    color: color(grey);
+  }
+
+  &.error.active {
+    color: color(red);
+  }
+
+  a {
+    transition: transform 0.25s $cubic;
+  }
+
+  &:not(.active):hover a {
     transform: translateX(0.25em);
   }
 }
@@ -31,18 +43,4 @@
 
 .title {
   font-size: 1.2em;
-}
-
-.chapters {
-  margin-left: 0.75em;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0.75em;
-    height: 1.75em;
-    bottom: calc(100% + 0.25em);
-    border-left: 0.13em solid #77838b;
-  }
 }

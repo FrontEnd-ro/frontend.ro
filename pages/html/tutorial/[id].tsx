@@ -130,7 +130,7 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
                 <LessonHeading as="h3" id="exercitii">
                   Exerciții
                 </LessonHeading>
-                <LessonExercises lessonId={lessonInfo.id} />
+                <LessonExercises tutorialId="html" lessonId={lessonInfo.id} />
               </div>
             )}
           </LessonContent>

@@ -14,9 +14,10 @@ import styles from './LessonExercises.module.scss';
 
 interface Props {
   lessonId: string
+  tutorialId?: string;
 }
 
-function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof connector>) {
+function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<typeof connector>) {
   const isLoggedIn = !!user.info;
 
   const [submissions, setSubmissions] = useState<Submission[]>(undefined);
@@ -99,7 +100,10 @@ function LessonExercises({ user, lessonId }: Props & ConnectedProps<typeof conne
                 SubmissionStatus.AWAITING_REVIEW,
                 SubmissionStatus.DONE,
               ].includes(sub.status)}
-              href={`/rezolva/${sub.exercise._id}`}
+              href={tutorialId === undefined
+                ? `/rezolva/${sub.exercise._id}`
+                // TODO: change to /html when finishing the integration
+                : `/${tutorialId}/tutorial/${lessonId}/exercitii/${sub.exercise._id}`}
             />
           ))}
         </div>

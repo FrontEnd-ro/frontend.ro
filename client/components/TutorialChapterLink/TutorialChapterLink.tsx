@@ -18,7 +18,6 @@ interface Props {
   className?: string;
   chapters?: Chapter[];
   showChapters?: boolean;
-  showProgress?: boolean;
 }
 
 const TutorialChapterLink = ({
@@ -28,9 +27,6 @@ const TutorialChapterLink = ({
   chapters = [],
   showChapters = false,
   active = false,
-  // By default, show the progress if completePercentage
-  // is greater than 0.
-  showProgress = completePercentage > 0,
   className = '',
 }: Props) => {
   return (
@@ -52,7 +48,7 @@ const TutorialChapterLink = ({
           no-underline
         `}
         >
-          {showProgress && (
+          {completePercentage > 0 && (
             <ProgressIndicator completePercentage={completePercentage} />
           )}
           <span className={styles.title}>

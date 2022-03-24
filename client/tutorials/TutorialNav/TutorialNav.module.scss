@@ -4,11 +4,11 @@
   overflow: auto;
 }
 
-.TutorialChapterLink--locked {
+.ProgressLink--locked {
   opacity: 0.5;
 }
 
-.TutorialChapterLink--locked:hover,
-.TutorialChapterLink--active {
+.ProgressLink--locked:hover,
+.ProgressLink--active {
   opacity: 1;
 }

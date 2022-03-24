@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import TutorialChapterLinkComponent from './TutorialChapterLink';
+import ProgressLinkComponent from './ProgressLink';
 
 export default {
-  title: 'Tutoria/TutorialChapterLink',
-  component: TutorialChapterLinkComponent,
-} as ComponentMeta<typeof TutorialChapterLinkComponent>;
+  title: 'Generic/ProgressLink',
+  component: ProgressLinkComponent,
+} as ComponentMeta<typeof ProgressLinkComponent>;
 
-const Template: ComponentStory<typeof TutorialChapterLinkComponent> = (args) => (
-  <TutorialChapterLinkComponent {...args} />
+const Template: ComponentStory<typeof ProgressLinkComponent> = (args) => (
+  <ProgressLinkComponent {...args} />
 );
 
 const BASE_PROPS: {

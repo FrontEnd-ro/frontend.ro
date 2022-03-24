@@ -1,6 +1,6 @@
 import React from 'react';
 import { getLessonById } from '~/services/DataModel';
-import TutorialChapterLink from '~/components/TutorialChapterLink';
+import ProgressLink from '~/components/ProgressLink';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 import styles from './TutorialNav.module.scss';
@@ -26,11 +26,11 @@ const TutorialNav = ({
 
         return (
           <div key={lesson.lessonId}>
-            <TutorialChapterLink
+            <ProgressLink
               className={`
                 mb-8
-                ${styles.TutorialChapterLink}
-                ${lesson.locked ? styles['TutorialChapterLink--locked'] : ''}
+                ${styles.ProgressLink}
+                ${lesson.locked ? styles['ProgressLink--locked'] : ''}
               `}
               title={lessonInfos[index].title}
               completePercentage={completePercentage}

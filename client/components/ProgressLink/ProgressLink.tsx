@@ -4,7 +4,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ProgressDonut } from '~/components/progress';
 
-import styles from './TutorialChapterLink.module.scss';
+import styles from './ProgressLink.module.scss';
 
 interface Props {
   href: string;
@@ -17,7 +17,7 @@ interface Props {
   className?: string;
 }
 
-const TutorialChapterLink = ({
+const ProgressLink = ({
   href,
   title,
   completePercentage,
@@ -26,7 +26,7 @@ const TutorialChapterLink = ({
 }: Props) => {
   return (
     <div className={`
-      ${styles.TutorialChapterLink}
+      ${styles.ProgressLink}
       ${className}
       relative
       overflow-hidden
@@ -88,4 +88,4 @@ const ProgressIndicator = ({
   );
 };
 
-export default TutorialChapterLink;
+export default ProgressLink;

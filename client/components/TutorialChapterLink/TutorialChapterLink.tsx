@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ProgressDonut } from '~/components/progress';
-import TableOfContents, { Chapter } from '~/components/TableOfContents';
 
 import styles from './TutorialChapterLink.module.scss';
 
@@ -16,23 +15,18 @@ interface Props {
   // Optional
   active?: boolean;
   className?: string;
-  chapters?: Chapter[];
-  showChapters?: boolean;
 }
 
 const TutorialChapterLink = ({
   href,
   title,
   completePercentage,
-  chapters = [],
-  showChapters = false,
   active = false,
   className = '',
 }: Props) => {
   return (
     <div className={`
       ${styles.TutorialChapterLink}
-      ${showChapters ? styles['show-chapters'] : ''}
       ${className}
       relative
       overflow-hidden
@@ -56,11 +50,6 @@ const TutorialChapterLink = ({
           </span>
         </a>
       </Link>
-      {showChapters && (
-        <div className={styles.chapters}>
-          <TableOfContents chapters={chapters} />
-        </div>
-      )}
     </div>
   );
 };

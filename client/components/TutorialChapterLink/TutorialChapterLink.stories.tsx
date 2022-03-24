@@ -15,12 +15,10 @@ const BASE_PROPS: {
   href: string,
   title: string,
   active: boolean,
-  ribbonPosition: 'top-right' | 'bottom-right';
 } = {
   href: '#',
   title: 'HTML Lesson',
   active: true,
-  ribbonPosition: 'top-right',
 };
 
 export const Initial = Template.bind({});

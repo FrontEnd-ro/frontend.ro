@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
@@ -100,13 +101,21 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
         Component: tutorialProgress === undefined
           ? null
           : (
-            <TableOfContents
-              onChapterClick={() => {
-                // FIXME
-                // THIS SHOULD CLOSE THE MENU
-              }}
-              chapters={chapters}
-            />
+            <div className="d-flex flex-column justify-content-between flex-1 pb-5">
+              <TableOfContents
+                onChapterClick={() => {
+                  // FIXME
+                  // THIS SHOULD CLOSE THE MENU
+                }}
+                chapters={chapters}
+              />
+              {/* TODO: change to /html when finishing the integration */}
+              <Link href="/html/tutorial">
+                <a className="text-center">
+                  Înapoi la tutorial
+                </a>
+              </Link>
+            </div>
           ),
       }}
       >

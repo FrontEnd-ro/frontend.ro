@@ -21,7 +21,7 @@ export default function AboutUsContent() {
   const lessonInfo = getLessonById('despre-noi');
 
   useEffect(() => {
-    setUrlToShare(`${window.location.origin}${router.pathname}`);
+    setUrlToShare(`${window.location.origin}${router.asPath}`);
   }, []);
 
   return (

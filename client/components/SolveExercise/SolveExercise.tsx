@@ -14,7 +14,9 @@ import PageContainer from '~/components/PageContainer';
 import StatusBanner from './StatusBanner/StatusBanner';
 import SubmissionService from '~/services/Submission.service';
 import { UserState, LessonExercise } from '~/redux/user/types';
-import { SubmissionStatus } from '~/../shared/types/submission.types';
+import {
+  SubmissionStatus, SubmissionVersionI, WIPSanitiedSubmission,
+} from '~/../shared/types/submission.types';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
@@ -28,7 +30,7 @@ import Button from '../Button';
 import SolveExerciseSkeleton from './SolveExercise.skeleton';
 import FolderStructure from '~/services/utils/FolderStructure';
 import AsideNav from './AsideNav/AsideNav';
-import { SubmissionVersionI } from '~/../shared/types/submission.types';
+
 import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
 import RoutingUtils from '~/services/utils/Routing.utils';
 
@@ -66,7 +68,9 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
   const [fetchError, setFetchError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [autoSaved, setAutoSaved] = useState<AutoSave>(AutoSave.NONE);
-  const [lessonExercises, setLessonExercises] = useState<LessonExercise[]>([]);
+  const [submissionList, setSubmissionList] = useState<
+    Pick<WIPSanitiedSubmission, '_id' | 'status' | 'exercise' | 'feedbacks'>[]
+  >([]);
 
   const activeVersionIndex = versions.findIndex((v) => v._id === RoutingUtils.getQueryString(router, 'version'));
 
@@ -75,8 +79,8 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
     || submission.status === SubmissionStatus.AWAITING_REVIEW
   );
 
-  const exerciseIndex = lessonExercises.findIndex((ex) => {
-    return ex._id === submission?.exercise?._id;
+  const submissionIndex = submissionList.findIndex((sub) => {
+    return sub.exercise._id === submission?.exercise?._id;
   });
 
   const folderStructure = React.useMemo(() => {
@@ -243,15 +247,29 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
       });
   };
 
-  const fetchExercisesFromLesson = (lessonId) => {
-    return LessonExerciseService
-      .getAllExercisesForLessons(lessonId)
-      .then((lessonExercises) => setLessonExercises(lessonExercises))
+  const fetchSubmissionsFromLesson = (lessonId) => {
+    return Promise.all([
+      SubmissionService.getAllSubmissionsFromLesson(lessonId),
+      LessonExerciseService.getAllExercisesForLessons(lessonId),
+    ])
+      .then(([submissions, lessonExercises]) => {
+        setSubmissionList(submissions.map((sub, index) => {
+          if (sub === null) {
+            return {
+              feedbacks: [],
+              _id: lessonExercises[index]._id,
+              exercise: lessonExercises[index],
+              status: SubmissionStatus.IN_PROGRESS,
+            };
+          }
+          return sub;
+        }));
+      })
       .catch((err) => {
-        setLessonExercises([]);
+        setSubmissionList([]);
         // Do nothing since the default value is empty Array
         // so the UI is non-breaking
-        console.error('[SolveExercise.fetchExercisesFromLesson]', err);
+        console.error('[SolveExercise.fetchSubmissionsFromLesson]', err);
       });
   };
 
@@ -293,7 +311,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
 
   useEffect(() => {
     if (submission?.exercise?.lesson) {
-      fetchExercisesFromLesson(submission.exercise.lesson);
+      fetchSubmissionsFromLesson(submission.exercise.lesson);
     }
   }, [submission?.exercise?.lesson]);
 
@@ -310,7 +328,11 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
     <PageWithAsideMenu menu={{
       title: getLessonById(submission.exercise.lesson).title,
       Component: (
-        <AsideNav lessonExercises={lessonExercises} versions={versions} />
+        <AsideNav
+          versions={versions}
+          submissions={submissionList}
+          currentExerciseId={submission.exercise._id}
+        />
       ),
     }}
     >
@@ -372,8 +394,8 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
             </Button>
             {
               (submission.status !== SubmissionStatus.IN_PROGRESS)
-              && (exerciseIndex + 1 < lessonExercises.length) && (
-                <Link href={`/rezolva/${lessonExercises[exerciseIndex + 1]._id}`}>
+              && (submissionIndex + 1 < submissionList.length) && (
+                <Link href={`/rezolva/${submissionList[submissionIndex + 1].exercise._id}`}>
                   <a className="btn btn--default no-underline ml-2">
                     Rezolvă următorul exercițiu!
                   </a>

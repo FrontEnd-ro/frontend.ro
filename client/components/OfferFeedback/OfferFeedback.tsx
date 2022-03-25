@@ -150,7 +150,7 @@ function OfferFeedback({
     <PageWithAsideMenu menu={{
       title: getLessonById(submission.exercise.lesson).title,
       Component: (
-        <AsideNav lessonExercises={[]} versions={versions} />
+        <AsideNav submissions={[]} versions={versions} />
       ),
     }}
     >

@@ -1,18 +1,23 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { LessonExercise } from '~/redux/user/types';
-import TableOfContents from '~/components/TableOfContents';
+import ProgressLink from '~/components/ProgressLink';
+import {
+  FeedbackType,
+  SubmissionStatus,
+  SubmissionVersionI,
+  WIPSanitiedSubmission,
+} from '~/../shared/types/submission.types';
 import ExerciseVersionHistory from '../../ExerciseVersionHistory';
-import { SubmissionVersionI } from '~/../shared/types/submission.types';
 
 import styles from './AsideNav.module.scss';
 
 interface Props {
-  lessonExercises: LessonExercise[];
+  submissions: Pick<WIPSanitiedSubmission, 'status' | 'exercise' | 'feedbacks'>[];
   versions: SubmissionVersionI[];
+  currentExerciseId?: string;
 }
 
-const AsideNav = ({ lessonExercises, versions }: Props) => {
+const AsideNav = ({ currentExerciseId, submissions, versions }: Props) => {
   const router = useRouter();
   const versionHrefBuilder = (v: SubmissionVersionI) => ({
     query: {
@@ -23,14 +28,32 @@ const AsideNav = ({ lessonExercises, versions }: Props) => {
 
   return (
     <div className="d-flex flex-column justify-content-between flex-1">
-      <TableOfContents
-        className={styles.TableOfContents}
-        chapters={lessonExercises.map((lessonEx, index) => ({
-          id: lessonEx._id,
-          title: `Exercițiu #${index + 1}`,
-          href: `/rezolva/${lessonEx._id}`,
-        }))}
-      />
+      <nav className={styles['chapter-nav']}>
+        {submissions.map((submission, index) => {
+          let variant: 'default' | 'waiting' | 'error' = 'default';
+          if (submission.status === SubmissionStatus.AWAITING_REVIEW) {
+            variant = 'waiting';
+          } else if (
+            submission.status === SubmissionStatus.IN_PROGRESS && submission.feedbacks
+              .filter((f) => f.type === FeedbackType.IMPROVEMENT).length > 0
+          ) {
+            variant = 'error';
+          }
+
+          return (
+            <div key={submission.exercise._id}>
+              <ProgressLink
+                className="mb-8"
+                variant={variant}
+                title={`Exercițiu #${index + 1}`}
+                href={`/rezolva/${submission.exercise._id}`}
+                active={submission.exercise._id === currentExerciseId}
+                completePercentage={submission.status === SubmissionStatus.DONE ? 100 : 0}
+              />
+            </div>
+          );
+        })}
+      </nav>
       <ExerciseVersionHistory hrefBuilder={versionHrefBuilder} versions={versions} />
     </div>
   );

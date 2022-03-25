@@ -17,7 +17,7 @@ const submissionRouter = express.Router();
 // let's not use a separate main route, rather use a sub-route here.
 submissionRouter.use('/versions', submissionVersionRouter);
 
-submissionRouter.get('/', [PublicMiddleware], async function getSubmissions(req, res) {
+submissionRouter.get('/', [UserRoleMiddleware(UserRole.ADMIN)], async function getSubmissions(req, res) {
   const { page, query, status } = req.query;
 
   // The query param is called status so it makes sense when
@@ -37,7 +37,7 @@ submissionRouter.get('/', [PublicMiddleware], async function getSubmissions(req,
   res.json(results.map(SubmissionModel.sanitize));
 });
 
-submissionRouter.get('/:submissionId', async function getSubmission(req, res) {
+submissionRouter.get('/:submissionId', [UserRoleMiddleware(UserRole.ADMIN)], async function getSubmission(req, res) {
   const { submissionId } = req.params;
 
   try {

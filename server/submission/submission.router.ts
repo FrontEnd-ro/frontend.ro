@@ -34,7 +34,7 @@ submissionRouter.get('/', [PublicMiddleware], async function getSubmissions(req,
   }
 
   const results = await SubmissionModel.search(+page, query, statuses);
-  res.json(results);
+  res.json(results.map(SubmissionModel.sanitize));
 });
 
 submissionRouter.get('/:submissionId', async function getSubmission(req, res) {
@@ -45,7 +45,7 @@ submissionRouter.get('/:submissionId', async function getSubmission(req, res) {
     if (!submission) {
       new ServerError(404, `No submission with id='${submissionId}' found`).send(res);
     } else {
-      res.json(submission);
+      res.json(SubmissionModel.sanitize(submission));
     }
   } catch (err) {
     new ServerError(400, err.message).send(res);
@@ -63,7 +63,7 @@ submissionRouter.get('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerci
       new ServerError(404, `No submission for exercise='${exerciseId}' found`).send(res);
       return;
     } else {
-      res.json(submission);
+      res.json(SubmissionModel.sanitize(submission));
     }
   } catch (err) {
     console.log("[API][getSubmissionByExercise]", err);
@@ -80,6 +80,7 @@ submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMI
 
     if (!targetUser) {
       new ServerError(404, `User '${username}' doesn't exist.`).send(res);
+      return;
     }
 
     const submission = await SubmissionModel.getUserSubmission(targetUser._id, exerciseId);
@@ -88,7 +89,7 @@ submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMI
       new ServerError(404, `No submission for exercise='${exerciseId}' found`).send(res);
       return;
     } else {
-      res.json(submission);
+      res.json(SubmissionModel.sanitize(submission));
     }
   } catch (err) {
     console.log("[API][getSubmissionByExercise]", err);
@@ -98,7 +99,7 @@ submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMI
 
 submissionRouter.post('/', [PrivateMiddleware], async function createSubmission(req, res) {
   const submission = await SubmissionModel.create(req.body);
-  res.json(submission);
+  res.json(SubmissionModel.sanitize(submission));
 });
 
 submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], async function approveSubmission(req, res) {
@@ -221,7 +222,7 @@ submissionRouter.put('/:submissionId', [PrivateMiddleware], async function updat
     await SubmissionModel.update(submission._id, payload);
     const updatedSubmission = await SubmissionModel.get(submissionId);
 
-    res.json(updatedSubmission);
+    res.json(SubmissionModel.sanitize(updatedSubmission));
   } catch (err) {
     console.error("[API][put.updateSubmission]", err);
     new ServerError(err.code, err.message).send(res);
@@ -254,7 +255,7 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
     updatedSubmission = await SubmissionModel.get(existingSubmission._id);
   }
 
-  res.json(updatedSubmission);
+  res.json(SubmissionModel.sanitize(updatedSubmission));
 });
 
 

@@ -1,6 +1,6 @@
 import { ObjectId } from "mongoose";
-import { UserI } from "./user.types";
-import { ExerciseI, LessonExerciseI } from "./exercise.types";
+import { UserI, WIPSanitizedUser } from "./user.types";
+import { WIPPopulatedLessonExerciseI, WIPSanitizedLessonExercise } from "./exercise.types";
 
 export enum FeedbackType {
   PRAISE = 'praise',
@@ -39,13 +39,24 @@ export interface WIPPopulatedSubmissionI {
 
   user: UserI;
 
-  exercise: LessonExerciseI;
+  exercise: WIPPopulatedLessonExerciseI;
 
   assignee: UserI;
   
   status: SubmissionStatus;
 
   feedbacks: FeedbackI[];
+}
+
+// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
+export type WIPSanitiedSubmission = Pick<WIPPopulatedSubmissionI, 'code' | 'status' | 'feedbacks'> & {
+  _id: string;
+
+  user: WIPSanitizedUser;
+
+  exercise: WIPSanitizedLessonExercise;
+
+  assigneed: WIPSanitizedUser;
 }
 
 export interface SubmissionVersionI {

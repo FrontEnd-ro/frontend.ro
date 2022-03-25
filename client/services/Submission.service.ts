@@ -1,6 +1,6 @@
 import HttpService from './Http.service';
 import { Submission } from '~/redux/exercise-submissions/types';
-import { SubmissionStatus } from '~/../shared/types/submission.types';
+import { SubmissionStatus, WIPSanitiedSubmission } from '~/../shared/types/submission.types';
 
 class SubmissionService {
   static searchSubmissions(page = 0, query = '', statuses = [SubmissionStatus.AWAITING_REVIEW]) {
@@ -14,6 +14,12 @@ class SubmissionService {
   static getOwnSubmission(exerciseId: string) {
     return HttpService
       .get(`${process.env.ENDPOINT}/submissions/exercise/${exerciseId}`)
+      .then((resp) => resp.json());
+  }
+
+  static getAllSubmissionsFromLesson(lessonId: string): Promise<(WIPSanitiedSubmission | null)[]> {
+    return HttpService
+      .get(`${process.env.ENDPOINT}/submissions/lesson/${lessonId}`)
       .then((resp) => resp.json());
   }
 

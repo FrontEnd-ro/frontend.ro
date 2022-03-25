@@ -4,6 +4,7 @@ import { NotificationChannel, NotificationI, NotificationType, NotificationUrgen
 import submissionVersionRouter from './submission-version/submission-version.router';
 import { UserRole } from '../../shared/types/user.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
+import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 
 const express = require('express');
 const UserModel = require('../user/user.model');
@@ -70,6 +71,27 @@ submissionRouter.get('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerci
     new ServerError(err.code, err.message).send(res);
   }
 });
+
+submissionRouter.get(
+  "/lesson/:lessonId",
+  [PrivateMiddleware],
+  async function getAllSubmissionsFromLesson(req, res) {
+    const { lessonId } = req.params;
+    const { user } = req.body;
+
+    try {
+      const exercises = await LessonExerciseModel.getAllFromLesson(lessonId);
+      const submissions = await Promise.all(
+        exercises.map((ex) => SubmissionModel.getByExerciseId(user._id, ex._id))
+      );
+
+      res.json(submissions);
+    } catch (err) {
+      console.log("[API][getAllSubmissionsFromLesson]", err);
+      new ServerError(err.code, err.message).send(res);
+    }
+  }
+);
 
 submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMIN), SolvableExercise], async function getUserSubmission(req, res) {
   const { username, exerciseId } = req.params;

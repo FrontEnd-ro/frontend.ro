@@ -1,5 +1,5 @@
 import { PopulatedDoc } from 'mongoose';
-import { UserI } from './user.types';
+import { UserI, WIPSanitizedUser } from './user.types';
 
 export enum ExerciseType {
   HTML = 'html',
@@ -45,4 +45,9 @@ export interface LessonExerciseI extends ExerciseI {
 // FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
 export interface WIPPopulatedLessonExerciseI extends LessonExerciseI {
   user: UserI;
+}
+
+// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
+export type WIPSanitizedLessonExercise = Omit<LessonExerciseI, 'user'> & {
+  user: WIPSanitizedUser;
 }

@@ -30,3 +30,15 @@ export interface UserI {
 
   tutorials: string[];
 }
+
+// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
+export type WIPSanitizedUser = Pick<
+  UserI,
+  | 'avatar'
+  | 'name'
+  | 'email'
+  | 'username'
+  | 'description'
+  | 'role'
+  | 'tutorials'
+>;

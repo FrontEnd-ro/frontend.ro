@@ -97,12 +97,12 @@ const WaitingIndicator = () => (
       size="2em"
       count={100}
       strokeWidth={3}
-      items={[{ color: 'var(--grey)', count: 100 }]}
+      items={[{ color: 'var(--orange)', count: 100 }]}
     />
     <FontAwesomeIcon
       width={14}
       icon={faHourglass}
-      className={`absolute text-grey ${styles['check-icon']}`}
+      className={`absolute text-orange ${styles['check-icon']}`}
     />
   </div>
 );

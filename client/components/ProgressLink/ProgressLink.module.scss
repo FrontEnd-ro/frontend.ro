@@ -16,8 +16,8 @@
   }
 
   &.waiting.active {
-    color: color(grey);
-    border-color: color(grey);
+    color: color(orange);
+    border-color: color(orange);
   }
 
   &.error.active {

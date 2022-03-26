@@ -7,18 +7,22 @@
 
   &.active {
     font-weight: bold;
+    border-width: 2px;
   }
 
   &.default.active {
     color: color(green);
+    border-color: color(green);
   }
 
   &.waiting.active {
     color: color(grey);
+    border-color: color(grey);
   }
 
   &.error.active {
     color: color(red);
+    border-color: color(red);
   }
 
   a {

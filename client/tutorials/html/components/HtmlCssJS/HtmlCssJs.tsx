@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Typed from 'typed.js';
+import React, { useState } from 'react';
 import { Checkbox } from '~/components/Form';
 import TodoExample from './TodoExample/TodoExample';
 import GradientText from '~/components/GradientText/GradientText';
 
 import styles from './HtmlCssJs.module.scss';
-import { wait } from '~/services/Utils';
 import CheckboxOnboarding from './CheckboxOnboarding/CheckboxOnboarding';
 
 interface Config {
@@ -23,97 +21,14 @@ interface Config {
  */
 const HtmlCssJs = () => {
   const [config, setConfig] = useState<Config>({
-    htmlEnabled: false,
-    cssEnabled: false,
-    jsEnabled: false,
+    htmlEnabled: true,
+    cssEnabled: true,
+    jsEnabled: true,
   });
-
-  // When this component mounts, incrementally enable each
-  // language. The state of this "demo" is captured here.
-  const [demoInProgress, setDemoInProgress] = useState(true);
-
-  // Milliseconds
-  const BLOB_DELAY = 2000;
 
   // Each blob is being animated, by transitionioning
   // to and from another blob.
   const BLOB_ANIMATION_DURATION = '15s';
-
-  const typedRef = useRef<Typed>(null);
-  const todoFormRef = useRef<HTMLFormElement>(null);
-  const htmlExplanationRef = useRef<HTMLDivElement>(null);
-  const cssExplanationRef = useRef<HTMLDivElement>(null);
-  const jsExplanationRef = useRef<HTMLDivElement>(null);
-
-  // Play initial animation which
-  // shows the HTML, CSS and JavaScript blobs
-  // in order, then types a new ToDo into the
-  // input and "presses" the "Add" button.
-  const play = async () => {
-    setDemoInProgress(true);
-    setConfig({ htmlEnabled: true, cssEnabled: false, jsEnabled: false });
-
-    htmlExplanationRef.current.addEventListener('transitionend', async function onHtmlEnd() {
-      htmlExplanationRef.current.removeEventListener('transitionend', onHtmlEnd);
-
-      await wait(BLOB_DELAY);
-      setConfig({ htmlEnabled: true, cssEnabled: true, jsEnabled: false });
-
-      cssExplanationRef.current.addEventListener('transitionend', async function onCssEnd() {
-        cssExplanationRef.current.removeEventListener('transitionend', onCssEnd);
-
-        await wait(BLOB_DELAY);
-        setConfig({ htmlEnabled: true, cssEnabled: true, jsEnabled: true });
-
-        startTypedAnimation('Începe să înveți HTML')
-          .then(() => setDemoInProgress(false));
-      });
-    });
-  };
-
-  /**
-   * Type value of `text` inside the input of <ToDo> component.
-   * @param text string
-   * @returns Promise<void>
-   */
-  const startTypedAnimation = (text: string) => {
-    return new Promise<void>((resolve) => {
-      if (!todoFormRef.current) {
-        console.error('startTypedAnimation: expected `todoFormRef.current` to contain the form.');
-        resolve();
-      }
-
-      const inputEl = todoFormRef.current.querySelector('input');
-      const submitButonEl = todoFormRef.current.querySelector('button');
-      if (inputEl === null || submitButonEl === null) {
-        console.error('startTypedAnimation: expected both `inputEl` and `submitButonEl` to contain DOM elements.');
-        resolve();
-      }
-
-      const options = {
-        strings: [text],
-        typeSpeed: 250,
-        onComplete() {
-          submitButonEl.click();
-          resolve();
-        },
-      };
-
-      typedRef.current = new Typed(inputEl, options);
-    });
-  };
-
-  useEffect(() => {
-    setTimeout(play, 500);
-
-    return () => {
-      // If Typed.js has been initialized,
-      // make sure to dispose of it!
-      if (typedRef.current) {
-        typedRef.current.destroy();
-      }
-    };
-  }, []);
 
   return (
     <div className={`${styles.HtmlCssJs} w-100`}>
@@ -123,14 +38,13 @@ const HtmlCssJs = () => {
             We don't want to have content/layout shift when the demo finishes.
             That's why we're using the `invisible` CSS class.
            */}
-          <CheckboxOnboarding className={demoInProgress ? 'invisible' : ''} />
+          <CheckboxOnboarding />
         </div>
         <div className={`d-flex justify-content-between w-100 mb-8 relative ${styles['checkbox-wrapper']}`}>
           <Checkbox
             variant="black"
             name="html"
             checked={config.htmlEnabled}
-            disabled={demoInProgress}
             className={styles.Checkbox}
             onChange={() => setConfig({ ...config, htmlEnabled: !config.htmlEnabled })}
           >
@@ -140,7 +54,6 @@ const HtmlCssJs = () => {
             variant="black"
             name="css"
             checked={config.cssEnabled}
-            disabled={demoInProgress}
             className={styles.Checkbox}
             onChange={() => setConfig({ ...config, cssEnabled: !config.cssEnabled })}
           >
@@ -150,7 +63,6 @@ const HtmlCssJs = () => {
             variant="black"
             name="js"
             checked={config.jsEnabled}
-            disabled={demoInProgress}
             className={styles.Checkbox}
             onChange={() => setConfig({ ...config, jsEnabled: !config.jsEnabled })}
           >
@@ -160,24 +72,21 @@ const HtmlCssJs = () => {
       </div>
       <div className="relative">
         <div className={`${styles['TodoExample-wrapper']} relative`}>
-          <TodoExample ref={todoFormRef} {...config} />
+          <TodoExample {...config} />
         </div>
 
         <div>
           <HTMLExplanation
-            ref={htmlExplanationRef}
             enabled={config.htmlEnabled}
             blobTransitionDuration={BLOB_ANIMATION_DURATION}
           />
 
           <CSSExplanation
-            ref={cssExplanationRef}
             enabled={config.htmlEnabled && config.cssEnabled}
             blobTransitionDuration={BLOB_ANIMATION_DURATION}
           />
 
           <JSExplanation
-            ref={jsExplanationRef}
             enabled={config.htmlEnabled && config.jsEnabled}
             blobTransitionDuration={BLOB_ANIMATION_DURATION}
           />

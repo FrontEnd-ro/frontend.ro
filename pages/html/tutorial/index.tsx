@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import SEOTags from '~/components/SEOTags';
+import { RootState } from '~/redux/root.reducer';
 import PageContainer from '~/components/PageContainer';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
+import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 
-function HtmlTutorialDashboard() {
+function HtmlTutorialDashboard({ user }: ConnectedProps<typeof connector>) {
   const TUTORIAL_ID = 'html';
+  const isLoggedIn = !!user.info;
+  const didStartTutorial = isLoggedIn && user.info.tutorials.includes(TUTORIAL_ID);
   const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
 
   useEffect(() => {
@@ -40,13 +45,26 @@ function HtmlTutorialDashboard() {
       }}
       >
         <PageContainer>
-          <h1>
-            {TUTORIAL_ID.toUpperCase()}
-          </h1>
+          {didStartTutorial
+            ? (
+              <p>
+                Tutorial Dashboard
+              </p>
+            )
+            : <TutorialDescription tutorialId={TUTORIAL_ID} />}
+
         </PageContainer>
       </PageWithAsideMenu>
     </>
   );
 }
 
-export default HtmlTutorialDashboard;
+function mapStateToProps(state: RootState) {
+  return {
+    user: state.user,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
+export default connector(HtmlTutorialDashboard);

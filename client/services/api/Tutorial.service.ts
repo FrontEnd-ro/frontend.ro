@@ -19,6 +19,11 @@ class TutorialService {
       .get(`${process.env.ENDPOINT}/tutorials/${tutorialName}/progress`)
       .then((resp) => resp.json());
   }
+
+  static startTutorial(tutorialId: string) {
+    return HttpService
+      .post(`${process.env.ENDPOINT}/tutorials/${tutorialId}/start`);
+  }
 }
 
 export default TutorialService;

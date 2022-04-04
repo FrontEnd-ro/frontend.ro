@@ -29,7 +29,7 @@ function PageWithAsideMenu({ children, menu }: PropsWithChildren<Props>) {
   }, []);
 
   return (
-    <div className={`${styles['page-with-aside-menu']} d-flex`}>
+    <div className={`${styles['page-with-aside-menu']} d-flex h-100`}>
       <AsideMenu
         className={`${styles['aside-menu']} d-flex flex-column`}
         title={menu.title}
@@ -38,7 +38,7 @@ function PageWithAsideMenu({ children, menu }: PropsWithChildren<Props>) {
       >
         {menu.Component}
       </AsideMenu>
-      <main>
+      <main className="d-flex flex-column">
         <Header onMenuClick={() => setIsMenuOpen(true)} withNavMenu />
         {children}
         <Footer />

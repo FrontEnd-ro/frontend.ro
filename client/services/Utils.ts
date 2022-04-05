@@ -1,4 +1,5 @@
 import SweetAlertService from './sweet-alert/SweetAlert.service';
+import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 export { v4 as uuid } from 'uuid';
 
@@ -159,4 +160,24 @@ export const copyToClipboard = (text: string) => {
         text: "Seems like your browser doesn't support clipboard copying. You have to copy it manually...",
       });
     });
+};
+
+export const aggregateTutorialProgress = (tutorialProgress: TutorialProgressI): {
+  done: number;
+  inProgress: number;
+  total: number;
+} => {
+  const aggregate = {
+    done: 0,
+    inProgress: 0,
+    total: 0,
+  };
+
+  tutorialProgress.lessons.forEach((lesson) => {
+    aggregate.done += lesson.progress.done;
+    aggregate.inProgress += lesson.progress.inProgress;
+    aggregate.total += lesson.progress.total;
+  });
+
+  return aggregate;
 };

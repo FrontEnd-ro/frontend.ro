@@ -33,16 +33,18 @@ function HtmlTutorialDashboard({ user }: ConnectedProps<typeof connector>) {
         description="Învață HTML printr-un curs online, focusat pe practică și feedback de la developeri cu experiență."
         url={`https://FrontEnd.ro/${TUTORIAL_ID}`}
       />
-      <PageWithAsideMenu menu={{
-        // FIXME: should come from server
-        title: `Modulul de ${TUTORIAL_ID.toUpperCase()}`,
-        Component: tutorialProgress !== undefined ? (
-          <TutorialNav
-            tutorialId={TUTORIAL_ID}
-            tutorialProgress={tutorialProgress}
-          />
-        ) : null,
-      }}
+      <PageWithAsideMenu
+        withFooter={false}
+        menu={{
+          // FIXME: should come from server
+          title: `Modulul de ${TUTORIAL_ID.toUpperCase()}`,
+          Component: tutorialProgress !== undefined ? (
+            <TutorialNav
+              tutorialId={TUTORIAL_ID}
+              tutorialProgress={tutorialProgress}
+            />
+          ) : null,
+        }}
       >
         <PageContainer>
           {didStartTutorial

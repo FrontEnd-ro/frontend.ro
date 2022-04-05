@@ -13,9 +13,10 @@ interface Props {
     title: string;
     Component: ReactElement;
   }
+  withFooter?: boolean;
 }
 
-function PageWithAsideMenu({ children, menu }: PropsWithChildren<Props>) {
+function PageWithAsideMenu({ children, menu, withFooter = true }: PropsWithChildren<Props>) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -41,7 +42,9 @@ function PageWithAsideMenu({ children, menu }: PropsWithChildren<Props>) {
       <main className="d-flex flex-column">
         <Header onMenuClick={() => setIsMenuOpen(true)} withNavMenu />
         {children}
-        <Footer />
+        {withFooter && (
+          <Footer />
+        )}
       </main>
     </div>
   );

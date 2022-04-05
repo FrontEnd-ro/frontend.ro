@@ -39,14 +39,14 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
       console.error('UserActivity.fetchTutorialsProgress', err);
       setDidError(true);
     }
-  }
+  };
 
   const aggregateTutorialProgress = (tutorialProgress: TutorialProgressI) => {
     const aggregate = {
       done: 0,
       inProgress: 0,
       total: 0,
-    }
+    };
 
     tutorialProgress.lessons.forEach((lesson) => {
       aggregate.done += lesson.progress.done;
@@ -58,7 +58,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
       name: tutorialProgress.name,
       progress: aggregate,
     };
-  }
+  };
 
   useEffect(() => {
     // Solved exercises
@@ -89,10 +89,11 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
   if (didError) {
     return (
       <p className="text-red text-center">
-        Oops! Nu am putut încărca profilul. <br />
+        Oops! Nu am putut încărca profilul.
+        <br />
         Încearcă din nou.
       </p>
-    )
+    );
   }
 
   if (!createdExercises || !solvedExercises || !tutorialsProgress) {
@@ -122,9 +123,10 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
                   { description: 'În progres', count: aggregatedProgress.progress.inProgress, color: 'var(--yellow)' },
                   {
                     description: 'Neîncepute',
-                    count: aggregatedProgress.progress.total - (aggregatedProgress.progress.done + aggregatedProgress.progress.inProgress),
-                    color: 'var(--grey)'
-                  }
+                    count: aggregatedProgress.progress.total
+                      - (aggregatedProgress.progress.done + aggregatedProgress.progress.inProgress),
+                    color: 'var(--grey)',
+                  },
                 ]}
                 total={aggregatedProgress.progress.total}
               />
@@ -132,10 +134,12 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
               {aggregatedProgress.progress.done < aggregatedProgress.progress.total && (
                 <Link href={`/${aggregatedProgress.name}`}>
                   <a className="btn btn--light no-underline mt-4">
-                    {(aggregatedProgress.progress.done === 0 && aggregatedProgress.progress.inProgress === 0)
-                      ? "Începe tutorialul"
-                      : "Continuă"
-                    }
+                    {(
+                      aggregatedProgress.progress.done === 0
+                      && aggregatedProgress.progress.inProgress === 0
+                    )
+                      ? 'Începe tutorialul'
+                      : 'Continuă'}
                   </a>
                 </Link>
               )}
@@ -149,20 +153,19 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
                 </Link>
               )} */}
             </div>
-          ))
-        }
+          ))}
       </section>
       <h2>
         Exerciții rezolvate
       </h2>
       <div className={styles['exercises-wrapper']}>
-        {solvedExercises.map((submission: Submission, index) => (
+        {solvedExercises.map((submission: Submission) => (
           <ExercisePreview
             key={submission._id}
             exercise={submission.exercise}
             href={`rezolva/${submission.exercise._id}`}
             viewMode="STUDENT"
-            feedbackCount={submission.feedbacks.filter(f => f.type === 'improvement').length}
+            feedbackCount={submission.feedbacks.filter((f) => f.type === 'improvement').length}
             isApproved={submission.status === SubmissionStatus.DONE}
             readOnly={[
               SubmissionStatus.AWAITING_REVIEW,
@@ -182,7 +185,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
       <hr />
       <h2> Exerciții create </h2>
       <div className={styles['exercises-wrapper']}>
-        {createdExercises.map((ex, index) => (
+        {createdExercises.map((ex) => (
           <ExercisePreview
             key={ex._id}
             exercise={ex}

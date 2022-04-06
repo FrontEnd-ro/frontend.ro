@@ -6,6 +6,7 @@ import PageContainer from '~/components/PageContainer';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 
@@ -48,11 +49,7 @@ function HtmlTutorialDashboard({ user }: ConnectedProps<typeof connector>) {
       >
         <PageContainer>
           {didStartTutorial
-            ? (
-              <p>
-                Tutorial Dashboard
-              </p>
-            )
+            ? <TutorialDashboard tutorialId={TUTORIAL_ID} />
             : <TutorialDescription tutorialId={TUTORIAL_ID} />}
 
         </PageContainer>

@@ -17,6 +17,7 @@ interface Props {
   feedbackCount: number;
   isApproved: boolean;
 
+  className?: string;
   // Do we need this?
   readOnly: boolean;
 }
@@ -29,22 +30,23 @@ function ExercisePreview({
   feedbackCount,
   isApproved,
   exercise,
+  className = '',
 }: Props) {
   const { btnText, infoMessage } = getFooterTexts(viewMode, feedbackCount, readOnly, isApproved);
 
-  let className = `${styles['exercise-preview']} bg-white rounded-md`;
+  let computedClassName = `${styles['exercise-preview']} bg-white rounded-md`;
   if (isApproved) {
-    className += ` ${styles['is--done']}`;
+    computedClassName += ` ${styles['is--done']}`;
   }
   if (!isApproved && readOnly) {
-    className += ` ${styles['is--waiting']}`;
+    computedClassName += ` ${styles['is--waiting']}`;
   }
   if (feedbackCount > 0) {
-    className += ` ${styles['has--issues']}`;
+    computedClassName += ` ${styles['has--issues']}`;
   }
 
   return (
-    <div className={className}>
+    <div className={`${computedClassName} ${className}`}>
       <header className="text-right">
         {isPrivate && <FontAwesomeIcon className="text-grey" width="24" icon={faLock} title="Exercițiu privat" />}
       </header>

@@ -157,15 +157,19 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
     const notification: NotificationI = {
       to: submission.user,
       short_message: 'ți-a aprobat exercițiul. Congrats!',
-      long_message: 'ți-a aprobat exercițiul. Congrats!',
+      long_message: 'Tocmai ne-am uitat pe exercițiul tău și rezolvarea e corectă.',
       timestamp: Date.now(),
       href: `/rezolva/${submission.exercise._id.toString()}`,
+      href_text: 'Vezi soluția aici',
       from: admin._id,
       type: NotificationType.INFO,
       urgency: NotificationUrgency.REGULAR
     }
 
-    const { success, responses } = await NotificationModel.notify(notification, [NotificationChannel.IN_APP]);
+    const { success, responses } = await NotificationModel.notify(
+      notification,
+      [NotificationChannel.IN_APP, NotificationChannel.EMAIL]
+    );
     if (!success) {
       console.error("approveSubmission.notify", responses);
     }
@@ -210,15 +214,19 @@ submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], 
     const notification: NotificationI = {
       to: submission.user,
       short_message: 'ți-a trimis feedback pentru soluția ta.',
-      long_message: 'ți-a trimis feedback pentru soluția ta.',
+      long_message: 'Tocmai ne-am uitat pe soluția ta și ți-am trimis feedback de îmbunătățire.',
       timestamp: Date.now(),
       href: `/rezolva/${submission.exercise._id.toString()}`,
+      href_text: 'Continuă rezolvarea exercițiului',
       from: admin._id,
       type: NotificationType.INFO,
       urgency: NotificationUrgency.REGULAR
     }
 
-    const { success, responses } = await NotificationModel.notify(notification, [NotificationChannel.IN_APP]);
+    const { success, responses } = await NotificationModel.notify(
+      notification,
+      [NotificationChannel.IN_APP, NotificationChannel.EMAIL]
+    );
     if (!success) {
       console.error("[API][feedbackSubmission.notify]", responses);
     }

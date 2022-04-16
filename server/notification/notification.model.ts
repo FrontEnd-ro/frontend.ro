@@ -5,6 +5,7 @@
  * code to decide which/what kind of notification we want to show.
  */
 import mongoose from 'mongoose';
+import appConfig from '../config';
 import UserModel from '../user/user.model';
 import EmailService from '../Email.service';
 import { validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
@@ -60,15 +61,24 @@ class NotificationModel {
     });
 
     const user = await UserModel.findUserBy({ _id: payload.to });
+
+    // User that triggered the action that lead to this notification
+    // Default to 'FrontEnd.ro' if this email is NOT a result of a user action.
+    let sourceName = `FrontEnd.ro`;
+    if (payload.from !== undefined) {
+      const sourceAdmin = await UserModel.findUserBy({ _id: payload.from });
+      sourceName = sourceAdmin.name ?? sourceAdmin.username;
+    }
+
     const responses = await Promise.all(channels.map(async (channel) => {
       switch (channel) {
         case NotificationChannel.EMAIL:
           const templateModel: NotificationTemplateModel = {
             name: user.name ?? user.username,
-            subject: payload.short_message,
+            subject: `${sourceName} ${payload.short_message}`,
             body: payload.long_message,
             [payload.type]: true,
-            cta_link: payload.href,
+            cta_link: `${appConfig.APP.app_url}${payload.href}`,
             cta_text: payload.href_text,
           }
 

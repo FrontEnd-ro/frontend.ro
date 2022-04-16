@@ -1,6 +1,7 @@
 {
   "APP": {
     "env": "production",
+    "app_url": "https://frontend.ro",
     "endpoint": "https://frontend.ro/api"
   },
   "CDN": {

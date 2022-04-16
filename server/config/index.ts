@@ -9,6 +9,7 @@ interface AppConfig {
   APP: {
     port: number;
     endpoint: string;
+    app_url: string;
     default_port: number;
     env: 'development' | 'production';
   },

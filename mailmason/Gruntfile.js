@@ -1,7 +1,7 @@
 const { getConnectConfig, extendWithDevTask } = require('./Gruntfile.custom');
 
 module.exports = function(grunt) {
-  const sass = require('node-sass')
+  const sass = require('sass')
   require('load-grunt-tasks')(grunt, { pattern: ['grunt-*', 'assemble'] })
   require('time-grunt')(grunt)
   grunt.loadNpmTasks('grunt-ftp-deploy')

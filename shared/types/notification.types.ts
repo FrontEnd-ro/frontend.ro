@@ -71,6 +71,11 @@ export interface NotificationI {
 
   // How do we reach the user? In app notifications? Email? Something else?
   channels?: NotificationChannel[];
+
+  // Tags that uniquely identify a notification.
+  // These can help us making sure we never send a notification
+  // more than once.
+  tags?: Map<string, string>
 }
 
 // On the FrontEnd side we parse the above notification

@@ -30,6 +30,10 @@ export interface SubmissionI {
   status: SubmissionStatus;
 
   feedbacks: ObjectId[]
+
+  updatedAt: Date;
+
+  createdAt: Date;
 }
 
 export interface WIPPopulatedSubmissionI {
@@ -46,6 +50,10 @@ export interface WIPPopulatedSubmissionI {
   status: SubmissionStatus;
 
   feedbacks: FeedbackI[];
+
+  updatedAt: Date;
+
+  createdAt: Date;
 }
 
 // FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443

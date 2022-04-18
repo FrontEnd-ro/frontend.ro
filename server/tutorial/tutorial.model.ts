@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import { LessonI } from '../../shared/types/lesson.types';
 import { TutorialI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
 
+import "../lesson/lesson.model";
+
 const TutorialSchema = new mongoose.Schema<TutorialI>({
   // Human-readable tutorial ID (example: 'html')
   tutorialId: { type: String, required: true, unique: true },

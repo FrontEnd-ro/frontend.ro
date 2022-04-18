@@ -8,6 +8,7 @@ import { SubmissionStatus } from '../../shared/types/submission.types';
 /** Initialize the User Schema because we need it when referencing & populating the results */
 require('../user/user.model');
 require('../exercise/exercise.model');
+require('../lesson-exercise/lesson-exercise.model');
 
 SubmissionSchema.index({ user: 1, exercise: 1 }, { unique: true });
 

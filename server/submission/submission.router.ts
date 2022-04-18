@@ -162,7 +162,7 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
       href: `/rezolva/${submission.exercise._id.toString()}`,
       href_text: 'Vezi soluția aici',
       from: admin._id,
-      type: NotificationType.INFO,
+      type: NotificationType.SUCCESS,
       urgency: NotificationUrgency.REGULAR
     }
 

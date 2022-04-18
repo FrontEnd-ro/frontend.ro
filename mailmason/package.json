@@ -17,7 +17,8 @@
     "litmus": "grunt litmus",
     "flood": "grunt flood",
     "build": "grunt",
-    "deploy": "grunt deploy"
+    "deploy": "grunt deploy",
+    "force-deploy": "postmark templates push ./dist -f"
   },
   "devDependencies": {
     "grunt": "^1.0.4",

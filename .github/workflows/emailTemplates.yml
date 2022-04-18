@@ -1,0 +1,42 @@
+name: Email Templates Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  email-templates-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mailmason
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+
+      - name: Install Ruby deps
+        run: |
+          gem install premailer
+          gem install nokogiri
+
+      - name: Install & build
+        run: |
+            yarn
+            yarn build
+
+      - name: Deploy Dev
+        run: yarn force-deploy
+        env:
+          POSTMARK_SERVER_TOKEN: ${{secrets.POSTMARK_DEV_SERVER_TOKEN}}
+
+      - name: Deploy Prod
+        run: yarn force-deploy
+        env:
+          POSTMARK_SERVER_TOKEN: ${{secrets.POSTMARK_PROD_SERVER_TOKEN}}

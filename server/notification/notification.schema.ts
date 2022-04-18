@@ -6,6 +6,7 @@ const NotificationSchema = new mongoose.Schema<NotificationI>({
   type: {
     type: String, enum: NotificationType, default: NotificationType.INFO, required: true,
   },
+  title: { type: String, required: true, default: 'Notificare FrontEnd.ro' },
   short_message: { type: String, required: true },
   long_message: { type: String, required: true },
   timestamp: { type: Number, required: true },

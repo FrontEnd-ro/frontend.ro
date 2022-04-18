@@ -156,6 +156,9 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
 
     const notification: NotificationI = {
       to: submission.user,
+      // We want this to be unique across all exercise notifications,
+      // so they get correctly "bundled" into the same GMail thread.
+      title: `Exercițiu ${submission.exercise.type.toUpperCase()} | FrontEnd.ro (#${submission.exercise._id.toString().slice(-4)})`,
       short_message: 'ți-a aprobat exercițiul. Congrats!',
       long_message: 'Tocmai ne-am uitat pe exercițiul tău și rezolvarea e corectă.',
       timestamp: Date.now(),
@@ -213,6 +216,9 @@ submissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware('admin')], 
 
     const notification: NotificationI = {
       to: submission.user,
+      // We want this to be unique across all exercise notifications,
+      // so they get correctly "bundled" into the same GMail thread.
+      title: `Exercițiu ${submission.exercise.type.toUpperCase()} | FrontEnd.ro (#${submission.exercise._id.toString().slice(-4)})`,
       short_message: 'ți-a trimis feedback pentru soluția ta.',
       long_message: 'Tocmai ne-am uitat pe soluția ta și ți-am trimis feedback de îmbunătățire.',
       timestamp: Date.now(),

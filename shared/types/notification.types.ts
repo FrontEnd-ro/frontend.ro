@@ -30,6 +30,13 @@ export interface NotificationI {
 
   type: NotificationType;
 
+  // For the moment, only used as "subject" for
+  // Email Notifications. Another usecase would be as
+  // title for modal notificatons (if we implement them).
+  // NOTE: this value is also important in grouping
+  // conversations into the same Email Thread inside GMail.
+  title: string;
+
   // For the moment the UI will only show the
   // "short_message" property. However, we need these
   // to correctly map on Email Notifications where "short_message"
@@ -79,7 +86,9 @@ export type ParsedNotificationI = Omit<NotificationI, 'to' | 'from'> & {
 type NotificationTemplateModelBase = {
   name: string;
   subject: string;
+  headline: string;
   body: string;
+  date?: string;
 } & { [key in NotificationType]?: boolean };
 
 type NotificationTemplateModelWithCTA = NotificationTemplateModelBase & {

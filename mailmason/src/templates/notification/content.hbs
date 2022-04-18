@@ -3,6 +3,13 @@ layout: basic/content.hbs
 ---
 <table>
   <tbody>
+    \{{#date}}
+      <tr>
+        <td class="text-right">
+          <p> \{{ . }}</p>
+        </td>
+      </tr>
+    \{{/date}}
     <tr>
       <td>
         <p class="
@@ -15,7 +22,7 @@ layout: basic/content.hbs
           \{{#info}} ℹ️ \{{/info}}
           \{{#danger}} ⚠️ \{{/danger}}
 
-          \{{ subject }}
+          \{{ headline }}
         </p>
         {{> light_greeting}}
         <p>

@@ -75,11 +75,13 @@ class NotificationModel {
         case NotificationChannel.EMAIL:
           const templateModel: NotificationTemplateModel = {
             name: user.name ?? user.username,
-            subject: `${sourceName} ${payload.short_message}`,
+            subject: payload.title ?? 'Notificare FrontEnd.ro',
+            headline: `${sourceName} ${payload.short_message}`,
             body: payload.long_message,
             [payload.type]: true,
             cta_link: `${appConfig.APP.app_url}${payload.href}`,
             cta_text: payload.href_text,
+            date: Intl.DateTimeFormat('ro-RO').format(new Date()),
           }
 
           return EmailService.sendTemplateWithAlias(

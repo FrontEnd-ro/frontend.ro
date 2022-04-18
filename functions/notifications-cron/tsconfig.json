@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "ES2020",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+  },
+  "include": [
+    "./src/index.ts",
+    "../../server/**/*.js",
+    "../../server/**/*.ts",
+    "../../shared/**/*.ts",
+    "../../shared/**/*.ts"
+  ]
+}

@@ -19,6 +19,7 @@ const NotificationSchema = new mongoose.Schema<NotificationI>({
   href_text: { type: String, required: false },
   from: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
   channels: { type: [String], enum: NotificationChannel, required: false },
+  tags: { type: Map, of: String, required: false }
 });
 
 

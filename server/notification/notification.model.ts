@@ -21,6 +21,11 @@ class NotificationModel {
     return Notification.findById(notificationId);
   }
 
+  static findOneByTagsAndUser(to: string, tags: Map<string, string>) {
+    // The tags need to match perfectly!
+    return Notification.findOne({ to, tags });
+  }
+
   static markAsRead(notificationId: string) {
     return Notification.findOneAndUpdate(
       { _id: notificationId },

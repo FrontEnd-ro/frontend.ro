@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { useKeyDown } from '~/services/Hooks';
+import BaseTidbitItem from '../BaseTidbitItem';
 import { TidbitI } from '~/../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
 import Highlight, { Language } from '~/components/Highlight/Highlight';
@@ -77,8 +78,9 @@ const Tidbit = ({ tidbit, index }: Props) => {
             <FontAwesomeIcon width={48} icon={faArrowAltCircleLeft} />
           </a>
         </Link>
-        <img
-          alt={tidbit.title}
+        <BaseTidbitItem
+          controls
+          title={tidbit.title}
           src={currentItem.imageSrc}
           className={`${styles['main-image']} d-block`}
         />

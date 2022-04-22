@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import BaseTidbitItem from '../BaseTidbitItem';
 import { TidbitI } from '~/../shared/types/tidbit.types';
 
 import styles from './TidbitGalleryItem.module.scss';
@@ -29,7 +30,7 @@ const TidbitGalleryItem = ({
         overflow-hidden
       `}
     >
-      <img className="w-100" src={tidbit.items[itemIndex].imageSrc} alt={tidbit.title} />
+      <BaseTidbitItem className="w-100" src={tidbit.items[itemIndex].imageSrc} title={tidbit.title} controls={false} />
     </a>
   </Link>
 );

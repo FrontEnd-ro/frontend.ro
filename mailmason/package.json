@@ -21,7 +21,7 @@
     "force-deploy": "postmark templates push ./dist -f"
   },
   "devDependencies": {
-    "grunt": "^1.0.4",
+    "grunt": "^1.5.2",
     "grunt-assemble": "^0.6.3",
     "grunt-autoprefixer": "^3.0.4",
     "grunt-aws": "^0.7.1",

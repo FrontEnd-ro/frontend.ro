@@ -2,7 +2,7 @@
   "APP": {
     "port": 3300,
     "env": "development",
-    "app_url": "https://frontend-ro-dev.herokuapp.com"
+    "app_url": "https://frontend-ro-dev.herokuapp.com",
     "endpoint": "https://frontend-ro-dev.herokuapp.com/api"
   },
   "CDN": {

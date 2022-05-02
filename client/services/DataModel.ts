@@ -547,3 +547,20 @@ export function getLessonById(id: string): LessonDescription {
 
   return match || null;
 }
+
+export function getAdjacentLessons(id: string): LessonDescription[] {
+  /**
+   * We want to be able to navigate to the next / previous written lessons.
+   * There's no point in navigating to a lesson only to find out it hasn't been written yet.
+   */
+  const writtenLessons = LESSONS.filter((lesson) => lesson.written);
+  const currentLessonIndex = writtenLessons.findIndex((lesson) => lesson.id === id);
+  if (currentLessonIndex === -1) {
+    return [];
+  }
+
+  const previousLesson = writtenLessons[currentLessonIndex - 1] ?? null;
+  const nextLesson = writtenLessons[currentLessonIndex + 1] ?? null;
+
+  return [previousLesson, nextLesson];
+}

@@ -1,0 +1,28 @@
+@import "../../../styles/variables";
+
+.lessonNavigation {
+  @extend %containerConfig;
+  gap: 1em;
+  padding: 1em 0;
+  border-top: 2px solid color(silver);
+
+  a {
+    border-bottom: 2px solid color(silver);
+
+    &:last-child {
+      border: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .lessonNavigation {
+    flex-direction: row;
+
+    a {
+      border-right: 2px solid color(silver);
+      border-bottom: 0;
+      padding-right: 1em;
+    }
+  }
+}

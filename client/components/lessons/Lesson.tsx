@@ -17,6 +17,7 @@ import LessonService from '~/services/api/Lesson.service';
 import LessonContent from './LessonContent/LessonContent';
 import LessonHeading from './LessonHeading/LessonHeading';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
+import LessonNavigation from './LessonNavigation/LessonNavigation';
 
 export default function Lesson({
   lessonInfo,
@@ -81,7 +82,7 @@ export default function Lesson({
               <LessonExercises lessonId={lessonInfo.id} />
             </div>
           )}
-          <Footer />
+          <LessonNavigation className="mt-16" lessonId={lessonInfo.id} />
         </div>
       </main>
     </div>

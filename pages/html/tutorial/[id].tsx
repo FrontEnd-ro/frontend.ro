@@ -25,6 +25,7 @@ import AboutHtmlContent from '~/curriculum/html/AboutHtml/AboutHtml';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
 import HTMLStructureContent from '~/curriculum/html/HTMLStructure/HTMLStructure';
+import LessonNavigation from '~/components/lessons/LessonNavigation/LessonNavigation';
 
 const LESSON_TO_COMPONENT = {
   'audio-video': <AudioAndVideoContent />,
@@ -134,6 +135,7 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
               </div>
             )}
           </LessonContent>
+          <LessonNavigation className="mt-16" lessonId={lessonInfo.id} />
         </PageContainer>
       </PageWithAsideMenu>
     </>

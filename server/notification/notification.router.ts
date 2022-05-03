@@ -2,21 +2,26 @@ import express from 'express';
 import { ServerError } from '../ServerUtils';
 import { PrivateMiddleware } from '../Middlewares';
 import NotificationModel from './notification.model';
+import { Notification } from './notification.schema';
+import { NotificationChannel } from '../../shared/types/notification.types';
 
 const notificationRouter = express.Router();
 
+
+// We're using this endpoint to fetch IN-APP Notifications
+// and show them to the user, in the UI.
 notificationRouter.get('/', [
   PrivateMiddleware,
-  async function getAllNotifications(req, res) {
+  async function getAllInAppNotifications(req, res) {
     const { user } = req.body;
 
     try {
-      const allNotifications = await NotificationModel
-        .getAll(user._id)
+      const inAppNotifications = await Notification
+        .find({ to: user._id, channels: { $in: [NotificationChannel.IN_APP] } })
         .populate('from', 'name username avatar');
-      res.json(allNotifications);
+      res.json(inAppNotifications);
     } catch (err) {
-      console.error("[notificationRouter.getAllNotifications]", err);
+      console.error("[notificationRouter.getAllInAppNotifications]", err);
       new ServerError(500, 'Eroare la încărcarea notificărilor...').send(res);
     }
   }

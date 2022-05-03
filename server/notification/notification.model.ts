@@ -21,10 +21,6 @@ class NotificationModel {
     return Notification.findById(notificationId);
   }
 
-  static getAll(recipientId: string) {
-    return Notification.find({ to: recipientId });
-  }
-
   static markAsRead(notificationId: string) {
     return Notification.findOneAndUpdate(
       { _id: notificationId },

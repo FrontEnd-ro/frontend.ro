@@ -3,6 +3,17 @@ import appConfig from './config';
 
 const client = new ServerClient(appConfig.EMAIL.token);
 
+export enum EMAIL_TEMPLATE {
+  NOTIFICATION = 'notification',
+  REGISTER = 'register',
+  PASSWORD_RESET = 'password-reset',
+  AWARDED_CERTIFICATION = 'awarded-certification',
+
+  // To be deprecated and replaced with generic event templates
+  GIT_INCEPATORI_INFO = 'git-incepatori-info',
+  GIT_INCEPATORI_REGISTERED = 'git-incepatori-registered',
+  GIT_INCEPATORI_WAITLIST = 'git-incepatori-waitlist',
+}
 
 /**
  * In most cases sending the Email is not a critical
@@ -21,7 +32,7 @@ const client = new ServerClient(appConfig.EMAIL.token);
  */
 async function sendTemplateWithAlias(
   email: string,
-  TemplateAlias: string,
+  TemplateAlias: EMAIL_TEMPLATE,
   TemplateModel: Record<string, any>
 ) {
   const options = {

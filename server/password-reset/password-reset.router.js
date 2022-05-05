@@ -1,5 +1,5 @@
 const express = require('express');
-import EmailService from '../Email.service';
+import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 const { ServerError } = require('../ServerUtils');
 const UserModel = require('../user/user.model');
 const PasswordResetModel = require('./password-reset.model');
@@ -25,7 +25,7 @@ passwordResetRouter.post('/', async function generateResetCode(req, res) {
 
     // Using "await" because sending the Reset Code via
     // email is critical for the user to continue the flow
-    const emailResponse = await EmailService.sendTemplateWithAlias(email, "password-reset", {
+    const emailResponse = await EmailService.sendTemplateWithAlias(email, EMAIL_TEMPLATE.PASSWORD_RESET, {
       "name": user.name,
       "resetCode": resetCode.code,
       "resetLink": "https://frontend.ro/auth?reset_password",

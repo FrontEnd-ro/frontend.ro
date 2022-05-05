@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const { connectToDb } = require('../database');
-import EmailService from '../Email.service';
+import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 const EventModel = require('../event/event.model');
 
 
@@ -25,7 +25,7 @@ connectToDb()
           .all(waitlist.map(person =>
             EmailService.sendTemplateWithAlias(
               person.email,
-              `${trainingId}-info`,
+              EMAIL_TEMPLATE.GIT_INCEPATORI_INFO,
               {
                 name: person.name,
                 sender_name: "Păvă",

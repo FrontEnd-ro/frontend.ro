@@ -1,7 +1,7 @@
 const express = require('express');
 
 const EventModel = require('./event.model');
-import EmailService from '../Email.service';
+import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 const { ServerError } = require('../ServerUtils');
 
 const eventRouter = express.Router();
@@ -54,7 +54,7 @@ eventRouter.post('/:label/register', async function registerToEvent(req, res) {
       // critical for the continuation of the flow.
       EmailService.sendTemplateWithAlias(
         email,
-        `${label}-registered`,
+        EMAIL_TEMPLATE.GIT_INCEPATORI_REGISTERED,
         {
           name,
           sender_name: "Păvă",
@@ -100,7 +100,7 @@ eventRouter.post('/:label/waitlist', async function addToWaitlist(req, res) {
     // critical for the continuation of the flow.
     EmailService.sendTemplateWithAlias(
       email,
-      `${label}-waitlist`,
+      EMAIL_TEMPLATE.GIT_INCEPATORI_WAITLIST,
       {
         name,
         sender_name: "Păvă",

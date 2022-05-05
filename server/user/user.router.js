@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
-import EmailService from '../Email.service';
+import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const UserModel = require('./user.model');
 const SubscribeModel = require('../subscribe.model');
@@ -121,7 +121,7 @@ userRouter.post('/register', async function register(req, res) {
   // critical for the continuation of the flow.
   EmailService.sendTemplateWithAlias(
     email,
-    "register",
+    EMAIL_TEMPLATE.REGISTER,
     {
       name: username,
       sender_name: 'Păvă'
@@ -370,7 +370,7 @@ userRouter.post('/subscribe', async (req, res) => {
   // critical for the continuation of the flow.
   EmailService.sendTemplateWithAlias(
     email,
-    "register",
+    EMAIL_TEMPLATE.REGISTER,
     {
       name,
       sender_name: 'Păvă'

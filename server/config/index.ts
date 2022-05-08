@@ -8,6 +8,7 @@ interface AppConfig {
   },
   APP: {
     port: number;
+    language: "ro" | "en";
     endpoint: string;
     app_url: string;
     default_port: number;

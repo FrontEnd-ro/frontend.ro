@@ -1,12 +1,15 @@
 import mongoose, { Document, ObjectId } from 'mongoose';
+import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
+
+import appConfig from '../config';
+import Tutorial from '../tutorial/tutorial.model';
+import { LessonI } from '../../shared/types/lesson.types';
 const SharedUserModel = require('../../shared/user.shared-model');
 const SubmissionModel = require('../submission/submission.model');
-import { ExerciseType } from '../../shared/types/exercise.types';
 import SharedExerciseModel from '../../shared/exercise.shared-model';
-import { SubmissionStatus } from '../../shared/types/submission.types';
-import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
+import { WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
+import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
 import { CertificationI, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
-import appConfig from '../config';
 
 const CertificationSchema = new mongoose.Schema<CertificationI>({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
@@ -15,6 +18,8 @@ const CertificationSchema = new mongoose.Schema<CertificationI>({
   lesson_exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'LessonExercise' }],
   og_image: { type: String, required: false },
   pdf: { type: String, required: false }
+}, {
+  timestamps: true
 });
 
 const Certification: mongoose.Model<CertificationI, {}, {}> = mongoose.models.Certification
@@ -33,65 +38,122 @@ function sanitizeCertification(certification: Document<any, any, WIPPopulatedCer
 }
 
 /**
- * To be called manually by admins if the automatic
- * certification generation somehow fails.
+ * Store a certification into the Database and trigger a Lambda Function
+ * to generate it's corresponding assets: PDF and JPEG.
+ * > NOTE: this function is somewhat idempotent - in the sense that
+ * > multiple calls to this function don't create multiple Certifications,
+ * > instead they update the same one.
+ * @param userId string
+ * @param tutorial_id ObjectId
+ * @param dryRun boolean - whether to actually perform the tasks, or simply to log the result, without any side effects
+ * @returns 
  */
-async function createCertification(userId: string, tutorial_id: ObjectId, moduleType: ExerciseType, certificationPath: string) {
-  const certificationData: CertificationI = {
-    tutorial: tutorial_id,
-    user: userId,
-    timestamp: Date.now(),
-    lesson_exercises: []
-  }
+async function createCertification(
+  userId: string,
+  tutorial_id: ObjectId,
+  dryRun = false
+): Promise<mongoose.Document<any, any, CertificationI> & CertificationI> {
+  const SPAN = `[createCertification, userId=${userId}, tutorial_id=${tutorial_id}, dryRun=${dryRun}]`;
+  const tutorial = await Tutorial
+    .findById(tutorial_id)
+    .populate<{ lessons: LessonI[] }>("lessons");
 
-  // Step 1: store certification
-  const userSubmissions = await SubmissionModel.getAllUserSubmissions(userId);
-  certificationData.lesson_exercises = userSubmissions
-    .filter(submission => submission.status === SubmissionStatus.DONE && submission.exercise.type === moduleType)
-    .map(submission => submission.exercise._id.toString());
-
-  let certification = new Certification({
-    ...certificationData,
-    _id: new mongoose.Types.ObjectId(),
-  });
-  try {
-    certification = await certification.save();
-  } catch (err) {
-    console.error("[createHTMLCertification] Certification couldn't be saved", err);
+  if (tutorial === null) {
+    console.error(`${SPAN} couldn't find tutorial. Exiting.`);
     return;
   }
 
-  // Step 2: generate assets
-  await refreshCertificationAssets(
-    certification.id,
-    certificationPath
-  );
+  let certification: mongoose.Document<any, any, CertificationI> & CertificationI;
+  // Step 1: store certification into the DB
+  try {
+    certification = await storeCertificationData(tutorial, userId, dryRun);
+  } catch (err) {
+    console.error(`${SPAN} Certification couldn't be saved in DB`, err);
+    return;
+  }
+
+  try {
+    certification = await refreshCertificationAssets(certification, dryRun);
+  } catch (err) {
+    console.error(`${SPAN} Certification assets couldn't be generated.`, err);
+    return;
+  }
+  
+  console.info(`${SPAN} successfully created certification`);
+  return certification;
 }
 
 /**
- * Refresh the generated assets for each certification:
- * - PDF Diploma
- * - JPG OG Image
+ * Create or Update (if already exists) certification information into the Database.
+ * @param userId string
+ * @param tutorial_id ObjectId
+ * @param dryRun boolean - whether to actually perform the tasks, or simply to log the result, without any side effects
+ * @returns Persisted Certification
  */
-async function refreshCertificationAssets(certificationId: string, certificationUrl: string) {
-  const certification = await Certification.findById(certificationId);
+async function storeCertificationData(
+  tutorial: WIPPopulatedTutorialI,
+  userId: string,
+  dryRun = false
+) {
+  const SPAN = `[storeCertificationData, userId=${userId}, tutorial_id=${tutorial._id}, dryRun=${dryRun}]`;
 
-  if (certification === null) {
-    console.error(`[refreshCertificationAssets] ceritification with id='${certificationId}' doesn't exist`);
-    return null;
+  let certification = await Certification.findOne({ tutorial: tutorial._id });
+  if (certification !== null) {
+    console.info(`${SPAN} Certification already exists. We'll update it!`)
+    certification.timestamp = Date.now();
+  } else {
+    certification = new Certification({
+      tutorial: tutorial._id,
+      user: userId,
+      timestamp: Date.now(),
+      lesson_exercises: [],
+      _id: new mongoose.Types.ObjectId(),
+    });
   }
 
-  const lambda = new LambdaClient({});
+  const lessonIds = (tutorial.lessons as LessonI[]).map((lesson) => lesson.lessonId);
+  const userSubmissions: WIPPopulatedSubmissionI[] = await SubmissionModel.getAllUserSubmissions(userId);
+  certification.lesson_exercises = userSubmissions
+    .filter(submission => submission.status === SubmissionStatus.DONE)
+    .filter(submission => lessonIds.includes(submission.exercise.lesson))
+    .map(submission => submission.exercise._id.toString());
+
+  if (!dryRun) {
+    certification = await certification.save();
+  }
+
+  console.info(`${SPAN} successfully persisted certification.`);
+  return certification;
+}
+
+/**
+ * Generate and store certification assets inside AWS S3:
+ * - PDF Diploma
+ * - JPG OG Image
+ * @param certification mongoose.Document<any, any, CertificationI>
+ * @param dryRun boolean - whether to actually perform the tasks, or simply to log the result, without any side effects
+ * @returns Promise
+ */
+async function refreshCertificationAssets(
+  certification: mongoose.Document<any, any, CertificationI> & CertificationI,
+  dryRun = false
+) {
   // TODO: extract this outside this function
   // into a more generic way (per environment)
   const FunctionName = appConfig.APP.env === 'production'
     ? 'diploma-screenshot'
     : 'diploma-test';
+    const lambda = new LambdaClient({ region: appConfig.AWS.region });
+
+  const SPAN = `[refreshCertificationAssets, certificationId=${certification.id}, FunctionName=${FunctionName}, region=${appConfig.AWS.region}, dryRun=${dryRun}]`;
 
   const payload = {
-    certificationId,
-    url: certificationUrl,
+    certificationId: certification.id,
+    url: getCertificationUrl(certification.id),
+    dryRun,
   }
+  // TODO: extract this into a Lambda Service
+  // that abstracts all this logic.
   const invokeCommand = new InvokeCommand({
     FunctionName,
     InvocationType: 'RequestResponse',
@@ -99,32 +161,40 @@ async function refreshCertificationAssets(certificationId: string, certification
   });
 
   const response = await lambda.send(invokeCommand);
-
-  console.log("Got response from lambda function", response);
+  console.log(`${SPAN} Got response from lambda function`, response);
 
   const decodedPayload = new TextDecoder('ascii').decode(response.Payload);
-  console.log("Decoded payload is", decodedPayload);
+  console.log(`${SPAN} Decoded string payload is`, decodedPayload);
 
   const jsonPayload = JSON.parse(decodedPayload);
   const body = JSON.parse(jsonPayload.body)
 
-
   if (!body?.pdf?.success) {
-    console.error("❌ PDF wasn't successfully generated");
+    console.error(`${SPAN} PDF wasn't successfully generated`);
   } else {
     certification.pdf = body.pdf.uri;
   }
 
   if (!body?.ogImage?.success) {
-    console.error("❌ PDF wasn't successfully generated");
+    console.error(`${SPAN} OG_IMAGE wasn't successfully generated`);
   } else {
     certification.og_image = body.ogImage.uri;
   }
 
-  await certification.save();
+  if (!dryRun) {
+    await certification.save();
+  }
 
-  console.log("[refreshCertificationAssets] done ✔️");
+  console.info(`${SPAN} successfully generated and persisted assets`, certification.toJSON());
   return certification;
 }
 
-export { Certification, createCertification, sanitizeCertification, refreshCertificationAssets };
+/**
+ * Return the Public URL of the certification. This is used to create the PDF and JPEG assets.
+ * @returns string
+ */
+function getCertificationUrl(certificationId: string) {
+  return `${appConfig.APP.app_url}/certificari/${certificationId}`;
+}
+
+export { Certification, createCertification, sanitizeCertification };

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { LessonI } from '../../shared/types/lesson.types';
 import { TutorialI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
 
 const TutorialSchema = new mongoose.Schema<TutorialI>({
@@ -11,6 +12,18 @@ const TutorialSchema = new mongoose.Schema<TutorialI>({
 const Tutorial: mongoose.Model<TutorialI, {}, {}> = mongoose.models.Tutorial
   || mongoose.model<TutorialI>('Tutorial', TutorialSchema);
 
+async function findTutorialIdByLessonId(
+  lessonId: string
+): Promise<string | null> {
+  const allTutorials: WIPPopulatedTutorialI[] = await Tutorial
+    .find()
+    .populate("lessons");
+
+  const match = allTutorials.find((tutorial) =>
+    tutorial.lessons.find((lesson) => lesson.lessonId === lessonId)
+  );
+  return match?._id?.toString() ?? null;
+}
 
 function sanitizeTutorial(tutorial: WIPPopulatedTutorialI) {
   const result: WIPPopulatedTutorialI = {
@@ -26,4 +39,4 @@ function sanitizeTutorial(tutorial: WIPPopulatedTutorialI) {
 }
 
 export default Tutorial;
-export { sanitizeTutorial };
+export { findTutorialIdByLessonId, sanitizeTutorial };

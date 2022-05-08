@@ -14,10 +14,10 @@ interface Props {
     username: string;
     avatar: string;
   }
-  module: {
+  tutorial: {
     name: string;
-    url: string;
-  },
+    href: string;
+  };
   certification: {
     date: Date;
     url: string;
@@ -29,7 +29,7 @@ interface Props {
 }
 
 const Diploma = ({
-  student, module, certification, variant = 'large', shareControls = true,
+  student, tutorial, certification, variant = 'large', shareControls = true,
 }: Props) => {
   const [fullCertificationUrl, setFullCertificationUrl] = useState(certification.url);
   useEffect(() => {
@@ -71,8 +71,8 @@ const Diploma = ({
         </a>
         <p>
           a completat
-          <a className="mt-4 mb-4 d-block text-bold" href={module.url}>
-            {module.name}
+          <a className="mt-4 mb-4 d-block text-bold" href={tutorial.href}>
+            {tutorial.name}
           </a>
           rezolvând cu succes toate cele
           {' '}

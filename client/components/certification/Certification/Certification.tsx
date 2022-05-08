@@ -14,7 +14,7 @@ const Certification = ({ certification }: { certification: WIPPopulatedCertifica
     <section className={styles.Certification}>
       <Diploma
         student={certification.user}
-        module={certification.module}
+        tutorial={certification.tutorial}
         certification={{
           date: new Date(certification.timestamp),
           exerciseCount: certification.lesson_exercises.length,

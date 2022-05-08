@@ -24,9 +24,9 @@ const baseArgs = {
     username: 'jondoe',
     avatar: 'https://iampava.com/images/pava.jpg',
   },
-  module: {
+  tutorial: {
     name: 'Modulul de HTML',
-    url: '#html',
+    href: '#html',
   },
   certification: {
     date: new Date(),

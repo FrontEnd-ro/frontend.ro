@@ -1,22 +1,17 @@
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, ObjectId } from 'mongoose';
 const SharedUserModel = require('../../shared/user.shared-model');
 const SubmissionModel = require('../submission/submission.model');
 import { ExerciseType } from '../../shared/types/exercise.types';
 import SharedExerciseModel from '../../shared/exercise.shared-model';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
-import { CertificationI, CertificationModule, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
+import { CertificationI, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
 import appConfig from '../config';
-
-const ModuleSchema = new mongoose.Schema<CertificationModule>({
-  name: { type: String, required: true },
-  url: { type: String, required: true },
-})
 
 const CertificationSchema = new mongoose.Schema<CertificationI>({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   timestamp: { type: Number, required: true },
-  module: { type: ModuleSchema, required: true },
+  tutorial: { type: mongoose.Schema.Types.ObjectId, ref: 'Tutorial' },
   lesson_exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'LessonExercise' }],
   og_image: { type: String, required: false },
   pdf: { type: String, required: false }
@@ -41,9 +36,9 @@ function sanitizeCertification(certification: Document<any, any, WIPPopulatedCer
  * To be called manually by admins if the automatic
  * certification generation somehow fails.
  */
-async function createCertification(userId: string, module: CertificationModule, moduleType: ExerciseType, certificationPath: string) {
+async function createCertification(userId: string, tutorial_id: ObjectId, moduleType: ExerciseType, certificationPath: string) {
   const certificationData: CertificationI = {
-    module,
+    tutorial: tutorial_id,
     user: userId,
     timestamp: Date.now(),
     lesson_exercises: []

@@ -1,18 +1,14 @@
-import { PopulatedDoc, Document } from 'mongoose';
+import { PopulatedDoc, Document, ObjectId } from 'mongoose';
 import { LessonExerciseI, WIPPopulatedLessonExerciseI } from './exercise.types';
+import { TutorialI } from './tutorial.types';
 import { UserI } from './user.types';
-
-export interface CertificationModule {
-  name: string;
-  url: string;
-}
 
 export interface CertificationI {
   // Optional because when we create certifications
   // we don't know what ID will MongoDB use
   _id?: string;
 
-  module: CertificationModule;
+  tutorial: ObjectId;
 
   // UUID of the user that got the certification
   user: PopulatedDoc<UserI>;
@@ -36,7 +32,7 @@ export interface WIPPopulatedCertificationI {
   // https://github.com/FrontEnd-ro/frontend.ro/issues/442
   _id?: string;
 
-  module: CertificationModule;
+  tutorial: TutorialI;
 
   user: UserI;
 

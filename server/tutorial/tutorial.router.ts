@@ -88,6 +88,7 @@ tutorialRouter.get('/:tutorialId/progress', [
     const progress: TutorialProgressI = {
       tutorialId: tutorial.tutorialId,
       name: tutorial.name,
+      href: tutorial.href,
       lessons: tutorial.lessons.map((lesson) => ({
         lessonId: lesson.lessonId,
         // Initially undefined, we'll compute it later

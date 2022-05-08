@@ -8,6 +8,7 @@ import { Certification, sanitizeCertification } from '../../server/certification
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import { WIPPopulatedLessonExerciseI } from '~/../shared/types/exercise.types';
+import { TutorialI } from '~/../shared/types/tutorial.types';
 import SEOTags from '~/components/SEOTags';
 
 export default function CertificationPage(
@@ -19,7 +20,7 @@ export default function CertificationPage(
         <SEOTags
           shareImage={certification.og_image ?? ''}
           url={`https://FrontEnd.ro/certificari/${certification._id}`}
-          title={`Felicitări! Ai completat cu succes ${certification.module.name}`}
+          title={`Felicitări! Ai completat cu succes ${certification.tutorial.name}`}
           description={`${certification.user.name ?? certification.user.username} a rezolvat cu succes toate cele ${certification.lesson_exercises.length} exerciții.`}
         >
           <meta name="robots" content="noindex" />
@@ -44,6 +45,7 @@ export async function getServerSideProps({ res, params }) {
   }
   const certification = await Certification.findById(params.certificationId)
     .populate<{ user: UserI }>('user')
+    .populate<{ tutorial: TutorialI }>('tutorial')
     // eslint-disable-next-line camelcase
     .populate<{ lesson_exercises: WIPPopulatedLessonExerciseI[] }>({
       path: 'lesson_exercises',

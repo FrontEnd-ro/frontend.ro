@@ -13,9 +13,9 @@ const HtmlFakeDiploma = ({ isLoggedIn, userInfo } : ConnectedProps<typeof connec
   return (
     <Diploma
       student={isLoggedIn ? userInfo : defaultStudent}
-      module={{
+      tutorial={{
         name: 'Modulul de HTML',
-        url: '/html',
+        href: '/html',
       }}
       certification={{
         date: new Date(),

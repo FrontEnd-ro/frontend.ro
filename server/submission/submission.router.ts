@@ -3,8 +3,10 @@ import { SubmissionVersion } from './submission-version/submission-version.model
 import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
 import submissionVersionRouter from './submission-version/submission-version.router';
 import { UserRole } from '../../shared/types/user.types';
-import { SubmissionStatus } from '../../shared/types/submission.types';
+import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
+import { findTutorialIdByLessonId } from '../tutorial/tutorial.model';
+import { maybeCreateCertification } from '../certification/certification.router';
 
 const express = require('express');
 const UserModel = require('../user/user.model');
@@ -129,7 +131,7 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
   const { feedbacks, user: admin } = req.body;
 
   try {
-    const submission = await SubmissionModel.get(submissionId);
+    const submission: WIPPopulatedSubmissionI = await SubmissionModel.get(submissionId);
 
     if (!submission) {
       throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
@@ -167,6 +169,13 @@ submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], a
       from: admin._id,
       type: NotificationType.SUCCESS,
       urgency: NotificationUrgency.REGULAR
+    }
+
+    const tutorial_id = await findTutorialIdByLessonId(submission.exercise.lesson);
+    if (tutorial_id === null) {
+      console.warn(`[approveSubmission] There is no tutorial linked to the lesson with ID=${submission.exercise.lesson}.`)
+    } else {
+      maybeCreateCertification(tutorial_id, submission.user._id.toString());
     }
 
     const { success, responses } = await NotificationModel.notify(

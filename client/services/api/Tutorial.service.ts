@@ -8,15 +8,15 @@ class TutorialService {
       .then((resp) => resp.json());
   }
 
-  static getInfo(tutorialName: string): Promise<WIPPopulatedTutorialI> {
+  static getInfo(tutorialId: string): Promise<WIPPopulatedTutorialI> {
     return HttpService
-      .get(`${process.env.ENDPOINT}/tutorials/${tutorialName}`)
+      .get(`${process.env.ENDPOINT}/tutorials/${tutorialId}`)
       .then((resp) => resp.json());
   }
 
-  static getProgress(tutorialName: string): Promise<TutorialProgressI> {
+  static getProgress(tutorialId: string): Promise<TutorialProgressI> {
     return HttpService
-      .get(`${process.env.ENDPOINT}/tutorials/${tutorialName}/progress`)
+      .get(`${process.env.ENDPOINT}/tutorials/${tutorialId}/progress`)
       .then((resp) => resp.json());
   }
 

@@ -31,7 +31,7 @@ async function main() {
   }
 }
 
-async function createTutorialFromLessons(name: string, lessonIds: string[]) {
+async function createTutorialFromLessons(tutorialId: string, name: string, lessonIds: string[]) {
   const lessons: LessonI[] = await Promise.all(lessonIds.map((lessonId) => {
     return LessonModel.get(lessonId);
   }))
@@ -41,6 +41,7 @@ async function createTutorialFromLessons(name: string, lessonIds: string[]) {
   }
 
   const newTutorial = new Tutorial({
+    tutorialId,
     name,
     lessons: lessons.map((lesson) => lesson._id.toString()),
   });
@@ -48,7 +49,7 @@ async function createTutorialFromLessons(name: string, lessonIds: string[]) {
   newTutorial.save();
 }
 
-function createNewTutorial(name: string) {
-  const newTutorial = new Tutorial({ name, lessons: [] });
+function createNewTutorial(tutorialId: string, name: string) {
+  const newTutorial = new Tutorial({ tutorialId, name, lessons: [] });
   newTutorial.save();
 }

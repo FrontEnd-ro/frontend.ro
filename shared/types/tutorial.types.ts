@@ -12,6 +12,9 @@ export interface TutorialI {
 
   // Unique, human-readable ID.
   // This is used when Routing in the UI.
+  tutorialId: string;
+
+  // Displayed in the UI
   name: string;
 
   // Collection of lesson IDs. The exercises are derived from
@@ -23,13 +26,22 @@ export interface TutorialI {
 export interface WIPPopulatedTutorialI {
   _id?: ObjectId;
 
+  // Unique, human-readable ID.
+  // This is used when Routing in the UI.
+  tutorialId: string;
+
+  // Displayed in the UI
   name: string;
 
   lessons: LessonI[]
 }
 
 export interface TutorialProgressI {
-  // Tutorial name which acts like an ID
+  // Unique, human-readable ID.
+  // This is used when Routing in the UI.
+  tutorialId: string;
+
+  // Displayed in the UI
   name: string;
 
   lessons: {

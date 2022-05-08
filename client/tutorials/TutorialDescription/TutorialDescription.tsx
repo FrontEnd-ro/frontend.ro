@@ -9,9 +9,12 @@ import StartTutorialForm from './StartTutorialForm/StartTutorialForm';
 
 interface Props {
   tutorialId: string;
+  tutorialName: string;
 }
 
-const TutorialDescription = ({ tutorialId, user }: Props & ConnectedProps<typeof connector>) => {
+const TutorialDescription = ({
+  tutorialId, tutorialName, user,
+}: Props & ConnectedProps<typeof connector>) => {
   const isLoggedIn = !!user.info;
   const [error, setError] = useState<string>(null);
 
@@ -33,9 +36,9 @@ const TutorialDescription = ({ tutorialId, user }: Props & ConnectedProps<typeof
           Hey 👋,
         </p>
         <p className="font-light">
-          Și felicitări pentru că vrei să începi Modulul de
+          Și felicitări pentru că vrei să începi
           {' '}
-          {tutorialId.toUpperCase()}
+          {tutorialName}
           !
         </p>
         <p>

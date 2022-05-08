@@ -22,16 +22,16 @@ tutorialRouter.get('/', [
   }
 ]);
 
-tutorialRouter.get('/:tutorialName', [
+tutorialRouter.get('/:tutorialId', [
   PublicMiddleware,
   async function getTutorial(req: Request, res: Response) {
-    const { tutorialName } = req.params;
+    const { tutorialId } = req.params;
 
-    const tutorial: WIPPopulatedTutorialI = await Tutorial.findOne({ name: tutorialName })
+    const tutorial: WIPPopulatedTutorialI = await Tutorial.findOne({ tutorialId })
       .populate('lessons');
 
     if (tutorial === null) {
-      new ServerError(404, `Nu există nici un tutorial cu name=${tutorialName}`).send(res);
+      new ServerError(404, `Nu există nici un tutorial cu id=${tutorialId}`).send(res);
       return;
     }
 
@@ -52,7 +52,7 @@ tutorialRouter.post('/:tutorialId/start', [
     }
 
     try {
-      const tutorial = await Tutorial.findOne({ name: tutorialId });
+      const tutorial = await Tutorial.findOne({ tutorialId });
       if (tutorial === null) {
         new ServerError(404, `Nu există nici un tutorial cu ID=${tutorialId}`).send(res);
         return;
@@ -70,22 +70,23 @@ tutorialRouter.post('/:tutorialId/start', [
   }
 ])
 
-tutorialRouter.get('/:tutorialName/progress', [
+tutorialRouter.get('/:tutorialId/progress', [
   PrivateMiddleware,
   async function getTutorialProgress(req: Request, res: Response) {
-    const { tutorialName } = req.params;
+    const { tutorialId } = req.params;
     const { user }: { user: UserI } = req.body;
 
     const tutorial: WIPPopulatedTutorialI = await Tutorial
-      .findOne({ name: tutorialName })
+      .findOne({ tutorialId })
       .populate('lessons');
 
     if (tutorial === null) {
-      new ServerError(404, `Nu există nici un tutorial cu name=${tutorialName}`).send(res);
+      new ServerError(404, `Nu există nici un tutorial cu tutorialId=${tutorialId}`).send(res);
       return;
     }
 
     const progress: TutorialProgressI = {
+      tutorialId: tutorial.tutorialId,
       name: tutorial.name,
       lessons: tutorial.lessons.map((lesson) => ({
         lessonId: lesson.lessonId,

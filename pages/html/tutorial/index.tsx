@@ -30,7 +30,7 @@ function HtmlTutorialDashboard({ user }: ConnectedProps<typeof connector>) {
   return (
     <>
       <SEOTags
-        title={`Tutorialul de ${TUTORIAL_ID.toUpperCase()}`}
+        title="Tutorialul de HTMl"
         description="Învață HTML printr-un curs online, focusat pe practică și feedback de la developeri cu experiență."
         url={`https://FrontEnd.ro/${TUTORIAL_ID}`}
       />
@@ -50,7 +50,7 @@ function HtmlTutorialDashboard({ user }: ConnectedProps<typeof connector>) {
         <PageContainer>
           {didStartTutorial
             ? <TutorialDashboard tutorialId={TUTORIAL_ID} />
-            : <TutorialDescription tutorialId={TUTORIAL_ID} />}
+            : <TutorialDescription tutorialId={TUTORIAL_ID} tutorialName={tutorialProgress.name} />}
 
         </PageContainer>
       </PageWithAsideMenu>

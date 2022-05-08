@@ -32,7 +32,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
     try {
       const tutorials = await TutorialService.getAll();
       const progressResponses = await Promise.all(tutorials.map((tutorial) => {
-        return TutorialService.getProgress(tutorial.name);
+        return TutorialService.getProgress(tutorial.tutorialId);
       }));
 
       setTutorialsProgress(progressResponses);
@@ -99,7 +99,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
               className={`${styles['progress-wrapper']} p-3`}
             >
               <TutorialProgress
-                title={tutorialsProgress[index].name.toUpperCase()}
+                title={tutorialsProgress[index].name}
                 tutorialProgress={tutorialsProgress[index]}
               />
 

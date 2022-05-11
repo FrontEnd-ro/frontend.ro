@@ -20,10 +20,24 @@ dotenv.config();
 
 exports.handler = run;
 
-async function run(event: { url: string, certificationId: string }) {
+async function run(event: { url: string, certificationId: string, dryRun: boolean }) {
   console.log('Function called with event=', event);
 
   const { pdf, ogImage } = await generateAssets(event.url);
+
+  if (event.dryRun) {
+    const message = 'Dry run. Skipping S3 upload';
+    console.log(message);
+
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify({
+        status: 200,
+        message,
+      }),
+    };
+    return response;
+  }
 
   const s3 = new S3Client({ region: process.env.AWS_REGION });
   const pdfUri = await uploadToS3(s3, `certifications/${event.certificationId}/diploma.pdf`, pdf);

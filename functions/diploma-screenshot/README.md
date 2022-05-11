@@ -26,3 +26,11 @@ AWS_REGION=eu-central-1
 ## Docker
 
 See `Dockerfile` for docker build commands.
+
+## GitHub Actions
+
+This function gets automatically *built* and *pushed* to AWS Elastic Container Registry using the `diplomaScreenshot.yml` GitHub action.
+
+Thus, in order to deploy a new version of this function simply wait for the image to be pushed, then log into AWS Lambda and change the image for this function.
+
+> NOTE: maybe this last step can be automatized as well

@@ -10,6 +10,8 @@ Thus, we're going to deploy all our functions using [container images](https://d
 
 ## How to provision, deploy and run
 
+> NOTE: the instructions below are for doing these steps manually. We also set up GitHub Actions that automatically handle **building** and **pushing** the image to the Elastic Container Registry. (see `diplomaScreenshot.yml`)
+
 **0. Log into AWS with the correct IAM user and switch to `eu-central-1`**
 
 **1. Create a new repository**

@@ -1,0 +1,53 @@
+name: Build and push diploma-screenshot
+
+on:
+  push:
+    paths:
+      - 'functions/diploma-screenshot/**'
+
+jobs:
+  diploma-screenshot:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: functions/diploma-screenshot
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install & build
+        run: |
+            yarn
+            yarn build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+
+      - name: Extract short sha
+        id: extract_short_sha
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: diploma-screenshot
+          # Image tag follows this format: ${BRANCH}_${SHORT_SHA}
+          IMAGE_TAG: ${{ steps.extract_branch.outputs.branch }}_${{ steps.extract_short_sha.outputs.sha_short }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

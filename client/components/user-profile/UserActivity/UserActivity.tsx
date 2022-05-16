@@ -104,7 +104,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
               />
 
               {aggregatedProgress.done < aggregatedProgress.total && (
-                <Link href={`/${tutorialsProgress[index].name}`}>
+                <Link href={`/${tutorialsProgress[index].tutorialId}/tutorial`}>
                   <a className="btn btn--light no-underline mt-4">
                     {(
                       aggregatedProgress.done === 0

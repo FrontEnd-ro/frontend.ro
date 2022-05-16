@@ -32,9 +32,11 @@ const Notification = ({
         />
         <div className="body">
           <p className="m-0">
-            <span className={styles.user}>
-              {notification.from?.name ?? notification.from?.username ?? ''}
-            </span>
+            {notification.from !== undefined && (
+              <span className={styles.user}>
+                {notification.from?.name ?? notification.from?.username ?? ''}
+              </span>
+            )}
             {notification.short_message}
           </p>
           <time

@@ -35,7 +35,7 @@ const Notification = ({
             <span className={styles.user}>
               {notification.from?.name ?? notification.from?.username ?? ''}
             </span>
-            {notification.long_message}
+            {notification.short_message}
           </p>
           <time
             className="text-silver"

@@ -5,7 +5,6 @@ const TutorialSchema = new mongoose.Schema<TutorialI>({
   // Human-readable tutorial ID (example: 'html')
   tutorialId: { type: String, required: true, unique: true },
   name: { type: String, required: true, unique: true },
-  href: { type: String, required: true, unique: true },
   lessons: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' }],
 });
 
@@ -17,7 +16,6 @@ function sanitizeTutorial(tutorial: WIPPopulatedTutorialI) {
   const result: WIPPopulatedTutorialI = {
     tutorialId: tutorial.tutorialId,
     name: tutorial.name,
-    href: tutorial.href,
     // Omit 'views'
     lessons: tutorial.lessons.map((lesson) => ({
       lessonId: lesson.lessonId,

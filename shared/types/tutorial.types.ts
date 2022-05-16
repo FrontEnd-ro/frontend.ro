@@ -17,8 +17,6 @@ export interface TutorialI {
   // Displayed in the UI
   name: string;
 
-  href: string;
-
   // Collection of lesson IDs. The exercises are derived from
   // the lessons, thus they are not first class properties on
   // the tutorial.
@@ -35,8 +33,6 @@ export interface WIPPopulatedTutorialI {
   // Displayed in the UI
   name: string;
 
-  href: string;
-
   lessons: LessonI[]
 }
 
@@ -47,8 +43,6 @@ export interface TutorialProgressI {
 
   // Displayed in the UI
   name: string;
-
-  href: string;
 
   lessons: {
     // Lesson ID

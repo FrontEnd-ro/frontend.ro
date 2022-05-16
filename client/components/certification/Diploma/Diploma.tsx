@@ -16,7 +16,7 @@ interface Props {
   }
   tutorial: {
     name: string;
-    href: string;
+    tutorialId: string;
   };
   certification: {
     date: Date;
@@ -71,7 +71,7 @@ const Diploma = ({
         </a>
         <p>
           a completat
-          <a className="mt-4 mb-4 d-block text-bold" href={tutorial.href}>
+          <a className="mt-4 mb-4 d-block text-bold" href={`/${tutorial.tutorialId}`}>
             {tutorial.name}
           </a>
           rezolvând cu succes toate cele

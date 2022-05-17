@@ -77,7 +77,11 @@ class NotificationModel {
           const templateModel: NotificationTemplateModel = {
             name: user.name ?? user.username,
             subject: payload.title ?? 'Notificare FrontEnd.ro',
-            headline: `${sourceName} ${payload.short_message}`,
+            // Only add the name if ont of the admins is responsible
+            // for this notification (ie: he/she approved an exercise).
+            headline: payload.from !== undefined
+              ? `${sourceName} ${payload.short_message}`
+              : payload.short_message,
             body: payload.long_message,
             [payload.type]: true,
             cta_link: `${appConfig.APP.app_url}${payload.href}`,

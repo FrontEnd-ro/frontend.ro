@@ -5,12 +5,16 @@ import { RootState } from '~/redux/root.reducer';
 import PageContainer from '~/components/PageContainer';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { TutorialProgressI, WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 
-function HtmlTutorialDashboard({ user }: ConnectedProps<typeof connector>) {
+type Props = {
+  tutorialInfo: WIPPopulatedTutorialI
+} & ConnectedProps<typeof connector>;
+
+function HtmlTutorialDashboard({ user, tutorialInfo }: Props) {
   const TUTORIAL_ID = 'html';
   const isLoggedIn = !!user.info;
   const didStartTutorial = isLoggedIn && user.info.tutorials.includes(TUTORIAL_ID);
@@ -50,7 +54,7 @@ function HtmlTutorialDashboard({ user }: ConnectedProps<typeof connector>) {
         <PageContainer>
           {didStartTutorial
             ? <TutorialDashboard tutorialId={TUTORIAL_ID} />
-            : <TutorialDescription tutorialId={TUTORIAL_ID} tutorialName={tutorialProgress.name} />}
+            : <TutorialDescription tutorialId={TUTORIAL_ID} tutorialName={tutorialInfo.name} />}
 
         </PageContainer>
       </PageWithAsideMenu>
@@ -67,3 +71,24 @@ function mapStateToProps(state: RootState) {
 const connector = connect(mapStateToProps);
 
 export default connector(HtmlTutorialDashboard);
+
+export async function getServerSideProps(): Promise<{
+  props: {
+    tutorialInfo: WIPPopulatedTutorialI
+  }
+}> {
+  const Tutorial = (await import('../../../server/tutorial/tutorial.model')).default;
+  const htmlTutorial = await Tutorial.findOne({ tutorialId: 'html' }).populate('lessons');
+
+  // FIXME
+  // In theory only calling `.toObject()` should be enough to get a plain Object
+  // However, NextJS complains it cannot serialize it.
+  // This issue may hold the answer https://github.com/vercel/next.js/issues/11993.
+  const htmlTutorialObject = JSON.parse(JSON.stringify(htmlTutorial.toObject()));
+
+  return {
+    props: {
+      tutorialInfo: htmlTutorialObject,
+    },
+  };
+}

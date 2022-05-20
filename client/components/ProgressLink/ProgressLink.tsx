@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faHourglass, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faExclamationTriangle, faHourglass } from '@fortawesome/free-solid-svg-icons';
 import { ProgressDonut } from '~/components/progress';
 
 import styles from './ProgressLink.module.scss';
@@ -15,6 +15,7 @@ interface Props {
   // Optional
   active?: boolean;
   className?: string;
+  htmlTitle?: string;
   variant?: 'default' | 'waiting' | 'error';
 }
 
@@ -25,17 +26,20 @@ const ProgressLink = ({
   active = false,
   className = '',
   variant = 'default',
+  htmlTitle,
 }: Props) => {
   return (
-    <div className={`
-      ${styles.ProgressLink}
-      ${styles[variant]}
-      ${active ? styles.active : ''}
-      ${className}
-      relative
-      overflow-hidden
-      rounded-md
-    `}
+    <div
+      className={`
+        ${styles.ProgressLink}
+        ${styles[variant]}
+        ${active ? styles.active : ''}
+        ${className}
+        relative
+        overflow-hidden
+        rounded-md
+      `}
+      title={htmlTitle}
     >
       <Link href={href}>
         <a className="d-flex align-items-center no-underline">
@@ -117,7 +121,7 @@ const ErrorIndicator = () => (
     />
     <FontAwesomeIcon
       width={14}
-      icon={faTimes}
+      icon={faExclamationTriangle}
       className={`absolute text-red ${styles['check-icon']}`}
     />
   </div>

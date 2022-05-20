@@ -40,11 +40,21 @@ const AsideNav = ({ currentExerciseId, submissions, versions }: Props) => {
             variant = 'error';
           }
 
+          let htmlTitle;
+          if (variant === 'error') {
+            htmlTitle = 'Exercițiul are feedback de rezolvat';
+          } else if (variant === 'waiting') {
+            htmlTitle = 'În curs de verificare';
+          } else if (submission.status === SubmissionStatus.DONE) {
+            htmlTitle = 'Execițiu rezolvat cu succes';
+          }
+
           return (
             <div key={submission.exercise._id}>
               <ProgressLink
                 className="mb-8"
                 variant={variant}
+                htmlTitle={htmlTitle}
                 title={`Exercițiu #${index + 1}`}
                 href={`/rezolva/${submission.exercise._id}`}
                 active={submission.exercise._id === currentExerciseId}

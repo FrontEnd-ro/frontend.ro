@@ -3,7 +3,6 @@ const express = require('express');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { default: appConfig } = require('../config');
 
-
 const ExerciseModel = require('./exercise.model');
 const SubmissionModel = require('../submission/submission.model');
 
@@ -39,14 +38,15 @@ exerciseRouter.get('/solved', [PrivateMiddleware], async function getSolvedExerc
 exerciseRouter.get('/:exerciseId', [PublicMiddleware, PublicOrOwnExercise], async function getExerciseById(req, res) {
   const { exerciseId } = req.params;
 
-  try {
-    let result = await ExerciseModel.get(exerciseId);
-    let sanitizedResult = ExerciseModel.sanitize(result);
-    res.json(sanitizedResult);
-  } catch (err) {
-    new ServerError(err.code, err.message).send(res);
+  const exercise = await ExerciseModel.get(exerciseId);
+
+  if (!exercise) {
+    throw new ServerError(404, `No exercise with id='${exerciseId}' found`);
+  } else {
+    const sanitizedExercise = ExerciseModel.sanitize(exercise);
+    res.json(sanitizedExercise);
   }
-});
+})
 
 exerciseRouter.get('/public/:username', [PublicMiddleware], async function getPublicUserExercises(req, res) {
   const { username } = req.params
@@ -63,8 +63,6 @@ exerciseRouter.get('/public/:username', [PublicMiddleware], async function getPu
 
   res.json(sanitizedResults);
 })
-
-
 
 exerciseRouter.post('/', [PrivateMiddleware], async function createExercise(req, res) {
   const exercise = await ExerciseModel.create(req.body);
@@ -111,19 +109,6 @@ exerciseRouter.post('/media', [PrivateMiddleware], function createExercise(req, 
       new ServerError(500, err.message || 'Oops! Se pare că nu am putut încărca fișierele. Încearcă din nou.').send(res);
     }
   });
-})
-
-exerciseRouter.get('/:exerciseId', [PublicOrOwnExercise], async function getExercise(req, res) {
-  const { exerciseId } = req.params;
-
-  const exercise = await ExerciseModel.get(exerciseId);
-
-  if (!exercise) {
-    throw new ServerError(404, `No exercise with id='${exerciseId}' found`);
-  } else {
-    const sanitizedExercise = ExerciseModel.sanitize(exercise);
-    res.json(sanitizedExercise);
-  }
 })
 
 exerciseRouter.put('/:exerciseId', [PrivateMiddleware, OwnExercise], async function updateExercise(req, res) {

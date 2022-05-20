@@ -108,6 +108,7 @@ async function PublicOrOwnExercise(req, res, next) {
 
     if (exercise.private) {
       await OwnExercise(req, res, next);
+      return;
     }
 
     next();

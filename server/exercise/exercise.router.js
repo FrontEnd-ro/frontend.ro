@@ -25,14 +25,15 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 exerciseRouter.get('/', [PrivateMiddleware], async function getUserExercises(req, res) {
   let results = await ExerciseModel.getUserExercises(req.body.user._id);
+  let sanitizedResults = results.map(ExerciseModel.sanitize);
 
-  res.json(results);
+  res.json(sanitizedResults);
 })
 
 exerciseRouter.get('/solved', [PrivateMiddleware], async function getSolvedExercises(req, res) {
   let results = await SubmissionModel.getAllUserSubmissions(req.body.user._id);
-
-  res.json(results);
+  let sanitizedResults = results.map(SubmissionModel.sanitize);
+  res.json(sanitizedResults);
 })
 
 exerciseRouter.get('/:exerciseId', [PublicMiddleware, PublicOrOwnExercise], async function getExerciseById(req, res) {
@@ -40,7 +41,8 @@ exerciseRouter.get('/:exerciseId', [PublicMiddleware, PublicOrOwnExercise], asyn
 
   try {
     let result = await ExerciseModel.get(exerciseId);
-    res.json(result);
+    let sanitizedResult = ExerciseModel.sanitize(result);
+    res.json(sanitizedResult);
   } catch (err) {
     new ServerError(err.code, err.message).send(res);
   }
@@ -57,15 +59,17 @@ exerciseRouter.get('/public/:username', [PublicMiddleware], async function getPu
   }
 
   let results = await ExerciseModel.getUserExercises(user._id, true);
+  const sanitizedResults = results.map(ExerciseModel.sanitize);
 
-  res.json(results);
+  res.json(sanitizedResults);
 })
 
 
 
 exerciseRouter.post('/', [PrivateMiddleware], async function createExercise(req, res) {
   const exercise = await ExerciseModel.create(req.body);
-  res.json(exercise);
+  const sanitizedExercise = ExerciseModel.sanitize(exercise);
+  res.json(sanitizedExercise);
 })
 
 exerciseRouter.post('/media', [PrivateMiddleware], function createExercise(req, res) {
@@ -117,7 +121,8 @@ exerciseRouter.get('/:exerciseId', [PublicOrOwnExercise], async function getExer
   if (!exercise) {
     throw new ServerError(404, `No exercise with id='${exerciseId}' found`);
   } else {
-    res.json(exercise);
+    const sanitizedExercise = ExerciseModel.sanitize(exercise);
+    res.json(sanitizedExercise);
   }
 })
 
@@ -125,7 +130,8 @@ exerciseRouter.put('/:exerciseId', [PrivateMiddleware, OwnExercise], async funct
   const { exerciseId } = req.params;
 
   const exercise = await ExerciseModel.update(exerciseId, req.body);
-  res.json(exercise);
+  const sanitizedExercise = ExerciseModel.sanitize(exercise);
+  res.json(sanitizedExercise);
 })
 
 exerciseRouter.delete('/:exerciseId', [PrivateMiddleware, OwnExercise], async function deleteExercise(req, res) {

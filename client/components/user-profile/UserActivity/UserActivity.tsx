@@ -16,6 +16,7 @@ import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialProgress from './TutorialProgress/TutorialProgress';
 import { aggregateTutorialProgress } from '~/services/Utils';
+import { UserRole } from '~/../shared/types/user.types';
 
 interface Props {
   profileUser: UserState['info']
@@ -25,7 +26,6 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
   const isOwnProfile = currentUser.info && currentUser.info.username === profileUser.username;
   const [didError, setDidError] = useState(false);
   const [solvedExercises, setSolvedExercises] = useState<Submission[]>(undefined);
-  const [createdExercises, setCreatedExercises] = useState(undefined);
   const [tutorialsProgress, setTutorialsProgress] = useState<TutorialProgressI[]>(undefined);
 
   const fetchTutorialsProgress = async () => {
@@ -55,17 +55,6 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
       setSolvedExercises([]);
       setTutorialsProgress([]);
     }
-
-    // Created exercises
-    const createdExercisesPromise = isOwnProfile
-      ? ExerciseService.getCreatedExercises()
-      : ExerciseService.getPublicCreatedExercises(profileUser.username);
-
-    createdExercisesPromise.then((resp) => {
-      setCreatedExercises(resp);
-    }).catch((err) => {
-      console.error(err);
-    });
   }, []);
 
   if (didError) {
@@ -78,12 +67,12 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
     );
   }
 
-  if (!createdExercises || !solvedExercises || !tutorialsProgress) {
+  if (!solvedExercises || !tutorialsProgress) {
     // Loading
     return null;
   }
 
-  if (createdExercises.length === 0 && !isOwnProfile) {
+  if (!isOwnProfile) {
     return <NoActivity user={profileUser} />;
   }
 
@@ -155,6 +144,30 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
         )}
       </div>
       <hr />
+      {isOwnProfile && profileUser.role.includes(UserRole.ADMIN) && (
+        <CreatedExercises />
+      )}
+    </PageContainer>
+  );
+}
+
+// Only show this component for Logged In Admin Users
+const CreatedExercises = () => {
+  const [createdExercises, setCreatedExercises] = useState([]);
+
+  useEffect(() => {
+    ExerciseService
+      .getCreatedExercises()
+      .then((exercises) => {
+        setCreatedExercises(exercises);
+      })
+      .catch((err) => {
+        console.error('[CreatedExercises.getCreatedExercises] Failed to get exercises.', err);
+      });
+  }, []);
+
+  return (
+    <section>
       <h2> Exerciții create </h2>
       <div className={styles['exercises-wrapper']}>
         {createdExercises.map((ex) => (
@@ -163,25 +176,22 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
             exercise={ex}
             href={`exercitii/${ex._id}`}
             isPrivate={ex.private}
-            viewMode={isOwnProfile ? 'TEACHER' : 'STUDENT'}
+            viewMode="TEACHER"
             feedbackCount={0}
             isApproved={false}
             readOnly={false}
           />
         ))}
-        {isOwnProfile && (
-          <Link href="/exercitii/creeaza">
-            <a className="d-flex align-items-center justify-content-center no-underline text-center">
-              <FontAwesomeIcon icon={faPlus} width="32" height="32" />
-              <span> Creează un nou exercițiu </span>
-            </a>
-          </Link>
-        )}
-
+        <Link href="/exercitii/creeaza">
+          <a className="d-flex align-items-center justify-content-center no-underline text-center">
+            <FontAwesomeIcon icon={faPlus} width="32" height="32" />
+            <span> Creează un nou exercițiu </span>
+          </a>
+        </Link>
       </div>
-    </PageContainer>
+    </section>
   );
-}
+};
 
 function mapStateToProps(state: RootState) {
   return {

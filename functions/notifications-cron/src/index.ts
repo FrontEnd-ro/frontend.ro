@@ -21,7 +21,8 @@ const SubmissionModel = require('../../../server/submission/submission.model');
 exports.handler = run;
 
 async function run() {
-  // Whether to actually send the notifications, or simply to log the result, without any side effects.
+  // Whether to actually send the notifications, or simply to log the result,
+  // without any side effects.
   const dryRun = process.env.DRY_RUN === 'true';
   const SPAN = `[NotificationsCron.run, dryRun=${dryRun}]`;
 
@@ -37,6 +38,9 @@ async function run() {
     // Process the in order, so the logs make sense.
     for (const user of usersThatStartedATutorial) {
       try {
+        // NOTE: we want to process users synchronously,
+        // so that the logs make sense when we read them.
+        // eslint-disable-next-line no-await-in-loop
         await processUser(user, dryRun);
       } catch (err) {
         console.error(`${SPAN} Failed to process user=${user._id.toString()}`, err);
@@ -100,7 +104,7 @@ async function processUser(user: UserI, dryRun: boolean) {
       const notification = getNotificationPayload(user, tutorial, oldestSubmission, 3);
       await maybeNotify(notification, dryRun);
     } else {
-      console.log(`${SPAN} notification doesn't match any interval. Skipping.`)
+      console.log(`${SPAN} notification doesn't match any interval. Skipping.`);
     }
   }));
 }
@@ -109,7 +113,10 @@ function getMostRecentSubmission(submissions: WIPPopulatedSubmissionI[]) {
   let mostRecentSubmission = submissions[0];
 
   submissions.forEach((submission) => {
-    if (new Date(submission.updatedAt).getTime() > new Date(mostRecentSubmission.updatedAt).getTime()) {
+    if (
+      new Date(submission.updatedAt).getTime()
+        > new Date(mostRecentSubmission.updatedAt).getTime()
+    ) {
       mostRecentSubmission = submission;
     }
   });
@@ -171,7 +178,7 @@ async function maybeNotify(notification: NotificationI, dryRun: boolean): Promis
   } else {
     console.log(`${SPAN} On a dry run, so not sending notification.`, {
       ...notification,
-      to: (notification.to as UserI)._id.toString()
+      to: (notification.to as UserI)._id.toString(),
     });
   }
 }

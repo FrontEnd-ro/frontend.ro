@@ -171,7 +171,7 @@ async function maybeNotify(notification: NotificationI, dryRun: boolean): Promis
     const resp = await NotificationModel.notify(notification, [NotificationChannel.EMAIL]);
 
     if (resp.success) {
-      console.log(`${SPAN} successfully notified.`);
+      console.log(`${SPAN} successfully notified.`, notification);
     } else {
       console.error(`${SPAN} failed to notify.`, resp.responses);
     }

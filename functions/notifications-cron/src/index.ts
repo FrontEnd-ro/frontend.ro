@@ -139,7 +139,7 @@ function getNotificationPayload(
     to: user,
     timestamp: Date.now(),
     type: NotificationType.INFO,
-    title: `Nu uita de exercițiile ${tutorial.name}`,
+    title: `Nu uita de ${tutorial.name}`,
     short_message: `Nu uita de ${tutorial.name}`,
     long_message: `Am văzut că nu ai mai lucrat la exercițiile din acest tutorial.
 Știai că dacă le termini pe toate, vei primi o certificare din partea noastră?`,

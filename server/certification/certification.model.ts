@@ -76,7 +76,7 @@ async function createCertification(
     certification = await refreshCertificationAssets(certification, dryRun);
   } catch (err) {
     console.error(`${SPAN} Certification assets couldn't be generated.`, err);
-    return;
+    return certification;
   }
   
   console.info(`${SPAN} successfully created certification`);
@@ -97,7 +97,7 @@ async function storeCertificationData(
 ) {
   const SPAN = `[storeCertificationData, userId=${userId}, tutorial_id=${tutorial._id}, dryRun=${dryRun}]`;
 
-  let certification = await Certification.findOne({ tutorial: tutorial._id });
+  let certification = await Certification.findOne({ tutorial: tutorial._id, user: userId });
   if (certification !== null) {
     console.info(`${SPAN} Certification already exists. We'll update it!`)
     certification.timestamp = Date.now();

@@ -98,10 +98,10 @@ async function processUser(user: UserI, dryRun: boolean) {
     );
 
     if (differenceInBusinessDays > 7) {
-      const notification = getNotificationPayload(user, tutorial, oldestSubmission, 7);
+      const notification = getNotificationPayload(user, tutorial, oldestSubmission, 7, 'abandoned');
       await maybeNotify(notification, dryRun);
     } else if (differenceInBusinessDays > 3) {
-      const notification = getNotificationPayload(user, tutorial, oldestSubmission, 3);
+      const notification = getNotificationPayload(user, tutorial, oldestSubmission, 3, 'inactivity');
       await maybeNotify(notification, dryRun);
     } else {
       console.log(`${SPAN} notification doesn't match any interval. Skipping.`);
@@ -129,11 +129,20 @@ function getNotificationPayload(
   tutorial: WIPPopulatedTutorialI,
   oldestSubmission: WIPPopulatedSubmissionI,
   inactivityInterval: number,
+  // If we think this user abandoned the tutorial, we send a different message
+  type?: 'inactivity' | 'abandoned',
 ): NotificationI {
   const tags = new Map<string, string>();
   tags.set('tutorial', tutorial.tutorialId);
   tags.set('inactivityInterval', inactivityInterval.toString());
   tags.set('oldestSubmission', oldestSubmission._id.toString());
+
+  const longMessage = type === 'inactivity'
+    ? `Am văzut că nu ai mai lucrat la exercițiile din acest tutorial.
+     Știai că dacă le termini pe toate, vei primi o certificare din partea noastră?`
+    : `A trecut mai mult de o săptămână de când ai lucrat la acest tutorial. Totul ok? Dacă l-ai abandonat,
+     îmi poți spune motivele? Asta ne ajută să-l facem și mai bun pentru viitorii utilizatori :D Iar dacă nu l-ai
+     abandonat, poți să-l continui apăsând pe linkul de mai jos.`;
 
   return {
     to: user,
@@ -141,8 +150,7 @@ function getNotificationPayload(
     type: NotificationType.INFO,
     title: `Nu uita de ${tutorial.name}`,
     short_message: `Nu uita de ${tutorial.name}`,
-    long_message: `Am văzut că nu ai mai lucrat la exercițiile din acest tutorial.
-Știai că dacă le termini pe toate, vei primi o certificare din partea noastră?`,
+    long_message: longMessage,
     href_text: 'Continuă să rezolvi exercițiile!',
     href: `/${tutorial.tutorialId}`,
     urgency: NotificationUrgency.REGULAR,

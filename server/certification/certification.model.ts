@@ -1,5 +1,5 @@
 import mongoose, { Document, ObjectId } from 'mongoose';
-import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
+import { LambdaClient, InvokeCommand, waitUntilFunctionActive } from '@aws-sdk/client-lambda';
 
 import appConfig from '../config';
 import Tutorial from '../tutorial/tutorial.model';
@@ -134,7 +134,7 @@ async function storeCertificationData(
  * @param dryRun boolean - whether to actually perform the tasks, or simply to log the result, without any side effects
  * @returns Promise
  */
-async function refreshCertificationAssets(
+export async function refreshCertificationAssets(
   certification: mongoose.Document<any, any, CertificationI> & CertificationI,
   dryRun = false
 ) {
@@ -159,6 +159,17 @@ async function refreshCertificationAssets(
     InvocationType: 'RequestResponse',
     Payload: Buffer.from(JSON.stringify(payload), 'utf-8'),
   });
+
+  const waitResponse = await waitUntilFunctionActive({
+    client: lambda,
+    maxWaitTime: 30,
+  }, {
+    FunctionName
+  });
+  if (waitResponse.state !== 'SUCCESS') {
+    console.log(`${SPAN} Function is not active.`, waitResponse);
+    return certification;
+  }
 
   const response = await lambda.send(invokeCommand);
   console.log(`${SPAN} Got response from lambda function`, response);

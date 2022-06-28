@@ -147,6 +147,7 @@ const NotificationsTooltip = ({
             <List>
               {notifications.map((notificationProps) => (
                 <Notification
+                  theme={theme}
                   key={notificationProps._id}
                   notification={notificationProps}
                   onMarkAsRead={() => markAsRead(notificationProps._id)}

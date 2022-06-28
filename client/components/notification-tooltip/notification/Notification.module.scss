@@ -21,10 +21,6 @@
     }
   }
 
-  &.is--unread {
-    background-color: darken(color(darker-white), 5%);
-  }
-
   img {
     margin-right: 0.8em;
   }
@@ -37,4 +33,12 @@
     margin-right: 0.4em;
     border-bottom: 1px solid color(silver);
   }
+}
+
+.theme-default.is--unread {
+  background-color: darken(color(darker-white), 5%);
+}
+
+.theme-black.is--unread {
+  background-color: #000;
 }

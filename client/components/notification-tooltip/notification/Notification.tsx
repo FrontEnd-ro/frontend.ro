@@ -9,15 +9,18 @@ import styles from './Notification.module.scss';
 interface Props {
   notification: ParsedNotificationI,
   onMarkAsRead: (_id: string) => void
+  theme?: 'default' | 'black';
 }
 
 const Notification = ({
   notification,
   onMarkAsRead,
+  theme = 'default',
 }: Props) => (
   <li
     className={`
-      ${styles.notification} 
+      ${styles.notification}
+      ${styles[`theme-${theme}`]}
       ${!notification.read ? styles['is--unread'] : ''} text-xs
     `}
     onClick={() => onMarkAsRead(notification._id)}

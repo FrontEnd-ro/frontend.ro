@@ -26,10 +26,18 @@ interface Props {
   },
   variant?: 'large' | 'medium' | 'small',
   showShareControls?: boolean,
+  showSignature?: boolean,
+  showQRCode?: boolean,
 }
 
 const Diploma = ({
-  student, tutorial, certification, variant = 'large', showShareControls = true,
+  student,
+  tutorial,
+  certification,
+  variant = 'large',
+  showShareControls = true,
+  showSignature = true,
+  showQRCode = true,
 }: Props) => {
   const [fullCertificationUrl, setFullCertificationUrl] = useState(certification.url);
   useEffect(() => {
@@ -82,13 +90,15 @@ const Diploma = ({
         </p>
       </div>
       <footer className="relative d-flex justify-content-between align-items-end">
-        <Signature className="mr-2" />
-        <QRCode
-          width={140}
-          background="#f8f8f8"
-          className={styles.qrcode}
-          url={fullCertificationUrl}
-        />
+        {showSignature && <Signature className="mr-2" />}
+        {showQRCode && (
+          <QRCode
+            width={140}
+            background="#f8f8f8"
+            className={styles.qrcode}
+            url={fullCertificationUrl}
+          />
+        )}
 
         {showShareControls && (
         // This attribute means we'll remove this element when generating

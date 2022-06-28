@@ -22,6 +22,8 @@ const HtmlFakeDiploma = ({ isLoggedIn, userInfo } : ConnectedProps<typeof connec
         exerciseCount: 18,
         url: 'https://FrontEnd.ro',
       }}
+      showQRCode={false}
+      showSignature={false}
       showShareControls={false}
     />
   );

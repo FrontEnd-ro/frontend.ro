@@ -30,7 +30,7 @@ function Home({
         {/* <LandingThanks /> */}
         <LandingTidbits tidbits={tidbits} />
         <LandingSubscribe />
-        <LandingStats />
+        {/* <LandingStats /> */}
         <Footer />
       </>
     </>

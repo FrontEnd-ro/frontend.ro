@@ -22,7 +22,7 @@ const HtmlFakeDiploma = ({ isLoggedIn, userInfo } : ConnectedProps<typeof connec
         exerciseCount: 18,
         url: 'https://FrontEnd.ro',
       }}
-      shareControls={false}
+      showShareControls={false}
     />
   );
 };

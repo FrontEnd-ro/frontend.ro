@@ -25,11 +25,11 @@ interface Props {
     exerciseCount: number;
   },
   variant?: 'large' | 'medium' | 'small',
-  shareControls?: boolean,
+  showShareControls?: boolean,
 }
 
 const Diploma = ({
-  student, tutorial, certification, variant = 'large', shareControls = true,
+  student, tutorial, certification, variant = 'large', showShareControls = true,
 }: Props) => {
   const [fullCertificationUrl, setFullCertificationUrl] = useState(certification.url);
   useEffect(() => {
@@ -90,7 +90,7 @@ const Diploma = ({
           url={fullCertificationUrl}
         />
 
-        {shareControls && (
+        {showShareControls && (
         // This attribute means we'll remove this element when generating
         // the OG:IMAGE and PDF for the Diploma
         // https://github.com/FrontEnd-ro/frontend.ro/issues/449

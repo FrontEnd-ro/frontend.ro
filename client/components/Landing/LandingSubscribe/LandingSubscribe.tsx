@@ -8,9 +8,10 @@ export default function LandingSubscribe() {
       <section>
         <h2>Rămâi conectat la noutăți</h2>
         <p>
-          Dacă-ți place proiectul și vrei să te ținem la curent
+          Dacă nu te-am convins încă să începi un tutorial,
+          dar ai vrea să te ținem la curent
           cu noutățile (no spam, promitem) -
-          atunci lasă-ți email-ul aici și hai în comunitate.
+          lasă-ți email-ul aici și hai în comunitate.
         </p>
         <SubscribeForm />
       </section>

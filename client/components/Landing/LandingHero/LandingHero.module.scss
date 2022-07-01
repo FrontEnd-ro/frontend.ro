@@ -1,10 +1,13 @@
 @import '../../../styles/variables';
 
-
-.landing-hero {
-  min-height: 100vh;
+.LandingHero {
+  min-height: calc(100vh);
   flex-flow: column nowrap;
   background: color(darker-white);
+
+  &.isLoggedIn {
+    min-height: calc(100vh - #{$app-header-height});
+  }
 
   aside {
     left: -100vw;
@@ -16,38 +19,14 @@
     padding: 8vh 10vw 0 10vw;
   }
 
-  h1 {
-    margin: 0;
-    font-size: calc(2em + 2vw);
-    display: inline-block;
-  }
-
-  h2 {
+  .description {
     font-weight: normal;
     font-size: calc(1em + 1vw);
-
-    span {
-      display: block;
-    }
   }
 
   .action-button {
     padding: 0.5em 1em;
-    min-height: initial;
-    text-decoration: none;
-    display: inline-block;
-    margin: 1.5em 1em 0 0;
     font-size: calc(0.65em + 1vw);
-  }
-
-  @media screen and (max-width: 515px) {
-    h2 span {
-      display: inline;
-    }
-
-    .action-button {
-      display: block;
-    }
   }
 }
 
@@ -55,8 +34,6 @@
   top: 2em;
   right: 2em;
   z-index: 3;
-  display: flex;
-  position: absolute;
 
   svg {
     width: 1em;
@@ -65,13 +42,29 @@
 }
 
 .nav-wrapper {
-  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
+@media screen and (max-height: 500px) {
+  .LandingHero,
+  .LandingHero.isLoggedIn {
+    height: auto;
+    display: block;
+    min-height: auto;
+  }
+}
+
 @media screen and (max-width: 515px) {
+  .description span {
+    display: inline;
+  }
+
+  .action-button {
+    display: block;
+  }
+
   .menu-btn {
     top: 1em;
     right: 1em;

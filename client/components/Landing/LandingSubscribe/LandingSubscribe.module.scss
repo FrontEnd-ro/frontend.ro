@@ -1,20 +1,40 @@
 @import '../../../styles/variables';
 
 .LandingSubscribe {
-  padding: 0.5em 0 2em 0;
+  padding: 0 0 2em 0;
 
   & > section {
     width: $width;
     margin: 0 auto;
     max-width: $max-width;
   }
-  
-  h2 {
-    font-size: calc(1.5em + 1vw);
+}
+
+.SubscribeForm {
+  margin: 2.5em auto;
+  max-width: 17em;
+}
+
+.SVGArrow {
+  z-index: 1;
+  left: 12em;
+  top: calc(100% + 1em);
+  transform: scaleX(-1);
+}
+
+@media screen and (max-width: 1000px) {
+  .SVGArrow {
+    left: 10vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .SubscribeForm {
+    width: 100%;
+    max-width: 100%;
   }
 
-  .SubscribeForm {
-    margin: 2.5em auto;
-    max-width: 17em;
+  .SVGArrow {
+    display: none;
   }
 }

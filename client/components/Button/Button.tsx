@@ -3,7 +3,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type Variant = 'light' | 'blue' | 'success' | 'danger' | 'transparent' |
-  'yellow' | 'grey' | 'link' | 'gradient';
+  'yellow' | 'grey' | 'link' | 'gradient' | 'default';
 interface Props {
   loading?: boolean;
   variant?: Variant;

@@ -1,12 +1,11 @@
 @import '../../../styles/variables';
 
-.wrapper {
+.LandingAdCard {
   position: fixed;
   right: 0;
   bottom: 0;
   z-index: 3;
   padding: 1em;
-  width: 100%;
   max-width: 25em;
   transform: translateY(100%);
   transition: transform 0.5s $cubic;
@@ -21,15 +20,12 @@
 }
 
 .content {
-  position: relative;
   padding: 1em 2em;
   border-radius: 0.5em;
-  background: color(white);
   box-shadow: 0 0 10px color(grey);
 }
 
 .close-button {
   top: 0;
   right: 0;
-  color: color(silver);
 }

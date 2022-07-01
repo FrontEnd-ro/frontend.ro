@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+.LandingHTML {
+  @extend %containerConfig;
+}
+
+.SVGArrow {
+  z-index: 1;
+  top: 100%;
+  right: -3em;
+}
+
+@media screen and (max-width: 600px) {
+  .SVGArrow {
+    display: none;
+  }
+}

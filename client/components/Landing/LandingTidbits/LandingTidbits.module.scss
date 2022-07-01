@@ -91,3 +91,19 @@
     font-size: calc(1.5em + 3vmin);
   }
 }
+
+.CallToAction {
+  @extend %containerConfig;
+}
+
+.SVGArrow {
+  right: 12em;
+  z-index: 1;
+  bottom: -5em;
+}
+
+@media screen and (max-width: 600px) {
+  .SVGArrow {
+    display: none;
+  }
+}

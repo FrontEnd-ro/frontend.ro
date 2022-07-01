@@ -26,18 +26,18 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
     <nav className={styles['nav-links']}>
       <List as="ol">
         <li>
-          <Link href="/lectii">
-            Lecții
-          </Link>
-        </li>
-        <li>
-          <Link href="/exercitii">
-            Exerciții
+          <Link href="/html">
+            Modulul de HTML
           </Link>
         </li>
         <li>
           <Link href="/tidbits">
             Tidbits
+          </Link>
+        </li>
+        <li>
+          <Link href="/resurse">
+            Resurse utile
           </Link>
         </li>
         {/* <li>
@@ -63,11 +63,6 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
             </Link>
           </li>
         )}
-        <li>
-          <Link href="/resurse">
-            Resurse utile
-          </Link>
-        </li>
       </List>
     </nav>
   );

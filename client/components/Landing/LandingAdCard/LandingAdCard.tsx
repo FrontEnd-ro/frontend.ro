@@ -45,11 +45,12 @@ function LandingAdCard({ ad }: { ad: ApplicationConfig['ad'] }) {
 
   return (
     <div className={`
-      ${styles.wrapper}
-      ${visible ? styles['wrapper--visible'] : ''}
+      ${styles.LandingAdCard}
+      ${visible ? styles['LandingAdCard--visible'] : ''}
+      w-100
     `}
     >
-      <div className={`${styles.content} d-flex align-items-center flex-wrap`}>
+      <div className={`${styles.content} bg-white relative d-flex align-items-center flex-wrap`}>
         <h2 className="m-0">
           Hey,
         </h2>
@@ -61,7 +62,7 @@ function LandingAdCard({ ad }: { ad: ApplicationConfig['ad'] }) {
             {ad.cta}
           </Link>
         )}
-        <Button className={`${styles['close-button']} absolute`} onClick={didVisit}>
+        <Button className={`${styles['close-button']} text-silver absolute`} onClick={didVisit}>
           <FontAwesomeIcon icon={faTimes} width={20} height={20} />
         </Button>
       </div>

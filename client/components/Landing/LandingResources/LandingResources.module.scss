@@ -1,0 +1,69 @@
+@import '../../../styles/variables';
+
+.CallToAction {
+  @extend %containerConfig;
+}
+
+.Grid {
+  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.Item {
+  cursor: pointer;
+  aspect-ratio: 4/3;
+
+  // Make sure we only have 5 rows
+  &:nth-child(n + 41) {
+    display: none;
+  }
+
+  img {
+    object-fit: cover;
+    aspect-ratio: 4/3;
+    transition: transform 0.1s linear;
+  }
+}
+
+.Link {
+  display: none;
+  margin-left: 5%;
+  @extend %containerConfig;
+}
+
+// Only apply the `blur` filter if we can `hover`
+// over elements in the current browser.
+// This means we'll display the images clearly
+// on mobile or tabled devices.
+@media (any-hover: hover) {
+  .Item {
+    img {
+      filter: blur(2px);
+    }
+
+    &:hover img {
+      z-index: 3;
+      filter: none;
+      border-radius: 0.5em;
+      transform: scale(1.1);
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .Grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  // Same as before, only 5 columns
+  .Item:nth-child(n + 31) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .Link {
+    display: inline-block;
+  }
+}

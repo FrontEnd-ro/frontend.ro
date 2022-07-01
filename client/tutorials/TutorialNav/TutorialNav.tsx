@@ -20,6 +20,7 @@ const TutorialNav = ({
 }: TutorialNavProps) => {
   const lessonInfos = tutorialProgress.lessons
     .map((lesson) => getLessonById(lesson.lessonId));
+  const hasCertification = tutorialProgress.certification !== null;
 
   return (
     <nav className={styles['chapter-nav']}>
@@ -45,11 +46,11 @@ const TutorialNav = ({
               className={`
               mb-8
               ${styles.ProgressLink}
-              ${lesson.locked ? styles['ProgressLink--locked'] : ''}
+              ${(lesson.locked && !hasCertification) ? styles['ProgressLink--locked'] : ''}
             `}
               title={lessonInfos[index].title}
               completePercentage={completePercentage}
-            // FIXME: temp path until we move this to a first-class page.
+              // FIXME: temp path until we move this to a first-class page.
               href={`/${tutorialId}/tutorial/${lesson.lessonId}`}
             />
           </div>

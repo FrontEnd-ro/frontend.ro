@@ -77,7 +77,7 @@ function SubscribeForm({ className = '' }: { className?: string }) {
         ? <p> ✔ Bine ai venit în comunitate!</p>
         : (
           <Button
-            variant="light"
+            variant="default"
             type="submit"
             loading={isSubscribing}
             className="w-100"

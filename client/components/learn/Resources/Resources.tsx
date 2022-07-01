@@ -84,7 +84,7 @@ function Resources() {
       <List as="ol" className={styles['category-list']}>
         {sections.map(({ id, title, description }) => (
           <li key={title} className={`${styles.category} relative`}>
-            <h2>
+            <h2 id={id}>
               {title}
             </h2>
             {!!description && (

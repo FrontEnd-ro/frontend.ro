@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 
 import styles from './ExercisePreview.module.scss';
 
@@ -16,8 +16,8 @@ function ExercisePreviewSkeleton() {
         <div />
       </div>
       <footer className="text-right">
-        <Link href="#">
-          <a className="btn">{' '}</a>
+        <Link href="#" variant="contained">
+          {' '}
         </Link>
       </footer>
     </div>

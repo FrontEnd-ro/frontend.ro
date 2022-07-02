@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faPlay } from '@fortawesome/free-solid-svg-icons';
 
+import Link from '~/components/generic/Link';
 import styles from './ExercisePreview.module.scss';
 import Markdown from '../Markdown';
 import { Exercise } from '~/redux/user/types';
@@ -64,10 +64,8 @@ function ExercisePreview({
           )}
           {(viewMode === 'TEACHER' || !infoMessage) && (
             <>
-              <Link href={`/${exercise.user.username}`}>
-                <a className={styles.avatar}>
-                  <img src={exercise.user.avatar} alt="Author avatar" />
-                </a>
+              <Link className={styles.avatar} href={`/${exercise.user.username}`}>
+                <img src={exercise.user.avatar} alt="Author avatar" />
               </Link>
               <div className={`${styles.tags} truncate d-inline-block`}>
                 {exercise.tags.map((t) => (
@@ -79,11 +77,14 @@ function ExercisePreview({
             </>
           )}
         </>
-        <Link href={href}>
-          <a className={`d-flex btn no-underline ${isApproved || readOnly || feedbackCount > 0 ? 'btn--light' : 'btn--blue'}`}>
-            {btnText}
-            <FontAwesomeIcon width="16" className="ml-2" icon={faPlay} />
-          </a>
+        <Link
+          href={href}
+          className="d-flex"
+          variant="contained"
+          color={isApproved || readOnly || feedbackCount > 0 ? 'white' : 'blue'}
+        >
+          {btnText}
+          <FontAwesomeIcon width="16" className="ml-2" icon={faPlay} />
         </Link>
       </footer>
     </div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import PageContainer from '../PageContainer';
+import Link from '~/components/generic/Link';
 
 import styles from './404.module.scss';
 
@@ -25,8 +25,8 @@ export default function NotFoundPage() {
           <h2>
             Se pare că pagina pe care o cauți nu mai există.
           </h2>
-          <Link href="/">
-            <a className={`${styles.cta} btn btn--blue`}>Navighează acasă!</a>
+          <Link variant="contained" color="blue" className={styles.cta} href="/">
+            Navighează acasă!
           </Link>
         </PageContainer>
 

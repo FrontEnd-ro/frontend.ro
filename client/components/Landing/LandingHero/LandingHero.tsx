@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import { connect, ConnectedProps } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -45,20 +45,14 @@ function LandingHero({ user }: ConnectedProps<typeof connector>) {
             </span>
           </h2>
           <div>
-            <Link href="/lectii">
-              <a className={`${styles['action-button']} text-center btn btn--default`}>
-                Lecții
-              </a>
+            <Link variant="contained" color="black" href="/lectii" className={`${styles['action-button']} text-center`}>
+              Lecții
             </Link>
-            <Link href="/exercitii">
-              <a className={`${styles['action-button']} text-center btn btn--default`}>
-                Exerciții
-              </a>
+            <Link variant="contained" color="black" href="/exercitii" className={`${styles['action-button']} text-center`}>
+              Exerciții
             </Link>
-            <Link href="/vreau-sa-ajut">
-              <a className={`${styles['action-button']} text-center btn btn--light`}>
-                Implică-te
-              </a>
+            <Link variant="contained" color="white" href="/vreau-sa-ajut" className={`${styles['action-button']} text-center`}>
+              Implică-te
             </Link>
           </div>
         </div>

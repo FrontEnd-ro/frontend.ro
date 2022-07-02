@@ -1,7 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faExclamationTriangle, faHourglass } from '@fortawesome/free-solid-svg-icons';
+import Link from '~/components/generic/Link';
 import { ProgressDonut } from '~/components/progress';
 
 import styles from './ProgressLink.module.scss';
@@ -41,21 +41,19 @@ const ProgressLink = ({
       `}
       title={htmlTitle}
     >
-      <Link href={href}>
-        <a className="d-flex align-items-center no-underline">
-          {variant === 'default' && completePercentage > 0 && (
-            <ProgressIndicator completePercentage={completePercentage} />
-          )}
-          {variant === 'waiting' && (
-            <WaitingIndicator />
-          )}
-          {variant === 'error' && (
-            <ErrorIndicator />
-          )}
-          <span className={styles.title}>
-            {title}
-          </span>
-        </a>
+      <Link href={href} className="d-flex align-items-center no-underline">
+        {variant === 'default' && completePercentage > 0 && (
+          <ProgressIndicator completePercentage={completePercentage} />
+        )}
+        {variant === 'waiting' && (
+          <WaitingIndicator />
+        )}
+        {variant === 'error' && (
+          <ErrorIndicator />
+        )}
+        <span className={styles.title}>
+          {title}
+        </span>
       </Link>
     </div>
   );

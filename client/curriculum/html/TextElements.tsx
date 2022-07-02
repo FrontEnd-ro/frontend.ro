@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import {
   LessonCover,
@@ -8,6 +7,7 @@ import {
   LessonHeading,
   LessonTip,
 } from '~/components/lessons';
+import Link from '~/components/generic/Link';
 import Highlight from '~/components/Highlight/Highlight';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/DataModel';
@@ -98,9 +98,7 @@ export default function TextsContent() {
           însă mai târziu vom vedea cum putem adăuga propriile stiluri via
           {' '}
           <Link href="/css/intro">
-            <a>
-              CSS
-            </a>
+            CSS
           </Link>
           .
         </p>

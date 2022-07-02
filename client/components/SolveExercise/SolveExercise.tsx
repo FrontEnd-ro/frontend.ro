@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import debounce from 'lodash/debounce';
 
 import noop from 'lodash/noop';
 import { useRouter } from 'next/router';
+import Link from '~/components/generic/Link';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Markdown from '~/components/Markdown';
@@ -355,9 +355,7 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
           Creat de
           {' '}
           <Link href={`/${submission.exercise.user.username}`}>
-            <a>
-              {submission.exercise.user.name || submission.exercise.user.username}
-            </a>
+            {submission.exercise.user.name || submission.exercise.user.username}
           </Link>
 
         </p>
@@ -395,10 +393,13 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
             {
               (submission.status !== SubmissionStatus.IN_PROGRESS)
               && (submissionIndex + 1 < submissionList.length) && (
-                <Link href={`/rezolva/${submissionList[submissionIndex + 1].exercise._id}`}>
-                  <a className="btn btn--default no-underline ml-2">
-                    Rezolvă următorul exercițiu!
-                  </a>
+                <Link
+                  color="black"
+                  variant="contained"
+                  className="d-inline-block ml-2"
+                  href={`/rezolva/${submissionList[submissionIndex + 1].exercise._id}`}
+                >
+                  Rezolvă următorul exercițiu!
                 </Link>
               )
             }
@@ -427,10 +428,8 @@ const ExerciseNotFound = () => (
       <h1> Oops 😟</h1>
       <h2> Exercițiul e privat sau nu există </h2>
 
-      <Link href="/">
-        <a className="btn btn--blue">
-          Navighează acasă
-        </a>
+      <Link variant="contained" color="blue" href="/">
+        Navighează acasă
       </Link>
     </PageContainer>
     <Footer />

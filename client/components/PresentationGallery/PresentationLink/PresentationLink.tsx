@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import React from 'react';
+import Link from '~/components/generic/Link';
 
 import styles from './PresentationLink.module.scss';
 
@@ -22,39 +22,37 @@ function PresentationLink({
   });
 
   return (
-    <Link href={href ?? `/slides/${id}`}>
-      <a className={`${styles['presentation-link']} ${className}`}>
-        <img width="256" height="256" src={thumb} alt={`${title} slides thumb`} />
-        <div
-          className="img"
-          style={{
-            backgroundImage: `url(${thumb})`,
-          }}
-        />
-        <section>
-          <div>
-            <h3>{title}</h3>
-            <p>{description}</p>
+    <Link href={href ?? `/slides/${id}`} className={`${styles['presentation-link']} ${className}`}>
+      <img width="256" height="256" src={thumb} alt={`${title} slides thumb`} />
+      <div
+        className="img"
+        style={{
+          backgroundImage: `url(${thumb})`,
+        }}
+      />
+      <section>
+        <div>
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </div>
+        <div className="footer">
+          <p>
+            {formattedDate}
+            {views ? (
+              <span>
+                {' '}
+                |
+                {views}
+                {' '}
+                vizualizări
+              </span>
+            ) : null}
+          </p>
+          <div className="btn btn--light">
+            Vezi slide-urile
           </div>
-          <div className="footer">
-            <p>
-              {formattedDate}
-              {views ? (
-                <span>
-                  {' '}
-                  |
-                  {views}
-                  {' '}
-                  vizualizări
-                </span>
-              ) : null}
-            </p>
-            <div className="btn btn--light">
-              Vezi slide-urile
-            </div>
-          </div>
-        </section>
-      </a>
+        </div>
+      </section>
     </Link>
   );
 }

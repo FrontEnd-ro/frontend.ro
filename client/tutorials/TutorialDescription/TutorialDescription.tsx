@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import List from '~/components/List';

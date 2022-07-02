@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import styles from './LandingCta.module.scss';
 
 export default function LandingCta() {
@@ -9,15 +9,11 @@ export default function LandingCta() {
       <h3>
         Hai să
         <Link href="">
-          <a>
-            învățăm
-          </a>
+          învățăm
         </Link>
         sau să
         <Link href="">
-          <a>
-            predăm
-          </a>
+          predăm
         </Link>
         împreună.
       </h3>

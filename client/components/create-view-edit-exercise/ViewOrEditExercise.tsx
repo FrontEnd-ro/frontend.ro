@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useState, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -13,6 +12,7 @@ import {
 } from '.';
 import BasicEditorLazy from '../Editor/BasicEditor/BasicEditor.lazy';
 import Form from '../Form';
+import Link from '~/components/generic/Link';
 import MarkdownTextarea from '../MarkdownTextarea';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
@@ -216,19 +216,15 @@ function ViewOrEditExercise({
             <h1>
               Exercițiu
               {' '}
-              <Link href="/lecții">
-                <a className="text-blue uppercase">
-                  {exercise.type}
-                </a>
+              <Link color="blue" href="/lecții" className="uppercase">
+                {exercise.type}
               </Link>
 
             </h1>
             <h2>
               {' '}
-              <Link href={`/${exercise.user.username}`}>
-                <a className="text-bold text-blue">
-                  {nameOrUsername}
-                </a>
+              <Link color="blue" className="text-bold" href={`/${exercise.user.username}`}>
+                {nameOrUsername}
               </Link>
               {' '}
               a scris un exercițiu despre

@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import List from '../List';
+import Link from '~/components/generic/Link';
 import styles from './TableOfContents.module.scss';
 
 interface State {
@@ -186,13 +186,12 @@ function ChapterListItem({
       ${item.subchapters?.length > 0 ? styles['with--subchapters'] : ''}
     `}
     >
-      <Link href={item.href}>
-        <a
-          onClick={() => scrollToItem(item.id)}
-          className={activeChapterId === item.id ? `${styles.active} text-bold` : 'text-bold'}
-        >
-          {item.title}
-        </a>
+      <Link
+        href={item.href}
+        onClick={() => scrollToItem(item.id)}
+        className={activeChapterId === item.id ? `${styles.active} text-bold` : 'text-bold'}
+      >
+        {item.title}
       </Link>
       <List>
         {item.subchapters && item.subchapters.map((subchapter) => (

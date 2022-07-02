@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
+import Link from '~/components/generic/Link';
 import Demo, { DemoPreview } from '~/components/demo';
 import Highlight from '~/components/Highlight/Highlight';
 
@@ -30,9 +30,7 @@ export default function HugeImageLoading() {
             Deschide
             {' '}
             <Link href="/intro/devtools">
-              <a>
-                panoul Network din DevTools
-              </a>
+              panoul Network din DevTools
             </Link>
             {' '}
             și încetinește conexiunea, iar apoi refreshuiește pagina.

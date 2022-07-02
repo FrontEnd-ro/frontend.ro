@@ -1,11 +1,11 @@
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import UserService from '~/services/User.service';
 import { logoutUser } from '~/redux/user/user.actions';
 import Button from '~/components/Button';
+import Link from '~/components/generic/Link';
 import List from '../List';
 
 import styles from './NavLinks.module.scss';
@@ -27,37 +27,27 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
       <List as="ol">
         <li>
           <Link href="/lectii">
-            <a>
-              Lecții
-            </a>
+            Lecții
           </Link>
         </li>
         <li>
           <Link href="/exercitii">
-            <a>
-              Exerciții
-            </a>
+            Exerciții
           </Link>
         </li>
         <li>
           <Link href="/tidbits">
-            <a>
-              Tidbits
-            </a>
+            Tidbits
           </Link>
         </li>
         {/* <li>
           <Link href="/evenimente">
-            <a>
-              Evenimente
-            </a>
+            Evenimente
           </Link>
         </li>
         <li>
           <Link href="/slides">
-            <a>
-              Slide-uri
-            </a>
+            Slide-uri
           </Link>
         </li> */}
         {isLoggedIn ? (
@@ -69,17 +59,13 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
         ) : (
           <li className={styles.login}>
             <Link href={`/auth?next=${encodeURIComponent(router.asPath)}`}>
-              <a>
-                Intră în cont
-              </a>
+              Intră în cont
             </Link>
           </li>
         )}
         <li>
           <Link href="/resurse">
-            <a>
-              Resurse utile
-            </a>
+            Resurse utile
           </Link>
         </li>
       </List>

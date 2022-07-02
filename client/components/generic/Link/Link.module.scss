@@ -1,0 +1,89 @@
+@import "../../../styles/variables";
+
+.contained {
+  @extend %gradientBackground;
+  transition: background 0.5s;
+  padding: 0.5em 0.75em;
+  border-radius: 5px;
+  color: color(white);
+  text-decoration: none;
+
+  &:hover {
+    background-position: right center;
+  }
+
+  &:active {
+    background-position: left center;
+  }
+
+  // Colors
+  &.inherit {
+    color: inherit;
+    border: 1px solid currentColor;
+  }
+
+  &.white {
+    border: 1px solid color(black);
+    @extend %whiteGradientBackground;
+  }
+
+  &.black {
+    border: 1px solid color(black);
+    @extend %blackGradientBackground;
+  }
+
+  &.green {
+    @extend %greenGradientBackground;
+  }
+
+  &.blue {
+    @extend %blueGradientBackground;
+  }
+
+  &.red {
+    @extend %redGradientBackground;
+  }
+
+  &.yellow {
+    @extend %yellowGradientBackground;
+  }
+
+  &.grey {
+    @extend %greyGradientBackground;
+  }
+}
+
+.text {
+  // Colors
+  &.inherit {
+    color: inherit;
+  }
+
+  &.white {
+    color: color(white);
+  }
+
+  &.black {
+    color: color(black);
+  }
+
+  &.green {
+    color: color(green);
+  }
+
+  &.blue {
+    color: color(blue);
+  }
+
+  &.red {
+    color: color(red);
+  }
+
+  &.yellow {
+    color: color(yellow);
+  }
+
+  &.grey {
+    color: color(grey);
+  }
+}

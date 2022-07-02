@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import { format } from 'date-fns';
+import Link from '~/components/generic/Link';
 import { timeAgo } from '../../../services/Utils';
 import { ParsedNotificationI } from '~/../shared/types/notification.types';
 
@@ -25,31 +25,29 @@ const Notification = ({
     `}
     onClick={() => onMarkAsRead(notification._id)}
   >
-    <Link href={notification.href ?? '#'}>
-      <a className="d-flex no-underline">
-        <img
-          width="32"
-          height="32"
-          alt={notification.from ? `${notification.from.username} avatar` : 'FrontEnd.ro'}
-          src={notification.from ? notification.from.avatar : `${process.env.CLOUDFRONT_PUBLIC}/public/logo-square--S.jpg`}
-        />
-        <div className="body">
-          <p className="m-0">
-            {notification.from !== undefined && (
-              <span className={styles.user}>
-                {notification.from?.name ?? notification.from?.username ?? ''}
-              </span>
-            )}
-            {notification.short_message}
-          </p>
-          <time
-            className="text-silver"
-            dateTime={format(notification.timestamp, 'yyyy-MM-dd')}
-          >
-            {timeAgo(new Date(notification.timestamp))}
-          </time>
-        </div>
-      </a>
+    <Link className="d-flex no-underline" href={notification.href ?? '#'}>
+      <img
+        width="32"
+        height="32"
+        alt={notification.from ? `${notification.from.username} avatar` : 'FrontEnd.ro'}
+        src={notification.from ? notification.from.avatar : `${process.env.CLOUDFRONT_PUBLIC}/public/logo-square--S.jpg`}
+      />
+      <div className="body">
+        <p className="m-0">
+          {notification.from !== undefined && (
+            <span className={styles.user}>
+              {notification.from?.name ?? notification.from?.username ?? ''}
+            </span>
+          )}
+          {notification.short_message}
+        </p>
+        <time
+          className="text-silver"
+          dateTime={format(notification.timestamp, 'yyyy-MM-dd')}
+        >
+          {timeAgo(new Date(notification.timestamp))}
+        </time>
+      </div>
     </Link>
   </li>
 );

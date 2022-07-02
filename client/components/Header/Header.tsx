@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faLink } from '@fortawesome/free-solid-svg-icons';
 
@@ -46,23 +46,21 @@ function Header({
               <FontAwesomeIcon icon={faBars} />
             </Button>
           )}
-          <Link href={href}>
-            <a className={styles.logo}>
-              <picture>
-                <source
-                  srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo-square--S.jpg`}
-                  media="(max-width: 600px)"
-                />
-                <source
-                  srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo.png`}
-                  media="(min-width: 600px)"
-                />
-                <img
-                  src={`${process.env.CLOUDFRONT_PUBLIC}/public/logo.png`}
-                  alt="FrontEnd.ro logo"
-                />
-              </picture>
-            </a>
+          <Link className={styles.logo} href={href}>
+            <picture>
+              <source
+                srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo-square--S.jpg`}
+                media="(max-width: 600px)"
+              />
+              <source
+                srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo.png`}
+                media="(min-width: 600px)"
+              />
+              <img
+                src={`${process.env.CLOUDFRONT_PUBLIC}/public/logo.png`}
+                alt="FrontEnd.ro logo"
+              />
+            </picture>
           </Link>
           {demoPage && (
             <p className={`${styles['demo-label']} text-white mx-5 text-bold`}>

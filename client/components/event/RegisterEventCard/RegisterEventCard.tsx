@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import Link from 'next/link';
 import { format } from 'date-fns';
 import ReactSelect from 'react-select';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { RootState } from '~/redux/root.reducer';
 
+import Link from '~/components/generic/Link';
 import EventService from '~/services/api/Event.service';
 import Form, { FormGroup } from '~/components/Form';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -239,9 +239,7 @@ function RegisterEventCard({
         {url && (
           <div className="text-right my-5">
             <Link href={url}>
-              <a>
-                Află mai multe
-              </a>
+              Află mai multe
             </Link>
           </div>
         )}

@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import Diploma from '../Diploma/Diploma';
+import Link from '~/components/generic/Link';
 import ExercisePreview from '~/components/ExercisePreview';
 import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
 
@@ -24,9 +24,7 @@ const Certification = ({ certification }: { certification: WIPPopulatedCertifica
       />
       <p className="mt-8 mb-12 text-2xl font-light">
         <Link href={`/${certification.user.username}`}>
-          <a className="border-bottom-1px no-underline">
-            {nameOrUsername}
-          </a>
+          {nameOrUsername}
         </Link>
         {' '}
         a rezolvat cu succes toate cele
@@ -41,9 +39,7 @@ const Certification = ({ certification }: { certification: WIPPopulatedCertifica
         trimis prin platforma
         {' '}
         <Link href="/">
-          <a className="border-bottom-1px no-underline">
-            FrontEnd.ro
-          </a>
+          FrontEnd.ro
         </Link>
         {' '}
         și evaluat de echipa noastră.

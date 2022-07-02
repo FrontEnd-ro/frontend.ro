@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
+import Link from '~/components/generic/Link';
 import Demo, { DemoPreview } from '~/components/demo';
 import Highlight from '~/components/Highlight/Highlight';
 
@@ -31,9 +31,7 @@ export default function ContentShifting() {
             Deschide
             {' '}
             <Link href="/intro/devtools">
-              <a>
-                devtools în modul responsive
-              </a>
+              devtools în modul responsive
             </Link>
             {' '}
             și joacă-te cu dimensiunea browserului pentru

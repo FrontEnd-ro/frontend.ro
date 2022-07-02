@@ -1,10 +1,10 @@
 import React from 'react';
 import { UrlObject } from 'url';
-import Link from 'next/link';
 import { format } from 'date-fns';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import Link from '~/components/generic/Link';
 
 import List from '../List';
 import { timeAgo } from '~/services/Utils';
@@ -66,38 +66,40 @@ const ExerciseVersion = ({
   const dateTime = format(new Date(version.createdAt).getTime(), 'yyyy-MM-dd');
 
   return (
-    <Link replace href={href} passHref>
-      <a className={`
-        ${className}
-        ${styles.ExerciseVersion} 
-        ${isActive ? styles['ExerciseVersion--active'] : ''}
-        d-flex no-underline
-        `}
-      >
-        <div className={`${styles.index} d-flex p-3 align-items-center text-2xl`}>
-          {index}
-        </div>
-        <div className="p-3">
-          <p className="text-bold m-0 d-flex align-items-center">
-            {version.approved ? (
-              <>
-                <span className="mr-2"> Soluție corectă </span>
-                <FontAwesomeIcon width="16" icon={faCheck} />
-              </>
-            ) : (
-              <>
-                <span className="mr-2"> Soluție respinsă </span>
-                <FontAwesomeIcon width="16" icon={faTimes} />
-              </>
-            )}
-          </p>
-          <time title={dateTime} className="d-block mt-4 mb-2" dateTime={dateTime}>
-            <FontAwesomeIcon width="16" className="text-silver" icon={faCalendarAlt} />
-            {' '}
-            {timeAgo(new Date(version.createdAt))}
-          </time>
-        </div>
-      </a>
+    <Link
+      replace
+      href={href}
+      passHref
+      className={`
+      ${className}
+      ${styles.ExerciseVersion} 
+      ${isActive ? styles['ExerciseVersion--active'] : ''}
+      d-flex no-underline
+      `}
+    >
+      <div className={`${styles.index} d-flex p-3 align-items-center text-2xl`}>
+        {index}
+      </div>
+      <div className="p-3">
+        <p className="text-bold m-0 d-flex align-items-center">
+          {version.approved ? (
+            <>
+              <span className="mr-2"> Soluție corectă </span>
+              <FontAwesomeIcon width="16" icon={faCheck} />
+            </>
+          ) : (
+            <>
+              <span className="mr-2"> Soluție respinsă </span>
+              <FontAwesomeIcon width="16" icon={faTimes} />
+            </>
+          )}
+        </p>
+        <time title={dateTime} className="d-block mt-4 mb-2" dateTime={dateTime}>
+          <FontAwesomeIcon width="16" className="text-silver" icon={faCalendarAlt} />
+          {' '}
+          {timeAgo(new Date(version.createdAt))}
+        </time>
+      </div>
     </Link>
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import {
   LessonCover,
@@ -9,6 +8,7 @@ import {
   LessonResources,
   LessonFirstSentence,
 } from '~/components/lessons';
+import Link from '~/components/generic/Link';
 import Highlight from '~/components/Highlight/Highlight';
 import { DemoPreview } from '~/components/demo';
 
@@ -112,10 +112,8 @@ export default function AudioAndVideoContent() {
               pentru a-l putea vizualiza.
             </p>
           </audio>
-          <Link href="/demo/html/audio">
-            <a target="_blank" className="d-block">
-              Deschide demo-ul într-o pagină nouă
-            </a>
+          <Link target="_blank" className="d-block" href="/demo/html/audio">
+            Deschide demo-ul într-o pagină nouă
           </Link>
         </DemoPreview>
         <p>

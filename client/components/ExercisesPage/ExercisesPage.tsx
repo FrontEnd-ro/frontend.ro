@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { Exercise } from '~/redux/user/types';
 import { LESSONS } from '~/services/DataModel';
@@ -76,9 +76,7 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
         De aceea, pentru fiecare
         {' '}
         <Link href="lectii">
-          <a>
-            lecție
-          </a>
+          lecție
         </Link>
         {' '}
         am adăugat câteva exerciții pe care te încurajăm să le rezolvi. Apoi,
@@ -95,9 +93,7 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
         aruncă un ochi
         {' '}
         <Link href="/intro/despre-noi">
-          <a>
-            aici
-          </a>
+          aici
         </Link>
       </p>
       {(!lessonExercises || !submissions) && (<Spinner showText text="Încărcăm exercițiile" />)}

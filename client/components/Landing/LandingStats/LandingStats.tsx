@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import {
   StatsCardLayout1,
   StatsCardLayout2,
@@ -45,29 +45,25 @@ function LandingStats() {
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/countries.svg`}
           />
         </a>
-        <Link href="/lectii">
-          <a className={styles.card4}>
-            <StatsCardLayout3
-              text1="Am scris"
-              text2={`${lessonsWritten.length} lecții`}
-              colorText="#1b1b15"
-              src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/vintage-typewriter.jpg`}
-            />
-          </a>
+        <Link href="/lectii" className={styles.card4}>
+          <StatsCardLayout3
+            text1="Am scris"
+            text2={`${lessonsWritten.length} lecții`}
+            colorText="#1b1b15"
+            src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/vintage-typewriter.jpg`}
+          />
         </Link>
-        <Link href="/evenimente">
-          <a className={styles.card5}>
-            <StatsCardLayout6
-              counter={4}
-              colorText="#663399"
-              description="training-uri practice"
-              direction="to top left"
-              colorGradient1="b4fdfd"
-              colorGradient2="a8c6f0"
-              background="linear-gradient"
-              footer="Contează doar cât de mult exersezi 💕"
-            />
-          </a>
+        <Link href="/evenimente" className={styles.card5}>
+          <StatsCardLayout6
+            counter={4}
+            colorText="#663399"
+            description="training-uri practice"
+            direction="to top left"
+            colorGradient1="b4fdfd"
+            colorGradient2="a8c6f0"
+            background="linear-gradient"
+            footer="Contează doar cât de mult exersezi 💕"
+          />
         </Link>
         <StatsCardLayout6
           counter={4}
@@ -77,17 +73,15 @@ function LandingStats() {
           description="traineri pasionați"
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/pencils.jpg`}
         />
-        <Link href="/slides">
-          <a className={styles.card7}>
-            <StatsCardLayout4
-              counter1={100}
-              counter2={33}
-              text1="slide-uri"
-              colorText="#1b1b15"
-              text2="challenge-uri practice"
-              title="Am creat și"
-            />
-          </a>
+        <Link href="/slides" className={styles.card7}>
+          <StatsCardLayout4
+            counter1={100}
+            counter2={33}
+            text1="slide-uri"
+            colorText="#1b1b15"
+            text2="challenge-uri practice"
+            title="Am creat și"
+          />
         </Link>
         <StatsCardLayout1
           counter={22}

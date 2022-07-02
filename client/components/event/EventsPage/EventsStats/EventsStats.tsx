@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import styles from './EventsStats.module.scss';
 import {
   StatsCardLayout1,
@@ -7,23 +6,22 @@ import {
   StatsCardLayout4,
   StatsCardLayout6,
 } from '~/components/PlatformStats';
+import Link from '~/components/generic/Link';
 
 function EventsStats() {
   return (
     <div className={styles['events-stats']}>
-      <Link href="/evenimente">
-        <a className={styles.card1}>
-          <StatsCardLayout6
-            counter={4}
-            colorText="#663399"
-            description="training-uri practice"
-            direction="to top left"
-            colorGradient1="b4fdfd"
-            colorGradient2="a8c6f0"
-            background="linear-gradient"
-            footer="Contează doar cât de mult exersezi 💕"
-          />
-        </a>
+      <Link className={styles.card1} href="/evenimente">
+        <StatsCardLayout6
+          counter={4}
+          colorText="#663399"
+          description="training-uri practice"
+          direction="to top left"
+          colorGradient1="b4fdfd"
+          colorGradient2="a8c6f0"
+          background="linear-gradient"
+          footer="Contează doar cât de mult exersezi 💕"
+        />
       </Link>
       <StatsCardLayout6
         counter={4}
@@ -33,27 +31,23 @@ function EventsStats() {
         description="traineri pasionați"
         src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/zoom-call-with-coffee.jpg`}
       />
-      <Link href="/lectii">
-        <a className={styles.card3}>
-          <StatsCardLayout3
-            text1="În total"
-            text2="11 ore predate online"
-            colorText="#1b1b15"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/hourglass.jpg`}
-          />
-        </a>
+      <Link className={styles.card3} href="/lectii">
+        <StatsCardLayout3
+          text1="În total"
+          text2="11 ore predate online"
+          colorText="#1b1b15"
+          src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/hourglass.jpg`}
+        />
       </Link>
-      <Link href="/slides">
-        <a className={styles.card4}>
-          <StatsCardLayout4
-            counter1={100}
-            counter2={33}
-            text1="slide-uri"
-            colorText="#1b1b15"
-            text2="challenge-uri practice"
-            title="Am creat și"
-          />
-        </a>
+      <Link className={styles.card4} href="/slides">
+        <StatsCardLayout4
+          counter1={100}
+          counter2={33}
+          text1="slide-uri"
+          colorText="#1b1b15"
+          text2="challenge-uri practice"
+          title="Am creat și"
+        />
       </Link>
       <StatsCardLayout1
         counter={22}

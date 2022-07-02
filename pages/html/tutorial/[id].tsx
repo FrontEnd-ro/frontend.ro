@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
@@ -111,10 +111,8 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
                 chapters={chapters}
               />
               {/* TODO: change to /html when finishing the integration */}
-              <Link href="/html/tutorial">
-                <a className="text-center">
-                  Înapoi la tutorial
-                </a>
+              <Link className="text-center" href="/html/tutorial">
+                Înapoi la tutorial
               </Link>
             </div>
           ),

@@ -1,9 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
 
 import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
+import Link from '~/components/generic/Link';
 import Highlight from '~/components/Highlight/Highlight';
 import SEOTags from '~/components/SEOTags';
 import FormattedText from '~/components/FormattedText';
@@ -59,9 +59,7 @@ export default function InternalCSS() {
             HTML. Față de
             {' '}
             <Link href="/demo/css/css-inline">
-              <a>
-                metoda inline
-              </a>
+              metoda inline
             </Link>
             {' '}
             , la aceasta trebuie să precizăm pentru ce elemente

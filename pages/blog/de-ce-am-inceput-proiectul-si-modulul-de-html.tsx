@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
+import Link from '~/components/generic/Link';
 import PageContainer from '~/components/PageContainer';
 import List from '~/components/List';
 import { LessonQuote } from '~/components/lessons';
@@ -218,16 +218,14 @@ const Changelog1 = () => {
           uiți la lectia cu
           {' '}
           <Link href="/intro/vs-code">
-            <a>
-              VSCode
-            </a>
+            VSCode
           </Link>
           {' '}
           (pentru că n-ai nici un editor de cod) și
           apoi sa continui cu
           {' '}
           <Link href="/html/despre-html">
-            <a> prima lecție de HTML </a>
+            prima lecție de HTML
           </Link>
           ...
           Dar nu știi asta, deci dacă începi direct cu capitolul de HTML,

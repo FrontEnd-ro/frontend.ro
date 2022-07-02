@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import PageContainer from '../PageContainer';
@@ -10,6 +9,7 @@ import { Submission } from '~/redux/exercise-submissions/types';
 
 import { timeAgo } from '~/services/Utils';
 import Markdown from '../Markdown';
+import Link from '~/components/generic/Link';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 import { FeedbackType, SubmissionVersionI, SubmissionStatus } from '~/../shared/types/submission.types';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -129,10 +129,8 @@ function OfferFeedback({
           <h1> Oops 😟</h1>
           <h2> Feedback-ul a fost trimis sau submisia nu mai există </h2>
 
-          <Link href="/">
-            <a className="btn btn--blue">
-              Navighează acasă
-            </a>
+          <Link variant="contained" color="blue" href="/">
+            Navighează acasă
           </Link>
         </PageContainer>
       </>
@@ -178,10 +176,7 @@ function OfferFeedback({
           Feedback pentru
           {' '}
           <Link href={`/${submission.user.username}`}>
-            <a>
-              {authorNameOrUsername}
-            </a>
-
+            {authorNameOrUsername}
           </Link>
         </h1>
         <time className="m-0">

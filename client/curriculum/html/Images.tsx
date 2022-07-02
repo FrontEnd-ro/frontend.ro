@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { faExclamationCircle, faExclamationTriangle, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -13,6 +12,7 @@ import {
   LessonTip,
   LessonFirstSentence,
 } from '~/components/lessons';
+import Link from '~/components/generic/Link';
 import Highlight from '~/components/Highlight/Highlight';
 import SideBySidePictures from '~/components/SideBySidePictures';
 import FormattedText from '~/components/FormattedText';
@@ -129,9 +129,7 @@ export default function ImagesContent() {
           nu este
           {' '}
           <Link href="/html/validarea-paginilor-html">
-            <a>
-              considerată validă
-            </a>
+            considerată validă
           </Link>
           .
         </LessonTip>
@@ -470,10 +468,8 @@ export default function ImagesContent() {
           <p>
             Te încurajăm să experimentezi și cu opțiunea
             {' '}
-            <Link href="intro/devtools">
-              <a target="_blank">
-                DRP (Device Pixel Ratio)
-              </a>
+            <Link target="_blank" href="intro/devtools">
+              DRP (Device Pixel Ratio)
             </Link>
             {' '}
             De exemplu, cu o valoare

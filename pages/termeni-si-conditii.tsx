@@ -1,7 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
+import Link from '~/components/generic/Link';
 import PageContainer from '~/components/PageContainer';
 import SEOTags from '~/components/SEOTags';
 import { GITHUB_URL } from '~/services/Constants';
@@ -50,9 +50,7 @@ function TermsAndConditions() {
               ai control asupra propriilor date și le poți șterge oricând din
               {' '}
               <Link href="/settings">
-                <a>
-                  pagina de setări
-                </a>
+                pagina de setări
               </Link>
             </li>
           </List>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode, faLightbulb, faPen } from '@fortawesome/free-solid-svg-icons';
 
@@ -37,11 +37,9 @@ function NoSubmissionsYet() {
           Vreau să scriu lecții
         </Button>
 
-        <Link href="/exercitii/creeaza">
-          <a className={`${help === 'exercises' ? 'btn--blue ' : 'btn--transparent '}btn align-items-center`}>
-            <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faLightbulb} />
-            Vreau să creez exerciții
-          </a>
+        <Link variant="contained" color="inherit" href="/exercitii/creeaza" className="align-items-center">
+          <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faLightbulb} />
+          Vreau să creez exerciții
         </Link>
       </div>
       {help && (
@@ -77,9 +75,7 @@ function NoSubmissionsYet() {
                 Aruncă un ochi
                 {' '}
                 <Link href="/lectii">
-                  <a>
-                    aici
-                  </a>
+                  aici
                 </Link>
                 {' '}
                 pentru a vedea toate lecțiile scrise deja, cât și cele pe care

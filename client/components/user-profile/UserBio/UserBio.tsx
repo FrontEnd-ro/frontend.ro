@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import { UserState } from '~/redux/user/types';
+import Link from '~/components/generic/Link';
 
 import styles from './UserBio.module.scss';
 
@@ -36,8 +36,8 @@ function UserBio({ user, currentUser, className }: ConnectedProps<typeof connect
         </p>
         )}
         {isOwnBio && (
-        <Link href="/settings">
-          <a className="btn btn--light no-underline my-5"> Editează profilul </a>
+        <Link variant="contained" color="white" href="/settings" className="my-5">
+          Editează profilul
         </Link>
         )}
       </div>

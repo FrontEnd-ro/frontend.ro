@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import Link from 'next/link';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TableOfContents, { Chapter } from '~/components/TableOfContents';
 import { useOutsideClick } from '~/services/Hooks';
 import Button from '~/components/Button';
+import Link from '~/components/generic/Link';
 
 import styles from './LessonMenu.module.scss';
 
@@ -34,12 +34,10 @@ LessonMenu({
   return (
     <aside ref={ref} className={`${styles['lesson-menu']}${isOpen ? ` ${styles['lesson-menu--open']}` : ''} ${className} bg-black text-white`}>
       <header className="lesson-menu__header d-flex justify-content-between align-items-center">
-        <Link href={url}>
-          <a onClick={onScrollTop}>
-            <h2>
-              {title}
-            </h2>
-          </a>
+        <Link onClick={onScrollTop} href={url}>
+          <h2>
+            {title}
+          </h2>
         </Link>
         <Button onClick={close}>
           <FontAwesomeIcon icon={faTimes} />

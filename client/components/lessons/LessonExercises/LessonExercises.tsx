@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import { ConnectedProps, connect } from 'react-redux';
 import LessonExerciseService from '~/services/LessonExercise.service';
 import { LessonExercise } from '~/redux/user/types';
@@ -114,10 +114,8 @@ function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<
           la această lecție.
           Până atunci poți să rezolvi celelalte
           {' '}
-          <Link href="/exercitii">
-            <a className="text-bold">
-              exerciții disponibile
-            </a>
+          <Link className="text-bold" href="/exercitii">
+            exerciții disponibile
           </Link>
           .
         </p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '~/components/generic/Link';
 import { Submission, SubmissionType } from '../../../redux/exercise-submissions/types';
 import { timeAgo } from '../../../services/Utils';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
@@ -13,22 +13,22 @@ function ExSubmission({ submission } : Props) {
   // This refers to the main link that navigates
   // us to the actual submission
   const mainLinkConfig = computeMainLinkConfig();
-  function computeMainLinkConfig() {
+  function computeMainLinkConfig(): { label: string; color: 'black' | 'red' | 'green' } {
     switch (submission.status) {
       case SubmissionStatus.IN_PROGRESS:
         return {
           label: 'Vezi progresul',
-          className: 'btn--default',
+          color: 'black',
         };
       case SubmissionStatus.AWAITING_REVIEW:
         return {
           label: 'Oferă feedback',
-          className: 'btn--danger',
+          color: 'red',
         };
       case SubmissionStatus.DONE:
         return {
           label: 'Vezi rezolvarea',
-          className: 'btn--success',
+          color: 'green',
         };
       default:
         console.error(`[ExSubmission] Unrecognized submission status. Got: ${submission.status}`);
@@ -38,7 +38,7 @@ function ExSubmission({ submission } : Props) {
         // something went wrong and we can identify/fix it.
         return {
           label: '',
-          className: 'btn--default',
+          color: 'black',
         };
     }
   }
@@ -49,29 +49,27 @@ function ExSubmission({ submission } : Props) {
     >
       <div className={`${styles['card-top']} d-flex align-items-center justify-content-between`}>
         <div className={`${styles['card-info']} d-flex align-items-center justify-content-between text-bold`}>
-          <Link href={`/${submission.user.username}`}>
-            <a
-              className={`${styles['card-link']}`}
-            >
-              <img
-                width="50"
-                height="50"
-                alt={`${submission.user.username} avatar`}
-                src={submission.user.avatar}
-              />
-              <span>
-                {submission.user.username}
-              </span>
-            </a>
+          <Link href={`/${submission.user.username}`} className={`${styles['card-link']}`}>
+            <img
+              width="50"
+              height="50"
+              alt={`${submission.user.username} avatar`}
+              src={submission.user.avatar}
+            />
+            <span>
+              {submission.user.username}
+            </span>
           </Link>
           <span className={`${styles['card-el']} ${styles['card-chapter']} text-bold text-white rounded-md bg-grey uppercase text-center text-xs`}>
             {submission.exercise.type}
           </span>
         </div>
-        <Link href={`/feedback/${submission.user.username}/${submission.exercise._id}`}>
-          <a className={`btn ${mainLinkConfig.className}`}>
-            {mainLinkConfig.label}
-          </a>
+        <Link
+          variant="contained"
+          color={mainLinkConfig.color}
+          href={`/feedback/${submission.user.username}/${submission.exercise._id}`}
+        >
+          {mainLinkConfig.label}
         </Link>
         {/* {
         submission.type === 'assigned'

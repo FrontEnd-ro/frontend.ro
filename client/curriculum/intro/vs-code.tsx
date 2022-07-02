@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import {
   LessonCover,
@@ -9,6 +8,7 @@ import {
   LessonTip,
   LessonFirstSentence,
 } from '~/components/lessons';
+import Link from '~/components/generic/Link';
 import { Diana } from '~/services/contributors';
 import { getLessonById } from '~/services/DataModel';
 import FormattedText from '~/components/FormattedText';
@@ -78,10 +78,8 @@ export default function VSCodeContent() {
           nostru de operare. Procesul de instalare este unul simplu, dar dacă
           întâlnești probleme, dă-ne un semn.
         </p>
-        <Link href="https://code.visualstudio.com/download">
-          <a target="_blank" rel="noopener noreferrer">
-            https://code.visualstudio.com/download
-          </a>
+        <Link href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">
+          https://code.visualstudio.com/download
         </Link>
         <LessonFigure
           withBorder
@@ -205,9 +203,7 @@ export default function VSCodeContent() {
             , folosind o interfață vizuală. (PS: dacă nu știi Git poate
             {' '}
             <Link href="/slides/git-incepatori">
-              <a>
-                slide-urile de la trainingul pe care l-am ținut
-              </a>
+              slide-urile de la trainingul pe care l-am ținut
             </Link>
             {' '}
             o să te ajute)
@@ -227,9 +223,7 @@ export default function VSCodeContent() {
             despre ele
             {' '}
             <Link href="#extensii">
-              <a>
-                mai jos
-              </a>
+              mai jos
             </Link>
             .
           </li>

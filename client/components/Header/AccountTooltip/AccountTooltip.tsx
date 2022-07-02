@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import Link from 'next/link';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import UserService from '~/services/User.service';
 import { RootState } from '~/redux/root.reducer';
 import Button from '~/components/Button';
+import Link from '~/components/generic/Link';
 
 import styles from './AccountTooltip.module.scss';
 import { useOutsideClick } from '~/services/Hooks';
@@ -47,17 +47,13 @@ function AccountTooltip({ theme = 'default', user, dispatch }: Props & Connected
       {isOpen && (
         <List className="menu">
           <li>
-            <Link href={`/${user.info.username}`}>
-              <a className="no-underline">
-                Profilul tău
-              </a>
+            <Link className="no-underline" href={`/${user.info.username}`}>
+              Profilul tău
             </Link>
           </li>
           <li>
-            <Link href="/settings">
-              <a className="no-underline">
-                Setările contului
-              </a>
+            <Link className="no-underline" href="/settings">
+              Setările contului
             </Link>
           </li>
           <li>

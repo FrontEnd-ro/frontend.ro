@@ -1,6 +1,5 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import ExercisePreview from '~/components/ExercisePreview';
@@ -17,6 +16,7 @@ import TutorialService from '~/services/api/Tutorial.service';
 import TutorialProgress from './TutorialProgress/TutorialProgress';
 import { aggregateTutorialProgress } from '~/services/Utils';
 import { UserRole } from '~/../shared/types/user.types';
+import Link from '~/components/generic/Link';
 
 interface Props {
   profileUser: UserState['info']
@@ -93,24 +93,25 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
               />
 
               {aggregatedProgress.done < aggregatedProgress.total && (
-                <Link href={`/${tutorialsProgress[index].tutorialId}/tutorial`}>
-                  <a className="btn btn--light no-underline mt-4">
-                    {(
-                      aggregatedProgress.done === 0
-                      && aggregatedProgress.inProgress === 0
-                    )
-                      ? 'Începe tutorialul'
-                      : 'Continuă'}
-                  </a>
+                <Link
+                  color="white"
+                  variant="contained"
+                  href={`/${tutorialsProgress[index].tutorialId}/tutorial`}
+                  className="d-inline-block mt-4"
+                >
+                  {(
+                    aggregatedProgress.done === 0
+                    && aggregatedProgress.inProgress === 0
+                  )
+                    ? 'Începe tutorialul'
+                    : 'Continuă'}
                 </Link>
               )}
 
               {/* TODO: https://github.com/FrontEnd-ro/frontend.ro/issues/512 */}
               {/* {aggregatedProgress.done === aggregatedProgress.total && (
-                <Link href="#">
-                  <a className="btn btn--light no-underline mt-4">
-                    Vezi certificarea
-                  </a>
+                <Link href="#" className="btn btn--light no-underline mt-4">
+                  Vezi certificarea
                 </Link>
               )} */}
             </div>
@@ -135,11 +136,9 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
           />
         ))}
         {solvedExercises.length === 0 && (
-          <Link href="/exercitii">
-            <a className="d-flex align-items-center justify-content-center no-underline text-center">
-              <FontAwesomeIcon icon={faPlus} width="32" height="32" />
-              <span> Rezolvă un exercițiu </span>
-            </a>
+          <Link href="/exercitii" className="d-flex align-items-center justify-content-center no-underline text-center">
+            <FontAwesomeIcon icon={faPlus} width="32" height="32" />
+            <span> Rezolvă un exercițiu </span>
           </Link>
         )}
       </div>
@@ -182,11 +181,9 @@ const CreatedExercises = () => {
             readOnly={false}
           />
         ))}
-        <Link href="/exercitii/creeaza">
-          <a className="d-flex align-items-center justify-content-center no-underline text-center">
-            <FontAwesomeIcon icon={faPlus} width="32" height="32" />
-            <span> Creează un nou exercițiu </span>
-          </a>
+        <Link href="/exercitii/creeaza" className="d-flex align-items-center justify-content-center no-underline text-center">
+          <FontAwesomeIcon icon={faPlus} width="32" height="32" />
+          <span> Creează un nou exercițiu </span>
         </Link>
       </div>
     </section>

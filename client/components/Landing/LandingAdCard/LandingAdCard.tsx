@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ApplicationConfig } from '~/redux/application-config.reducer';
 import Button from '~/components/Button';
+import Link from '~/components/generic/Link';
 
 import styles from './LandingAdCard.module.scss';
 
@@ -57,10 +57,8 @@ function LandingAdCard({ ad }: { ad: ApplicationConfig['ad'] }) {
           {ad.text}
         </p>
         {ad.cta && ad.ctaLink && (
-          <Link href={ad.ctaLink}>
-            <a onClick={didVisit}>
-              {ad.cta}
-            </a>
+          <Link onClick={didVisit} href={ad.ctaLink}>
+            {ad.cta}
           </Link>
         )}
         <Button className={`${styles['close-button']} absolute`} onClick={didVisit}>

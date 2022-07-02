@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import {
   LessonCover,
   LessonFigure,
@@ -9,6 +8,7 @@ import {
   LessonResources,
   LessonTip,
 } from '~/components/lessons';
+import Link from '~/components/generic/Link';
 import Highlight from '~/components/Highlight/Highlight';
 import DevToolsClone from '~/components/DevToolsClone';
 import SideBySidePictures from '~/components/SideBySidePictures';
@@ -194,10 +194,8 @@ div {
           Poți citi mai multe
           {' '}
           {' '}
-          <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing">
-            <a target="_blank">
-              aici
-            </a>
+          <Link target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing">
+            aici
           </Link>
           .
         </LessonTip>

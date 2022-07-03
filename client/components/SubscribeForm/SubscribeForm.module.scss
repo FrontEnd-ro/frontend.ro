@@ -1,36 +1,15 @@
 @import '../../styles/variables';
 
-.form {
-  text-align: left;
-  display: inline-block;
-
-  & > label {
-    display: block;
-    margin-bottom: 1em;
-  }
-
-  & > div {
-    align-items: flex-end;
-  }
-
-  span {
-    display: block;
-    font-weight: lighter;
-  }
-
+.SubscribeForm {
   input {
     font-size: 1em;
     border-radius: 5px;
     padding: 0.5em 1em;
-    width: 100%;
-  }
-
-  button {
-    padding: 0.45em 0.5em 0.5em 0.5em;
+    border: 1px solid color(grey);
   }
 }
 
-.subscribe-form--with-text {
+.SubscribeFormWithText {
   padding: 1em 5em;
   border: 5px dashed color(silver);
   background: rgba(color(blue), 0.15);

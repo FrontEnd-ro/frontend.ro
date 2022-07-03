@@ -1,6 +1,6 @@
 @import '../../../styles/variables';
 
-.landing-subscribe {
+.LandingSubscribe {
   padding: 0.5em 0 2em 0;
 
   & > section {
@@ -13,36 +13,8 @@
     font-size: calc(1.5em + 1vw);
   }
 
-  p {
-    text-align: left;
-  }
-
-  form {
-    text-align: left;
-    display: inline-block;
-
-    & > label {
-      display: block;
-      margin-bottom: 1em;
-    }
-
-    & > div {
-      align-items: flex-end;
-    }
-
-    span {
-      display: block;
-      font-weight: lighter;
-    }
-
-    input {
-      font-size: 1em;
-      border-radius: 5px;
-      padding: 0.5em 1em;
-    }
-
-    button {
-      padding: 0.45em 0.5em 0.5em 0.5em;
-    }
+  .SubscribeForm {
+    margin: 2.5em auto;
+    max-width: 17em;
   }
 }

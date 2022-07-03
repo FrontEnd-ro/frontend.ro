@@ -3,7 +3,7 @@ import UserService from '~/services/User.service';
 import Button from '~/components/Button';
 import styles from './SubscribeForm.module.scss';
 
-function SubscribeForm() {
+function SubscribeForm({ className = '' }: { className?: string }) {
   const [didSubscribe, setDidSubscribe] = useState(false);
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [error, setError] = useState(null);
@@ -45,17 +45,17 @@ function SubscribeForm() {
   };
 
   return (
-    <form onSubmit={submit} className={`${styles.form} my-5 text-center`}>
-      <label>
-        <span className="m-0">Cum să-ți spunem?</span>
-        <input disabled={isSubscribing} type="text" name="name" required />
+    <form onSubmit={submit} className={`${styles.SubscribeForm} ${className}`}>
+      <label className="d-block mb-4">
+        <span className="m-0 d-block">Cum să-ți spunem?</span>
+        <input className="w-100" disabled={isSubscribing} type="text" name="name" required />
       </label>
-      <label>
-        <span className="m-0">Email</span>
-        <input disabled={isSubscribing} type="email" name="email" required />
+      <label className="d-block mb-4">
+        <span className="m-0 d-block">Email</span>
+        <input className="w-100" disabled={isSubscribing} type="email" name="email" required />
       </label>
-      <label>
-        <span className="mb-2">
+      <label className="d-block mb-4">
+        <span className="mb-2 d-block">
           Ca să ne asigurăm că nu ești robot,
           {' '}
           <br />
@@ -64,7 +64,7 @@ function SubscribeForm() {
           {' '}
           <strong>{ROBOT_STRING}</strong>
         </span>
-        <input disabled={isSubscribing} type="text" name="robot-check" required />
+        <input className="w-100" disabled={isSubscribing} type="text" name="robot-check" required />
       </label>
       {error && (
         <p>

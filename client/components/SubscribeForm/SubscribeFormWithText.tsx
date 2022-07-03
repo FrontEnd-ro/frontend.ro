@@ -7,11 +7,11 @@ function SubscribeFormWithText(
   { children, className = '' }: { children: ReactNode, className?: string },
 ) {
   return (
-    <div className={`${styles['subscribe-form--with-text']} ${className} d-flex justify-content-between`}>
+    <div className={`${styles.SubscribeFormWithText} ${className} d-flex justify-content-between`}>
       <div>
         {children}
       </div>
-      <SubscribeForm />
+      <SubscribeForm className="my-5" />
     </div>
   );
 }

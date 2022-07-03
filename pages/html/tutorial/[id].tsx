@@ -99,23 +99,21 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
       />
       <PageWithAsideMenu menu={{
         title: lessonInfo.title,
-        Component: tutorialProgress === undefined
-          ? null
-          : (
-            <div className="d-flex flex-column justify-content-between flex-1 pb-5">
-              <TableOfContents
-                onChapterClick={() => {
-                  // FIXME
-                  // THIS SHOULD CLOSE THE MENU
-                }}
-                chapters={chapters}
-              />
-              {/* TODO: change to /html when finishing the integration */}
-              <Link className="text-center" href="/html/tutorial">
-                Înapoi la tutorial
-              </Link>
-            </div>
-          ),
+        Component: (
+          <div className="d-flex flex-column justify-content-between flex-1 pb-5">
+            <TableOfContents
+              onChapterClick={() => {
+                // FIXME
+                // THIS SHOULD CLOSE THE MENU
+              }}
+              chapters={chapters}
+            />
+            {/* TODO: change to /html when finishing the integration */}
+            <Link className="text-center" href="/html/tutorial">
+              Înapoi la tutorial
+            </Link>
+          </div>
+        ),
       }}
       >
         <PageContainer>

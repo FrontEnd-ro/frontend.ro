@@ -25,7 +25,7 @@ const Explainer = () => {
   const explanations = [{
     title: 'Citești lecția',
     paragraphs: [
-      <> Fiecare concept e explicat printr-o lecție text dar și un tutorial video. </>,
+      <> Fiecare concept e explicat printr-o lecție text, cu exemple de cod. </>,
     ],
   }, {
     title: 'Rezolvi exercițiile',

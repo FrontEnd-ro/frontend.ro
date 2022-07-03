@@ -84,7 +84,7 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
               </a>
             )}
           </div>
-          <div className={styles['hero-video']} />
+          {/* <div className={styles['hero-video']} /> */}
         </div>
 
         <div id="what-is-html">

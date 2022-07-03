@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Link from '~/components/generic/Link';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
@@ -6,8 +5,6 @@ import NotFoundPage from '~/components/404/NotFound';
 import { withSmoothScroll } from '~/services/Hooks';
 import { LessonHeading } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
-import TutorialService from '~/services/api/Tutorial.service';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
 import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
@@ -45,9 +42,6 @@ const LESSON_TO_COMPONENT = {
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
 const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => {
-  const TUTORIAL_ID = 'html';
-  const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
-
   const getChapters = (lessonDescription: LessonDescription): Chapter[] => {
     if (!lessonDescription.withExercises) {
       return parseChapters(lessonDescription.chapters);
@@ -67,15 +61,6 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
       },
     ];
   };
-
-  useEffect(() => {
-    TutorialService
-      .getProgress(TUTORIAL_ID)
-      .then((progress) => {
-        setTutorialProgress(progress);
-        console.log(progress);
-      });
-  }, []);
 
   withSmoothScroll();
 

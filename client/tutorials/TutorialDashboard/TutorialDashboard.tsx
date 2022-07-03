@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Spinner from '~/components/Spinner';
+import React from 'react';
 import ResponsiveFlex from '~/components/ResponsiveFlex';
-import ExerciseService from '~/services/Exercise.service';
 import ExercisePreview from '~/components/ExercisePreview';
-import TutorialService from '~/services/api/Tutorial.service';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
@@ -11,54 +8,12 @@ import TutorialProgress from '~/components/user-profile/UserActivity/TutorialPro
 
 import styles from './TutorialDashboard.module.scss';
 
-const TutorialDashboard = ({ tutorialId }: { tutorialId: string }) => {
-  const [didError, setDidError] = useState(false);
-  const [submissions, setSubmissions] = useState<Submission[]>(undefined);
-  const [tutorialProgress, setTutorialProgress] = useState<TutorialProgressI>(undefined);
+interface Props {
+  submissions: Submission[];
+  tutorialProgress: TutorialProgressI;
+}
 
-  const fetchTutorialProgress = async () => {
-    try {
-      const tutorialProgress = await TutorialService.getProgress(tutorialId);
-      setTutorialProgress(tutorialProgress);
-    } catch (err) {
-      console.error('TutorialDashboard.fetchTutorialProgress', err);
-      setDidError(true);
-    }
-  };
-
-  const fetchSubmissions = async () => {
-    try {
-      const submissions = await ExerciseService.getSolvedExercises();
-      setSubmissions(submissions);
-    } catch (err) {
-      console.error('TutorialDashboard.fetchSubmissions', err);
-      setDidError(true);
-    }
-  };
-
-  useEffect(() => {
-    fetchSubmissions();
-    fetchTutorialProgress();
-  }, [tutorialId]);
-
-  if (didError) {
-    return (
-      // TODO: extract into a re-usable <TryAgain> component
-      // https://github.com/FrontEnd-ro/frontend.ro/issues/674
-      <p className="text-red text-center">
-        Oops! Nu am putut încărca progresul pentru acest tutorial.
-        <br />
-        Încearcă din nou.
-      </p>
-    );
-  }
-
-  if (tutorialProgress === undefined || submissions === undefined) {
-    // TODO: add Skeleton Screens
-    // https://github.com/FrontEnd-ro/frontend.ro/issues/673
-    return <Spinner />;
-  }
-
+const TutorialDashboard = ({ tutorialProgress, submissions }: Props) => {
   const pendingSubmissions = submissions.filter(
     (submission) => submission.status === SubmissionStatus.IN_PROGRESS,
   );

@@ -76,7 +76,7 @@ function HtmlTutorialDashboard({
   return (
     <>
       <SEOTags
-        title="Tutorialul de HTMl"
+        title={tutorialInfo.name}
         description="Învață HTML printr-un curs online, focusat pe practică și feedback de la developeri cu experiență."
         url={`https://FrontEnd.ro/${TUTORIAL_ID}`}
       />

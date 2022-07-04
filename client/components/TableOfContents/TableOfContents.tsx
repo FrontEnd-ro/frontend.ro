@@ -77,14 +77,9 @@ class TableOfContents extends React.Component<Props, State> {
       }
 
       if (entry.target.id !== activeChapterId) {
-        /**
-         * Using the NextRouter `replace` method is buggy on Firefox, triggering
-         * a scroll when it intersects an element.
-         *
-         * This is reproducing only when using a Mouse, not the touchpad on laptop.
-         */
-        window.history.replaceState(null, '', `${window.location.pathname}#${entry.target.id}`);
-        this.refreshActiveChapter();
+        this.setState({
+          activeChapterId: entry.target.id,
+        });
       }
 
       return true;
@@ -187,6 +182,7 @@ function ChapterListItem({
     `}
     >
       <Link
+        replace
         href={item.href}
         onClick={() => scrollToItem(item.id)}
         className={activeChapterId === item.id ? `${styles.active} text-bold` : 'text-bold'}

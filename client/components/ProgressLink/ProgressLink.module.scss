@@ -25,11 +25,11 @@
     border-color: color(red);
   }
 
-  a {
+  .content {
     transition: transform 0.25s $cubic;
   }
 
-  &:not(.active):hover a {
+  &:not(.active):hover .content {
     transform: translateX(0.25em);
   }
 }

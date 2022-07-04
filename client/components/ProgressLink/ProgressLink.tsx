@@ -29,7 +29,8 @@ const ProgressLink = ({
   htmlTitle,
 }: Props) => {
   return (
-    <div
+    <Link
+      href={href}
       className={`
         ${styles.ProgressLink}
         ${styles[variant]}
@@ -38,10 +39,12 @@ const ProgressLink = ({
         relative
         overflow-hidden
         rounded-md
+        d-block
+        no-underline
       `}
       title={htmlTitle}
     >
-      <Link href={href} className="d-flex align-items-center no-underline">
+      <div className={`${styles.content} d-flex align-items-center no-underline`}>
         {variant === 'default' && completePercentage > 0 && (
           <ProgressIndicator completePercentage={completePercentage} />
         )}
@@ -54,8 +57,8 @@ const ProgressLink = ({
         <span className={styles.title}>
           {title}
         </span>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

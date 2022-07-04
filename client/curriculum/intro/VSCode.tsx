@@ -9,12 +9,9 @@ import {
   LessonFirstSentence,
 } from '~/components/lessons';
 import Link from '~/components/generic/Link';
-import { Diana } from '~/services/contributors';
 import { getLessonById } from '~/services/DataModel';
 import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
-
-const contributors = [Diana];
 
 export default function VSCodeContent() {
   const lessonInfo = getLessonById('vs-code');

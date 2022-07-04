@@ -2,7 +2,7 @@ import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
-import VSCodeContent from '~/curriculum/intro/vs-code';
+import VSCodeContent from '~/curriculum/intro/VSCode';
 import AboutUsContent from '~/curriculum/intro/despre-noi';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
 

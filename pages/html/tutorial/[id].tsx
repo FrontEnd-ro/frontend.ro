@@ -15,6 +15,7 @@ import TableOfContents, { Chapter, parseChapters } from '~/components/TableOfCon
 import ListsContent from '~/curriculum/html/Lists';
 import FormsContent from '~/curriculum/html/Forms';
 import ImagesContent from '~/curriculum/html/Images';
+import VSCodeContent from '~/curriculum/intro/VSCode';
 import TextsContent from '~/curriculum/html/TextElements';
 import ContainersContent from '~/curriculum/html/Containers';
 import AudioAndVideoContent from '~/curriculum/html/AudioAndVideo';
@@ -35,6 +36,7 @@ const LESSON_TO_COMPONENT = {
   'structura-pagina-html': <HTMLStructureContent />,
   texte: <TextsContent />,
   validare: <HTMLValidationContent />,
+  'vs-code': <VSCodeContent />,
 };
 
 // Naming this component `Temp` because eventually

@@ -39,6 +39,19 @@ export const Text = () => (
   </Wrapper>
 );
 
+export const DuoTone = () => (
+  <Wrapper>
+    <LinkComponent href="#" variant="duo-tone" color="inherit"> Duo-tone Inherit </LinkComponent>
+    <LinkComponent href="#" variant="duo-tone" color="white"> Duo-tone White </LinkComponent>
+    <LinkComponent href="#" variant="duo-tone" color="black"> Duo-tone Black </LinkComponent>
+    <LinkComponent href="#" variant="duo-tone" color="green"> Duo-tone Green </LinkComponent>
+    <LinkComponent href="#" variant="duo-tone" color="blue"> Duo-tone Blue </LinkComponent>
+    <LinkComponent href="#" variant="duo-tone" color="red"> Duo-tone Red </LinkComponent>
+    <LinkComponent href="#" variant="duo-tone" color="yellow"> Duo-tone Yellow </LinkComponent>
+    <LinkComponent href="#" variant="duo-tone" color="grey"> Duo-tone Grey </LinkComponent>
+  </Wrapper>
+);
+
 export const Link = Template.bind({});
 Link.args = {
   href: '#',

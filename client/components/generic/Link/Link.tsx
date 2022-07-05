@@ -1,10 +1,9 @@
-import { UrlObject } from 'url';
 import React, { PropsWithChildren } from 'react';
 import NextLink, { LinkProps } from 'next/link';
 
 import styles from './Link.module.scss';
 
-type Variant = 'text' | 'contained';
+type Variant = 'text' | 'contained' | 'duo-tone';
 
 type Color = 'inherit' | 'white' | 'black' | 'green' | 'blue' | 'red' | 'yellow' | 'grey';
 

@@ -87,3 +87,50 @@
     color: color(grey);
   }
 }
+
+.duo-tone {
+  padding: 0.5em 0.75em;
+  text-decoration: none;
+  border-left: 5px solid transparent;
+
+  &.inherit {
+    border-color: currentColor;
+    background: rgba(color(white), 0.1);
+  }
+
+  // Colors
+  &.white {
+    border-color: color(white);
+    background: rgba(color(white), 0.1);
+  }
+
+  &.black {
+    border-color: color(black);
+    background: rgba(color(black), 0.1);
+  }
+
+  &.green {
+    border-color: color(green);
+    background: rgba(color(green), 0.1);
+  }
+
+  &.blue {
+    border-color: color(blue);
+    background: rgba(color(blue), 0.1);
+  }
+
+  &.red {
+    border-color: color(red);
+    background: rgba(color(red), 0.1);
+  }
+
+  &.yellow {
+    border-color: color(yellow);
+    background: rgba(color(yellow), 0.1);
+  }
+
+  &.grey {
+    border-color: color(grey);
+    background: rgba(color(grey), 0.1);
+  }
+}

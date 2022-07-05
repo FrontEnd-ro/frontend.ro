@@ -1,5 +1,6 @@
 import { ObjectId } from "mongoose";
 import { LessonI } from "./lesson.types";
+import { WIPPopulatedCertificationI } from "./certification.types";
 
 /**
  * The Tutorial entity is at the center of our platform.
@@ -62,4 +63,6 @@ export interface TutorialProgressI {
       total: number;
     }
   }[];
+
+  certification: WIPPopulatedCertificationI | null;
 }

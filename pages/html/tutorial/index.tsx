@@ -5,13 +5,13 @@ import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
 import PageContainer from '~/components/PageContainer';
 import ExerciseService from '~/services/Exercise.service';
-import TutorialService from '~/services/api/Tutorial.service';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
-import { loadSubmissions, loadTutorial } from '~/redux/progress/progress.actions';
+import { loadSubmissions } from '~/redux/progress/progress.actions';
 import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
+import maybeFetchTutorialProgress from './tutorial.utils';
 
 type Props = {
   tutorialInfo: WIPPopulatedTutorialI
@@ -22,8 +22,13 @@ function HtmlTutorialDashboard({
 }: Props) {
   const TUTORIAL_ID = 'html';
   const isLoggedIn = !!user.info;
-  const [didError, setDidError] = useState(false);
+  const [failedToFetchSubmissions, setFailedToFetchSubmissions] = useState(false);
   const didStartTutorial = isLoggedIn && user.info.tutorials.includes(TUTORIAL_ID);
+
+  const failedToFetchProgress = maybeFetchTutorialProgress(
+    TUTORIAL_ID,
+    isLoggedIn && tutorialProgress === undefined,
+  );
 
   const fetchSubmissions = async () => {
     try {
@@ -31,29 +36,15 @@ function HtmlTutorialDashboard({
       dispatch(loadSubmissions(tutorialInfo.tutorialId, submissions));
     } catch (err) {
       console.error('HtmlTutorialDashboard.fetchSubmissions', err);
-      setDidError(true);
-    }
-  };
-
-  const fetchTutorial = async () => {
-    try {
-      const progress = await TutorialService.getProgress(TUTORIAL_ID);
-      dispatch(loadTutorial(progress));
-    } catch (err) {
-      console.error('HtmlTutorialDashboard.fetchTutorial', err);
-      setDidError(true);
+      setFailedToFetchSubmissions(true);
     }
   };
 
   useEffect(() => {
-    if (isLoggedIn && tutorialProgress === undefined) {
-      fetchTutorial();
-    }
-
     if (isLoggedIn && !hasFetchedSubmissions) {
       fetchSubmissions();
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, hasFetchedSubmissions]);
 
   if (isLoggedIn && tutorialProgress === undefined) {
     return (
@@ -61,7 +52,7 @@ function HtmlTutorialDashboard({
     );
   }
 
-  if (didError) {
+  if (failedToFetchSubmissions || failedToFetchProgress) {
     return (
       // TODO: extract into a re-usable <TryAgain> component
       // https://github.com/FrontEnd-ro/frontend.ro/issues/674

@@ -12,3 +12,13 @@
 .ProgressLink--active {
   opacity: 1;
 }
+
+.CertificationLink {
+  .ProgressLink {
+    z-index: 1;
+  }
+
+  canvas {
+    pointer-events: none;
+  }
+}

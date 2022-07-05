@@ -23,3 +23,5 @@ export const MONACO = {
     SCROLL: 'SC',
   },
 };
+
+export const HTML_TUTORIAL_ID = 'html';

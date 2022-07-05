@@ -1,4 +1,6 @@
-import React from 'react';
+import noop from 'lodash/noop';
+import ConfettiGenerator from 'confetti-js';
+import React, { useEffect, useRef } from 'react';
 import { getLessonById } from '~/services/DataModel';
 import ProgressLink from '~/components/ProgressLink';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
@@ -40,7 +42,49 @@ const TutorialNav = ({
           </div>
         );
       })}
+      <CertificationLink tutorialId={tutorialId} tutorialProgress={tutorialProgress} />
     </nav>
+  );
+};
+
+const CertificationLink = ({
+  tutorialId,
+  tutorialProgress,
+}: { tutorialId: string; tutorialProgress: TutorialProgressI }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isDone = tutorialProgress.certification !== null;
+
+  useEffect(() => {
+    if (!isDone) {
+      return noop;
+    }
+
+    const confetti = new ConfettiGenerator({
+      target: canvasRef.current,
+      width: 300,
+      height: 70,
+      clock: 15,
+    });
+    confetti.render();
+
+    return () => confetti.clear();
+  }, [isDone]);
+
+  return (
+    <div className={`${styles.CertificationLink} relative`}>
+      <ProgressLink
+        className={`
+          mb-8
+          ${styles.ProgressLink}
+          ${tutorialProgress.certification === null ? styles['ProgressLink--locked'] : ''}
+        `}
+        title="Certificare"
+        completePercentage={isDone ? 100 : 0}
+        // FIXME: temp path until we move this to a first-class page.
+        href={`/${tutorialId}/tutorial/certification`}
+      />
+      <canvas className="pin-full" ref={canvasRef} />
+    </div>
   );
 };
 

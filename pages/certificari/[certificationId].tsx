@@ -27,7 +27,7 @@ export default function CertificationPage(
         </SEOTags>
         <Header withNavMenu />
         <main data-certification-page>
-          <CertificationComponent certification={certification} />
+          <CertificationComponent className="mt-12" certification={certification} />
         </main>
         <Footer />
       </>

@@ -5,8 +5,11 @@ import { UserI } from '../../shared/types/user.types';
 import Tutorial, { sanitizeTutorial } from './tutorial.model';
 import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
 import { WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
-import { TutorialProgressI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
+import { Certification, sanitizeCertification } from '../certification/certification.model';
+import { TutorialI, TutorialProgressI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
+import { WIPPopulatedCertificationI } from '../../shared/types/certification.types';
+import { Document } from 'mongoose';
 
 const SubmissionModel = require('../submission/submission.model')
 const LessonExerciseModel = require('../lesson-exercise/lesson-exercise.model');
@@ -97,16 +100,33 @@ tutorialRouter.get('/:tutorialId/progress', [
           inProgress: 0,
           total: 0,
         }
-      }))
+      })),
+      certification: null,
     };
 
-    const [
-      submissions,
-      lessonExercises
-    ]: [WIPPopulatedSubmissionI[], WIPPopulatedLessonExerciseI[]] = await Promise.all([
+    const [submissions, lessonExercises, certification]: [
+      WIPPopulatedSubmissionI[],
+      WIPPopulatedLessonExerciseI[],
+      Document<any, any, WIPPopulatedCertificationI>
+    ] = await Promise.all([
       SubmissionModel.getAllUserSubmissions(user._id.toString()),
-      LessonExerciseModel.getAll()
+      LessonExerciseModel.getAll(),
+      Certification.findOne({
+        tutorialId: tutorial._id,
+        user: user._id,
+      })
+        .populate("user")
+        .populate<{
+          lesson_exercises: WIPPopulatedLessonExerciseI[];
+        }>({
+          path: "lesson_exercises",
+          populate: { path: "user" },
+        }),
     ]);
+
+    if (certification !== null) {
+      progress.certification = sanitizeCertification(certification);
+    }
 
     progress.lessons.forEach((lesson) => {
       submissions

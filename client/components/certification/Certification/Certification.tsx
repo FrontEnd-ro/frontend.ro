@@ -1,17 +1,22 @@
 import React from 'react';
+import List from '~/components/List';
 import Diploma from '../Diploma/Diploma';
 import Link from '~/components/generic/Link';
 import ExercisePreview from '~/components/ExercisePreview';
 import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
 
 import styles from './Certification.module.scss';
-import List from '~/components/List';
 
-const Certification = ({ certification }: { certification: WIPPopulatedCertificationI }) => {
+interface Props {
+  certification: WIPPopulatedCertificationI;
+  className?: string;
+}
+
+const Certification = ({ certification, className = '' }: Props) => {
   const nameOrUsername = certification.user.name ?? certification.user.username;
 
   return (
-    <section className={styles.Certification}>
+    <section className={`${styles.Certification} ${className}`}>
       <Diploma
         student={certification.user}
         tutorial={certification.tutorial}

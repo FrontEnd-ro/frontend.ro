@@ -144,3 +144,16 @@
     }
   }
 }
+[data-tutorial-certification] {
+  @media screen and (max-width: 1200px) {
+    .Diploma {
+      @include diploma-medium;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .Diploma {
+      @include diploma-small;
+    }
+  }
+}

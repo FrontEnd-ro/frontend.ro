@@ -25,11 +25,13 @@ const CertificationSchema = new mongoose.Schema<CertificationI>({
 const Certification: mongoose.Model<CertificationI, {}, {}> = mongoose.models.Certification
   || mongoose.model<CertificationI>('Certification', CertificationSchema);
 
-function sanitizeCertification(certification: Document<any, any, WIPPopulatedCertificationI> & WIPPopulatedCertificationI) {
+function sanitizeCertification(certification: Document<any, any, WIPPopulatedCertificationI>) {
   // https://github.com/Automattic/mongoose/issues/2790
   const sanitizedCertfication: WIPPopulatedCertificationI = JSON.parse(JSON.stringify(certification.toObject()));
 
-  sanitizedCertfication.user = SharedUserModel.sanitize(sanitizedCertfication.user);
+  if (typeof sanitizedCertfication.user !== 'string') {
+    sanitizedCertfication.user = SharedUserModel.sanitize(sanitizedCertfication.user);
+  }
   sanitizedCertfication.lesson_exercises = sanitizedCertfication.lesson_exercises.map(lessonExercise => {
     return SharedExerciseModel.sanitize(lessonExercise)
   });

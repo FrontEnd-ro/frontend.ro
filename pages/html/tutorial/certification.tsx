@@ -54,6 +54,7 @@ function HTMLTutorialCertification({ isLoggedIn, tutorialInfo, tutorialProgress 
           title: tutorialInfo.name,
           Component: tutorialProgress !== undefined ? (
             <TutorialNav
+              showDashboardLink
               tutorialId={HTML_TUTORIAL_ID}
               tutorialProgress={tutorialProgress}
             />

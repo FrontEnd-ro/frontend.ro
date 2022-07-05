@@ -1,6 +1,7 @@
 import noop from 'lodash/noop';
 import ConfettiGenerator from 'confetti-js';
 import React, { useEffect, useRef } from 'react';
+import Link from '~/components/generic/Link';
 import { getLessonById } from '~/services/DataModel';
 import ProgressLink from '~/components/ProgressLink';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
@@ -10,16 +11,28 @@ import styles from './TutorialNav.module.scss';
 interface TutorialNavProps {
   tutorialId: string;
   tutorialProgress: TutorialProgressI;
+  showDashboardLink?: boolean;
 }
 const TutorialNav = ({
   tutorialId,
   tutorialProgress,
+  showDashboardLink = false,
 }: TutorialNavProps) => {
   const lessonInfos = tutorialProgress.lessons
     .map((lesson) => getLessonById(lesson.lessonId));
 
   return (
     <nav className={styles['chapter-nav']}>
+      {showDashboardLink && (
+        <Link
+          color="inherit"
+          variant="duo-tone"
+          href={`/${tutorialId}/tutorial`}
+          className="text-white d-block mb-8"
+        >
+          Înapoi la Dashboard
+        </Link>
+      )}
       {tutorialProgress.lessons.map((lesson, index) => {
         let completePercentage = 0;
         if (lesson.progress.total > 0) {
@@ -30,13 +43,13 @@ const TutorialNav = ({
           <div key={lesson.lessonId}>
             <ProgressLink
               className={`
-                mb-8
-                ${styles.ProgressLink}
-                ${lesson.locked ? styles['ProgressLink--locked'] : ''}
-              `}
+              mb-8
+              ${styles.ProgressLink}
+              ${lesson.locked ? styles['ProgressLink--locked'] : ''}
+            `}
               title={lessonInfos[index].title}
               completePercentage={completePercentage}
-              // FIXME: temp path until we move this to a first-class page.
+            // FIXME: temp path until we move this to a first-class page.
               href={`/${tutorialId}/tutorial/${lesson.lessonId}`}
             />
           </div>

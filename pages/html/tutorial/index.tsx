@@ -74,8 +74,7 @@ function HtmlTutorialDashboard({
       <PageWithAsideMenu
         withFooter={false}
         menu={{
-          // FIXME: should come from server
-          title: `Modulul de ${TUTORIAL_ID.toUpperCase()}`,
+          title: tutorialInfo.name,
           Component: tutorialProgress !== undefined ? (
             <TutorialNav
               tutorialId={TUTORIAL_ID}

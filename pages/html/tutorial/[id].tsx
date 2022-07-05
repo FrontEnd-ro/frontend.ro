@@ -95,8 +95,8 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
               }}
               chapters={chapters}
             />
-            {/* TODO: change to /html when finishing the integration */}
-            <Link className="text-center" href="/html/tutorial">
+            {/* TODO|FIXME: get the tutorial ID dynamically */}
+            <Link variant="duo-tone" color="white" href="/html/tutorial">
               Înapoi la tutorial
             </Link>
           </div>

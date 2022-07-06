@@ -10,6 +10,7 @@ import { RootState } from '~/redux/root.reducer';
 import { withSmoothScroll } from '~/services/Hooks';
 import ChipCarousel from '../../components/ChipCarousel/ChipCarousel';
 import HtmlCssJs from './components/HtmlCssJS/HtmlCssJs';
+import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import HtmlHowItWorks from './components/HtmlHowItWorks/HtmlHowItWorks';
 import HtmlFakeDiploma from './components/HtmlFakeDiploma/HtmlFakeDiploma';
 
@@ -31,9 +32,7 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
   });
 
   const startTutorial = () => {
-    // Temporary redirect to the lessons page,
-    // until we finish implementing the HTML Tutorial page.
-    router.push('/lectii');
+    router.push(`${HTML_TUTORIAL_ID}/tutorial`);
   };
 
   const navigateToFirstSection = (e: React.MouseEvent<HTMLAnchorElement>) => {

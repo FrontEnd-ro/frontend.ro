@@ -14,6 +14,9 @@ import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 
 type Props = {
+  // Whether this is the root page on a tutorial
+  isRootPage: boolean;
+
   tutorialInfo: WIPPopulatedTutorialI
   children?: ReactNode;
 } & ConnectedProps<typeof connector>;
@@ -25,6 +28,7 @@ type Props = {
 // data from the server.
 function TutorialPage({
   user,
+  isRootPage,
   tutorialInfo,
   tutorialProgress,
   hasFetchedSubmissions,
@@ -86,6 +90,7 @@ function TutorialPage({
         menu={{
           title: tutorialInfo.name,
           Component: <TutorialNav
+            showDashboardLink={!isRootPage}
             tutorialId={tutorialInfo.tutorialId}
             tutorialProgress={tutorialProgress ?? getEmptyTutorialProgress(tutorialInfo)}
           />,

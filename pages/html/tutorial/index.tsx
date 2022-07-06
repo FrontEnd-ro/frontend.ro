@@ -16,7 +16,7 @@ const TutorialIndex = ({
   const didStartTutorial = isLoggedIn && userTutorials.includes(tutorialInfo.tutorialId);
 
   return (
-    <TutorialPage tutorialInfo={tutorialInfo}>
+    <TutorialPage tutorialInfo={tutorialInfo} isRootPage>
       {didStartTutorial
         ? <TutorialDashboard submissions={submissions} tutorialProgress={tutorialProgress} />
         : (

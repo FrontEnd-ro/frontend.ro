@@ -12,7 +12,7 @@ type Props = {
 
 const TutorialCertification = ({ tutorialInfo, tutorialProgress }: Props) => {
   return (
-    <TutorialPage tutorialInfo={tutorialInfo}>
+    <TutorialPage tutorialInfo={tutorialInfo} isRootPage={false}>
       {tutorialProgress && tutorialProgress?.certification !== null
         ? <Certification className="mt-12" certification={tutorialProgress.certification} />
         : (

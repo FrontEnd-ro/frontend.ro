@@ -4,6 +4,7 @@ import Spinner from '~/components/Spinner';
 import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
 import PageContainer from '~/components/PageContainer';
+import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import maybeFetchTutorialProgress from './tutorial.utils';
 import ExerciseService from '~/services/Exercise.service';
 import { getEmptyTutorialProgress } from '~/services/Utils';
@@ -21,13 +22,12 @@ type Props = {
 function HtmlTutorialDashboard({
   user, tutorialInfo, tutorialProgress, submissions, hasFetchedSubmissions, dispatch,
 }: Props) {
-  const TUTORIAL_ID = 'html';
   const isLoggedIn = !!user.info;
   const [failedToFetchSubmissions, setFailedToFetchSubmissions] = useState(false);
-  const didStartTutorial = isLoggedIn && user.info.tutorials.includes(TUTORIAL_ID);
+  const didStartTutorial = isLoggedIn && user.info.tutorials.includes(HTML_TUTORIAL_ID);
 
   const failedToFetchProgress = maybeFetchTutorialProgress(
-    TUTORIAL_ID,
+    HTML_TUTORIAL_ID,
     isLoggedIn && tutorialProgress === undefined,
   );
 
@@ -70,14 +70,14 @@ function HtmlTutorialDashboard({
       <SEOTags
         title={tutorialInfo.name}
         description="Învață HTML printr-un curs online, focusat pe practică și feedback de la developeri cu experiență."
-        url={`https://FrontEnd.ro/${TUTORIAL_ID}`}
+        url={`https://FrontEnd.ro/${HTML_TUTORIAL_ID}`}
       />
       <PageWithAsideMenu
         withFooter={false}
         menu={{
           title: tutorialInfo.name,
           Component: <TutorialNav
-            tutorialId={TUTORIAL_ID}
+            tutorialId={HTML_TUTORIAL_ID}
             tutorialProgress={tutorialProgress ?? getEmptyTutorialProgress(tutorialInfo)}
           />,
         }}
@@ -85,7 +85,12 @@ function HtmlTutorialDashboard({
         <PageContainer>
           {didStartTutorial
             ? <TutorialDashboard submissions={submissions} tutorialProgress={tutorialProgress} />
-            : <TutorialDescription tutorialId={TUTORIAL_ID} tutorialName={tutorialInfo.name} />}
+            : (
+              <TutorialDescription
+                tutorialId={HTML_TUTORIAL_ID}
+                tutorialName={tutorialInfo.name}
+              />
+            )}
 
         </PageContainer>
       </PageWithAsideMenu>

@@ -1,123 +1,50 @@
-import { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import Spinner from '~/components/Spinner';
-import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
-import PageContainer from '~/components/PageContainer';
+import TutorialPage from '~/tutorials/TutorialPage';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
-import ExerciseService from '~/services/Exercise.service';
-import { getEmptyTutorialProgress } from '~/services/Utils';
-import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
-import { loadSubmissions } from '~/redux/progress/progress.actions';
 import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
-import maybeFetchTutorialProgress from '../../../client/tutorials/tutorial.utils';
-import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 
 type Props = {
   tutorialInfo: WIPPopulatedTutorialI
 } & ConnectedProps<typeof connector>;
 
-function HtmlTutorialDashboard({
-  user, tutorialInfo, tutorialProgress, submissions, hasFetchedSubmissions, dispatch,
-}: Props) {
-  const isLoggedIn = !!user.info;
-  const [failedToFetchSubmissions, setFailedToFetchSubmissions] = useState(false);
-  const didStartTutorial = isLoggedIn && user.info.tutorials.includes(HTML_TUTORIAL_ID);
-
-  const failedToFetchProgress = maybeFetchTutorialProgress(
-    HTML_TUTORIAL_ID,
-    isLoggedIn && tutorialProgress === undefined,
-  );
-
-  const fetchSubmissions = async () => {
-    try {
-      const submissions = await ExerciseService.getSolvedExercises();
-      dispatch(loadSubmissions(tutorialInfo.tutorialId, submissions));
-    } catch (err) {
-      console.error('HtmlTutorialDashboard.fetchSubmissions', err);
-      setFailedToFetchSubmissions(true);
-    }
-  };
-
-  useEffect(() => {
-    if (isLoggedIn && !hasFetchedSubmissions) {
-      fetchSubmissions();
-    }
-  }, [isLoggedIn, hasFetchedSubmissions]);
-
-  if (isLoggedIn && tutorialProgress === undefined) {
-    return (
-      <Spinner />
-    );
-  }
-
-  if (failedToFetchSubmissions || failedToFetchProgress) {
-    return (
-      // TODO: extract into a re-usable <TryAgain> component
-      // https://github.com/FrontEnd-ro/frontend.ro/issues/674
-      <p className="text-red text-center">
-        Oops! Nu am putut încărca acest tutorial.
-        <br />
-        Încearcă din nou.
-      </p>
-    );
-  }
+const TutorialIndex = ({
+  isLoggedIn, userTutorials, tutorialInfo, tutorialProgress, submissions,
+}: Props) => {
+  const didStartTutorial = isLoggedIn && userTutorials.includes(tutorialInfo.tutorialId);
 
   return (
-    <>
-      <SEOTags
-        title={tutorialInfo.name}
-        description="Învață HTML printr-un curs online, focusat pe practică și feedback de la developeri cu experiență."
-        url={`https://FrontEnd.ro/${HTML_TUTORIAL_ID}`}
-      />
-      <PageWithAsideMenu
-        withFooter={false}
-        menu={{
-          title: tutorialInfo.name,
-          Component: <TutorialNav
-            tutorialId={HTML_TUTORIAL_ID}
-            tutorialProgress={tutorialProgress ?? getEmptyTutorialProgress(tutorialInfo)}
-          />,
-        }}
-      >
-        <PageContainer>
-          {didStartTutorial
-            ? <TutorialDashboard submissions={submissions} tutorialProgress={tutorialProgress} />
-            : (
-              <TutorialDescription
-                tutorialId={HTML_TUTORIAL_ID}
-                tutorialName={tutorialInfo.name}
-              />
-            )}
-
-        </PageContainer>
-      </PageWithAsideMenu>
-    </>
+    <TutorialPage tutorialInfo={tutorialInfo}>
+      {didStartTutorial
+        ? <TutorialDashboard submissions={submissions} tutorialProgress={tutorialProgress} />
+        : (
+          <TutorialDescription
+            tutorialName={tutorialInfo.name}
+            tutorialId={tutorialInfo.tutorialId}
+          />
+        )}
+    </TutorialPage>
   );
-}
+};
 
 function mapStateToProps(state: RootState) {
   return {
-    user: state.user,
-    hasFetchedSubmissions: state.progress.submissions.html !== undefined,
+    isLoggedIn: !!state.user.info,
+    userTutorials: state.user?.info?.tutorials ?? [],
 
     // FIXME|TODO remove hardcoding
-    tutorialProgress: state.progress.tutorials.html,
-    submissions: state.progress.submissions.html ?? [],
+    tutorialProgress: state.progress.tutorials[HTML_TUTORIAL_ID],
+    submissions: state.progress.submissions[HTML_TUTORIAL_ID] ?? [],
   };
 }
 
 const connector = connect(mapStateToProps);
 
-export default connector(HtmlTutorialDashboard);
+export default connector(TutorialIndex);
 
-export async function getServerSideProps(): Promise<{
-  props: {
-    tutorialInfo: WIPPopulatedTutorialI
-  }
-}> {
+export const getServerSideProps = async () => {
   const Tutorial = (await import('../../../server/tutorial/tutorial.model')).default;
   const htmlTutorial = await Tutorial.findOne({ tutorialId: 'html' }).populate('lessons');
 
@@ -132,4 +59,4 @@ export async function getServerSideProps(): Promise<{
       tutorialInfo: htmlTutorialObject,
     },
   };
-}
+};

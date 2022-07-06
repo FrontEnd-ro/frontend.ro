@@ -5,13 +5,13 @@ import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
 import PageContainer from '~/components/PageContainer';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
-import maybeFetchTutorialProgress from './tutorial.utils';
 import ExerciseService from '~/services/Exercise.service';
 import { getEmptyTutorialProgress } from '~/services/Utils';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
-import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import { loadSubmissions } from '~/redux/progress/progress.actions';
+import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
+import maybeFetchTutorialProgress from '../../../client/tutorials/tutorial.utils';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 

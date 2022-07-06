@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
-import { useInView } from 'react-intersection-observer';
 import { connect, ConnectedProps } from 'react-redux';
 import List from '../../components/List';
 import Header from '../../components/Header';
@@ -18,18 +17,12 @@ import styles from './HtmlLanding.module.scss';
 
 const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
   const router = useRouter();
-  const [showHtmlCssJs, setShowHtmlCssJs] = useState(false);
   const chipRows = [
     ['<html>', '<div>', '<form>', '<head>', '<span>', '<article>', '<video>', '<button>', '<title>', '<main>', '<label>', '<summary>'],
     ['<aside>', '<pre>', '<code>', '<em>', '<br>', '<body>', '<header>', '<section>', '<p>', '<nav>', '<tbody>', '<progress>', '<h1>'],
     ['<blockquote>', '<ol>', '<footer>', '<audio>', '<img>', '<picture>', '<h2>', '<canvas>', '<figure>', '<hr>', '<ul>', '<select>'],
     ['<a>', '<time>', '<h3>', '<track>', '<iframe>', '<svg>', '<script>', '<link>', '<table>', '<input>', '<textarea>', '<details>'],
   ];
-
-  const { ref, inView } = useInView({
-    threshold: 1,
-    triggerOnce: true,
-  });
 
   const startTutorial = () => {
     router.push(`${HTML_TUTORIAL_ID}/tutorial`);
@@ -44,12 +37,6 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
     e.preventDefault();
     document.querySelector('#auth').scrollIntoView();
   };
-
-  useEffect(() => {
-    if (inView) {
-      setShowHtmlCssJs(true);
-    }
-  }, [inView]);
 
   withSmoothScroll();
 
@@ -111,9 +98,8 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
               trebuie să le înveți pentru a construi site-uri și aplicații web.
             </p>
           </div>
-          <div ref={ref} />
           <div className={styles['HtmlCssJs-wrapper']}>
-            {showHtmlCssJs && <HtmlCssJs />}
+            <HtmlCssJs />
           </div>
         </div>
 

@@ -6,6 +6,7 @@ import { RootState } from '~/redux/root.reducer';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import PageContainer from '~/components/PageContainer';
 import maybeFetchTutorialProgress from './tutorial.utils';
+import { getEmptyTutorialProgress } from '~/services/Utils';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import Certification from '~/components/certification/Certification/Certification';
@@ -52,13 +53,10 @@ function HTMLTutorialCertification({ isLoggedIn, tutorialInfo, tutorialProgress 
         withFooter={false}
         menu={{
           title: tutorialInfo.name,
-          Component: tutorialProgress !== undefined ? (
-            <TutorialNav
-              showDashboardLink
-              tutorialId={HTML_TUTORIAL_ID}
-              tutorialProgress={tutorialProgress}
-            />
-          ) : null,
+          Component: <TutorialNav
+            tutorialId={HTML_TUTORIAL_ID}
+            tutorialProgress={tutorialProgress ?? getEmptyTutorialProgress(tutorialInfo)}
+          />,
         }}
       >
         <PageContainer data-tutorial-certification>

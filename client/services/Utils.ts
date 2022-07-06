@@ -1,5 +1,5 @@
 import SweetAlertService from './sweet-alert/SweetAlert.service';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { TutorialProgressI, WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 
 export { v4 as uuid } from 'uuid';
 
@@ -180,4 +180,23 @@ export const aggregateTutorialProgress = (tutorialProgress: TutorialProgressI): 
   });
 
   return aggregate;
+};
+
+export const getEmptyTutorialProgress = (
+  tutorialInfo: WIPPopulatedTutorialI,
+): TutorialProgressI => {
+  return {
+    tutorialId: tutorialInfo.tutorialId,
+    name: tutorialInfo.name,
+    certification: null,
+    lessons: tutorialInfo.lessons.map((l, index) => ({
+      ...l,
+      locked: index > 0,
+      progress: {
+        done: 0,
+        inProgress: 0,
+        total: 0,
+      },
+    })),
+  };
 };

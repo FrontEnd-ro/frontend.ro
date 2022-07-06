@@ -4,14 +4,15 @@ import Spinner from '~/components/Spinner';
 import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
 import PageContainer from '~/components/PageContainer';
+import maybeFetchTutorialProgress from './tutorial.utils';
 import ExerciseService from '~/services/Exercise.service';
+import { getEmptyTutorialProgress } from '~/services/Utils';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import { loadSubmissions } from '~/redux/progress/progress.actions';
 import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
-import maybeFetchTutorialProgress from './tutorial.utils';
 
 type Props = {
   tutorialInfo: WIPPopulatedTutorialI
@@ -75,12 +76,10 @@ function HtmlTutorialDashboard({
         withFooter={false}
         menu={{
           title: tutorialInfo.name,
-          Component: tutorialProgress !== undefined ? (
-            <TutorialNav
-              tutorialId={TUTORIAL_ID}
-              tutorialProgress={tutorialProgress}
-            />
-          ) : null,
+          Component: <TutorialNav
+            tutorialId={TUTORIAL_ID}
+            tutorialProgress={tutorialProgress ?? getEmptyTutorialProgress(tutorialInfo)}
+          />,
         }}
       >
         <PageContainer>

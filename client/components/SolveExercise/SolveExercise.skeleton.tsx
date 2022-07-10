@@ -14,9 +14,8 @@ const SolveExerciseSkeleton = () => {
           {['_____Exercitiu #1',
             '_____Exercitiu #2',
             '_____Exercitiu #3',
-          ].map((text, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <SkeletonParagraph key={index} text={text} className="d-block" />
+          ].map((index) => (
+            <SkeletonRect key={index} height="50px" className="d-block mb-8" />
           ))}
         </>
       ),

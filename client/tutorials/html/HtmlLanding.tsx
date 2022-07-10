@@ -1,9 +1,8 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import List from '../../components/List';
 import Header from '../../components/Header';
-import Button from '../../components/Button';
+import Link from '~/components/generic/Link';
 import { RootState } from '~/redux/root.reducer';
 import { withSmoothScroll } from '~/services/Hooks';
 import ChipCarousel from '../../components/ChipCarousel/ChipCarousel';
@@ -14,8 +13,9 @@ import HtmlFakeDiploma from './components/HtmlFakeDiploma/HtmlFakeDiploma';
 
 import styles from './HtmlLanding.module.scss';
 
-const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
-  const router = useRouter();
+const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
+  const tutorialUrl = `/${HTML_TUTORIAL_ID}/tutorial`;
+  const didStartTutorial = tutorials.includes(HTML_TUTORIAL_ID);
   const chipRows = [
     ['<html>', '<div>', '<form>', '<head>', '<span>', '<article>', '<video>', '<button>', '<title>', '<main>', '<label>', '<summary>'],
     ['<aside>', '<pre>', '<code>', '<em>', '<br>', '<body>', '<header>', '<section>', '<p>', '<nav>', '<tbody>', '<progress>', '<h1>'],
@@ -23,18 +23,9 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
     ['<a>', '<time>', '<h3>', '<track>', '<iframe>', '<svg>', '<script>', '<link>', '<table>', '<input>', '<textarea>', '<details>'],
   ];
 
-  const startTutorial = () => {
-    router.push(`${HTML_TUTORIAL_ID}/tutorial`);
-  };
-
   const navigateToFirstSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     document.querySelector('#what-is-html').scrollIntoView();
-  };
-
-  const navigateToLogin = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    document.querySelector('#auth').scrollIntoView();
   };
 
   withSmoothScroll();
@@ -55,18 +46,19 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
             de la developeri cu experiență
           </p>
           <div className={`${styles['hero-controls']} d-flex align-items-center justify-content-between`}>
-            <a onClick={navigateToFirstSection} href="#what-is-html" className="btn btn--light no-underline">
-              Află mai multe
-            </a>
-
-            {isLoggedIn ? (
-              <Button variant="blue" onClick={startTutorial}>
-                Începe acum
-              </Button>
+            {didStartTutorial ? (
+              <Link href={tutorialUrl} color="blue" variant="contained">
+                Continuă Tutorialul
+              </Link>
             ) : (
-              <a onClick={navigateToLogin} href="#auth" className="btn btn--blue no-underline">
-                Începe acum
-              </a>
+              <>
+                <Link onClick={navigateToFirstSection} href="#what-is-html" variant="contained" color="white">
+                  Află mai multe
+                </Link>
+                <Link href={tutorialUrl} color="blue" variant="contained">
+                  Începe acum
+                </Link>
+              </>
             )}
           </div>
           {/* <div className={styles['hero-video']} /> */}
@@ -165,21 +157,22 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
           </div>
         </div>
 
-        <div id="auth">
+        <div>
           <div className={styles.section}>
             <h2 className={styles['section-heading']}>
               Gata să începem?
             </h2>
-            {isLoggedIn && (
-              <p className={styles['section-text']}>
-                Ești deja autentificat, deci apasă pe butonul de mai jos și hai să trecem la treabă!
-              </p>
-            )}
           </div>
           <div className="text-center text-2xl">
-            <Button onClick={startTutorial} variant="blue">
-              Începe acum
-            </Button>
+            {didStartTutorial ? (
+              <Link href={tutorialUrl} color="blue" variant="contained">
+                Continuă Tutorialul
+              </Link>
+            ) : (
+              <Link color="blue" variant="contained" href={tutorialUrl}>
+                Începe Tutorialul
+              </Link>
+            )}
           </div>
         </div>
       </main>
@@ -189,7 +182,7 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
 
 function mapStateToProps(state: RootState) {
   return {
-    isLoggedIn: !!state.user.info,
+    tutorials: state.user?.info?.tutorials ?? [],
   };
 }
 

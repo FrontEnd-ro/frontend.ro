@@ -279,8 +279,16 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
   const { exerciseId } = req.params;
   const { code, user, status } = req.body;
 
-  const existingSubmission = await SubmissionModel.getByExerciseId(user._id, exerciseId);
+  const [lessonExercise, existingSubmission] = await Promise.all([
+    LessonExerciseModel.get(exerciseId),
+    SubmissionModel.getByExerciseId(user._id, exerciseId),
+  ]);
   let updatedSubmission;
+
+  if (!user.tutorials.includes(lessonExercise.type)) {
+    new ServerError(403, 'Trebuie să te înscrii la acest tutorial pentru a putea trimite soluții.').send(res);
+    return;
+  }
 
   if (!existingSubmission) {
     console.log("[submitSolution] First solution for this exercise. Let's create it");

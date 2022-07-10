@@ -50,12 +50,12 @@ export const timeAgo = (date: Date): string => {
   }
   return formatDate(date);
 };
-export const formatDate = (dateToFormat: Date): string => {
-  //  Convert a string like '2020-09-20T00:00:00' into '20 September 2020'
-  let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  let date = new Date(dateToFormat);
-  let str = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-  return str;
+export const formatDate = (dateToFormat: Date, locale = 'ro-RO'): string => {
+  return new Intl.DateTimeFormat(locale, {
+    month: 'long',
+    day: '2-digit',
+    year: 'numeric',
+  }).format(dateToFormat);
 };
 
 export const alphabeticSortComparator = (nameA, nameB) => {

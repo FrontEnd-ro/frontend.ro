@@ -39,7 +39,7 @@ const TodoExample = React.forwardRef(({
     { text: 'Prepară cafeaua', done: true },
   ]);
 
-  const today = formatDate(new Date());
+  const today = new Date();
   const remainingTodos = todos.filter((todo) => !todo.done);
 
   useEffect(() => {
@@ -111,8 +111,8 @@ const TodoExample = React.forwardRef(({
       `}
     >
       <header>
-        <time>
-          {today}
+        <time dateTime={today.toISOString()}>
+          {formatDate(today)}
         </time>
         <p className={componentStyles.count}>
           {remainingTodos.length}

@@ -112,11 +112,11 @@ const Diploma = ({
             }}
             direction="up"
           >
-            <OptionsDrawer.Element>
+            <OptionsDrawer.Element className="bg-white">
               <CopyLinkButton text={fullCertificationUrl} />
             </OptionsDrawer.Element>
             {certification.pdf && (
-            <OptionsDrawer.Element>
+            <OptionsDrawer.Element className="bg-white">
               <a
                 href={certification.pdf}
                 className="btn btn--light no-underline btn--with-icon"
@@ -126,10 +126,10 @@ const Diploma = ({
               </a>
             </OptionsDrawer.Element>
             )}
-            <OptionsDrawer.Element>
+            <OptionsDrawer.Element className="bg-white">
               <FacebookButton url={fullCertificationUrl} />
             </OptionsDrawer.Element>
-            <OptionsDrawer.Element>
+            <OptionsDrawer.Element className="bg-white">
               <LinkedInButton url={fullCertificationUrl} />
             </OptionsDrawer.Element>
           </OptionsDrawer>

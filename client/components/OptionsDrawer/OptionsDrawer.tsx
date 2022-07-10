@@ -56,9 +56,9 @@ const OptionsDrawer = ({
   );
 };
 
-OptionsDrawer.Element = ({ children }: { children: ReactNode }) => {
+OptionsDrawer.Element = ({ children, className = '' }: { children: ReactNode, className?: string }) => {
   return (
-    <li className={`${styles.Element} w-100 bg-white`}>
+    <li className={`${styles.Element} ${className} w-100`}>
       {children}
     </li>
   );

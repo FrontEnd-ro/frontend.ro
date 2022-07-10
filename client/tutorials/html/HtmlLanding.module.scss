@@ -33,7 +33,7 @@
   margin-top: 3em;
   margin-bottom: 6em;
 
-  a:first-of-type {
+  > *:first-of-type {
     margin-right: 3em;
   }
 }
@@ -121,7 +121,7 @@
     text-align: center;
     flex-flow: column nowrap;
 
-    a {
+    & > * {
       width: 100%;
       margin-bottom: 1em;
       margin-right: 0 !important;

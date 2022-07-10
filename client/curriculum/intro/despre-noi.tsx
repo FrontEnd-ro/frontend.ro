@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import {
   LessonCover, LessonHeading, LessonFigure, LessonQuote,
@@ -7,6 +6,7 @@ import {
 import {
   FacebookButton, LinkedInButton, WhatsAppButton, CopyLinkButton,
 } from '~/components/SocialMediaButtons';
+import { useCurrentUrl } from '~/services/Hooks';
 import { getLessonById } from '~/services/DataModel';
 import coverSvg from '~/public/images/lessons/lesson-0__cover.svg';
 import FormattedText from '~/components/FormattedText';
@@ -15,14 +15,8 @@ import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
 import { GITHUB_URL } from '~/services/Constants';
 
 export default function AboutUsContent() {
-  const router = useRouter();
-  const [urlToShare, setUrlToShare] = useState(router.pathname);
-
+  const urlToShare = useCurrentUrl();
   const lessonInfo = getLessonById('despre-noi');
-
-  useEffect(() => {
-    setUrlToShare(`${window.location.origin}${router.asPath}`);
-  }, []);
 
   return (
     <>
@@ -105,16 +99,16 @@ export default function AboutUsContent() {
         </p>
         <div className="d-flex justify-content-center my-5">
           <OptionsDrawer trigger={{ text: 'Share', icon: faShare }}>
-            <OptionsDrawer.Element>
+            <OptionsDrawer.Element className="bg-white">
               <CopyLinkButton text={urlToShare} />
             </OptionsDrawer.Element>
-            <OptionsDrawer.Element>
+            <OptionsDrawer.Element className="bg-white">
               <FacebookButton url={urlToShare} />
             </OptionsDrawer.Element>
-            <OptionsDrawer.Element>
+            <OptionsDrawer.Element className="bg-white">
               <LinkedInButton url={urlToShare} />
             </OptionsDrawer.Element>
-            <OptionsDrawer.Element>
+            <OptionsDrawer.Element className="bg-white">
               <WhatsAppButton url={urlToShare} />
             </OptionsDrawer.Element>
           </OptionsDrawer>

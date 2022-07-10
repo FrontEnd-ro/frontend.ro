@@ -1,5 +1,5 @@
 import { NextRouter, useRouter } from 'next/router';
-import { MutableRefObject, useEffect } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { UserState } from '~/redux/user/types';
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 import { noop } from './Utils';
@@ -100,6 +100,17 @@ function useKeyDown(code: string, handler: (e: KeyboardEvent) => void, dependenc
   }, [code, ...dependencies]);
 }
 
+function useCurrentUrl() {
+  const router = useRouter();
+  const [url, setUrl] = useState(router.pathname);
+
+  useEffect(() => {
+    setUrl(`${window.location.origin}${router.asPath}`);
+  }, []);
+
+  return url;
+}
+
 export {
   useOutsideClick,
   withSmoothScroll,
@@ -107,4 +118,5 @@ export {
   useAnonymousOnly,
   withAuthModal,
   useKeyDown,
+  useCurrentUrl,
 };

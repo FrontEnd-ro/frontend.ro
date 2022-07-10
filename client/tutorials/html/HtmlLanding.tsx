@@ -1,19 +1,25 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
+import { faShare } from '@fortawesome/free-solid-svg-icons';
 import List from '../../components/List';
 import Header from '../../components/Header';
 import Link from '~/components/generic/Link';
 import { RootState } from '~/redux/root.reducer';
-import { withSmoothScroll } from '~/services/Hooks';
+import { useCurrentUrl, withSmoothScroll } from '~/services/Hooks';
 import ChipCarousel from '../../components/ChipCarousel/ChipCarousel';
 import HtmlCssJs from './components/HtmlCssJS/HtmlCssJs';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
+import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
 import HtmlHowItWorks from './components/HtmlHowItWorks/HtmlHowItWorks';
 import HtmlFakeDiploma from './components/HtmlFakeDiploma/HtmlFakeDiploma';
+import {
+  CopyLinkButton, FacebookButton, LinkedInButton, WhatsAppButton,
+} from '~/components/SocialMediaButtons';
 
 import styles from './HtmlLanding.module.scss';
 
 const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
+  const urlToShare = useCurrentUrl();
   const tutorialUrl = `/${HTML_TUTORIAL_ID}/tutorial`;
   const didStartTutorial = tutorials.includes(HTML_TUTORIAL_ID);
   const chipRows = [
@@ -47,9 +53,25 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
           </p>
           <div className={`${styles['hero-controls']} d-flex align-items-center justify-content-between`}>
             {didStartTutorial ? (
-              <Link href={tutorialUrl} color="blue" variant="contained">
-                Continuă Tutorialul
-              </Link>
+              <>
+                <OptionsDrawer className="mr-4" trigger={{ text: 'Share', icon: faShare }} variant="light">
+                  <OptionsDrawer.Element className="bg-black">
+                    <CopyLinkButton text={urlToShare} />
+                  </OptionsDrawer.Element>
+                  <OptionsDrawer.Element className="bg-black">
+                    <FacebookButton url={urlToShare} />
+                  </OptionsDrawer.Element>
+                  <OptionsDrawer.Element className="bg-black">
+                    <LinkedInButton url={urlToShare} />
+                  </OptionsDrawer.Element>
+                  <OptionsDrawer.Element className="bg-black">
+                    <WhatsAppButton url={urlToShare} />
+                  </OptionsDrawer.Element>
+                </OptionsDrawer>
+                <Link href={tutorialUrl} color="blue" variant="contained">
+                  Continuă Tutorialul
+                </Link>
+              </>
             ) : (
               <>
                 <Link onClick={navigateToFirstSection} href="#what-is-html" variant="contained" color="white">

@@ -4,7 +4,6 @@ import { connect, ConnectedProps } from 'react-redux';
 import List from '../../components/List';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
-import Login from '~/components/login/Login';
 import { RootState } from '~/redux/root.reducer';
 import { withSmoothScroll } from '~/services/Hooks';
 import ChipCarousel from '../../components/ChipCarousel/ChipCarousel';
@@ -177,21 +176,11 @@ const HtmlLanding = ({ isLoggedIn }: ConnectedProps<typeof connector>) => {
               </p>
             )}
           </div>
-          {isLoggedIn ? (
-            <div className="text-center text-2xl">
-              <Button onClick={startTutorial} variant="blue">
-                Începe acum
-              </Button>
-            </div>
-          ) : (
-            <div className={styles['login-wrapper']}>
-              <Login
-                mode="register"
-                className={styles.login}
-                onSuccess={startTutorial}
-              />
-            </div>
-          )}
+          <div className="text-center text-2xl">
+            <Button onClick={startTutorial} variant="blue">
+              Începe acum
+            </Button>
+          </div>
         </div>
       </main>
     </>

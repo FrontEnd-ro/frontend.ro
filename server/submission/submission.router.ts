@@ -1,3 +1,4 @@
+import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import NotificationModel from '../notification/notification.model';
 import { SubmissionVersion } from './submission-version/submission-version.model';
 import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
@@ -263,6 +264,10 @@ submissionRouter.put('/:submissionId', [PrivateMiddleware], async function updat
     const updatedSubmission = await SubmissionModel.get(submissionId);
 
     res.json(SubmissionModel.sanitize(updatedSubmission));
+
+    if (payload.status === SubmissionStatus.AWAITING_REVIEW) {
+      notifyAdminsNewSubmission(user.name || user.username);
+    }
   } catch (err) {
     console.error("[API][put.updateSubmission]", err);
     new ServerError(err.code, err.message).send(res);
@@ -296,6 +301,7 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
   }
 
   res.json(SubmissionModel.sanitize(updatedSubmission));
+  notifyAdminsNewSubmission(user.name || user.username);
 });
 
 
@@ -338,3 +344,23 @@ submissionRouter.delete('/:submissionId', [PrivateMiddleware], async function de
 })
 
 module.exports = submissionRouter;
+
+async function notifyAdminsNewSubmission(studentName: string) {
+  const admins = (await UserModel.search()).filter(
+    (user) => user.role === UserRole.ADMIN
+  );
+
+  admins.forEach((admin) => {
+    EmailService.sendTemplateWithAlias(
+      admin.email,
+      EMAIL_TEMPLATE.NOTIFICATION,
+      {
+        subject: "Nou Exercițiu Rezolvat",
+        headline: "Nou Exercițiu Rezolvat",
+        body: `${studentName} a rezolvat un exercitiu.`,
+        cta_text: "Vezi solutia",
+        cta_link: "https://frontend.ro/exercitii-rezolvat",
+      }
+    );
+  });
+}

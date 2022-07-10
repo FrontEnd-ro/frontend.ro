@@ -118,7 +118,11 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
               </div>
             )}
           </LessonContent>
-          <LessonNavigation className="mt-16" lessonId={lessonInfo.id} />
+          {/*
+            TEMPORARILY DISABLING THIS COMPONENT
+            https://github.com/FrontEnd-ro/frontend.ro/issues/745
+            <LessonNavigation className="mt-16" lessonId={lessonInfo.id} />
+          */}
         </PageContainer>
       </PageWithAsideMenu>
     </>

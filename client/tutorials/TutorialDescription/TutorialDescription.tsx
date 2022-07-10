@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import List from '~/components/List';
+import Login from '~/components/login';
 import { RootState } from '~/redux/root.reducer';
+import { startedTutorial } from '~/redux/user/user.actions';
 import TutorialService from '~/services/api/Tutorial.service';
-import { withAuthModal } from '~/services/Hooks';
 import StartTutorialForm from './StartTutorialForm/StartTutorialForm';
 
 interface Props {
@@ -12,20 +13,22 @@ interface Props {
 }
 
 const TutorialDescription = ({
-  tutorialId, tutorialName, user,
+  tutorialId, tutorialName, isLoggedIn, dispatch,
 }: Props & ConnectedProps<typeof connector>) => {
-  const isLoggedIn = !!user.info;
   const [error, setError] = useState<string>(null);
+  const [isStarting, setIsStarting] = useState(false);
 
-  const startTutorial = () => {
-    TutorialService.startTutorial(tutorialId)
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.error('TutorialDescription.startTutorial', err);
-        setError(err.message ?? 'Nu am reușit să începem tutorialul. Încearcă din nou');
-      });
+  const startTutorial = async () => {
+    setIsStarting(true);
+    try {
+      await TutorialService.startTutorial(tutorialId);
+      dispatch(startedTutorial(tutorialId));
+    } catch (err) {
+      console.error('TutorialDescription.startTutorial', err);
+      setError(err.message ?? 'Nu am reușit să începem tutorialul. Încearcă din nou');
+    } finally {
+      setIsStarting(false);
+    }
   };
 
   return (
@@ -81,17 +84,33 @@ const TutorialDescription = ({
           Dacă ești de acord, atunci hai să trecem la treabă!
         </p>
       </div>
-      <StartTutorialForm
-        error={error}
-        onSubmit={withAuthModal(isLoggedIn, startTutorial)}
-      />
+      {isLoggedIn ? (
+        <StartTutorialForm
+          error={error}
+          isStarting={isStarting}
+          onSubmit={() => { startTutorial(); }}
+        />
+      ) : (
+        <Login
+          mode="register"
+          onSuccess={(user) => {
+            if (!user.tutorials.includes(tutorialId)) {
+              startTutorial();
+            }
+          }}
+          optionalTerms={[{
+            name: 'startTutorial',
+            description: 'Am citit și sunt de acord să încep tutorialul',
+          }]}
+        />
+      )}
     </section>
   );
 };
 
 function mapStateToProps(state: RootState) {
   return {
-    user: state.user,
+    isLoggedIn: !!state.user?.info,
   };
 }
 

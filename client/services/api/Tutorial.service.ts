@@ -20,8 +20,8 @@ class TutorialService {
       .then((resp) => resp.json());
   }
 
-  static startTutorial(tutorialId: string) {
-    return HttpService
+  static async startTutorial(tutorialId: string): Promise<void> {
+    await HttpService
       .post(`${process.env.ENDPOINT}/tutorials/${tutorialId}/start`);
   }
 }

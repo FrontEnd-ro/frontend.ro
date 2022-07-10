@@ -6,11 +6,12 @@ import styles from './StartTutorialForm.module.scss';
 
 interface Props {
   className?: string;
+  isStarting: boolean;
   error?: string;
   onSubmit: () => void | Promise<boolean>;
 }
 
-const StartTutorialForm = ({ onSubmit, error = '', className = '' }: Props) => {
+const StartTutorialForm = ({ onSubmit, isStarting, error = '', className = '' }: Props) => {
   return (
     <Form onSubmit={onSubmit} className={`${styles.StartTutorialForm} ${className}`}>
       <Checkbox
@@ -22,7 +23,7 @@ const StartTutorialForm = ({ onSubmit, error = '', className = '' }: Props) => {
           Am citit și sunt de acord să încep tutorialul
         </span>
       </Checkbox>
-      <Button variant="success" type="submit">
+      <Button loading={isStarting} variant="success" type="submit">
         Începe tutorialul
       </Button>
       {error && (

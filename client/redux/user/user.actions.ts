@@ -1,6 +1,7 @@
 import { ParsedNotificationI } from '../../../shared/types/notification.types';
 
 const LOAD_INFO = 'user/LOAD_INFO';
+const STARTED_TUTORIAL = 'user/STARTED_TUTORIAL';
 
 const ADD_NOTIFICATIONS = 'user/ADD_NOTIFICATIONS';
 const LOAD_NOTIFICATIONS = 'user/LOAD_NOTIFICATIONS';
@@ -12,6 +13,7 @@ const MARK_ALL_AS_READ = 'user/MARK_ALL_NOTIFICATIONS_AS_READ';
 
 export const USER_INFO = {
   LOAD: LOAD_INFO,
+  STARTED_TUTORIAL,
 };
 
 export const USER_NOTIFICATIONS = {
@@ -78,4 +80,11 @@ export const markAllAsRead = () => ({
 export const logoutUser = () => ({
   type: USER_LOGOUT,
   payload: null,
+});
+
+export const startedTutorial = (tutorialId: string) => ({
+  type: STARTED_TUTORIAL,
+  payload: {
+    tutorialId,
+  },
 });

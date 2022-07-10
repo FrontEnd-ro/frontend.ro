@@ -22,6 +22,19 @@ export const userReducer = (state = initialState, action: { type: string; payloa
       };
     }
 
+    case USER_INFO.STARTED_TUTORIAL: {
+      return {
+        ...state,
+        info: {
+          ...state.info,
+          tutorials: [
+            ...(state.info?.tutorials ?? []).filter((id) => id !== action.payload.tutorialId),
+            action.payload.tutorialId,
+          ],
+        },
+      };
+    }
+
     case USER_NOTIFICATIONS.ADD: {
       let {
         index,

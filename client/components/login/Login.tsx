@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropsWithChildren } from 'react';
 import debounce from 'lodash/debounce';
 import { DebouncedFunc } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,7 +26,15 @@ import styles from './Login.module.scss';
 interface MyProps {
   mode?: Mode;
   className?: string;
-  onSuccess?: (user?: UserState['info']) => void
+  onSuccess?: (user?: UserState['info']) => void;
+
+  // In case we want to add optional Checkbox items
+  // that need to be accepted by the user
+  optionalTerms?: {
+    name: string;
+    description: string | JSX.Element;
+    defaultChecked?: boolean;
+  }[];
 }
 
 type Mode = 'login' | 'register' | 'getResetCode' | 'resetPassword'
@@ -40,7 +48,7 @@ interface MyState {
   usernameExists: boolean;
 }
 
-class Login extends Component<MyProps, MyState> {
+class Login extends Component<PropsWithChildren<MyProps>, MyState> {
   private checkUsernameDebouncedFn: DebouncedFunc<() => void>;
 
   constructor(props: MyProps) {
@@ -174,7 +182,7 @@ class Login extends Component<MyProps, MyState> {
       usernameExists,
       username,
     } = this.state;
-    const { className } = this.props;
+    const { className, optionalTerms = [] } = this.props;
 
     return (
       <div className={`${styles['login-form']} ${className || ''}`}>
@@ -238,6 +246,18 @@ class Login extends Component<MyProps, MyState> {
                 </span>
               </Checkbox>
             )}
+            {optionalTerms.map((term) => (
+              <Checkbox
+                required
+                key={term.name}
+                name={term.name}
+                className="d-flex mb-4"
+              >
+                <span style={{ fontSize: '0.85em' }}>
+                  {term.description}
+                </span>
+              </Checkbox>
+            ))}
 
             {serverError && <p className={`${styles['server-error']} text-red text-bold`}>{serverError}</p>}
 

@@ -249,10 +249,24 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
 
   const fetchSubmissionsFromLesson = (lessonId) => {
     return Promise.all([
-      SubmissionService.getAllSubmissionsFromLesson(lessonId),
+      isLoggedIn
+        ? SubmissionService.getAllSubmissionsFromLesson(lessonId)
+        : Promise.resolve([]),
       LessonExerciseService.getAllExercisesForLessons(lessonId),
     ])
       .then(([submissions, lessonExercises]) => {
+        if (submissions.length === 0) {
+          // One situation in which submissions may be empty
+          // is if you're not logged in.
+          setSubmissionList(lessonExercises.map((lessonExercise) => ({
+            feedbacks: [],
+            _id: lessonExercise._id,
+            exercise: lessonExercise,
+            status: SubmissionStatus.IN_PROGRESS,
+          })));
+          return;
+        }
+
         setSubmissionList(submissions.map((sub, index) => {
           if (sub === null) {
             return {

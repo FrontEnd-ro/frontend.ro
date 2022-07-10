@@ -121,11 +121,6 @@ submissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMI
   }
 });
 
-submissionRouter.post('/', [PrivateMiddleware], async function createSubmission(req, res) {
-  const submission = await SubmissionModel.create(req.body);
-  res.json(SubmissionModel.sanitize(submission));
-});
-
 submissionRouter.post('/:submissionId/approve', [UserRoleMiddleware('admin')], async function approveSubmission(req, res) {
   const { submissionId } = req.params;
   const { feedbacks, user: admin } = req.body;

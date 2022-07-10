@@ -31,6 +31,7 @@ import SolveExerciseSkeleton from './SolveExercise.skeleton';
 import FolderStructure from '~/services/utils/FolderStructure';
 import AsideNav from './AsideNav/AsideNav';
 
+import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
 import RoutingUtils from '~/services/utils/Routing.utils';
 
@@ -346,6 +347,8 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
           versions={versions}
           submissions={submissionList}
           currentExerciseId={submission.exercise._id}
+          // FIXME: the tutorial ID should be dynamic
+          lessonHref={`/${HTML_TUTORIAL_ID}/tutorial/${getLessonById(submission.exercise.lesson).id}`}
         />
       ),
     }}

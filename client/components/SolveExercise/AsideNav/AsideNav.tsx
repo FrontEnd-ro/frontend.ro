@@ -7,6 +7,7 @@ import {
   SubmissionVersionI,
   WIPSanitiedSubmission,
 } from '~/../shared/types/submission.types';
+import Link from '~/components/generic/Link';
 import ExerciseVersionHistory from '../../ExerciseVersionHistory';
 
 import styles from './AsideNav.module.scss';
@@ -15,9 +16,12 @@ interface Props {
   submissions: Pick<WIPSanitiedSubmission, 'status' | 'exercise' | 'feedbacks'>[];
   versions: SubmissionVersionI[];
   currentExerciseId?: string;
+  lessonHref?: string;
 }
 
-const AsideNav = ({ currentExerciseId, submissions, versions }: Props) => {
+const AsideNav = ({
+  currentExerciseId, submissions, versions, lessonHref,
+}: Props) => {
   const router = useRouter();
   const versionHrefBuilder = (v: SubmissionVersionI) => ({
     query: {
@@ -64,7 +68,14 @@ const AsideNav = ({ currentExerciseId, submissions, versions }: Props) => {
           );
         })}
       </nav>
-      <ExerciseVersionHistory hrefBuilder={versionHrefBuilder} versions={versions} />
+      <div>
+        {lessonHref !== undefined && (
+          <Link href={lessonHref} variant="duo-tone" color="white" className="d-block mt-4 mb-8">
+            Înpoi la lecție
+          </Link>
+        )}
+        <ExerciseVersionHistory hrefBuilder={versionHrefBuilder} versions={versions} />
+      </div>
     </div>
   );
 };

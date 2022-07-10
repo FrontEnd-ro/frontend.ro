@@ -61,7 +61,11 @@ enum AutoSave {
 
 // TODO: refactor to get rid of duplicate code
 // https://github.com/FrontEnd-ro/frontend.ro/issues/411
-function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connector> & Props) {
+function SolveExercise({
+  exerciseId,
+  isLoggedIn,
+  tutorials,
+}: ConnectedProps<typeof connector> & Props) {
   const router = useRouter();
   const solutionRef = useRef(null);
   const [submission, setSubmission] = useState<Submission>(null);
@@ -93,9 +97,9 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
   }, [submission]);
 
   const autoSaveSolution = async (code) => {
-    if (!code || !isLoggedIn) {
+    if (!code || !isLoggedIn || !tutorials.includes(submission.exercise.type)) {
       // Do not save empty editors or if the user
-      // is not logged in
+      // is not logged in or if this tutorial hasn't been started
       return;
     }
 
@@ -146,23 +150,32 @@ function SolveExercise({ exerciseId, isLoggedIn }: ConnectedProps<typeof connect
 
     setIsSubmitting(true);
 
-    let updatedSubmission;
-    if (submission._id) {
-      updatedSubmission = await SubmissionService.updateSubmission(submission._id, {
-        status: SubmissionStatus.AWAITING_REVIEW,
-        code,
+    try {
+      let updatedSubmission;
+      if (submission._id) {
+        updatedSubmission = await SubmissionService.updateSubmission(submission._id, {
+          status: SubmissionStatus.AWAITING_REVIEW,
+          code,
+        });
+      } else {
+        updatedSubmission = await SubmissionService.createSubmission(exerciseId, code);
+      }
+
+      setSubmission(updatedSubmission);
+
+      SweetAlertService.toast({
+        type: 'success',
+        text: 'Ai trimis soluția cu succes',
       });
-    } else {
-      updatedSubmission = await SubmissionService.createSubmission(exerciseId, code);
+    } catch (e) {
+      console.error('submitSolution: ', e);
+      SweetAlertService.toast({
+        type: 'error',
+        text: e.message ?? 'Nu am putut trimite soluția ta. Mai încearcă.',
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
-    setSubmission(updatedSubmission);
-
-    SweetAlertService.toast({
-      type: 'success',
-      text: 'Ai trimis soluția cu succes',
-    });
   };
 
   const validateSubmissionCanBeSent = (code: string, submission: Submission) => {
@@ -456,6 +469,7 @@ const ExerciseNotFound = () => (
 function mapStateToProps(state: RootState) {
   return {
     isLoggedIn: !!state.user.info,
+    tutorials: state.user?.info?.tutorials ?? [],
   };
 }
 

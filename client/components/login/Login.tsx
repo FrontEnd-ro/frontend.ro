@@ -206,27 +206,30 @@ class Login extends Component<PropsWithChildren<MyProps>, MyState> {
 
             {mode === 'register' && (
               <FormGroup className="mb-4">
-                <label>
-                  <span className="label"> Username </span>
-                  <InputWithIcon
-                    required
-                    type="text"
-                    name="username"
-                    onChange={this.onUsernameChange}
-                  >
-                    {usernameExists && <FontAwesomeIcon width="1em" className="text-red" icon={faTimes} />}
-                    {usernameExists === false && <FontAwesomeIcon width="1em" className="text-green" icon={faCheck} />}
-                    {usernameExists === undefined && username && <FontAwesomeIcon width="1em" className="rotate" icon={faSpinner} />}
-                  </InputWithIcon>
+                <label className="label">
+                  Username
                 </label>
+                <InputWithIcon
+                  required
+                  type="text"
+                  name="username"
+                  // TODO: migrate component to Hooks so we can use `useId`
+                  id="loginUsername"
+                  onChange={this.onUsernameChange}
+                >
+                  {usernameExists && <FontAwesomeIcon width="1em" className="text-red" icon={faTimes} />}
+                  {usernameExists === false && <FontAwesomeIcon width="1em" className="text-green" icon={faCheck} />}
+                  {usernameExists === undefined && username && <FontAwesomeIcon width="1em" className="rotate" icon={faSpinner} />}
+                </InputWithIcon>
               </FormGroup>
             )}
 
             <FormGroup className="mb-4">
-              <label>
-                <span className="label"> Parola </span>
-                <PasswordReveal />
+              <label htmlFor="loginPassword" className="label">
+                Parola
               </label>
+              {/* TODO: migrate component to Hooks so we can use `useId` */}
+              <PasswordReveal inputId="loginPassword" />
             </FormGroup>
 
             {(mode === 'register') && (

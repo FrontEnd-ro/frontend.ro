@@ -8,6 +8,7 @@ import styles from './PasswordReveal.module.scss';
 interface Props {
   required?: boolean;
   name?: string;
+  inputId?: string;
   autoComplete?: string;
   passwordError?: boolean;
   onInput?: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -19,6 +20,7 @@ const PasswordReveal = React.forwardRef(({
   autoComplete = 'on',
   passwordError = false,
   onInput,
+  inputId,
 }: Props, forwardRef: React.RefObject<HTMLInputElement>) => {
   const [visible, setVisible] = useState(false);
 
@@ -30,6 +32,7 @@ const PasswordReveal = React.forwardRef(({
           type={visible ? 'text' : 'password'}
           name={name}
           required={required}
+          id={inputId}
           autoComplete={autoComplete}
           onInput={onInput}
         />

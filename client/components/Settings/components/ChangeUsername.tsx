@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import Button from '~/components/Button';
 import Form, { FormGroup, PasswordReveal } from '~/components/Form';
 import UsernameInput from '~/components/Form/UsernameInput/UsernameInput';
@@ -10,6 +10,7 @@ interface Props {
 }
 
 function ChangeUsername({ onSuccess }: Props) {
+  const inputId = useId();
   const [error, setError] = useState(null);
   const [isChanging, setIsChanging] = useState(false);
 
@@ -47,12 +48,10 @@ function ChangeUsername({ onSuccess }: Props) {
       <div className="d-flex justify-content-between align-items-center">
         <div>
           <FormGroup className="mb-4">
-            <label>
-              <span className="label">
-                Noul username*
-              </span>
-              <UsernameInput name="newUsername" />
+            <label htmlFor={inputId} className="label">
+              Noul username*
             </label>
+            <UsernameInput id={inputId} name="newUsername" />
           </FormGroup>
 
           <FormGroup>

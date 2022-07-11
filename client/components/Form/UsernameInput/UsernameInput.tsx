@@ -5,7 +5,7 @@ import { faCheck, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 import UserService from '~/services/User.service';
 import InputWithIcon from '../InputWithIcon/InputWithIcon';
 
-function UsernameInput({ name }: any) {
+function UsernameInput({ name, id }: { name: string; id?: string; }) {
   const ref = useRef<HTMLInputElement>(null);
   const checkFn = useRef<DebouncedFunc<(value: string) => void>>(debounce(checkUsername, 250));
 
@@ -45,6 +45,7 @@ function UsernameInput({ name }: any) {
       type="text"
       name={name}
       ref={ref}
+      id={id}
       onChange={onUsernameChange}
     >
       {usernameExists && <FontAwesomeIcon width="1em" className="text-red" icon={faTimes} />}

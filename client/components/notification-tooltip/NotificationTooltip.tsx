@@ -16,6 +16,7 @@ import {
 } from '../../redux/user/user.actions';
 import { RootState } from '~/redux/root.reducer';
 import { useOutsideClick } from '~/services/Hooks';
+import NotificationItem from './NotificationItem/NotificationItem';
 import SkeletonNotificationList from './skeleton-list/SkeletonList';
 import NotificationService from '~/services/api/Notification.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -146,12 +147,13 @@ const NotificationsTooltip = ({
           {notifications.length > 0 && (
             <List>
               {notifications.map((notificationProps) => (
-                <Notification
-                  theme={theme}
+                <NotificationItem
                   key={notificationProps._id}
-                  notification={notificationProps}
-                  onMarkAsRead={() => markAsRead(notificationProps._id)}
-                />
+                  isRead={notificationProps.read}
+                  onClick={() => markAsRead(notificationProps._id)}
+                >
+                  <Notification notification={notificationProps} />
+                </NotificationItem>
               ))}
             </List>
           )}

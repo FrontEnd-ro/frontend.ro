@@ -1,44 +1,19 @@
 @import '../../../styles/variables';
 
-.notification {
-  line-height: 2em;
+.Notification {
+  padding: 0.5em 1em;
+
+  &:hover {
+    @extend %gradientBackground;
+    @extend %blueGradientBackground;
+  }
+}
+
+.image {
+  margin-right: 0.8em;
+}
+
+.user {
+  margin-right: 0.4em;
   border-bottom: 1px solid color(silver);
-
-  &:first-of-type {
-    border-top: 1px solid color(silver);
-  }
-
-  &:last-of-type {
-    border-bottom: 0;
-  }
-
-  a {
-    padding: 0.5em 1em;
-
-    &:hover {
-      @extend %gradientBackground;
-      @extend %blueGradientBackground;
-    }
-  }
-
-  img {
-    margin-right: 0.8em;
-  }
-
-  :global .body {
-    white-space: initial;
-  }
-
-  .user {
-    margin-right: 0.4em;
-    border-bottom: 1px solid color(silver);
-  }
-}
-
-.theme-default.is--unread {
-  background-color: darken(color(darker-white), 5%);
-}
-
-.theme-black.is--unread {
-  background-color: #000;
 }

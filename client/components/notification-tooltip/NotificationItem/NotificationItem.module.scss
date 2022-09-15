@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+
+.notification {
+  line-height: 2em;
+  border-bottom: 1px solid color(silver);
+
+  &:first-of-type {
+    border-top: 1px solid color(silver);
+  }
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  :global .body {
+    white-space: initial;
+  }
+}
+
+.theme-default.is--unread {
+  background-color: darken(color(darker-white), 5%);
+}
+
+.theme-black.is--unread {
+  background-color: #000;
+}

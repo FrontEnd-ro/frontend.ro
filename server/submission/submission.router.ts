@@ -367,7 +367,7 @@ async function notifyAdminsNewSubmission(studentName: string) {
         headline: "Nou Exercițiu Rezolvat",
         body: `${studentName} a rezolvat un exercitiu.`,
         cta_text: "Vezi solutia",
-        cta_link: "https://frontend.ro/exercitii-rezolvat",
+        cta_link: "https://frontend.ro/exercitii-rezolvate",
       }
     );
   });

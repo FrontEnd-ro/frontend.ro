@@ -309,7 +309,9 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
   }
 
   res.json(SubmissionModel.sanitize(updatedSubmission));
-  notifyAdminsNewSubmission(user.name || user.username);
+  if (updatedSubmission.status === SubmissionStatus.AWAITING_REVIEW) {
+    notifyAdminsNewSubmission(user.name || user.username);
+  }
 });
 
 

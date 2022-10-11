@@ -47,7 +47,7 @@ function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<
 
   if (exercises) {
     exercises.forEach((ex) => {
-      const matchedSubmission = submissions.find((sub) => sub.exercise._id === ex._id);
+      const matchedSubmission = submissions?.find((sub) => sub.exercise._id === ex._id);
 
       if (matchedSubmission) {
         mergedData.push(matchedSubmission);

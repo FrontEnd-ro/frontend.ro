@@ -24,7 +24,11 @@ body {
 
 @media screen and (min-width: 640px) {
   .email-card {
-    background-color: color(white);
+    // VERY IMPORTANT: do not change this to pure white (#fff)
+    // or we will break rending on the MacBook Email Client.
+    // From my tests, it seems like the client modifies pure white
+    // to a black color, if dark theme on the laptop is enabled.
+    background-color: #fffffd;
   }
 }
 

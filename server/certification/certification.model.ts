@@ -1,9 +1,9 @@
 import mongoose, { Document, ObjectId } from 'mongoose';
-import { LambdaClient, InvokeCommand, waitUntilFunctionActive } from '@aws-sdk/client-lambda';
 
 import appConfig from '../config';
 import Tutorial from '../tutorial/tutorial.model';
 import { LessonI } from '../../shared/types/lesson.types';
+import { LambdaService } from '../services/Lambda.service';
 const SharedUserModel = require('../../shared/user.shared-model');
 const SubmissionModel = require('../submission/submission.model');
 import SharedExerciseModel from '../../shared/exercise.shared-model';
@@ -145,7 +145,6 @@ export async function refreshCertificationAssets(
   const FunctionName = appConfig.APP.env === 'production'
     ? 'diploma-screenshot'
     : 'diploma-test';
-    const lambda = new LambdaClient({ region: appConfig.AWS.region });
 
   const SPAN = `[refreshCertificationAssets, certificationId=${certification.id}, FunctionName=${FunctionName}, region=${appConfig.AWS.region}, dryRun=${dryRun}]`;
 
@@ -154,33 +153,12 @@ export async function refreshCertificationAssets(
     url: getCertificationUrl(certification.id),
     dryRun,
   }
-  // TODO: extract this into a Lambda Service
-  // that abstracts all this logic.
-  const invokeCommand = new InvokeCommand({
-    FunctionName,
-    InvocationType: 'RequestResponse',
-    Payload: Buffer.from(JSON.stringify(payload), 'utf-8'),
-  });
 
-  const waitResponse = await waitUntilFunctionActive({
-    client: lambda,
-    maxWaitTime: 30,
-  }, {
-    FunctionName
-  });
-  if (waitResponse.state !== 'SUCCESS') {
-    console.log(`${SPAN} Function is not active.`, waitResponse);
+  const body = await LambdaService.invokeWithIdleRetry(FunctionName, payload);
+  if (body === null) {
+    console.log(`${SPAN} Got "null" response. Exiting.`);
     return certification;
   }
-
-  const response = await lambda.send(invokeCommand);
-  console.log(`${SPAN} Got response from lambda function`, response);
-
-  const decodedPayload = new TextDecoder('ascii').decode(response.Payload);
-  console.log(`${SPAN} Decoded string payload is`, decodedPayload);
-
-  const jsonPayload = JSON.parse(decodedPayload);
-  const body = JSON.parse(jsonPayload.body)
 
   if (!body?.pdf?.success) {
     console.error(`${SPAN} PDF wasn't successfully generated`);

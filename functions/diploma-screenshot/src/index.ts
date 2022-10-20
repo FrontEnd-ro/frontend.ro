@@ -9,9 +9,6 @@ import {
 import * as dotenv from 'dotenv';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import chromium = require('chrome-aws-lambda');
-// TODO: not sure why ESLint complains about the below rule
-// eslint-disable-next-line import/first
-import { DiplomaScreenshotInput } from '../../../shared/types/function.types';
 
 interface ResizeOptions extends JSONObject {
   width?: number,
@@ -23,7 +20,11 @@ dotenv.config();
 
 exports.handler = run;
 
-async function run(event: DiplomaScreenshotInput) {
+async function run(event: {
+  url: string;
+  dryRun: boolean;
+  certificationId: string;
+}) {
   console.log('Function called with event=', event);
 
   const { pdf, ogImage } = await generateAssets(event.url);

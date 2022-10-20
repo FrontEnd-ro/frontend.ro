@@ -15,5 +15,7 @@ RUN npm install -g yarn
 # Install NPM dependencies for function
 RUN yarn
 
+RUN yarn build
+
 # Set the CMD to your handler
 CMD [ "index.handler" ] 

@@ -8,6 +8,7 @@ import { TidbitI } from '~/../shared/types/tidbit.types';
 import LandingAdCard from './LandingAdCard/LandingAdCard';
 import LandingResources from './LandingResources/LandingResources';
 import LandingSubscribe from './LandingSubscribe/LandingSubscribe';
+import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import LandingHTML from '~/components/Landing/LandingHtml/LandingHtml';
 import LandingTidbits from '~/components/Landing/LandingTidbits/LandingTidbits';
 
@@ -18,7 +19,11 @@ function LandingPage({
   tutorials,
   isLoggedIn,
   applicationConfig,
-}: ConnectedProps<typeof connector> & {tidbits: TidbitI[]}) {
+  htmlTutorialProgress,
+}: ConnectedProps<typeof connector> & {
+  tidbits: TidbitI[],
+  htmlTutorialProgress?: TutorialProgressI,
+}) {
   return (
     <>
       <SEOTags
@@ -43,7 +48,11 @@ function LandingPage({
       </style>
       <>
         {applicationConfig.ad && <LandingAdCard ad={applicationConfig.ad} />}
-        <LandingHero isLoggedIn={isLoggedIn} tutorials={tutorials} />
+        <LandingHero
+          tutorials={tutorials}
+          isLoggedIn={isLoggedIn}
+          htmlTutorialProgress={htmlTutorialProgress}
+        />
         <LandingHTML className={styles.LandingHTML} />
         <LandingTidbits tidbits={tidbits} />
         <LandingResources className={styles.LandingResources} />

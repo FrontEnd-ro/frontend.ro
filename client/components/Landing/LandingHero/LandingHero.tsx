@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import ConfettiGenerator from 'confetti-js';
+import React, { useEffect, useRef, useState } from 'react';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -9,6 +10,7 @@ import NavLinks from '~/components/NavLinks/NavLinks';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import LandingSchmoes from './LandingSchmoes/LandingSchmoes';
 import AsideMenu from '~/components/layout/AsideMenu/AsideMenu';
+import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 import styles from './LandingHero.module.scss';
 
@@ -17,11 +19,55 @@ interface Props {
 
   // Tutorials started by the user
   tutorials: string[];
+
+  // Progress of the HTML tutorial,
+  // if the user started it.
+  htmlTutorialProgress?: TutorialProgressI;
 }
 
-function LandingHero({ isLoggedIn, tutorials }: Props) {
+enum TutorialState {
+  NOT_STARTED = 0,
+  IN_PROGRESS = 1,
+  FINISHED = 2,
+}
+
+function LandingHero({ isLoggedIn, tutorials, htmlTutorialProgress }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const didStartHTMLTutorial = tutorials.includes(HTML_TUTORIAL_ID);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  let tutorialState = TutorialState.NOT_STARTED;
+  if (htmlTutorialProgress?.certification !== undefined) {
+    tutorialState = TutorialState.FINISHED;
+  } else if (tutorials.includes(HTML_TUTORIAL_ID)) {
+    tutorialState = TutorialState.IN_PROGRESS;
+  }
+
+  const CONFIG: Record<TutorialState, { label: string; href: string }> = {
+    [TutorialState.NOT_STARTED]: {
+      label: 'Începe Tutorialul de HTML',
+      href: '/html',
+    },
+    [TutorialState.IN_PROGRESS]: {
+      label: 'Continuă Tutorialul de HTML',
+      href: '/html/tutorial',
+    },
+    [TutorialState.FINISHED]: {
+      label: 'Vezi certificarea HTML!',
+      href: '/html/tutorial/certification',
+    },
+  };
+
+  useEffect(() => {
+    if (tutorialState === TutorialState.FINISHED) {
+      const confetti = new ConfettiGenerator({
+        target: canvasRef.current,
+        width: 300,
+        height: 70,
+        clock: 15,
+      });
+      confetti.render();
+    }
+  }, []);
 
   return (
     <>
@@ -56,10 +102,11 @@ function LandingHero({ isLoggedIn, tutorials }: Props) {
             <Link
               color="black"
               variant="contained"
-              href={didStartHTMLTutorial ? '/html/tutorial' : '/html'}
-              className={`${styles['action-button']} d-inline-block mt-2 text-center`}
+              href={CONFIG[tutorialState].href}
+              className={`${styles['action-button']} d-inline-block mt-2 text-center relative`}
             >
-              {didStartHTMLTutorial ? 'Continuă Tutorialul de HTML' : 'Începe Tutorialul de HTML'}
+              {CONFIG[tutorialState].label}
+              <canvas className="pin-full" ref={canvasRef} />
             </Link>
           </div>
         </div>

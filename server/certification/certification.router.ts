@@ -110,36 +110,44 @@ export async function maybeCreateCertification(
   const certification = await createCertification(userId, tutorial._id, dryRun);
 
   // Notify via Email
-  const emailResult = await EmailService.sendTemplateWithAlias(user.email, EMAIL_TEMPLATE.AWARDED_CERTIFICATION, {
-    [appConfig.APP.language]: true,
-    name: user.name,
-    moduleName: tutorial.name,
-    moduleUrl: `${appConfig.APP.app_url}/${tutorial.tutorialId}`,
-    certificationUrl: `${appConfig.APP.app_url}/certificari/${certification.id}`
-  });
-
-  if (emailResult.success === true) {
-    console.log(`${SPAN} Successfully notified via email.`);
+  if (dryRun === true) {
+    console.log(`${SPAN} Skipping email notification.`);
   } else {
-    console.error(`${SPAN} Failed to notify user via email.`, emailResult);
+    const emailResult = await EmailService.sendTemplateWithAlias(user.email, EMAIL_TEMPLATE.AWARDED_CERTIFICATION, {
+      [appConfig.APP.language]: true,
+      name: user.name,
+      moduleName: tutorial.name,
+      moduleUrl: `${appConfig.APP.app_url}/${tutorial.tutorialId}`,
+      certificationUrl: `${appConfig.APP.app_url}/certificari/${certification.id}`
+    });
+  
+    if (emailResult.success === true) {
+      console.log(`${SPAN} Successfully notified via email.`);
+    } else {
+      console.error(`${SPAN} Failed to notify user via email.`, emailResult);
+    }
   }
 
   // Notify IN_APP
-  try {
-    await NotificationModel.notify({
-      to: user,
-      title: `Felicitări Ai completat cu succes ${tutorial.name}`,
-      short_message: `Ți-am generat cu succes certificarea pentru ${tutorial.name}. Congrats!`,
-      long_message: `Sunt Alex de la FrontEnd.ro și-ți scriu pentru a te felicita că ai completat cu succes ${tutorial.name}`,
-      timestamp: Date.now(),
-      href: `//certificari/${certification.id}`,
-      href_text: 'Vezi certificarea aici',
-      type: NotificationType.SUCCESS,
-      urgency: NotificationUrgency.REGULAR
-    }, [NotificationChannel.IN_APP]);
-    console.log(`${SPAN} Successfully notified user IN_APP.`);
-  } catch (err) {
-    console.error(`${SPAN} Failed to notify user IN_APP.`, err);
+  if (dryRun === true) {
+    console.log(`${SPAN} Skipping in-app notification.`);
+  } else {
+    try {
+      await NotificationModel.notify({
+        to: user,
+        title: `Felicitări Ai completat cu succes ${tutorial.name}`,
+        short_message: `Ți-am generat cu succes certificarea pentru ${tutorial.name}. Congrats!`,
+        long_message: `Sunt Alex de la FrontEnd.ro și-ți scriu pentru a te felicita că ai completat cu succes ${tutorial.name}`,
+        timestamp: Date.now(),
+        href: `//certificari/${certification.id}`,
+        href_text: 'Vezi certificarea aici',
+        type: NotificationType.SUCCESS,
+        urgency: NotificationUrgency.REGULAR
+      }, [NotificationChannel.IN_APP]);
+      console.log(`${SPAN} Successfully notified user IN_APP.`);
+    } catch (err) {
+      console.error(`${SPAN} Failed to notify user IN_APP.`, err);
+    }
   }
 }
 

@@ -120,11 +120,13 @@ async function storeCertificationData(
     .filter(submission => lessonIds.includes(submission.exercise.lesson))
     .map(submission => submission.exercise._id.toString());
 
-  if (!dryRun) {
+  if (dryRun === true) {
+    console.info(`${SPAN} Skipping persistance.`);
+  } else {
     certification = await certification.save();
+    console.info(`${SPAN} successfully persisted certification.`);
   }
 
-  console.info(`${SPAN} successfully persisted certification.`);
   return certification;
 }
 
@@ -172,11 +174,13 @@ export async function refreshCertificationAssets(
     certification.og_image = body.ogImage.uri;
   }
 
-  if (!dryRun) {
+  if (dryRun === true) {
+    console.info(`${SPAN} Skipping persistance.`);
+  } else {
     await certification.save();
+    console.info(`${SPAN} successfully generated and persisted assets`, certification.toJSON());
   }
 
-  console.info(`${SPAN} successfully generated and persisted assets`, certification.toJSON());
   return certification;
 }
 

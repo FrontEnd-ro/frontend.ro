@@ -8,7 +8,9 @@ FROM public.ecr.aws/lambda/nodejs:14
 ENV LAMBDA_TASK_ROOT=/var/task/
 
 # Function file is named "index.js", and there is a package.json file in the app directory 
-COPY ./src tsconfig.json package.json  ${LAMBDA_TASK_ROOT}
+COPY src ${LAMBDA_TASK_ROOT}
+COPY tsconfig.json ${LAMBDA_TASK_ROOT}
+COPY package.json package.json
 
 RUN npm install -g yarn
 

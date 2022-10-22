@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const { connectToDb } = require('./database');
-const { default: sslRedirect } = require('heroku-ssl-redirect');
 
 require('dotenv').config();
 import appConfig from './config';
@@ -42,8 +41,6 @@ app.use(
   })
 );
 
-
-app.use(sslRedirect());
 app.use(compression());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());

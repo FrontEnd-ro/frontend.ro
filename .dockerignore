@@ -1,0 +1,38 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.env
+
+public/robots.txt
+public/sitemap.xml
+public/sitemap-0.xml
+
+storybook-static/
+
+#IDE
+.idea/
+
+mongodb_dump
+server-build
+

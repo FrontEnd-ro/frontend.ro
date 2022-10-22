@@ -1,8 +1,8 @@
 {
   "APP": {
     "env": "development",
-    "app_url": "https://frontend-ro-dev.herokuapp.com",
-    "endpoint": "https://frontend-ro-dev.herokuapp.com/api"
+    "app_url": "https://dev.frontend.ro",
+    "endpoint": "https://dev.frontend.ro/api"
   },
   "CDN": {
     "user_generated": "https://d3g5wqcc138su1.cloudfront.net"

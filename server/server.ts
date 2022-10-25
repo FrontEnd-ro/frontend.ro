@@ -37,7 +37,7 @@ app.use(
   cors({
     credentials: true,
     origin: appConfig.APP.env === 'production'
-      ? 'https://frontend.ro'
+      ? appConfig.APP.app_url
       : 'http://localhost:3300'
   })
 );

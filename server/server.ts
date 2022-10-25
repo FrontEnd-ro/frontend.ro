@@ -30,7 +30,7 @@ import tidbitRouter from './tidbit/tidbit.router';
 
 const port = appConfig.APP.port || appConfig.APP.default_port;
 const app = express();
-const nextApp = next({ dev: process.env.NODE_ENV !== 'production' })
+const nextApp = next({ dev: process.env.NODE_ENV === 'development' })
 const nextHandler = nextApp.getRequestHandler()
 
 app.use(

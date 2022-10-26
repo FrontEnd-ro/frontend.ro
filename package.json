@@ -52,8 +52,6 @@
     "postbuild": "next-sitemap",
     "start": "node server-build/server/server.js",
     "lint": "eslint pages/**/*.tsx client/**/*.tsx",
-    "deploy:master-dev": "git push dev master:master",
-    "deploy:master-prod": "git push heroku master:master",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",

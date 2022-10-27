@@ -63,6 +63,11 @@ function PrivateMiddleware(req, res, next) {
       } else {
         UserModel.findUserBy({ _id: payload._id })
           .then(resp => {
+            if (resp === null) {
+              // JWT is valid, but encoded ID doesn't exist
+              new ServerError(401, 'Unauthorized!').send(res);
+              return;
+            }
             req.body.user = resp;
             next();
           })

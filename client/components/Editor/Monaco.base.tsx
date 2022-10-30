@@ -395,12 +395,14 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
     return null;
   }
 
-  onResize = (fileSwitcherWidth) => {
-    this.setState({ fileSwitcherWidth }, () => {
-      if (this.editor) {
-        this.editor.layout();
-      }
-    });
+  resize = () => {
+    const SPAN = '[MonacoBase, resize]';
+    if (!this.editor) {
+      console.error(`${SPAN} Trying to resize editor but no editor found`);
+      return;
+    }
+
+    this.editor.layout();
   }
 
   onAllChanges(cb) {

@@ -294,7 +294,7 @@ class MonacoEditor extends MonacoBase {
       feedbacks,
     } = this.props;
     const {
-      folderStructure, selectedFileKey, fileSwitcherWidth, isDropable,
+      folderStructure, selectedFileKey, isDropable,
     } = this.state;
     const className = this.props.className || '';
     const selectedFile = folderStructure.getFile(selectedFileKey).file;
@@ -324,17 +324,13 @@ class MonacoEditor extends MonacoBase {
               onFileDelete={this.onFileDelete}
               onFolderDelete={this.onFolderDelete}
               onDownload={this.onDownload}
-              onResize={this.onResize}
+              onResize={this.resize}
             />
             <div
               className={`
                 ${styles.editor}
                 ${selectedFileKey ? '' : styles['has--no-selected-file']}
               `}
-              style={{
-                width: `calc(100% - ${fileSwitcherWidth}px)`,
-                maxWidth: `calc(100% - ${fileSwitcherWidth}px)`, // without this it doesn't resize in FF
-              }}
               ref={this.editorRef}
             />
             {selectedFile && (

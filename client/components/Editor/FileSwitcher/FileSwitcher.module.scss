@@ -6,6 +6,8 @@
   background: color(white);
   border-right: 0;
   color: color(black);
+  flex-grow: 0;
+  flex-shrink: 0;
 
   &.is--collapsed {
     width: 0 !important;

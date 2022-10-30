@@ -56,7 +56,7 @@ class BasicMonacoEditor extends MonacoBase {
   render() {
     const { readOnly } = this.props;
     const {
-      folderStructure, fileSwitcherWidth, selectedFileKey, isDropable,
+      folderStructure, selectedFileKey, isDropable,
     } = this.state;
     const selectedFile = folderStructure.getFile(selectedFileKey).file;
 
@@ -83,17 +83,13 @@ class BasicMonacoEditor extends MonacoBase {
               onFileDelete={this.onFileDelete}
               onFolderDelete={this.onFolderDelete}
               onDownload={this.onDownload}
-              onResize={this.onResize}
+              onResize={this.resize}
             />
             <div
               className={`
                 ${styles.editor}
                 ${selectedFileKey ? '' : styles['has--no-selected-file']}
               `}
-              style={{
-                width: `calc(100% - ${fileSwitcherWidth}px)`,
-                maxWidth: `calc(100% - ${fileSwitcherWidth}px)`,
-              }}
               ref={this.editorRef}
             />
             {selectedFile && (

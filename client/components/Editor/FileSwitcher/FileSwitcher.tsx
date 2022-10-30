@@ -30,7 +30,7 @@ interface Props {
   readOnly: boolean,
   selectedFileKey: string;
   folderStructure: FolderStructure,
-  onResize: (px: number) => void
+  onResize: () => void
   onSelect?: (key: string) => void
   onDownload?: () => Promise<void>
   onFolderAdd?: (key: string, asset: any) => void;
@@ -71,8 +71,7 @@ class FileSwitcher extends React.Component<Props, State> {
 
   componentDidMount() {
     const { onResize } = this.props;
-
-    onResize(INITIAL_WIDTH_PX);
+    onResize();
   }
 
   componentWillUnmount() {
@@ -219,22 +218,18 @@ class FileSwitcher extends React.Component<Props, State> {
         isCollapsed: !isCollapsed,
       },
       () => {
-        if (isCollapsed) {
-          onResize(INITIAL_WIDTH_PX);
-        } else {
-          onResize(0);
-        }
+        onResize();
       },
     );
   }
 
   onResize = ({ dx }) => {
+    const { onResize } = this.props;
     let newWidth = Number(this.fileSwitcherRef.current.style.width.split('px')[0]) + dx;
     newWidth = Math.min(Math.max(newWidth, MIN_WIDTH_PX), window.innerWidth / 2);
 
     this.fileSwitcherRef.current.style.width = `${newWidth}px`;
-
-    this.props.onResize(newWidth);
+    onResize();
   }
 
   deleteFileOrFolder(key) {
@@ -279,7 +274,7 @@ class FileSwitcher extends React.Component<Props, State> {
           ${readOnly ? styles['is--read-only'] : ''}
           ${isCollapsed ? styles['is--collapsed'] : ''}`}
         ref={this.fileSwitcherRef}
-        style={{ width: `${INITIAL_WIDTH_PX}px`, minWidth: `${MIN_WIDTH_PX}px` }}
+        style={{ width: `${INITIAL_WIDTH_PX}px` }}
       >
         {isCollapsed && (
           <Button onClick={this.toggleCollapse} title="Browse files" className={`${styles['toggle-button']}`}>

@@ -73,7 +73,6 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
   render() {
     const {
       modifiedFolderStructure,
-      fileSwitcherWidth,
       selectedFileKey,
     } = this.state;
     const { className } = this.props;
@@ -94,17 +93,13 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
           selectedFileKey={selectedFileKey}
           onSelect={this.onDiffFileSelect}
           onDownload={this.onDownload}
-          onResize={this.onResize}
+          onResize={this.resize}
         />
         <div
           className={`
             ${styles.editor}
             ${selectedFileKey ? '' : styles['has--no-selected-file']}
           `}
-          style={{
-            width: `calc(100% - ${fileSwitcherWidth}px)`,
-            maxWidth: `calc(100% - ${fileSwitcherWidth}px)`,
-          }}
           ref={this.editorRef}
         />
         {selectedFile && (

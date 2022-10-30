@@ -37,7 +37,9 @@ function withSmoothScroll(ref?: React.MutableRefObject<HTMLElement>) {
     }
     ref.current.style.scrollBehavior = 'smooth';
     return () => {
-      ref.current.style.scrollBehavior = 'initial';
+      if (ref.current !== undefined && ref.current !== null) {
+        ref.current.style.scrollBehavior = 'initial';
+      }
     };
   }, []);
 }

@@ -13,7 +13,7 @@ const HResizable = ({
   onResize,
   onEnd = noop,
 }: {
-  onResize: ({ dx: number }) => void,
+  onResize: ({ dx }: { dx: number }) => void,
   onEnd?: () => void
 }) => {
   const xRef = useRef<number>(0);

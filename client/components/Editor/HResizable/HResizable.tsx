@@ -1,14 +1,21 @@
 import React, { useEffect, useRef } from 'react';
+import { noop } from '~/services/Utils';
 import styles from './HResizable.module.scss';
 
 /**
- * Vertical separator, ssed inside the MonacoEditor component
+ * Vertical separator, used inside the MonacoEditor component
  * to separate the files section from the actual coding section.
  *
  * By passing the `onResize` callback we get notified when the user
  * grips and drags it (either via Mouse or Touch).
  */
-const HResizable = ({ onResize }: { onResize: ({ dx: number }) => void }) => {
+const HResizable = ({
+  onResize,
+  onEnd = noop,
+}: {
+  onResize: ({ dx: number }) => void,
+  onEnd?: () => void
+}) => {
   const xRef = useRef<number>(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -40,6 +47,8 @@ const HResizable = ({ onResize }: { onResize: ({ dx: number }) => void }) => {
 
     document.removeEventListener('mouseup', onMouseUp);
     document.removeEventListener('touchend', onMouseUp);
+
+    onEnd();
   }, []);
 
   useEffect(() => {

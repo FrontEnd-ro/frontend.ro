@@ -76,11 +76,13 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
       fileSwitcherWidth,
       selectedFileKey,
     } = this.state;
+    const { className } = this.props;
     const selectedFile = modifiedFolderStructure.getFile(selectedFileKey).file;
 
     return (
       <div
         className={`
+        ${className ?? ''}
         ${styles['editor-wrapper']}
       `}
         onDragEnter={this.onDragEnter}

@@ -7,9 +7,11 @@ const DiffEditorLazy = React.forwardRef((
   {
     originalFolderStructure,
     modifiedFolderStructure,
+    className = '',
   }: {
     originalFolderStructure: Pick<ExerciseFolder, 'files' | 'folders'>,
     modifiedFolderStructure: Pick<ExerciseFolder, 'files' | 'folders'>,
+    className?: string,
   }, forwardRef,
 ) => {
   const [DiffEditor, setDiffEditor] = useState(null);
@@ -29,6 +31,7 @@ const DiffEditorLazy = React.forwardRef((
   return (
     <DiffEditor
       ref={forwardRef}
+      className={className}
       // FIXME
       // https://github.com/FrontEnd-ro/frontend.ro/issues/111
       key={`${JSON.stringify(modifiedFolderStructure)}_${JSON.stringify(originalFolderStructure)}`}

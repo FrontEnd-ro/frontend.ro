@@ -200,10 +200,12 @@ function OfferFeedback({
             key={exerciseId}
             ref={solutionRef}
             folderStructure={folderStructure}
+            className="mt-8"
             onFeedbackAdded={(f) => setFeedbacks(f.getAll())}
           />
         ) : (
           <DiffEditorLazy
+            className="mt-8"
             modifiedFolderStructure={folderStructure}
             originalFolderStructure={JSON.parse(submission.exercise.example)}
           />

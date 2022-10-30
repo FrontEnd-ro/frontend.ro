@@ -294,7 +294,7 @@ class MonacoEditor extends MonacoBase {
       feedbacks,
     } = this.props;
     const {
-      folderStructure, selectedFileKey, fixedHeight, fileSwitcherWidth, isDropable,
+      folderStructure, selectedFileKey, fileSwitcherWidth, isDropable,
     } = this.state;
     const className = this.props.className || '';
     const selectedFile = folderStructure.getFile(selectedFileKey).file;
@@ -306,24 +306,9 @@ class MonacoEditor extends MonacoBase {
           ${styles['editor-wrapper']} 
           ${isDropable ? styles['is--dropable'] : ''}
         `}
-        style={{
-          height: fixedHeight ? `${fixedHeight}px` : 'initial',
-        }}
         onDragEnter={this.onDragEnter}
         onDragLeave={this.onDragLeave}
       >
-        {/* {toggleableHeight && (
-        <button
-          className={
-            `editor-wrapper__fit-btn
-            icon-btn
-            ${fixedHeight ? 'icon-minimize-2' : 'icon-maximize-2'
-        }`
-}
-          title={fixedHeight ? 'Fixed size' : 'Fit to code'}
-          onClick={this.toggleFit}
-        />
-        )} */}
         {folderStructure.files.length || folderStructure.folders.length ? (
           <>
             <FileSwitcher
@@ -351,7 +336,6 @@ class MonacoEditor extends MonacoBase {
               style={{
                 width: `calc(100% - ${fileSwitcherWidth}px)`,
                 maxWidth: `calc(100% - ${fileSwitcherWidth}px)`, // without this it doesn't resize in FF
-                height: fixedHeight ? `${fixedHeight}px` : '',
               }}
               ref={this.editorRef}
             />

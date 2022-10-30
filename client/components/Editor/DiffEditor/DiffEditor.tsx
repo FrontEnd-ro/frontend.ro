@@ -42,10 +42,6 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
       },
       () => {
         this.initEditor();
-
-        if (this.editor) {
-          this.toggleFit(true);
-        }
       },
     );
   }

@@ -55,8 +55,6 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
         }
 
         if (this.editor) {
-          this.toggleFit(true);
-
           this._baseModelChangeListener.dispose();
           this._baseModelChangeListener = this.editor.onDidChangeModelContent(this.onModelChange);
         }
@@ -169,8 +167,6 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
       () => {
         this.initEditor();
         if (this.editor) {
-          this.toggleFit(true);
-
           this._baseModelChangeListener.dispose();
           this._baseModelChangeListener = this.editor.onDidChangeModelContent(this.onModelChange);
         }
@@ -505,30 +501,12 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
 
           this.initEditor();
           if (this.editor) {
-            this.toggleFit(true);
-
             this._baseModelChangeListener.dispose();
             this._baseModelChangeListener = this.editor.onDidChangeModelContent(this.onModelChange);
           }
         },
       );
     });
-  }
-
-  toggleFit = (force = undefined) => {
-    console.log('TOGGLE FIT');
-    // const { fixedHeight: fixedHeightState } = this.state;
-
-    // const editorElHeight = this.editorRef.current.getBoundingClientRect().height;
-    // let fixedHeight: any = false;
-    // if (!fixedHeightState || force === true) {
-    //   // eslint-disable-next-line max-len
-    //   fixedHeight = this.editor.getModel().getLineCount() * this.editor.getConfiguration().lineHeight;
-    // }
-
-    // this.setState({ fixedHeight: Math.max(editorElHeight, fixedHeight) }, () => {
-    //   this.editor.layout();
-    // });
   }
 
   // DragNDrop

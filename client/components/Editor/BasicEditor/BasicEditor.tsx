@@ -72,7 +72,6 @@ class BasicMonacoEditor extends MonacoBase {
         {folderStructure.files.length || folderStructure.folders.length ? (
           <>
             <FileSwitcher
-              maxHeight={500}
               folderStructure={folderStructure}
               selectedFileKey={selectedFileKey}
               readOnly={readOnly}

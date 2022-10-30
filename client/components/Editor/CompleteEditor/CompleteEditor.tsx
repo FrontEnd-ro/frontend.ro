@@ -312,8 +312,6 @@ class MonacoEditor extends MonacoBase {
         {folderStructure.files.length || folderStructure.folders.length ? (
           <>
             <FileSwitcher
-              // FIXME 👇
-              maxHeight={500}
               feedbacks={feedbacks}
               folderStructure={folderStructure}
               selectedFileKey={selectedFileKey}

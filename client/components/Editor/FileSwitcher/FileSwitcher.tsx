@@ -28,7 +28,6 @@ const INITIAL_WIDTH_PX = 250;
 
 interface Props {
   readOnly: boolean,
-  maxHeight: number,
   selectedFileKey: string;
   folderStructure: FolderStructure,
   onResize: (px: number) => void
@@ -252,7 +251,6 @@ class FileSwitcher extends React.Component<Props, State> {
   render() {
     const {
       readOnly,
-      maxHeight,
       folderStructure,
       selectedFileKey,
       feedbacks: feedbacksProp,
@@ -281,7 +279,7 @@ class FileSwitcher extends React.Component<Props, State> {
           ${readOnly ? styles['is--read-only'] : ''}
           ${isCollapsed ? styles['is--collapsed'] : ''}`}
         ref={this.fileSwitcherRef}
-        style={{ width: `${INITIAL_WIDTH_PX}px`, minWidth: `${MIN_WIDTH_PX}px`, maxHeight: `${maxHeight}px` }}
+        style={{ width: `${INITIAL_WIDTH_PX}px`, minWidth: `${MIN_WIDTH_PX}px` }}
       >
         {isCollapsed && (
           <Button onClick={this.toggleCollapse} title="Browse files" className={`${styles['toggle-button']}`}>

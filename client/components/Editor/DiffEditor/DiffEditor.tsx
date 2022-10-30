@@ -88,7 +88,6 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
       >
         <FileSwitcher
           readOnly
-          maxHeight={500}
           folderStructure={modifiedFolderStructure}
           selectedFileKey={selectedFileKey}
           onSelect={this.onDiffFileSelect}

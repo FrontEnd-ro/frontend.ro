@@ -1,8 +1,9 @@
 import styles from '../Editor.module.scss';
 
-const EditorPlaceholder = () => {
+const EditorPlaceholder = ({ className = '' }: { className?: string }) => {
   return (
     <div className={`
+      ${className}
       ${styles['editor-wrapper']} 
       ${styles['editor-wrapper--loading']}
     `}

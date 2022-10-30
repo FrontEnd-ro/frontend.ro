@@ -14,7 +14,7 @@ const CompleteEditorLazy = React.forwardRef(({ folderStructure, feedbacks, ...re
   }, []);
 
   if (!CompleteEditor) {
-    return <EditorPlaceholder />;
+    return <EditorPlaceholder className={rest.className} />;
   }
 
   return (

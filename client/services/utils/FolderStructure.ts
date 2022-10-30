@@ -20,6 +20,10 @@ export interface ExerciseFile {
   content: string;
 }
 
+export interface ExerciseFileWithPath extends ExerciseFile {
+  path: string;
+}
+
 export interface ExerciseFolder {
   key: string;
   name: string;
@@ -29,6 +33,14 @@ export interface ExerciseFolder {
 
 class FolderStructure {
   public key: string;
+
+  // Adding this name prop here, so that
+  // the FolderStructure interface is compatible
+  // with ExerciseFolder.
+  // TODO: refactor all functions where we default
+  // to `this` and make sure that any ExerciseFolder
+  // works as default.
+  public name: string;
 
   public folders: ExerciseFolder[];
 
@@ -43,6 +55,16 @@ class FolderStructure {
   /** GETs */
   hasFile(key, subFolder = this) {
     return !!this.getFile(key, subFolder).file;
+  }
+
+  getFilesWithPath(subFolder: ExerciseFolder = this, path = ''): ExerciseFileWithPath[] {
+    const downstreamFiles = subFolder
+      .folders
+      .flatMap((folder) => this.getFilesWithPath(folder, `${path}/${folder.name}`));
+    return [
+      ...downstreamFiles,
+      ...(subFolder.files.map((file) => ({ ...file, path }))),
+    ];
   }
 
   static isEmpty(root: { files: ExerciseFile[]; folders: ExerciseFolder[]; }) {

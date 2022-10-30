@@ -12,9 +12,11 @@ import styles from './HResizable.module.scss';
 const HResizable = ({
   onResize,
   onEnd = noop,
+  className = '',
 }: {
   onResize: ({ dx }: { dx: number }) => void,
-  onEnd?: () => void
+  onEnd?: () => void,
+  className?: string,
 }) => {
   const xRef = useRef<number>(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -75,7 +77,12 @@ const HResizable = ({
     };
   }, []);
 
-  return <div ref={ref} className={`${styles.resizable} ${styles['h-resizable']}`} />;
+  return (
+    <div
+      ref={ref}
+      className={`${styles.resizable} ${styles['h-resizable']} ${className}`}
+    />
+  );
 };
 
 export default HResizable;

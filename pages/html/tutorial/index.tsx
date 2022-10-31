@@ -2,6 +2,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import TutorialPage from '~/tutorials/TutorialPage';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
+import { startedTutorial } from '~/redux/user/user.actions';
 import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
@@ -11,7 +12,7 @@ type Props = {
 } & ConnectedProps<typeof connector>;
 
 const TutorialIndex = ({
-  isLoggedIn, userTutorials, tutorialInfo, tutorialProgress, submissions,
+  isLoggedIn, userTutorials, tutorialInfo, tutorialProgress, submissions, dispatch,
 }: Props) => {
   const didStartTutorial = isLoggedIn && userTutorials.includes(tutorialInfo.tutorialId);
 
@@ -21,6 +22,8 @@ const TutorialIndex = ({
         ? <TutorialDashboard submissions={submissions} tutorialProgress={tutorialProgress} />
         : (
           <TutorialDescription
+            isLoggedIn={isLoggedIn}
+            onSuccess={() => dispatch(startedTutorial(tutorialInfo.tutorialId))}
             tutorialName={tutorialInfo.name}
             tutorialId={tutorialInfo.tutorialId}
           />

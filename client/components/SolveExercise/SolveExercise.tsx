@@ -31,9 +31,12 @@ import SolveExerciseSkeleton from './SolveExercise.skeleton';
 import FolderStructure from '~/services/utils/FolderStructure';
 import AsideNav from './AsideNav/AsideNav';
 
-import { HTML_TUTORIAL_ID } from '~/services/Constants';
+import { HTML_TUTORIAL_ID, HTML_TUTORIAL_NAME } from '~/services/Constants';
 import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
 import RoutingUtils from '~/services/utils/Routing.utils';
+import { APIErrorReasons } from '~/../shared/SharedConstants';
+import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
+import { startedTutorial } from '~/redux/user/user.actions';
 
 interface Props {
   exerciseId: string;
@@ -65,6 +68,7 @@ function SolveExercise({
   exerciseId,
   isLoggedIn,
   tutorials,
+  dispatch,
 }: ConnectedProps<typeof connector> & Props) {
   const router = useRouter();
   const solutionRef = useRef(null);
@@ -168,6 +172,20 @@ function SolveExercise({
         text: 'Ai trimis soluția cu succes',
       });
     } catch (e) {
+      if (e.reason === APIErrorReasons.EXERCISE_SUBMISSION_WITHOUT_TUTORIAL_START) {
+        await SweetAlertService.content(TutorialDescription, '', {
+          isLoggedIn: true,
+          tutorialId: HTML_TUTORIAL_ID,
+          tutorialName: HTML_TUTORIAL_NAME,
+          onSuccess: (tutorialId: string) => {
+            dispatch(startedTutorial(tutorialId));
+            submitSolution();
+          },
+          className: 'text-left',
+        });
+        return;
+      }
+
       console.error('submitSolution: ', e);
       SweetAlertService.toast({
         type: 'error',

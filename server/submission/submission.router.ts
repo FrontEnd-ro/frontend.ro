@@ -8,6 +8,7 @@ import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/su
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { findTutorialIdByLessonId } from '../tutorial/tutorial.model';
 import { maybeCreateCertification } from '../certification/certification.router';
+import { APIErrorReasons } from '../../shared/SharedConstants';
 
 const express = require('express');
 const UserModel = require('../user/user.model');
@@ -286,7 +287,11 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
   let updatedSubmission;
 
   if (!user.tutorials.includes(lessonExercise.type)) {
-    new ServerError(403, 'Trebuie să te înscrii la acest tutorial pentru a putea trimite soluții.').send(res);
+    res.status(403).json({
+      code: 403,
+      reason: APIErrorReasons.EXERCISE_SUBMISSION_WITHOUT_TUTORIAL_START,
+      message: 'Trebuie să te înscrii la acest tutorial pentru a putea trimite soluții.'
+    });
     return;
   }
 

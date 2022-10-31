@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
-import List from '~/components/List';
 import Login from '~/components/login';
-import { RootState } from '~/redux/root.reducer';
-import { startedTutorial } from '~/redux/user/user.actions';
 import TutorialService from '~/services/api/Tutorial.service';
 import StartTutorialForm from './StartTutorialForm/StartTutorialForm';
 
 interface Props {
   tutorialId: string;
   tutorialName: string;
+  isLoggedIn: boolean;
+  onSuccess: (tutorialId: string) => void;
+  className?: string;
 }
 
 const TutorialDescription = ({
-  tutorialId, tutorialName, isLoggedIn, dispatch,
-}: Props & ConnectedProps<typeof connector>) => {
+  tutorialId,
+  tutorialName,
+  isLoggedIn,
+  onSuccess,
+  className = '',
+}: Props) => {
   const [error, setError] = useState<string>(null);
   const [isStarting, setIsStarting] = useState(false);
 
@@ -22,7 +25,7 @@ const TutorialDescription = ({
     setIsStarting(true);
     try {
       await TutorialService.startTutorial(tutorialId);
-      dispatch(startedTutorial(tutorialId));
+      onSuccess(tutorialId);
     } catch (err) {
       console.error('TutorialDescription.startTutorial', err);
       setError(err.message ?? 'Nu am reușit să începem tutorialul. Încearcă din nou');
@@ -32,7 +35,7 @@ const TutorialDescription = ({
   };
 
   return (
-    <section className="d-flex flex-column justify-content-between pb-5">
+    <section className={`d-flex flex-column justify-content-between pb-5 ${className}`}>
       <div style={{ marginBottom: '5em' }} className="font-light">
         <p className="text-2xl mb-0 text-bold">
           Hey 👋,
@@ -113,12 +116,4 @@ const TutorialDescription = ({
   );
 };
 
-function mapStateToProps(state: RootState) {
-  return {
-    isLoggedIn: !!state.user?.info,
-  };
-}
-
-const connector = connect(mapStateToProps);
-
-export default connector(TutorialDescription);
+export default TutorialDescription;

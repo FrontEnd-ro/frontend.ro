@@ -22,7 +22,7 @@ function LandingPage({
   htmlTutorialProgress,
 }: ConnectedProps<typeof connector> & {
   tidbits: TidbitI[],
-  htmlTutorialProgress?: TutorialProgressI,
+  htmlTutorialProgress: TutorialProgressI | null,
 }) {
   return (
     <>

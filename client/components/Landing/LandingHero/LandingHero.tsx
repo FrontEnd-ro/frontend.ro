@@ -22,7 +22,7 @@ interface Props {
 
   // Progress of the HTML tutorial,
   // if the user started it.
-  htmlTutorialProgress?: TutorialProgressI;
+  htmlTutorialProgress: TutorialProgressI | null;
 }
 
 enum TutorialState {
@@ -36,7 +36,7 @@ function LandingHero({ isLoggedIn, tutorials, htmlTutorialProgress }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   let tutorialState = TutorialState.NOT_STARTED;
-  if (htmlTutorialProgress?.certification !== undefined) {
+  if (htmlTutorialProgress !== null && !!htmlTutorialProgress?.certification) {
     tutorialState = TutorialState.FINISHED;
   } else if (tutorials.includes(HTML_TUTORIAL_ID)) {
     tutorialState = TutorialState.IN_PROGRESS;

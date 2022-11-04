@@ -7,9 +7,6 @@ import {
   faFolderPlus,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  faEdit, faFileAlt, faFolder, faTrashAlt,
-} from '@fortawesome/free-regular-svg-icons';
 import { uuid, nextUntitledFilename } from '~/services/Utils';
 import HResizable from '../HResizable/HResizable';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -19,7 +16,7 @@ import FilesList from '../FileList/FilesList';
 import FolderBrowse from '../FolderBrowser/FolderBrowse';
 import Feedbacks from '../Feedbacks';
 import Button from '~/components/Button';
-import List from '~/components/List';
+import ContextMenu, { Target as ContextMenuTarget } from '~/components/FileBrowser/ContextMenu/ContextMenu';
 
 import styles from './FileSwitcher.module.scss';
 
@@ -44,8 +41,8 @@ interface Props {
 
 interface State {
   ctxMenuKey: string;
-  ctxMenuType: 'FILE' | 'FOLDER';
-  renamedAsset: (ExerciseFile | ExerciseFolder) & { type: 'FILE' | 'FOLDER' };
+  ctxMenuType: ContextMenuTarget;
+  renamedAsset: (ExerciseFile | ExerciseFolder) & { type: ContextMenuTarget };
   isCollapsed: boolean;
   isGeneratingArchive: boolean;
   dropdownStyle: Record<string, any>
@@ -107,9 +104,9 @@ class FileSwitcher extends React.Component<Props, State> {
 
     let renamedAsset = folderStructure.getFile(key).file;
     if (renamedAsset) {
-      renamedAsset = { ...renamedAsset, type: 'FILE' };
+      renamedAsset = { ...renamedAsset, type: ContextMenuTarget.FILE };
     } else {
-      renamedAsset = { ...folderStructure.getFolder(key).folder, type: 'FOLDER' };
+      renamedAsset = { ...folderStructure.getFolder(key).folder, type: ContextMenuTarget.FOLDER };
     }
 
     this.setState({ renamedAsset });
@@ -151,7 +148,7 @@ class FileSwitcher extends React.Component<Props, State> {
     const { renamedAsset } = this.state;
     const { onFileRename, onFolderRename } = this.props;
 
-    if (renamedAsset.type === 'FOLDER') {
+    if (renamedAsset.type === ContextMenuTarget.FOLDER) {
       onFolderRename(renamedAsset.key, renamedAsset.name);
     } else {
       onFileRename(renamedAsset.key, renamedAsset.name);
@@ -178,7 +175,7 @@ class FileSwitcher extends React.Component<Props, State> {
 
     this.setState({
       ctxMenuKey: e.target.dataset.key,
-      ctxMenuType: isFolder ? 'FOLDER' : 'FILE',
+      ctxMenuType: isFolder ? ContextMenuTarget.FOLDER : ContextMenuTarget.FILE,
     });
     document.addEventListener('click', this.closeMenu);
   }
@@ -188,7 +185,7 @@ class FileSwitcher extends React.Component<Props, State> {
     const renamedAsset = NewSourceFile(nextUntitledFilename(folderStructure
       .getFolder(parentKey).folder.files.map((f) => f.name)));
 
-    this.setState({ renamedAsset: { ...renamedAsset, type: 'FILE' } });
+    this.setState({ renamedAsset: { ...renamedAsset, type: ContextMenuTarget.FILE } });
     onFileAdd(parentKey, renamedAsset, () => {
       this.selectFile(renamedAsset.key);
     });
@@ -205,7 +202,7 @@ class FileSwitcher extends React.Component<Props, State> {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    this.setState({ renamedAsset: { ...renamedAsset, type: 'FOLDER' } });
+    this.setState({ renamedAsset: { ...renamedAsset, type: ContextMenuTarget.FOLDER } });
     onFolderAdd(parentKey, renamedAsset);
   }
 
@@ -236,7 +233,7 @@ class FileSwitcher extends React.Component<Props, State> {
     const { ctxMenuType } = this.state;
     const { onFolderDelete, onFileDelete } = this.props;
 
-    if (ctxMenuType === 'FOLDER') {
+    if (ctxMenuType === ContextMenuTarget.FOLDER) {
       onFolderDelete(key);
     } else {
       onFileDelete(key);
@@ -341,36 +338,15 @@ class FileSwitcher extends React.Component<Props, State> {
           />
         </div>
         {/* </Scroll> */}
-        <List className={styles['dropdown-menu']} style={dropdownStyle}>
-          {ctxMenuType === 'FOLDER' && (
-            <>
-              <li>
-                <Button onClick={() => this.newFile(ctxMenuKey)}>
-                  <FontAwesomeIcon icon={faFileAlt} width="18" height="18" />
-                  New file
-                </Button>
-              </li>
-              <li>
-                <Button onClick={() => this.newFolder(ctxMenuKey)}>
-                  <FontAwesomeIcon icon={faFolder} width="18" height="18" />
-                  New folder
-                </Button>
-              </li>
-            </>
-          )}
-          <li>
-            <Button onClick={() => this.enterEditMode(ctxMenuKey)}>
-              <FontAwesomeIcon icon={faEdit} width="18" height="18" />
-              Rename
-            </Button>
-          </li>
-          <li>
-            <Button onClick={() => this.deleteFileOrFolder(ctxMenuKey)}>
-              <FontAwesomeIcon icon={faTrashAlt} width="18" height="18" />
-              Delete
-            </Button>
-          </li>
-        </List>
+        <ContextMenu
+          target={ctxMenuType}
+          style={dropdownStyle}
+          className="absolute"
+          onNewFile={() => this.newFile(ctxMenuKey)}
+          onNewFolder={() => this.newFolder(ctxMenuKey)}
+          onRename={() => this.enterEditMode(ctxMenuKey)}
+          onDelete={() => this.deleteFileOrFolder(ctxMenuKey)}
+        />
         <HResizable onResize={this.onResize} />
       </div>
     );

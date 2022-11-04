@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+
+.ContextMenu {
+  z-index: 99;
+  background: color(darker-white);
+  border: 1px solid color(silver);
+  box-shadow: 0 0 1px color(grey);
+
+  li {
+    &:hover {
+      @extend %gradientBackground;
+      @extend %blueGradientBackground;
+    }
+
+    button {
+      display: flex;
+      color: inherit;
+      padding: 0.5em 1em;
+      white-space: nowrap;
+    }
+  }
+}
+
+.icon {
+  margin-right: 1em;
+}

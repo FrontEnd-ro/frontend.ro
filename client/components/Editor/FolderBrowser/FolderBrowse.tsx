@@ -2,6 +2,7 @@ import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Button from '~/components/Button';
+import { Target as ContextMenuTarget } from '~/components/FileBrowser/ContextMenu/ContextMenu';
 import FileIcons from '~/services/utils/FileIcons';
 import FolderStructure from '~/services/utils/FolderStructure';
 import Feedbacks from '../Feedbacks';
@@ -16,7 +17,7 @@ interface Props {
   feedbacks: Feedbacks;
   selectedFileKey: string;
   folderStructure: FolderStructure;
-  renamedAsset: { key: string, name: string, type: 'FILE' | 'FOLDER' };
+  renamedAsset: { key: string, name: string, type: ContextMenuTarget };
   onRename: (e: React.ChangeEvent<HTMLInputElement>) => void;
   saveAsset: (e: any) => void;
   selectFile: (key: string) => void;

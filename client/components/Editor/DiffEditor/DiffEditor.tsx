@@ -3,7 +3,8 @@ import * as Monaco from '../monaco';
 import FileIcons from '~/services/utils/FileIcons';
 import FolderStructure, { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import MonacoBase from '../Monaco.base';
-import FileSwitcher from '../FileSwitcher/FileSwitcher';
+import EditorExplorer from '../EditorExplorer/EditorExplorer';
+import ResizableExplorerContainer from '../ResizableExplorerContainer/ResizableExplorerContainer';
 
 import styles from '../Editor.module.scss';
 
@@ -87,14 +88,19 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
         onDragEnter={this.onDragEnter}
         onDragLeave={this.onDragLeave}
       >
-        <FileSwitcher
-          readOnly
-          folderStructure={modifiedFolderStructure}
-          selectedFileKey={selectedFileKey}
-          onSelect={this.onDiffFileSelect}
-          onDownload={this.onDownload}
-          onResize={this.resize}
-        />
+        <ResizableExplorerContainer
+          onResize={this.onResize}
+          containerRef={this.editorExplorerContainer}
+          initialWidth={this.INITIAL_EXPLORER_WIDTH_PX}
+        >
+          <EditorExplorer
+            readOnly
+            folderStructure={modifiedFolderStructure}
+            selectedFileKey={selectedFileKey}
+            onSelect={this.onDiffFileSelect}
+            onDownload={this.onDownload}
+          />
+        </ResizableExplorerContainer>
         <div
           className={`
             ${styles.editor}
@@ -103,10 +109,10 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
           ref={this.editorRef}
         />
         {selectedFile && (
-        <p className={`${styles['selected-file']} d-flex justify-content-center align-items-center`} title={selectedFile.name}>
-          <img width="20" src={FileIcons.getIconUrl(selectedFile.name)} alt="icon" />
-          <span className="ellipsis-overflow">{selectedFile.name}</span>
-        </p>
+          <p className={`${styles['selected-file']} d-flex justify-content-center align-items-center`} title={selectedFile.name}>
+            <img width="20" src={FileIcons.getIconUrl(selectedFile.name)} alt="icon" />
+            <span className="ellipsis-overflow">{selectedFile.name}</span>
+          </p>
         )}
 
       </div>

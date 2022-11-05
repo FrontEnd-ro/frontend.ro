@@ -2,11 +2,9 @@
 
 .resizable {
   z-index: 1;
-  position: relative;
 
   &::after {
     content: '';
-    z-index: 1;
     opacity: 0.5;
     pointer-events: none;
     background: currentColor;

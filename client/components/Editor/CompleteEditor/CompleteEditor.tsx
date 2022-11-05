@@ -18,7 +18,8 @@ import MonacoBase from '../Monaco.base';
 import InitForm from '../InitForm/InitForm';
 import AskTooltip from './AskTooltip/AskTooltip';
 import ViewTooltip from './ViewTooltip/ViewTooltip';
-import FileSwitcher from '../FileSwitcher/FileSwitcher';
+import EditorExplorer from '../EditorExplorer/EditorExplorer';
+import ResizableExplorerContainer from '../ResizableExplorerContainer/ResizableExplorerContainer';
 
 import styles from '../Editor.module.scss';
 
@@ -311,21 +312,26 @@ class MonacoEditor extends MonacoBase {
       >
         {folderStructure.files.length || folderStructure.folders.length ? (
           <>
-            <FileSwitcher
-              feedbacks={feedbacks}
-              folderStructure={folderStructure}
-              selectedFileKey={selectedFileKey}
-              readOnly={readOnly}
-              onFileAdd={this.onFileAdd}
-              onFolderAdd={this.onFolderAdd}
-              onSelect={this.onFileSelect}
-              onFileRename={this.onFileRename}
-              onFolderRename={this.onFolderRename}
-              onFileDelete={this.onFileDelete}
-              onFolderDelete={this.onFolderDelete}
-              onDownload={this.onDownload}
-              onResize={this.resize}
-            />
+            <ResizableExplorerContainer
+              onResize={this.onResize}
+              containerRef={this.editorExplorerContainer}
+              initialWidth={this.INITIAL_EXPLORER_WIDTH_PX}
+            >
+              <EditorExplorer
+                feedbacks={feedbacks}
+                folderStructure={folderStructure}
+                selectedFileKey={selectedFileKey}
+                readOnly={readOnly}
+                onFileAdd={this.onFileAdd}
+                onFolderAdd={this.onFolderAdd}
+                onSelect={this.onFileSelect}
+                onFileRename={this.onFileRename}
+                onFolderRename={this.onFolderRename}
+                onFileDelete={this.onFileDelete}
+                onFolderDelete={this.onFolderDelete}
+                onDownload={this.onDownload}
+              />
+            </ResizableExplorerContainer>
             <div
               className={`
                 ${styles.editor}

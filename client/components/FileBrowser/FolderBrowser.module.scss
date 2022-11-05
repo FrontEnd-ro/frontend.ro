@@ -1,0 +1,56 @@
+@import "../../styles/variables";
+
+.FolderBrowser {
+  &::before {
+    content: "";
+    top: 2.1em;
+    width: 3px;
+    left: 0.8em;
+    display: block;
+    position: absolute;
+    height: calc(100% - 2.15em);
+    background: color(darker-white);
+  }
+
+  &.is--open > .FilesList,
+  &.is--open > .FolderBrowser {
+    display: block;
+  }
+
+  .FilesList,
+  .FolderBrowser {
+    display: none;
+    margin-left: 1em;
+  }
+}
+
+.Folder {
+  white-space: nowrap;
+  padding: 0.25em 0 0.25em 0.5em;
+
+  &:hover:not(.is--renamed),
+  &.is--ctx-selected {
+    @extend %blueGradientBackground;
+  }
+
+  &.is--renamed {
+    border: 1px solid color(black);
+  }
+}
+
+.input {
+  border: 0;
+  color: inherit;
+  font-size: 1em;
+  background: none;
+  font-family: inherit;
+  text-overflow: ellipsis;
+
+  &[disabled] {
+    pointer-events: none;
+  }
+
+  &:not([disabled]) {
+    cursor: text;
+  }
+}

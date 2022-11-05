@@ -90,7 +90,7 @@ const FullScreenIDE = ({
           }}
           feedbacks={[]}
           ref={monacoRef}
-          className="h-100"
+          className={styles.Editor}
           folderStructure={folderStructure}
         />
       </div>

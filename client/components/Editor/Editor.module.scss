@@ -2,7 +2,13 @@
 
 .editor-wrapper {
   position: relative;
-  min-height: 500px;
+
+  // Temporarily add this height here, so that
+  // the <EditorExplorer> component behaves correctly,
+  // and has scroll.
+  // TODO: maybe extract this rule when
+  // refactoring the Editor components
+  height: 500px;
   z-index: 12;
   display: flex;
 

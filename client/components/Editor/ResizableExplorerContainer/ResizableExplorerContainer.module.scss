@@ -1,0 +1,15 @@
+@import '../../../styles/variables';
+
+.ResizableExplorerContainer {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.HResizable {
+  top: 0;
+  right: 0;
+  z-index: 2;
+  position: absolute;
+  color: color(silver);
+  background: color(silver);
+}

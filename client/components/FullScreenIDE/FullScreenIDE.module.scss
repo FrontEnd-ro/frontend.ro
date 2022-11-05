@@ -5,6 +5,10 @@
   min-height: 100vh;
 }
 
+.Editor {
+  height: 100%;
+}
+
 .resizing .SandpackPreview iframe {
   pointer-events: none;
 }

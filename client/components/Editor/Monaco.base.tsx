@@ -11,8 +11,12 @@ import FolderStructure from '~/services/utils/FolderStructure';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { MONACO } from '~/services/Constants';
 
+const MIN_EXPLORER_WIDTH_PX = 150;
+
 class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
   protected _baseModelChangeListener: any;
+
+  protected editorExplorerContainer: React.RefObject<HTMLDivElement>
 
   protected editorRef: React.RefObject<HTMLDivElement>
 
@@ -30,11 +34,14 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
 
   protected initEditor: () => void;
 
+  protected INITIAL_EXPLORER_WIDTH_PX = 250;
+
   constructor(props) {
     super(props);
 
     this._baseModelChangeListener = { dispose: noop };
     this.editorRef = React.createRef();
+    this.editorExplorerContainer = React.createRef();
   }
 
   componentDidMount() {
@@ -404,6 +411,30 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
 
     this.editor.layout();
   }
+
+  // Temporarily have this function here, so we don't duplicate it
+  // in all editors: CompleteEditor, BasicEditor, DiffEditor.
+  // TODO: refactor and remove from here. The Monaco editor should not
+  // be concerned with resizing. That's somehting his parent should handle.
+  onResize = ({ dx }: { dx: number }) => {
+    const { current: explorerContainer } = this.editorExplorerContainer;
+    const SPAN = '[Monaco.base onResize]';
+    if (!explorerContainer) {
+      console.log(`${SPAN} Tried to resize the Explorer, but no reference found. Misconfiguration?`);
+      return;
+    }
+
+    // NOTE: this isn't the most optimum way. We shouldn't read from the
+    // DOM every time. Instead, we should have this stored in a variable.
+    let newWidth = Number(explorerContainer.style.width.split('px')[0] ?? 0) + dx;
+
+    // FIXME: the max width (currently half of the inner width) should be somehow
+    // passed as a parameter.
+    newWidth = Math.min(Math.max(newWidth, MIN_EXPLORER_WIDTH_PX), window.innerWidth / 2);
+
+    explorerContainer.style.width = `${newWidth}px`;
+    this.resize();
+  };
 
   onAllChanges(cb) {
     let cursorListener = this.editor.onDidChangeCursorPosition((e) => cb({

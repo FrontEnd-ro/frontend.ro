@@ -1,0 +1,72 @@
+@import '../../../styles/variables';
+
+.EditorExplorer {
+  overflow: auto;
+  position: relative;
+  color: color(black);
+  background: color(white);
+  border: 1px solid color(silver);
+}
+
+.ActionBar {
+  top: 0;
+  z-index: 2;
+  display: flex;
+  position: sticky;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  font-size: 1.15em;
+  padding: 0.15em 0 0.15em 0.25em;
+  background: color(darker-white);
+  border-bottom: 1px solid color(silver);
+
+  button {
+    padding: 0;
+    margin-right: 0.75em;
+  }
+}
+
+// File Feedbacks Indicators
+// These classes are dynamically passed to the rendered Files
+// so we can show information about the feedback type (if any).
+.has--feedback::before {
+  content: '';
+  position: absolute;
+  display: block;
+  left: 0;
+  width: 0.25em;
+  height: 100%;
+}
+
+.has--feedback-improvement.has--feedback-opinion.has--feedback-praise::before {
+  background: linear-gradient(
+    to right,
+    color(red),
+    color(yellow),
+    color(green)
+  );
+}
+
+.has--feedback-improvement.has--feedback-opinion::before {
+  background: linear-gradient(to right, color(red), color(yellow));
+}
+
+.has--feedback-improvement.has--feedback-praise::before {
+  background: linear-gradient(to right, color(red), color(green));
+}
+
+.has--feedback-opinion.has--feedback-praise::before {
+  background: linear-gradient(to right, color(yellow), color(green));
+}
+
+.has--feedback-improvement::before {
+  background: color(red);
+}
+
+.has--feedback-opinion::before {
+  background: color(yellow);
+}
+
+.has--feedback-praise::before {
+  background: color(green);
+}

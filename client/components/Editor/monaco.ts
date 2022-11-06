@@ -2,13 +2,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-var */
 
+import MonacoService from '~/services/MonacoService';
 import { FeedbackType } from '~/../shared/types/submission.types';
 
-declare global {
-  var monaco: any;
-}
-
-// import './monaco.scss';
+const monaco = MonacoService.get();
 
 const LETTER_WIDTH = 7.75;
 
@@ -16,10 +13,12 @@ function extendWithDecorate(editor) {
   editor.decorationsMap = {};
 
   editor.decorate = function decorate(data, ...args) {
-    let currentRange = new window.monaco.Range(...args);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    let currentRange = new monaco.Range(...args);
     data.type = data.type || FeedbackType.PRAISE;
 
-    if (args.length === 1 && args[0] instanceof window.monaco.Range) {
+    if (args.length === 1 && args[0] instanceof monaco.Range) {
       [currentRange] = args;
     }
 
@@ -27,7 +26,7 @@ function extendWithDecorate(editor) {
     if (
       Object.keys(this.decorationsMap)
         .map((id) => textModel.getDecorationRange(id))
-        .find((rangeInfo) => window.monaco.Range.areIntersecting(rangeInfo, currentRange))
+        .find((rangeInfo) => monaco.Range.areIntersecting(rangeInfo, currentRange))
     ) {
       return;
     }
@@ -42,7 +41,7 @@ function extendWithDecorate(editor) {
               inlineClassName: `monaco__feedback--${data.type}`,
               linesDecorationsClassName: `monaco__line monaco__line--${data.type}`,
               stickiness:
-                window.monaco.editor.TrackedRangeStickiness
+                monaco.editor.TrackedRangeStickiness
                   .NeverGrowsWhenTypingAtEdges,
             },
           },
@@ -114,7 +113,7 @@ function extendWithHover(editor, onShowCb, onHideCb) {
       onHideCb();
 
       let textModel = editor.getModel();
-      let hoverRange = new window.monaco.Range(
+      let hoverRange = new monaco.Range(
         e.target.position.lineNumber,
         e.target.position.column,
         e.target.position.lineNumber,
@@ -123,7 +122,7 @@ function extendWithHover(editor, onShowCb, onHideCb) {
 
       let foundMatch = Object.keys(editor.decorationsMap).some((id) => {
         if (
-          window.monaco.Range.areIntersectingOrTouching(
+          monaco.Range.areIntersectingOrTouching(
             textModel.getDecorationRange(id),
             hoverRange,
           )
@@ -192,8 +191,8 @@ function formatCode(editor) {
   // FIXME
 }
 
-const { create, createDiffEditor, setModelLanguage } = window.monaco.editor;
-const { Range } = window.monaco;
+const { create, createDiffEditor, setModelLanguage } = monaco.editor;
+const { Range } = monaco;
 
 export {
   create,
@@ -208,7 +207,7 @@ export {
 
 /**
  *
- * @param {window.monaco.Range} range
+ * @param {monaco.Range} range
  */
 function getTooltipPosition(range, editor) {
   // Left

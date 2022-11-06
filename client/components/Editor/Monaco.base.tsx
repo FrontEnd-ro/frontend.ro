@@ -5,6 +5,7 @@ import React from 'react';
 import noop from 'lodash/noop';
 import { editor as MonacoTypes } from 'monaco-editor';
 import * as Monaco from './monaco';
+import MonacoService from '~/services/MonacoService';
 import SubmissionService from '~/services/api/Submission.service';
 import { extractExtension, filesToFolderStructure, fsEntriesToFolderStructure } from '~/services/utils/FileUtils';
 import FolderStructure from '~/services/utils/FolderStructure';
@@ -12,6 +13,7 @@ import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { MONACO } from '~/services/Constants';
 
 const MIN_EXPLORER_WIDTH_PX = 150;
+const monaco = MonacoService.get();
 
 class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
   protected _baseModelChangeListener: any;

@@ -1,7 +1,7 @@
 import React from 'react';
 /**
  * FIXME: right now we're importing Monaco Editor via
- * a hack (see `loadMonaco.ts` file). We should import it
+ * a hack (see `MonacoService.ts` file). We should import it
  * properly via Webpack. When that is done, let's revisit
  * this ESLint error
  */
@@ -18,10 +18,13 @@ import MonacoBase from '../Monaco.base';
 import InitForm from '../InitForm/InitForm';
 import AskTooltip from './AskTooltip/AskTooltip';
 import ViewTooltip from './ViewTooltip/ViewTooltip';
+import MonacoService from '~/services/MonacoService';
 import EditorExplorer from '../EditorExplorer/EditorExplorer';
 import ResizableExplorerContainer from '../ResizableExplorerContainer/ResizableExplorerContainer';
 
 import styles from '../Editor.module.scss';
+
+const monaco = MonacoService.get();
 
 class MonacoEditor extends MonacoBase {
   // FIXME 👇
@@ -220,7 +223,7 @@ class MonacoEditor extends MonacoBase {
     const decorationsThatIntersect = Object
       .keys(this.editor.decorationsMap)
       .filter((id) => changeRanges.some((range) => (
-        window.monaco.Range.areIntersectingOrTouching(
+        monaco.Range.areIntersectingOrTouching(
           this.editor.getModel().getDecorationRange(id),
           range,
         )

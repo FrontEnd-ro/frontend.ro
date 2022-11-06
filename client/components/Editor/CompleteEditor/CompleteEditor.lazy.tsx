@@ -1,32 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import loadMonaco from '../loadMonaco';
+import React, { Suspense } from 'react';
+import { withMonacoEditor } from '~/services/MonacoService';
 import EditorPlaceholder from '../EditorPlaceholder/EditorPlaceholder';
 
-const CompleteEditorLazy = React.forwardRef(({ folderStructure, feedbacks, ...rest }: any, forwardRef) => {
-  const [CompleteEditor, setCompleteEditor] = useState(null);
+const CompleteEditor = React.lazy(() => import('./CompleteEditor'));
 
-  useEffect(() => {
-    loadMonaco()
-      .then(() => import('./CompleteEditor'))
-      .then((module) => {
-        setCompleteEditor(() => module.default as any);
-      });
-  }, []);
+const CompleteEditorLazy = React.forwardRef((
+  { folderStructure, feedbacks, ...rest }: any,
+  forwardRef,
+) => {
+  const { loadError, didLoadMonaco } = withMonacoEditor();
+  const Placeholder = (<EditorPlaceholder className={rest.className} />);
 
-  if (!CompleteEditor) {
-    return <EditorPlaceholder className={rest.className} />;
+  if (loadError) {
+    return (<p> Something went wrong. Try again! </p>);
+  }
+
+  if (!didLoadMonaco) {
+    return Placeholder;
   }
 
   return (
-    <CompleteEditor
-      ref={forwardRef}
+    <Suspense fallback={Placeholder}>
+      <CompleteEditor
+        ref={forwardRef}
         // FIXME
         // https://github.com/FrontEnd-ro/frontend.ro/issues/111
-      key={`${folderStructure}-${feedbacks.length}`}
-      folderStructure={folderStructure || {}}
-      feedbacks={feedbacks}
-      {...rest}
-    />
+        key={`${folderStructure}-${feedbacks.length}`}
+        folderStructure={folderStructure || {}}
+        feedbacks={feedbacks}
+        {...rest}
+      />
+    </Suspense>
   );
 });
 

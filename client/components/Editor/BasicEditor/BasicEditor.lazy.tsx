@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import loadMonaco from '../loadMonaco';
+import React, { Suspense } from 'react';
+import { withMonacoEditor } from '~/services/MonacoService';
 import EditorPlaceholder from '../EditorPlaceholder/EditorPlaceholder';
 
+const BasicEditor = React.lazy(() => import('./BasicEditor'));
+
 const BasicEditorLazy = React.forwardRef(({ folderStructure, ...rest }: any, forwardRef) => {
-  const [BasicEditor, setBasicEditor] = useState(null);
+  const { loadError, didLoadMonaco } = withMonacoEditor();
+  const Placeholder = (<EditorPlaceholder className={rest.className} />);
 
-  useEffect(() => {
-    loadMonaco()
-      .then(() => import('./BasicEditor'))
-      .then((module) => {
-        setBasicEditor(() => module.default as any);
-      });
-  }, []);
+  if (loadError) {
+    return (<p> Something went wrong. Try again! </p>);
+  }
 
-  if (!BasicEditor) {
-    return <EditorPlaceholder />;
+  if (!didLoadMonaco) {
+    return Placeholder;
   }
 
   return (
-    <BasicEditor
-      ref={forwardRef}
-        // FIXME
-        // https://github.com/FrontEnd-ro/frontend.ro/issues/111
-      key={folderStructure}
-      folderStructure={folderStructure || {}}
-      {...rest}
-    />
+    <Suspense fallback={Placeholder}>
+      <BasicEditor
+        ref={forwardRef}
+          // FIXME
+          // https://github.com/FrontEnd-ro/frontend.ro/issues/111
+        key={folderStructure}
+        folderStructure={folderStructure || {}}
+        {...rest}
+      />
+    </Suspense>
   );
 });
 

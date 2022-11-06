@@ -7,7 +7,7 @@ import PageContainer from '~/components/PageContainer';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { RootState } from '~/redux/root.reducer';
 import { UserState } from '~/redux/user/types';
-import ExerciseService from '~/services/Exercise.service';
+import ExerciseService from '~/services/api/Exercise.service';
 import NoActivity from '../NoActivity/NoActivity';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 import styles from './UserActivity.module.scss';

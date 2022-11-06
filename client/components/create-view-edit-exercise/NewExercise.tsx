@@ -11,7 +11,7 @@ import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
 import svgCover from './dev-focus.svg';
 import styles from './NewExercise.module.scss';
-import ExerciseService from '~/services/Exercise.service';
+import ExerciseService from '~/services/api/Exercise.service';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 import BasicEditorLazy from '../Editor/BasicEditor/BasicEditor.lazy';

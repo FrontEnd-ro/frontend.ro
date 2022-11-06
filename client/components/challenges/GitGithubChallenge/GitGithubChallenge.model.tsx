@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import List from '~/components/List';
 /* eslint-disable import/prefer-default-export */
 import GitHubService from '~/services/api/GitHub.service';
-import UserService from '~/services/User.service';
+import UserService from '~/services/api/User.service';
 
 interface VerifyResp {
   isDone: boolean;

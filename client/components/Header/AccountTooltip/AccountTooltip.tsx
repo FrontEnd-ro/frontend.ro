@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
-import UserService from '~/services/User.service';
+import UserService from '~/services/api/User.service';
 import { RootState } from '~/redux/root.reducer';
 import Button from '~/components/Button';
 import Link from '~/components/generic/Link';

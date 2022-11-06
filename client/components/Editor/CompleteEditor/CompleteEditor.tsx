@@ -9,7 +9,7 @@ import React from 'react';
 import { editor as MonacoTypes } from 'monaco-editor';
 import * as Monaco from '../monaco';
 import FileIcons from '~/services/utils/FileIcons';
-import SubmissionService from '~/services/Submission.service';
+import SubmissionService from '~/services/api/Submission.service';
 import FolderStructure from '~/services/utils/FolderStructure';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 

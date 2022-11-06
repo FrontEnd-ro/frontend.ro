@@ -5,7 +5,7 @@ import React from 'react';
 import noop from 'lodash/noop';
 import { editor as MonacoTypes } from 'monaco-editor';
 import * as Monaco from './monaco';
-import SubmissionService from '~/services/Submission.service';
+import SubmissionService from '~/services/api/Submission.service';
 import { extractExtension, filesToFolderStructure, fsEntriesToFolderStructure } from '~/services/utils/FileUtils';
 import FolderStructure from '~/services/utils/FolderStructure';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';

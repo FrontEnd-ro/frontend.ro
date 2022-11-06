@@ -1,4 +1,4 @@
-import HttpService from '../Http.service';
+import HttpService from './Http.service';
 import { WIPPopulatedTutorialI, TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 class TutorialService {

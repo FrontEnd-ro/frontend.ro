@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import PageContainer from '../PageContainer';
 import Spinner from '../Spinner';
 import { RootState } from '~/redux/root.reducer';
-import SubmissionService from '~/services/Submission.service';
+import SubmissionService from '~/services/api/Submission.service';
 import { Submission } from '~/redux/exercise-submissions/types';
 
 import { timeAgo } from '~/services/Utils';

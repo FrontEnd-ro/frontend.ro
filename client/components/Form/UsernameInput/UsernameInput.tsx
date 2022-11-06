@@ -2,7 +2,7 @@ import { debounce, DebouncedFunc } from 'lodash';
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
-import UserService from '~/services/User.service';
+import UserService from '~/services/api/User.service';
 import InputWithIcon from '../InputWithIcon/InputWithIcon';
 
 function UsernameInput({ name, id }: { name: string; id?: string; }) {

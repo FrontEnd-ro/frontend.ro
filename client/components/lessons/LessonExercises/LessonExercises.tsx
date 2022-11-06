@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from '~/components/generic/Link';
 import { ConnectedProps, connect } from 'react-redux';
-import LessonExerciseService from '~/services/LessonExercise.service';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
 import { LessonExercise } from '~/redux/user/types';
 import ExercisePreview from '~/components/ExercisePreview';
 import { RootState } from '~/redux/root.reducer';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
-import ExerciseService from '~/services/Exercise.service';
+import ExerciseService from '~/services/api/Exercise.service';
 import { SkeletonRect } from '~/components/SkeletonScreens';
 
 import styles from './LessonExercises.module.scss';

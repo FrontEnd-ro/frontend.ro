@@ -12,12 +12,12 @@ import { RootState } from '~/redux/root.reducer';
 import { withAuthModal } from '~/services/Hooks';
 import PageContainer from '~/components/PageContainer';
 import StatusBanner from './StatusBanner/StatusBanner';
-import SubmissionService from '~/services/Submission.service';
+import SubmissionService from '~/services/api/Submission.service';
 import { UserState, LessonExercise } from '~/redux/user/types';
 import {
   SubmissionStatus, SubmissionVersionI, WIPSanitiedSubmission,
 } from '~/../shared/types/submission.types';
-import LessonExerciseService from '~/services/LessonExercise.service';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import HowToResolveFeedbackBanner from './HowToResolveFeedbackBanner/HowToResolveFeedbackBanner';

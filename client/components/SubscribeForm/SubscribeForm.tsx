@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UserService from '~/services/User.service';
+import UserService from '~/services/api/User.service';
 import Button from '~/components/Button';
 import styles from './SubscribeForm.module.scss';
 

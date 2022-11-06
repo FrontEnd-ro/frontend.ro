@@ -1,5 +1,5 @@
 import cookie from 'cookie';
-import SweetAlertService from './sweet-alert/SweetAlert.service';
+import SweetAlertService from '../sweet-alert/SweetAlert.service';
 
 class Http {
   get(url: string, options = {}, preventErrorAlert = false) {

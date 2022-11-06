@@ -1,5 +1,5 @@
 import React from 'react';
-import SubmissionService from '~/services/Submission.service';
+import SubmissionService from '~/services/api/Submission.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
 import styles from './ViewTooltip.module.scss';

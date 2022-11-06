@@ -4,7 +4,7 @@ import { DebouncedFunc } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import UserService from '~/services/User.service';
+import UserService from '~/services/api/User.service';
 import PasswordResetService from '~/services/api/PasswordReset.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LoginButtons from './LoginButtons/LoginButtons';

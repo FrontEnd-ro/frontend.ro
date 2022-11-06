@@ -1,4 +1,4 @@
-import HttpService from '../Http.service';
+import HttpService from './Http.service';
 import { ParsedNotificationI } from '../../../shared/types/notification.types';
 
 class NotificationService {

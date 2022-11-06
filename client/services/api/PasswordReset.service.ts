@@ -1,4 +1,4 @@
-import HttpService from '../Http.service';
+import HttpService from './Http.service';
 
 class PasswordResetService {
   static generateResetCode(email: string) {

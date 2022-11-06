@@ -23,7 +23,7 @@ import PrivacyControls from './PrivacyControls/PrivacyControls';
 import viewCover from './the-search.svg';
 import editCover from './coding.svg';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
-import ExerciseService from '~/services/Exercise.service';
+import ExerciseService from '~/services/api/Exercise.service';
 import Button from '~/components/Button';
 import { ExerciseType } from '~/../shared/types/exercise.types';
 

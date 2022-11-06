@@ -10,7 +10,7 @@ import PageContainer from '~/components/PageContainer';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { withAuthModal } from '~/services/Hooks';
 import { RootState } from '~/redux/root.reducer';
-import UserService from '~/services/User.service';
+import UserService from '~/services/api/User.service';
 import Button from '~/components/Button';
 import { tasks, Task } from './GitGithubChallenge.model';
 import GitHubService from '~/services/api/GitHub.service';

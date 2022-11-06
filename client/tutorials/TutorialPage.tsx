@@ -6,7 +6,7 @@ import { RootState } from '~/redux/root.reducer';
 import PageContainer from '~/components/PageContainer';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import maybeFetchTutorialProgress from './tutorial.utils';
-import ExerciseService from '~/services/Exercise.service';
+import ExerciseService from '~/services/api/Exercise.service';
 import { getEmptyTutorialProgress } from '~/services/Utils';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { loadSubmissions } from '~/redux/progress/progress.actions';

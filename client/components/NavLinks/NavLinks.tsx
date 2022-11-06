@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
-import UserService from '~/services/User.service';
+import UserService from '~/services/api/User.service';
 import { logoutUser } from '~/redux/user/user.actions';
 import Button from '~/components/Button';
 import Link from '~/components/generic/Link';

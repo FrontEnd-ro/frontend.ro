@@ -3,7 +3,7 @@ import React from 'react';
 import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
+import { DeprecatedBasicEditor } from '~/components/Editor/BasicEditor';
 import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import SEOTags from '~/components/SEOTags';
 
@@ -30,7 +30,7 @@ export default function ExternalMethod() {
               />
             </div>
           </DemoPreview>
-          <BasicEditorLazy folderStructure={externCssExample} readOnly />
+          <DeprecatedBasicEditor folderStructure={externCssExample} readOnly />
         </Demo>
         <Footer />
       </>

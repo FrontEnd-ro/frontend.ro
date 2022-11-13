@@ -10,7 +10,7 @@ import {
   uploadFiles,
   uploadMedia,
 } from '.';
-import BasicEditorLazy from '../Editor/BasicEditor/BasicEditor.lazy';
+import { DeprecatedBasicEditor } from '../Editor/BasicEditor';
 import Form from '../Form';
 import Link from '~/components/generic/Link';
 import MarkdownTextarea from '../MarkdownTextarea';
@@ -269,7 +269,7 @@ function ViewOrEditExercise({
           {exerciseBody && (
             <>
               <h3> Cod de început</h3>
-              <BasicEditorLazy
+              <DeprecatedBasicEditor
                 ref={exampleRef}
                 readOnly={!isOwnExercise}
                 folderStructure={exerciseBody}
@@ -287,7 +287,7 @@ function ViewOrEditExercise({
           {(!exerciseBody && isOwnExercise && showExampleEditor) && (
             <>
               <h3> Cod de început</h3>
-              <BasicEditorLazy
+              <DeprecatedBasicEditor
                 ref={exampleRef}
                 readOnly={!isOwnExercise}
                 folderStructure={exerciseBody}
@@ -298,7 +298,7 @@ function ViewOrEditExercise({
 
         <section className={`${styles['example-wrapper']} relative`}>
           <h3> Soluție</h3>
-          <BasicEditorLazy
+          <DeprecatedBasicEditor
             ref={solutionRef}
             readOnly={!isOwnExercise}
             folderStructure={exerciseSolution}

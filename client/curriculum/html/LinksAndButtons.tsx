@@ -14,7 +14,7 @@ import {
   LessonFirstSentence,
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
-import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
+import { DeprecatedBasicEditor } from '~/components/Editor/BasicEditor';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/DataModel';
 import List from '~/components/List';
@@ -119,7 +119,7 @@ export default function LinksAndButtonsContent() {
           pe care suntem.
         </p>
 
-        <BasicEditorLazy folderStructure={relativeUrlExample} readOnly />
+        <DeprecatedBasicEditor folderStructure={relativeUrlExample} readOnly />
         <p>
           Foarte utile sunt și link-urile care duc către o secțiune ale
           aceleiași pagini sau așa numitele

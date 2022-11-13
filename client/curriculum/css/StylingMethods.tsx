@@ -8,7 +8,7 @@ import {
 import Highlight from '~/components/Highlight/Highlight';
 // eslint-disable-next-line import/no-unresolved
 import coverSvg from '~/public/images/lessons/styling-methods__cover.svg';
-import BasicEditorLazy from '~/components/Editor/BasicEditor/BasicEditor.lazy';
+import { DeprecatedBasicEditor } from '~/components/Editor/BasicEditor';
 import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/DataModel';
@@ -320,7 +320,7 @@ export default function StylingMethodsContent() {
           <span className="text-bold">hai să vedem un exemplu</span>
           :
         </p>
-        <BasicEditorLazy folderStructure={externCssExample} readOnly />
+        <DeprecatedBasicEditor folderStructure={externCssExample} readOnly />
         <p>
           Astfel, prin aplicarea stilului descris în ambele foi, pagina va
           arăta așa:

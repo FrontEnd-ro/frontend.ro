@@ -20,7 +20,7 @@ export default () => {
         url="TODO"
         description="TODO"
       />
-      <FullScreenIDE folderStructure={startingFolderStructure} />
+      <FullScreenIDE initialFolderStructure={startingFolderStructure} />
     </>
   );
 };

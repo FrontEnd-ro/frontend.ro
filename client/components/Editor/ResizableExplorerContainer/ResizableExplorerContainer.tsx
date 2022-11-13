@@ -9,14 +9,14 @@ const ResizableExplorerContainer = ({
   onResize,
   children,
 }: PropsWithChildren<{
-  initialWidth: number;
+  initialWidth: string;
   containerRef: React.RefObject<HTMLDivElement>;
   onResize: ({ dx }: { dx: number }) => void
 }>) => (
   <div
     ref={containerRef}
     className={`relative ${styles.ResizableExplorerContainer}`}
-    style={{ width: `${initialWidth}px` }}
+    style={{ width: initialWidth }}
   >
     {children}
     <HResizable

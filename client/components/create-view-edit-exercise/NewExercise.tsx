@@ -14,7 +14,7 @@ import styles from './NewExercise.module.scss';
 import ExerciseService from '~/services/api/Exercise.service';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
-import BasicEditorLazy from '../Editor/BasicEditor/BasicEditor.lazy';
+import { DeprecatedBasicEditor } from '../Editor/BasicEditor';
 import FolderStructure from '~/services/utils/FolderStructure';
 import { UserState } from '~/redux/user/types';
 import {
@@ -189,7 +189,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
               ? (
                 <>
                   <h3> Cod de început </h3>
-                  <BasicEditorLazy ref={exampleRef} />
+                  <DeprecatedBasicEditor ref={exampleRef} />
                 </>
               )
               : (
@@ -208,7 +208,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
               ? (
                 <>
                   <h3> Soluție</h3>
-                  <BasicEditorLazy ref={solutionRef} />
+                  <DeprecatedBasicEditor ref={solutionRef} />
                   {solutionError && (
                     <p className={`${styles['error-message']} absolute text-right text-bold`}>
                       Nu poți crea un exercițiu fără soluție 👆

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { alphabeticSortComparator, uuid } from '../Utils';
 import ZipService from './ZipService';
 
@@ -285,6 +286,83 @@ class FolderStructure {
   }
 }
 
+export const useFolderStructure = (initialFolderStructure: FolderStructure) => {
+  const [folderStructure, setFolderStructure] = useState(
+    new FolderStructure(initialFolderStructure),
+  );
+
+  const [selectedFileId, setSelectedFileId] = useState('');
+
+  const addFile = (parentId: string, file: ExerciseFile) => {
+    folderStructure.addFile(parentId, file);
+    setFolderStructure(folderStructure);
+  };
+
+  const addFolder = (parentId: string, file: ExerciseFile) => {
+    folderStructure.addFile(parentId, file);
+    setFolderStructure(folderStructure);
+  };
+
+  const selectFile = (id: string) => {
+    setSelectedFileId(id);
+  };
+
+  const renameFile = (id: string, newName: string) => {
+    try {
+      folderStructure.renameFile(id, newName);
+      setSelectedFileId(id);
+      setFolderStructure(folderStructure);
+    } catch (err) {
+      console.error(`Failed to renameFile, id=${id}, newName=${newName}`, err);
+      throw err;
+    }
+  };
+
+  const renameFolder = (id: string, newName: string) => {
+    try {
+      folderStructure.renameFolder(id, newName);
+      setSelectedFileId(id);
+      setFolderStructure(folderStructure);
+    } catch (err) {
+      console.error(`Failed to renameFolder, id=${id}, newName=${newName}`, err);
+      throw err;
+    }
+  };
+
+  const deleteFile = (id: string) => {
+    try {
+      folderStructure.deleteFile(id);
+      setFolderStructure(folderStructure);
+    } catch (err) {
+      console.error(`Failed to deleteFile, id=${id}`, err);
+      throw err;
+    }
+  };
+
+  const deleteFolder = (id: string) => {
+    try {
+      folderStructure.deleteFolder(id);
+      setFolderStructure(folderStructure);
+    } catch (err) {
+      console.error(`Failed to deleteFolder, id=${id}`, err);
+      throw err;
+    }
+  };
+
+  return {
+    selectedFileId,
+    folderStructure,
+
+    addFile,
+    addFolder,
+    selectFile,
+    renameFile,
+    renameFolder,
+    deleteFile,
+    deleteFolder,
+  };
+};
+
 export function NewSourceFile(name = 'Untitled file') {
   return {
     key: uuid(),
@@ -292,4 +370,5 @@ export function NewSourceFile(name = 'Untitled file') {
     name,
   };
 }
+
 export default FolderStructure;

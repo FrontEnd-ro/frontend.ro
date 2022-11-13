@@ -318,7 +318,7 @@ class MonacoEditor extends MonacoBase {
             <ResizableExplorerContainer
               onResize={this.onResize}
               containerRef={this.editorExplorerContainer}
-              initialWidth={this.INITIAL_EXPLORER_WIDTH_PX}
+              initialWidth={`${this.INITIAL_EXPLORER_WIDTH_PX}px`}
             >
               <EditorExplorer
                 feedbacks={feedbacks}

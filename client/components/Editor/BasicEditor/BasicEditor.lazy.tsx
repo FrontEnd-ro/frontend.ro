@@ -1,12 +1,14 @@
 import React, { Suspense } from 'react';
+import { BasicEditorProps } from './BasicEditor';
 import { withMonacoEditor } from '~/services/MonacoService';
 import EditorPlaceholder from '../EditorPlaceholder/EditorPlaceholder';
 
 const BasicEditor = React.lazy(() => import('./BasicEditor'));
 
-const BasicEditorLazy = React.forwardRef(({ folderStructure, ...rest }: any, forwardRef) => {
+const BasicEditorLazy = (props: BasicEditorProps) => {
   const { loadError, didLoadMonaco } = withMonacoEditor();
-  const Placeholder = (<EditorPlaceholder className={rest.className} />);
+  // eslint-disable-next-line react/destructuring-assignment
+  const Placeholder = (<EditorPlaceholder className={props.className} />);
 
   if (loadError) {
     return (<p> Something went wrong. Try again! </p>);
@@ -18,16 +20,9 @@ const BasicEditorLazy = React.forwardRef(({ folderStructure, ...rest }: any, for
 
   return (
     <Suspense fallback={Placeholder}>
-      <BasicEditor
-        ref={forwardRef}
-          // FIXME
-          // https://github.com/FrontEnd-ro/frontend.ro/issues/111
-        key={folderStructure}
-        folderStructure={folderStructure || {}}
-        {...rest}
-      />
+      <BasicEditor {...props} />
     </Suspense>
   );
-});
+};
 
 export default BasicEditorLazy;

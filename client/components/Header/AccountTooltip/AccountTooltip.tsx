@@ -12,10 +12,10 @@ import { logoutUser } from '~/redux/user/user.actions';
 import List from '~/components/List';
 
 interface Props {
-  theme?: 'default' | 'black';
+  theme?: 'light' | 'dark';
 }
 
-function AccountTooltip({ theme = 'default', user, dispatch }: Props & ConnectedProps<typeof connector>) {
+function AccountTooltip({ theme = 'light', user, dispatch }: Props & ConnectedProps<typeof connector>) {
   const ref = useRef(null);
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);

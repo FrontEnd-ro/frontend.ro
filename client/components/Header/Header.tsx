@@ -12,6 +12,7 @@ import { RootState } from '~/redux/root.reducer';
 import styles from './Header.module.scss';
 import AsideMenu from '../layout/AsideMenu/AsideMenu';
 import NavLinks from '../NavLinks/NavLinks';
+import { ThemeVariant } from '~/services/Constants';
 import NotificationTooltip from '../notification-tooltip/NotificationTooltip';
 
 interface Props {
@@ -19,7 +20,7 @@ interface Props {
   demoPage?: boolean;
   withNavMenu?: boolean;
   onMenuClick?: () => void;
-  theme?: 'default' | 'black';
+  theme?: ThemeVariant;
   className?: string;
 }
 
@@ -29,7 +30,7 @@ function Header({
   onMenuClick,
   isLoggedIn,
   withNavMenu = false,
-  theme = 'default',
+  theme = 'light',
   className = '',
 }: ConnectedProps<typeof connector> & Props) {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);

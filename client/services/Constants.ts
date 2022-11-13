@@ -28,3 +28,5 @@ export const HTML_TUTORIAL_ID = 'html';
 // FIXME 👇
 // Should ALWAYS come from the server
 export const HTML_TUTORIAL_NAME = 'Tutorialul de HTML';
+
+export type ThemeVariant = 'light' | 'dark';

@@ -38,7 +38,7 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
 
   return (
     <>
-      <Header theme="black" withNavMenu />
+      <Header theme="dark" withNavMenu />
       <main data-certification-page className={styles.HtmlLanding}>
         <div className={`${styles.hero} d-flex align-items-center justify-content-center bg-black text-white`}>
           <h1 className="text-center mb-0"> Învață HTML de la zero </h1>

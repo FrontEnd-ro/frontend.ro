@@ -16,6 +16,7 @@ import {
 } from '../../redux/user/user.actions';
 import { RootState } from '~/redux/root.reducer';
 import { useOutsideClick } from '~/services/Hooks';
+import { ThemeVariant } from '~/services/Constants';
 import NotificationItem from './NotificationItem/NotificationItem';
 import SkeletonNotificationList from './skeleton-list/SkeletonList';
 import NotificationService from '~/services/api/Notification.service';
@@ -26,11 +27,11 @@ import styles from './NotificationTooltip.module.scss';
 type Props = {
   className?: string
   tooltipClassName?: string;
-  theme?: 'default' | 'black';
+  theme?: ThemeVariant;
 } & ConnectedProps<typeof connector>;
 
 const NotificationsTooltip = ({
-  className, tooltipClassName, theme = 'default', user, dispatch,
+  className, tooltipClassName, theme = 'light', user, dispatch,
 }: Props) => {
   const [error, setError] = useState(false);
   const [isOpen, setIsOpen] = useState(false);

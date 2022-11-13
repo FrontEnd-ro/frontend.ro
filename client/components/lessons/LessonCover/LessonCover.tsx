@@ -1,8 +1,6 @@
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import { useResizeObserver } from '~/services/Hooks';
 import styles from './LessonCover.module.scss';
-
-// TS missed `ResizeObserver` definitions: https://github.com/Microsoft/TypeScript/issues/28502
-declare let ResizeObserver: any;
 
 export default function LessonCover(
   {
@@ -12,23 +10,17 @@ export default function LessonCover(
 ) {
   const coverRef = useRef(null);
 
-  useEffect(() => {
-    if (resizeOffset) {
-      const resizeObserver = new ResizeObserver(([entry]) => {
-        const viewBox = coverRef.current.querySelector('svg').getAttribute('viewBox').split(' ');
+  const onResize = (rect: DOMRectReadOnly) => {
+    const viewBox = coverRef.current.querySelector('svg').getAttribute('viewBox').split(' ');
 
-        if (entry.contentRect.width < 400) {
-          coverRef.current.querySelector('svg').setAttribute('viewBox', [resizeOffset, viewBox.slice(1)].join(' '));
-        } else {
-          coverRef.current.querySelector('svg').setAttribute('viewBox', [0, viewBox.slice(1)].join(' '));
-        }
-      });
-
-      resizeObserver.observe(coverRef.current);
-
-      return () => resizeObserver.disconnect();
+    if (rect.width < 400) {
+      coverRef.current.querySelector('svg').setAttribute('viewBox', [resizeOffset, viewBox.slice(1)].join(' '));
+    } else {
+      coverRef.current.querySelector('svg').setAttribute('viewBox', [0, viewBox.slice(1)].join(' '));
     }
-  }, []);
+  };
+
+  useResizeObserver(coverRef.current, onResize);
 
   return (
     <figure ref={coverRef} className={styles['lesson-cover']}>

@@ -113,6 +113,27 @@ function useCurrentUrl() {
   return url;
 }
 
+function useResizeObserver(
+  element: HTMLElement | null = null,
+  onResize: (DOMRectReadOnly) => void,
+  dependencies: any[] = [],
+) {
+  useEffect(() => {
+    if (element === null) {
+      return noop;
+    }
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      const { contentRect } = entry;
+      onResize(contentRect);
+    });
+
+    resizeObserver.observe(element);
+
+    return () => resizeObserver.disconnect();
+  }, [element, ...dependencies]);
+}
+
 export {
   useOutsideClick,
   withSmoothScroll,
@@ -121,4 +142,5 @@ export {
   withAuthModal,
   useKeyDown,
   useCurrentUrl,
+  useResizeObserver,
 };

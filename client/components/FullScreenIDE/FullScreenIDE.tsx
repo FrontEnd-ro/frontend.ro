@@ -11,6 +11,7 @@ import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 
 import styles from './FullScreenIDE.module.scss';
 import MonacoBase from '../Editor/Monaco.base';
+import { useResizeObserver } from '~/services/Hooks';
 
 const FullScreenIDE = ({
   folderStructure,
@@ -34,25 +35,19 @@ const FullScreenIDE = ({
   useEffect(() => {
     pageWidthRef.current = pageRef.current.getBoundingClientRect().width;
     editorWidthRef.current = editorRef.current.getBoundingClientRect().width;
-
-    return resizeWithWindow();
   }, []);
 
-  const resizeWithWindow = () => {
-    const resizeObserver = new ResizeObserver(([entry]) => {
-      const { width } = entry.contentRect;
-      const percentage = width / pageWidthRef.current;
+  const onWindowResize = (rect: DOMRectReadOnly) => {
+    const { width } = rect;
+    const percentage = width / pageWidthRef.current;
 
-      if (percentage !== 1) {
-        pageWidthRef.current = entry.contentRect.width;
-        resizeEditor(editorWidthRef.current * percentage);
-      }
-    });
-
-    resizeObserver.observe(pageRef.current);
-
-    return () => resizeObserver.disconnect();
+    if (percentage !== 1) {
+      pageWidthRef.current = width;
+      resizeEditor(editorWidthRef.current * percentage);
+    }
   };
+
+  useResizeObserver(pageRef.current, onWindowResize);
 
   const onResize = ({ dx }: { dx: number }) => {
     setIsResizing(true);

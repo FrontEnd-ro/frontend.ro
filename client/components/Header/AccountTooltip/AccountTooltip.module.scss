@@ -5,15 +5,12 @@
 
   .avatar {
     padding: 0;
-    width: 3em;
-    height: 3em;
     cursor: pointer;
-    background: color(white);
-    border: 1px solid color(silver);
+    border-radius: 50%;
 
     img {
-      width: 100%;
-      height: 100%;
+      max-width: initial;
+      border-radius: 50%;
     }
   }
 

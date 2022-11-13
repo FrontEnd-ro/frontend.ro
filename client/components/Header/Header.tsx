@@ -69,21 +69,24 @@ function Header({
             </p>
           )}
         </div>
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center h-100 py-1 gap-x-4">
           {isLoggedIn ? (
             <>
+              <AccountTooltip theme={theme} />
               <NotificationTooltip
-                className="mr-2"
                 theme={theme}
                 tooltipClassName={styles['notification-tooltip']}
               />
-              <AccountTooltip theme={theme} />
             </>
           ) : null}
           {withNavMenu && (
-            <Button className={styles['nav-menu']} variant="light" onClick={() => setIsNavMenuOpen(true)}>
+            <Button
+              variant="transparent"
+              onClick={() => setIsNavMenuOpen(true)}
+              className={`${styles['nav-menu']} h-100 align-items-center`}
+            >
               Nav
-              <FontAwesomeIcon icon={faLink} />
+              <FontAwesomeIcon className="ml-2" icon={faBars} />
             </Button>
           )}
         </div>

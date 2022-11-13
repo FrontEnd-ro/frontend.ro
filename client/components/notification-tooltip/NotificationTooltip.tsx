@@ -120,13 +120,21 @@ const NotificationsTooltip = ({
   // }, [isOpen, user.notifications.end]);
 
   return (
-    <div ref={componentRef} className={`${className ?? ''} ${styles[`theme-${theme}`]} relative`}>
+    <div
+      ref={componentRef}
+      className={`
+        h-100
+        relative
+        ${className ?? ''}
+        ${styles[`theme-${theme}`]}
+      `}
+    >
       <Button
         onClick={toggle}
         variant="transparent"
-        className={`${styles.icon} relative`}
+        className={`${styles.Button} relative h-100`}
       >
-        <FontAwesomeIcon style={{ minWidth: '20px' }} width="20px" icon={loading ? faSpinner : faBell} />
+        <FontAwesomeIcon icon={loading ? faSpinner : faBell} />
         {user.notifications.unreadCount > 0 && (
           <span className={`${styles['unread-badge']} text-white text-center text-xs`}>
             {user.notifications.unreadCount}

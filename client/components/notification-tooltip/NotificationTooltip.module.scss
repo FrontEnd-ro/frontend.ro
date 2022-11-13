@@ -1,5 +1,15 @@
 @import '../../styles/variables';
 
+.Button {
+  padding: 0.25em 0.5em;
+  background: color(darker-white);
+  border: 1px solid color(silver);
+
+  svg {
+    min-width: 1em;
+  }
+}
+
 .tooltip {
   @extend %mini-scrollbar;
 
@@ -14,20 +24,17 @@
   border: 1px solid color(silver);
 }
 
-.theme-dark {
-  color: color(white);
-
-  .tooltip {
+.theme-dark .tooltip {
+    color: color(white);
     background: color(black);
     border-color: color(grey);
-  }
 }
 
 // TODO: extract as a separate "Badge" component
 .unread-badge {
   position: absolute;
-  top: 0.5em;
-  right: 0;
+  top: 0em;
+  right: -0.5em;
   height: 1.5em;
   min-width: 1.5em;
   border-radius: 50%;

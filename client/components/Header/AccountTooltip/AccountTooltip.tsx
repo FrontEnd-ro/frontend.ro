@@ -33,14 +33,13 @@ function AccountTooltip({ theme = 'light', user, dispatch }: Props & ConnectedPr
   useOutsideClick(ref, () => setIsOpen(false));
 
   return (
-    <div ref={ref} className={`${styles['account-tooltip']} ${styles[`theme-${theme}`]}`}>
-      <Button className={styles.avatar} onClick={toggleToolip}>
+    <div ref={ref} className={`${styles['account-tooltip']} ${styles[`theme-${theme}`]} h-100`}>
+      <Button className={`${styles.avatar} h-100`} onClick={toggleToolip}>
         <img
-          className="pointer"
+          className="pointer d-block h-100"
           title="Toggle menu"
           src={user.info.avatar}
           alt={`${user.info.name} avatar`}
-          width="32"
           data-toggle="true"
         />
       </Button>

@@ -351,18 +351,6 @@
   text-overflow: ellipsis;
 }
 
-.pt-5 {
-  padding-top: 2em;
-}
-
-.pb-5 {
-  padding-bottom: 2em;;
-}
-
-.p-3 {
-  padding: 0.75em;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
@@ -371,4 +359,28 @@
 
 .rotate {
   animation: 0.5s rotateAnimation linear infinite;
+}
+
+/** Padding */
+
+.py-1 {
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+}
+
+.p-3 {
+  padding: 0.75em;
+}
+
+.pt-5 {
+  padding-top: 2em;
+}
+
+.pb-5 {
+  padding-bottom: 2em;;
+}
+
+/** Gap */
+.gap-x-4 {
+  column-gap: 1em;
 }

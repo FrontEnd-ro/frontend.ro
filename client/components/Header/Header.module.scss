@@ -4,7 +4,7 @@
   display: flex;
   height: $app-header-height;
   align-items: center;
-  padding: 0 5vw;
+  padding: 0.35em 5vw;
   position: relative;
   justify-content: space-between;
   z-index: 11;
@@ -146,13 +146,14 @@ header.header-menu-open .mobile-menu {
 
 .nav-menu {
   display: flex;
-  align-items: center;
-  margin-left: 1em;
+  font-size: 0.9em;
+  padding: 0.25em 0.5em;
+  border: 1px solid color(silver);
+  background-color: color(darker-white);
 
   svg {
-    width: 1.25em;
-    min-width: 1.25em;
-    margin-left: 0.5em;
+    width: 1em;
+    min-width: 1em;
   }
 }
 
@@ -181,6 +182,12 @@ header.header-menu-open .mobile-menu {
     display: flex;
     justify-content: center;
     transform: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .logo img {
+    border-radius: 50%;
   }
 }
 

@@ -75,7 +75,7 @@ function Header({
               <AccountTooltip theme={theme} />
               <NotificationTooltip
                 theme={theme}
-                tooltipClassName={styles['notification-tooltip']}
+                tooltipClassName={styles.NotificationTooltip}
               />
             </>
           ) : null}

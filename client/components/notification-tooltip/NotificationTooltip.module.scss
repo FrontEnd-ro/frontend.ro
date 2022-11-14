@@ -2,12 +2,25 @@
 
 .Button {
   padding: 0.25em 0.5em;
-  background: color(darker-white);
-  border: 1px solid color(silver);
 
   svg {
     min-width: 1em;
   }
+}
+
+// TODO: these lines are duplicated in other Buttons
+// used inside the Header. The proper way to do this is
+// to have a Button variant that knows how to change
+// based on theme: "light" | "dark".
+.theme-light .Button {
+  color: color(black);
+  background: color(darker-white);
+  border: 1px solid color(silver);
+}
+
+.theme-dark .Button {
+  color: color(darker-white);
+  border: 1px solid color(grey);
 }
 
 .tooltip {

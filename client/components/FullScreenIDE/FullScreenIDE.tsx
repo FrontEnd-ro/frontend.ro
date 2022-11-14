@@ -3,6 +3,7 @@ import { faFile } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SandpackProvider, SandpackPreview, useSandpack } from '@codesandbox/sandpack-react';
 
+import Header from '../Header';
 import IDEPanel from './IDEPanel/IDEPanel';
 import styles from './FullScreenIDE.module.scss';
 import { useResizeObserver } from '~/services/Hooks';
@@ -112,58 +113,61 @@ const FullScreenIDE = ({
   };
 
   return (
-    <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
-      <IDEPanel vertical>
-        <IDEPanel.Button title="Explorer">
-          <FontAwesomeIcon icon={faFile} />
-        </IDEPanel.Button>
-      </IDEPanel>
-      <div ref={pageRef} className="h-100 d-flex w-100">
-        <div className="d-flex">
-          <ResizableExplorerContainer
-            onResize={({ dx }) => onResize({ explorerDx: dx })}
-            containerRef={editorExplorerContainer}
-            initialWidth={EXPLORER_WIDTH.initial}
-          >
-            <EditorExplorer
-              folderStructure={folderStructure}
-              selectedFileKey={selectedFileId}
-              onFileAdd={addFile}
-              onFolderAdd={addFolder}
-              onSelect={selectFile}
-              onFileRename={renameFile}
-              onFolderRename={renameFolder}
-              onFileDelete={deleteFile}
-              onFolderDelete={deleteFolder}
-            />
-          </ResizableExplorerContainer>
-          <div style={{ width: EDITOR_WIDTH.initial }} ref={editorRef}>
-            <BasicEditor
-              onChange={onCodeChange}
-              className={styles.BasicEditor}
-              resizeTarget={editorRef.current}
-              file={selectedFileId ? folderStructure.getFile(selectedFileId)?.file : undefined}
-            />
+    <>
+      <Header className={styles.Header} theme="dark" withNavMenu />
+      <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
+        <IDEPanel vertical>
+          <IDEPanel.Button title="Explorer">
+            <FontAwesomeIcon icon={faFile} />
+          </IDEPanel.Button>
+        </IDEPanel>
+        <div ref={pageRef} className="h-100 d-flex w-100">
+          <div className="d-flex">
+            <ResizableExplorerContainer
+              onResize={({ dx }) => onResize({ explorerDx: dx })}
+              containerRef={editorExplorerContainer}
+              initialWidth={EXPLORER_WIDTH.initial}
+            >
+              <EditorExplorer
+                folderStructure={folderStructure}
+                selectedFileKey={selectedFileId}
+                onFileAdd={addFile}
+                onFolderAdd={addFolder}
+                onSelect={selectFile}
+                onFileRename={renameFile}
+                onFolderRename={renameFolder}
+                onFileDelete={deleteFile}
+                onFolderDelete={deleteFolder}
+              />
+            </ResizableExplorerContainer>
+            <div style={{ width: EDITOR_WIDTH.initial }} ref={editorRef}>
+              <BasicEditor
+                onChange={onCodeChange}
+                className={styles.BasicEditor}
+                resizeTarget={editorRef.current}
+                file={selectedFileId ? folderStructure.getFile(selectedFileId)?.file : undefined}
+              />
+            </div>
+          </div>
+          <HResizable
+            onResize={({ dx }) => onResize({ editorDx: dx })}
+            className="bg-grey"
+            onEnd={() => setIsResizing(false)}
+          />
+          <div className="relative flex-1">
+            {!didSandpackLoad && (
+              <div className={`pin-full text-black bg-white d-flex align-items-center justify-content-center ${styles.loader}`}>
+                <p> Loading... </p>
+              </div>
+            )}
+            <SandpackProvider className={`${styles.SandpackProvider} m-0`} files={sandpackFiles} template="react">
+              <SandpackPreview className={`${styles.SandpackPreview} m-0`} />
+              <SandpackListener onSuccess={() => setDidSandpackLoad(true)} />
+            </SandpackProvider>
           </div>
         </div>
-        <HResizable
-          onResize={({ dx }) => onResize({ editorDx: dx })}
-          className="bg-grey"
-          onEnd={() => setIsResizing(false)}
-        />
-        <div className="relative flex-1">
-          {!didSandpackLoad && (
-            <div className={`pin-full text-black bg-white d-flex align-items-center justify-content-center ${styles.loader}`}>
-              <p> Loading... </p>
-            </div>
-          )}
-          <SandpackProvider className={`${styles.SandpackProvider} m-0`} files={sandpackFiles} template="react">
-            <SandpackPreview className={`${styles.SandpackPreview} m-0`} />
-            <SandpackListener onSuccess={() => setDidSandpackLoad(true)} />
-          </SandpackProvider>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

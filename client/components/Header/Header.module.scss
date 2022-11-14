@@ -7,7 +7,7 @@
   padding: 0.35em 5vw;
   position: relative;
   justify-content: space-between;
-  z-index: 11;
+  z-index: 50;
 }
 
 .theme-light {
@@ -144,19 +144,6 @@ header.header-menu-open .mobile-menu {
   }
 }
 
-.nav-menu {
-  display: flex;
-  font-size: 0.9em;
-  padding: 0.25em 0.5em;
-  border: 1px solid color(silver);
-  background-color: color(darker-white);
-
-  svg {
-    width: 1em;
-    min-width: 1em;
-  }
-}
-
 .aside-menu {
   left: -100vw;
   width: 100vw !important;
@@ -199,4 +186,27 @@ header.header-menu-open .mobile-menu {
     width: 100%;
     top: $app-header-height;
   }
+}
+
+/** Nav Menu Btn */
+.nav-menu {
+  display: flex;
+  font-size: 0.9em;
+  padding: 0.25em 0.5em;
+
+  svg {
+    width: 1em;
+    min-width: 1em;
+  }
+}
+
+.theme-light .nav-menu {
+  color: color(black);
+  border: 1px solid color(silver);
+  background-color: color(darker-white);
+}
+
+.theme-dark .nav-menu {
+  color: color(darker-white);
+  border: 1px solid color(grey);
 }

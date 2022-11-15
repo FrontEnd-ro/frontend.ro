@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Monaco from '../../monaco';
+import MonacoService from '~/services/MonacoService';
 import FileIcons from '~/services/utils/FileIcons';
 import InitForm from '../../InitForm/InitForm';
 import FolderStructure from '~/services/utils/FolderStructure';
@@ -35,7 +35,7 @@ class DeprecatedBasicMonacoEditor extends MonacoBase {
 
     let { file } = folderStructure.getFile(selectedFileKey);
 
-    this.editor = Monaco.create(this.editorRef.current, {
+    this.editor = MonacoService.create(this.editorRef.current, {
       readOnly,
       value: file ? file.content : '',
       scrollBeyondLastLine: false,

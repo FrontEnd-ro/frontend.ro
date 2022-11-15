@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Monaco from '../monaco';
+import MonacoService from '~/services/MonacoService';
 import FileIcons from '~/services/utils/FileIcons';
 import FolderStructure, { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import MonacoBase from '../Monaco.base';
@@ -61,7 +61,7 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
 
     const modifiedFile = modifiedFolderStructure.getFile(selectedFileKey).file;
 
-    this.editor = Monaco.createDiffEditor(this.editorRef.current, {
+    this.editor = MonacoService.createDiffEditor(this.editorRef.current, {
       scrollBeyondLastLine: false,
     });
 

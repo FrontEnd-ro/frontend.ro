@@ -7,7 +7,6 @@ import React from 'react';
  */
 // eslint-disable-next-line import/no-unresolved
 import { editor as MonacoTypes } from 'monaco-editor';
-import * as Monaco from '../monaco';
 import FileIcons from '~/services/utils/FileIcons';
 import SubmissionService from '~/services/api/Submission.service';
 import FolderStructure from '~/services/utils/FolderStructure';
@@ -61,7 +60,7 @@ class MonacoEditor extends MonacoBase {
 
     let { file } = folderStructure.getFile(selectedFileKey);
 
-    this.editor = Monaco.create(this.editorRef.current, {
+    this.editor = MonacoService.create(this.editorRef.current, {
       value: file ? file.content : '',
       readOnly,
       hover: {
@@ -71,8 +70,8 @@ class MonacoEditor extends MonacoBase {
     });
     this.Feedbacks.add(...this.props.feedbacks);
 
-    Monaco.extendWithDecorate(this.editor);
-    Monaco.extendWithHover(this.editor, this.showViewTooltip, this.hideViewTooltip);
+    MonacoService.extendWithDecorate(this.editor);
+    MonacoService.extendWithHover(this.editor, this.showViewTooltip, this.hideViewTooltip);
 
     if (file) {
       this.onFileSelect(file.key);
@@ -84,7 +83,7 @@ class MonacoEditor extends MonacoBase {
     }
 
     if (askTooltip) {
-      Monaco.extendWithCursorSelectionTooltip(
+      MonacoService.extendWithCursorSelectionTooltip(
         this.editor,
         (tooltipPosition, cursorSelection) => {
           this.setState({

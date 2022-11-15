@@ -4,7 +4,6 @@
 import React from 'react';
 import noop from 'lodash/noop';
 import { editor as MonacoTypes } from 'monaco-editor';
-import * as Monaco from './monaco';
 import MonacoService from '~/services/MonacoService';
 import SubmissionService from '~/services/api/Submission.service';
 import { extractExtension, filesToFolderStructure, fsEntriesToFolderStructure } from '~/services/utils/FileUtils';
@@ -148,7 +147,7 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
     const extension = extractExtension(name);
     const language = extension === 'js' ? 'javascript' : extension;
 
-    Monaco.setModelLanguage(this.editor.getModel(), language);
+    MonacoService.setModelLanguage(this.editor, language);
   }
 
   updateDiffLanguageBasedOnFileName(name: string) {
@@ -156,8 +155,7 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
     const extension = extractExtension(name);
     const language = extension === 'js' ? 'javascript' : extension;
 
-    Monaco.setModelLanguage(diffEditor.getModel().modified, language);
-    Monaco.setModelLanguage(diffEditor.getModel().original, language);
+    MonacoService.setModelLanguage(diffEditor, language);
   }
 
   createFirstFile = ({ name }: { name: string }) => {

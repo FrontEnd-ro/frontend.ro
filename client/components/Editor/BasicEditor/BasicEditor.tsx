@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { editor } from 'monaco-editor';
 import { Theme } from '../themes';
-import * as Monaco from '../monaco';
+import MonacoService from '~/services/MonacoService';
 import styles from '../Editor.module.scss';
 import { extractExtension } from '~/services/utils/FileUtils';
 import { noop } from '~/services/Utils';
@@ -32,8 +32,8 @@ const _BasicEditor = ({
   const editor = useRef<editor.IStandaloneCodeEditor>(null);
 
   const init = async () => {
-    await Monaco.defineTheme(theme);
-    editor.current = Monaco.create(editorRootRef.current, {
+    await MonacoService.defineTheme(theme);
+    editor.current = MonacoService.create(editorRootRef.current, {
       readOnly,
       value: file ? file.content : '',
       scrollBeyondLastLine: false,
@@ -68,7 +68,7 @@ const _BasicEditor = ({
     const extension = extractExtension(file.name);
     const language = extension === 'js' ? 'javascript' : extension;
 
-    Monaco.setModelLanguage(editor.current.getModel(), language);
+    MonacoService.setModelLanguage(editor.current, language);
     editor.current.getModel().setValue(file.content);
   };
 

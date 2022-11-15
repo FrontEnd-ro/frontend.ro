@@ -34,6 +34,7 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'react/prop-types': 'off',
+    'import/no-unresolved': 'off', // Disabling becasue TS takes care of it
   },
   plugins: [
     '@typescript-eslint',

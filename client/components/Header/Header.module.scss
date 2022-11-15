@@ -66,39 +66,6 @@
   background: color(black);
 }
 
-.header-tooltip {
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-
-  &.header-tooltip--no-scroll ul {
-    position: absolute;
-    right: 0;
-    border: 1px solid color(silver);
-    box-shadow: 0 0 1px color(grey);
-    background-color: color(white);
-  }
-
-  ul {
-    text-align: left;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    li {
-      border-bottom: 1px solid color(silver);
-
-      &:last-of-type {
-        border-bottom: 0;
-      }
-
-      &:hover {
-        color: color(white);
-      }
-    }
-  }
-}
-
 .aside-menu {
   left: -100vw;
   width: 100vw !important;

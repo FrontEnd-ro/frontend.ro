@@ -188,10 +188,6 @@ function onChangeCursorSelection(selection, onShowCb, onHideCb) {
   }, 1000);
 }
 
-function formatCode(editor) {
-  // FIXME
-}
-
 async function defineTheme(theme: Theme) {
   switch (theme) {
     case Theme.DRACULA: {
@@ -222,7 +218,6 @@ export {
   extendWithDecorate,
   extendWithHover,
   extendWithCursorSelectionTooltip,
-  formatCode,
   defineTheme,
 };
 

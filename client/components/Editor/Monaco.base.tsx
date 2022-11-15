@@ -144,10 +144,6 @@ class MonacoBase<P = any, S = any> extends React.Component<P & any, S & any> {
     this.editor.setScrollPosition(scroll);
   }
 
-  formatCode = () => {
-    return Monaco.formatCode(this.editor);
-  }
-
   updateLanguageBasedOnFileName(name) {
     const extension = extractExtension(name);
     const language = extension === 'js' ? 'javascript' : extension;

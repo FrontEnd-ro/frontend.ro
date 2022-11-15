@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { editor } from 'monaco-editor';
+import { Theme } from '../themes';
 import * as Monaco from '../monaco';
 import styles from '../Editor.module.scss';
 import { extractExtension } from '~/services/utils/FileUtils';
@@ -15,6 +16,7 @@ export interface BasicEditorProps {
   // If this HTML element resizes, then we will
   // trigger a layout change (resize) for the editor
   resizeTarget?: HTMLElement;
+  theme?: Theme;
 }
 
 const _BasicEditor = ({
@@ -23,22 +25,27 @@ const _BasicEditor = ({
   readOnly = false,
   className = '',
   resizeTarget = null,
+  theme = Theme.VS,
 }: BasicEditorProps) => {
   // This is where we will mount the Monaco Editor
   const editorRootRef = useRef<HTMLDivElement | null>(null);
   const editor = useRef<editor.IStandaloneCodeEditor>(null);
 
-  useEffect(() => {
+  const init = async () => {
+    await Monaco.defineTheme(theme);
     editor.current = Monaco.create(editorRootRef.current, {
       readOnly,
       value: file ? file.content : '',
       scrollBeyondLastLine: false,
+      theme,
     });
 
     if (file !== undefined) {
       updateContent();
     }
-  }, []);
+  };
+
+  useEffect(() => { init(); }, []);
 
   useEffect(() => {
     if (!editor.current || onChange === undefined) {

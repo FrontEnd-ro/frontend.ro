@@ -5,6 +5,7 @@ import { SandpackProvider, SandpackPreview, useSandpack } from '@codesandbox/san
 
 import Header from '../Header';
 import IDEPanel from './IDEPanel/IDEPanel';
+import { Theme } from '../Editor/themes';
 import styles from './FullScreenIDE.module.scss';
 import { useResizeObserver } from '~/services/Hooks';
 import HResizable from '../Editor/HResizable/HResizable';
@@ -145,6 +146,7 @@ const FullScreenIDE = ({
                 onChange={onCodeChange}
                 className={styles.BasicEditor}
                 resizeTarget={editorRef.current}
+                theme={Theme.TOMORROW_NIGHT}
                 file={selectedFileId ? folderStructure.getFile(selectedFileId)?.file : undefined}
               />
             </div>

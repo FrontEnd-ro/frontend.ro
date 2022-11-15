@@ -2,6 +2,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-var */
 
+import { Theme } from './themes';
 import MonacoService from '~/services/MonacoService';
 import { FeedbackType } from '~/../shared/types/submission.types';
 
@@ -191,6 +192,25 @@ function formatCode(editor) {
   // FIXME
 }
 
+async function defineTheme(theme: Theme) {
+  switch (theme) {
+    case Theme.DRACULA: {
+      const { DraculaTheme } = await import('./themes/index');
+      monaco.editor.defineTheme(theme, DraculaTheme);
+      break;
+    }
+    case Theme.TOMORROW_NIGHT: {
+      const { TomorrowNightTheme } = await import('./themes/index');
+      monaco.editor.defineTheme(theme, TomorrowNightTheme);
+      break;
+    }
+    default:
+      // If we end up here, it means we have one of the automatically
+      // supported themes, and there's nothing we need to do.
+      break;
+  }
+}
+
 const { create, createDiffEditor, setModelLanguage } = monaco.editor;
 const { Range } = monaco;
 
@@ -203,6 +223,7 @@ export {
   extendWithHover,
   extendWithCursorSelectionTooltip,
   formatCode,
+  defineTheme,
 };
 
 /**

@@ -2,10 +2,13 @@
 
 .notification {
   line-height: 2em;
-  border-bottom: 1px solid color(silver);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: var(--accent-color);
 
   &:first-of-type {
-    border-top: 1px solid color(silver);
+    border-top-width: 1px;
+    border-top-style: solid;
   }
 
   &:last-of-type {
@@ -15,12 +18,8 @@
   :global .body {
     white-space: initial;
   }
-}
 
-.theme-default.is--unread {
-  background-color: darken(color(darker-white), 5%);
-}
-
-.theme-black.is--unread {
-  background-color: #000;
+  &.is--unread {
+    background: var(--background-highlight);
+  }
 }

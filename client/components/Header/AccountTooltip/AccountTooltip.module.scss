@@ -20,8 +20,8 @@
     top: 100%;
     position: absolute;
     white-space: nowrap;
-    background: color(darker-white);
-    border: 1px solid color(silver);
+    background: var(--background-color);
+    border: 1px solid var(--accent-color);
 
     li {
       cursor: pointer;
@@ -39,8 +39,3 @@
   }
 }
 
-.theme-dark ul {
-  color: color(white);
-  background: color(black);
-  border-color: color(grey);
-}

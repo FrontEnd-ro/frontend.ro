@@ -1,6 +1,21 @@
 @import '../../styles/variables';
 
 .header {
+  // By using CSS Variables we can pretty much have any
+  // variantion we want on the Header. This let's us easily
+  // adapt to Monaco Themes when we're on the full-screen
+  // editor experience.
+
+  --text-color: var(--black);
+  // Used for borders
+  --accent-color: var(--silver);
+
+  --background-color: var(--darker-white);
+
+  // Used to highlight different elements.
+  // For example, unread notifications. 
+  --background-highlight: #ebebeb;
+
   display: flex;
   height: $app-header-height;
   align-items: center;
@@ -8,15 +23,19 @@
   position: relative;
   justify-content: space-between;
   z-index: 50;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 .theme-light {
-  background-color: color(darker-white);
-  border-bottom: 1px solid color(silver);
+  border-bottom: 1px solid var(--accent-color);
 }
 
 .theme-dark {
-  background-color: color(black);
+  --text-color: var(--darker-white);
+  --accent-color: var(--grey);
+  --background-color: var(--black);
+  --background-highlight: #000;
 }
 
 .menu {
@@ -63,7 +82,7 @@
 .demo-label {
   padding: 0.5em;
   border-radius: 0.5em;
-  background: color(black);
+  background: var(--background-highlight);
 }
 
 .aside-menu {
@@ -108,20 +127,10 @@
   display: flex;
   font-size: 0.9em;
   padding: 0.25em 0.5em;
+  border: 1px solid var(--accent-color);
 
   svg {
     width: 1em;
     min-width: 1em;
   }
-}
-
-.theme-light .nav-menu {
-  color: color(black);
-  border: 1px solid color(silver);
-  background-color: color(darker-white);
-}
-
-.theme-dark .nav-menu {
-  color: color(darker-white);
-  border: 1px solid color(grey);
 }

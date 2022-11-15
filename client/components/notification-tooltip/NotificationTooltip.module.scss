@@ -1,26 +1,15 @@
 @import '../../styles/variables';
 
 .Button {
+  border-width: 1px;
+  border-style: solid;
   padding: 0.25em 0.5em;
+  border-color: var(--accent-color);
+  background: var(--background-color);
 
   svg {
     min-width: 1em;
   }
-}
-
-// TODO: these lines are duplicated in other Buttons
-// used inside the Header. The proper way to do this is
-// to have a Button variant that knows how to change
-// based on theme: "light" | "dark".
-.theme-light .Button {
-  color: color(black);
-  background: color(darker-white);
-  border: 1px solid color(silver);
-}
-
-.theme-dark .Button {
-  color: color(darker-white);
-  border: 1px solid color(grey);
 }
 
 .tooltip {
@@ -35,12 +24,8 @@
   overflow-y: auto;
   max-width: 100vw;
   border: 1px solid color(silver);
-}
-
-.theme-dark .tooltip {
-    color: color(white);
-    background: color(black);
-    border-color: color(grey);
+  background: var(--background-color);
+  border-color: var(--accent-color);
 }
 
 // TODO: extract as a separate "Badge" component

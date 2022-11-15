@@ -1,4 +1,5 @@
 import React from 'react';
+import { Theme } from '../themes';
 import MonacoService from '~/services/MonacoService';
 import FileIcons from '~/services/utils/FileIcons';
 import FolderStructure, { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
@@ -63,6 +64,7 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
 
     this.editor = MonacoService.createDiffEditor(this.editorRef.current, {
       scrollBeyondLastLine: false,
+      theme: Theme.VS,
     });
 
     if (modifiedFile) {

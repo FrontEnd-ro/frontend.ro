@@ -7,6 +7,7 @@ import React from 'react';
  */
 // eslint-disable-next-line import/no-unresolved
 import { editor as MonacoTypes } from 'monaco-editor';
+import { Theme } from '../themes';
 import FileIcons from '~/services/utils/FileIcons';
 import SubmissionService from '~/services/api/Submission.service';
 import FolderStructure from '~/services/utils/FolderStructure';
@@ -67,6 +68,7 @@ class MonacoEditor extends MonacoBase {
         enabled: true,
       },
       scrollBeyondLastLine: false,
+      theme: Theme.VS,
     });
     this.Feedbacks.add(...this.props.feedbacks);
 

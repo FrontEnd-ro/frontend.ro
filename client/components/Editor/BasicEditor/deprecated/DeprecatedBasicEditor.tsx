@@ -1,4 +1,5 @@
 import React from 'react';
+import { Theme } from '../../themes';
 import MonacoService from '~/services/MonacoService';
 import FileIcons from '~/services/utils/FileIcons';
 import InitForm from '../../InitForm/InitForm';
@@ -39,6 +40,7 @@ class DeprecatedBasicMonacoEditor extends MonacoBase {
       readOnly,
       value: file ? file.content : '',
       scrollBeyondLastLine: false,
+      theme: Theme.VS,
     });
 
     if (file) {

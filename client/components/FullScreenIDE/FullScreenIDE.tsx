@@ -48,6 +48,7 @@ const FullScreenIDE = ({
 
   const [isResizing, setIsResizing] = useState(false);
   const [didSandpackLoad, setDidSandpackLoad] = useState(false);
+  const [showEditorExplorer, setShowEditorExplorer] = useState(true);
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
 
   useEffect(() => {
@@ -113,36 +114,42 @@ const FullScreenIDE = ({
     setSandpackFiles(toSandPackFiles(folderStructure));
   };
 
+  const toggleEditorExplorer = () => {
+    setShowEditorExplorer(!showEditorExplorer);
+  };
+
   return (
     <>
       <Header className={styles.Header} theme="dark" withNavMenu />
       <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
         <IDEPanel className={styles.IDEPanel} vertical>
-          <IDEPanel.Button title="Explorer">
+          <IDEPanel.Button onClick={toggleEditorExplorer} title="Explorer">
             <FontAwesomeIcon icon={faFile} />
           </IDEPanel.Button>
         </IDEPanel>
         <div ref={pageRef} className="h-100 d-flex w-100">
           <div className="d-flex">
-            <ResizableExplorerContainer
-              onResize={({ dx }) => onResize({ explorerDx: dx })}
-              containerRef={editorExplorerContainer}
-              initialWidth={EXPLORER_WIDTH.initial}
-              classNameHResizable={styles.HResizable}
-            >
-              <EditorExplorer
-                className={styles.EditorExplorer}
-                folderStructure={folderStructure}
-                selectedFileKey={selectedFileId}
-                onFileAdd={addFile}
-                onFolderAdd={addFolder}
-                onSelect={selectFile}
-                onFileRename={renameFile}
-                onFolderRename={renameFolder}
-                onFileDelete={deleteFile}
-                onFolderDelete={deleteFolder}
-              />
-            </ResizableExplorerContainer>
+            {showEditorExplorer && (
+              <ResizableExplorerContainer
+                onResize={({ dx }) => onResize({ explorerDx: dx })}
+                containerRef={editorExplorerContainer}
+                initialWidth={EXPLORER_WIDTH.initial}
+                classNameHResizable={styles.HResizable}
+              >
+                <EditorExplorer
+                  className={styles.EditorExplorer}
+                  folderStructure={folderStructure}
+                  selectedFileKey={selectedFileId}
+                  onFileAdd={addFile}
+                  onFolderAdd={addFolder}
+                  onSelect={selectFile}
+                  onFileRename={renameFile}
+                  onFolderRename={renameFolder}
+                  onFileDelete={deleteFile}
+                  onFolderDelete={deleteFolder}
+                />
+              </ResizableExplorerContainer>
+            )}
             <div style={{ width: EDITOR_WIDTH.initial }} ref={editorRef}>
               <BasicEditor
                 onChange={onCodeChange}

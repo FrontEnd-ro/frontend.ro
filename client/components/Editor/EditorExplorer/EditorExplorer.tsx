@@ -38,6 +38,7 @@ interface Props {
   onFileDelete?: (key: string) => void;
   onCollapse?: () => void;
   feedbacks?: any[]; // TODO: add types
+  className?: string;
 }
 
 const EditorExplorer = ({
@@ -54,6 +55,7 @@ const EditorExplorer = ({
   onFileDelete,
   onCollapse,
   feedbacks = [],
+  className = '',
 }: Props) => {
   const editorExplorerRef = useRef<HTMLDivElement | null>(null);
   const [contextMenuKey, setContextMenuKey] = useState<string | undefined>(undefined);
@@ -239,7 +241,7 @@ const EditorExplorer = ({
     <>
       <div
         ref={editorExplorerRef}
-        className={`h-100 w-100 ${styles.EditorExplorer}`}
+        className={`h-100 w-100 ${className} ${styles.EditorExplorer}`}
       >
         <ActionBar
           readOnly={readOnly}

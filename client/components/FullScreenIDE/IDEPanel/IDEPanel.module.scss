@@ -1,10 +1,13 @@
 @import '../../../styles/variables';
 
 .IDEPanel {
-  --background: var(--black);
+  --text-color: var(--silver);
+  --background-color: var(--black);
+  --background-highlight: var(--darker-white);
   
   padding: 1em 0.5em;
-  background: var(--background);
+  color: var(--text-color);
+  background: var(--background-color);
   border: 1px solid rgb(52, 52, 52);
 }
 
@@ -17,9 +20,9 @@
 .Button {
   width: 2em;
   padding: 0.5em;
-  color: color(silver);
+  color: inherit;
 
   &:hover {
-    background: rgba(color(white), 0.15);
+    background: var(--background-highlight);
   }
 }

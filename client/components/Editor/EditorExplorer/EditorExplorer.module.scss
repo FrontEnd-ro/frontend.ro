@@ -1,11 +1,16 @@
 @import '../../../styles/variables';
 
 .EditorExplorer {
+  --text-color: var(--black);
+  --accent-color: var(--silver);
+  --accent-color-2: #dde0e2;
+  --background-color: var(--white);
+  --background-color-header: var(--darker-white);
+
   overflow: auto;
   position: relative;
-  color: color(black);
-  background: color(white);
-  border: 1px solid color(silver);
+  color: var(--text-color);
+  background: var(--background-color);
 }
 
 .ActionBar {
@@ -17,8 +22,8 @@
   justify-content: space-between;
   font-size: 1.15em;
   padding: 0.15em 0 0.15em 0.25em;
-  background: color(darker-white);
-  border-bottom: 1px solid color(silver);
+  background: var(--background-color-header);
+  border-bottom: 1px solid var(--accent-color);
 
   button {
     padding: 0;

@@ -9,7 +9,7 @@ const CompleteEditorLazy = React.forwardRef((
   forwardRef,
 ) => {
   const { loadError, didLoadMonaco } = withMonacoEditor();
-  const Placeholder = (<EditorPlaceholder className={rest.className} />);
+  const Placeholder = (<EditorPlaceholder className={`bg-silver ${rest.className}`} />);
 
   if (loadError) {
     return (<p> Something went wrong. Try again! </p>);

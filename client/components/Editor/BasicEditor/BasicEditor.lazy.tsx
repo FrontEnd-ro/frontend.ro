@@ -8,7 +8,7 @@ const BasicEditor = React.lazy(() => import('./BasicEditor'));
 const BasicEditorLazy = (props: BasicEditorProps) => {
   const { loadError, didLoadMonaco } = withMonacoEditor();
   // eslint-disable-next-line react/destructuring-assignment
-  const Placeholder = (<EditorPlaceholder className={props.className} />);
+  const Placeholder = (<EditorPlaceholder theme={props.theme} className={props.className} />);
 
   if (loadError) {
     return (<p> Something went wrong. Try again! </p>);

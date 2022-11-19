@@ -117,7 +117,7 @@ const FullScreenIDE = ({
     <>
       <Header className={styles.Header} theme="dark" withNavMenu />
       <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
-        <IDEPanel vertical>
+        <IDEPanel className={styles.IDEPanel} vertical>
           <IDEPanel.Button title="Explorer">
             <FontAwesomeIcon icon={faFile} />
           </IDEPanel.Button>
@@ -128,8 +128,10 @@ const FullScreenIDE = ({
               onResize={({ dx }) => onResize({ explorerDx: dx })}
               containerRef={editorExplorerContainer}
               initialWidth={EXPLORER_WIDTH.initial}
+              classNameHResizable={styles.HResizable}
             >
               <EditorExplorer
+                className={styles.EditorExplorer}
                 folderStructure={folderStructure}
                 selectedFileKey={selectedFileId}
                 onFileAdd={addFile}
@@ -153,7 +155,7 @@ const FullScreenIDE = ({
           </div>
           <HResizable
             onResize={({ dx }) => onResize({ editorDx: dx })}
-            className="bg-grey"
+            className={styles.HResizable}
             onEnd={() => setIsResizing(false)}
           />
           <div className="relative flex-1">

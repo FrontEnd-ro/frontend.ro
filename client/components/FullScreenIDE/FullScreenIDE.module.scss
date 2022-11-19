@@ -5,8 +5,39 @@
   min-height: calc(100vh - #{$app-header-height});
 }
 
+.Header,
+.IDEPanel {
+  --background-color: #17181a;
+  --background-highlight: #232729;
+}
+
+.FullScreenIDE .EditorExplorer {
+  --text-color: var(--silver);
+  --background-color: #1D1F21;
+  --background-color-header: #1D1F21;
+  --accent-color: rgb(52, 52, 52);
+  --accent-color-2: #232729;
+
+  border: 1px solid rgb(52, 52, 52);
+  border-left: 0;
+}
+
+.FullScreenIDE .HResizable {
+  width: 1px;
+  background: none;
+}
+
+
 .BasicEditor {
   height: 100% !important;
+  border-style: solid;
+  border-color: rgb(52, 52, 52);
+  background-color: #1D1F21;
+  border-width: 1px 1px 1px 0;
+
+  :global .overflow-guard {
+    border: 0;
+  }
 }
 
 .resizing .SandpackPreview iframe {

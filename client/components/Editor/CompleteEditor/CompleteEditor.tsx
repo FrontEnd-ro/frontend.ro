@@ -334,6 +334,7 @@ class MonacoEditor extends MonacoBase {
                 onFileDelete={this.onFileDelete}
                 onFolderDelete={this.onFolderDelete}
                 onDownload={this.onDownload}
+                className={styles.EditorExplorer}
               />
             </ResizableExplorerContainer>
             <div

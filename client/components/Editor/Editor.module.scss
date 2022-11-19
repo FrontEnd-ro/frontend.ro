@@ -17,8 +17,6 @@
   }
 
   &.editor-wrapper--loading {
-    background-color: color(darker-white);
-    border: 1px solid color(silver);
     color: color(gray);
 
     p {
@@ -89,5 +87,9 @@
     input {
       opacity: 0;
     }
+  }
+
+  .EditorExplorer {
+    border: 1px solid color(silver);
   }
 }

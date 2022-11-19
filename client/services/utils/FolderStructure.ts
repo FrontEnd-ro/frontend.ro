@@ -299,7 +299,7 @@ export const useFolderStructure = (initialFolderStructure: FolderStructure) => {
   };
 
   const addFolder = (parentId: string, file: ExerciseFile) => {
-    folderStructure.addFile(parentId, file);
+    folderStructure.addFolder(parentId, file);
     setFolderStructure(folderStructure);
   };
 
@@ -321,7 +321,6 @@ export const useFolderStructure = (initialFolderStructure: FolderStructure) => {
   const renameFolder = (id: string, newName: string) => {
     try {
       folderStructure.renameFolder(id, newName);
-      setSelectedFileId(id);
       setFolderStructure(folderStructure);
     } catch (err) {
       console.error(`Failed to renameFolder, id=${id}, newName=${newName}`, err);

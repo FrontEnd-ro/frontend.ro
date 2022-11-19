@@ -4,7 +4,7 @@
   padding: 0.25em;
   flex-flow: row nowrap;
   font-family: $monospace;
-  color: darken(color(grey), 5%);
+  color: var(--text-color);
 
   &.is--ctx-selected {
     background: color(darker-white);
@@ -12,12 +12,11 @@
 
   &:hover,
   &.is--selected {
-    color: color(black);
-    background: lighten(color(silver), 15%);
+    background: var(--accent-color-2);
   }
 
   &.is--renamed {
-    border: 1px solid color(black);
+    border: 1px solid var(--text-color);
   }
 }
 

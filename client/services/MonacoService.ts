@@ -105,21 +105,25 @@ class MonacoService {
   }
 
   async defineTheme(theme: Theme) {
+    const themeConfig = await this.fetchTheme(theme);
+    if (themeConfig !== null) {
+      this.monaco.editor.defineTheme(theme, themeConfig);
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async fetchTheme(theme: Theme): Promise<MonacoTypes.editor.IStandaloneThemeData | null> {
     switch (theme) {
       case Theme.DRACULA: {
         const { DraculaTheme } = await import('../components/Editor/themes/index');
-        this.monaco.editor.defineTheme(theme, DraculaTheme);
-        break;
+        return DraculaTheme;
       }
       case Theme.TOMORROW_NIGHT: {
         const { TomorrowNightTheme } = await import('../components/Editor/themes/index');
-        this.monaco.editor.defineTheme(theme, TomorrowNightTheme);
-        break;
+        return TomorrowNightTheme;
       }
       default:
-        // If we end up here, it means we have one of the automatically
-        // supported themes, and there's nothing we need to do.
-        break;
+        return null;
     }
   }
 

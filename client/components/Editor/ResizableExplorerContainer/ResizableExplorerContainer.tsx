@@ -8,10 +8,12 @@ const ResizableExplorerContainer = ({
   containerRef,
   onResize,
   children,
+  classNameHResizable = '',
 }: PropsWithChildren<{
   initialWidth: string;
   containerRef: React.RefObject<HTMLDivElement>;
-  onResize: ({ dx }: { dx: number }) => void
+  onResize: ({ dx }: { dx: number }) => void;
+  classNameHResizable?: string;
 }>) => (
   <div
     ref={containerRef}
@@ -20,8 +22,8 @@ const ResizableExplorerContainer = ({
   >
     {children}
     <HResizable
-      className={styles.HResizable}
       onResize={onResize}
+      className={`${styles.HResizable} ${classNameHResizable}`}
     />
   </div>
 );

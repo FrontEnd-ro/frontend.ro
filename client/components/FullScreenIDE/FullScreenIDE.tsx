@@ -16,8 +16,10 @@ import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/Res
 
 const FullScreenIDE = ({
   initialFolderStructure,
+  initialSelectedFile = '',
 }: {
-  initialFolderStructure: FolderStructure
+  initialFolderStructure: FolderStructure;
+  initialSelectedFile?: string;
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };
@@ -44,7 +46,7 @@ const FullScreenIDE = ({
     deleteFile,
     deleteFolder,
     selectFile,
-  } = useFolderStructure(initialFolderStructure);
+  } = useFolderStructure(initialFolderStructure, initialSelectedFile);
 
   const [isResizing, setIsResizing] = useState(false);
   const [didSandpackLoad, setDidSandpackLoad] = useState(false);

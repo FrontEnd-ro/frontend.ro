@@ -20,7 +20,10 @@ export default () => {
         url="TODO"
         description="TODO"
       />
-      <FullScreenIDE initialFolderStructure={startingFolderStructure} />
+      <FullScreenIDE
+        initialSelectedFile="App.js"
+        initialFolderStructure={startingFolderStructure}
+      />
     </>
   );
 };

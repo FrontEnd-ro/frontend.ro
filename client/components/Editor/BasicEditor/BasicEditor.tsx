@@ -59,10 +59,10 @@ const _BasicEditor = ({
   }, [onChange]);
 
   useEffect(() => {
-    if (file !== undefined) {
+    if (file !== undefined && editor.current !== null) {
       updateContent();
     }
-  }, [file?.key]);
+  }, [file?.key, !!editor.current]);
 
   const updateContent = () => {
     const extension = extractExtension(file.name);

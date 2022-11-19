@@ -286,12 +286,15 @@ class FolderStructure {
   }
 }
 
-export const useFolderStructure = (initialFolderStructure: FolderStructure) => {
+export const useFolderStructure = (
+  initialFolderStructure: FolderStructure,
+  initialSelectedFile = '',
+  ) => {
   const [folderStructure, setFolderStructure] = useState(
     new FolderStructure(initialFolderStructure),
   );
 
-  const [selectedFileId, setSelectedFileId] = useState('');
+  const [selectedFileId, setSelectedFileId] = useState(initialSelectedFile);
 
   const addFile = (parentId: string, file: ExerciseFile) => {
     folderStructure.addFile(parentId, file);

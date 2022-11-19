@@ -6,9 +6,16 @@
 }
 
 .Header,
-.IDEPanel {
+.IDEPanel,
+.ControlPanel {
   --background-color: #17181a;
   --background-highlight: #232729;
+}
+
+.ControlPanel {
+  z-index: 99;
+  --text-color: var(--darker-white);
+  border-top: 1px solid rgb(52, 52, 52);
 }
 
 .FullScreenIDE .EditorExplorer {

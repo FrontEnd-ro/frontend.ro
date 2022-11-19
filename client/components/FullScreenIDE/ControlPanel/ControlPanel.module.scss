@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+
+.ControlPanel {
+  color: var(--text-color);
+  background: var(--background-color);
+  
+  padding: 2em;
+}
+
+.ControlPanelNav {
+  width: 12em;
+  min-width: 10.5em;
+}
+
+.main {
+  @extend %containerConfig;
+  padding: 0 2em;
+}

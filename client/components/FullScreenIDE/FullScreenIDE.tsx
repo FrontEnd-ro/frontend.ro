@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SandpackProvider, SandpackPreview, useSandpack } from '@codesandbox/sandpack-react';
 
@@ -7,12 +7,13 @@ import Header from '../Header';
 import IDEPanel from './IDEPanel/IDEPanel';
 import { Theme } from '../Editor/themes';
 import styles from './FullScreenIDE.module.scss';
-import { useResizeObserver } from '~/services/Hooks';
+import { useKeyDown, useResizeObserver } from '~/services/Hooks';
 import HResizable from '../Editor/HResizable/HResizable';
 import { BasicEditor } from '../Editor/BasicEditor';
 import EditorExplorer from '../Editor/EditorExplorer/EditorExplorer';
 import FolderStructure, { useFolderStructure } from '~/services/utils/FolderStructure';
 import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
+import ControlPanel from './ControlPanel/ControlPanel';
 
 const FullScreenIDE = ({
   initialFolderStructure,
@@ -50,6 +51,7 @@ const FullScreenIDE = ({
 
   const [isResizing, setIsResizing] = useState(false);
   const [didSandpackLoad, setDidSandpackLoad] = useState(false);
+  const [showControlPanel, setShowControlPanel] = useState(false);
   const [showEditorExplorer, setShowEditorExplorer] = useState(true);
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
 
@@ -71,6 +73,11 @@ const FullScreenIDE = ({
   };
 
   useResizeObserver(pageRef?.current, onWindowResize);
+  useKeyDown('Escape', () => {
+    if (showControlPanel === true) {
+      setShowControlPanel(false);
+    }
+  }, [showControlPanel]);
 
   const onResize = (props: { editorDx: number } | { explorerDx: number }) => {
     let newEditorWidth: number;
@@ -120,16 +127,23 @@ const FullScreenIDE = ({
     setShowEditorExplorer(!showEditorExplorer);
   };
 
+  const toggleControlPanel = () => {
+    setShowControlPanel(!showControlPanel);
+  };
+
   return (
     <>
       <Header className={styles.Header} theme="dark" withNavMenu />
       <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
         <IDEPanel className={styles.IDEPanel} vertical>
-          <IDEPanel.Button onClick={toggleEditorExplorer} title="Explorer">
+          <IDEPanel.Button active={showEditorExplorer} onClick={toggleEditorExplorer} title="Explorer">
             <FontAwesomeIcon icon={faFile} />
           </IDEPanel.Button>
+          <IDEPanel.Button active={showControlPanel} onClick={toggleControlPanel} title="Control Panel">
+            <FontAwesomeIcon icon={faList} />
+          </IDEPanel.Button>
         </IDEPanel>
-        <div ref={pageRef} className="h-100 d-flex w-100">
+        <div ref={pageRef} className="h-100 d-flex w-100 relative">
           <div className="d-flex">
             {showEditorExplorer && (
               <ResizableExplorerContainer
@@ -178,6 +192,9 @@ const FullScreenIDE = ({
               <SandpackListener onSuccess={() => setDidSandpackLoad(true)} />
             </SandpackProvider>
           </div>
+          {showControlPanel && (
+            <ControlPanel className={`pin-full ${styles.ControlPanel}`} />
+          )}
         </div>
       </section>
     </>

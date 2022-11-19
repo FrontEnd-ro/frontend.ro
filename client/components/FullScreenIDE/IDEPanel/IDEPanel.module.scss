@@ -22,7 +22,8 @@
   padding: 0.5em;
   color: inherit;
 
-  &:hover {
+  &:hover,
+  &.active {
     background: var(--background-highlight);
   }
 }

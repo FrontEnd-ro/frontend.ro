@@ -11,6 +11,7 @@ type Props = {
   color?: Color;
   variant?: Variant;
   className?: string;
+  active?: boolean;
 } & LinkProps & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>;
 
 const Link = ({
@@ -19,6 +20,7 @@ const Link = ({
   variant = 'text',
   color = 'inherit',
   className = '',
+  active = true,
 
   // Next Link props 👇
   replace,
@@ -38,7 +40,16 @@ const Link = ({
     prefetch={prefetch}
     locale={locale}
   >
-    <a className={`${className} ${styles[variant]} ${styles[color]} cursor-pointer`} {...rest}>
+    <a
+      className={`
+        ${className}
+        ${styles[variant]}
+        ${styles[color]}
+        ${active === true ? styles.active : ''}
+        cursor-pointer
+      `}
+      {...rest}
+    >
       {children}
     </a>
   </NextLink>

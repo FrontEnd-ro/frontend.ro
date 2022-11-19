@@ -20,11 +20,20 @@ const IDEPanel = ({ vertical = false, className = '', children }: PropsWithChild
   );
 };
 
-IDEPanel.Button = ({ children, className = '', ...rest }: PropsWithChildren<HTMLAttributes<HTMLButtonElement>>) => (
+IDEPanel.Button = ({
+  children,
+  className = '',
+  active = false,
+  ...rest
+}: PropsWithChildren<HTMLAttributes<HTMLButtonElement>> & { active?: boolean; }) => (
   <button
     {...rest}
     type="button"
-    className={`${styles.Button} ${className ?? ''} btn--transparent`}
+    className={`
+      ${styles.Button}
+      ${className ?? ''}
+      ${active === true ? styles.active : ''} btn--transparent
+    `}
   >
     {children}
   </button>

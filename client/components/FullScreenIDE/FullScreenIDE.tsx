@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faList } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faList, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { SandpackProvider, SandpackPreview, useSandpack } from '@codesandbox/sandpack-react';
 
 import Header from '../Header';
@@ -17,6 +17,19 @@ import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/Res
 import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
 import { withAutomaticVerification } from '~/services/api/AutomaticTutorialService';
+
+enum Panel {
+  EDITOR = 'editor',
+  INFO = 'info',
+  VERIFY = 'verify',
+}
+
+interface NavItem {
+  type: Panel;
+  title: string;
+  icon: IconDefinition;
+  onClick: () => void;
+}
 
 const FullScreenIDE = ({
   tutorialId,
@@ -58,12 +71,37 @@ const FullScreenIDE = ({
 
   const [isResizing, setIsResizing] = useState(false);
   const [didSandpackLoad, setDidSandpackLoad] = useState(false);
-  const [showControlPanel, setShowControlPanel] = useState(false);
-  const [showVerifyPanel, setShowVerifyPanel] = useState(false);
+  const [activePanel, setActivePanel] = useState<Panel>(Panel.EDITOR);
+
+  // Whether or not to show the Editor File/Folder Explorer
   const [showEditorExplorer, setShowEditorExplorer] = useState(true);
   const { isVerifying, verificationStatus, verifySolution } = withAutomaticVerification();
 
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
+
+  const navItems : NavItem[] = [{
+    title: 'Editor',
+    type: Panel.EDITOR,
+    icon: faFile,
+    onClick: () => {
+      if (activePanel === Panel.EDITOR) {
+        setShowEditorExplorer(!showEditorExplorer);
+        return;
+      }
+
+      toggleActivePanel(Panel.EDITOR);
+    },
+  }, {
+    title: 'Challenge Info',
+    type: Panel.INFO,
+    icon: faList,
+    onClick: () => toggleActivePanel(Panel.INFO),
+  }, {
+    title: 'Verify Solution',
+    type: Panel.VERIFY,
+    icon: faPlayCircle,
+    onClick: () => toggleActivePanel(Panel.VERIFY),
+  }];
 
   useEffect(() => {
     pageWidth.current = pageRef.current.getBoundingClientRect().width;
@@ -84,10 +122,10 @@ const FullScreenIDE = ({
 
   useResizeObserver(pageRef?.current, onWindowResize);
   useKeyDown('Escape', () => {
-    if (showControlPanel === true) {
-      setShowControlPanel(false);
+    if (activePanel !== Panel.EDITOR) {
+      setActivePanel(Panel.EDITOR);
     }
-  }, [showControlPanel]);
+  }, [activePanel]);
 
   const onResize = (props: { editorDx: number } | { explorerDx: number }) => {
     let newEditorWidth: number;
@@ -133,24 +171,12 @@ const FullScreenIDE = ({
     setSandpackFiles(toSandPackFiles(folderStructure));
   };
 
-  const toggleEditorExplorer = () => {
-    if (showControlPanel === true || showVerifyPanel === true) {
-      setShowControlPanel(false);
-      setShowVerifyPanel(false);
-      return;
+  const toggleActivePanel = (panelClicked: Panel) => {
+    if (activePanel === panelClicked) {
+      setActivePanel(Panel.EDITOR);
+    } else {
+      setActivePanel(panelClicked);
     }
-
-    setShowEditorExplorer(!showEditorExplorer);
-  };
-
-  const toggleControlPanel = () => {
-    setShowVerifyPanel(false);
-    setShowControlPanel(!showControlPanel);
-  };
-
-  const toggleVerifyPanel = () => {
-    setShowControlPanel(false);
-    setShowVerifyPanel(!showVerifyPanel);
   };
 
   return (
@@ -158,19 +184,16 @@ const FullScreenIDE = ({
       <Header className={styles.Header} theme="dark" withNavMenu />
       <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
         <IDEPanel className={styles['actions-panel']} vertical>
-          <IDEPanel.Button
-            title="Explorer"
-            onClick={toggleEditorExplorer}
-            active={showEditorExplorer && !showControlPanel && !showVerifyPanel}
-          >
-            <FontAwesomeIcon icon={faFile} />
-          </IDEPanel.Button>
-          <IDEPanel.Button active={showControlPanel} onClick={toggleControlPanel} title="Control Panel">
-            <FontAwesomeIcon icon={faList} />
-          </IDEPanel.Button>
-          <IDEPanel.Button active={showVerifyPanel} onClick={toggleVerifyPanel} title="Verify Panel">
-            <FontAwesomeIcon icon={faPlayCircle} />
-          </IDEPanel.Button>
+          {navItems.map((item) => (
+            <IDEPanel.Button
+              key={item.type}
+              title={item.title}
+              onClick={item.onClick}
+              active={activePanel === item.type}
+            >
+              <FontAwesomeIcon icon={item.icon} />
+            </IDEPanel.Button>
+          ))}
         </IDEPanel>
         <div ref={pageRef} className="h-100 d-flex w-100 relative">
           <div className="d-flex">
@@ -221,12 +244,12 @@ const FullScreenIDE = ({
               <SandpackListener onSuccess={() => setDidSandpackLoad(true)} />
             </SandpackProvider>
           </div>
-          {showControlPanel && (
+          {activePanel === Panel.INFO && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
               <ControlPanel className={styles.ControlPanel} />
             </IDEPanel>
           )}
-          {showVerifyPanel && (
+          {activePanel === Panel.VERIFY && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
               <VerifyPanel
                 isVerifying={isVerifying}

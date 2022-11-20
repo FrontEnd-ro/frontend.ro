@@ -30,13 +30,14 @@
   --accent-color: rgb(52, 52, 52);
   --accent-color-2: #232729;
 
-  border: 1px solid rgb(52, 52, 52);
+  border: 1px solid var(--accent-color);
   border-left: 0;
 }
 
 .FullScreenIDE .HResizable {
-  width: 1px;
-  background: none;
+  width: 2px;
+  z-index: 12;
+  background: rgb(52, 52, 52);
 }
 
 

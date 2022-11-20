@@ -2,27 +2,16 @@
 
 .resizable {
   z-index: 1;
-
-  &::after {
-    content: '';
-    opacity: 0.5;
-    pointer-events: none;
-    background: currentColor;
-    position: absolute;
-  }
 }
 
 .h-resizable {
   cursor: ew-resize;
-  width: 4px;
+  width: 3px;
   height: 100%;
 
-  &:hover::after {
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 100%;
-    transform: translateX(-2px);
+  &:hover {
+    transform-origin: center;
+    transform: scaleX(2);
   }
 }
 

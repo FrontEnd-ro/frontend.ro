@@ -1,6 +1,7 @@
 @import '../../../styles/variables';
 
 .ControlPanel {
+  overflow: auto;
   color: var(--text-color);
   background: var(--background-color);
   
@@ -8,7 +9,9 @@
 }
 
 .ControlPanelNav {
+  top: 0;
   width: 12em;
+  position: sticky;
   min-width: 10.5em;
 }
 
@@ -22,8 +25,9 @@
   flex-direction: column;
 
   [class*=ControlPanel_ControlPanelNav] {
-    width: 100%;
     gap: 1em;
+    width: 100%;
+    position: static;
     flex-flow: row wrap;
   }
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { faFile, faList } from '@fortawesome/free-solid-svg-icons';
+import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFile, faList } from '@fortawesome/free-solid-svg-icons';
 import { SandpackProvider, SandpackPreview, useSandpack } from '@codesandbox/sandpack-react';
 
 import Header from '../Header';
@@ -14,11 +15,17 @@ import EditorExplorer from '../Editor/EditorExplorer/EditorExplorer';
 import FolderStructure, { useFolderStructure } from '~/services/utils/FolderStructure';
 import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
 import ControlPanel from './ControlPanel/ControlPanel';
+import VerifyPanel from './VerifyPanel/VerifyPanel';
+import { withAutomaticVerification } from '~/services/api/AutomaticTutorialService';
 
 const FullScreenIDE = ({
+  tutorialId,
+  challengeId,
   initialFolderStructure,
   initialSelectedFile = '',
 }: {
+  tutorialId: string;
+  challengeId: string;
   initialFolderStructure: FolderStructure;
   initialSelectedFile?: string;
 }) => {
@@ -52,7 +59,10 @@ const FullScreenIDE = ({
   const [isResizing, setIsResizing] = useState(false);
   const [didSandpackLoad, setDidSandpackLoad] = useState(false);
   const [showControlPanel, setShowControlPanel] = useState(false);
+  const [showVerifyPanel, setShowVerifyPanel] = useState(false);
   const [showEditorExplorer, setShowEditorExplorer] = useState(true);
+  const { isVerifying, verificationStatus, verifySolution } = withAutomaticVerification();
+
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
 
   useEffect(() => {
@@ -124,23 +134,42 @@ const FullScreenIDE = ({
   };
 
   const toggleEditorExplorer = () => {
+    if (showControlPanel === true || showVerifyPanel === true) {
+      setShowControlPanel(false);
+      setShowVerifyPanel(false);
+      return;
+    }
+
     setShowEditorExplorer(!showEditorExplorer);
   };
 
   const toggleControlPanel = () => {
+    setShowVerifyPanel(false);
     setShowControlPanel(!showControlPanel);
+  };
+
+  const toggleVerifyPanel = () => {
+    setShowControlPanel(false);
+    setShowVerifyPanel(!showVerifyPanel);
   };
 
   return (
     <>
       <Header className={styles.Header} theme="dark" withNavMenu />
       <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
-        <IDEPanel className={styles.IDEPanel} vertical>
-          <IDEPanel.Button active={showEditorExplorer} onClick={toggleEditorExplorer} title="Explorer">
+        <IDEPanel className={styles['actions-panel']} vertical>
+          <IDEPanel.Button
+            title="Explorer"
+            onClick={toggleEditorExplorer}
+            active={showEditorExplorer && !showControlPanel && !showVerifyPanel}
+          >
             <FontAwesomeIcon icon={faFile} />
           </IDEPanel.Button>
           <IDEPanel.Button active={showControlPanel} onClick={toggleControlPanel} title="Control Panel">
             <FontAwesomeIcon icon={faList} />
+          </IDEPanel.Button>
+          <IDEPanel.Button active={showVerifyPanel} onClick={toggleVerifyPanel} title="Verify Panel">
+            <FontAwesomeIcon icon={faPlayCircle} />
           </IDEPanel.Button>
         </IDEPanel>
         <div ref={pageRef} className="h-100 d-flex w-100 relative">
@@ -193,7 +222,19 @@ const FullScreenIDE = ({
             </SandpackProvider>
           </div>
           {showControlPanel && (
-            <ControlPanel className={`pin-full ${styles.ControlPanel}`} />
+            <IDEPanel className={`${styles['main-panel']} pin-full`}>
+              <ControlPanel className={styles.ControlPanel} />
+            </IDEPanel>
+          )}
+          {showVerifyPanel && (
+            <IDEPanel className={`${styles['main-panel']} pin-full`}>
+              <VerifyPanel
+                isVerifying={isVerifying}
+                onNextChallenge={() => alert('TODO implement')}
+                verificationStatus={verificationStatus}
+                onVerify={() => verifySolution(tutorialId, challengeId, folderStructure)}
+              />
+            </IDEPanel>
           )}
         </div>
       </section>

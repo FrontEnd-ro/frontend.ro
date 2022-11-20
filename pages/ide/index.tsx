@@ -21,6 +21,8 @@ export default () => {
         description="TODO"
       />
       <FullScreenIDE
+        tutorialId="christmas-advent-3d"
+        challengeId="hierarchy"
         initialSelectedFile="App.js"
         initialFolderStructure={startingFolderStructure}
       />

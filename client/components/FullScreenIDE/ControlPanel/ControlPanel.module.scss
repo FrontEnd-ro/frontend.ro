@@ -1,13 +1,5 @@
 @import '../../../styles/variables';
 
-.ControlPanel {
-  overflow: auto;
-  color: var(--text-color);
-  background: var(--background-color);
-  
-  padding: 2em;
-}
-
 .ControlPanelNav {
   top: 0;
   width: 12em;

@@ -7,17 +7,28 @@
 }
 
 .Header,
-.IDEPanel,
-.ControlPanel {
+.actions-panel,
+.main-panel {
   --background-color: #17181a;
   --background-highlight: #232729;
 }
 
-.ControlPanel {
+.main-panel {
+  --text-color: var(--darker-white);
+
+  padding: 2em;
+  overflow: auto;
+  color: var(--text-color);
+  background: var(--background-color);
+}
+
+.main-panel {
   z-index: 99;
   --text-color: var(--darker-white);
   border-top: 1px solid rgb(52, 52, 52);
+}
 
+.ControlPanel { 
   @media screen and (max-width: 1000px) {
     @include ControlPanel-column;
   }

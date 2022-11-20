@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+
+.Alert {
+  padding: 0.75em 1em;
+}
+
+.icon {
+  height: 1.2em;
+  margin-right: 0.5em;
+}
+
+.error {
+  background: rgba(color(red), 0.1);
+}
+
+.warning {
+  background: rgba(color(yellow), 0.1);
+}
+
+.info {
+  background: rgba(color(blue), 0.1);
+}
+
+.success {
+  background: rgba(color(green), 0.1);
+}

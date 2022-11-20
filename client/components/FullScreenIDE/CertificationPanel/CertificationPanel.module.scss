@@ -1,0 +1,7 @@
+@import '../../../styles/variables';
+
+.CertificationPanel {
+  width: 100%;
+  margin-left: 0;
+  @extend %containerConfig;
+}

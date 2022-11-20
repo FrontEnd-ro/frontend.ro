@@ -30,3 +30,9 @@ export const HTML_TUTORIAL_ID = 'html';
 export const HTML_TUTORIAL_NAME = 'Tutorialul de HTML';
 
 export type ThemeVariant = 'light' | 'dark';
+
+export const JonDoeUser = {
+  name: 'Jon Doe',
+  username: 'jonDoe',
+  avatar: 'https://d3tycb976jpudc.cloudfront.net/schmoes/jon.svg',
+};

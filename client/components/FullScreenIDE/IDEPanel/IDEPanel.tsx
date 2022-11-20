@@ -9,7 +9,6 @@ interface Props {
 const IDEPanel = ({ vertical = false, className = '', children }: PropsWithChildren<Props>) => {
   return (
     <div className={`
-      d-flex
       ${className}
       ${styles.IDEPanel}
       ${vertical === true ? styles.vertical : ''}

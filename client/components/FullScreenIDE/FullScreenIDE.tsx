@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faList, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faAward, faFile, faList, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { SandpackProvider, SandpackPreview, useSandpack } from '@codesandbox/sandpack-react';
 
 import Header from '../Header';
@@ -17,11 +17,13 @@ import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/Res
 import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
 import { withAutomaticVerification } from '~/services/api/AutomaticTutorialService';
+import CertificationPanel from './CertificationPanel/CertificationPanel';
 
 enum Panel {
   EDITOR = 'editor',
   INFO = 'info',
   VERIFY = 'verify',
+  CERTIFICATION = 'certification',
 }
 
 interface NavItem {
@@ -101,6 +103,11 @@ const FullScreenIDE = ({
     type: Panel.VERIFY,
     icon: faPlayCircle,
     onClick: () => toggleActivePanel(Panel.VERIFY),
+  }, {
+    title: 'Certification',
+    type: Panel.CERTIFICATION,
+    icon: faAward,
+    onClick: () => toggleActivePanel(Panel.CERTIFICATION),
   }];
 
   useEffect(() => {
@@ -257,6 +264,11 @@ const FullScreenIDE = ({
                 verificationStatus={verificationStatus}
                 onVerify={() => verifySolution(tutorialId, challengeId, folderStructure)}
               />
+            </IDEPanel>
+          )}
+          {activePanel === Panel.CERTIFICATION && (
+            <IDEPanel className={`${styles['main-panel']} pin-full`}>
+              <CertificationPanel tutorialId={tutorialId} />
             </IDEPanel>
           )}
         </div>

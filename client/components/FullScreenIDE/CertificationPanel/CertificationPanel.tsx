@@ -15,7 +15,7 @@ const CertificationPanel = ({
 
   return (
     <section className={`${className} ${styles.CertificationPanel}`}>
-      <h1> Certification </h1>
+      <h1 className="mt-0"> Certification </h1>
       {!didFinishTutorial && (
         <p>
           Rezolvă toate exercițiile din acest tutorial și obține o certificare

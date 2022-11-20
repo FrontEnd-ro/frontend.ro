@@ -16,3 +16,20 @@
   @extend %containerConfig;
   padding: 0 2em;
 }
+
+@mixin ControlPanel-column {
+  row-gap: 2em;
+  flex-direction: column;
+
+  [class*=ControlPanel_ControlPanelNav] {
+    width: 100%;
+    gap: 1em;
+    flex-flow: row wrap;
+  }
+
+  [class*=ControlPanel_main]{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+}

@@ -17,7 +17,6 @@ const lessonExerciseRouter = require('./lesson-exercise/lesson-exercise.router')
 const demoRouter = require('./demo.router');
 const eventRouter = require('./event/event.router');
 const githubRouter = require('./github/github.router.js');
-const challengeRouter = require('./challenge/challenge.router.js');
 const lessonRouter = require('./lesson/lesson.router');
 const presentationRouter = require('./presentation/presentation.router');
 const applicationConfigRouter = require('./application-config/application-config.router');
@@ -26,6 +25,7 @@ import notificationRouter from './notification/notification.router';
 import certificationRouter from './certification/certification.router';
 import tutorialRouter from './tutorial/tutorial.router';
 import tidbitRouter from './tidbit/tidbit.router';
+import challengeRouter from './challenge/challenge.router';
 
 const port = appConfig.APP.port || appConfig.APP.default_port;
 const app = express();

@@ -29,8 +29,8 @@ const ChallengeSchema = new mongoose.Schema({
   participants: [{ type: ChallengeParticipantSchema, required: true }],
 });
 
-const Challenge = mongoose.models.Challenge || mongoose.model('Challenge', ChallengeSchema);
-const ChallengeParticipant = mongoose.models.ChallengeParticipant || mongoose.model('ChallengeParticipant', ChallengeParticipantSchema);
+const Challenge = mongoose.models.DeprecatedChallenge || mongoose.model('DeprecatedChallenge', ChallengeSchema);
+const ChallengeParticipant = mongoose.models.ChallengeParticipant || mongoose.model('DeprecatedChallengeParticipant', ChallengeParticipantSchema);
 
 class ChallengeModel {
   static getById(id) {

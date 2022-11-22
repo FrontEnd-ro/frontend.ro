@@ -6,11 +6,13 @@ import styles from './Markdown.module.scss';
 
 interface Props {
   markdownString: string;
-  variant?: 'none' | 'transparent';
+  // TODO: refactor these. The component should have
+  // no styles of it's own
+  variant?: 'default' | 'transparent' | 'none';
   className?: string;
 }
 
-function Markdown({ markdownString, className = '', variant = 'none' }: Props) {
+function Markdown({ markdownString, className = '', variant = 'default' }: Props) {
   const markdownRef = useRef(null);
 
   // Whether or not we successfully lazy-loaded
@@ -38,7 +40,7 @@ function Markdown({ markdownString, className = '', variant = 'none' }: Props) {
     <div
       className={`
       ${styles.markdown}
-      ${variant === 'transparent' && styles['is--transparent']}
+      ${styles[variant]}
       ${className}
     `}
       ref={markdownRef}

@@ -14,7 +14,7 @@ import UserService from '~/services/api/User.service';
 import Button from '~/components/Button';
 import { tasks, Task } from './GitGithubChallenge.model';
 import GitHubService from '~/services/api/GitHub.service';
-import ChallengesService from '~/services/api/Challenge.service';
+import ChallengesService from '~/services/api/DeprecatedChallenge.service';
 import List from '~/components/List';
 
 import styles from './GitGithubChallenge.module.scss';

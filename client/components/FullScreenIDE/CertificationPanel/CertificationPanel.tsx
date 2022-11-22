@@ -1,6 +1,7 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import { JonDoeUser } from '~/services/Constants';
+import { ChallengeI } from '~/../shared/types/challenge.types';
 import Diploma from '~/components/certification/Diploma/Diploma';
 
 import styles from './CertificationPanel.module.scss';
@@ -8,10 +9,10 @@ import styles from './CertificationPanel.module.scss';
 const CertificationPanel = ({
   userInfo,
   isLoggedIn,
-  tutorialId,
+  challenge,
   className = '',
-}: ConnectedProps<typeof connector> & { tutorialId: string; className?: string }) => {
-  const didFinishTutorial = isLoggedIn && userInfo.tutorials.includes(tutorialId);
+}: ConnectedProps<typeof connector> & { challenge: ChallengeI; className?: string }) => {
+  const didFinishTutorial = isLoggedIn && userInfo.tutorials.includes(challenge.challengeId);
 
   return (
     <section className={`${className} ${styles.CertificationPanel}`}>
@@ -25,12 +26,12 @@ const CertificationPanel = ({
       <Diploma
         student={isLoggedIn ? userInfo : JonDoeUser}
         tutorial={{
-          name: 'React 3D Christmas Advent',
-          tutorialId: 'christmas-advent-3d',
+          name: challenge.title,
+          tutorialId: challenge.challengeId,
         }}
         certification={{
           date: new Date(),
-          exerciseCount: 7,
+          exerciseCount: challenge.tasks.length,
           url: 'https://FrontEnd.ro',
         }}
         showQRCode={false}

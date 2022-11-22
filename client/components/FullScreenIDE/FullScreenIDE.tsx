@@ -16,8 +16,9 @@ import FolderStructure, { useFolderStructure } from '~/services/utils/FolderStru
 import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
 import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
-import { withAutomaticVerification } from '~/services/api/AutomaticTutorialService';
+import { withAutomaticVerification } from '~/services/api/Challenge.service';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
+import { ChallengeI } from '~/../shared/types/challenge.types';
 
 enum Panel {
   EDITOR = 'editor',
@@ -34,15 +35,9 @@ interface NavItem {
 }
 
 const FullScreenIDE = ({
-  tutorialId,
-  challengeId,
-  initialFolderStructure,
-  initialSelectedFile = '',
+  challenge,
 }: {
-  tutorialId: string;
-  challengeId: string;
-  initialFolderStructure: FolderStructure;
-  initialSelectedFile?: string;
+  challenge: ChallengeI,
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };
@@ -59,6 +54,13 @@ const FullScreenIDE = ({
   const editorWidth = useRef<number | undefined>(undefined);
   const explorerWidth = useRef<number | undefined>(undefined);
 
+  const [currentTaskId, setCurrentTaskId] = useState(challenge.tasks[0].taskId);
+  const currentTask = challenge.tasks.find((task) => task.taskId === currentTaskId);
+
+  const initialFolderStructure = new FolderStructure(JSON.parse(
+    currentTask.startingCode,
+  ));
+
   const {
     selectedFileId,
     folderStructure,
@@ -69,7 +71,7 @@ const FullScreenIDE = ({
     deleteFile,
     deleteFolder,
     selectFile,
-  } = useFolderStructure(initialFolderStructure, initialSelectedFile);
+  } = useFolderStructure(initialFolderStructure, initialFolderStructure.files?.[0]?.key);
 
   const [isResizing, setIsResizing] = useState(false);
   const [didSandpackLoad, setDidSandpackLoad] = useState(false);
@@ -253,7 +255,11 @@ const FullScreenIDE = ({
           </div>
           {activePanel === Panel.INFO && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
-              <ControlPanel className={styles.ControlPanel} />
+              <ControlPanel
+                challenge={challenge}
+                currentTaskId={currentTaskId}
+                className={styles.ControlPanel}
+              />
             </IDEPanel>
           )}
           {activePanel === Panel.VERIFY && (
@@ -262,13 +268,15 @@ const FullScreenIDE = ({
                 isVerifying={isVerifying}
                 onNextChallenge={() => alert('TODO implement')}
                 verificationStatus={verificationStatus}
-                onVerify={() => verifySolution(tutorialId, challengeId, folderStructure)}
+                onVerify={() => verifySolution(
+                  challenge.challengeId, currentTaskId, folderStructure,
+                )}
               />
             </IDEPanel>
           )}
           {activePanel === Panel.CERTIFICATION && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
-              <CertificationPanel tutorialId={tutorialId} />
+              <CertificationPanel challenge={challenge} />
             </IDEPanel>
           )}
         </div>

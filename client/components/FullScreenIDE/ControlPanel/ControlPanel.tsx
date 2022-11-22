@@ -1,48 +1,28 @@
-import { ReactNode, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ControlPanelNav from './ControlPanelNav/ControlPanelNav';
+import { ChallengeI } from '~/../shared/types/challenge.types';
 
 import styles from './ControlPanel.module.scss';
+import Markdown from '~/components/Markdown';
 
-const ControlPanel = ({ className = '' }: { className?: string }) => {
-  const [activeId, setActiveId] = useState('1');
-  const navItems : {
-    id: string;
-    label: string;
-    content: ReactNode;
-  }[] = [{
-    id: '1',
-    label: 'Hierarchy',
-    content: <Challenge1 />,
-  }, {
-    id: '2',
-    label: 'Shapes creation',
-    content: <Challenge2 />,
-  }, {
-    id: '3',
-    label: 'Lights, camera and orbit controls',
-    content: <Challenge3 />,
-  }, {
-    id: '4',
-    label: 'Dat GUI',
-    content: <Challenge4 />,
-  }, {
-    id: '5',
-    label: 'Mesh and textures',
-    content: <Challenge5 />,
-  }, {
-    id: '6',
-    label: 'Physics',
-    content: <Challenge6 />,
-  }, {
-    id: '7',
-    label: 'Interactions',
-    content: <Challenge7 />,
-  }];
+interface Props {
+  challenge: ChallengeI;
+  currentTaskId: string;
+  className?: string;
+}
 
-  const activeItem = navItems.find((item) => item.id === activeId);
+const ControlPanel = ({ challenge, currentTaskId, className = '' }: Props) => {
+  // We allow a user to view a task explainer without actually changing
+  // the entire editor context to that specific task.
+  const [viewingTaskId, setViewingTaskId] = useState(currentTaskId);
+  const activeTask = challenge.tasks.find((task) => task.taskId === viewingTaskId);
+
+  useEffect(() => {
+    setViewingTaskId(currentTaskId);
+  }, [currentTaskId]);
 
   const changeContent = (id: string) => {
-    setActiveId(id);
+    setViewingTaskId(id);
   };
 
   return (
@@ -50,208 +30,25 @@ const ControlPanel = ({ className = '' }: { className?: string }) => {
       <ControlPanelNav
         onItemClick={changeContent}
         className={styles.ControlPanelNav}
-        items={navItems.map((item) => ({
-          ...item,
-          active: activeId === item.id,
+        items={challenge.tasks.map((task) => ({
+          id: task.taskId,
+          label: task.title,
+          active: task.taskId === viewingTaskId,
         }))}
       />
       <main className={styles.main}>
-        {activeItem.content}
+        {/*
+          TODO: show an Alert which:
+            > 1. Tells the user this task is blocked until he/she finishes the previous one
+            > 2. Tells the user this task is available with a button for "starting" it
+        */}
+        <h1 className="mt-0">
+          {activeTask.title}
+        </h1>
+        <Markdown variant="none" markdownString={activeTask.explainer} />
       </main>
     </section>
   );
 };
-
-const Challenge1 = () => (
-  <>
-    <h1 className="mt-0"> Hierarchy </h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-  </>
-);
-
-const Challenge2 = () => (
-  <>
-    <h1 className="mt-0"> Shapes creation </h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-  </>
-);
-
-const Challenge3 = () => (
-  <>
-    <h1 className="mt-0"> Lights, camera and orbit controls </h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-  </>
-);
-
-const Challenge4 = () => (
-  <>
-    <h1 className="mt-0"> Dat GUI </h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-  </>
-);
-
-const Challenge5 = () => (
-  <>
-    <h1 className="mt-0"> Mesh and textures </h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-  </>
-);
-
-const FirstChallenge = () => (
-  <>
-    <h1 className="mt-0"> Challenge </h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-  </>
-);
-
-const Challenge6 = () => (
-  <>
-    <h1 className="mt-0"> Physics </h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-  </>
-);
-
-const Challenge7 = () => (
-  <>
-    <h1 className="mt-0"> Interactions </h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      Pariatur, neque! Odit voluptas similique eos blanditiis iusto,
-      magni dolor repellendus ipsam omnis autem aut nam, consequatur
-      debitis eaque alias, aliquid doloremque?
-    </p>
-  </>
-);
 
 export default ControlPanel;

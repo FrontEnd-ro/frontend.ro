@@ -1,7 +1,7 @@
 import Button from '~/components/Button';
 import Alert from '~/components/generic/Alert/Alert';
 import List from '~/components/List';
-import { VerificationStatus } from '~/services/api/AutomaticTutorialService';
+import { VerificationStatus } from '~/services/api/Challenge.service';
 
 import styles from './VerifyPanel.module.scss';
 

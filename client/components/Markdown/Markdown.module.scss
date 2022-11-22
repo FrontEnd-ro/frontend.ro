@@ -1,15 +1,23 @@
 @import '../../styles/variables';
 
 .markdown {
-  padding: 1em;
   position: relative;
-  font-family: sans-serif;
-  border: 1px solid color(silver);
-  background-color: color(darker-white);
 
-  &.is--transparent {
+  &.default {
+    padding: 1em;
+    font-family: sans-serif;
+    border: 1px solid color(silver);
+    background-color: color(darker-white);
+  }
+
+  &.transparent {
     border: 0;
     background-color: transparent;
+  }
+
+  &.none {
+    font-family: inherit;
+    font-size: inherit;
   }
 
   code {

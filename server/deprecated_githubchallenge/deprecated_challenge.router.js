@@ -1,6 +1,6 @@
 const express = require('express');
 
-const ChallengeModel = require('./challenge.model');
+const ChallengeModel = require('./deprecated_challenge.model');
 import EmailService from '../Email.service';
 const { ServerError } = require('../ServerUtils');
 const { PrivateMiddleware } = require('../Middlewares');

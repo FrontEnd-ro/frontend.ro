@@ -188,6 +188,21 @@ const FullScreenIDE = ({
     }
   };
 
+  const TEMP_DEPENDENCIES = {
+    '@react-spring/three': '^9.5.5',
+    '@react-three/cannon': '^6.4.0',
+    '@react-three/drei': '^9.29.1',
+    '@react-three/fiber': '^8.7.2',
+    '@types/node': '^18.7.23',
+    '@types/react': '^18.0.21',
+    '@types/react-dom': '^18.0.6',
+    '@types/three': '^0.144.0',
+    react: '^18.2.0',
+    'react-dom': '^18.2.0',
+    three: '^0.144.0',
+    typescript: '^4.8.3',
+  };
+
   return (
     <>
       <Header className={styles.Header} theme="dark" withNavMenu />
@@ -248,7 +263,14 @@ const FullScreenIDE = ({
                 <p> Loading... </p>
               </div>
             )}
-            <SandpackProvider className={`${styles.SandpackProvider} m-0`} files={sandpackFiles} template="react">
+            <SandpackProvider
+              className={`${styles.SandpackProvider} m-0`}
+              files={sandpackFiles}
+              template="react-ts"
+              customSetup={{
+                dependencies: TEMP_DEPENDENCIES,
+              }}
+            >
               <SandpackPreview className={`${styles.SandpackPreview} m-0`} />
               <SandpackListener onSuccess={() => setDidSandpackLoad(true)} />
             </SandpackProvider>

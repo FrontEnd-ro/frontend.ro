@@ -1,7 +1,6 @@
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/404/NotFound';
 import { ChallengeI } from '~/../shared/types/challenge.types';
-import FolderStructure from '~/services/utils/FolderStructure';
 import { FullScreenIDE } from '~/components/FullScreenIDE/FullScreenIDE';
 
 export default ({ challenge } : { challenge: ChallengeI }) => {

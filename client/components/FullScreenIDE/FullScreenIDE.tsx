@@ -188,21 +188,6 @@ const FullScreenIDE = ({
     }
   };
 
-  const TEMP_DEPENDENCIES = {
-    '@react-spring/three': '^9.5.5',
-    '@react-three/cannon': '^6.4.0',
-    '@react-three/drei': '^9.29.1',
-    '@react-three/fiber': '^8.7.2',
-    '@types/node': '^18.7.23',
-    '@types/react': '^18.0.21',
-    '@types/react-dom': '^18.0.6',
-    '@types/three': '^0.144.0',
-    react: '^18.2.0',
-    'react-dom': '^18.2.0',
-    three: '^0.144.0',
-    typescript: '^4.8.3',
-  };
-
   return (
     <>
       <Header className={styles.Header} theme="dark" withNavMenu />
@@ -267,9 +252,10 @@ const FullScreenIDE = ({
               className={`${styles.SandpackProvider} m-0`}
               files={sandpackFiles}
               template="react-ts"
-              customSetup={{
-                dependencies: TEMP_DEPENDENCIES,
-              }}
+              // No need for dependencies here, as they will
+              // automatically be resolved based on the
+              // existing package.json file.
+              // https://sandpack.codesandbox.io/docs/advanced-usage/client#usage
             >
               <SandpackPreview className={`${styles.SandpackPreview} m-0`} />
               <SandpackListener onSuccess={() => setDidSandpackLoad(true)} />

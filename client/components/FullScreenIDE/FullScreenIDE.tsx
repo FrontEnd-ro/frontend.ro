@@ -47,6 +47,7 @@ const FullScreenIDE = ({
   // Explorer, Editor and Previewer.
   const pageRef = useRef<HTMLDivElement>(null);
   const editorRef = useRef<HTMLDivElement>(null);
+  const sandpackParent = useRef<HTMLDivElement>(null);
   const editorExplorerContainer = useRef<HTMLDivElement>(null);
 
   // Storing these values as `refs` because we're manually setting the styles.
@@ -54,7 +55,9 @@ const FullScreenIDE = ({
   const editorWidth = useRef<number | undefined>(undefined);
   const explorerWidth = useRef<number | undefined>(undefined);
 
-  const [currentTaskId, setCurrentTaskId] = useState(challenge.tasks[0].taskId);
+  // Temporary initializing this to the second task, because that's the one
+  // where the testing works.
+  const [currentTaskId, setCurrentTaskId] = useState(challenge.tasks[1].taskId);
   const currentTask = challenge.tasks.find((task) => task.taskId === currentTaskId);
 
   const initialFolderStructure = new FolderStructure(JSON.parse(
@@ -79,7 +82,13 @@ const FullScreenIDE = ({
 
   // Whether or not to show the Editor File/Folder Explorer
   const [showEditorExplorer, setShowEditorExplorer] = useState(true);
-  const { isVerifying, verificationStatus, verifySolution } = withAutomaticVerification();
+  const {
+    isVerifying,
+    verificationStatus,
+    verifySolution,
+    setVerificationStatus,
+    verifySolutionClientSide,
+  } = withAutomaticVerification();
 
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
 
@@ -180,6 +189,25 @@ const FullScreenIDE = ({
     setSandpackFiles(toSandPackFiles(folderStructure));
   };
 
+  const onVerify = () => {
+    const iframe = sandpackParent.current.querySelector('iframe');
+
+    if (iframe === null) {
+      // This should never ever be null. If it is, major bug on our side.
+      setVerificationStatus({
+        challengeId: challenge.challengeId,
+        taskId: currentTaskId,
+        valid: false,
+        error: {
+          description: 'Nu am putut evalua soluția ta. Dă-ne un semn dacă problema persistă!',
+        },
+      });
+      return;
+    }
+
+    verifySolutionClientSide(challenge.challengeId, currentTaskId, iframe);
+  };
+
   const toggleActivePanel = (panelClicked: Panel) => {
     if (activePanel === panelClicked) {
       setActivePanel(Panel.EDITOR);
@@ -242,7 +270,7 @@ const FullScreenIDE = ({
             className={styles.HResizable}
             onEnd={() => setIsResizing(false)}
           />
-          <div className="relative flex-1">
+          <div ref={sandpackParent} className="relative flex-1">
             {!didSandpackLoad && (
               <div className={`pin-full text-black bg-white d-flex align-items-center justify-content-center ${styles.loader}`}>
                 <p> Loading... </p>
@@ -276,9 +304,7 @@ const FullScreenIDE = ({
                 isVerifying={isVerifying}
                 onNextChallenge={() => alert('TODO implement')}
                 verificationStatus={verificationStatus}
-                onVerify={() => verifySolution(
-                  challenge.challengeId, currentTaskId, folderStructure,
-                )}
+                onVerify={onVerify}
               />
             </IDEPanel>
           )}

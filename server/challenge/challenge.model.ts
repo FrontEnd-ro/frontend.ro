@@ -15,6 +15,7 @@ const ChallengeSchema = new mongoose.Schema<ChallengeI>({
   challengeId: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   tasks: [{ type: ChallengeTaskSchema, required: true }],
+  typeDefinitions: { type: String, required: false },
 });
 
 const Challenge = mongoose.models.Challenge || mongoose.model('Challenge', ChallengeSchema);

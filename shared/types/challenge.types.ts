@@ -11,6 +11,16 @@ export interface ChallengeI {
   title: string;
 
   tasks: ChallengeTaskI[];
+
+  // Stringified JSON containing type definitions
+  // of the NPM packages we use in this code.
+  // These definitions can be loaded into the
+  // Editor to provide us with autocomplete
+  // and intellisense.
+  // NOTE: putting these on the challenge itself
+  // instead of on the Task because we expect Challenge
+  // to use more-or-less the same packages across tasks.
+  typeDefinitions?: string;
 }
 
 export interface ChallengeTaskI {

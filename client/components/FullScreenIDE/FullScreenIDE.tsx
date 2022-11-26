@@ -18,7 +18,7 @@ import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
 import { withAutomaticVerification } from '~/services/api/Challenge.service';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
-import { ChallengeI } from '~/../shared/types/challenge.types';
+import { ParsedChallengeI } from '~/../shared/types/challenge.types';
 
 enum Panel {
   EDITOR = 'editor',
@@ -37,7 +37,7 @@ interface NavItem {
 const FullScreenIDE = ({
   challenge,
 }: {
-  challenge: ChallengeI,
+  challenge: ParsedChallengeI,
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };
@@ -97,7 +97,18 @@ const FullScreenIDE = ({
 
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
 
-  const navItems : NavItem[] = [{
+  const extraMonacoLibs = [
+    ...folderStructure.getFilesWithPath().map((file) => ({
+      content: file.content,
+      path: `${file.path}/${file.name}`,
+    })),
+    ...challenge.typeDefinitions.map(({ content, path }) => ({
+      content,
+      path: `/${path}`,
+    })),
+  ];
+
+  const navItems: NavItem[] = [{
     title: 'Editor',
     type: Panel.EDITOR,
     icon: faFile,
@@ -266,7 +277,10 @@ const FullScreenIDE = ({
                 className={styles.BasicEditor}
                 resizeTarget={editorRef.current}
                 theme={Theme.TOMORROW_NIGHT}
-                file={selectedFileId ? folderStructure.getFile(selectedFileId)?.file : undefined}
+                typeDefinitions={extraMonacoLibs}
+                file={selectedFileId
+                  ? folderStructure.getFileWithPath(selectedFileId)?.file
+                  : undefined}
               />
             </div>
           </div>

@@ -1,9 +1,10 @@
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/404/NotFound';
-import { ChallengeI } from '~/../shared/types/challenge.types';
+import { parseChallenge } from '~/../shared/Challenge.shared';
+import { ChallengeI, ParsedChallengeI } from '~/../shared/types/challenge.types';
 import { FullScreenIDE } from '~/components/FullScreenIDE/FullScreenIDE';
 
-export default ({ challenge } : { challenge: ChallengeI }) => {
+export default ({ challenge } : { challenge: ParsedChallengeI }) => {
   if (challenge === undefined) {
     return <NotFoundPage />;
   }
@@ -30,9 +31,10 @@ export async function getServerSideProps({ res }) {
     const resp = await fetch(`${appConfig.APP.endpoint}/challenges/${CHALLENGE_ID}`);
     switch (resp.status) {
       case 200: {
-        const challenge = await resp.json();
+        const challenge: ChallengeI = await resp.json();
+        const parsedChallenge = parseChallenge(challenge);
         return {
-          props: { challenge },
+          props: { challenge: parsedChallenge },
         };
       }
       case 404:

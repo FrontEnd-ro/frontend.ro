@@ -11,12 +11,20 @@ import { useResizeObserver } from '~/services/Hooks';
 export interface BasicEditorProps {
   className?: string,
   readOnly?: boolean,
-  file?: ExerciseFile,
+  file?: (ExerciseFile & { path: string }),
   onChange?: (code: string) => void,
   // If this HTML element resizes, then we will
   // trigger a layout change (resize) for the editor
   resizeTarget?: HTMLElement;
   theme?: Theme;
+
+  // Type definitions for the files or libraries
+  // we reference in our code. This allows our Editor
+  // to have propert Intellisense functionality.
+  // > content: is the actual content of the file or it's `.d.ts` definitions
+  // > path: path to where is this file or package found. Example:
+  //   node_modules/@types/react/index.d.ts
+  typeDefinitions?: { content: string; path: string}[];
 }
 
 const _BasicEditor = ({
@@ -26,6 +34,7 @@ const _BasicEditor = ({
   className = '',
   resizeTarget = null,
   theme = Theme.VS,
+  typeDefinitions = [],
 }: BasicEditorProps) => {
   // This is where we will mount the Monaco Editor
   const editorRootRef = useRef<HTMLDivElement | null>(null);
@@ -39,6 +48,17 @@ const _BasicEditor = ({
       scrollBeyondLastLine: false,
       theme,
     });
+
+    if (typeDefinitions.length !== 0) {
+      MonacoService
+        .get()
+        .languages
+        .typescript
+        .typescriptDefaults.setExtraLibs(typeDefinitions.map((lib) => ({
+          content: lib.content,
+          filePath: `file://${lib.path}`,
+        })));
+    }
 
     if (file !== undefined) {
       updateContent();
@@ -66,12 +86,23 @@ const _BasicEditor = ({
 
   const updateContent = () => {
     const extension = extractExtension(file.name);
+    let language = MonacoService.getModelLanguage(extension);
 
-    MonacoService.setModelLanguage(
-      editor.current,
-      MonacoService.getModelLanguage(extension),
+    // Dispose of the current model
+    editor.current.getModel()?.dispose();
+
+    // Create a new model with a URI
+    // This allows us to have intellisese when using TypeScript.
+    // FIXME: this code should be moved down into MonacoService.
+    // The internal details should not be handled from here.
+    // Like a Facade pattern, we should interact with the service,
+    // not directly. But for now, it's ok.
+    const newModel = MonacoService.get().editor.createModel(
+      file.content,
+      language,
+      MonacoService.get().Uri.parse(`file://${file.path}/${file.name}`),
     );
-    editor.current.getModel().setValue(file.content);
+    editor.current.setModel(newModel);
   };
 
   useResizeObserver(resizeTarget, () => editor.current.layout());

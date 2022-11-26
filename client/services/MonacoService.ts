@@ -72,6 +72,7 @@ class MonacoService {
         require(['vs/editor/editor.main'], resolve);
       });
       this.monaco = monaco;
+      this.setupTypescript();
 
       this.pendingPromises.forEach(({ resolve }) => resolve(this.monaco));
       return this.monaco;
@@ -139,6 +140,15 @@ class MonacoService {
       default:
         return null;
     }
+  }
+
+  // This enables Intellisense for our TypeScript files.
+  private setupTypescript() {
+    this.monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      esModuleInterop: true,
+      jsx: this.monaco.languages.typescript.JsxEmit.Preserve,
+      allowJs: true,
+    });
   }
 
   /* ********** DEPRECATED (kind of) - START */

@@ -101,6 +101,17 @@ class FolderStructure {
     return { file: null };
   }
 
+  // TODO: this is not the most efficient way to do this.
+  // We probably should populate the paths when creating the
+  // folder structure, and then just making sure we keep them in sync.
+  getFileWithPath(key, subFolder: any = this) {
+    const allFiles = this.getFilesWithPath(subFolder);
+    const foundFile = allFiles.find((file) => file.key === key);
+    return {
+      file: foundFile ?? null,
+    };
+  }
+
   getFolder(key, subFolder: any = this) {
     if (!key) {
       return { folder: this, parentKey: null };

@@ -23,6 +23,12 @@ export interface ChallengeI {
   typeDefinitions?: string;
 }
 
+// When reading this data on the client, we're actually parsing a few
+// properties so we have typed JSON objects instead of strings.
+export interface ParsedChallengeI extends Omit<ChallengeI, 'typeDefinitions'> {
+  typeDefinitions: {content: string; path: string;}[];
+}
+
 export interface ChallengeTaskI {
   // Unique, human-readable ID.
   // This is used when routing in the UI.

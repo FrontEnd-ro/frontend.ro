@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import ControlPanelNav from './ControlPanelNav/ControlPanelNav';
-import { ChallengeI } from '~/../shared/types/challenge.types';
+import { ParsedChallengeI } from '~/../shared/types/challenge.types';
 
 import styles from './ControlPanel.module.scss';
 import Markdown from '~/components/Markdown';
 
 interface Props {
-  challenge: ChallengeI;
+  challenge: ParsedChallengeI;
   currentTaskId: string;
   className?: string;
 }

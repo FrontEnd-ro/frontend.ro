@@ -1,7 +1,7 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import { JonDoeUser } from '~/services/Constants';
-import { ChallengeI } from '~/../shared/types/challenge.types';
+import { ParsedChallengeI } from '~/../shared/types/challenge.types';
 import Diploma from '~/components/certification/Diploma/Diploma';
 
 import styles from './CertificationPanel.module.scss';
@@ -11,7 +11,7 @@ const CertificationPanel = ({
   isLoggedIn,
   challenge,
   className = '',
-}: ConnectedProps<typeof connector> & { challenge: ChallengeI; className?: string }) => {
+}: ConnectedProps<typeof connector> & { challenge: ParsedChallengeI; className?: string }) => {
   const didFinishTutorial = isLoggedIn && userInfo.tutorials.includes(challenge.challengeId);
 
   return (

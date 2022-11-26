@@ -29,6 +29,9 @@ export interface ChallengeTaskI {
   // for example the Git/GitHub one.
   startingCode?: string;
 
+  // Which file to initially open/show to the User.
+  startingFile?: string;
+
   // Stringified JSON
   // If this is missing it means we have a
   // challenge that doesn't involve coding,

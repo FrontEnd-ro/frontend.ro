@@ -6,6 +6,7 @@ const ChallengeTaskSchema = new mongoose.Schema<ChallengeTaskI>({
   title: { type: String, required: true },
   explainer: { type: String, required: true },
   solution: { type: String, required: false },
+  startingFile: { type: String, required: false},
   startingCode: { type: String, required: false },
   filesThatCanBeEdited: [{ type: String, required: false }],
 });

@@ -74,7 +74,12 @@ const FullScreenIDE = ({
     deleteFile,
     deleteFolder,
     selectFile,
-  } = useFolderStructure(initialFolderStructure, initialFolderStructure.files?.[0]?.key);
+  } = useFolderStructure(
+    initialFolderStructure,
+    // If the task definition doesn't have a `startingFile`, default
+    // to the first file in the top folder.
+    currentTask.startingFile ?? initialFolderStructure.files?.[0]?.key,
+  );
 
   const [isResizing, setIsResizing] = useState(false);
   const [didSandpackLoad, setDidSandpackLoad] = useState(false);

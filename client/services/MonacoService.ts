@@ -90,6 +90,20 @@ class MonacoService {
   createDiffEditor : typeof MonacoTypes.editor.createDiffEditor
     = (...props) => this.monaco.editor.createDiffEditor(...props);
 
+  // eslint-disable-next-line class-methods-use-this
+  getModelLanguage(extension: string): string {
+    switch (extension) {
+      case 'js':
+      case 'jsx':
+        return 'javascript';
+      case 'ts':
+      case 'tsx':
+        return 'typescript';
+      default:
+        return extension;
+    }
+  }
+
   setModelLanguage(
     regularOrDiffEditor: MonacoTypes.editor.IEditor,
     language: string,

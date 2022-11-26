@@ -66,9 +66,11 @@ const _BasicEditor = ({
 
   const updateContent = () => {
     const extension = extractExtension(file.name);
-    const language = extension === 'js' ? 'javascript' : extension;
 
-    MonacoService.setModelLanguage(editor.current, language);
+    MonacoService.setModelLanguage(
+      editor.current,
+      MonacoService.getModelLanguage(extension),
+    );
     editor.current.getModel().setValue(file.content);
   };
 

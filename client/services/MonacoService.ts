@@ -147,6 +147,7 @@ class MonacoService {
     this.monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
       esModuleInterop: true,
       target: this.monaco.languages.typescript.ScriptTarget.Latest,
+      moduleResolution: this.monaco.languages.typescript.ModuleResolutionKind.NodeJs,
       jsx: this.monaco.languages.typescript.JsxEmit.Preserve,
       allowJs: true,
     });

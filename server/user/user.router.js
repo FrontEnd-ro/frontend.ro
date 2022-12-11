@@ -16,6 +16,36 @@ const userRouter = express.Router();
 const s3 = new S3Client({ region: appConfig.AWS.region });
 const upload = multer({ storage: multer.memoryStorage() });
 
+userRouter.get('/avatar/:username', async function getDefaultAvatar(req, res) {
+  // Previously we were pointing directly to https://joeschmoe.io/ API.
+  // However, since the heroku free plans were cancelled, this api failed
+  // to work. Thus, we're chaning the endpoint of default avatar to our own,
+  // so we have full control in the future and prevent similar situations.
+  const { username } = req.params;
+
+  // Thankfully we saved some Schmoes, and we're gonna use these
+  // for the default avatars. Below we have a very "dumb" hash function,
+  // that links a Username with a Schmoe.
+  const schmoes = [
+    'adam',
+    'jacques',
+    'jaqueline',
+    'jazebelle',
+    'jeri',
+    'jodi',
+    'joe',
+    'jon',
+    'jude'
+  ];
+
+  const totalCharCode = username
+    .split('')
+    .reduce((acc, cur) => acc + cur.charCodeAt(0), 0);
+
+  const schmoeIndex = totalCharCode % schmoes.length;
+  res.redirect(302, `${appConfig.CDN.static}/schmoes/pngs/${schmoes[schmoeIndex]}.png`);
+});
+
 userRouter.get('/check-username/:username', async function checkUsername(req, res) {
   const { username } = req.params;
 

@@ -11,7 +11,8 @@ import SchmoePirate from './SchmoePirate';
 
 import styles from './LandingSchmoes.module.scss';
 
-/** https://joeschmoe.io/ */
+// The website that offered the "schmoes" for free was https://joeschmoe.io
+// However, that is now down because of the changes to free Heroku Plans.
 export default function LandingSchmoes() {
   return (
     <div className={`${styles['landing-schmoes']} absolute w-100 overflow-hidden`}>

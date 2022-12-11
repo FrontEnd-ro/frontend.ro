@@ -90,11 +90,14 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://www.thedoodlelibrary.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/doodle_500w.png`,
     },
-    {
-      title: 'Joe Schmoe',
-      url: 'https://joeschmoe.io/',
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/schmoe_500w.png`,
-    },
+    // Currently this website is down, following Heroku closing down free plans.
+    // TODO: periodically check whether this will be "revived" in the future. If yes,
+    // add it back to the list.
+    // {
+    //   title: 'Joe Schmoe',
+    //   url: 'https://joeschmoe.io/',
+    //   cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/schmoe_500w.png`,
+    // },
     {
       title: 'Blobs.app',
       url: 'https://blobs.app',

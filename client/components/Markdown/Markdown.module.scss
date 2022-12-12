@@ -20,17 +20,6 @@
     font-size: inherit;
   }
 
-  code {
-    font-family: $monospace;
-    padding: 0 0.5em;
-    border-radius: 3px;
-    line-height: 1.25em;
-    margin: 0 0.2em;
-    background-color: lighten(color(silver), 20%);
-    border: 1px solid color(silver);
-    display: inline-block;
-  }
-
   a {
     border-bottom: 1px solid color(silver);
   }

@@ -18,6 +18,6 @@ const ChallengeSchema = new mongoose.Schema<ChallengeI>({
   typeDefinitions: { type: String, required: false },
 });
 
-const Challenge = mongoose.models.Challenge || mongoose.model('Challenge', ChallengeSchema);
+const Challenge: mongoose.Model<ChallengeI, {}, {}> = mongoose.models.Challenge || mongoose.model('Challenge', ChallengeSchema);
 
 export default Challenge;

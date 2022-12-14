@@ -18,7 +18,7 @@ import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
 import { withAutomaticVerification } from '~/services/api/Challenge.service';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
-import { ParsedChallengeI } from '~/../shared/types/challenge.types';
+import { ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 
 enum Panel {
   EDITOR = 'editor',
@@ -35,9 +35,9 @@ interface NavItem {
 }
 
 const FullScreenIDE = ({
-  challenge,
+  challengeSubmission,
 }: {
-  challenge: ParsedChallengeI,
+  challengeSubmission: ParsedChallengeSubmissionI,
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };
@@ -55,14 +55,44 @@ const FullScreenIDE = ({
   const editorWidth = useRef<number | undefined>(undefined);
   const explorerWidth = useRef<number | undefined>(undefined);
 
-  // Temporary initializing this to the second task, because that's the one
-  // where the testing works.
-  const [currentTaskId, setCurrentTaskId] = useState(challenge.tasks[1].taskId);
-  const currentTask = challenge.tasks.find((task) => task.taskId === currentTaskId);
+  const [currentTaskId, setCurrentTaskId] = useState(
+    // First task that is either:
+    // > not started
+    // > started but the solution is not valid
+    challengeSubmission.tasks.find((t) => t.status === undefined
+      || t.status.valid === false).taskId,
+  );
+  const currentTask = challengeSubmission.tasks.find((task) => task.taskId === currentTaskId);
 
-  const initialFolderStructure = new FolderStructure(JSON.parse(
-    currentTask.startingCode,
-  ));
+  const taskFolderStructure = (function getTaskFolderStructure() {
+    // We need to merge the starting code from the task definition
+    // with the code that the user has wrote for that task (if any).
+    const folderStructure = new FolderStructure(JSON.parse(
+      currentTask.startingCode,
+    ));
+    const folderStructureForEditedFiles = new FolderStructure(JSON.parse(
+      currentTask.codeForFilesThatCanBeEdited,
+    ));
+
+    currentTask.filesThatCanBeEdited.forEach((fileId) => {
+      const { file } = folderStructure.getFile(fileId);
+      if (file === null) {
+        return;
+      }
+
+      const { file: editedFile } = folderStructureForEditedFiles.getFile(fileId);
+      if (editedFile === null) {
+        return;
+      }
+
+      folderStructure.setContent(
+        file.key,
+        editedFile.content,
+      );
+    });
+
+    return folderStructure;
+  }());
 
   const {
     selectedFileId,
@@ -75,10 +105,10 @@ const FullScreenIDE = ({
     deleteFolder,
     selectFile,
   } = useFolderStructure(
-    initialFolderStructure,
+    taskFolderStructure,
     // If the task definition doesn't have a `startingFile`, default
     // to the first file in the top folder.
-    currentTask.startingFile ?? initialFolderStructure.files?.[0]?.key,
+    currentTask.startingFile ?? taskFolderStructure.files?.[0]?.key,
   );
 
   const [isResizing, setIsResizing] = useState(false);
@@ -102,7 +132,7 @@ const FullScreenIDE = ({
       content: file.content,
       path: `${file.path}/${file.name}`,
     })),
-    ...challenge.typeDefinitions.map(({ content, path }) => ({
+    ...challengeSubmission.typeDefinitions.map(({ content, path }) => ({
       content,
       path: `/${path}`,
     })),
@@ -214,7 +244,7 @@ const FullScreenIDE = ({
     if (iframe === null) {
       // This should never ever be null. If it is, major bug on our side.
       setVerificationStatus({
-        challengeId: challenge.challengeId,
+        challengeId: challengeSubmission.challengeId,
         taskId: currentTaskId,
         valid: false,
         error: {
@@ -224,7 +254,7 @@ const FullScreenIDE = ({
       return;
     }
 
-    verifySolutionClientSide(challenge.challengeId, currentTaskId, iframe);
+    verifySolutionClientSide(challengeSubmission.challengeId, currentTaskId, iframe);
   };
 
   const toggleActivePanel = (panelClicked: Panel) => {
@@ -317,7 +347,7 @@ const FullScreenIDE = ({
           {activePanel === Panel.INFO && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
               <ControlPanel
-                challenge={challenge}
+                challenge={challengeSubmission}
                 currentTaskId={currentTaskId}
                 className={styles.ControlPanel}
               />
@@ -335,7 +365,7 @@ const FullScreenIDE = ({
           )}
           {activePanel === Panel.CERTIFICATION && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
-              <CertificationPanel challenge={challenge} />
+              <CertificationPanel challenge={challengeSubmission} />
             </IDEPanel>
           )}
         </div>

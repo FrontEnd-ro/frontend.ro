@@ -30,6 +30,8 @@ export interface ParsedChallengeI extends Omit<ChallengeI, 'typeDefinitions'> {
 }
 
 export interface ChallengeTaskI {
+  _id?: ObjectId;
+
   // Unique, human-readable ID.
   // This is used when routing in the UI.
   taskId: string;

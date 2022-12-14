@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { editor } from 'monaco-editor';
 import { Theme } from '../themes';
 import MonacoService from '~/services/MonacoService';
@@ -11,6 +11,7 @@ import { useResizeObserver } from '~/services/Hooks';
 export interface BasicEditorProps {
   className?: string,
   readOnly?: boolean,
+  readOnlyTooltipMessage?: string;
   file?: (ExerciseFile & { path: string }),
   onChange?: (code: string) => void,
   // If this HTML element resizes, then we will
@@ -35,10 +36,12 @@ const _BasicEditor = ({
   resizeTarget = null,
   theme = Theme.VS,
   typeDefinitions = [],
+  readOnlyTooltipMessage,
 }: BasicEditorProps) => {
   // This is where we will mount the Monaco Editor
   const editorRootRef = useRef<HTMLDivElement | null>(null);
   const editor = useRef<editor.IStandaloneCodeEditor>(null);
+  const [didLoadEditor, setDidLoadEditor] = useState(false);
 
   const init = async () => {
     await MonacoService.defineTheme(theme);
@@ -63,6 +66,7 @@ const _BasicEditor = ({
     if (file !== undefined) {
       updateContent();
     }
+    setDidLoadEditor(true);
   };
 
   useEffect(() => { init(); }, []);
@@ -72,7 +76,24 @@ const _BasicEditor = ({
     }
 
     editor.current.updateOptions({ readOnly });
-  }, [readOnly]);
+  }, [readOnly, didLoadEditor]);
+
+  useEffect(() => {
+    if (editor.current === null || readOnlyTooltipMessage === undefined) {
+      return noop;
+    }
+
+    const messageContribution = editor.current.getContribution('editor.contrib.messageController');
+    const disposable = editor.current.onDidAttemptReadOnlyEdit(() => {
+      // According to this: https://github.com/microsoft/monaco-editor/issues/1742
+      // the typings are not 100% complete.
+      (messageContribution as any).showMessage(
+        readOnlyTooltipMessage,
+        editor.current.getPosition(),
+      );
+    });
+    return () => disposable.dispose();
+  }, [readOnlyTooltipMessage, didLoadEditor]);
 
   useEffect(() => {
     if (!editor.current || onChange === undefined) {

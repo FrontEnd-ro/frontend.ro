@@ -12,7 +12,7 @@ import { useKeyDown, useResizeObserver } from '~/services/Hooks';
 import HResizable from '../Editor/HResizable/HResizable';
 import { BasicEditor } from '../Editor/BasicEditor';
 import EditorExplorer from '../Editor/EditorExplorer/EditorExplorer';
-import FolderStructure, { useFolderStructure } from '~/../shared/utils/FolderStructure';
+import FolderStructure, { ExerciseFile, useFolderStructure } from '~/../shared/utils/FolderStructure';
 import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
 import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
@@ -108,6 +108,9 @@ const FullScreenIDE = ({
     })),
   ];
 
+  const fileNamesThatCanBeEdited = currentTask.filesThatCanBeEdited
+    .filter((fileId) => folderStructure.hasFile(fileId))
+    .map((fileId) => folderStructure.getFile(fileId).file.name);
   const navItems: NavItem[] = [{
     title: 'Editor',
     type: Panel.EDITOR,
@@ -276,6 +279,7 @@ const FullScreenIDE = ({
                 onChange={onCodeChange}
                 readOnly={currentTask.filesThatCanBeEdited?.length > 0
                   && !currentTask.filesThatCanBeEdited.includes(selectedFileId)}
+                readOnlyTooltipMessage={`Pentru acest task poti edita doar ${fileNamesThatCanBeEdited.length > 1 ? 'fisierele' : 'fisierul'} ${fileNamesThatCanBeEdited.join(',')}.`}
                 className={styles.BasicEditor}
                 resizeTarget={editorRef.current}
                 theme={Theme.TOMORROW_NIGHT}

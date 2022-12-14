@@ -3,8 +3,8 @@ import React from 'react';
 import Demo, { DemoPreview } from '~/components/demo';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
+import { ExerciseFile, ExerciseFolder } from '~/../shared/utils/FolderStructure';
 import { DeprecatedBasicEditor } from '~/components/Editor/BasicEditor';
-import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
 import SEOTags from '~/components/SEOTags';
 
 export default function ExternalMethod() {

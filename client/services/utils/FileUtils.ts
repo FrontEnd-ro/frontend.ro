@@ -1,5 +1,5 @@
 import { uuid } from '../Utils';
-import FolderStructure from './FolderStructure';
+import FolderStructure from '../../../shared/utils/FolderStructure';
 
 export function extractExtension(fileName: string) {
   const parts = fileName.split('.');

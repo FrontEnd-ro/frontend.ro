@@ -5,7 +5,7 @@ import MonacoService from '~/services/MonacoService';
 import styles from '../Editor.module.scss';
 import { extractExtension } from '~/services/utils/FileUtils';
 import { noop } from '~/services/Utils';
-import { ExerciseFile } from '~/services/utils/FolderStructure';
+import { ExerciseFile } from '~/../shared/utils/FolderStructure';
 import { useResizeObserver } from '~/services/Hooks';
 
 export interface BasicEditorProps {

@@ -15,7 +15,7 @@ import ExerciseService from '~/services/api/Exercise.service';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 import { DeprecatedBasicEditor } from '../Editor/BasicEditor';
-import FolderStructure from '~/services/utils/FolderStructure';
+import FolderStructure from '~/../shared/utils/FolderStructure';
 import { UserState } from '~/redux/user/types';
 import {
   MediaUploadResp,

@@ -19,7 +19,7 @@ import FolderBrowser from '../../FileBrowser/FolderBrowser';
 import { uuid, nextUntitledFilename } from '~/services/Utils';
 import FileList from '~/components/FileBrowser/FileList/FileList';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
-import FolderStructure, { NewSourceFile } from '~/services/utils/FolderStructure';
+import FolderStructure, { NewSourceFile } from '~/../shared/utils/FolderStructure';
 import ContextMenu, { Target as ContextMenuTarget } from '~/components/FileBrowser/ContextMenu/ContextMenu';
 
 import styles from './EditorExplorer.module.scss';

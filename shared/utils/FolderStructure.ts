@@ -1,6 +1,11 @@
 import { useState } from 'react';
-import { alphabeticSortComparator, uuid } from '../Utils';
-import ZipService from './ZipService';
+import { alphabeticSortComparator, uuid } from './utils.shared';
+
+// FIXME
+// Previously this file was in the /client folder. Now we moved it
+// to shared, because we need to use from here as well. But this import
+// is still here. Let's refactor and remove it.
+import ZipService from '../../client/services/utils/ZipService';
 
 const ERROR_MESSAGES = {
   FILE_MISSING: "Hmm, there's a bug in here. File seems to be missing.",

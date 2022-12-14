@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import { RootState } from '~/redux/root.reducer';
 import { Exercise } from '~/redux/user/types';
-import FolderStructure from '~/services/utils/FolderStructure';
+import FolderStructure from '~/../shared/utils/FolderStructure';
 import {
   FileDictionary,
   MediaUploadResp,

@@ -7,7 +7,7 @@ import { editor as MonacoTypes } from 'monaco-editor';
 import MonacoService from '~/services/MonacoService';
 import SubmissionService from '~/services/api/Submission.service';
 import { extractExtension, filesToFolderStructure, fsEntriesToFolderStructure } from '~/services/utils/FileUtils';
-import FolderStructure from '~/services/utils/FolderStructure';
+import FolderStructure from '~/../shared/utils/FolderStructure';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { MONACO } from '~/services/Constants';
 

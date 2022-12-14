@@ -9,7 +9,7 @@ import Highlight from '~/components/Highlight/Highlight';
 // eslint-disable-next-line import/no-unresolved
 import coverSvg from '~/public/images/lessons/styling-methods__cover.svg';
 import { DeprecatedBasicEditor } from '~/components/Editor/BasicEditor';
-import { ExerciseFile, ExerciseFolder } from '~/services/utils/FolderStructure';
+import { ExerciseFile, ExerciseFolder } from '~/../shared/utils/FolderStructure';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/DataModel';
 import List from '~/components/List';

@@ -28,7 +28,7 @@ import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 import Feedbacks from '../Editor/Feedbacks';
 import Button from '../Button';
 import SolveExerciseSkeleton from './SolveExercise.skeleton';
-import FolderStructure from '~/services/utils/FolderStructure';
+import FolderStructure from '~/../shared/utils/FolderStructure';
 import AsideNav from './AsideNav/AsideNav';
 
 import { HTML_TUTORIAL_ID, HTML_TUTORIAL_NAME } from '~/services/Constants';

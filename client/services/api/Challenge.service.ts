@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import HttpService from './Http.service';
-import FolderStructure from '../utils/FolderStructure';
+import FolderStructure from '../../../shared/utils/FolderStructure';
 import { parseChallenge } from '~/../shared/Challenge.shared';
 import { ChallengeI, ParsedChallengeI } from '~/../shared/types/challenge.types';
 

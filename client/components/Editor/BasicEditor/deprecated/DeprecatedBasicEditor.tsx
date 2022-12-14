@@ -3,7 +3,7 @@ import { Theme } from '../../themes';
 import MonacoService from '~/services/MonacoService';
 import FileIcons from '~/services/utils/FileIcons';
 import InitForm from '../../InitForm/InitForm';
-import FolderStructure from '~/services/utils/FolderStructure';
+import FolderStructure from '~/../shared/utils/FolderStructure';
 import MonacoBase from '../../Monaco.base';
 import EditorExplorer from '../../EditorExplorer/EditorExplorer';
 import ResizableExplorerContainer from '../../ResizableExplorerContainer/ResizableExplorerContainer';

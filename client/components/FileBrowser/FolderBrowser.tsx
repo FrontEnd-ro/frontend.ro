@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '~/components/Button';
-import { ExerciseFolder } from '~/services/utils/FolderStructure';
+import { ExerciseFolder } from '~/../shared/utils/FolderStructure';
 import FileList from '~/components/FileBrowser/FileList/FileList';
 import { Target as ContextMenuTarget } from './ContextMenu/ContextMenu';
 

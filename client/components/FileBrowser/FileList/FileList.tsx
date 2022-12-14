@@ -9,7 +9,7 @@ import {
 import List from '~/components/List';
 import Button from '~/components/Button';
 import FileIcons from '~/services/utils/FileIcons';
-import { ExerciseFile } from '~/services/utils/FolderStructure';
+import { ExerciseFile } from '~/../shared/utils/FolderStructure';
 
 import styles from './FileList.module.scss';
 

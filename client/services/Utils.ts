@@ -1,7 +1,7 @@
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 import { TutorialProgressI, WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 
-export { v4 as uuid } from 'uuid';
+export { uuid, alphabeticSortComparator } from '~/../shared/utils/utils.shared';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop() { }
@@ -56,17 +56,6 @@ export const formatDate = (dateToFormat: Date, locale = 'ro-RO'): string => {
     day: '2-digit',
     year: 'numeric',
   }).format(dateToFormat);
-};
-
-export const alphabeticSortComparator = (nameA, nameB) => {
-  let lowercaseNameA = nameA.toLowerCase();
-  let lowercaseNameB = nameB.toLowerCase();
-
-  if (lowercaseNameA === lowercaseNameB) {
-    return 0;
-  }
-
-  return lowercaseNameA < lowercaseNameB ? -1 : 1;
 };
 
 export const nextUntitledFilename = (existingNames, NAME_BASE = 'Untitled file') => {

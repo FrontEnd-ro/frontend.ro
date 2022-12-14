@@ -12,7 +12,7 @@ import { useKeyDown, useResizeObserver } from '~/services/Hooks';
 import HResizable from '../Editor/HResizable/HResizable';
 import { BasicEditor } from '../Editor/BasicEditor';
 import EditorExplorer from '../Editor/EditorExplorer/EditorExplorer';
-import FolderStructure, { useFolderStructure } from '~/services/utils/FolderStructure';
+import FolderStructure, { useFolderStructure } from '~/../shared/utils/FolderStructure';
 import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
 import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';

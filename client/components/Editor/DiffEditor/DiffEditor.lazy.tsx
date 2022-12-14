@@ -1,6 +1,6 @@
 import React, { Ref, Suspense } from 'react';
 import { withMonacoEditor } from '~/services/MonacoService';
-import { ExerciseFolder } from '~/services/utils/FolderStructure';
+import { ExerciseFolder } from '~/../shared/utils/FolderStructure';
 import EditorPlaceholder from '../EditorPlaceholder/EditorPlaceholder';
 import DiffMonacoEditor from './DiffEditor';
 

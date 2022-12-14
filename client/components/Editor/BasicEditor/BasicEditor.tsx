@@ -66,6 +66,13 @@ const _BasicEditor = ({
   };
 
   useEffect(() => { init(); }, []);
+  useEffect(() => {
+    if (editor.current === null) {
+      return;
+    }
+
+    editor.current.updateOptions({ readOnly });
+  }, [readOnly]);
 
   useEffect(() => {
     if (!editor.current || onChange === undefined) {

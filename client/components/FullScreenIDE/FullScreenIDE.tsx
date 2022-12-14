@@ -274,6 +274,8 @@ const FullScreenIDE = ({
             <div style={{ width: EDITOR_WIDTH.initial }} ref={editorRef}>
               <BasicEditor
                 onChange={onCodeChange}
+                readOnly={currentTask.filesThatCanBeEdited?.length > 0
+                  && !currentTask.filesThatCanBeEdited.includes(selectedFileId)}
                 className={styles.BasicEditor}
                 resizeTarget={editorRef.current}
                 theme={Theme.TOMORROW_NIGHT}
@@ -299,10 +301,10 @@ const FullScreenIDE = ({
               className={`${styles.SandpackProvider} m-0`}
               files={sandpackFiles}
               template="react-ts"
-              // No need for dependencies here, as they will
-              // automatically be resolved based on the
-              // existing package.json file.
-              // https://sandpack.codesandbox.io/docs/advanced-usage/client#usage
+            // No need for dependencies here, as they will
+            // automatically be resolved based on the
+            // existing package.json file.
+            // https://sandpack.codesandbox.io/docs/advanced-usage/client#usage
             >
               <SandpackPreview className={`${styles.SandpackPreview} m-0`} />
               <SandpackListener onSuccess={() => setDidSandpackLoad(true)} />

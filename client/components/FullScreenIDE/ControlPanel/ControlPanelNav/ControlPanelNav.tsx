@@ -7,6 +7,7 @@ interface Props {
     id: string;
     label: string;
     active?: boolean;
+    isCurrent?: boolean;
   }[];
   onItemClick: (id: string) => void;
   className?: string;
@@ -23,7 +24,7 @@ const ControlPanelNav = ({ items, onItemClick, className = '' }: Props) => {
           color="blue"
           active={item.active}
           onClick={() => onItemClick(item.id)}
-          className={styles.Link}
+          className={`${styles.Link} ${item.isCurrent ? styles['is--current'] : ''}`}
         >
           {item.label}
         </Link>

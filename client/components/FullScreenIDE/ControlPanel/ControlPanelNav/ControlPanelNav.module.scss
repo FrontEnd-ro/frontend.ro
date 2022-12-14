@@ -1,4 +1,8 @@
 .Link {
   padding-top: 1em;
   padding-bottom: 1em;
+
+  &.is--current {
+    background: var(--blue);
+  }
 }

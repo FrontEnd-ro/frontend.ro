@@ -34,6 +34,7 @@ const ControlPanel = ({ challenge, currentTaskId, className = '' }: Props) => {
           id: task.taskId,
           label: task.title,
           active: task.taskId === viewingTaskId,
+          isCurrent: task.taskId === currentTaskId
         }))}
       />
       <main className={styles.main}>

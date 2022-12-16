@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAward, faFile, faList, IconDefinition } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +8,7 @@ import { SandpackProvider, SandpackPreview, useSandpack } from '@codesandbox/san
 import Header from '../Header';
 import IDEPanel from './IDEPanel/IDEPanel';
 import { Theme } from '../Editor/themes';
+import { RootState } from '~/redux/root.reducer';
 import styles from './FullScreenIDE.module.scss';
 import { useKeyDown, useResizeObserver } from '~/services/Hooks';
 import HResizable from '../Editor/HResizable/HResizable';
@@ -35,9 +37,10 @@ interface NavItem {
   onClick: () => void;
 }
 
-const FullScreenIDE = ({
+const _FullScreenIDE = ({
   challengeSubmission,
-}: {
+  isLoggedIn,
+}: ConnectedProps<typeof connector> & {
   challengeSubmission: ParsedChallengeSubmissionI,
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
@@ -404,6 +407,7 @@ const FullScreenIDE = ({
           {activePanel === Panel.VERIFY && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
               <VerifyPanel
+                isLoggedIn={isLoggedIn}
                 isVerifying={isVerifying}
                 onNextChallenge={() => alert('TODO implement')}
                 verificationStatus={verificationStatus}
@@ -454,5 +458,13 @@ const SandpackListener = ({ onSuccess }: { onSuccess: () => void }) => {
   return null;
 };
 
+function mapStateToProps(state: RootState) {
+  return {
+    isLoggedIn: !!state.user.info,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
 // eslint-disable-next-line import/prefer-default-export
-export { FullScreenIDE };
+export const FullScreenIDE = connector(_FullScreenIDE);

@@ -6,6 +6,7 @@ import { VerificationStatus } from '~/services/api/Challenge.service';
 import styles from './VerifyPanel.module.scss';
 
 interface Props {
+  isLoggedIn: boolean;
   isVerifying: boolean;
   savingStatus: {
     isSaving: boolean;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const VerifyPanel = ({
+  isLoggedIn,
   isVerifying,
   savingStatus,
   onVerify,
@@ -51,6 +53,18 @@ const VerifyPanel = ({
   };
 
   const ActionButton = getActionButton();
+
+  if (!isLoggedIn) {
+    return (
+      <section className="w-100">
+        {!isLoggedIn && (
+        <Alert severity="info" className="mb-8">
+          Trebuie să te autentifici pentru a trimite o soluție.
+        </Alert>
+        )}
+      </section>
+    );
+  }
 
   return (
     <section className="w-100">

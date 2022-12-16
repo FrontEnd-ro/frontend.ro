@@ -19,6 +19,7 @@ import VerifyPanel from './VerifyPanel/VerifyPanel';
 import { withAutomaticVerification } from '~/services/api/Challenge.service';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
 import { ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.service';
 
 enum Panel {
   EDITOR = 'editor',
@@ -117,6 +118,11 @@ const FullScreenIDE = ({
 
   // Whether or not to show the Editor File/Folder Explorer
   const [showEditorExplorer, setShowEditorExplorer] = useState(true);
+  const [savingStatus, setSavingStatus] = useState({
+    isSaving: false,
+    error: '',
+  });
+
   const {
     isVerifying,
     verificationStatus,
@@ -257,6 +263,48 @@ const FullScreenIDE = ({
     verifySolutionClientSide(challengeSubmission.challengeId, currentTaskId, iframe);
   };
 
+  const onSaveProgress = async () => {
+    const SPAN = `[onSaveProgress, challengeSubmission=${challengeSubmission.challengeId}]}`;
+    setSavingStatus({
+      isSaving: true,
+      error: '',
+    });
+    try {
+      const { filesThatCanBeEdited } = currentTask;
+      let folderStructureToSave = new FolderStructure();
+
+      if (filesThatCanBeEdited === undefined) {
+        console.log(`${SPAN} Saving entire solution code.`);
+        folderStructureToSave = folderStructure;
+      } else {
+        console.log(`${SPAN} Saving only code for files that can be edited.`);
+        filesThatCanBeEdited.forEach((fileId) => {
+          const { file } = folderStructure.getFile(fileId);
+          if (file !== null) {
+            folderStructureToSave.addFile(undefined, file);
+          }
+        });
+      }
+
+      await ChallengeSubmissionService.updateCode(
+        challengeSubmission.challengeId,
+        currentTaskId,
+        folderStructureToSave.toJSON(),
+      );
+    } catch (err) {
+      console.error(`${SPAN} Failed to save progress`, err);
+      setSavingStatus({
+        isSaving: false,
+        error: (err instanceof Error) ? err.message : 'Nu am putut salva progresul. Încearcă din nou!',
+      });
+    } finally {
+      setSavingStatus({
+        ...savingStatus,
+        isSaving: false,
+      });
+    }
+  };
+
   const toggleActivePanel = (panelClicked: Panel) => {
     if (activePanel === panelClicked) {
       setActivePanel(Panel.EDITOR);
@@ -359,7 +407,9 @@ const FullScreenIDE = ({
                 isVerifying={isVerifying}
                 onNextChallenge={() => alert('TODO implement')}
                 verificationStatus={verificationStatus}
+                savingStatus={savingStatus}
                 onVerify={onVerify}
+                onSaveProgress={onSaveProgress}
               />
             </IDEPanel>
           )}

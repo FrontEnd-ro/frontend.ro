@@ -7,12 +7,24 @@ import styles from './VerifyPanel.module.scss';
 
 interface Props {
   isVerifying: boolean;
+  savingStatus: {
+    isSaving: boolean;
+    error: string;
+  };
   onVerify: () => void;
+  onSaveProgress: () => void;
   onNextChallenge: () => void;
   verificationStatus?: VerificationStatus;
 }
 
-const VerifyPanel = ({ isVerifying, onVerify, onNextChallenge, verificationStatus }: Props) => {
+const VerifyPanel = ({
+  isVerifying,
+  savingStatus,
+  onVerify,
+  onSaveProgress,
+  onNextChallenge,
+  verificationStatus,
+}: Props) => {
   const getActionButton = () => {
     if (verificationStatus === undefined) {
       return (
@@ -50,6 +62,23 @@ const VerifyPanel = ({ isVerifying, onVerify, onNextChallenge, verificationStatu
         </p>
       ) : <VerificationDetails verificationStatus={verificationStatus} />}
       {ActionButton}
+      <hr className="mt-8" />
+      <p>
+        If you'd like to save your progress and continue later, click the button below.
+      </p>
+      {verificationStatus?.valid !== true && (
+        <>
+          <Button onClick={() => onSaveProgress()} variant="light" loading={savingStatus.isSaving}>
+            Save Progress
+          </Button>
+          {savingStatus.error !== '' && (
+            <Alert severity="error">
+              {savingStatus.error}
+            </Alert>
+          )}
+        </>
+      )}
+
     </section>
   );
 };

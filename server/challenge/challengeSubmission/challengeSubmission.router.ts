@@ -10,6 +10,7 @@ import {
   sanitize as sanitizeChallengeSubmission,
   mergeChallengeSubmission
 } from './challengeSubmission.model';
+import FolderStructure from '../../../shared/utils/FolderStructure';
 
 const challengeSubmissionRouter = express.Router();
 
@@ -61,6 +62,21 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
       const challenge = await Challenge.findOne({ challengeId });
       if (challenge === null) {
         new ServerError(404, `Challange with ID=${challengeId} not found!`).send(res);
+        return;
+      }
+
+      // Make sure that `code` variable only contains data for
+      // the Files that can be edited.
+      const { filesThatCanBeEdited } = challenge
+        .tasks
+        .find((t) => t.taskId === taskId);
+      const codeFolderStructure = new FolderStructure(JSON.parse(code));
+      if (
+        codeFolderStructure
+          .getFilesWithPath()
+          .some((file) => !filesThatCanBeEdited.includes(file.key))
+      ) {
+        new ServerError(400, 'You can only edit certain files for tihs task.').send(res);
         return;
       }
 

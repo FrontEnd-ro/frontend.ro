@@ -10,18 +10,24 @@ import Footer from '~/components/Footer';
 import { WIPPopulatedLessonExerciseI } from '~/../shared/types/exercise.types';
 import { TutorialI } from '~/../shared/types/tutorial.types';
 import SEOTags from '~/components/SEOTags';
+import { ChallengeI } from '~/../shared/types/challenge.types';
 
 export default function CertificationPage(
   { certification }: { certification: WIPPopulatedCertificationI },
 ) {
+  const solvedExercisesCount = certification.lesson_exercises.length;
+  const seoDescription = solvedExercisesCount > 0
+    ? `${certification.user.name ?? certification.user.username} a rezolvat cu succes toate cele ${certification.lesson_exercises.length} exerciții.`
+    : `${certification.user.name ?? certification.user.username} a rezolvat cu succes acest challenge!`;
+
   return certification !== null
     ? (
       <>
         <SEOTags
           shareImage={certification.og_image ?? ''}
           url={`https://FrontEnd.ro/certificari/${certification._id}`}
-          title={`Felicitări! Ai completat cu succes ${certification.tutorial.name}`}
-          description={`${certification.user.name ?? certification.user.username} a rezolvat cu succes toate cele ${certification.lesson_exercises.length} exerciții.`}
+          title={`Felicitări! Ai completat cu succes ${certification.tutorial?.name ?? certification.challenge?.title}`}
+          description={seoDescription}
         >
           <meta name="robots" content="noindex" />
         </SEOTags>
@@ -46,6 +52,7 @@ export async function getServerSideProps({ res, params }) {
   const certification = await Certification.findById(params.certificationId)
     .populate<{ user: UserI }>('user')
     .populate<{ tutorial: TutorialI }>('tutorial')
+    .populate<{ challenge: ChallengeI }>('challenge')
     // eslint-disable-next-line camelcase
     .populate<{ lesson_exercises: WIPPopulatedLessonExerciseI[] }>({
       path: 'lesson_exercises',

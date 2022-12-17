@@ -11,6 +11,9 @@ import {
   mergeChallengeSubmission
 } from './challengeSubmission.model';
 import FolderStructure from '../../../shared/utils/FolderStructure';
+import UserModel from '../../user/user.model';
+import { ChallengeSubmissionI } from '../../../shared/types/challengeSubmissions.types';
+import { Certification } from '../../certification/certification.model';
 
 const challengeSubmissionRouter = express.Router();
 
@@ -78,7 +81,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
       let challengeSubmission = await ChallengeSubmission.findOne({
         challengeId,
         user: user._id.toString()
-      });
+      }).populate('user');
 
       if (challengeSubmission === null) {
         console.log(`${SPAN} No submission for this user. We'll create one now.`);
@@ -96,7 +99,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
 
       task.codeForFilesThatCanBeEdited = code;
       await challengeSubmission.save();
-      
+
       res.json(sanitizeChallengeSubmission(mergeChallengeSubmission(challengeSubmission, challenge)));
     } catch (err) {
       new ServerError(
@@ -125,7 +128,7 @@ challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
       let challengeSubmission = await ChallengeSubmission.findOne({
         challengeId,
         user: user._id.toString()
-      });
+      }).populate('user');
 
       if (challengeSubmission === null) {
         console.log(`${SPAN} No submission for this user. We'll create one now.`);
@@ -157,6 +160,12 @@ challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
       await challengeSubmission.save();
 
       res.json(sanitizeChallengeSubmission(mergeChallengeSubmission(challengeSubmission, challenge)));
+
+      try {
+        maybeCreateCertification(challengeId, user._id.toString());
+      } catch (err) {
+        console.error(`${SPAN} Something went wrong when persisting the certification.`);
+      }
     } catch (err) {
       new ServerError(
         err.code || 500,
@@ -178,7 +187,6 @@ async function createNewSubmission(challenge: ChallengeI, user: UserI) {
 
 export default challengeSubmissionRouter;
 
-
 /**
  * Checks whether the code contains only files with ids from "fileIds".
  * @param fileIds A list of IDs for files that can be edited
@@ -192,3 +200,90 @@ function doFilesMatch(fileIds: string[], code: string) {
 
   return result;
 }
+
+
+/************** TODO: unify the implementation here and the one for the regular "tutorials" */
+
+/**
+ * Verify that the user has successfully completed all tasks in this challenge.
+ * > if yes: persist certification in the DB
+ * > if not: do nothing
+ * @param challengeId string
+ * @param userId string
+ * @param dryRun boolean - whether to actually perform the tasks, or simply to log the result, without any side effects
+ * @returns 
+ */
+export async function maybeCreateCertification(
+  challengeId: string,
+  userId: string,
+  dryRun = false,
+) {
+
+  const SPAN = `[maybeCreateCertification, challengeId=${challengeId}, userId=${userId}, dryRun=${dryRun}]`;
+  let challenge = await Challenge.findOne({ challengeId });
+  let challengeSubmission = await ChallengeSubmission
+    .findOne({ challengeId, user: userId });
+
+  if (challengeSubmission === null) {
+    console.info(`${SPAN} Challenge not found.`);
+    return;
+  }
+
+  const user: UserI = await UserModel.findUserBy({ _id: userId});
+  if (user === null) {
+    console.info(`${SPAN} User not found.`);
+    return;
+  }
+
+  const didFinishAllTasks = challengeSubmission.tasks.every((task) => task.status?.valid === true);
+  if (!didFinishAllTasks) {
+    console.log(`${SPAN} Not all tasks are finished.`);
+    return;
+  }
+
+  if (dryRun === true) {
+    console.log(`${SPAN} Skipping creating the certification.`);
+    return;
+  }
+
+  await storeCertificationData(challenge, user._id.toString(), dryRun);
+}
+
+
+/**
+ * Create or Update (if already exists) certification information into the Database.
+ * @param challenge ChallengeSubmissionI
+ * @param userId string
+ * @param dryRun boolean - whether to actually perform the tasks, or simply to log the result, without any side effects
+ * @returns Persisted Certification
+ */
+async function storeCertificationData(
+  challenge: ChallengeI,
+  userId: string,
+  dryRun = false
+) {
+  const SPAN = `[storeCertificationData, userId=${userId}, challengeId=${challenge._id}, dryRun=${dryRun}]`;
+
+  let certification = await Certification.findOne({ challenge: challenge._id, user: userId });
+  if (certification !== null) {
+    console.info(`${SPAN} Certification already exists. We'll update it!`)
+    certification.timestamp = Date.now();
+  } else {
+    certification = new Certification({
+      challenge: challenge._id,
+      user: userId,
+      timestamp: Date.now(),
+      lesson_exercises: [],
+    });
+  }
+
+  if (dryRun === true) {
+    console.info(`${SPAN} Skipping persistance.`);
+  } else {
+    certification = await certification.save();
+    console.info(`${SPAN} successfully persisted certification.`);
+  }
+
+  return certification;
+}
+

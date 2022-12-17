@@ -1,4 +1,5 @@
 import { PopulatedDoc, Document, ObjectId } from 'mongoose';
+import { ChallengeI } from './challenge.types';
 import { LessonExerciseI, WIPPopulatedLessonExerciseI } from './exercise.types';
 import { TutorialI } from './tutorial.types';
 import { UserI } from './user.types';
@@ -9,6 +10,12 @@ export interface CertificationI {
   _id?: string;
 
   tutorial: ObjectId;
+
+  // FIXME
+  // We should merge the concepts of Tutorial and Challenge. They are very similar.
+  // When we do this, remove this code. We added it because we had no time left to
+  // properly implement this before Christmas Advent.
+  challenge: ObjectId;
 
   // UUID of the user that got the certification
   user: PopulatedDoc<UserI>;
@@ -33,6 +40,8 @@ export interface WIPPopulatedCertificationI {
   _id?: string;
 
   tutorial: TutorialI;
+
+  challenge: ChallengeI;
 
   user: UserI;
 

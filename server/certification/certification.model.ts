@@ -15,6 +15,7 @@ const CertificationSchema = new mongoose.Schema<CertificationI>({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   timestamp: { type: Number, required: true },
   tutorial: { type: mongoose.Schema.Types.ObjectId, ref: 'Tutorial' },
+  challenge: { type: mongoose.Schema.Types.ObjectId, ref: 'Challenge' },
   lesson_exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'LessonExercise' }],
   og_image: { type: String, required: false },
   pdf: { type: String, required: false }

@@ -14,10 +14,14 @@ interface Props {
     username: string;
     avatar: string;
   }
-  tutorial: {
+  tutorial?: {
     name: string;
     tutorialId: string;
   };
+  challenge?: {
+    title: string;
+    challengeId: string;
+  }
   certification: {
     date: Date;
     url: string;
@@ -33,6 +37,7 @@ interface Props {
 const Diploma = ({
   student,
   tutorial,
+  challenge,
   certification,
   variant = 'large',
   showShareControls = true,
@@ -79,14 +84,18 @@ const Diploma = ({
         </a>
         <p>
           a completat
-          <a className="mt-4 mb-4 d-block text-bold" href={`/${tutorial.tutorialId}`}>
-            {tutorial.name}
+          <a className="mt-4 mb-4 d-block text-bold" href={`/${tutorial?.tutorialId ?? challenge?.challengeId}`}>
+            {tutorial?.name ?? challenge?.title}
           </a>
-          rezolvând cu succes toate cele
-          {' '}
-          {certification.exerciseCount}
-          {' '}
-          exerciții.
+          {certification.exerciseCount > 0 && (
+            <>
+              rezolvând cu succes toate cele
+              {' '}
+              {certification.exerciseCount}
+              {' '}
+              exerciții.
+            </>
+          )}
         </p>
       </div>
       <footer className="relative d-flex justify-content-between align-items-end">

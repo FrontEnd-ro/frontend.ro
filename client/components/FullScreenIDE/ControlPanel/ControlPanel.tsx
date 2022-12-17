@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+import Alert from '~/components/generic/Alert/Alert';
 import ControlPanelNav from './ControlPanelNav/ControlPanelNav';
-import { ParsedChallengeI } from '~/../shared/types/challenge.types';
+import { ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 
 import styles from './ControlPanel.module.scss';
 import Markdown from '~/components/Markdown';
 
 interface Props {
-  challenge: ParsedChallengeI;
+  challenge: ParsedChallengeSubmissionI;
+  // "current" in the sense that this is the task you must solve now.
   currentTaskId: string;
   className?: string;
 }
@@ -15,7 +17,10 @@ const ControlPanel = ({ challenge, currentTaskId, className = '' }: Props) => {
   // We allow a user to view a task explainer without actually changing
   // the entire editor context to that specific task.
   const [viewingTaskId, setViewingTaskId] = useState(currentTaskId);
-  const activeTask = challenge.tasks.find((task) => task.taskId === viewingTaskId);
+  const viewingTask = challenge.tasks.find((task) => task.taskId === viewingTaskId);
+
+  const currentTaskIndex = challenge.tasks.findIndex((task) => task.taskId === currentTaskId);
+  const viewingTaskIndex = challenge.tasks.indexOf(viewingTask);
 
   useEffect(() => {
     setViewingTaskId(currentTaskId);
@@ -38,15 +43,20 @@ const ControlPanel = ({ challenge, currentTaskId, className = '' }: Props) => {
         }))}
       />
       <main className={styles.main}>
-        {/*
-          TODO: show an Alert which:
-            > 1. Tells the user this task is blocked until he/she finishes the previous one
-            > 2. Tells the user this task is available with a button for "starting" it
-        */}
+        {viewingTask.status?.valid === true && (
+          <Alert className="mb-8" severity="success">
+            Ai rezolvat cu succes acest task!
+          </Alert>
+        )}
+        {viewingTaskIndex > currentTaskIndex && (
+          <Alert className="mb-8" severity="info">
+            Pentru a putea începe acest task trebuie să termini toate taskurile anterioare.
+          </Alert>
+        )}
         <h1 className="mt-0">
-          {activeTask.title}
+          {viewingTask.title}
         </h1>
-        <Markdown variant="none" markdownString={activeTask.explainer} />
+        <Markdown variant="none" markdownString={viewingTask.explainer} />
       </main>
     </section>
   );

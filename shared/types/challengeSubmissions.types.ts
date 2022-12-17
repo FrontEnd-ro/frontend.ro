@@ -41,6 +41,8 @@ export interface ChallengeSubmissionTaskI extends ChallengeTaskI {
 }
 
 export interface VerificationStatus {
+  _id?: ObjectId;
+
   valid: boolean;
   // In case verification failed, we're populating
   // the fields below with the error details.

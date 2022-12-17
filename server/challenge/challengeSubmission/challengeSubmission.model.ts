@@ -52,6 +52,7 @@ const sanitize = (challengeSubmission: ChallengeSubmissionI) :  ChallengeSubmiss
 
   sanitizedChallengeSubmission.tasks.forEach(task => {
     delete task._id;
+    delete task.status?._id;
   });
 
   return sanitizedChallengeSubmission;
@@ -94,6 +95,14 @@ const mapFromChallenge = (challenge: ChallengeI, user: UserI): ChallengeSubmissi
 // the user code, so to get the full context we need to merge this with the Challenge
 // definition.
 const mergeChallengeSubmission = (challengeSubmission: ChallengeSubmissionI, challenge: ChallengeI) : ChallengeSubmissionI => {
+  if (challengeSubmission instanceof mongoose.Document) {
+    challengeSubmission = challengeSubmission.toObject();
+  }
+
+  if (challenge instanceof mongoose.Document) {
+    challenge = challenge.toObject();
+  }
+
   return {
     challengeId: challenge.challengeId,
     title: challenge.title,

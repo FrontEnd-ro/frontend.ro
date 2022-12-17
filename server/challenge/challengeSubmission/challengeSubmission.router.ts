@@ -70,12 +70,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
       const { filesThatCanBeEdited } = challenge
         .tasks
         .find((t) => t.taskId === taskId);
-      const codeFolderStructure = new FolderStructure(JSON.parse(code));
-      if (
-        codeFolderStructure
-          .getFilesWithPath()
-          .some((file) => !filesThatCanBeEdited.includes(file.key))
-      ) {
+      if (!doFilesMatch(filesThatCanBeEdited, code)) {
         new ServerError(400, 'You can only edit certain files for tihs task.').send(res);
         return;
       }
@@ -116,8 +111,58 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
 challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
   PrivateMiddleware,
   async function submitSolution(req: Request, res: Response) {
-    // POST /challenge/:challengeId/task/:taskId/status
-    // BODY: { code: string; valid: true | false; error: ... }
+    const { user, code } = req.body;
+    const { challengeId, taskId } = req.params;
+
+    const SPAN = `[submitSolution, challengeId=${challengeId}, taskId=${taskId}, username=${user.username}]`;
+
+    try {
+      const challenge = await Challenge
+        .findOne({ challengeId })
+        .orFail(new ServerError(404, `Challange with ID=${challengeId} not found!`));
+      let challengeTask = challenge.tasks.find((t) => t.taskId === taskId);
+
+      let challengeSubmission = await ChallengeSubmission.findOne({
+        challengeId,
+        user: user._id.toString()
+      });
+
+      if (challengeSubmission === null) {
+        console.log(`${SPAN} No submission for this user. We'll create one now.`);
+        challengeSubmission = await createNewSubmission(challenge.toObject(), user);
+      }
+
+      let submissionTask = challengeSubmission.tasks.find((t) => t.taskId === taskId);
+      if (submissionTask === undefined) {
+        new ServerError(404, `No task found for user=${user.username}, challengeId=${challengeId} and taskId=${taskId}`).send(res);
+        return;
+      }
+
+      if (submissionTask.status?.valid === true) {
+        new ServerError(400, `Task with id=${taskId} for user=${user.username} and challengeId=${challengeId} is already approved.`).send(res);
+        return;
+      }
+
+      if (!doFilesMatch(challengeTask.filesThatCanBeEdited, code)) {
+        new ServerError(400, 'You can only edit certain files for tihs task.').send(res);
+        return;
+      }
+
+      // If everything checks out, we can verify this solution.
+      submissionTask.codeForFilesThatCanBeEdited = code;
+      submissionTask.status = {
+        valid: true
+      };
+
+      await challengeSubmission.save();
+
+      res.json(sanitizeChallengeSubmission(mergeChallengeSubmission(challengeSubmission, challenge)));
+    } catch (err) {
+      new ServerError(
+        err.code || 500,
+        err.message || `Error tying to submit sollution for challengeId=${challengeId} and taskId=${taskId}`,
+      ).send(res);
+    }
   }
 ]);
 
@@ -132,3 +177,18 @@ async function createNewSubmission(challenge: ChallengeI, user: UserI) {
 }
 
 export default challengeSubmissionRouter;
+
+
+/**
+ * Checks whether the code contains only files with ids from "fileIds".
+ * @param fileIds A list of IDs for files that can be edited
+ * @param code A stringified FolderStructure class
+ */
+function doFilesMatch(fileIds: string[], code: string) {
+  const codeFolderStructure = new FolderStructure(JSON.parse(code));
+  const result = codeFolderStructure
+    .getFilesWithPath()
+    .every((file) => fileIds.includes(file.key));
+
+  return result;
+}

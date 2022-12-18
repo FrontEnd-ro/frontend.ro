@@ -170,8 +170,8 @@ export const withAutomaticVerification = () => {
 
       onWindowEvent(
         eventResultType,
-        ({ payload }: WindowMessage<{ status: boolean; reason: string; }>) => {
-          if (typeof payload.reason !== 'string' || typeof payload.status !== 'boolean') {
+        ({ payload }: WindowMessage<VerificationStatus>) => {
+          if (typeof payload.valid !== 'boolean') {
             // Wrong format of expected message. Most likely a bug on our side.
             resolve({
               challengeId,
@@ -186,10 +186,8 @@ export const withAutomaticVerification = () => {
           resolve({
             challengeId,
             taskId,
-            valid: payload.status,
-            error: {
-              description: payload.reason,
-            },
+            valid: payload.valid,
+            error: payload.error,
           });
         },
       );

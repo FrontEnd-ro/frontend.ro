@@ -9807,6 +9807,11 @@ lz-string@^1.4.4:
   resolved "https://registry.yarnpkg.com/lz-string/-/lz-string-1.4.4.tgz#c0d8eaf36059f705796e1e344811cf4c498d3a26"
   integrity sha512-0ckx7ZHRPqb0oUm8zNr+90mtf9DQB60H1wMCjBtfi62Kl3a7JbHob6gA2bC+xRvZoOL+1hzUK8jeuEIQE8svEQ==
 
+magic-snowflakes@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/magic-snowflakes/-/magic-snowflakes-6.1.0.tgz#96c7b29c791b049125d39824a9cd2dc4326b3a98"
+  integrity sha512-+1wkYYDR8pyeLn8af/XMfSOesuyTluu6yrmKX/tU5gBk+gLtpJbyyCqndf6DDNRwmtycQgAsufRv9ftXVznTgA==
+
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"

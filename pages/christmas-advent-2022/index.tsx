@@ -1,10 +1,21 @@
+import { useState } from 'react';
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/404/NotFound';
 import { parseChallengeSubmission } from '~/../shared/Challenge.shared';
 import { FullScreenIDE } from '~/components/FullScreenIDE/FullScreenIDE';
-import { ChallengeSubmissionI, ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import { ChallengeSubmissionI, ChallengeSubmissionTaskI, ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 
-export default ({ challengeSubmission } : { challengeSubmission: ParsedChallengeSubmissionI }) => {
+export default ({
+  challengeSubmissionServer,
+} : {
+  challengeSubmissionServer: ParsedChallengeSubmissionI;
+}) => {
+  const [challengeSubmission, setChallengeSubmission] = useState(challengeSubmissionServer);
+
+  const onChallengeSubmit = (challenge: ParsedChallengeSubmissionI) => {
+    setChallengeSubmission(challenge);
+  };
+
   if (challengeSubmission === undefined) {
     return <NotFoundPage />;
   }
@@ -16,7 +27,10 @@ export default ({ challengeSubmission } : { challengeSubmission: ParsedChallenge
         url="TODO"
         description="TODO"
       />
-      <FullScreenIDE challengeSubmission={challengeSubmission} />
+      <FullScreenIDE
+        onChallengeSubmit={onChallengeSubmit}
+        challengeSubmission={challengeSubmission}
+      />
     </>
   );
 };
@@ -40,7 +54,7 @@ export async function getServerSideProps({ res, req }) {
         const challenge: ChallengeSubmissionI = await resp.json();
         const parsedChallenge = parseChallengeSubmission(challenge);
         return {
-          props: { challengeSubmission: parsedChallenge },
+          props: { challengeSubmissionServer: parsedChallenge },
         };
       }
       case 404:

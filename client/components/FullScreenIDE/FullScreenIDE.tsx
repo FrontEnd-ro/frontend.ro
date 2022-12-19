@@ -20,7 +20,7 @@ import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
 import { withAutomaticVerification } from '~/services/api/Challenge.service';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
-import { ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import { ChallengeSubmissionTaskI, ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.service';
 
 enum Panel {
@@ -37,11 +37,18 @@ interface NavItem {
   onClick: () => void;
 }
 
+export interface ApiStatus {
+  loadingType: 'none' | 'verifying' | 'saving' | 'submitting';
+  error: string;
+}
+
 const _FullScreenIDE = ({
   challengeSubmission,
   isLoggedIn,
+  onChallengeSubmit,
 }: ConnectedProps<typeof connector> & {
-  challengeSubmission: ParsedChallengeSubmissionI,
+  challengeSubmission: ParsedChallengeSubmissionI;
+  onChallengeSubmit: (task: ParsedChallengeSubmissionI) => void;
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };
@@ -59,13 +66,7 @@ const _FullScreenIDE = ({
   const editorWidth = useRef<number | undefined>(undefined);
   const explorerWidth = useRef<number | undefined>(undefined);
 
-  const [currentTaskId, setCurrentTaskId] = useState(
-    // First task that is either:
-    // > not started
-    // > started but the solution is not valid
-    challengeSubmission.tasks.find((t) => t.status === undefined
-      || t.status.valid === false).taskId,
-  );
+  const [currentTaskId, setCurrentTaskId] = useState(getCurrentTaskId(challengeSubmission));
   const currentTask = challengeSubmission.tasks.find((task) => task.taskId === currentTaskId);
 
   const taskFolderStructure = (function getTaskFolderStructure() {
@@ -121,18 +122,23 @@ const _FullScreenIDE = ({
 
   // Whether or not to show the Editor File/Folder Explorer
   const [showEditorExplorer, setShowEditorExplorer] = useState(true);
-  const [savingStatus, setSavingStatus] = useState({
-    isSaving: false,
-    error: '',
+  const [apiStatus, setApiStatus] = useState<ApiStatus>({
+    loadingType: 'none', error: '',
   });
 
   const {
     isVerifying,
     verificationStatus,
-    verifySolution,
     setVerificationStatus,
     verifySolutionClientSide,
   } = withAutomaticVerification();
+
+  useEffect(() => {
+    setApiStatus({
+      loadingType: isVerifying ? 'verifying' : 'none',
+      error: '',
+    });
+  }, [isVerifying]);
 
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
 
@@ -266,29 +272,31 @@ const _FullScreenIDE = ({
     verifySolutionClientSide(challengeSubmission.challengeId, currentTaskId, iframe);
   };
 
+  const resetState = (newChallengeSubmission: ParsedChallengeSubmissionI) => {
+    setActivePanel(Panel.INFO);
+    setVerificationStatus(undefined);
+
+    const newCurrentTaskId = getCurrentTaskId(newChallengeSubmission)
+    const newCurrentTask = newChallengeSubmission
+      .tasks
+      .find((task) => task.taskId === newCurrentTaskId);
+
+    setCurrentTaskId(newCurrentTaskId);
+    if (newCurrentTask.startingFile) {
+      selectFile(newCurrentTask.startingFile);
+    }
+
+    onChallengeSubmit(newChallengeSubmission);
+  };
+
   const onSaveProgress = async () => {
     const SPAN = `[onSaveProgress, challengeSubmission=${challengeSubmission.challengeId}]}`;
-    setSavingStatus({
-      isSaving: true,
+    setApiStatus({
+      loadingType: 'saving',
       error: '',
     });
     try {
-      const { filesThatCanBeEdited } = currentTask;
-      let folderStructureToSave = new FolderStructure();
-
-      if (filesThatCanBeEdited === undefined) {
-        console.log(`${SPAN} Saving entire solution code.`);
-        folderStructureToSave = folderStructure;
-      } else {
-        console.log(`${SPAN} Saving only code for files that can be edited.`);
-        filesThatCanBeEdited.forEach((fileId) => {
-          const { file } = folderStructure.getFile(fileId);
-          if (file !== null) {
-            folderStructureToSave.addFile(undefined, file);
-          }
-        });
-      }
-
+      const folderStructureToSave = getFolderStructureToSave(currentTask, folderStructure);
       await ChallengeSubmissionService.updateCode(
         challengeSubmission.challengeId,
         currentTaskId,
@@ -296,14 +304,44 @@ const _FullScreenIDE = ({
       );
     } catch (err) {
       console.error(`${SPAN} Failed to save progress`, err);
-      setSavingStatus({
-        isSaving: false,
+      setApiStatus({
+        loadingType: 'none',
         error: (err instanceof Error) ? err.message : 'Nu am putut salva progresul. Încearcă din nou!',
       });
     } finally {
-      setSavingStatus({
-        ...savingStatus,
-        isSaving: false,
+      setApiStatus({
+        ...apiStatus,
+        loadingType: 'none',
+      });
+    }
+  };
+
+  const onNextChallenge = async () => {
+    const SPAN = `[onNextChallenge, challengeSubmission=${challengeSubmission.challengeId}]}`;
+    setApiStatus({
+      loadingType: 'submitting',
+      error: '',
+    });
+
+    try {
+      const folderStructureToSave = getFolderStructureToSave(currentTask, folderStructure);
+      const submittedChallenge = await ChallengeSubmissionService.submitSolution(
+        challengeSubmission.challengeId,
+        currentTaskId,
+        folderStructureToSave.toJSON(),
+      );
+
+      resetState(submittedChallenge);
+    } catch (err) {
+      console.error(`${SPAN} Failed to save progress`, err);
+      setApiStatus({
+        loadingType: 'none',
+        error: (err instanceof Error) ? err.message : 'Nu am putut salva progresul. Încearcă din nou!',
+      });
+    } finally {
+      setApiStatus({
+        ...apiStatus,
+        loadingType: 'none',
       });
     }
   };
@@ -408,10 +446,9 @@ const _FullScreenIDE = ({
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
               <VerifyPanel
                 isLoggedIn={isLoggedIn}
-                isVerifying={isVerifying}
-                onNextChallenge={() => alert('TODO implement')}
+                apiStatus={apiStatus}
+                onNextChallenge={onNextChallenge}
                 verificationStatus={verificationStatus}
-                savingStatus={savingStatus}
                 onVerify={onVerify}
                 onSaveProgress={onSaveProgress}
               />
@@ -427,6 +464,40 @@ const _FullScreenIDE = ({
     </>
   );
 };
+
+function getCurrentTaskId(challengeSubmission: ParsedChallengeSubmissionI) {
+  // First task that is either:
+  // > not started
+  // > started but the solution is not valid
+  return challengeSubmission
+    .tasks
+    .find((t) => t.status === undefined || t.status.valid === false).taskId;
+}
+
+function getFolderStructureToSave(
+  task: ChallengeSubmissionTaskI,
+  folderStructure: FolderStructure,
+): FolderStructure {
+  const SPAN = `[getFolderStructureToSave, task=${task.taskId}]`;
+
+  const { filesThatCanBeEdited } = task;
+  let folderStructureToSave = new FolderStructure();
+
+  if (filesThatCanBeEdited === undefined) {
+    console.log(`${SPAN} Saving entire solution code.`);
+    folderStructureToSave = folderStructure;
+  } else {
+    console.log(`${SPAN} Saving only code for files that can be edited.`);
+    filesThatCanBeEdited.forEach((fileId) => {
+      const { file } = folderStructure.getFile(fileId);
+      if (file !== null) {
+        folderStructureToSave.addFile(undefined, file);
+      }
+    });
+  }
+
+  return folderStructureToSave;
+}
 
 // TODO: move from here
 const toSandPackFiles = (folderStructure: FolderStructure): Record<string, string> => {

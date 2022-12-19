@@ -2,16 +2,13 @@ import Button from '~/components/Button';
 import Alert from '~/components/generic/Alert/Alert';
 import List from '~/components/List';
 import { VerificationStatus } from '~/services/api/Challenge.service';
+import { ApiStatus } from '../FullScreenIDE';
 
 import styles from './VerifyPanel.module.scss';
 
 interface Props {
   isLoggedIn: boolean;
-  isVerifying: boolean;
-  savingStatus: {
-    isSaving: boolean;
-    error: string;
-  };
+  apiStatus: ApiStatus;
   onVerify: () => void;
   onSaveProgress: () => void;
   onNextChallenge: () => void;
@@ -20,8 +17,7 @@ interface Props {
 
 const VerifyPanel = ({
   isLoggedIn,
-  isVerifying,
-  savingStatus,
+  apiStatus,
   onVerify,
   onSaveProgress,
   onNextChallenge,
@@ -30,7 +26,7 @@ const VerifyPanel = ({
   const getActionButton = () => {
     if (verificationStatus === undefined) {
       return (
-        <Button onClick={() => onVerify()} loading={isVerifying} variant="blue">
+        <Button onClick={() => onVerify()} loading={apiStatus.loadingType === 'verifying'} variant="blue">
           Verify solution
         </Button>
       );
@@ -39,14 +35,14 @@ const VerifyPanel = ({
     const { valid } = verificationStatus;
     if (!valid) {
       return (
-        <Button className="mt-8" onClick={() => onVerify()} loading={isVerifying} variant="light">
+        <Button className="mt-8" onClick={() => onVerify()} loading={apiStatus.loadingType === 'verifying'} variant="light">
           Verify solution again
         </Button>
       );
     }
 
     return (
-      <Button className="mt-4" onClick={() => onNextChallenge()} loading={isVerifying} variant="success">
+      <Button className="mt-4" onClick={() => onNextChallenge()} loading={apiStatus.loadingType === 'submitting'} variant="success">
         Next challenge
       </Button>
     );
@@ -58,9 +54,9 @@ const VerifyPanel = ({
     return (
       <section className="w-100">
         {!isLoggedIn && (
-        <Alert severity="info" className="mb-8">
-          Trebuie să te autentifici pentru a trimite o soluție.
-        </Alert>
+          <Alert severity="info" className="mb-8">
+            Trebuie să te autentifici pentru a trimite o soluție.
+          </Alert>
         )}
       </section>
     );
@@ -76,21 +72,22 @@ const VerifyPanel = ({
         </p>
       ) : <VerificationDetails verificationStatus={verificationStatus} />}
       {ActionButton}
-      <hr className="mt-8" />
-      <p>
-        If you'd like to save your progress and continue later, click the button below.
-      </p>
       {verificationStatus?.valid !== true && (
         <>
-          <Button onClick={() => onSaveProgress()} variant="light" loading={savingStatus.isSaving}>
+          <hr className="mt-8" />
+          <p>
+            If you'd like to save your progress and continue later, click the button below.
+          </p>
+          <Button onClick={() => onSaveProgress()} variant="light" loading={apiStatus.loadingType === 'saving'}>
             Save Progress
           </Button>
-          {savingStatus.error !== '' && (
-            <Alert severity="error">
-              {savingStatus.error}
-            </Alert>
-          )}
+
         </>
+      )}
+      {apiStatus.error !== '' && (
+        <Alert severity="error">
+          {apiStatus.error}
+        </Alert>
       )}
 
     </section>

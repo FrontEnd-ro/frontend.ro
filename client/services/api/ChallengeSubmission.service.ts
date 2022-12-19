@@ -25,6 +25,21 @@ class ChallengeSubmissionService {
 
     return parseChallengeSubmission(challenge);
   }
+
+  static async submitSolution(
+    challengeId: string,
+    taskId: string,
+    code: string,
+  ): Promise<ParsedChallengeSubmissionI> {
+    const challenge: ChallengeSubmissionI = await HttpService
+      .post(
+        `${process.env.ENDPOINT}/challenge-submissions/${challengeId}/task/${taskId}/status`,
+        { code },
+      )
+      .then((resp) => resp.json());
+
+    return parseChallengeSubmission(challenge);
+  }
 }
 
 export default ChallengeSubmissionService;

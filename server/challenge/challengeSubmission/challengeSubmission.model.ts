@@ -104,10 +104,8 @@ const mergeChallengeSubmission = (challengeSubmission: ChallengeSubmissionI, cha
   }
 
   return {
-    challengeId: challenge.challengeId,
-    title: challenge.title,
+    ...challenge,
     user: challengeSubmission.user,
-    typeDefinitions: challenge.typeDefinitions,
     tasks: challenge.tasks.map((task) => {
       const submissionTask = challengeSubmission.tasks.find(t => t.taskId === task.taskId);
 

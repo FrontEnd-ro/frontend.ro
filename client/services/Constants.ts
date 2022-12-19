@@ -25,6 +25,8 @@ export const MONACO = {
 };
 
 export const HTML_TUTORIAL_ID = 'html';
+export const CHRISTMAS_ADVENT_ID = 'christmas-advent-2022';
+
 // FIXME 👇
 // Should ALWAYS come from the server
 export const HTML_TUTORIAL_NAME = 'Tutorialul de HTML';

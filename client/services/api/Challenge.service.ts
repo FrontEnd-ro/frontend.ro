@@ -77,6 +77,17 @@ class ChallengeService {
     return typeDefinition;
   }
 
+  static async getStartingCode(challengeId: string): Promise<{
+    challengeId: string;
+    startingCode: string;
+  }> {
+    const startingCodeResponse: { challengeId: string; startingCode: string } = await HttpService
+      .get(`${process.env.ENDPOINT}/challenges/${challengeId}/startingCode`)
+      .then((resp) => resp.json());
+
+    return startingCodeResponse;
+  }
+
   static verify(
     challengeId: string,
     taskId: string,
@@ -238,6 +249,35 @@ export const useTypeDefinitions = (challengeId: string) => {
 };
 
 export default ChallengeService;
+
+/** Hooks */
+export const useStartingCode = (challengeId: string): {
+  challenge: { challengeId: string; startingCode: string } | undefined | null
+} => {
+  const [challenge, setChallenge] = useState<{
+    challengeId: string;
+    startingCode: string
+  }>(undefined);
+  const SPAN = `[useStartingCode, challengeId=${challengeId}]`;
+
+  const fetchStartingCode = async () => {
+    try {
+      const response = await ChallengeService.getStartingCode(challengeId);
+      setChallenge(response);
+    } catch (err) {
+      console.error(`${SPAN} Failed to fetch challenge.`, err);
+      setChallenge(null);
+    }
+  };
+
+  useEffect(() => {
+    fetchStartingCode();
+  }, [challengeId]);
+
+  return {
+    challenge,
+  };
+};
 
 // Utility functions
 const emitIframeEvent = (iframe: HTMLIFrameElement, eventMessage: WindowMessage) => {

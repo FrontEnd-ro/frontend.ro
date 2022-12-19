@@ -3,7 +3,6 @@ import { connect, ConnectedProps } from 'react-redux';
 import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAward, faFile, faList, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { SandpackProvider, SandpackPreview, useSandpack } from '@codesandbox/sandpack-react';
 
 import Header from '../Header';
 import IDEPanel from './IDEPanel/IDEPanel';
@@ -19,6 +18,7 @@ import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/Res
 import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
 import { useTypeDefinitions, withAutomaticVerification } from '~/services/api/Challenge.service';
+import Sandpack, { toSandPackFiles } from '../Sandpack/Sandpack';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
 import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
 import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
@@ -437,18 +437,11 @@ const _FullScreenIDE = ({
                 <p> Loading... </p>
               </div>
             )}
-            <SandpackProvider
-              className={`${styles.SandpackProvider} m-0`}
-              files={sandpackFiles}
+            <Sandpack
               template="react-ts"
-            // No need for dependencies here, as they will
-            // automatically be resolved based on the
-            // existing package.json file.
-            // https://sandpack.codesandbox.io/docs/advanced-usage/client#usage
-            >
-              <SandpackPreview className={`${styles.SandpackPreview} m-0`} />
-              <SandpackListener onSuccess={() => setDidSandpackLoad(true)} />
-            </SandpackProvider>
+              files={sandpackFiles}
+              onLoad={() => setDidSandpackLoad(true)}
+            />
           </div>
           {activePanel === Panel.INFO && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
@@ -520,36 +513,6 @@ function getFolderStructureToSave(
 
   return folderStructureToSave;
 }
-
-// TODO: move from here
-const toSandPackFiles = (folderStructure: FolderStructure): Record<string, string> => {
-  const files = {};
-  folderStructure.getFilesWithPath().forEach((file) => {
-    files[`${file.path}/${file.name}`] = file.content;
-  });
-
-  return files;
-};
-
-const SandpackListener = ({ onSuccess }: { onSuccess: () => void }) => {
-  const { listen } = useSandpack();
-
-  useEffect(() => {
-    // listens for any message dispatched between sandpack and the bundler
-    const stopListening = listen((msg) => {
-      if (msg.type === 'success') {
-        onSuccess();
-      }
-    });
-
-    return () => {
-      // unsubscribe
-      stopListening();
-    };
-  }, [listen]);
-
-  return null;
-};
 
 function mapStateToProps(state: RootState) {
   return {

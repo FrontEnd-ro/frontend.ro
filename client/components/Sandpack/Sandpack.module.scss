@@ -1,0 +1,13 @@
+.SandpackProvider,
+.SandpackPreview {
+  width: 100% !important;
+  height: 100% !important;
+
+  :global .sp-preview-container {
+    border-radius: inherit;
+  }
+
+  iframe {
+    height: 100%;
+  }
+}

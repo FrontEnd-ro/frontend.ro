@@ -11,6 +11,7 @@ import LandingSubscribe from './LandingSubscribe/LandingSubscribe';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import LandingHTML from '~/components/Landing/LandingHtml/LandingHtml';
 import LandingTidbits from '~/components/Landing/LandingTidbits/LandingTidbits';
+import LandingChristmasAdvent from './LandingChristmasAdvent/LandingChristmasAdvent';
 
 import styles from './Landing.module.scss';
 
@@ -53,6 +54,7 @@ function LandingPage({
           isLoggedIn={isLoggedIn}
           htmlTutorialProgress={htmlTutorialProgress}
         />
+        <LandingChristmasAdvent className={styles.LandingChristmasAdvent} />
         <LandingHTML className={styles.LandingHTML} />
         <LandingTidbits tidbits={tidbits} />
         <LandingResources className={styles.LandingResources} />

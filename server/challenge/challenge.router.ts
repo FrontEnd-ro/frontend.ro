@@ -43,4 +43,22 @@ challengeRouter.get('/:challengeId/types', [
   }
 ]);
 
+challengeRouter.get('/:challengeId/startingCode', [
+  PublicMiddleware,
+  async function getStartingCodeForFirstTask(req: Request, res: Response) {
+    const { challengeId } = req.params;
+    const challenge: ChallengeI = await Challenge.findOne({ challengeId });
+
+    if (challenge === null) {
+      new ServerError(404, 'Not Found').send(res);
+      return;
+    }
+
+    res.json({
+      challengeId,
+      startingCode: challenge.tasks[0].startingCode
+    });
+  }
+]);
+
 export default challengeRouter;

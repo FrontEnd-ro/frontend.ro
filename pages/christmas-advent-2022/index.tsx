@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
 import NotFoundPage from '~/components/404/NotFound';
+import { CHRISTMAS_ADVENT_ID } from '~/services/Constants';
 import { useCertification } from '~/services/api/Certification.service';
 import { FullScreenIDE } from '~/components/FullScreenIDE/FullScreenIDE';
 import { ChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
@@ -60,15 +61,14 @@ const connector = connect(mapStateToProps);
 export default connector(ChristmasAdvent2022);
 
 export async function getServerSideProps({ res, req }) {
-  const CHALLENGE_ID = 'christmas-advent-2022';
-  const SPAN = `[${CHALLENGE_ID}, getServerSideProps]`;
+  const SPAN = `[${CHRISTMAS_ADVENT_ID}, getServerSideProps]`;
 
   const { default: fetch } = await import('node-fetch');
   const { default: appConfig } = await import('../../server/config');
 
   try {
     const { token } = req?.cookies ?? {};
-    const resp = await fetch(`${appConfig.APP.endpoint}/challenge-submissions/${CHALLENGE_ID}`, {
+    const resp = await fetch(`${appConfig.APP.endpoint}/challenge-submissions/${CHRISTMAS_ADVENT_ID}`, {
       headers: {
         cookie: `token=${token}`,
       },

@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+@import '../../../styles/variables';
+
+.LandingChristmasAdvent {
+  @extend %containerConfig;
+
+  h2 {
+    font-family: 'Merienda', cursive;
+  }
+}
+
+.Preview {
+  height: 80vw;
+  max-height: 35em;
+  border-radius: 1em;
+  background: #282a36;
+  box-shadow: 0 0 1em color(black);
+}
+
+.Sandpack {
+  border-radius: 1em;
+
+  &--hidden {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+.SVGArrow {
+  z-index: 1;
+  top: 100%;
+  right: -3em;
+}
+
+@media screen and (max-width: 600px) {
+  .SVGArrow {
+    display: none;
+  }
+}

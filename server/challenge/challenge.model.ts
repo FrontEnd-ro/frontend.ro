@@ -21,7 +21,6 @@ const ChallengeSchema = new mongoose.Schema<ChallengeI>({
   title: { type: String, required: true },
   tasks: [{ type: ChallengeTaskSchema, required: true }],
   introExplainer: { type: ChallengeIntroExplainerSchema, required: false },
-  typeDefinitions: { type: String, required: false },
 });
 
 const Challenge: mongoose.Model<ChallengeI, {}, {}> = mongoose.models.Challenge || mongoose.model('Challenge', ChallengeSchema);

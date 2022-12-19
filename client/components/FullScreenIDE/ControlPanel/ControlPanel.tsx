@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import Alert from '~/components/generic/Alert/Alert';
 import ControlPanelNav from './ControlPanelNav/ControlPanelNav';
-import { ChallengeSubmissionTaskI, ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
 
 import styles from './ControlPanel.module.scss';
 import Markdown from '~/components/Markdown';
 
 interface Props {
-  challenge: ParsedChallengeSubmissionI;
+  challenge: ChallengeSubmissionI;
   // "current" in the sense that this is the task you must solve now.
   currentTaskId: string;
   className?: string;

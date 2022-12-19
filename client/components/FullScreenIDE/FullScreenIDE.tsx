@@ -14,14 +14,15 @@ import { useKeyDown, useResizeObserver } from '~/services/Hooks';
 import HResizable from '../Editor/HResizable/HResizable';
 import { BasicEditor } from '../Editor/BasicEditor';
 import EditorExplorer from '../Editor/EditorExplorer/EditorExplorer';
-import FolderStructure, { ExerciseFile, useFolderStructure } from '~/../shared/utils/FolderStructure';
+import FolderStructure, { useFolderStructure } from '~/../shared/utils/FolderStructure';
 import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
 import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
-import { withAutomaticVerification } from '~/services/api/Challenge.service';
+import { useTypeDefinitions, withAutomaticVerification } from '~/services/api/Challenge.service';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
-import { ChallengeSubmissionTaskI, ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
 import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.service';
+import { type } from 'os';
 
 enum Panel {
   EDITOR = 'editor',
@@ -47,8 +48,8 @@ const _FullScreenIDE = ({
   isLoggedIn,
   onChallengeSubmit,
 }: ConnectedProps<typeof connector> & {
-  challengeSubmission: ParsedChallengeSubmissionI;
-  onChallengeSubmit: (task: ParsedChallengeSubmissionI) => void;
+  challengeSubmission: ChallengeSubmissionI;
+  onChallengeSubmit: (task: ChallengeSubmissionI) => void;
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };
@@ -132,6 +133,7 @@ const _FullScreenIDE = ({
     setVerificationStatus,
     verifySolutionClientSide,
   } = withAutomaticVerification();
+  const { typeDefinitions } = useTypeDefinitions(challengeSubmission.challengeId);
 
   useEffect(() => {
     setApiStatus({
@@ -147,7 +149,7 @@ const _FullScreenIDE = ({
       content: file.content,
       path: `${file.path}/${file.name}`,
     })),
-    ...challengeSubmission.typeDefinitions.map(({ content, path }) => ({
+    ...typeDefinitions.map(({ content, path }) => ({
       content,
       path: `/${path}`,
     })),
@@ -272,11 +274,11 @@ const _FullScreenIDE = ({
     verifySolutionClientSide(challengeSubmission.challengeId, currentTaskId, iframe);
   };
 
-  const resetState = (newChallengeSubmission: ParsedChallengeSubmissionI) => {
+  const resetState = (newChallengeSubmission: ChallengeSubmissionI) => {
     setActivePanel(Panel.INFO);
     setVerificationStatus(undefined);
 
-    const newCurrentTaskId = getCurrentTaskId(newChallengeSubmission)
+    const newCurrentTaskId = getCurrentTaskId(newChallengeSubmission);
     const newCurrentTask = newChallengeSubmission
       .tasks
       .find((task) => task.taskId === newCurrentTaskId);
@@ -465,7 +467,7 @@ const _FullScreenIDE = ({
   );
 };
 
-function getCurrentTaskId(challengeSubmission: ParsedChallengeSubmissionI) {
+function getCurrentTaskId(challengeSubmission: ChallengeSubmissionI) {
   // First task that is either:
   // > not started
   // > started but the solution is not valid

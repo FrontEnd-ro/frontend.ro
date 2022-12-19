@@ -25,7 +25,7 @@ export interface BasicEditorProps {
   // > content: is the actual content of the file or it's `.d.ts` definitions
   // > path: path to where is this file or package found. Example:
   //   node_modules/@types/react/index.d.ts
-  typeDefinitions?: { content: string; path: string}[];
+  typeDefinitions?: { content: string; path: string }[];
 }
 
 const _BasicEditor = ({
@@ -43,6 +43,17 @@ const _BasicEditor = ({
   const editor = useRef<editor.IStandaloneCodeEditor>(null);
   const [didLoadEditor, setDidLoadEditor] = useState(false);
 
+  const setTypes = () => {
+    MonacoService
+      .get()
+      .languages
+      .typescript
+      .typescriptDefaults.setExtraLibs(typeDefinitions.map((lib) => ({
+        content: lib.content,
+        filePath: `file://${lib.path}`,
+      })));
+  };
+
   const init = async () => {
     await MonacoService.defineTheme(theme);
     editor.current = MonacoService.create(editorRootRef.current, {
@@ -53,14 +64,7 @@ const _BasicEditor = ({
     });
 
     if (typeDefinitions.length !== 0) {
-      MonacoService
-        .get()
-        .languages
-        .typescript
-        .typescriptDefaults.setExtraLibs(typeDefinitions.map((lib) => ({
-          content: lib.content,
-          filePath: `file://${lib.path}`,
-        })));
+      setTypes();
     }
 
     if (file !== undefined) {
@@ -70,6 +74,7 @@ const _BasicEditor = ({
   };
 
   useEffect(() => { init(); }, []);
+  useEffect(setTypes, [typeDefinitions.map((t) => t.path).join('_')]);
   useEffect(() => {
     if (editor.current === null) {
       return;

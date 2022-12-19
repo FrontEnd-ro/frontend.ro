@@ -16,12 +16,6 @@ export interface ChallengeSubmissionI extends Omit<ChallengeI, 'tasks'> {
   tasks: ChallengeSubmissionTaskI[];
 }
 
-// When reading this data on the client, we're actually parsing a few
-// properties so we have typed JSON objects instead of strings.
-export interface ParsedChallengeSubmissionI extends Omit<ChallengeSubmissionI, 'typeDefinitions'> {
-  typeDefinitions: {content: string; path: string;}[];
-}
-
 export interface ChallengeSubmissionTaskI extends ChallengeTaskI {
   // Unique, human-readable ID.
   // This is used when routing in the UI.

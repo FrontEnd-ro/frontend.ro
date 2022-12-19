@@ -19,22 +19,6 @@ export interface ChallengeI {
 
     markdown: string;
   }
-
-  // Stringified JSON containing type definitions
-  // of the NPM packages we use in this code.
-  // These definitions can be loaded into the
-  // Editor to provide us with autocomplete
-  // and intellisense.
-  // NOTE: putting these on the challenge itself
-  // instead of on the Task because we expect Challenge
-  // to use more-or-less the same packages across tasks.
-  typeDefinitions?: string;
-}
-
-// When reading this data on the client, we're actually parsing a few
-// properties so we have typed JSON objects instead of strings.
-export interface ParsedChallengeI extends Omit<ChallengeI, 'typeDefinitions'> {
-  typeDefinitions: {content: string; path: string;}[];
 }
 
 export interface ChallengeTaskI {
@@ -69,3 +53,5 @@ export interface ChallengeTaskI {
   // doesn't involve coding, leave this empty.
   filesThatCanBeEdited: string[];
 }
+
+export type TypeDefinition = {content: string; path: string;};

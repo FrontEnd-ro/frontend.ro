@@ -1,21 +1,20 @@
 import HttpService from './Http.service';
-import { parseChallengeSubmission } from '~/../shared/Challenge.shared';
-import { ChallengeSubmissionI, ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import { ChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 
 class ChallengeSubmissionService {
-  static async get(challengeId: string): Promise<ParsedChallengeSubmissionI> {
+  static async get(challengeId: string): Promise<ChallengeSubmissionI> {
     const challenge: ChallengeSubmissionI = await HttpService
       .get(`${process.env.ENDPOINT}/challenge-submissions/${challengeId}`)
       .then((resp) => resp.json());
 
-    return parseChallengeSubmission(challenge);
+    return challenge;
   }
 
   static async updateCode(
     challengeId: string,
     taskId: string,
     code: string,
-  ): Promise<ParsedChallengeSubmissionI> {
+  ): Promise<ChallengeSubmissionI> {
     const challenge: ChallengeSubmissionI = await HttpService
       .put(
         `${process.env.ENDPOINT}/challenge-submissions/${challengeId}/task/${taskId}`,
@@ -23,14 +22,14 @@ class ChallengeSubmissionService {
       )
       .then((resp) => resp.json());
 
-    return parseChallengeSubmission(challenge);
+    return challenge;
   }
 
   static async submitSolution(
     challengeId: string,
     taskId: string,
     code: string,
-  ): Promise<ParsedChallengeSubmissionI> {
+  ): Promise<ChallengeSubmissionI> {
     const challenge: ChallengeSubmissionI = await HttpService
       .post(
         `${process.env.ENDPOINT}/challenge-submissions/${challengeId}/task/${taskId}/status`,
@@ -38,7 +37,7 @@ class ChallengeSubmissionService {
       )
       .then((resp) => resp.json());
 
-    return parseChallengeSubmission(challenge);
+    return challenge;
   }
 }
 

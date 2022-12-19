@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/404/NotFound';
-import { parseChallengeSubmission } from '~/../shared/Challenge.shared';
 import { FullScreenIDE } from '~/components/FullScreenIDE/FullScreenIDE';
-import { ChallengeSubmissionI, ChallengeSubmissionTaskI, ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import { ChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 
 export default ({
   challengeSubmissionServer,
 } : {
-  challengeSubmissionServer: ParsedChallengeSubmissionI;
+  challengeSubmissionServer: ChallengeSubmissionI;
 }) => {
   const [challengeSubmission, setChallengeSubmission] = useState(challengeSubmissionServer);
 
-  const onChallengeSubmit = (challenge: ParsedChallengeSubmissionI) => {
+  const onChallengeSubmit = (challenge: ChallengeSubmissionI) => {
     setChallengeSubmission(challenge);
   };
 
@@ -51,10 +50,9 @@ export async function getServerSideProps({ res, req }) {
     });
     switch (resp.status) {
       case 200: {
-        const challenge: ChallengeSubmissionI = await resp.json();
-        const parsedChallenge = parseChallengeSubmission(challenge);
+        const challengeSubmissionServer: ChallengeSubmissionI = await resp.json();
         return {
-          props: { challengeSubmissionServer: parsedChallenge },
+          props: { challengeSubmissionServer },
         };
       }
       case 404:

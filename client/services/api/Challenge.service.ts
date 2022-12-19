@@ -20,22 +20,20 @@ const TESTING_EVENTS = {
   TASK_RESULT: {
     hierarchy: 'TEST_1_RESULT',
     shapes: 'TEST_2_RESULT',
-    'lights-camera': 'TEST_3_RESULT',
-    'dat-gui': 'TEST_4_RESULT',
-    mesh: 'TEST_5_RESULT',
-    physics: 'TEST_6_RESULT',
-    interactions: 'TEST_7_RESULT',
+    movement: 'TEST_3_RESULT',
+    mesh: 'TEST_4_RESULT',
+    physics: 'TEST_5_RESULT',
+    interactions: 'TEST_6_RESULT',
   },
 
   // Outgoing events that trigger testing of a task
   TASK_RUN: {
     hierarchy: 'TEST_1_RUN',
     shapes: 'TEST_2_RUN',
-    'lights-camera': 'TEST_3_RUN',
-    'dat-gui': 'TEST_4_RUN',
-    mesh: 'TEST_5_RUN',
-    physics: 'TEST_6_RUN',
-    interactions: 'TEST_7_RUN',
+    movement: 'TEST_3_RUN',
+    mesh: 'TEST_4_RUN',
+    physics: 'TEST_5_RUN',
+    interactions: 'TEST_6_RUN',
   },
 };
 

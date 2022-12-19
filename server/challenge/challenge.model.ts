@@ -11,10 +11,16 @@ const ChallengeTaskSchema = new mongoose.Schema<ChallengeTaskI>({
   filesThatCanBeEdited: [{ type: String, required: false }],
 });
 
+const ChallengeIntroExplainerSchema = new mongoose.Schema<{ title: string; markdown: string}>({
+  title: { type: String, required: true },
+  markdown: { type: String, required: true },
+})
+
 const ChallengeSchema = new mongoose.Schema<ChallengeI>({
   challengeId: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   tasks: [{ type: ChallengeTaskSchema, required: true }],
+  introExplainer: { type: ChallengeIntroExplainerSchema, required: false },
   typeDefinitions: { type: String, required: false },
 });
 

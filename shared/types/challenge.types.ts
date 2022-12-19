@@ -12,6 +12,14 @@ export interface ChallengeI {
 
   tasks: ChallengeTaskI[];
 
+  // This can be used to give some general information
+  // regarding the challenge.
+  introExplainer?: {
+    title: string;
+
+    markdown: string;
+  }
+
   // Stringified JSON containing type definitions
   // of the NPM packages we use in this code.
   // These definitions can be loaded into the

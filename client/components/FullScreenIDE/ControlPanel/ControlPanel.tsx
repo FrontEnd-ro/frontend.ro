@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Alert from '~/components/generic/Alert/Alert';
 import ControlPanelNav from './ControlPanelNav/ControlPanelNav';
-import { ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import { ChallengeSubmissionTaskI, ParsedChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 
 import styles from './ControlPanel.module.scss';
 import Markdown from '~/components/Markdown';
@@ -17,10 +17,24 @@ const ControlPanel = ({ challenge, currentTaskId, className = '' }: Props) => {
   // We allow a user to view a task explainer without actually changing
   // the entire editor context to that specific task.
   const [viewingTaskId, setViewingTaskId] = useState(currentTaskId);
-  const viewingTask = challenge.tasks.find((task) => task.taskId === viewingTaskId);
+  const tasks: ChallengeSubmissionTaskI[] = challenge.introExplainer !== undefined
+    ? [
+      // Creating a "fake task" on the fly, from the
+      // introExplainer property on the challenge.
+      {
+        taskId: 'introExplainer',
+        title: challenge.introExplainer.title,
+        explainer: challenge.introExplainer.markdown,
+        codeForFilesThatCanBeEdited: '',
+        filesThatCanBeEdited: [],
+      },
+      ...challenge.tasks,
+    ]
+    : challenge.tasks;
+  const viewingTask = tasks.find((task) => task.taskId === viewingTaskId);
 
-  const currentTaskIndex = challenge.tasks.findIndex((task) => task.taskId === currentTaskId);
-  const viewingTaskIndex = challenge.tasks.indexOf(viewingTask);
+  const currentTaskIndex = tasks.findIndex((task) => task.taskId === currentTaskId);
+  const viewingTaskIndex = tasks.indexOf(viewingTask);
 
   useEffect(() => {
     setViewingTaskId(currentTaskId);
@@ -35,11 +49,11 @@ const ControlPanel = ({ challenge, currentTaskId, className = '' }: Props) => {
       <ControlPanelNav
         onItemClick={changeContent}
         className={styles.ControlPanelNav}
-        items={challenge.tasks.map((task) => ({
+        items={tasks.map((task) => ({
           id: task.taskId,
           label: task.title,
           active: task.taskId === viewingTaskId,
-          isCurrent: task.taskId === currentTaskId
+          isCurrent: task.taskId === currentTaskId,
         }))}
       />
       <main className={styles.main}>

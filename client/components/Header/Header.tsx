@@ -29,11 +29,14 @@ function Header({
   demoPage,
   onMenuClick,
   isLoggedIn,
+  navItems,
   withNavMenu = false,
   theme = 'light',
   className = '',
 }: ConnectedProps<typeof connector> & Props) {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
+  const hasHighlightNavItems = navItems.some((item) => item.highlighted === true);
+
   return (
     <>
 
@@ -83,7 +86,13 @@ function Header({
             <Button
               variant="transparent"
               onClick={() => setIsNavMenuOpen(true)}
-              className={`${styles['nav-menu']} h-100 align-items-center`}
+              className={`
+                ${styles['nav-menu']}
+                ${hasHighlightNavItems ? styles['nav-menu--highlight'] : ''}
+                h-100
+                relative
+                align-items-center
+              `}
             >
               Nav
               <FontAwesomeIcon className="ml-2" icon={faBars} />
@@ -114,6 +123,7 @@ function Header({
 function mapStateToProps(state: RootState) {
   return {
     isLoggedIn: !!state.user.info,
+    navItems: state.applicationConfig.navItems,
   };
 }
 

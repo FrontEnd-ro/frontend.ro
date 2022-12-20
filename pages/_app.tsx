@@ -15,6 +15,7 @@ export default function MyApp({ Component, pageProps }: any) {
       ...defaultUserState,
       info: pageProps._serverUser,
     },
+    applicationConfig: pageProps._applicationConfig,
   });
 
   useApplicationConfig((config) => store.dispatch(loadConfig(config)));
@@ -45,6 +46,9 @@ export default function MyApp({ Component, pageProps }: any) {
 MyApp.getInitialProps = async ({ ctx }) => {
   const pageProps = {
     _serverUser: null,
+    _applicationConfig: {
+      navItems: [],
+    },
   };
 
   const isClientSide = !ctx.req;
@@ -55,8 +59,25 @@ MyApp.getInitialProps = async ({ ctx }) => {
 
   const { token } = ctx.req?.cookies ?? {};
   if (!token) {
+    const applicationConfig = await fetchApplicationConfigServerSide();
+    pageProps._applicationConfig = applicationConfig;
+
     return { pageProps };
   }
+
+  const [user, applicationConfig] = await Promise.all([
+    fetchUserServiceSide(token),
+    fetchApplicationConfigServerSide(),
+  ]);
+
+  pageProps._serverUser = user;
+  pageProps._applicationConfig = applicationConfig;
+
+  return { pageProps };
+};
+
+async function fetchUserServiceSide(token: string) {
+  const SPAN = '[fetchUserServiceSide]';
 
   try {
     const { default: fetch } = await import('node-fetch');
@@ -69,19 +90,39 @@ MyApp.getInitialProps = async ({ ctx }) => {
         cookie: `token=${token}`,
       },
     });
+
     if (!resp.ok) {
-      return { pageProps };
+      return null;
     }
 
     const user = await resp.json();
-
-    pageProps._serverUser = user;
+    return user;
   } catch (err) {
-    console.error('[getServerSideProps][pingUser]: ', err);
+    console.error(`${SPAN} Failed to fetch user server side`, err);
   }
 
-  return { pageProps };
-};
+  return null;
+}
+
+async function fetchApplicationConfigServerSide(): Promise<ApplicationConfig> {
+  const SPAN = '[fetchApplicationConfigServerSide]';
+
+  const emptyConfig = { navItems: [] };
+  try {
+    const { default: fetch } = await import('node-fetch');
+    const resp = await fetch(`${process.env.ENDPOINT}/application-config`);
+    if (!resp.ok) {
+      return emptyConfig;
+    }
+
+    const applicationConfig = await resp.json();
+    return applicationConfig;
+  } catch (err) {
+    console.error(`${SPAN} Failed to fetch ApplicationConfig server side`, err);
+  }
+
+  return emptyConfig;
+}
 
 function useApplicationConfig(callback: (config: ApplicationConfig) => void) {
   const fetchApplicationConfig = () => {

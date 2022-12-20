@@ -10,7 +10,7 @@ import List from '../List';
 
 import styles from './NavLinks.module.scss';
 
-function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
+function NavLinks({ user, navItems, dispatch }: ConnectedProps<typeof connector>) {
   const router = useRouter();
   const isLoggedIn = !!user.info;
 
@@ -25,31 +25,16 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
   return (
     <nav className={styles['nav-links']}>
       <List as="ol">
-        <li>
-          <Link href="/html">
-            Modulul de HTML
-          </Link>
-        </li>
-        <li>
-          <Link href="/tidbits">
-            Tidbits
-          </Link>
-        </li>
-        <li>
-          <Link href="/resurse">
-            Resurse utile
-          </Link>
-        </li>
-        {/* <li>
-          <Link href="/evenimente">
-            Evenimente
-          </Link>
-        </li>
-        <li>
-          <Link href="/slides">
-            Slide-uri
-          </Link>
-        </li> */}
+        {navItems.map((navItem) => (
+          <li key={navItem._id}>
+            <Link
+              href={navItem.href}
+              className={`${navItem.highlighted === true ? styles.highlighted : ''}`}
+            >
+              {navItem.text}
+            </Link>
+          </li>
+        ))}
         {isLoggedIn ? (
           <li className={styles.login}>
             <Button variant="transparent" onClick={logout}>
@@ -71,6 +56,7 @@ function NavLinks({ user, dispatch }: ConnectedProps<typeof connector>) {
 function mapStateToProps(state: RootState) {
   return {
     user: state.user,
+    navItems: state.applicationConfig.navItems,
   };
 }
 

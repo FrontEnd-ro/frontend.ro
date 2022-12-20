@@ -13,10 +13,24 @@ const Ad = new mongoose.Schema({
   text: { type: String, required: true },
   cta: { type: String, required: false },
   ctaLink: { type: String, required: false }
-})
+});
+
+/**
+ * This defines navigation links that are shown
+ * inside <AsideMenu>.
+ */
+const NavItem = new mongoose.Schema({
+  text: { type: String, required: true },
+  href: { type: String, required: true },
+
+  // Whether or not to highlight this in a way that
+  // draws attention and signifies it's important for users.
+  highlighted: { type: Boolean, required: false },
+});
 
 const ApplicationConfigSchema = new mongoose.Schema({
   ad: { type: Ad, required: true },
+  navItems: [{ type: NavItem, required: false }],
 })
 
 const ApplicationConfig = mongoose.models.ApplicationConfig

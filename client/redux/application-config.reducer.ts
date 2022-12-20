@@ -4,7 +4,13 @@ export interface ApplicationConfig {
     text: string;
     cta?: string;
     ctaLink?: string;
-  }
+  },
+  navItems: {
+    _id: string;
+    text: string;
+    href: string;
+    highlighted?: boolean;
+  }[],
 }
 
 const LOAD_CONFIG = 'config/LOAD_CONFIG';
@@ -14,8 +20,9 @@ export const loadConfig = (config: ApplicationConfig) => ({
   payload: config,
 });
 
-export const defaultApplicationConfigState = {
+export const defaultApplicationConfigState: ApplicationConfig = {
   ad: undefined,
+  navItems: [],
 };
 
 const initialState: ApplicationConfig = defaultApplicationConfigState;

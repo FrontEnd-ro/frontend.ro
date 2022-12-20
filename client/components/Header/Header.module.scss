@@ -133,4 +133,18 @@
     width: 1em;
     min-width: 1em;
   }
+
+  &--highlight {
+    &::after {
+      content: '';
+      top: 0;
+      right: 0;
+      width: 0.75em;
+      height: 0.75em;
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(50%, -50%);
+      background: color(green);
+    }
+  }
 }

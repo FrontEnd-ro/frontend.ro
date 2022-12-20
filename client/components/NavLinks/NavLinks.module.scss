@@ -15,6 +15,15 @@
     color: color(white);
     position: relative;
     padding: 0;
+
+    &.highlighted {
+      border-bottom: 3px dashed color(green);
+
+      &:hover {
+        border-bottom-style: solid;
+      }
+    }
+
     &::after {
       content: '';
       width: 100%;
@@ -27,7 +36,7 @@
       transition: transform 0.2s $cubic;
     }
 
-    &:hover::after {
+    &:not(.highlighted):hover::after {
       transform: scale(1);
     }
   }

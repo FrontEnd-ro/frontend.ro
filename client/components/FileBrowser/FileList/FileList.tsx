@@ -26,6 +26,9 @@ interface Props {
   onRenameStart?: (key: string) => void;
   onRenameDone?: (key: string, name: string) => void;
   customClasses?: (key: string) => string;
+
+  // See explanation about this prop in the EditorExplorer component.
+  filesToIgnore?: string[];
 }
 
 // Renders a List of "Files" that can be renamed or deleted.
@@ -36,6 +39,7 @@ function FileList({
   className = '',
   selectedFileKey,
   renamedFileKey,
+  filesToIgnore = [],
 
   // If we have the Context Menu open for a file, this
   // prop holds the key for that specific file.
@@ -81,7 +85,7 @@ function FileList({
 
   return (
     <List variant="none" className={className}>
-      {files.map(({ key, name }) => (
+      {files.filter((file) => !filesToIgnore.includes(file.key)).map(({ key, name }) => (
         <li
           key={key}
           className={`

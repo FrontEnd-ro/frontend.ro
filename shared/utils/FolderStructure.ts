@@ -106,6 +106,15 @@ class FolderStructure {
     return { file: null };
   }
 
+  getFilesByName(name: string, subFolder: any = this): ExerciseFile[] {
+    let foundFiles: ExerciseFile[] = subFolder.files.filter((file) => file.name === name);
+    for (let folder of subFolder.folders) {
+      foundFiles.push(...this.getFilesByName(name, folder));
+    }
+
+    return foundFiles;
+  }
+
   // TODO: this is not the most efficient way to do this.
   // We probably should populate the paths when creating the
   // folder structure, and then just making sure we keep them in sync.

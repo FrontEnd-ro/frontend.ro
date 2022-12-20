@@ -22,7 +22,6 @@ import { useTypeDefinitions, withAutomaticVerification } from '~/services/api/Ch
 import CertificationPanel from './CertificationPanel/CertificationPanel';
 import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
 import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.service';
-import { type } from 'os';
 
 enum Panel {
   EDITOR = 'editor',
@@ -393,6 +392,7 @@ const _FullScreenIDE = ({
                   onFolderRename={renameFolder}
                   onFileDelete={deleteFile}
                   onFolderDelete={deleteFolder}
+                  filesOrFoldersToIgnore={folderStructure.getFilesByName('TestingService.tsx').map((file) => file.key)}
                 />
               </ResizableExplorerContainer>
             )}

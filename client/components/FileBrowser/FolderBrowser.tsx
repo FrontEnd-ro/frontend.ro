@@ -33,6 +33,9 @@ interface Props {
   onRenameDone?: (key: string, name: string) => void;
   openContextMenu?: (key: string, e: MouseEvent<HTMLElement>, target: ContextMenuTarget) => void;
 
+  // See explanation about this prop in the EditorExplorer component.
+  filesOrFoldersToIgnore?: string[];
+
   // This allows us to pass custom class names to any File in this Tree.
   customClasses?: (key: string) => string;
 }
@@ -42,6 +45,7 @@ const FolderBrowser = ({
   onFileSelect,
   readOnly,
   className = '',
+  filesOrFoldersToIgnore = [],
   contextSelectedKey,
   selectedFileKey,
   renamedKey,
@@ -153,7 +157,7 @@ const FolderBrowser = ({
           />
         </form>
       </div>
-      {folders.map((folder) => (
+      {folders.filter((folder) => !filesOrFoldersToIgnore.includes(folder.key)).map((folder) => (
         <FolderBrowser
           key={folder.key}
           folder={folder}
@@ -166,6 +170,7 @@ const FolderBrowser = ({
           onRenameStart={onRenameStart}
           onRenameDone={onRenameDone}
           customClasses={customClasses}
+          filesOrFoldersToIgnore={filesOrFoldersToIgnore}
         />
       ))}
       <FileList
@@ -182,6 +187,7 @@ const FolderBrowser = ({
         onRenameDone={onRenameDone}
         onFileSelect={onFileSelect}
         customClasses={customClasses}
+        filesToIgnore={filesOrFoldersToIgnore}
       />
     </div>
   );

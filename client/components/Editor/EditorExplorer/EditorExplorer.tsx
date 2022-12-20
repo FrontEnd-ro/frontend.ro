@@ -39,6 +39,7 @@ interface Props {
   onCollapse?: () => void;
   feedbacks?: any[]; // TODO: add types
   className?: string;
+  filesOrFoldersToIgnore?: string[];
 }
 
 const EditorExplorer = ({
@@ -55,6 +56,10 @@ const EditorExplorer = ({
   onFileDelete,
   onCollapse,
   feedbacks = [],
+  // List of ids of files and/or folder that we want to hide
+  // from the explorer. This is a quick (and dirty) solution
+  // so we can hide the Testing code in our Christmas Advent.
+  filesOrFoldersToIgnore = [],
   className = '',
 }: Props) => {
   const editorExplorerRef = useRef<HTMLDivElement | null>(null);
@@ -251,21 +256,24 @@ const EditorExplorer = ({
           onDownload={onInnerDownload}
         />
         <div>
-          {folderStructure.folders.map((folder) => (
-            <FolderBrowser
-              key={folder.key}
-              folder={folder}
-              readOnly={readOnly}
-              onFileSelect={selectFile}
-              selectedFileKey={selectedFileKey}
-              renamedKey={renamedAsset?.key}
-              contextSelectedKey={contextMenuKey}
-              openContextMenu={openContextMenu}
-              onRenameStart={onRenameStart}
-              onRenameDone={onRenameDone}
-              customClasses={customFileClasses}
-            />
-          ))}
+          {folderStructure.folders
+            .filter((folder) => !filesOrFoldersToIgnore.includes(folder.key))
+            .map((folder) => (
+              <FolderBrowser
+                key={folder.key}
+                folder={folder}
+                readOnly={readOnly}
+                onFileSelect={selectFile}
+                selectedFileKey={selectedFileKey}
+                renamedKey={renamedAsset?.key}
+                contextSelectedKey={contextMenuKey}
+                openContextMenu={openContextMenu}
+                onRenameStart={onRenameStart}
+                onRenameDone={onRenameDone}
+                customClasses={customFileClasses}
+                filesOrFoldersToIgnore={filesOrFoldersToIgnore}
+              />
+            ))}
           <FileList
             readOnly={readOnly}
             files={folderStructure.files}
@@ -277,6 +285,7 @@ const EditorExplorer = ({
             onRenameDone={onRenameDone}
             onFileSelect={selectFile}
             customClasses={customFileClasses}
+            filesToIgnore={filesOrFoldersToIgnore}
           />
         </div>
       </div>

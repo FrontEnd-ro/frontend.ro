@@ -20,6 +20,7 @@ import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
 import { useTypeDefinitions, withAutomaticVerification } from '~/services/api/Challenge.service';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
+import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
 import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
 import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.service';
 
@@ -35,6 +36,7 @@ interface NavItem {
   title: string;
   icon: IconDefinition;
   onClick: () => void;
+  disabled?: boolean;
 }
 
 export interface ApiStatus {
@@ -46,11 +48,13 @@ const _FullScreenIDE = ({
   challengeSubmission,
   isLoggedIn,
   onChallengeSubmit,
+  certification,
   fileNamesToIgnoreFromExplorer = [],
 }: ConnectedProps<typeof connector> & {
   challengeSubmission: ChallengeSubmissionI;
   onChallengeSubmit: (task: ChallengeSubmissionI) => void;
   fileNamesToIgnoreFromExplorer?: string[];
+  certification?: WIPPopulatedCertificationI;
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };
@@ -185,6 +189,9 @@ const _FullScreenIDE = ({
     type: Panel.VERIFY,
     icon: faPlayCircle,
     onClick: () => toggleActivePanel(Panel.VERIFY),
+
+    // If we already finished this Challenge let's hide this panel.
+    disabled: certification !== undefined,
   }, {
     title: 'Certification',
     type: Panel.CERTIFICATION,
@@ -362,7 +369,7 @@ const _FullScreenIDE = ({
       <Header className={styles.Header} theme="dark" withNavMenu />
       <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
         <IDEPanel className={styles['actions-panel']} vertical>
-          {navItems.map((item) => (
+          {navItems.filter((item) => item.disabled !== true).map((item) => (
             <IDEPanel.Button
               key={item.type}
               title={item.title}
@@ -466,7 +473,7 @@ const _FullScreenIDE = ({
           )}
           {activePanel === Panel.CERTIFICATION && (
             <IDEPanel className={`${styles['main-panel']} pin-full`}>
-              <CertificationPanel challenge={challengeSubmission} />
+              <CertificationPanel certification={certification} challenge={challengeSubmission} />
             </IDEPanel>
           )}
         </div>
@@ -479,9 +486,14 @@ function getCurrentTaskId(challengeSubmission: ChallengeSubmissionI) {
   // First task that is either:
   // > not started
   // > started but the solution is not valid
-  return challengeSubmission
+  const nextTaskId = challengeSubmission
     .tasks
-    .find((t) => t.status === undefined || t.status.valid === false).taskId;
+    .find((t) => t.status === undefined || t.status.valid === false)?.taskId;
+
+  // In case we cannot find a Task that's invalid
+  // which means we finished this challenge, let's
+  // set the "current" task as the last one.
+  return nextTaskId ?? challengeSubmission.tasks[challengeSubmission.tasks.length - 1].taskId;
 }
 
 function getFolderStructureToSave(

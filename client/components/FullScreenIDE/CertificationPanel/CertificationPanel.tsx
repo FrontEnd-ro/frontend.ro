@@ -3,6 +3,7 @@ import { RootState } from '~/redux/root.reducer';
 import { JonDoeUser } from '~/services/Constants';
 import { ChallengeI } from '~/../shared/types/challenge.types';
 import Diploma from '~/components/certification/Diploma/Diploma';
+import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
 
 import styles from './CertificationPanel.module.scss';
 
@@ -10,19 +11,33 @@ const CertificationPanel = ({
   userInfo,
   isLoggedIn,
   challenge,
+  certification,
   className = '',
-}: ConnectedProps<typeof connector> & { challenge: ChallengeI; className?: string }) => {
-  const didFinishTutorial = isLoggedIn && userInfo.tutorials.includes(challenge.challengeId);
+}: ConnectedProps<typeof connector> & {
+  challenge: ChallengeI;
+  certification?: WIPPopulatedCertificationI;
+  className?: string;
+}) => {
+  const didFinishTutorial = certification !== undefined;
 
-  return (
-    <section className={`${className} ${styles.CertificationPanel}`}>
-      <h1 className="mt-0"> Certification </h1>
-      {!didFinishTutorial && (
-        <p>
-          Rezolvă toate exercițiile din acest tutorial și obține o certificare
-          ca cea de jos:
-        </p>
-      )}
+  const getDiploma = () => {
+    if (didFinishTutorial) {
+      return (
+        <Diploma
+          student={certification.user}
+          tutorial={certification.tutorial}
+          challenge={certification.challenge}
+          certification={{
+            date: new Date(certification.timestamp),
+            exerciseCount: certification.lesson_exercises.length,
+            url: `/certificari/${certification._id}`,
+            pdf: certification.pdf,
+          }}
+        />
+      );
+    }
+
+    return (
       <Diploma
         student={isLoggedIn ? userInfo : JonDoeUser}
         tutorial={{
@@ -38,6 +53,23 @@ const CertificationPanel = ({
         showSignature={false}
         showShareControls={false}
       />
+    );
+  };
+
+  return (
+    <section className={`${className} ${styles.CertificationPanel}`}>
+      <h1 className="mt-0"> Certificare </h1>
+      {!didFinishTutorial ? (
+        <p>
+          Rezolvă toate exercițiile din acest tutorial și obține o certificare
+          ca cea de jos:
+        </p>
+      ) : (
+        <p>
+          Congrats! Ai terminat cu succes acest challenge!
+        </p>
+      )}
+      {getDiploma()}
     </section>
   );
 };

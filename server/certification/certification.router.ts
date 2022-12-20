@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { ServerError } from '../ServerUtils';
-import { PublicMiddleware } from '../Middlewares';
+import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
 import Tutorial from '../tutorial/tutorial.model';
 import { Certification, createCertification } from './certification.model';
 import { LessonI } from '../../shared/types/lesson.types';
@@ -10,9 +10,11 @@ import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/su
 import appConfig from '../config';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import UserModel from '../user/user.model';
+import { sanitize as sanitizeUser} from '../../shared/user.shared-model';
 import { UserI } from '../../shared/types/user.types';
 import NotificationModel from '../notification/notification.model';
 import { NotificationChannel, NotificationType, NotificationUrgency } from '../../shared/types/notification.types';
+import Challenge from '../challenge/challenge.model';
 
 const LessonModel = require('../lesson/lesson.model');
 const SubmissionModel = require('../submission/submission.model');
@@ -34,6 +36,47 @@ certificationRouter.get('/:certificationId', [
     }
 
     res.json(certification);
+  }
+]);
+
+certificationRouter.get('/challenge/:challengeId', [
+  PrivateMiddleware,
+  async function getCertificationForChallenge(req: Request, res: Response) {
+    const { user } = req.body;
+    const { challengeId } = req.params;
+
+    try {
+      const challenge = await Challenge.findOne({
+        challengeId
+      });
+
+      if (challenge === null) {
+        new ServerError(404, `Nu exista nici un challenge cu challengeId=${challengeId}.`).send(res);
+        return;
+      }
+
+      const certification = await Certification.findOne({
+        challengeId: challenge._id,
+        user: user._id.toString(),
+      })
+        .populate('user')
+        .populate('lesson_exercises');
+  
+      if (certification === null) {
+        new ServerError(404, `Nu există nici o certificare pentru challengeId=${challengeId}`).send(res);
+        return;
+      }
+  
+      res.json({
+        ...certification.toObject(),
+        user: sanitizeUser(certification.user),
+      });
+    } catch (err) {
+      new ServerError(
+        err.code || 500,
+        err.message || `Error tying to fetch certification for challengeId=${challengeId}`,
+      ).send(res);
+    }
   }
 ]);
 

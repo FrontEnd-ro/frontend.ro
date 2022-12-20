@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { alphabeticSortComparator, uuid } from './utils.shared';
 
 // FIXME
@@ -305,12 +305,20 @@ class FolderStructure {
 export const useFolderStructure = (
   initialFolderStructure: FolderStructure,
   initialSelectedFile = '',
-  ) => {
+
+  // Use this dependencies as "triggers" to reset the state.
+  dependencies: any[] = [],
+) => {
   const [folderStructure, setFolderStructure] = useState(
     new FolderStructure(initialFolderStructure),
   );
 
   const [selectedFileId, setSelectedFileId] = useState(initialSelectedFile);
+
+  useEffect(() => {
+    setFolderStructure(new FolderStructure(initialFolderStructure));
+    setSelectedFileId(initialSelectedFile);
+  }, dependencies);
 
   const addFile = (parentId: string, file: ExerciseFile) => {
     folderStructure.addFile(parentId, file);

@@ -115,6 +115,7 @@ const _FullScreenIDE = ({
     // If the task definition doesn't have a `startingFile`, default
     // to the first file in the top folder.
     currentTask.startingFile ?? taskFolderStructure.files?.[0]?.key,
+    [currentTaskId],
   );
 
   const [isResizing, setIsResizing] = useState(false);
@@ -143,6 +144,9 @@ const _FullScreenIDE = ({
   }, [isVerifying]);
 
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
+  useEffect(() => {
+    setSandpackFiles(toSandPackFiles(folderStructure))
+  }, [folderStructure]);
 
   const extraMonacoLibs = [
     ...folderStructure.getFilesWithPath().map((file) => ({
@@ -284,10 +288,6 @@ const _FullScreenIDE = ({
       .find((task) => task.taskId === newCurrentTaskId);
 
     setCurrentTaskId(newCurrentTaskId);
-    if (newCurrentTask.startingFile) {
-      selectFile(newCurrentTask.startingFile);
-    }
-
     onChallengeSubmit(newChallengeSubmission);
   };
 

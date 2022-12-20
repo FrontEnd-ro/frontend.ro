@@ -29,6 +29,7 @@ export default ({
       <FullScreenIDE
         onChallengeSubmit={onChallengeSubmit}
         challengeSubmission={challengeSubmission}
+        fileNamesToIgnoreFromExplorer={['TestingService.tsx']}
       />
     </>
   );

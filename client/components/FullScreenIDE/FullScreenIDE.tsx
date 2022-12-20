@@ -46,9 +46,11 @@ const _FullScreenIDE = ({
   challengeSubmission,
   isLoggedIn,
   onChallengeSubmit,
+  fileNamesToIgnoreFromExplorer = [],
 }: ConnectedProps<typeof connector> & {
   challengeSubmission: ChallengeSubmissionI;
   onChallengeSubmit: (task: ChallengeSubmissionI) => void;
+  fileNamesToIgnoreFromExplorer?: string[];
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };
@@ -392,7 +394,12 @@ const _FullScreenIDE = ({
                   onFolderRename={renameFolder}
                   onFileDelete={deleteFile}
                   onFolderDelete={deleteFolder}
-                  filesOrFoldersToIgnore={folderStructure.getFilesByName('TestingService.tsx').map((file) => file.key)}
+                  filesOrFoldersToIgnore={
+                    fileNamesToIgnoreFromExplorer
+                      .flatMap((name) => folderStructure
+                        .getFilesByName(name)
+                        .map((file) => file.key))
+                  }
                 />
               </ResizableExplorerContainer>
             )}

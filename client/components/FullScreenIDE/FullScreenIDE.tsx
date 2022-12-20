@@ -382,6 +382,7 @@ const _FullScreenIDE = ({
                 classNameHResizable={styles.HResizable}
               >
                 <EditorExplorer
+                  readOnly
                   className={styles.EditorExplorer}
                   folderStructure={folderStructure}
                   selectedFileKey={selectedFileId}

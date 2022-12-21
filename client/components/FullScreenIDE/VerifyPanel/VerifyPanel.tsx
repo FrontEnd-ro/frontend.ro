@@ -85,7 +85,7 @@ const VerifyPanel = ({
         </>
       )}
       {apiStatus.error !== '' && (
-        <Alert severity="error">
+        <Alert className="mt-8" severity="error">
           {apiStatus.error}
         </Alert>
       )}

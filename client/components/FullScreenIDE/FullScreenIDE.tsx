@@ -288,6 +288,10 @@ const _FullScreenIDE = ({
 
   const resetState = (newChallengeSubmission: ChallengeSubmissionI) => {
     setActivePanel(Panel.INFO);
+    setApiStatus({
+      error: '',
+      loadingType: 'none',
+    });
     setVerificationStatus(undefined);
 
     const newCurrentTaskId = getCurrentTaskId(newChallengeSubmission);
@@ -312,16 +316,15 @@ const _FullScreenIDE = ({
         currentTaskId,
         folderStructureToSave.toJSON(),
       );
+      setApiStatus({
+        error: '',
+        loadingType: 'none',
+      });
     } catch (err) {
       console.error(`${SPAN} Failed to save progress`, err);
       setApiStatus({
         loadingType: 'none',
-        error: (err instanceof Error) ? err.message : 'Nu am putut salva progresul. Încearcă din nou!',
-      });
-    } finally {
-      setApiStatus({
-        ...apiStatus,
-        loadingType: 'none',
+        error: ('message' in err) ? err.message : 'Nu am putut salva progresul. Încearcă din nou!',
       });
     }
   };
@@ -346,12 +349,7 @@ const _FullScreenIDE = ({
       console.error(`${SPAN} Failed to save progress`, err);
       setApiStatus({
         loadingType: 'none',
-        error: (err instanceof Error) ? err.message : 'Nu am putut salva progresul. Încearcă din nou!',
-      });
-    } finally {
-      setApiStatus({
-        ...apiStatus,
-        loadingType: 'none',
+        error: ('message' in err) ? err.message : 'Nu am putut salva progresul. Încearcă din nou!',
       });
     }
   };

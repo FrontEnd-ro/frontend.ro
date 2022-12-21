@@ -97,6 +97,11 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
         return;
       }
 
+      if (task.status?.valid === true) {
+        new ServerError(403, 'Acest task e deja completat cu succes. Nu-l mai poți modifica.').send(res);
+        return;
+      }
+
       task.codeForFilesThatCanBeEdited = code;
       await challengeSubmission.save();
 

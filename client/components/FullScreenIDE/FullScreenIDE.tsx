@@ -80,30 +80,26 @@ const _FullScreenIDE = ({
 
   const taskFolderStructure = (function getTaskFolderStructure() {
     // We need to merge the starting code from the task definition
-    // with the code that the user has wrote for that task (if any).
+    // with the code that the user has wrote for that task (if any)
+    // and all the previous ones.
+
+    const currentTaskIndex = challengeSubmission.tasks.indexOf(currentTask);
+
     const folderStructure = new FolderStructure(JSON.parse(
       currentTask.startingCode,
     ));
-    const folderStructureForEditedFiles = new FolderStructure(JSON.parse(
-      currentTask.codeForFilesThatCanBeEdited,
-    ));
+    for (let i = 0; i <= currentTaskIndex; i += 1) {
+      const previousTask = challengeSubmission.tasks[i];
+      const folderStructureForPreviousTask = new FolderStructure(JSON.parse(
+        previousTask.codeForFilesThatCanBeEdited,
+      ));
 
-    currentTask.filesThatCanBeEdited.forEach((fileId) => {
-      const { file } = folderStructure.getFile(fileId);
-      if (file === null) {
-        return;
-      }
-
-      const { file: editedFile } = folderStructureForEditedFiles.getFile(fileId);
-      if (editedFile === null) {
-        return;
-      }
-
-      folderStructure.setContent(
-        file.key,
-        editedFile.content,
-      );
-    });
+      folderStructureForPreviousTask.getFilesWithPath().forEach((file) => {
+        if (folderStructure.hasFile(file.key)) {
+          folderStructure.setContent(file.key, file.content);
+        }
+      });
+    }
 
     return folderStructure;
   }());

@@ -130,12 +130,19 @@ const _BasicEditor = ({
     // The internal details should not be handled from here.
     // Like a Facade pattern, we should interact with the service,
     // not directly. But for now, it's ok.
-    const newModel = MonacoService.get().editor.createModel(
-      file.content,
-      language,
-      MonacoService.get().Uri.parse(`file://${file.path}/${file.name}`),
-    );
-    editor.current.setModel(newModel);
+    const modelUri = MonacoService.get().Uri.parse(`file://${file.path}/${file.name}`);
+    const existingModel = MonacoService.get().editor.getModel(modelUri);
+    if (existingModel !== null) {
+      existingModel.setValue(file.content);
+      editor.current.setModel(existingModel);
+    } else {
+      const newModel = MonacoService.get().editor.createModel(
+        file.content,
+        language,
+        modelUri,
+      );
+      editor.current.setModel(newModel);
+    }
   };
 
   useResizeObserver(resizeTarget, () => editor.current.layout());

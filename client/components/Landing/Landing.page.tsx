@@ -54,7 +54,7 @@ function LandingPage({
           isLoggedIn={isLoggedIn}
           htmlTutorialProgress={htmlTutorialProgress}
         />
-        {/* <LandingChristmasAdvent className={styles.LandingChristmasAdvent} /> */}
+        <LandingChristmasAdvent className={styles.LandingChristmasAdvent} />
         <LandingHTML className={styles.LandingHTML} />
         <LandingTidbits tidbits={tidbits} />
         <LandingResources className={styles.LandingResources} />

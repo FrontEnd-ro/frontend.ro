@@ -1,28 +1,31 @@
 import { useEffect, useRef, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAward, faFile, faList, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
+import {
+  faAward, faFile, faList, IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
 
 import Header from '../Header';
 import IDEPanel from './IDEPanel/IDEPanel';
 import { Theme } from '../Editor/themes';
 import { RootState } from '~/redux/root.reducer';
-import styles from './FullScreenIDE.module.scss';
-import { useKeyDown, useResizeObserver } from '~/services/Hooks';
-import HResizable from '../Editor/HResizable/HResizable';
 import { BasicEditor } from '../Editor/BasicEditor';
-import EditorExplorer from '../Editor/EditorExplorer/EditorExplorer';
-import FolderStructure, { useFolderStructure } from '~/../shared/utils/FolderStructure';
-import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
-import ControlPanel from './ControlPanel/ControlPanel';
 import VerifyPanel from './VerifyPanel/VerifyPanel';
-import { useTypeDefinitions, withAutomaticVerification } from '~/services/api/Challenge.service';
+import ControlPanel from './ControlPanel/ControlPanel';
+import HResizable from '../Editor/HResizable/HResizable';
+import { useKeyDown, useResizeObserver } from '~/services/Hooks';
 import Sandpack, { toSandPackFiles } from '../Sandpack/Sandpack';
+import EditorExplorer from '../Editor/EditorExplorer/EditorExplorer';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
 import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
-import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
 import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.service';
+import FolderStructure, { useFolderStructure } from '~/../shared/utils/FolderStructure';
+import { useTypeDefinitions, withAutomaticVerification } from '~/services/api/Challenge.service';
+import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
+import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
+
+import styles from './FullScreenIDE.module.scss';
 
 enum Panel {
   EDITOR = 'editor',
@@ -150,7 +153,7 @@ const _FullScreenIDE = ({
 
   const [sandpackFiles, setSandpackFiles] = useState(toSandPackFiles(folderStructure));
   useEffect(() => {
-    setSandpackFiles(toSandPackFiles(folderStructure))
+    setSandpackFiles(toSandPackFiles(folderStructure));
   }, [folderStructure]);
 
   const extraMonacoLibs = [
@@ -295,9 +298,6 @@ const _FullScreenIDE = ({
     setVerificationStatus(undefined);
 
     const newCurrentTaskId = getCurrentTaskId(newChallengeSubmission);
-    const newCurrentTask = newChallengeSubmission
-      .tasks
-      .find((task) => task.taskId === newCurrentTaskId);
 
     setCurrentTaskId(newCurrentTaskId);
     onChallengeSubmit(newChallengeSubmission);

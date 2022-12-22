@@ -21,6 +21,7 @@ const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
 
   return (
     <section className={`${className} relative`}>
+      <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap" rel="stylesheet" /> 
       <div className={styles.LandingChristmasAdvent}>
         <div>
           <div className="d-inline-block relative">

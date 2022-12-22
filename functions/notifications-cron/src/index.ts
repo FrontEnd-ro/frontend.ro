@@ -77,7 +77,15 @@ async function processUser(user: UserI, dryRun: boolean) {
     const tutorialSubmissions = submissions.filter((submission) => {
       return tutorialLessonIds.includes(submission.exercise.lesson);
     });
-    console.log(`${SPAN} User has ${submissions.length} submissions`);
+    console.log(`${SPAN} User has ${tutorialSubmissions.length} submissions`);
+
+    const awaitingReviewTutorialSubmissions = tutorialSubmissions.filter(
+      (submission) => submission.status === SubmissionStatus.AWAITING_REVIEW,
+    );
+    if (awaitingReviewTutorialSubmissions.length > 0) {
+      console.log(`${SPAN} User has some submissions that are awaiting review. Skipping.`);
+      return;
+    }
 
     const inProgressTutorialSubmissions = tutorialSubmissions.filter(
       (submission) => submission.status === SubmissionStatus.IN_PROGRESS,

@@ -13,6 +13,10 @@ const SubscribersSchema = new mongoose.Schema({
 const Subscriber = mongoose.models?.Subscriber || mongoose.model('Subscriber', SubscribersSchema);
 
 class SubscriberModel {
+  static listAll() {
+    return Subscriber.find({});
+  }
+
   static async exists(email) {
     const subscriber = await Subscriber.findOne({ email });
 

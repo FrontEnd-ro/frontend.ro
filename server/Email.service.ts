@@ -1,4 +1,4 @@
-import { ServerClient } from 'postmark';
+import { ServerClient, TemplatedMessage } from 'postmark';
 import appConfig from './config';
 
 const client = new ServerClient(appConfig.EMAIL.token);
@@ -8,6 +8,7 @@ export enum EMAIL_TEMPLATE {
   REGISTER = 'register',
   PASSWORD_RESET = 'password-reset',
   AWARDED_CERTIFICATION = 'awarded-certification',
+  CHRISTMAS_ADVENT_2022 = 'christmas-advent-2022',
 
   // To be deprecated and replaced with generic event templates
   GIT_INCEPATORI_INFO = 'git-incepatori-info',
@@ -33,13 +34,15 @@ export enum EMAIL_TEMPLATE {
 async function sendTemplateWithAlias(
   email: string,
   TemplateAlias: EMAIL_TEMPLATE,
-  TemplateModel: Record<string, any>
+  TemplateModel: Record<string, any>,
+  MessageStream?: string,
 ) {
-  const options = {
+  const options: TemplatedMessage = {
     To: appConfig.APP.env === 'production' ? email : 'pava@frontend.ro',
     From: 'hello@frontend.ro',
     TemplateAlias,
     TemplateModel,
+    MessageStream,
   }
 
   try {
@@ -50,7 +53,7 @@ async function sendTemplateWithAlias(
       return {
         success: false,
         ErrorCode: response.ErrorCode,
-        Message: response.Message
+        Message: response.Message,
       };
     }
 

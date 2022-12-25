@@ -1,0 +1,10 @@
+{
+  "Name": "Christmas Advent 2022",
+  "Alias": "christmas-advent-2022",
+  "Subject": "Cadoul nostru de Crăciun: Tutorial ThreeJS și React",
+  "TemplateType": "Standard",
+  "LayoutTemplate": "basic",
+  "TestRenderModel": {
+    "name": "Bob"
+  }
+}

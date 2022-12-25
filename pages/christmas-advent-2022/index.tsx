@@ -36,9 +36,9 @@ const ChristmasAdvent2022 = ({
   return (
     <>
       <SEOTags
-        title="Full Screen Editor | TODO"
-        url="TODO"
-        description="TODO"
+        title="Christmas Advent 2022 | FrontEnd.ro"
+        url="https://FrontEnd.ro/christmas-advent-2022"
+        description="Învață ThreeJS și React printr-un tutorial interactiv în care trebuie să repari fabrica de jucării a lui Moș Crăciun."
       />
       <FullScreenIDE
         certification={certification}

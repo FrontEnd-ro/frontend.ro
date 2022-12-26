@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
+import { noop } from '~/services/Utils';
+import { UserState } from '~/redux/user/types';
+import { UserRole } from '../shared/types/user.types';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
 import LoadNotifications from '~/components/LoadNotifications/LoadNotifications';
 import { ApplicationConfig, loadConfig } from '~/redux/application-config.reducer';
@@ -20,7 +23,7 @@ export default function MyApp({ Component, pageProps }: any) {
     applicationConfig: pageProps._applicationConfig,
   });
 
-  useFathom('MVWDOLLT');
+  useFathom('MVWDOLLT', pageProps._serverUser);
   useApplicationConfig((config) => store.dispatch(loadConfig(config)));
 
   return (
@@ -142,8 +145,9 @@ function useApplicationConfig(callback: (config: ApplicationConfig) => void) {
   }, []);
 }
 
-function useFathom(trackingCode: string) {
+function useFathom(trackingCode: string, userInfo?: UserState['info']) {
   // https://vercel.com/guides/deploying-nextjs-using-fathom-analytics-with-vercel
+  const SPAN = `[useFathom, trackingCode=${trackingCode}, userInfo=${userInfo}]`;
   const router = useRouter();
 
   useEffect(() => {
@@ -163,4 +167,16 @@ function useFathom(trackingCode: string) {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
     };
   }, [trackingCode]);
+
+  useEffect(() => {
+    const isAdminRole = userInfo?.role === UserRole.ADMIN;
+
+    if (isAdminRole) {
+      Fathom.blockTrackingForMe();
+      console.info(`${SPAN} Don't initialize LogRocket for admin users.`);
+      return;
+    }
+
+    Fathom.enableTrackingForMe();
+  }, [userInfo?.role]);
 }

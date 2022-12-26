@@ -151,6 +151,13 @@ function useFathom(trackingCode: string, userInfo?: UserState['info']) {
   const router = useRouter();
 
   useEffect(() => {
+    const isAdminRole = userInfo?.role === UserRole.ADMIN;
+
+    if (isAdminRole) {
+      console.info(`${SPAN} Don't initialize Fathom for admin users.`);
+      return noop;
+    }
+
     Fathom.load(trackingCode, {
       includedDomains: [
         'frontend.ro',
@@ -166,17 +173,5 @@ function useFathom(trackingCode: string, userInfo?: UserState['info']) {
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
     };
-  }, [trackingCode]);
-
-  useEffect(() => {
-    const isAdminRole = userInfo?.role === UserRole.ADMIN;
-
-    if (isAdminRole) {
-      Fathom.blockTrackingForMe();
-      console.info(`${SPAN} Don't initialize LogRocket for admin users.`);
-      return;
-    }
-
-    Fathom.enableTrackingForMe();
-  }, [userInfo?.role]);
+  }, [trackingCode, userInfo?.role]);
 }

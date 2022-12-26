@@ -88,6 +88,7 @@
     "dompurify": "^2.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "fathom-client": "^3.5.0",
     "file-saver": "^2.0.5",
     "file-system-utils": "^0.0.1",
     "highlight.js": "^11.4.0",

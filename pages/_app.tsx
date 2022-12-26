@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
+import * as Fathom from 'fathom-client';
+import { useRouter } from 'next/router';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
 import LoadNotifications from '~/components/LoadNotifications/LoadNotifications';
 import { ApplicationConfig, loadConfig } from '~/redux/application-config.reducer';
@@ -18,6 +20,7 @@ export default function MyApp({ Component, pageProps }: any) {
     applicationConfig: pageProps._applicationConfig,
   });
 
+  useFathom('MVWDOLLT');
   useApplicationConfig((config) => store.dispatch(loadConfig(config)));
 
   return (
@@ -137,4 +140,27 @@ function useApplicationConfig(callback: (config: ApplicationConfig) => void) {
     fetchApplicationConfig();
     setInterval(fetchApplicationConfig, 30 * 60 * 1000); // 30 mins
   }, []);
+}
+
+function useFathom(trackingCode: string) {
+  // https://vercel.com/guides/deploying-nextjs-using-fathom-analytics-with-vercel
+  const router = useRouter();
+
+  useEffect(() => {
+    Fathom.load(trackingCode, {
+      includedDomains: [
+        'frontend.ro',
+        'www.frontend.ro',
+      ],
+    });
+
+    function onRouteChangeComplete() {
+      Fathom.trackPageview();
+    }
+
+    router.events.on('routeChangeComplete', onRouteChangeComplete);
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete);
+    };
+  }, [trackingCode]);
 }

@@ -1,9 +1,6 @@
 @import '../../../styles/variables';
 
 .IDEPanel {
-  --text-color: var(--silver);
-  --background-highlight: var(--darker-white);
-  
   padding: 1em 0.5em;
   color: var(--text-color);
   background: var(--background-color);
@@ -24,6 +21,7 @@
 
   &:hover,
   &.active {
+    color: var(--white);
     background: var(--background-highlight);
   }
 }

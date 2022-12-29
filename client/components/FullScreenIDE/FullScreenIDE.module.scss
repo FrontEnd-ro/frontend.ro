@@ -13,6 +13,11 @@
   --background-highlight: #232729;
 }
 
+.actions-panel {
+  --text-color: var(--silver);
+  --background-highlight: var(--blue);
+}
+
 .main-panel {
   --text-color: var(--darker-white);
 

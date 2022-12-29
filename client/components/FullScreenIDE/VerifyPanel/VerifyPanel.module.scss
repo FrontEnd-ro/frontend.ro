@@ -4,3 +4,8 @@
   padding: 0.5em 1em;
   border: 2px solid rgba(color(red), 0.1);
 }
+
+.button {
+  // This should instead be a `size` prop directly on the Button component
+  font-size: 0.85em;
+}

@@ -8,8 +8,10 @@
 
 .Header,
 .actions-panel,
-.main-panel {
+.main-panel,
+.verify-panel {
   --background-color: #17181a;
+  --text-color: var(--darker-white);
   --background-highlight: #232729;
 }
 
@@ -31,6 +33,11 @@
   z-index: 99;
   --text-color: var(--darker-white);
   border-top: 1px solid rgb(52, 52, 52);
+}
+
+.verify-panel {
+  left: 0;
+  bottom: 0;
 }
 
 .ControlPanel { 

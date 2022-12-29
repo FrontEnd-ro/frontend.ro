@@ -30,7 +30,6 @@ import styles from './FullScreenIDE.module.scss';
 enum Panel {
   EDITOR = 'editor',
   INFO = 'info',
-  VERIFY = 'verify',
   CERTIFICATION = 'certification',
 }
 
@@ -125,6 +124,7 @@ const _FullScreenIDE = ({
   const [isResizing, setIsResizing] = useState(false);
   const [didSandpackLoad, setDidSandpackLoad] = useState(false);
   const [activePanel, setActivePanel] = useState<Panel>(Panel.EDITOR);
+  const [showVerificationOverlay, setShowVerificationOverlay] = useState(true);
 
   // Whether or not to show the Editor File/Folder Explorer
   const [showEditorExplorer, setShowEditorExplorer] = useState(true);
@@ -183,14 +183,6 @@ const _FullScreenIDE = ({
     type: Panel.INFO,
     icon: faList,
     onClick: () => toggleActivePanel(Panel.INFO),
-  }, {
-    title: 'Verify Solution',
-    type: Panel.VERIFY,
-    icon: faPlayCircle,
-    onClick: () => toggleActivePanel(Panel.VERIFY),
-
-    // If we already finished this Challenge let's hide this panel.
-    disabled: certification !== undefined,
   }, {
     title: 'Certification',
     type: Panel.CERTIFICATION,
@@ -292,6 +284,7 @@ const _FullScreenIDE = ({
       loadingType: 'none',
     });
     setVerificationStatus(undefined);
+    setShowVerificationOverlay(true);
 
     const newCurrentTaskId = getCurrentTaskId(newChallengeSubmission);
 
@@ -362,63 +355,87 @@ const _FullScreenIDE = ({
     <>
       <Header className={styles.Header} theme="dark" withNavMenu />
       <section className={`${styles.FullScreenIDE} ${isResizing ? styles.resizing : ''} d-flex overflow-hidden`}>
-        <IDEPanel className={styles['actions-panel']} vertical>
-          {navItems.filter((item) => item.disabled !== true).map((item) => (
-            <IDEPanel.Button
-              key={item.type}
-              title={item.title}
-              onClick={item.onClick}
-              active={activePanel === item.type}
-            >
-              <FontAwesomeIcon icon={item.icon} />
-            </IDEPanel.Button>
-          ))}
+        <IDEPanel className={`${styles['actions-panel']} justify-content-between`} vertical>
+          <div className="d-flex flex-column">
+            {navItems.filter((item) => item.disabled !== true).map((item) => (
+              <IDEPanel.Button
+                key={item.type}
+                title={item.title}
+                onClick={item.onClick}
+                active={activePanel === item.type}
+              >
+                <FontAwesomeIcon icon={item.icon} />
+              </IDEPanel.Button>
+            ))}
+          </div>
+          <IDEPanel.Button
+            title="Verifică Soluția"
+            active={showVerificationOverlay}
+            onClick={() => setShowVerificationOverlay(!showVerificationOverlay)}
+          >
+            <FontAwesomeIcon icon={faPlayCircle} />
+          </IDEPanel.Button>
         </IDEPanel>
         <div ref={pageRef} className="h-100 d-flex w-100 relative">
-          <div className="d-flex">
-            {showEditorExplorer && (
-              <ResizableExplorerContainer
-                onResize={({ dx }) => onResize({ explorerDx: dx })}
-                containerRef={editorExplorerContainer}
-                initialWidth={EXPLORER_WIDTH.initial}
-                classNameHResizable={styles.HResizable}
-              >
-                <EditorExplorer
-                  readOnly
-                  className={styles.EditorExplorer}
-                  folderStructure={folderStructure}
-                  selectedFileKey={selectedFileId}
-                  onFileAdd={addFile}
-                  onFolderAdd={addFolder}
-                  onSelect={selectFile}
-                  onFileRename={renameFile}
-                  onFolderRename={renameFolder}
-                  onFileDelete={deleteFile}
-                  onFolderDelete={deleteFolder}
-                  filesOrFoldersToIgnore={
-                    fileNamesToIgnoreFromExplorer
-                      .flatMap((name) => folderStructure
-                        .getFilesByName(name)
-                        .map((file) => file.key))
-                  }
+          <div className="d-flex flex-column">
+            <div className="d-flex flex-1 overflow-auto">
+              {showEditorExplorer && (
+                <ResizableExplorerContainer
+                  onResize={({ dx }) => onResize({ explorerDx: dx })}
+                  containerRef={editorExplorerContainer}
+                  initialWidth={EXPLORER_WIDTH.initial}
+                  classNameHResizable={styles.HResizable}
+                >
+                  <EditorExplorer
+                    readOnly
+                    className={styles.EditorExplorer}
+                    folderStructure={folderStructure}
+                    selectedFileKey={selectedFileId}
+                    onFileAdd={addFile}
+                    onFolderAdd={addFolder}
+                    onSelect={selectFile}
+                    onFileRename={renameFile}
+                    onFolderRename={renameFolder}
+                    onFileDelete={deleteFile}
+                    onFolderDelete={deleteFolder}
+                    filesOrFoldersToIgnore={
+                      fileNamesToIgnoreFromExplorer
+                        .flatMap((name) => folderStructure
+                          .getFilesByName(name)
+                          .map((file) => file.key))
+                    }
+                  />
+                </ResizableExplorerContainer>
+              )}
+              <div style={{ width: EDITOR_WIDTH.initial }} ref={editorRef}>
+                <BasicEditor
+                  onChange={onCodeChange}
+                  readOnly={currentTask.filesThatCanBeEdited?.length > 0
+                    && !currentTask.filesThatCanBeEdited.includes(selectedFileId)}
+                  readOnlyTooltipMessage={`Pentru acest task poti edita doar ${fileNamesThatCanBeEdited.length > 1 ? 'fisierele' : 'fisierul'} ${fileNamesThatCanBeEdited.join(',')}.`}
+                  className={styles.BasicEditor}
+                  resizeTarget={editorRef.current}
+                  theme={Theme.TOMORROW_NIGHT}
+                  typeDefinitions={extraMonacoLibs}
+                  file={selectedFileId
+                    ? folderStructure.getFileWithPath(selectedFileId)?.file
+                    : undefined}
                 />
-              </ResizableExplorerContainer>
-            )}
-            <div style={{ width: EDITOR_WIDTH.initial }} ref={editorRef}>
-              <BasicEditor
-                onChange={onCodeChange}
-                readOnly={currentTask.filesThatCanBeEdited?.length > 0
-                  && !currentTask.filesThatCanBeEdited.includes(selectedFileId)}
-                readOnlyTooltipMessage={`Pentru acest task poti edita doar ${fileNamesThatCanBeEdited.length > 1 ? 'fisierele' : 'fisierul'} ${fileNamesThatCanBeEdited.join(',')}.`}
-                className={styles.BasicEditor}
-                resizeTarget={editorRef.current}
-                theme={Theme.TOMORROW_NIGHT}
-                typeDefinitions={extraMonacoLibs}
-                file={selectedFileId
-                  ? folderStructure.getFileWithPath(selectedFileId)?.file
-                  : undefined}
-              />
+              </div>
             </div>
+            {showVerificationOverlay && (
+              <IDEPanel className={`${styles['verify-panel']} p-3 w-100`}>
+                <VerifyPanel
+                  isLoggedIn={isLoggedIn}
+                  apiStatus={apiStatus}
+                  onNextChallenge={onNextChallenge}
+                  verificationStatus={verificationStatus}
+                  onVerify={onVerify}
+                  didFinishChallange={certification !== undefined}
+                  onSaveProgress={onSaveProgress}
+                />
+              </IDEPanel>
+            )}
           </div>
           <HResizable
             onResize={({ dx }) => onResize({ editorDx: dx })}
@@ -443,18 +460,6 @@ const _FullScreenIDE = ({
                 challenge={challengeSubmission}
                 currentTaskId={currentTaskId}
                 className={styles.ControlPanel}
-              />
-            </IDEPanel>
-          )}
-          {activePanel === Panel.VERIFY && (
-            <IDEPanel className={`${styles['main-panel']} pin-full`}>
-              <VerifyPanel
-                isLoggedIn={isLoggedIn}
-                apiStatus={apiStatus}
-                onNextChallenge={onNextChallenge}
-                verificationStatus={verificationStatus}
-                onVerify={onVerify}
-                onSaveProgress={onSaveProgress}
               />
             </IDEPanel>
           )}

@@ -13,6 +13,7 @@ interface Props {
   onSaveProgress: () => void;
   onNextChallenge: () => void;
   verificationStatus?: VerificationStatus;
+  didFinishChallange?: boolean;
 }
 
 const VerifyPanel = ({
@@ -22,27 +23,29 @@ const VerifyPanel = ({
   onSaveProgress,
   onNextChallenge,
   verificationStatus,
+  didFinishChallange = false,
 }: Props) => {
   const getActionButton = () => {
-    if (verificationStatus === undefined) {
+    if (verificationStatus === undefined || verificationStatus.valid === false) {
       return (
-        <Button onClick={() => onVerify()} loading={apiStatus.loadingType === 'verifying'} variant="blue">
+        <Button
+          variant="blue"
+          onClick={onVerify}
+          className={styles.button}
+          loading={apiStatus.loadingType === 'verifying'}
+        >
           Verifică soluția
         </Button>
       );
     }
 
-    const { valid } = verificationStatus;
-    if (!valid) {
-      return (
-        <Button className="mt-8" onClick={() => onVerify()} loading={apiStatus.loadingType === 'verifying'} variant="light">
-          Verifică încă o dată soluția
-        </Button>
-      );
-    }
-
     return (
-      <Button className="mt-4" onClick={() => onNextChallenge()} loading={apiStatus.loadingType === 'submitting'} variant="success">
+      <Button
+        variant="success"
+        onClick={onNextChallenge}
+        className={styles.button}
+        loading={apiStatus.loadingType === 'submitting'}
+      >
         Continuă cu următorul task
       </Button>
     );
@@ -53,37 +56,38 @@ const VerifyPanel = ({
   if (!isLoggedIn) {
     return (
       <section className="w-100">
-        {!isLoggedIn && (
-          <Alert severity="info" className="mb-8">
-            Trebuie să te autentifici pentru a trimite o soluție.
-          </Alert>
-        )}
+        <Alert severity="info">
+          Trebuie să te autentifici pentru a trimite o soluție.
+        </Alert>
+      </section>
+    );
+  }
+
+  if (didFinishChallange) {
+    return (
+      <section className="w-100">
+        <Alert severity="success">
+          Felicitări! Ai terminat cu succes acest tutorial.
+        </Alert>
       </section>
     );
   }
 
   return (
     <section className="w-100">
-      <h1 className="mt-0"> Verify Solution </h1>
-      {verificationStatus === undefined ? (
-        <p>
-          Dacă crezi că souția ta e corectă, apasă acest buton și noi
-          o vom valida automat.
-        </p>
-      ) : <VerificationDetails verificationStatus={verificationStatus} />}
+      {verificationStatus !== undefined && (
+        <VerificationDetails className="mb-8" verificationStatus={verificationStatus} />
+      )}
       {ActionButton}
       {verificationStatus?.valid !== true && (
-        <>
-          <hr className="mt-8" />
-          <p>
-            Dacă vrei să salvezi progresul și să continui rezolvarea mai târziu,
-            apasă pe butonul de mai jos.
-          </p>
-          <Button onClick={() => onSaveProgress()} variant="light" loading={apiStatus.loadingType === 'saving'}>
-            Salvează Progresul
-          </Button>
-
-        </>
+        <Button
+          variant="light"
+          onClick={onSaveProgress}
+          className={`${styles.button} ml-2`}
+          loading={apiStatus.loadingType === 'saving'}
+        >
+          Salvează Progresul
+        </Button>
       )}
       {apiStatus.error !== '' && (
         <Alert className="mt-8" severity="error">
@@ -106,7 +110,7 @@ const VerificationDetails = ({
 
   if (valid === true) {
     return (
-      <Alert severity="success">
+      <Alert className={className} severity="success">
         Felicitări! Soluția ta e corectă!
       </Alert>
     );

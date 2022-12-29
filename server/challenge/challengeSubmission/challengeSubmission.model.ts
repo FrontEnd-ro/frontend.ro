@@ -17,7 +17,7 @@ const VerificationStatusSchema = new mongoose.Schema<VerificationStatus>({
 });
 
 const ChallengeSubmissionTaskSchema = new mongoose.Schema<ChallengeSubmissionTaskI>({
-  taskId: { type: String, required: true, unique: true },
+  taskId: { type: String, required: true },
   codeForFilesThatCanBeEdited: {type: String, required: true },
   status: {type: VerificationStatusSchema, required: false },
   createdAt: { type: Date, required: false },
@@ -30,7 +30,7 @@ const ChallengeSubmissionTaskSchema = new mongoose.Schema<ChallengeSubmissionTas
 });
 
 const ChallengeSubmissionSchema = new mongoose.Schema<ChallengeSubmissionI>({
-  challengeId: { type: String, required: true, unique: true },
+  challengeId: { type: String, required: true },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   tasks: [{ type: ChallengeSubmissionTaskSchema, required: true }],
 });

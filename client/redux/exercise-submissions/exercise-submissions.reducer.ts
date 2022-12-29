@@ -1,7 +1,7 @@
 import { SubmissionState } from './types';
 import { EXERCISE_SUBMISSIONS } from './exercise-submissions.actions';
 
-const initialState: SubmissionState = {
+export const initialState: SubmissionState = {
   submissions: undefined,
   search: '',
   page: 0,

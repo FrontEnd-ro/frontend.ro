@@ -4,13 +4,13 @@ import { SUBMISSION_ACTION_TYPES, TUTORIAL_ACTION_TYPES } from './progress.actio
 
 type TutorialId = string;
 
-interface ProgressState {
+export interface ProgressState {
   tutorials: Record<TutorialId, TutorialProgressI>;
   submissions: Record<TutorialId, Submission[]>;
 }
 
 // Storing progress state from the perspective of the User
-const initialState: ProgressState = {
+export const initialState: ProgressState = {
   tutorials: {},
   submissions: {},
 };

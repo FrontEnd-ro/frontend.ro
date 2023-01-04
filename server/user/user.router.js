@@ -140,7 +140,7 @@ userRouter.post('/register', async function register(req, res) {
     email,
     username,
     password: hashedPassword,
-    avatar: `https://joeschmoe.io/api/v1/${username}`,
+    avatar: `${appConfig.APP.endpoint}/auth/avatar/${username}`,
   });
 
   // Create and set JTW as cookie
@@ -228,7 +228,7 @@ userRouter.post('/username', [
     try {
       const updatedUser = await updateUserFields({ _id: user._id, username: user.username, password }, {
         username,
-        avatar: `https://joeschmoe.io/api/v1/${username}`
+        avatar: `${appConfig.APP.endpoint}/auth/avatar/${username}`,
       });
       res.json(UserModel.sanitize(updatedUser));
     } catch (err) {

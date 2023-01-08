@@ -89,18 +89,35 @@ class SubmissionModel {
         },
       })
       .populate('exercise')
-      .sort('-submittedAt');
+      .sort('-updatedAt');
+
+    // Sort first the `AWAITING_REVIEW` status
+    // TODO: find a way to do this at the DB level.
+    // After a brief search online I couldn't find anything
+    // that worked "out-of-the-box". My guess is that it's
+    // not so trivial, but it needs further research.
+    const sortedByStatus = all.sort((s1, s2) => {
+      if (s1.status === SubmissionStatus.AWAITING_REVIEW) {
+        return -1;
+      }
+
+      if (s2.status === SubmissionStatus.AWAITING_REVIEW) {
+        return 1;
+      }
+
+      return 0;
+    });
 
     const results = [];
     let index = 0;
 
     /**
      * FIXME
-     * Shurely that has to be a better way to do pagination with an offset
+     * Surely that has to be a better way to do pagination with an offset
      * than this 👇
      */
     // eslint-disable-next-line no-restricted-syntax
-    for (const submission of all) {
+    for (const submission of sortedByStatus) {
       if (submission.user) {
         if (index >= page * PAGE_SIZE) {
           results.push(submission);

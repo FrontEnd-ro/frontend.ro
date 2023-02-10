@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.FeedbackZone {
+  border-width: 3px 0;
+  border-style: solid;
+
+  &--improvement {
+    border-color: color(red);
+  }
+
+  &--opinion {
+    border-color: color(yellow);
+  }
+
+  &--praise {
+    border-color: color(green);
+  }
+
+  .button {
+    font-size: 0.85em;
+  }
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+}

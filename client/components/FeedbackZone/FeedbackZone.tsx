@@ -14,11 +14,11 @@ import styles from './FeedbackZone.module.scss';
  */
 
 interface Props {
-  author: {
+  author?: {
     name?: string;
     avatar?: string;
   }
-  timestamp: number;
+  timestamp?: number;
   type: FeedbackType;
   // This is the actual feedback in Markdown format.
   markdown: string;
@@ -35,18 +35,32 @@ const FeedbackZone = ({
   loading = false,
 }: Props) => {
   return (
-    <section className={`${styles.FeedbackZone} ${styles[`FeedbackZone--${type}`]} bg-darker-white p-3`}>
+    <section className={`
+      bg-darker-white
+      ${styles.FeedbackZone}
+      ${styles[`FeedbackZone--${type}`]}
+      ${(author !== undefined || timestamp !== undefined) ? 'pt-3' : ''
+      }`}
+    >
       <div className="d-flex gap-x-4 mb-4">
-        {author?.avatar !== undefined ? (
-          <img src={author.avatar} alt={author.name ?? 'Unknown'} className={styles.avatar} />
-        ) : (
-          <PlaceholderAvatar />
+        {author !== undefined && (
+          <>
+            {author?.avatar !== undefined ? (
+              <img src={author.avatar} alt={author.name ?? 'Unknown'} className={styles.avatar} />
+            ) : (
+              <PlaceholderAvatar />
+            )}
+          </>
         )}
         <div>
-          <p className="m-0">{author.name ?? 'Unknown author'}</p>
-          <time className="text-grey" dateTime={format(timestamp, 'yyyy-MM-dd')}>
-            {timeAgo(new Date(timestamp))}
-          </time>
+          {author !== undefined && (
+            <p className="m-0">{author?.name ?? 'Unknown author'}</p>
+          )}
+          {timestamp !== undefined && (
+            <time className="text-grey" dateTime={format(timestamp, 'yyyy-MM-dd')}>
+              {timeAgo(new Date(timestamp))}
+            </time>
+          )}
         </div>
       </div>
       <Markdown

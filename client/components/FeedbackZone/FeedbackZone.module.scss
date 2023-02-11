@@ -3,6 +3,9 @@
 .FeedbackZone {
   border-width: 3px 0;
   border-style: solid;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  padding-bottom: 0.75em;
 
   &--improvement {
     border-color: color(red);

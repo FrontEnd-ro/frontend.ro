@@ -6,7 +6,7 @@ import styles from '../Editor.module.scss';
 import { extractExtension } from '~/services/utils/FileUtils';
 import { noop } from '~/services/Utils';
 import { ExerciseFile } from '~/../shared/utils/FolderStructure';
-import { useResizeObserver } from '~/services/Hooks';
+import { useResizeObserver, useViewZones } from '~/services/Hooks';
 
 export interface BasicEditorProps {
   className?: string,
@@ -26,6 +26,14 @@ export interface BasicEditorProps {
   // > path: path to where is this file or package found. Example:
   //   node_modules/@types/react/index.d.ts
   typeDefinitions?: { content: string; path: string }[];
+
+  // Used to render custom components inside the Editor
+  viewZones?: {
+    id: string;
+    afterLineNumber: number;
+    heightInPx: number;
+    Component: React.ReactElement;
+  }[];
 }
 
 const _BasicEditor = ({
@@ -37,6 +45,7 @@ const _BasicEditor = ({
   theme = Theme.VS,
   typeDefinitions = [],
   readOnlyTooltipMessage,
+  viewZones = [],
 }: BasicEditorProps) => {
   // This is where we will mount the Monaco Editor
   const editorRootRef = useRef<HTMLDivElement | null>(null);
@@ -115,7 +124,9 @@ const _BasicEditor = ({
     if (file !== undefined && editor.current !== null) {
       updateContent();
     }
-  }, [file?.key, !!editor.current]);
+  }, [file?.key, file?.name, !!editor.current]);
+
+  useViewZones(editor.current, viewZones);
 
   const updateContent = () => {
     const extension = extractExtension(file.name);

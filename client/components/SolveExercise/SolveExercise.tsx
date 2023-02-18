@@ -15,7 +15,7 @@ import StatusBanner from './StatusBanner/StatusBanner';
 import SubmissionService from '~/services/api/Submission.service';
 import { UserState, LessonExercise } from '~/redux/user/types';
 import {
-  SubmissionStatus, SubmissionVersionI, WIPSanitiedSubmission,
+  SubmissionStatus, SubmissionVersionI, WIPSanitiedSubmission, FeedbackI,
 } from '~/../shared/types/submission.types';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -24,13 +24,12 @@ import HowToResolveFeedbackBanner from './HowToResolveFeedbackBanner/HowToResolv
 
 import styles from './SolveExercise.module.scss';
 import { getLessonById } from '~/services/DataModel';
-import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
-import Feedbacks from '../Editor/Feedbacks';
 import Button from '../Button';
 import SolveExerciseSkeleton from './SolveExercise.skeleton';
 import FolderStructure from '~/../shared/utils/FolderStructure';
 import AsideNav from './AsideNav/AsideNav';
 
+import IDE from '../Editor/IDE/IDE';
 import { HTML_TUTORIAL_ID, HTML_TUTORIAL_NAME } from '~/services/Constants';
 import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
 import RoutingUtils from '~/services/utils/Routing.utils';
@@ -49,11 +48,7 @@ interface Submission {
   code: string;
   assignee: UserState['info'];
   status: SubmissionStatus;
-  feedbacks: {
-    _id: string;
-    type: string;
-    body: string;
-  }[]
+  feedbacks: FeedbackI[]
 }
 
 enum AutoSave {
@@ -71,7 +66,6 @@ function SolveExercise({
   dispatch,
 }: ConnectedProps<typeof connector> & Props) {
   const router = useRouter();
-  const solutionRef = useRef(null);
   const [submission, setSubmission] = useState<Submission>(null);
   const [versions, setVersions] = useState<SubmissionVersionI[]>([]);
   const [fetchError, setFetchError] = useState(false);
@@ -92,16 +86,18 @@ function SolveExercise({
     return sub.exercise._id === submission?.exercise?._id;
   });
 
-  const folderStructure = React.useMemo(() => {
-    if (!submission) {
-      return null;
+  let [folderStructure, setFolderStructure] = useState<FolderStructure | null>(null);
+  useEffect(() => {
+    if (submission !== null) {
+      setFolderStructure(new FolderStructure({
+        ...JSON.parse(submission.code || submission.exercise.example),
+        key: submission.exercise._id,
+      }));
     }
-
-    return JSON.parse(submission.code || submission.exercise.example);
-  }, [submission]);
+  }, [submission?.exercise?._id, submission?.code, submission?.exercise?.example]);
 
   const autoSaveSolution = async (code) => {
-    if (!code || !isLoggedIn || !tutorials.includes(submission.exercise.type)) {
+    if (!code || !isLoggedIn || !tutorials.includes(submission?.exercise?.type)) {
       // Do not save empty editors or if the user
       // is not logged in or if this tutorial hasn't been started
       return;
@@ -135,7 +131,7 @@ function SolveExercise({
 
   const debouncedAutoSaveRef = useRef(debounce(noop));
   useEffect(() => {
-    if (!isSubmitting) {
+    if (!isSubmitting && submission !== null) {
       debouncedAutoSaveRef.current = debounce(autoSaveSolution, 2000);
     }
     return () => {
@@ -143,10 +139,10 @@ function SolveExercise({
       // otherwise we'll have a memory leak inside our application.
       debouncedAutoSaveRef.current.cancel();
     };
-  }, [submission, isSubmitting]);
+  }, [submission?.exercise?._id, isSubmitting]);
 
   const submitSolution = async () => {
-    const code = solutionRef.current.getFolderStructure();
+    const code = folderStructure.toJSON();
 
     if (!validateSubmissionCanBeSent(code, submission)) {
       return;
@@ -329,16 +325,31 @@ function SolveExercise({
       });
   };
 
-  // FIXME
-  // Because of https://github.com/FrontEnd-ro/frontend.ro/issues/151
-  // let's also "optionally" send the code so that everything is in sync.
-  const onFeedbackDone = (_id: string, code?: string) => {
-    console.log(_id, submission.feedbacks.filter((f) => f._id !== _id));
+  const onFolderStructureChange = (newFolderStructure: FolderStructure) => {
+    if (newFolderStructure.toJSON() !== folderStructure.toJSON()) {
+      setFolderStructure(FolderStructure.clone(newFolderStructure));
+      setAutoSaved(AutoSave.NONE);
+      debouncedAutoSaveRef.current(newFolderStructure.toJSON());
+    }
+  };
+
+  const onFeedbackDone = async (_id: string) => {
+    const previousSubmission = { ...submission };
+    const newFeedbacks = submission.feedbacks.filter((f) => f._id !== _id);
+
     setSubmission({
       ...submission,
-      code: code ?? submission.code,
-      feedbacks: submission.feedbacks.filter((f) => f._id !== _id),
+      feedbacks: newFeedbacks,
     });
+
+    SubmissionService.markFeedbackAsDone(_id)
+      .catch((err) => {
+        setSubmission(previousSubmission);
+        SweetAlertService.toast({
+          type: 'error',
+          text: err.reason,
+        });
+      });
   };
 
   useEffect(() => {
@@ -364,7 +375,7 @@ function SolveExercise({
   if (fetchError) {
     return (<ExerciseNotFound />);
   }
-  if (!submission) {
+  if (!submission || !folderStructure) {
     return (
       <SolveExerciseSkeleton />
     );
@@ -410,18 +421,12 @@ function SolveExercise({
         <Markdown markdownString={submission.exercise.body} className={styles.bodyMarkdown} />
         <section>
           <h2> Rezolvă exercițiul </h2>
-          <CompleteEditorLazy
-            readOnly={readonly}
-            key={exerciseId}
-            ref={solutionRef}
-            askTooltip={false}
-            onChange={(code) => {
-              setAutoSaved(AutoSave.NONE);
-              debouncedAutoSaveRef.current(code);
-            }}
-            onFeedbackDone={onFeedbackDone}
+          <IDE
             feedbacks={submission.feedbacks}
-            folderStructure={folderStructure}
+            onFeedbackDone={onFeedbackDone}
+            initialFolderStructure={folderStructure}
+            readOnlyTooltipMessage="Ai trimis exercițiul către evaluare, deci nu-l poți edita până nu primești feedback."
+            onFolderStructureChange={readonly ? undefined : onFolderStructureChange}
           />
         </section>
         <section className="my-5 d-flex align-items-center justify-content-between">

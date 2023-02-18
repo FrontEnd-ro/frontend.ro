@@ -1,8 +1,10 @@
 import { NextRouter, useRouter } from 'next/router';
-import { MutableRefObject, useEffect, useState } from 'react';
+import * as MonacoTypes from 'monaco-editor';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { UserState } from '~/redux/user/types';
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 import { noop } from './Utils';
+import MonacoService from './MonacoService';
 
 function useOutsideClick(ref: MutableRefObject<HTMLElement>, handler: (e: MouseEvent) => void) {
   useEffect(() => {
@@ -76,10 +78,10 @@ function withAuthModal(isLoggedIn: boolean, cb: (...any) => any) {
           module.default,
           'Autentifică-te',
           {
-            onSuccess(userInfo: UserState['info']) {
-              SweetAlertService.closePopup();
-              cb(...props, userInfo);
-            },
+          onSuccess(userInfo: UserState['info']) {
+            SweetAlertService.closePopup();
+            cb(...props, userInfo);
+          },
           },
         );
       });
@@ -134,6 +136,50 @@ function useResizeObserver(
   }, [element, ...dependencies]);
 }
 
+function useViewZones(
+  editor: MonacoTypes.editor.IStandaloneCodeEditor | null,
+  viewZones: {
+    id: string;
+    afterLineNumber: number;
+    heightInPx: number;
+    Component: React.ReactElement;
+    range: {
+      startLineNumber: number;
+      startColumn: number;
+      endLineNumber: number;
+      endColumn: number;
+    }
+  }[],
+) {
+  const previousViewZones = useRef<{zoneId: string; decorationIds: string[]}[]>([]);
+
+  useEffect(() => {
+    if (editor === null) {
+      return;
+    }
+
+    previousViewZones.current.forEach((viewZoneId) => {
+      MonacoService.simpleRemoveViewZone(editor, viewZoneId.zoneId, viewZoneId.decorationIds);
+    });
+
+    viewZones.forEach((viewZone) => {
+      const newViewZoneId = MonacoService.simpleAddViewZone(
+        editor,
+        viewZone.afterLineNumber,
+        viewZone.heightInPx,
+        viewZone.Component,
+        viewZone.range,
+      );
+      previousViewZones.current.push(newViewZoneId);
+    });
+  }, [
+    editor,
+    viewZones
+      .map((viewZone) => `${viewZone.id}/${viewZone.afterLineNumber}/${viewZone.heightInPx}`)
+      .join('_'),
+  ]);
+}
+
 export {
   useOutsideClick,
   withSmoothScroll,
@@ -143,4 +189,5 @@ export {
   useKeyDown,
   useCurrentUrl,
   useResizeObserver,
+  useViewZones,
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
 import * as MonacoTypes from 'monaco-editor';
 import monacoPackageJson from 'monaco-editor/package.json';
 import { includeScript } from './Utils';
@@ -105,6 +106,7 @@ class MonacoService {
     }
   }
 
+  // TODO: should this be Static?
   setModelLanguage(
     regularOrDiffEditor: MonacoTypes.editor.IEditor,
     language: string,
@@ -140,6 +142,63 @@ class MonacoService {
       default:
         return null;
     }
+  }
+
+  // TODO: make this one `static`
+  // eslint-disable-next-line class-methods-use-this
+  simpleAddViewZone(
+    editor: MonacoTypes.editor.IStandaloneCodeEditor,
+    afterLineNumber: number,
+    heightInPx: number,
+    Component: React.ReactElement,
+    range: {
+      startLineNumber: number;
+      startColumn: number;
+      endLineNumber: number;
+      endColumn: number;
+    },
+  ): { zoneId: string; decorationIds: string[]; } {
+    const textModel = editor.getModel();
+    const domNode = document.createElement('div');
+    domNode.style.zIndex = '9999';
+    const root = createRoot(domNode);
+    root.render(Component);
+
+    let newViewZoneId = '';
+    editor.changeViewZones((changeAccessor) => {
+      newViewZoneId = changeAccessor.addZone({
+        afterLineNumber,
+        heightInPx,
+        domNode,
+      });
+    });
+    const decorationIds = textModel.deltaDecorations([], [{
+      range: new this.monaco.Range(
+        range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn,
+      ),
+      options: {
+        inlineClassName: 'monaco__feedback',
+        stickiness: this.monaco.editor.TrackedRangeStickiness.NeverGrowsWhenTypingAtEdges,
+      },
+    }]);
+
+    return {
+      zoneId: newViewZoneId,
+      decorationIds,
+    };
+  }
+
+  // TODO: make this one `static`
+  // eslint-disable-next-line class-methods-use-this
+  simpleRemoveViewZone(
+    editor: MonacoTypes.editor.IStandaloneCodeEditor,
+    viewZoneId: string,
+    decorationIds: string[],
+  ) {
+    editor.changeViewZones((changeAccessor) => {
+      changeAccessor.removeZone(viewZoneId);
+    });
+    editor.getModel().deltaDecorations(decorationIds, []);
   }
 
   // This enables Intellisense for our TypeScript files.

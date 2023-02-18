@@ -17,6 +17,13 @@
   background-color: rgba(color(red), 0.4);
 }
 
+.monaco__feedback {
+  border-style: solid;
+  border-width: 1px 0;
+  border-color: color(silver);
+  background-color: rgba(color(silver), 0.4);
+}
+
 .monaco__line {
   position: absolute;
   width: 7px !important;

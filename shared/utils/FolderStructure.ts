@@ -6,6 +6,7 @@ import { alphabeticSortComparator, uuid } from './utils.shared';
 // to shared, because we need to use from here as well. But this import
 // is still here. Let's refactor and remove it.
 import ZipService from '../../client/services/utils/ZipService';
+import { noop } from 'lodash';
 
 const ERROR_MESSAGES = {
   FILE_MISSING: "Hmm, there's a bug in here. File seems to be missing.",
@@ -52,8 +53,8 @@ class FolderStructure {
 
   public files: ExerciseFile[];
 
-  constructor({ folders = [], files = [] } = {}) {
-    this.key = null;
+  constructor({ folders = [], files = [], key = null } = {}) {
+    this.key = key;
     this.folders = folders;
     this.files = files;
   }
@@ -127,7 +128,7 @@ class FolderStructure {
   }
 
   getFolder(key, subFolder: any = this) {
-    if (!key) {
+    if (!key || key === this.key) {
       return { folder: this, parentKey: null };
     }
 
@@ -300,6 +301,13 @@ class FolderStructure {
     });
   }
 
+  static clone(folderStructure: FolderStructure): FolderStructure {
+    return new FolderStructure({
+      ...JSON.parse(folderStructure.toJSON()),
+      key: folderStructure.key,
+    });
+  }
+
   downloadAsZip() {
     let root = {
       name: 'source-code-archive',
@@ -317,15 +325,23 @@ export const useFolderStructure = (
 
   // Use this dependencies as "triggers" to reset the state.
   dependencies: any[] = [],
+  onFolderStructureChange: (folderStructure: FolderStructure) => void = noop,
 ) => {
   const [folderStructure, setFolderStructure] = useState(
-    new FolderStructure(initialFolderStructure),
+    FolderStructure.clone(initialFolderStructure)
   );
 
   const [selectedFileId, setSelectedFileId] = useState(initialSelectedFile);
 
   useEffect(() => {
-    setFolderStructure(new FolderStructure(initialFolderStructure));
+    if (initialFolderStructure.key !== folderStructure.key) {
+      return;
+    }
+    onFolderStructureChange(folderStructure);
+  }, [folderStructure.toJSON(), ...dependencies]);
+
+  useEffect(() => {
+    setFolderStructure(FolderStructure.clone(initialFolderStructure));
     setSelectedFileId(initialSelectedFile);
   }, dependencies);
 
@@ -345,9 +361,12 @@ export const useFolderStructure = (
 
   const renameFile = (id: string, newName: string) => {
     try {
-      folderStructure.renameFile(id, newName);
+      // TODO: use this pattern everywhere. Don't modify the data
+      let folderStructureClone = FolderStructure.clone(folderStructure);
+      folderStructureClone.renameFile(id, newName);
+
       setSelectedFileId(id);
-      setFolderStructure(folderStructure);
+      setFolderStructure(folderStructureClone);
     } catch (err) {
       console.error(`Failed to renameFile, id=${id}, newName=${newName}`, err);
       throw err;

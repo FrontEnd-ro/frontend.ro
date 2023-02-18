@@ -9,6 +9,8 @@ export enum FeedbackType {
 }
 
 export interface FeedbackI {
+  _id?: string;
+
   type: FeedbackType,
   body: string;
   // eslint-disable-next-line camelcase

@@ -401,3 +401,8 @@
 .gap-x-4 {
   column-gap: 1em;
 }
+
+/** User Select */
+.select-text {
+  user-select: text;
+}

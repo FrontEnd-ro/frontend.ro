@@ -96,7 +96,6 @@
     "jszip": "^3.7.0",
     "lodash": "^4.17.20",
     "logrocket": "^1.0.14",
-    "magic-snowflakes": "^6.1.0",
     "marked": "^4.0.10",
     "monaco-editor": "0.34.1",
     "monaco-editor-webpack-plugin": "^2.1.0",

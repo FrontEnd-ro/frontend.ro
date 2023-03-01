@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Snowflakes from 'magic-snowflakes';
 import Header from '~/components/Header';
 import Button from '~/components/Button';
 import Link from '~/components/generic/Link';
@@ -35,7 +34,6 @@ enum TutorialState {
 function LandingHero({ isLoggedIn, tutorials, htmlTutorialProgress }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const heroRef = useRef<HTMLElement>(null);
 
   let tutorialState = TutorialState.NOT_STARTED;
   if (htmlTutorialProgress !== null && !!htmlTutorialProgress?.certification) {
@@ -71,26 +69,6 @@ function LandingHero({ isLoggedIn, tutorials, htmlTutorialProgress }: Props) {
     }
   }, []);
 
-  useEffect(() => {
-    let snowflakes: Snowflakes;
-
-    import('magic-snowflakes')
-      .then((module) => {
-        const Snowflakes = module.default;
-        snowflakes = new Snowflakes({
-          container: heroRef.current ?? document.body,
-          speed: 2,
-        });
-      })
-      .catch((err) => {
-        console.error('Failed to load "magic-snowflakes" library.', err);
-      });
-
-    return () => {
-      snowflakes?.destroy();
-    };
-  }, []);
-
   return (
     <>
       {isLoggedIn
@@ -105,7 +83,7 @@ function LandingHero({ isLoggedIn, tutorials, htmlTutorialProgress }: Props) {
             <FontAwesomeIcon icon={faBars} />
           </Button>
         )}
-      <section ref={heroRef} className={`${styles.LandingHero} ${isLoggedIn ? styles.isLoggedIn : ''} d-flex justify-content-between`}>
+      <section className={`${styles.LandingHero} ${isLoggedIn ? styles.isLoggedIn : ''} d-flex justify-content-between`}>
         <AsideMenu hideScrollOnBody title="FrontEnd.ro" isOpen={isMenuOpen} close={() => setIsMenuOpen(false)}>
           <div className={`${styles['nav-wrapper']} absolute`}>
             <NavLinks />

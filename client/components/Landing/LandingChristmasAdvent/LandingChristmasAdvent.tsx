@@ -26,7 +26,7 @@ const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
         <div>
           <div className="d-inline-block relative">
             <h2 className="mb-0">
-              De Crăciun învață să programezi 3D cu Three.js și React!
+              Învață să programezi 3D cu Three.js și React!
             </h2>
             <p className="text-xl mt-4">
               Împreună cu

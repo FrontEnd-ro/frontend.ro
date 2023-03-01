@@ -93,7 +93,7 @@
     "file-system-utils": "^0.0.1",
     "highlight.js": "^11.4.0",
     "jsonwebtoken": "^8.5.1",
-    "jszip": "^3.7.0",
+    "jszip": "^3.8.0",
     "lodash": "^4.17.20",
     "logrocket": "^1.0.14",
     "marked": "^4.0.10",

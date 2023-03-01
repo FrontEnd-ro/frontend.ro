@@ -1,8 +1,5 @@
 name: Upload monaco-editor to AWS S3
-on:
-  push:
-    branches:
-      - master
+on: push
 jobs:
   upload-to-s3:
     runs-on: ubuntu-latest

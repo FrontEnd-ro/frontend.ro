@@ -87,7 +87,7 @@
     "date-fns": "^2.18.0",
     "dompurify": "^2.3.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fathom-client": "^3.5.0",
     "file-saver": "^2.0.5",
     "file-system-utils": "^0.0.1",

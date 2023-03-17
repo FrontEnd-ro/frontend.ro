@@ -30,7 +30,7 @@ function PageWithAsideMenu({ children, menu, withFooter = true }: PropsWithChild
   }, []);
 
   return (
-    <div className={`${styles['page-with-aside-menu']} d-flex h-100`}>
+    <div className={`${styles['page-with-aside-menu']} d-flex`}>
       <AsideMenu
         className={`${styles['aside-menu']} d-flex flex-column`}
         title={menu.title}

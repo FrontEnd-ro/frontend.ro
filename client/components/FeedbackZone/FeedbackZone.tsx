@@ -66,18 +66,20 @@ const FeedbackZone = ({
       <Markdown
         variant="transparent"
         markdownString={markdown}
-        className="mb-8"
+        className={onResolve !== undefined ? 'mb-8' : ''}
       />
-      <Button
-        outline
-        type="button"
-        loading={loading}
-        variant="transparent"
-        onClick={onResolve}
-        className={styles.button}
-      >
-        Marchează ca rezolvat
-      </Button>
+      {onResolve !== undefined && (
+        <Button
+          outline
+          type="button"
+          loading={loading}
+          variant="transparent"
+          onClick={onResolve}
+          className={styles.button}
+        >
+          Marchează ca rezolvat
+        </Button>
+      )}
     </section>
   );
 };

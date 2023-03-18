@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Button from '../Button';
 import { Checkbox } from '../Form';
+import IDE from '../Editor/IDE/IDE';
 import { timeAgo } from '~/services/Utils';
+import FolderStructure from '~/../shared/utils/FolderStructure';
 import DiffEditorLazy from '../Editor/DiffEditor/DiffEditor.lazy';
 import { SubmissionVersionI } from '~/../shared/types/submission.types';
-import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
 
 import styles from './SubmissionPreview.module.scss';
 
@@ -26,21 +27,10 @@ const SubmissionPreview = ({
   const [active, setActive] = useState(false);
   const [showDiff, setShowDiff] = useState(false);
 
-  const folderStructure = React.useMemo(() => {
-    if (!submission) {
-      return null;
-    }
-
-    return JSON.parse(submission.code);
-  }, [submission._id]);
-
-  const previousFolderStructure = React.useMemo(() => {
-    if (!previousSubmissionCode) {
-      return null;
-    }
-
-    return JSON.parse(previousSubmissionCode);
-  }, [previousSubmissionCode]);
+  const folderStructureJSON = JSON.parse(submission.code);
+  const previousFolderStructureJSON = previousSubmissionCode === undefined
+    ? { files: [], folders: [] }
+    : JSON.parse(previousSubmissionCode);
 
   const close = () => {
     setActive(false);
@@ -105,15 +95,13 @@ const SubmissionPreview = ({
 
         {showDiff ? (
           <DiffEditorLazy
-            originalFolderStructure={previousFolderStructure}
-            modifiedFolderStructure={folderStructure}
+            originalFolderStructure={previousFolderStructureJSON}
+            modifiedFolderStructure={folderStructureJSON}
           />
         ) : (
-          <CompleteEditorLazy
-            readOnly
-            askTooltip
+          <IDE
             feedbacks={submission.feedbacks}
-            folderStructure={folderStructure}
+            initialFolderStructure={new FolderStructure(folderStructureJSON)}
           />
         )}
 

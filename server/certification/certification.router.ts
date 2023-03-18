@@ -182,7 +182,7 @@ export async function maybeCreateCertification(
         short_message: `Ți-am generat cu succes certificarea pentru ${tutorial.name}. Congrats!`,
         long_message: `Sunt Alex de la FrontEnd.ro și-ți scriu pentru a te felicita că ai completat cu succes ${tutorial.name}`,
         timestamp: Date.now(),
-        href: `//certificari/${certification.id}`,
+        href: `/certificari/${certification.id}`,
         href_text: 'Vezi certificarea aici',
         type: NotificationType.SUCCESS,
         urgency: NotificationUrgency.REGULAR

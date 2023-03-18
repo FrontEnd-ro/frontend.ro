@@ -22,7 +22,7 @@ class LogRocketService {
 
         LogRocketService.instance.init('ijivpy/frontendro', {
           dom: {
-            textSanitizer: true,
+            textSanitizer: false,
           },
         });
       })

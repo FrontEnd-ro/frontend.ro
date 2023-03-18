@@ -261,6 +261,11 @@ submissionRouter.put('/:submissionId', [PrivateMiddleware], async function updat
       return;
     }
 
+    if (submission.feedbacks.length > 0) {
+      new ServerError(403, 'Încă ai feedback-uri nerezolvate pentru acest exercițiu.').send(res);
+      return;
+    }
+
     await SubmissionModel.update(submission._id, payload);
     const updatedSubmission = await SubmissionModel.get(submissionId);
 

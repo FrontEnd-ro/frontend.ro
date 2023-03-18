@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import debounce from 'lodash/debounce';
+import { DebouncedFunc } from 'lodash';
 
 import noop from 'lodash/noop';
 import { useRouter } from 'next/router';
@@ -96,20 +97,18 @@ function SolveExercise({
     }
   }, [submission?.exercise?._id, submission?.code, submission?.exercise?.example]);
 
-  const autoSaveSolution = async (code) => {
-    if (!code || !isLoggedIn || !tutorials.includes(submission?.exercise?.type)) {
-      // Do not save empty editors or if the user
-      // is not logged in or if this tutorial hasn't been started
-      return;
-    }
-
+  const autoSaveSolution = async (code: string, exerciseId: string, submissionId?: string) => {
+    // NOTE: submissionId is optional because we might want to create a new submission
+    // instead of updating an existing one
+    // Eg: you just start a new exercise and the AutoSave functionality kicks,
+    // thus you have no previous submission.
     setAutoSaved(AutoSave.IN_PROGRESS);
 
     let updatedSubmission;
 
     try {
-      if (submission._id) {
-        updatedSubmission = await SubmissionService.updateSubmission(submission._id, {
+      if (submissionId) {
+        updatedSubmission = await SubmissionService.updateSubmission(submissionId, {
           status: SubmissionStatus.IN_PROGRESS,
           code,
         });
@@ -129,17 +128,35 @@ function SolveExercise({
     }
   };
 
-  const debouncedAutoSaveRef = useRef(debounce(noop));
+  const debouncedAutoSaveRef = useRef<DebouncedFunc<(code: string)
+    => Promise<void>>>(debounce(noop));
+
+  /**
+   * Do not save solution if the user is not loggedIn OR
+   * if this tutorial hasn't been started OR
+   * if we still have feedbacks to be resolved.
+   * NOTE: we want to prevent saving if you have feedbacks,
+   * because you might edit the code and thus the feedbacks
+   * position will get messed up.
+   */
+  const shouldAutoSaveSolution = isLoggedIn
+    && tutorials.includes(submission?.exercise?.type) && submission?.feedbacks?.length === 0;
   useEffect(() => {
     if (!isSubmitting && submission !== null) {
-      debouncedAutoSaveRef.current = debounce(autoSaveSolution, 2000);
+      debouncedAutoSaveRef.current = debounce((code: string) => {
+        if (!code || !shouldAutoSaveSolution) {
+          return;
+        }
+
+        autoSaveSolution(code, exerciseId, submission?._id);
+      }, 2000);
     }
     return () => {
       // We want to cancel the previous debounced auto save function,
       // otherwise we'll have a memory leak inside our application.
       debouncedAutoSaveRef.current.cancel();
     };
-  }, [submission?.exercise?._id, isSubmitting]);
+  }, [submission?.exercise?._id, isSubmitting, shouldAutoSaveSolution]);
 
   const submitSolution = async () => {
     const code = folderStructure.toJSON();

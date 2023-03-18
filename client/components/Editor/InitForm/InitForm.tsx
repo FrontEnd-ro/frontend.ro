@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+import FolderStructure from '~/../shared/utils/FolderStructure';
 import Button from '~/components/Button';
 import Form from '~/components/Form';
 import { uuid } from '~/services/Utils';
+import { filesToFolderStructure, fsEntriesToFolderStructure } from '~/services/utils/FileUtils';
 
 import styles from './InitForm.module.scss';
 
 interface Props {
-  createFirstFile: ({ name: string }) => void;
-  uploadStructure: (e: any) => void
+  createFirstFile: ({ name }: { name: string; }) => void;
+  onFolderStructureUpload: (folderStructure: FolderStructure) => void;
+  className?: string;
 }
 
-function InitForm({ createFirstFile, uploadStructure }: Props) {
+function InitForm({ createFirstFile, onFolderStructureUpload, className = '' }: Props) {
   const [fileInputID] = useState(uuid());
   const [isDropable, setIsDropable] = useState(false);
 
@@ -28,9 +31,27 @@ function InitForm({ createFirstFile, uploadStructure }: Props) {
 
   const onDrop = () => setIsDropable(false);
 
+  const uploadStructure = ({ nativeEvent }) => {
+    setIsDropable(false);
+
+    let computeFolderStructure = null;
+    if (nativeEvent.target.webkitEntries && nativeEvent.target.webkitEntries.length) {
+      computeFolderStructure = fsEntriesToFolderStructure(nativeEvent.target.webkitEntries);
+    } else {
+      computeFolderStructure = filesToFolderStructure(nativeEvent.target.files);
+    }
+
+    computeFolderStructure.then((folderStructure: FolderStructure) => {
+      onFolderStructureUpload(folderStructure);
+    }).catch((err) => {
+      console.error('[InitForm.uploadStructure] Failed to convert files to FolderStructure', err);
+    });
+  };
+
   return (
     <Form
       className={`
+        ${className}
         ${styles['init-editor-form']} 
         ${isDropable ? styles['is--dropable'] : ''} 
         d-flex align-items-center justify-content-center`}

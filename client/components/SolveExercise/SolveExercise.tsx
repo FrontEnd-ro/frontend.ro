@@ -37,6 +37,7 @@ import RoutingUtils from '~/services/utils/Routing.utils';
 import { APIErrorReasons } from '~/../shared/SharedConstants';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 import { startedTutorial } from '~/redux/user/user.actions';
+import InitForm from '../Editor/InitForm/InitForm';
 
 interface Props {
   exerciseId: string;
@@ -438,13 +439,26 @@ function SolveExercise({
         <Markdown markdownString={submission.exercise.body} className={styles.bodyMarkdown} />
         <section>
           <h2> Rezolvă exercițiul </h2>
-          <IDE
-            feedbacks={submission.feedbacks}
-            onFeedbackDone={onFeedbackDone}
-            initialFolderStructure={folderStructure}
-            readOnlyTooltipMessage="Ai trimis exercițiul către evaluare, deci nu-l poți edita până nu primești feedback."
-            onFolderStructureChange={readonly ? undefined : onFolderStructureChange}
-          />
+          {(folderStructure.files.length === 0 && folderStructure.folders.length === 0) ? (
+            <InitForm
+              createFirstFile={({ name }: { name: string }) => {
+                const newFolderStructure = FolderStructure.clone(folderStructure);
+                newFolderStructure.addFile(undefined, { name });
+                setFolderStructure(newFolderStructure);
+              }}
+              onFolderStructureUpload={(newFolderStructure) => {
+                setFolderStructure(newFolderStructure);
+              }}
+            />
+          ) : (
+            <IDE
+              feedbacks={submission.feedbacks}
+              onFeedbackDone={onFeedbackDone}
+              initialFolderStructure={folderStructure}
+              readOnlyTooltipMessage="Ai trimis exercițiul către evaluare, deci nu-l poți edita până nu primești feedback."
+              onFolderStructureChange={readonly ? undefined : onFolderStructureChange}
+            />
+          )}
         </section>
         <section className="my-5 d-flex align-items-center justify-content-between">
           <p className="text-silver m-0">

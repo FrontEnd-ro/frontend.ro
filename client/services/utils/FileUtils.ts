@@ -28,7 +28,7 @@ export function filterFiles(
   });
 }
 
-export async function fsEntriesToFolderStructure(entries) {
+export async function fsEntriesToFolderStructure(entries): Promise<FolderStructure> {
   const fileSystemUtils = await import('file-system-utils');
   const { toFolderStructure } = fileSystemUtils;
 
@@ -36,7 +36,7 @@ export async function fsEntriesToFolderStructure(entries) {
     .then((structure) => new FolderStructure(structure));
 }
 
-export function filesToFolderStructure(files) {
+export function filesToFolderStructure(files): Promise<FolderStructure> {
   // eslint-disable-next-line no-param-reassign
   files = [...files].filter((f) => f.size > 0);
 

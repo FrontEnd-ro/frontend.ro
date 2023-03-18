@@ -360,8 +360,13 @@ class MonacoEditor extends MonacoBase {
           </>
         ) : (
           <InitForm
+            className="pin-full"
             createFirstFile={this.createFirstFile}
-            uploadStructure={this.uploadStructure}
+            onFolderStructureUpload={(newFolderStructure) => {
+              this.setState({
+                folderStructure: newFolderStructure,
+              });
+            }}
           />
         )}
         <ViewTooltip

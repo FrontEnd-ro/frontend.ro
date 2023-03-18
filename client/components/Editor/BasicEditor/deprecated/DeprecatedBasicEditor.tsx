@@ -115,7 +115,13 @@ class DeprecatedBasicMonacoEditor extends MonacoBase {
             </label>
           </>
         ) : (
-          <InitForm createFirstFile={this.createFirstFile} uploadStructure={this.uploadStructure} />
+          <InitForm
+            className="pin-full"
+            createFirstFile={this.createFirstFile}
+            onFolderStructureUpload={(newFolderStructure) => this.setState({
+              folderStructure: newFolderStructure,
+            })}
+          />
         )}
       </div>
     );

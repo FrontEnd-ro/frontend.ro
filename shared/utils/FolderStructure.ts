@@ -385,8 +385,10 @@ export const useFolderStructure = (
 
   const deleteFile = (id: string) => {
     try {
-      folderStructure.deleteFile(id);
-      setFolderStructure(folderStructure);
+      const folderStructureClone = FolderStructure.clone(folderStructure);
+      folderStructureClone.deleteFile(id);
+      setSelectedFileId('');
+      setFolderStructure(folderStructureClone);
     } catch (err) {
       console.error(`Failed to deleteFile, id=${id}`, err);
       throw err;

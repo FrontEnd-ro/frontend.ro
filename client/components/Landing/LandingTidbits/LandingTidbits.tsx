@@ -93,6 +93,7 @@ const LandingTidbits = ({ tidbits }: { tidbits: TidbitI[] }) => {
             href: `/tidbits/${tidbits[currentIndex].tidbitId}/${currentIndex + 1}`,
             alt: t.title,
             src: t.items[1].imageSrc,
+            loading: 'lazy',
           }))}
           rotationDelta={15}
           currentIndex={currentIndex}

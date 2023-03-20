@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, ImgHTMLAttributes } from 'react';
 import styles from './StackedImages.module.scss';
 
 interface Props {
@@ -6,6 +6,7 @@ interface Props {
     src: string;
     alt: string;
     href: string;
+    loading?: ImgHTMLAttributes<HTMLImageElement>['loading'];
     // We don't care about width/height because
     // we want just Square images.
   }[];
@@ -71,6 +72,7 @@ const StackedImages = ({
             <img
               alt={image.alt}
               src={image.src}
+              loading={image.loading}
               className={styles.image}
             />
           </a>

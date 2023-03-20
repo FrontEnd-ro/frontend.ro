@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import Spinner from '~/components/Spinner';
 import Link from '~/components/generic/Link';
 import SVGArrow from '~/components/SVGArrow/SVGArrow';
@@ -10,6 +11,10 @@ import Sandpack, { toSandPackFiles } from '~/components/Sandpack/Sandpack';
 import styles from './LandingChristmasAdvent.module.scss';
 
 const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
   const { challenge } = useStartingCode(CHRISTMAS_ADVENT_ID);
   const [didLoadSandpack, setDidLoadSandpack] = useState(false);
 
@@ -20,7 +25,7 @@ const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
   const sandpackFiles = toSandPackFiles(folderStructure);
 
   return (
-    <section className={`${className} relative`}>
+    <section ref={ref} className={`${className} relative`}>
       <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap" rel="stylesheet" /> 
       <div className={styles.LandingChristmasAdvent}>
         <div>
@@ -63,6 +68,7 @@ const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
             <Sandpack
               files={sandpackFiles}
               template="react-ts"
+              shouldLoad={inView}
               onLoad={() => setDidLoadSandpack(true)}
               className={`${styles.Sandpack} ${!didLoadSandpack ? styles['Sandpack--hidden'] : ''}`}
             />

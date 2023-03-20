@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Spinner from '~/components/Spinner';
 import Link from '~/components/generic/Link';
 import SVGArrow from '~/components/SVGArrow/SVGArrow';
 import { CHRISTMAS_ADVENT_ID } from '~/services/Constants';
-import FolderStructure from '~/../shared/utils/FolderStructure';
 import { useStartingCode } from '~/services/api/Challenge.service';
-import Sandpack, { toSandPackFiles } from '~/components/Sandpack/Sandpack';
+import FolderStructure, { toSandPackFiles } from '~/../shared/utils/FolderStructure';
 
 import styles from './LandingChristmasAdvent.module.scss';
+
+const Sandpack = React.lazy(() => import('../../Sandpack/Sandpack'));
 
 const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
   const { ref, inView } = useInView({
@@ -64,11 +65,11 @@ const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
           {challenge === null && (
             <p> Nu am putut încărca exemplul. Încearcă să reîncarci pagina.</p>
           )}
-          {(challenge !== undefined && challenge !== null) && (
+
+          {(challenge !== undefined && challenge !== null && inView) && (
             <Sandpack
               files={sandpackFiles}
               template="react-ts"
-              shouldLoad={inView}
               onLoad={() => setDidLoadSandpack(true)}
               className={`${styles.Sandpack} ${!didLoadSandpack ? styles['Sandpack--hidden'] : ''}`}
             />

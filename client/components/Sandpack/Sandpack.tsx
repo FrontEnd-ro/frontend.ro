@@ -15,13 +15,10 @@ interface Props {
   template: SandpackPredefinedTemplate;
   onLoad?: () => void;
   className?: string;
-
-  // Use this flag to lazy-load Sandpack
-  shouldLoad?: boolean;
 }
 
 const Sandpack = ({
-  files, template, onLoad = noop, className = '', shouldLoad = true,
+  files, template, onLoad = noop, className = '',
 }: Props) => {
   return (
     <SandpackProvider
@@ -33,12 +30,8 @@ const Sandpack = ({
       // existing package.json file.
       // https://sandpack.codesandbox.io/docs/advanced-usage/client#usage
     >
-      {shouldLoad && (
-        <>
-          <SandpackPreview className={`${styles.SandpackPreview} ${className} m-0`} />
-          <SandpackListener onSuccess={onLoad} />
-        </>
-      )}
+      <SandpackPreview className={`${styles.SandpackPreview} ${className} m-0`} />
+      <SandpackListener onSuccess={onLoad} />
     </SandpackProvider>
   );
 };
@@ -61,15 +54,6 @@ const SandpackListener = ({ onSuccess }: { onSuccess: () => void }) => {
   }, [listen]);
 
   return null;
-};
-
-export const toSandPackFiles = (folderStructure: FolderStructure): Record<string, string> => {
-  const files = {};
-  folderStructure.getFilesWithPath().forEach((file) => {
-    files[`${file.path}/${file.name}`] = file.content;
-  });
-
-  return files;
 };
 
 export default Sandpack;

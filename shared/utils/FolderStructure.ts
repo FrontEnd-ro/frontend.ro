@@ -427,4 +427,13 @@ export function NewSourceFile(name = 'Untitled file') {
   };
 }
 
+export const toSandPackFiles = (folderStructure: FolderStructure): Record<string, string> => {
+  const files = {};
+  folderStructure.getFilesWithPath().forEach((file) => {
+    files[`${file.path}/${file.name}`] = file.content;
+  });
+
+  return files;
+};
+
 export default FolderStructure;

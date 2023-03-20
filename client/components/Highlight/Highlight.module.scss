@@ -19,11 +19,15 @@
 
   pre {
     margin: 0;
+  }
+
+  code {
+    margin: 0;
     font-family: $monospace;
     padding: 1em 3em 1em 1em !important; // Otherwise it will get overriden by the `dracula.css`
   }
 
-  &.default pre {
+  &.default code {
     border-radius: 1em;
     box-shadow: 0 0 1em color(black);
   }

@@ -2,7 +2,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef } from 'react';
 import { HLJSApi } from 'highlight.js';
-import { noop } from 'lodash';
+import { noop, escape } from 'lodash';
 import { copyToClipboard } from '~/services/Utils';
 import Button from '~/components/Button';
 
@@ -24,7 +24,7 @@ export default function Highlight({
   language, code, withCopy = true, className, onHighlight = noop, variant = 'default', textWrap = 'scroll',
 }: Props) {
   const highlightModule = useRef<HLJSApi>(null);
-  const preRef = useRef<HTMLPreElement>(null);
+  const codeRef = useRef<HTMLPreElement>(null);
 
   useEffect(() => {
     import('~/services/highlight').then((module) => {
@@ -40,41 +40,30 @@ export default function Highlight({
       return;
     }
 
-    // After each highlight the <code> element is deleted
-    // and replaced with styled <span> elements. We have to
-    // re-create it.
-    const codeEl = document.createElement('code');
-
-    // Using `document.createTextNode` to correctly escape HTML code
-    codeEl.appendChild(document.createTextNode(code));
-    preRef.current.innerHTML = null;
-    preRef.current.appendChild(codeEl);
-
     highlightCode();
-  }, [code]);
+  }, [code, language]);
 
   const highlightCode = () => {
-    if (!preRef.current) {
-      console.warn('Highlight.highlightCode: expected `preRef.current` to be populated.');
+    if (!codeRef.current) {
+      console.warn('Highlight.highlightCode: expected `codeRef.current` to be populated.');
       return;
     }
 
-    highlightModule.current.highlightElement(preRef.current);
+    highlightModule.current.highlightElement(codeRef.current);
     onHighlight();
   };
 
   return (
     <div className={`${styles.highlight} ${styles[variant]} ${className}`}>
-      <pre
-        ref={preRef}
-        className={`
+      <pre className={textWrap === 'wrap' ? styles['pre--wrap'] : ''}>
+        <code
+          ref={codeRef}
+          className={`
           ${language}
-          ${textWrap === 'wrap' ? styles['pre--wrap'] : ''}
         `}
-      >
-        <code>
-          {code}
-        </code>
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: escape(code) }}
+        />
       </pre>
       {withCopy && <CopyButton code={code} />}
     </div>

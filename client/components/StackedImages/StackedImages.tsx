@@ -27,8 +27,9 @@ const StackedImages = ({
   const DISPLAY_COUNT = 5;
   const imagesToDisplay = images.slice(0, currentIndex + DISPLAY_COUNT);
 
-  // Generate the list of random rotations to be used.
-  const randomRotations = useMemo(() => {
+  const serverSideRotations = getServerSideRotations(images.length, rotationDelta);
+  // Generate the list of random rotations to be used on the client
+  const clientSideRotations = useMemo(() => {
     // First one is always stright
     const titls = [0, ...getRandomRotations(images.length - 1, rotationDelta)];
     return titls;
@@ -36,12 +37,18 @@ const StackedImages = ({
 
   // The currently visible one will have no rotation.
   // Thus, we need to keep track of this separately.
-  const [rotationsState, setRotationsState] = useState(randomRotations);
+  const [rotationsState, setRotationsState] = useState(serverSideRotations);
+
+  useEffect(() => {
+    // We specifically update this on the client-side
+    // because otherwise we get this SSR error: https://github.com/FrontEnd-ro/frontend.ro/issues/886
+    setRotationsState(clientSideRotations);
+  }, []);
   useEffect(() => {
     setRotationsState([
-      ...randomRotations.slice(0, currentIndex),
+      ...clientSideRotations.slice(0, currentIndex),
       0,
-      ...randomRotations.slice(currentIndex + 1),
+      ...clientSideRotations.slice(currentIndex + 1),
     ]);
   }, [currentIndex]);
 
@@ -85,6 +92,16 @@ function getRandomRotations(count: number, rotationDelta: number) {
 
   return new Array(count).fill('').map((_) => {
     return Math.random() * (max - min) + min;
+  });
+}
+
+// Initial rotations that will be rendered server-side
+// We need this so we can prevent this bug: https://github.com/FrontEnd-ro/frontend.ro/issues/886
+function getServerSideRotations(count: number, rotationDelta: number): number[] {
+  return new Array(count).fill('').map((_, index) => {
+    return index % 2 === 0
+      ? -rotationDelta / 2
+      : rotationDelta / 2;
   });
 }
 

@@ -26,7 +26,7 @@ const TidbitGalleryPage = ({ tidbits }: {tidbits: TidbitI[]}) => {
 export async function getServerSideProps() {
   const { default: fetch } = await import('node-fetch');
 
-  const resp = await fetch(`${process.env.ENDPOINT}/tidbits`);
+  const resp = await fetch(`${process.env.ENDPOINT}/tidbits?field=title&field=backgroundColor&field=tidbitId&field=items[0].imageSrc`);
   const tidbits: TidbitI[] = await resp.json();
 
   return {

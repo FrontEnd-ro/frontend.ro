@@ -5,7 +5,7 @@ import TidbitGalleryItem from '../TidbitGalleryItem/TidbitGalleryItem';
 
 import styles from './TidbitGallery.module.scss';
 
-const TidbitGallery = ({ tidbits }: {tidbits: TidbitI[]}) => {
+const TidbitGallery = ({ tidbits }: {tidbits: Pick<TidbitI, 'tidbitId' | 'backgroundColor' | 'items' | 'title'>[]}) => {
   return (
     <PageContainer className={styles.TidbitGallery}>
       <div className="text-center">

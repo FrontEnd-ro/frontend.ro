@@ -6,7 +6,7 @@ import { TidbitI } from '~/../shared/types/tidbit.types';
 import styles from './TidbitGalleryItem.module.scss';
 
 interface Props {
-  tidbit: TidbitI;
+  tidbit: Pick<TidbitI, 'tidbitId' | 'backgroundColor' | 'items' | 'title'>;
   itemIndex: number;
   active?: boolean;
   borderColor?: string;

@@ -31,7 +31,7 @@ const Certification = ({ certification, className = '' }: Props) => {
       {certification.lesson_exercises.length > 0 && (
         <>
           <p className="mt-8 mb-12 text-2xl font-light">
-            <Link href={`/${certification.user.username}`}>
+            <Link prefetch={false} href={`/${certification.user.username}`}>
               {nameOrUsername}
             </Link>
             {' '}
@@ -46,7 +46,7 @@ const Certification = ({ certification, className = '' }: Props) => {
             ale acestui modul. Fiecare exercițiu a fost
             trimis prin platforma
             {' '}
-            <Link href="/">
+            <Link prefetch={false} href="/">
               FrontEnd.ro
             </Link>
             {' '}

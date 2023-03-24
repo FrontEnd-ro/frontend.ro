@@ -238,7 +238,7 @@ function RegisterEventCard({
         )}
         {url && (
           <div className="text-right my-5">
-            <Link href={url}>
+            <Link prefetch={false} href={url}>
               Află mai multe
             </Link>
           </div>

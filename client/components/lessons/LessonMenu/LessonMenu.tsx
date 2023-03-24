@@ -34,7 +34,7 @@ LessonMenu({
   return (
     <aside ref={ref} className={`${styles['lesson-menu']}${isOpen ? ` ${styles['lesson-menu--open']}` : ''} ${className} bg-black text-white`}>
       <header className="lesson-menu__header d-flex justify-content-between align-items-center">
-        <Link onClick={onScrollTop} href={url}>
+        <Link prefetch={false} onClick={onScrollTop} href={url}>
           <h2>
             {title}
           </h2>

@@ -217,14 +217,14 @@ const Changelog1 = () => {
           Pentru că dacă ești începător complet ar trebui mai întâi să te
           uiți la lectia cu
           {' '}
-          <Link href="/intro/vs-code">
+          <Link prefetch={false} href="/intro/vs-code">
             VSCode
           </Link>
           {' '}
           (pentru că n-ai nici un editor de cod) și
           apoi sa continui cu
           {' '}
-          <Link href="/html/despre-html">
+          <Link prefetch={false} href="/html/despre-html">
             prima lecție de HTML
           </Link>
           ...

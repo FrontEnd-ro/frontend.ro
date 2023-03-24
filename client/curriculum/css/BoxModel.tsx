@@ -194,7 +194,7 @@ div {
           Poți citi mai multe
           {' '}
           {' '}
-          <Link target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing">
+          <Link prefetch={false} target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing">
             aici
           </Link>
           .

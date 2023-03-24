@@ -69,6 +69,7 @@ const Tidbit = ({ tidbit, index }: Props) => {
         {isFirstItem && previousTidbit && (<PrevTidbitLink previousTidbit={previousTidbit} />)}
 
         <Link
+          prefetch={false}
           href={`/tidbits/${tidbit.tidbitId}/${index}`}
           className={`
           ${styles['arrow-link']}
@@ -85,6 +86,7 @@ const Tidbit = ({ tidbit, index }: Props) => {
           className={`${styles['main-image']} d-block`}
         />
         <Link
+          prefetch={false}
           href={`/tidbits/${tidbit.tidbitId}/${index + 2}`}
           className={`
             ${styles['arrow-link']}
@@ -125,13 +127,13 @@ const Tidbit = ({ tidbit, index }: Props) => {
           ))}
         </div>
         <nav className={`${styles['footer-nav']} d-flex justify-content-between mb-8`}>
-          <Link href={previousTidbit !== null ? `/tidbits/${previousTidbit.tidbitId}/1` : '/tidbits'} className="d-flex">
+          <Link prefetch={false} href={previousTidbit !== null ? `/tidbits/${previousTidbit.tidbitId}/1` : '/tidbits'} className="d-flex">
             <FontAwesomeIcon className="mr-2" width={14} icon={faArrowLeft} />
             {previousTidbit !== null ? previousTidbit.title : 'Toate Tidbit\'s-urile'}
           </Link>
 
           {nextTidbit !== null && (
-            <Link href={`/tidbits/${nextTidbit.tidbitId}/1`} className="d-flex justify-content-end">
+            <Link prefetch={false} href={`/tidbits/${nextTidbit.tidbitId}/1`} className="d-flex justify-content-end">
               {nextTidbit.title}
               <FontAwesomeIcon className="ml-2" width={14} icon={faArrowRight} />
             </Link>
@@ -144,6 +146,7 @@ const Tidbit = ({ tidbit, index }: Props) => {
 
 const PrevTidbitLink = ({ previousTidbit }: { previousTidbit: TidbitI }) => (
   <Link
+    prefetch={false}
     href={`/tidbits/${previousTidbit.tidbitId}/${previousTidbit.items.length}`}
     className={`
       ${styles['prev-tidbit']}
@@ -165,6 +168,7 @@ const PrevTidbitLink = ({ previousTidbit }: { previousTidbit: TidbitI }) => (
 
 const NextTidbitLink = ({ nextTidbit }: { nextTidbit: TidbitI }) => (
   <Link
+    prefetch={false}
     href={`/tidbits/${nextTidbit.tidbitId}/1`}
     className={`
       ${styles['next-tidbit']}

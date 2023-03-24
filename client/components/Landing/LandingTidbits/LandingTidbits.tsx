@@ -117,7 +117,7 @@ const CallToAction = ({ arrowColor }: { arrowColor: string }) => (
       <br />
       În fiecare saptămână postăm
       {' '}
-      <Link href="/tidbits">
+      <Link prefetch={false} href="/tidbits">
         Tips & Tricks
       </Link>
     </h2>

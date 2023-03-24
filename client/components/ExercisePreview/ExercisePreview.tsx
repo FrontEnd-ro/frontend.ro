@@ -81,6 +81,7 @@ function ExercisePreview({
           href={href}
           className="d-flex"
           variant="contained"
+          prefetch={false}
           color={isApproved || readOnly || feedbackCount > 0 ? 'white' : 'blue'}
         >
           {btnText}

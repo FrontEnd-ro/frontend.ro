@@ -95,6 +95,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
               {aggregatedProgress.done < aggregatedProgress.total && (
                 <Link
                   color="white"
+                  prefetch={false}
                   variant="contained"
                   href={`/${tutorialsProgress[index].tutorialId}/tutorial`}
                   className="d-inline-block mt-4"
@@ -136,7 +137,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
           />
         ))}
         {solvedExercises.length === 0 && (
-          <Link href="/exercitii" className="d-flex align-items-center justify-content-center no-underline text-center">
+          <Link prefetch={false} href="/exercitii" className="d-flex align-items-center justify-content-center no-underline text-center">
             <FontAwesomeIcon icon={faPlus} width="32" height="32" />
             <span> Rezolvă un exercițiu </span>
           </Link>
@@ -181,7 +182,7 @@ const CreatedExercises = () => {
             readOnly={false}
           />
         ))}
-        <Link href="/exercitii/creeaza" className="d-flex align-items-center justify-content-center no-underline text-center">
+        <Link prefetch={false} href="/exercitii/creeaza" className="d-flex align-items-center justify-content-center no-underline text-center">
           <FontAwesomeIcon icon={faPlus} width="32" height="32" />
           <span> Creează un nou exercițiu </span>
         </Link>

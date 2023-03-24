@@ -45,7 +45,7 @@ function LandingStats() {
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/countries.svg`}
           />
         </a>
-        <Link href="/lectii" className={styles.card4}>
+        <Link prefetch={false} href="/lectii" className={styles.card4}>
           <StatsCardLayout3
             text1="Am scris"
             text2={`${lessonsWritten.length} lecții`}
@@ -53,7 +53,7 @@ function LandingStats() {
             src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/vintage-typewriter.jpg`}
           />
         </Link>
-        <Link href="/evenimente" className={styles.card5}>
+        <Link prefetch={false} href="/evenimente" className={styles.card5}>
           <StatsCardLayout6
             counter={4}
             colorText="#663399"
@@ -73,7 +73,7 @@ function LandingStats() {
           description="traineri pasionați"
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/pencils.jpg`}
         />
-        <Link href="/slides" className={styles.card7}>
+        <Link prefetch={false} href="/slides" className={styles.card7}>
           <StatsCardLayout4
             counter1={100}
             counter2={33}

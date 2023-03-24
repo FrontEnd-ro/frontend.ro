@@ -97,7 +97,7 @@ export default function TextsContent() {
           Fiecare browser vine cu propriile stiluri asupra elementelor de bază,
           însă mai târziu vom vedea cum putem adăuga propriile stiluri via
           {' '}
-          <Link href="/css/intro">
+          <Link prefetch={false} href="/css/intro">
             CSS
           </Link>
           .

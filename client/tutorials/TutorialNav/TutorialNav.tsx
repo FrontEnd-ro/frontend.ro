@@ -27,6 +27,7 @@ const TutorialNav = ({
       {showDashboardLink && (
         <Link
           color="inherit"
+          prefetch={false}
           variant="duo-tone"
           href={`/${tutorialId}/tutorial`}
           className="text-white d-block mb-8"

@@ -14,6 +14,7 @@ function ResourcePreview({
       href={url}
       target="_blank"
       rel="noreferrer"
+      prefetch={false}
       className={`
       ${styles['resource-preview']} 
       w-100 h-100 d-flex flex-column no-underline

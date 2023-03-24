@@ -101,6 +101,7 @@ function LandingHero({ isLoggedIn, tutorials, htmlTutorialProgress }: Props) {
           <div>
             <Link
               color="black"
+              prefetch={false}
               variant="contained"
               href={CONFIG[tutorialState].href}
               className={`${styles['action-button']} d-inline-block mt-2 text-center relative`}

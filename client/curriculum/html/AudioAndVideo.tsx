@@ -112,7 +112,7 @@ export default function AudioAndVideoContent() {
               pentru a-l putea vizualiza.
             </p>
           </audio>
-          <Link target="_blank" className="d-block" href="/demo/html/audio">
+          <Link prefetch={false} target="_blank" className="d-block" href="/demo/html/audio">
             Deschide demo-ul într-o pagină nouă
           </Link>
         </DemoPreview>

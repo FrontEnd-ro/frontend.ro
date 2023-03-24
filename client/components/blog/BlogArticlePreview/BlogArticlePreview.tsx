@@ -22,7 +22,7 @@ const BlogArticlePreview = ({
   title, href, cover, firstParagraph, variant = 'row', timestamp, className = '',
 }: Props) => {
   return (
-    <Link href={href} className={`${className} ${styles.BlogArticlePreview} ${styles[variant]} no-underline`}>
+    <Link prefetch={false} href={href} className={`${className} ${styles.BlogArticlePreview} ${styles[variant]} no-underline`}>
       <article className="d-flex justify-content-between align-items-start">
         <div className="cover-wrapper overflow-hidden">
           <Image

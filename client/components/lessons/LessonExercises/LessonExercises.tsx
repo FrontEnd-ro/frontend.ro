@@ -114,7 +114,7 @@ function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<
           la această lecție.
           Până atunci poți să rezolvi celelalte
           {' '}
-          <Link className="text-bold" href="/exercitii">
+          <Link prefetch={false} className="text-bold" href="/exercitii">
             exerciții disponibile
           </Link>
           .

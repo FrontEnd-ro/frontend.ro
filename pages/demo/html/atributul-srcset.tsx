@@ -30,7 +30,7 @@ export default function ContentShifting() {
             {' '}
             Deschide
             {' '}
-            <Link href="/intro/devtools">
+            <Link prefetch={false} href="/intro/devtools">
               devtools în modul responsive
             </Link>
             {' '}

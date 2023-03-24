@@ -36,7 +36,7 @@ function UserBio({ user, currentUser, className }: ConnectedProps<typeof connect
         </p>
         )}
         {isOwnBio && (
-        <Link variant="contained" color="white" href="/settings" className="my-5">
+        <Link prefetch={false} variant="contained" color="white" href="/settings" className="my-5">
           Editează profilul
         </Link>
         )}

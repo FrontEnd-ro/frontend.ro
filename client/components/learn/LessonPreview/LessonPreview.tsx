@@ -16,6 +16,7 @@ function LessonPreview({
   return (
     <Link
       href={url}
+      prefetch={false}
       className={`
         ${styles['lesson-preview']} 
         ${written ? styles.written : ''} 

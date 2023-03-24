@@ -23,6 +23,7 @@ const ControlPanelNav = ({ items, onItemClick, className = '' }: Props) => {
           variant="duo-tone"
           color="blue"
           active={item.active}
+          prefetch={false}
           onClick={() => onItemClick(item.id)}
           className={`${styles.Link} ${item.isCurrent ? styles['is--current'] : ''}`}
         >

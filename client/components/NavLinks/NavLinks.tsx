@@ -28,6 +28,7 @@ function NavLinks({ user, navItems, dispatch }: ConnectedProps<typeof connector>
         {navItems.map((navItem) => (
           <li key={navItem._id}>
             <Link
+              prefetch={false}
               href={navItem.href}
               className={`${navItem.highlighted === true ? styles.highlighted : ''}`}
             >
@@ -43,7 +44,7 @@ function NavLinks({ user, navItems, dispatch }: ConnectedProps<typeof connector>
           </li>
         ) : (
           <li className={styles.login}>
-            <Link href={`/auth?next=${encodeURIComponent(router.asPath)}`}>
+            <Link prefetch={false} href={`/auth?next=${encodeURIComponent(router.asPath)}`}>
               Intră în cont
             </Link>
           </li>

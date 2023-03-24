@@ -75,7 +75,7 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
       <p>
         De aceea, pentru fiecare
         {' '}
-        <Link href="lectii">
+        <Link prefetch={false} href="lectii">
           lecție
         </Link>
         {' '}
@@ -92,7 +92,7 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
         PS: dacă ești curios să afli mai multe despre noi și de ce facem asta,
         aruncă un ochi
         {' '}
-        <Link href="/intro/despre-noi">
+        <Link prefetch={false} href="/intro/despre-noi">
           aici
         </Link>
       </p>

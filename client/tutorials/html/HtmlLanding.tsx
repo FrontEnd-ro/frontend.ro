@@ -68,16 +68,16 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
                     <WhatsAppButton url={urlToShare} />
                   </OptionsDrawer.Element>
                 </OptionsDrawer>
-                <Link href={tutorialUrl} color="blue" variant="contained">
+                <Link prefetch={false} href={tutorialUrl} color="blue" variant="contained">
                   Continuă Tutorialul
                 </Link>
               </>
             ) : (
               <>
-                <Link onClick={navigateToFirstSection} href="#what-is-html" variant="contained" color="white">
+                <Link prefetch={false} onClick={navigateToFirstSection} href="#what-is-html" variant="contained" color="white">
                   Află mai multe
                 </Link>
-                <Link href={tutorialUrl} color="blue" variant="contained">
+                <Link prefetch={false} href={tutorialUrl} color="blue" variant="contained">
                   Începe acum
                 </Link>
               </>
@@ -187,11 +187,11 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
           </div>
           <div className="text-center text-2xl">
             {didStartTutorial ? (
-              <Link href={tutorialUrl} color="blue" variant="contained">
+              <Link prefetch={false} href={tutorialUrl} color="blue" variant="contained">
                 Continuă Tutorialul
               </Link>
             ) : (
-              <Link color="blue" variant="contained" href={tutorialUrl}>
+              <Link prefetch={false} color="blue" variant="contained" href={tutorialUrl}>
                 Începe Tutorialul
               </Link>
             )}

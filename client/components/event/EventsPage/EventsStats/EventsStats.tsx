@@ -11,7 +11,7 @@ import Link from '~/components/generic/Link';
 function EventsStats() {
   return (
     <div className={styles['events-stats']}>
-      <Link className={styles.card1} href="/evenimente">
+      <Link prefetch={false} className={styles.card1} href="/evenimente">
         <StatsCardLayout6
           counter={4}
           colorText="#663399"
@@ -31,7 +31,7 @@ function EventsStats() {
         description="traineri pasionați"
         src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/zoom-call-with-coffee.jpg`}
       />
-      <Link className={styles.card3} href="/lectii">
+      <Link prefetch={false} className={styles.card3} href="/lectii">
         <StatsCardLayout3
           text1="În total"
           text2="11 ore predate online"
@@ -39,7 +39,7 @@ function EventsStats() {
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/hourglass.jpg`}
         />
       </Link>
-      <Link className={styles.card4} href="/slides">
+      <Link prefetch={false} className={styles.card4} href="/slides">
         <StatsCardLayout4
           counter1={100}
           counter2={33}

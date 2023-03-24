@@ -50,7 +50,7 @@ function Header({
               <FontAwesomeIcon icon={faBars} />
             </Button>
           )}
-          <Link className={styles.logo} href={href}>
+          <Link prefetch={false} className={styles.logo} href={href}>
             <picture>
               <source
                 srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo-square--S.jpg`}

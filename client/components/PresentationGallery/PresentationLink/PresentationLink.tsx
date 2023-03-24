@@ -22,7 +22,7 @@ function PresentationLink({
   });
 
   return (
-    <Link href={href ?? `/slides/${id}`} className={`${styles['presentation-link']} ${className}`}>
+    <Link href={href ?? `/slides/${id}`} prefetch={false} className={`${styles['presentation-link']} ${className}`}>
       <img width="256" height="256" src={thumb} alt={`${title} slides thumb`} />
       <div
         className="img"

@@ -46,12 +46,12 @@ function AccountTooltip({ theme = 'light', user, dispatch }: Props & ConnectedPr
       {isOpen && (
         <List className="menu">
           <li>
-            <Link className="no-underline" href={`/${user.info.username}`}>
+            <Link prefetch={false} className="no-underline" href={`/${user.info.username}`}>
               Profilul tău
             </Link>
           </li>
           <li>
-            <Link className="no-underline" href="/settings">
+            <Link prefetch={false} className="no-underline" href="/settings">
               Setările contului
             </Link>
           </li>

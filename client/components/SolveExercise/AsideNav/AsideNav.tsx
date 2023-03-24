@@ -70,7 +70,7 @@ const AsideNav = ({
       </nav>
       <div>
         {lessonHref !== undefined && (
-          <Link href={lessonHref} variant="duo-tone" color="white" className="d-block mt-4 mb-8">
+          <Link prefetch={false} href={lessonHref} variant="duo-tone" color="white" className="d-block mt-4 mb-8">
             Înpoi la lecție
           </Link>
         )}

@@ -480,6 +480,7 @@ function SolveExercise({
                 <Link
                   color="black"
                   variant="contained"
+                  prefetch={false}
                   className="d-inline-block ml-2"
                   href={`/rezolva/${submissionList[submissionIndex + 1].exercise._id}`}
                 >
@@ -512,7 +513,7 @@ const ExerciseNotFound = () => (
       <h1> Oops 😟</h1>
       <h2> Exercițiul e privat sau nu există </h2>
 
-      <Link variant="contained" color="blue" href="/">
+      <Link prefetch={false} variant="contained" color="blue" href="/">
         Navighează acasă
       </Link>
     </PageContainer>

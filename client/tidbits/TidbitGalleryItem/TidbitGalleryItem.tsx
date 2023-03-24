@@ -20,6 +20,7 @@ const TidbitGalleryItem = ({
   borderColor = tidbit.backgroundColor,
 }: Props) => (
   <Link
+    prefetch={false}
     key={tidbit.tidbitId}
     style={{ borderColor }}
     className={`

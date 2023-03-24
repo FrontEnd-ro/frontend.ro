@@ -31,6 +31,7 @@ const ProgressLink = ({
   return (
     <Link
       href={href}
+      prefetch={false}
       className={`
         ${styles.ProgressLink}
         ${styles[variant]}

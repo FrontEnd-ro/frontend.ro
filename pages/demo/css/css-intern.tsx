@@ -58,7 +58,7 @@ export default function InternalCSS() {
             a documentului
             HTML. Față de
             {' '}
-            <Link href="/demo/css/css-inline">
+            <Link prefetch={false} href="/demo/css/css-inline">
               metoda inline
             </Link>
             {' '}

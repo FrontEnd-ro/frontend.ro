@@ -13,7 +13,7 @@ interface Props {
 const Notification = ({
   notification,
 }: Props) => (
-  <Link className={`d-flex no-underline ${styles.Notification}`} href={notification.href ?? '#'}>
+  <Link prefetch={false} className={`d-flex no-underline ${styles.Notification}`} href={notification.href ?? '#'}>
     <img
       width="32"
       height="32"

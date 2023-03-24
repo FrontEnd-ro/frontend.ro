@@ -49,7 +49,7 @@ function ExSubmission({ submission } : Props) {
     >
       <div className={`${styles['card-top']} d-flex align-items-center justify-content-between`}>
         <div className={`${styles['card-info']} d-flex align-items-center justify-content-between text-bold`}>
-          <Link href={`/${submission.user.username}`} className={`${styles['card-link']}`}>
+          <Link prefetch={false} href={`/${submission.user.username}`} className={`${styles['card-link']}`}>
             <img
               width="50"
               height="50"
@@ -65,6 +65,7 @@ function ExSubmission({ submission } : Props) {
           </span>
         </div>
         <Link
+          prefetch={false}
           variant="contained"
           color={mainLinkConfig.color}
           href={`/feedback/${submission.user.username}/${submission.exercise._id}`}

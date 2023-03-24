@@ -58,7 +58,7 @@ function LandingAdCard({ ad }: { ad: ApplicationConfig['ad'] }) {
           {ad.text}
         </p>
         {ad.cta && ad.ctaLink && (
-          <Link onClick={didVisit} href={ad.ctaLink}>
+          <Link prefetch={false} onClick={didVisit} href={ad.ctaLink}>
             {ad.cta}
           </Link>
         )}

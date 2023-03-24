@@ -77,7 +77,7 @@ const LandingHTML = ({ user, isLoggedIn, className = '' }: ConnectedProps<typeof
             <SVGArrow className={`${styles.SVGArrow} absolute`} />
           </div>
           <div>
-            <Link href={callToAction.href} variant="contained" color="blue" className="mt-2 text-xl d-inline-block">
+            <Link prefetch={false} href={callToAction.href} variant="contained" color="blue" className="mt-2 text-xl d-inline-block">
               {callToAction.text}
             </Link>
           </div>

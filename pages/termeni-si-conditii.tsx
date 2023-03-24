@@ -49,7 +49,7 @@ function TermsAndConditions() {
             <li>
               ai control asupra propriilor date și le poți șterge oricând din
               {' '}
-              <Link href="/settings">
+              <Link prefetch={false} href="/settings">
                 pagina de setări
               </Link>
             </li>

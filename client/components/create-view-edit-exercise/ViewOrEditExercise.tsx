@@ -216,14 +216,14 @@ function ViewOrEditExercise({
             <h1>
               Exercițiu
               {' '}
-              <Link color="blue" href="/lecții" className="uppercase">
+              <Link prefetch={false} color="blue" href="/lecții" className="uppercase">
                 {exercise.type}
               </Link>
 
             </h1>
             <h2>
               {' '}
-              <Link color="blue" className="text-bold" href={`/${exercise.user.username}`}>
+              <Link prefetch={false} color="blue" className="text-bold" href={`/${exercise.user.username}`}>
                 {nameOrUsername}
               </Link>
               {' '}

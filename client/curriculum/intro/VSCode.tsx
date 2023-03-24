@@ -199,7 +199,7 @@ export default function VSCodeContent() {
             </strong>
             , folosind o interfață vizuală. (PS: dacă nu știi Git poate
             {' '}
-            <Link href="/slides/git-incepatori">
+            <Link prefetch={false} href="/slides/git-incepatori">
               slide-urile de la trainingul pe care l-am ținut
             </Link>
             {' '}

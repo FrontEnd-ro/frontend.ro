@@ -128,7 +128,7 @@ export default function ImagesContent() {
           {' '}
           nu este
           {' '}
-          <Link href="/html/validarea-paginilor-html">
+          <Link prefetch={false} href="/html/validarea-paginilor-html">
             considerată validă
           </Link>
           .
@@ -468,7 +468,7 @@ export default function ImagesContent() {
           <p>
             Te încurajăm să experimentezi și cu opțiunea
             {' '}
-            <Link target="_blank" href="intro/devtools">
+            <Link prefetch={false} target="_blank" href="intro/devtools">
               DRP (Device Pixel Ratio)
             </Link>
             {' '}

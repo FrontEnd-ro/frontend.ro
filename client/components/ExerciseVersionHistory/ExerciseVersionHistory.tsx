@@ -70,6 +70,7 @@ const ExerciseVersion = ({
       replace
       href={href}
       passHref
+      prefetch={false}
       className={`
       ${className}
       ${styles.ExerciseVersion} 

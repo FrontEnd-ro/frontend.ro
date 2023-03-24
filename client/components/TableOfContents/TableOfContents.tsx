@@ -184,6 +184,7 @@ function ChapterListItem({
       <Link
         replace
         href={item.href}
+        prefetch={false}
         onClick={() => scrollToItem(item.id)}
         className={activeChapterId === item.id ? `${styles.active} text-bold` : 'text-bold'}
       >

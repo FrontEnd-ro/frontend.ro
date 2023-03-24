@@ -25,7 +25,7 @@ export default function NotFoundPage() {
           <h2>
             Se pare că pagina pe care o cauți nu mai există.
           </h2>
-          <Link variant="contained" color="blue" className={styles.cta} href="/">
+          <Link prefetch={false} variant="contained" color="blue" className={styles.cta} href="/">
             Navighează acasă!
           </Link>
         </PageContainer>

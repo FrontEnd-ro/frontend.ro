@@ -29,7 +29,7 @@ export default function HugeImageLoading() {
             {' '}
             Deschide
             {' '}
-            <Link href="/intro/devtools">
+            <Link prefetch={false} href="/intro/devtools">
               panoul Network din DevTools
             </Link>
             {' '}

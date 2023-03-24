@@ -53,7 +53,7 @@ const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
             <SVGArrow color="#58af58" className={`${styles.SVGArrow} absolute`} />
           </div>
           <div>
-            <Link href={CHRISTMAS_ADVENT_ID} variant="contained" color="green" className="mt-2 text-xl d-inline-block">
+            <Link prefetch={false} href={CHRISTMAS_ADVENT_ID} variant="contained" color="green" className="mt-2 text-xl d-inline-block">
               Începe tutorialul
             </Link>
           </div>

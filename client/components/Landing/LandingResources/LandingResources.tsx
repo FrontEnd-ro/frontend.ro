@@ -20,7 +20,7 @@ const LandingResources = ({ className = '' }: { className?: string }) => {
           Ah, aproape am uitat!
           Avem și o
           {' '}
-          <Link color="blue" href="/resurse">
+          <Link prefetch={false} color="blue" href="/resurse">
             listă de resurse
           </Link>
           {' '}
@@ -31,6 +31,7 @@ const LandingResources = ({ className = '' }: { className?: string }) => {
       <div className={styles.Grid}>
         {allResources.map((resource) => (
           <Link
+            prefetch={false}
             key={resource.title}
             href={resource.url}
             title={resource.title}
@@ -45,7 +46,7 @@ const LandingResources = ({ className = '' }: { className?: string }) => {
           </Link>
         ))}
       </div>
-      <Link variant="contained" color="black" className={`${styles.Link} w-100 mt-4 text-center`} href="/resurse">
+      <Link prefetch={false} variant="contained" color="black" className={`${styles.Link} w-100 mt-4 text-center`} href="/resurse">
         Vezi resursele
       </Link>
     </div>

@@ -37,7 +37,7 @@ function NoSubmissionsYet() {
           Vreau să scriu lecții
         </Button>
 
-        <Link variant="contained" color="inherit" href="/exercitii/creeaza" className="align-items-center">
+        <Link prefetch={false} variant="contained" color="inherit" href="/exercitii/creeaza" className="align-items-center">
           <FontAwesomeIcon height="24" width="32" className="mr-2" icon={faLightbulb} />
           Vreau să creez exerciții
         </Link>
@@ -74,7 +74,7 @@ function NoSubmissionsYet() {
               <p>
                 Aruncă un ochi
                 {' '}
-                <Link href="/lectii">
+                <Link prefetch={false} href="/lectii">
                   aici
                 </Link>
                 {' '}

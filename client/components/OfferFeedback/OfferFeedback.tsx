@@ -129,7 +129,7 @@ function OfferFeedback({
           <h1> Oops 😟</h1>
           <h2> Feedback-ul a fost trimis sau submisia nu mai există </h2>
 
-          <Link variant="contained" color="blue" href="/">
+          <Link prefetch={false} variant="contained" color="blue" href="/">
             Navighează acasă
           </Link>
         </PageContainer>
@@ -175,7 +175,7 @@ function OfferFeedback({
         <h1 className="mb-0">
           Feedback pentru
           {' '}
-          <Link href={`/${submission.user.username}`}>
+          <Link prefetch={false} href={`/${submission.user.username}`}>
             {authorNameOrUsername}
           </Link>
         </h1>

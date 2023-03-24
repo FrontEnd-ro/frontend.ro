@@ -70,7 +70,7 @@ const LandingTidbits = ({ tidbits }: { tidbits: Pick<TidbitI, 'title' | 'items' 
         <div className={`${styles.about} d-flex flex-column justify-content-between`}>
           <a
             rel="noreferrer"
-            href={`/tidbits/${tidbits[currentIndex].tidbitId}/${currentIndex + 1}`}
+            href={`/tidbits/${tidbits[currentIndex].tidbitId}/2`}
             className={`${styles['heading-link']} no-underline`}
           >
             <h2 className={`${styles.heading} m-0`}>
@@ -93,7 +93,7 @@ const LandingTidbits = ({ tidbits }: { tidbits: Pick<TidbitI, 'title' | 'items' 
         </div>
         <StackedImages
           images={tidbits.map((t, index) => ({
-            href: `/tidbits/${tidbits[currentIndex].tidbitId}/${currentIndex + 1}`,
+            href: `/tidbits/${tidbits[currentIndex].tidbitId}/2`,
             alt: t.title,
             src: t.items[1].imageSrc,
             loading: 'lazy',

@@ -9,7 +9,7 @@ export async function getServerSideProps(ctx) {
   const { default: fetch } = await import('node-fetch');
   const SPAN = '[pages/index.tsx, getServerSideProps]';
 
-  const resp = await fetch(`${process.env.ENDPOINT}/tidbits`);
+  const resp = await fetch(`${process.env.ENDPOINT}/tidbits?field=title&field=textColor&field=backgroundColor&field=tidbitId&field=items[1].imageSrc`);
   const tidbits = await resp.json();
 
   const pageProps = {

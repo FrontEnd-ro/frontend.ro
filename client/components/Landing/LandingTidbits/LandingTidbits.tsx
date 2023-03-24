@@ -11,7 +11,10 @@ import { TidbitI } from '~/../shared/types/tidbit.types';
 
 import styles from './LandingTidbits.module.scss';
 
-const LandingTidbits = ({ tidbits }: { tidbits: TidbitI[] }) => {
+// We're specifically picking the fields we need for this component,
+// as a "documentation" for the Query Param that needs to be sent
+// to the Tidbits API.
+const LandingTidbits = ({ tidbits }: { tidbits: Pick<TidbitI, 'title' | 'items' | 'textColor' | 'backgroundColor' | 'tidbitId'>[] }) => {
   const { ref, inView } = useInView({
     threshold: 0.4,
     triggerOnce: false,

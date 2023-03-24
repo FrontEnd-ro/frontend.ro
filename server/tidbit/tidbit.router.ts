@@ -1,3 +1,4 @@
+import { get , set} from 'lodash';
 import express, { Request, Response } from "express";
 import { ServerError } from "../ServerUtils";
 import { PublicMiddleware } from "../Middlewares";
@@ -8,9 +9,36 @@ const tidbitRouter = express.Router();
 tidbitRouter.get("/", [
   PublicMiddleware,
   async function getAllTidbits(req: Request, res: Response) {
+    const queryParams = req.query;
     const tidbits = await Tidbit.find().sort('-createdDate');
+    const sanitizedTidbits = tidbits.map(sanitizeTidbit);
 
-    res.json(tidbits.map(sanitizeTidbit));
+    if (queryParams.hasOwnProperty('field')) {
+      // Adding the `fields` query param let's you choose which fields to populate
+      // on each tidbit. Similar in a way to GraphQL
+      // ?field=title&field=description
+      // Available values are ones supported from Lodash `get()` function
+      const stringFields: string[] = Array.isArray(queryParams.field)
+        ? queryParams.field.map(f => f.toString())
+        : [queryParams.field.toString()];
+
+      const tidbitsWithFields = sanitizedTidbits.map((tidbit) => {
+        let newTidbit = {};
+        stringFields.forEach((field: string) => {
+          const fieldValue = get(tidbit, field);
+          if (fieldValue !== undefined) {
+            set(newTidbit, field, fieldValue);
+          }
+        });
+
+        return newTidbit;
+      });
+
+      res.json(tidbitsWithFields);
+      return;
+    }
+
+    res.json(sanitizedTidbits);
   },
 ]);
 

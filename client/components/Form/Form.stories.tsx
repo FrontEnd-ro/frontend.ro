@@ -1,5 +1,5 @@
 import React from 'react';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Checkbox from './Checkbox/Checkbox';

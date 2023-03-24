@@ -1,4 +1,4 @@
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './StickyScrollExplainer.module.scss';
 

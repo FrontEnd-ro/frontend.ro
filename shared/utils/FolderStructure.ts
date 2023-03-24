@@ -6,7 +6,7 @@ import { alphabeticSortComparator, uuid } from './utils.shared';
 // to shared, because we need to use from here as well. But this import
 // is still here. Let's refactor and remove it.
 import ZipService from '../../client/services/utils/ZipService';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 
 const ERROR_MESSAGES = {
   FILE_MISSING: "Hmm, there's a bug in here. File seems to be missing.",

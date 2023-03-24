@@ -1,4 +1,5 @@
-import { get , set} from 'lodash';
+import get from 'lodash/get';
+import set from 'lodash/set';
 import express, { Request, Response } from "express";
 import { ServerError } from "../ServerUtils";
 import { PublicMiddleware } from "../Middlewares";

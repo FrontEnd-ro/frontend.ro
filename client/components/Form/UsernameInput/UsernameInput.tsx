@@ -1,4 +1,5 @@
-import { debounce, DebouncedFunc } from 'lodash';
+import { DebouncedFunc } from 'lodash';
+import debounce from 'lodash/debounce';
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';

@@ -2,7 +2,8 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef } from 'react';
 import { HLJSApi } from 'highlight.js';
-import { noop, escape } from 'lodash';
+import noop from 'lodash/noop';
+import escape from 'lodash/escape';
 import { copyToClipboard } from '~/services/Utils';
 import Button from '~/components/Button';
 

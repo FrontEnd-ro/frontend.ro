@@ -51,6 +51,10 @@ const LandingTidbits = ({ tidbits }: { tidbits: Pick<TidbitI, 'title' | 'items' 
     }
   };
 
+  if (tidbits.length === 0) {
+    return null;
+  }
+
   return (
     <div>
       <CallToAction arrowColor={tidbits[currentIndex].textColor} />

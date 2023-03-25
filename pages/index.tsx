@@ -22,7 +22,7 @@ export async function getServerSideProps(ctx) {
       fetch(`${process.env.ENDPOINT}/tidbits?field=title&field=textColor&field=backgroundColor&field=tidbitId&field=items[1].imageSrc`)
         .then(parseJSONOrThrowIfNot200),
       !token
-        ? Promise.resolve('not_started')
+        ? Promise.resolve({ status: 'not_started' })
         : fetch(`${process.env.ENDPOINT}/tutorials/html/status`, {
           headers: {
             cookie: `token=${token}`,

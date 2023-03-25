@@ -178,4 +178,45 @@ tutorialRouter.get('/:tutorialId/progress', [
   }
 ]);
 
+tutorialRouter.get("/:tutorialId/status", [
+  PrivateMiddleware,
+  async function getTutorialStatus(req: Request, res: Response<{ status: 'not_started' | 'started' | 'completed'}>) {
+    const { tutorialId } = req.params;
+    const { user }: { user: UserI } = req.body;
+
+    try {
+      const tutorial: TutorialI = await Tutorial.findOne({ tutorialId });
+      if (tutorial === null) {
+        new ServerError(
+          404,
+          `Nu există nici un tutorial cu id=${tutorialId}`
+        ).send(res);
+        return;
+      }
+  
+      const certification = await Certification.findOne({
+        tutorialId: tutorial._id,
+        user: user._id,
+      });
+  
+      if (certification !== null) {
+        res.json({ status: "completed" });
+        return;
+      }
+  
+      if (user.tutorials.includes(tutorialId)) {
+        res.json({ status: "started" });
+        return;
+      }
+  
+      res.json({ status: "not_started" });
+    } catch (err) {
+      new ServerError(
+        err.code || 500,
+        err.message || `Error tying to get status for tutorialId=${tutorialId}`,
+      ).send(res);
+    }
+  },
+]);
+
 export default tutorialRouter;

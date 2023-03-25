@@ -8,7 +8,6 @@ import { TidbitI } from '~/../shared/types/tidbit.types';
 import LandingAdCard from './LandingAdCard/LandingAdCard';
 import LandingResources from './LandingResources/LandingResources';
 import LandingSubscribe from './LandingSubscribe/LandingSubscribe';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import LandingHTML from '~/components/Landing/LandingHtml/LandingHtml';
 import LandingTidbits from '~/components/Landing/LandingTidbits/LandingTidbits';
 import LandingChristmasAdvent from './LandingChristmasAdvent/LandingChristmasAdvent';
@@ -17,13 +16,12 @@ import styles from './Landing.module.scss';
 
 function LandingPage({
   tidbits,
-  tutorials,
   isLoggedIn,
   applicationConfig,
-  htmlTutorialProgress,
+  htmlTutorialState,
 }: ConnectedProps<typeof connector> & {
   tidbits: TidbitI[],
-  htmlTutorialProgress: TutorialProgressI | null,
+  htmlTutorialState: 'not_started' | 'started' | 'completed';
 }) {
   return (
     <>
@@ -50,9 +48,8 @@ function LandingPage({
       <>
         {applicationConfig.ad && <LandingAdCard ad={applicationConfig.ad} />}
         <LandingHero
-          tutorials={tutorials}
           isLoggedIn={isLoggedIn}
-          htmlTutorialProgress={htmlTutorialProgress}
+          htmlTutorialState={htmlTutorialState}
         />
         <LandingHTML className={styles.LandingHTML} />
         <LandingChristmasAdvent className={styles.LandingChristmasAdvent} />
@@ -69,7 +66,6 @@ function mapStateToProps(state: RootState) {
   return {
     isLoggedIn: !!state.user.info,
     applicationConfig: state.applicationConfig,
-    tutorials: state?.user?.info?.tutorials ?? [],
   };
 }
 

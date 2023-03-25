@@ -13,17 +13,17 @@ export async function getServerSideProps(ctx) {
   const pageProps = {
     props: {
       tidbits: [],
-      htmlTutorialProgress: null,
+      htmlTutorialState: 'not_started',
     },
   };
 
   try {
-    const [tidbits, htmlTutorialProgress] = await Promise.all([
+    const [tidbits, htmlTutorialState] = await Promise.all([
       fetch(`${process.env.ENDPOINT}/tidbits?field=title&field=textColor&field=backgroundColor&field=tidbitId&field=items[1].imageSrc`)
         .then(parseJSONOrThrowIfNot200),
       !token
-        ? Promise.resolve(null)
-        : fetch(`${process.env.ENDPOINT}/tutorials/html/progress`, {
+        ? Promise.resolve('not_started')
+        : fetch(`${process.env.ENDPOINT}/tutorials/html/status`, {
           headers: {
             cookie: `token=${token}`,
           },
@@ -31,7 +31,7 @@ export async function getServerSideProps(ctx) {
     ]);
 
     pageProps.props.tidbits = tidbits;
-    pageProps.props.htmlTutorialProgress = htmlTutorialProgress;
+    pageProps.props.htmlTutorialState = htmlTutorialState.status;
   } catch (err) {
     console.error(`${SPAN}`, err);
   }

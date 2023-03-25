@@ -7,58 +7,37 @@ import Header from '~/components/Header';
 import Button from '~/components/Button';
 import Link from '~/components/generic/Link';
 import NavLinks from '~/components/NavLinks/NavLinks';
-import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import LandingSchmoes from './LandingSchmoes/LandingSchmoes';
 import AsideMenu from '~/components/layout/AsideMenu/AsideMenu';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 import styles from './LandingHero.module.scss';
 
 interface Props {
   isLoggedIn: boolean;
-
-  // Tutorials started by the user
-  tutorials: string[];
-
-  // Progress of the HTML tutorial,
-  // if the user started it.
-  htmlTutorialProgress: TutorialProgressI | null;
+  htmlTutorialState: 'not_started' | 'started' | 'completed';
 }
 
-enum TutorialState {
-  NOT_STARTED = 0,
-  IN_PROGRESS = 1,
-  FINISHED = 2,
-}
-
-function LandingHero({ isLoggedIn, tutorials, htmlTutorialProgress }: Props) {
+function LandingHero({ isLoggedIn, htmlTutorialState }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  let tutorialState = TutorialState.NOT_STARTED;
-  if (htmlTutorialProgress !== null && !!htmlTutorialProgress?.certification) {
-    tutorialState = TutorialState.FINISHED;
-  } else if (tutorials.includes(HTML_TUTORIAL_ID)) {
-    tutorialState = TutorialState.IN_PROGRESS;
-  }
-
-  const CONFIG: Record<TutorialState, { label: string; href: string }> = {
-    [TutorialState.NOT_STARTED]: {
+  const CONFIG: Record<'not_started' | 'started' | 'completed', { label: string; href: string }> = {
+    not_started: {
       label: 'Începe Tutorialul de HTML',
       href: '/html',
     },
-    [TutorialState.IN_PROGRESS]: {
+    started: {
       label: 'Continuă Tutorialul de HTML',
       href: '/html/tutorial',
     },
-    [TutorialState.FINISHED]: {
+    completed: {
       label: 'Vezi certificarea HTML!',
       href: '/html/tutorial/certification',
     },
   };
 
   useEffect(() => {
-    if (tutorialState === TutorialState.FINISHED) {
+    if (htmlTutorialState === 'completed') {
       const confetti = new ConfettiGenerator({
         target: canvasRef.current,
         width: 300,
@@ -103,10 +82,10 @@ function LandingHero({ isLoggedIn, tutorials, htmlTutorialProgress }: Props) {
               color="black"
               prefetch={false}
               variant="contained"
-              href={CONFIG[tutorialState].href}
+              href={CONFIG[htmlTutorialState].href}
               className={`${styles['action-button']} d-inline-block mt-2 text-center relative`}
             >
-              {CONFIG[tutorialState].label}
+              {CONFIG[htmlTutorialState].label}
               <canvas className="pin-full" ref={canvasRef} />
             </Link>
           </div>

@@ -195,7 +195,7 @@ tutorialRouter.get("/:tutorialId/status", [
       }
   
       const certification = await Certification.findOne({
-        tutorialId: tutorial._id,
+        tutorial: tutorial._id,
         user: user._id,
       });
   

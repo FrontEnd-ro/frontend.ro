@@ -69,11 +69,11 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@gogaille/storybook-addon-next-router": "^4.0.0",
     "@octokit/rest": "^18.5.2",
-    "@storybook/addon-actions": "^6.4.19",
-    "@storybook/addon-essentials": "^6.4.19",
-    "@storybook/addon-links": "^6.4.19",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
     "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^6.4.19",
+    "@storybook/react": "^6.5.16",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
@@ -141,5 +141,8 @@
     "style-loader": "^2.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
+  },
+  "resolutions": {
+    "@storybook/react-docgen-typescript-plugin": "1.0.6--canary.9.cd77847.0"
   }
 }

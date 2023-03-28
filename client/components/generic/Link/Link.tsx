@@ -39,19 +39,16 @@ const Link = ({
     passHref={passHref}
     prefetch={prefetch}
     locale={locale}
+    className={`
+    ${className}
+    ${styles[variant]}
+    ${styles[color]}
+    ${active === true ? styles.active : ''}
+    cursor-pointer
+  `}
+    {...rest}
   >
-    <a
-      className={`
-        ${className}
-        ${styles[variant]}
-        ${styles[color]}
-        ${active === true ? styles.active : ''}
-        cursor-pointer
-      `}
-      {...rest}
-    >
-      {children}
-    </a>
+    {children}
   </NextLink>
 );
 

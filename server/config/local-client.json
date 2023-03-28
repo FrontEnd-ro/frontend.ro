@@ -2,7 +2,7 @@
   "APP": {
     "port": 3300,
     "env": "development",
-    "app_url": "https://dev.frontend.ro",
+    "app_url": "http://localhost:3000",
     "endpoint": "https://dev.frontend.ro/api"
   },
   "CDN": {

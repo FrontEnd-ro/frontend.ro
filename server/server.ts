@@ -30,15 +30,14 @@ import challengeSubmissionRouter from './challenge/challengeSubmission/challenge
 
 const port = appConfig.APP.port || appConfig.APP.default_port;
 const app = express();
-const nextApp = next({ dev: process.env.NODE_ENV === 'development' })
-const nextHandler = nextApp.getRequestHandler()
 
 app.use(
   cors({
     credentials: true,
     origin: appConfig.APP.env === 'production'
-      ? appConfig.APP.app_url
-      : 'http://localhost:3300'
+    ? appConfig.APP.app_url
+    // TODO: this should be dynamically set via the config
+    : 'http://localhost:3000'
   })
 );
 
@@ -46,8 +45,6 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());
 
-
-app.use(express.static('client/public'));
 app.use('/_next', express.static('/../dist'));
 
 /** API routers */
@@ -69,16 +66,21 @@ app.use('/api/certifications', certificationRouter);
 app.use('/api/tutorials', tutorialRouter);
 app.use('/api/tidbits', tidbitRouter);
 
-app.get('*', (req, res) => {
-  nextHandler(req, res, req.url);
-});
-
 connectToDb()
   .catch(err => {
     console.error('[connectToDB]', err);
     throw true;
   })
-  .then(() => nextApp.prepare())
+  .then(() => {
+    if (process.env.NODE_ENV !== "development") {
+      const nextApp = next({ dev: false });
+      const nextHandler = nextApp.getRequestHandler();
+      app.get("*", (req, res) => {
+        nextHandler(req, res, req.url);
+      });
+      nextApp.prepare();
+    }
+  })
   .catch(err => {
     console.error('[nextApp.prepare]', err);
     throw true;

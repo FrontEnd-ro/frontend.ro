@@ -12,7 +12,7 @@ import Link from '~/components/generic/Link';
 import Highlight from '~/components/Highlight/Highlight';
 import DevToolsClone from '~/components/DevToolsClone';
 import SideBySidePictures from '~/components/SideBySidePictures';
-import coverSvg from '~/public/images/lessons/box-model/cover.svg';
+import coverSvg from './BoxModelCover.svg';
 import FormattedText from '~/components/FormattedText';
 import { getLessonById } from '~/services/DataModel';
 import List from '~/components/List';

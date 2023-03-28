@@ -45,8 +45,9 @@
     }
   ],
   "scripts": {
-    "dev": "nodemon server/server.ts --watch server",
-    "dev:client": "ts-node server/client-server.ts",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "nodemon server/server.ts --watch server",
+    "dev:client": "next dev",
     "prebuild": "rm -rf server-build",
     "build": "tsc -p ./server/ && next build",
     "postbuild": "next-sitemap",
@@ -77,6 +78,7 @@
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
+    "concurrently": "^7.6.0",
     "confetti-js": "^0.0.18",
     "config": "^3.3.6",
     "cookie": "^0.4.1",

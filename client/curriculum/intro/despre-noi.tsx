@@ -8,7 +8,7 @@ import {
 } from '~/components/SocialMediaButtons';
 import { useCurrentUrl } from '~/services/Hooks';
 import { getLessonById } from '~/services/DataModel';
-import coverSvg from '~/public/images/lessons/lesson-0__cover.svg';
+import coverSvg from './despre-noi-cover.svg';
 import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
 import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';

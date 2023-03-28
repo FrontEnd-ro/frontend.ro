@@ -19,7 +19,10 @@ import { UserRole } from '~/../shared/types/user.types';
 import Link from '~/components/generic/Link';
 
 interface Props {
-  profileUser: UserState['info']
+  profileUser: {
+    name?: string;
+    username: string;
+  }
 }
 
 function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connector> & Props) {
@@ -144,7 +147,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
         )}
       </div>
       <hr />
-      {isOwnProfile && profileUser.role.includes(UserRole.ADMIN) && (
+      {isOwnProfile && currentUser.info.role.includes(UserRole.ADMIN) && (
         <CreatedExercises />
       )}
     </PageContainer>

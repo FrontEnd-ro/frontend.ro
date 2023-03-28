@@ -5,7 +5,7 @@ import svgCover from './no-activity.svg';
 
 import styles from './NoActivity.module.scss';
 
-function NoActivity({ user }: { user: UserState['info'] }) {
+function NoActivity({ user }: { user: { name?: string; username: string; } }) {
   const nameOrUsername = user.name || user.username;
 
   return (

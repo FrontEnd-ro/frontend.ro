@@ -8,7 +8,12 @@ import styles from './UserProfile.module.scss';
 import UserActivity from './UserActivity/UserActivity';
 
 interface Props {
-  profileUser: UserState['info']
+  profileUser: {
+    avatar: string;
+    name?: string;
+    username: string;
+    description?: string;
+  }
 }
 function UserProfile({ profileUser }: Props) {
   const nameOrUsername = profileUser.name || profileUser.username;

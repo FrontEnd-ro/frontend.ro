@@ -7,7 +7,7 @@ const UserModel = require('./user.model');
 const SubscribeModel = require('../subscribe.model');
 const PasswordResetModel = require('../password-reset/password-reset.model');
 const { ServerError, setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } = require('../ServerUtils');
-const { PrivateMiddleware } = require('../Middlewares');
+const { PrivateMiddleware, PublicMiddleware } = require('../Middlewares');
 const { MAX_MEDIA_MB, MAX_MEDIA_BYTES } = require('../../shared/SharedConstants')
 const { default: appConfig } = require('../config');
 
@@ -64,7 +64,27 @@ userRouter.get('/ping', [
     const { user } = req.body;
     res.json(UserModel.sanitize(user));
   }
-])
+]);
+
+userRouter.get('/:username', [
+  PublicMiddleware,
+  async function getPublicProfile(req, res) {
+    const { username } = req.params;
+    try {
+      const user = await UserModel.getUser({ username });
+      if (user === null) {
+        throw new ServerError(404, `No user with username=${username} exists.`);
+      }
+
+      const publicUser = UserModel.sanitizeForPublic(user);
+      res.json(publicUser);
+    } catch (err) {
+      new ServerError(
+        err.code || 500,
+        err.message || `Error tying to get public profile for username=${username}`,
+      ).send(res);
+    }
+}]);
 
 userRouter.post('/login', async function login(req, res) {
   let { emailOrUsername, password } = req.body;

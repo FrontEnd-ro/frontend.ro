@@ -1,30 +1,38 @@
 import React from 'react';
 import NotFoundPage from './404';
 import UserProfile from '~/components/user-profile/UserProfile';
-import SharedUserModel from '../shared/user.shared-model';
 
-export default function Username(props: any) {
-  // eslint-disable-next-line react/destructuring-assignment
-  return props.profileUser ? <UserProfile profileUser={props.profileUser} /> : <NotFoundPage />;
+export default function Username({ publicProfile }: {
+  publicProfile: {
+    avatar: string;
+    name?: string;
+    username: string;
+    description?: string;
+  } | null
+}) {
+  if (publicProfile === null) {
+    return <NotFoundPage />;
+  }
+
+  return <UserProfile profileUser={publicProfile} />
 }
 
 export async function getServerSideProps({ res, params }) {
-  const user = await SharedUserModel.findUserBy({ username: params.username });
+  const resp = await fetch(`${process.env.ENDPOINT}/auth/${params.username}`);
 
-  if (!user) {
-    res.statusCode = 404;
-
+  if (!resp.ok) {
+    res.statusCode = resp.status;
     return {
-      props: {},
+      props: {
+        publicProfile: null,
+      },
     };
   }
 
-  const sanitizedUser = SharedUserModel.sanitize(user);
-  delete sanitizedUser.lastLogin;
-
+  const publicProfile = await resp.json();
   return {
     props: {
-      profileUser: sanitizedUser,
-    },
-  };
+      publicProfile
+    }
+  }
 }

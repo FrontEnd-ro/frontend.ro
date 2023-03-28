@@ -91,6 +91,17 @@ class UserModel {
 
   static sanitize = SharedUserModel.sanitize;
 
+  static sanitizeForPublic = (user) => {
+    const sanitizedUser = UserModel.sanitize(user);
+    const propertiesToKeep = ['name', 'description', 'avatar', 'username'];
+    const result = {};
+
+    propertiesToKeep.forEach((prop) => {
+      result[prop] = sanitizedUser[prop];
+    });
+    return result;
+  }
+
   static validateUsername(username) {
     const RESTRICTED_USERNAMES = [
       'lectii',

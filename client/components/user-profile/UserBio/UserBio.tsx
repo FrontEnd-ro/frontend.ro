@@ -7,7 +7,12 @@ import Link from '~/components/generic/Link';
 import styles from './UserBio.module.scss';
 
 interface Props {
-  user: UserState['info'],
+  user: {
+    avatar: string;
+    name?: string;
+    username: string;
+    description?: string;
+  },
   className?: string
 }
 

@@ -112,7 +112,7 @@ tutorialRouter.get('/:tutorialId/progress', [
       SubmissionModel.getAllUserSubmissions(user._id.toString()),
       LessonExerciseModel.getAll(),
       Certification.findOne({
-        tutorialId: tutorial._id,
+        tutorial: tutorial._id,
         user: user._id,
       })
         .populate("user")

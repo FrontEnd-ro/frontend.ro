@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { ServerError } from '../ServerUtils';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
 import Tutorial from '../tutorial/tutorial.model';
-import { Certification, createCertification } from './certification.model';
+import { Certification, createCertification, sanitizeCertification } from './certification.model';
 import { LessonI } from '../../shared/types/lesson.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { ExerciseType, WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
@@ -15,6 +15,8 @@ import { UserI } from '../../shared/types/user.types';
 import NotificationModel from '../notification/notification.model';
 import { NotificationChannel, NotificationType, NotificationUrgency } from '../../shared/types/notification.types';
 import Challenge from '../challenge/challenge.model';
+import { TutorialI } from '../../shared/types/tutorial.types';
+import { ChallengeI } from '../../shared/types/challenge.types';
 
 const LessonModel = require('../lesson/lesson.model');
 const SubmissionModel = require('../submission/submission.model');
@@ -26,16 +28,28 @@ certificationRouter.get('/:certificationId', [
   async function getCertification(req: Request, res: Response) {
     const { certificationId } = req.params;
 
-    const certification = await Certification.findById(certificationId)
-      .populate('user')
-      .populate('lesson_exercises');
-
-    if (certification === null) {
-      new ServerError(404, `Nu există nici o certificare cu ID=${certificationId}`).send(res);
-      return;
+    try {
+      const certification = await Certification.findById(certificationId)
+        .populate('user')
+        .populate<{ tutorial: TutorialI }>('tutorial')
+        .populate<{ challenge: ChallengeI }>('challenge')
+        .populate<{ lesson_exercises: WIPPopulatedLessonExerciseI[] }>({
+          path: 'lesson_exercises',
+          populate: { path: 'user' },
+        });
+  
+      if (certification === null) {
+        new ServerError(404, `Nu există nici o certificare cu ID=${certificationId}`).send(res);
+        return;
+      }
+  
+      res.json(sanitizeCertification(certification));
+    } catch (err) {
+      new ServerError(
+        err.code || 500,
+        err.message || `Error tying to fetch certification for certificationId=${certificationId}`,
+      ).send(res);
     }
-
-    res.json(certification);
   }
 ]);
 
@@ -67,10 +81,7 @@ certificationRouter.get('/challenge/:challengeId', [
         return;
       }
   
-      res.json({
-        ...certification.toObject(),
-        user: sanitizeUser(certification.user),
-      });
+      res.json(sanitizeCertification(certification));
     } catch (err) {
       new ServerError(
         err.code || 500,

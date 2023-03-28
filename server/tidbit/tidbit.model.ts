@@ -24,7 +24,7 @@ const Tidbit: mongoose.Model<TidbitI, {}, {}> = mongoose.models.Tidbit
   || mongoose.model<TidbitI>('Tidbit', TidbitSchema);
 
 
-function sanitizeTidbit(tidbit: Document<TidbitI> & TidbitI): TidbitI {
+function sanitizeTidbit(tidbit: Document<any, any, TidbitI> & TidbitI): TidbitI {
   const tidbitCopy = tidbit.toObject();
   delete tidbitCopy._id;
 

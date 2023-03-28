@@ -1,10 +1,11 @@
+import * as LogrocketInstance from 'logrocket/dist/types';
 interface IdentityData {
   name?: string;
   username: string;
   email: string;
 }
 class LogRocketService {
-  private static instance = null;
+  private static instance: typeof LogrocketInstance | null = null;
 
   private static identityData: IdentityData;
 

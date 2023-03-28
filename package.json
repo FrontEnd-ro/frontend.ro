@@ -93,7 +93,7 @@
     "jsonwebtoken": "^8.5.1",
     "jszip": "^3.7.0",
     "lodash": "^4.17.20",
-    "logrocket": "^1.0.14",
+    "logrocket": "^4.0.0",
     "marked": "^4.0.10",
     "monaco-editor": "0.34.1",
     "mongoose": "^6.0.13",

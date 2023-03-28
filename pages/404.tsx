@@ -12,7 +12,7 @@ export default function Generic404() {
     const lesson = getUpcomingLesson(router.asPath);
 
     setUpcomingLesson(lesson || false);
-  }, []);
+  }, [router.asPath]);
 
   if (upcomingLesson === undefined) {
     return null;

@@ -4,7 +4,7 @@ import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import ExercisesPage from '~/components/ExercisesPage';
 
-export default function () {
+const Page =  () => {
   return (
     <>
       <SEOTags
@@ -20,3 +20,5 @@ export default function () {
     </>
   );
 }
+
+export default Page;

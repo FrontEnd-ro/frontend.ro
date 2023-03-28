@@ -6,6 +6,6 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": ["./frontend-ssr"],
+  "eslint.workingDirectories": ["./pages", "./client"],
   "editor.tabSize": 2,
 }

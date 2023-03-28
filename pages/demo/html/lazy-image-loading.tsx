@@ -83,7 +83,7 @@ export default function LazyLoadingImages() {
           <DemoPreview>
             <div>
               {images.map(({ src, alt }) => (
-                <img loading="lazy" height="500" src={src} alt={alt} />
+                <img loading="lazy" key={`${src}_${alt}`}  height="500" src={src} alt={alt} />
               ))}
 
             </div>

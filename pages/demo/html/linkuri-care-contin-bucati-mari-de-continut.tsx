@@ -8,6 +8,7 @@ import Footer from '~/components/Footer';
 import Highlight from '~/components/Highlight/Highlight';
 import { LessonTip } from '~/components/lessons';
 import FormattedText from '~/components/FormattedText';
+import Link from 'next/link';
 
 export default function LinksAroundBiggerChuncksOfContent() {
   const title = 'Două modalități prin care putem folosi bucăți mari de cod în interiorul unui link și implicațiile lor';
@@ -230,7 +231,7 @@ export default function LinksAroundBiggerChuncksOfContent() {
           />
           <p>
             Al doilea exemplu are un link în titlu și link-ul are un
-            <a href="/css/pseudo-elements"> pseudo-element</a>
+            <Link prefetch={false} href="/css/pseudo-elements"> pseudo-element</Link>
             {' '}
             definit care
             "acoperă" întregul card.

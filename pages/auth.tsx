@@ -5,7 +5,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import AuthRedirect from '~/components/AuthRedirect/AuthRedirect';
 import { RootState } from '~/redux/root.reducer';
-import { useAnonymousOnly } from '~/services/Hooks';
+import { navigateIfAuthenticated } from '~/services/Hooks';
 import SEOTags from '~/components/SEOTags';
 
 function Authpage({ isLoggedIn }: ConnectedProps<typeof connector>) {
@@ -16,7 +16,7 @@ function Authpage({ isLoggedIn }: ConnectedProps<typeof connector>) {
     if (router.query.next) {
       nextHref = Array.isArray(router.query.next) ? router.query.next[0] : router.query.next;
     }
-    useAnonymousOnly(router, isLoggedIn, nextHref);
+    navigateIfAuthenticated(router, isLoggedIn, nextHref);
   }, []);
 
   return (

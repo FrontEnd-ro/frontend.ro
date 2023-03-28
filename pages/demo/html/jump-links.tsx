@@ -23,16 +23,9 @@ export default function JumpLinks() {
         <Header demoPage />
         <Demo title={title}>
           <DemoPreview>
-            <html
-              lang="en"
-              style={{
+              <div style={{
                 scrollBehavior: 'smooth',
-              }}
-            >
-              <head>
-                <title>Smooth scrolling</title>
-              </head>
-              <body>
+              }}>
                 <section>
                   <a href="#o-simpla-sectiune">O simplă secțiune</a>
                   <h3 id="o-simpla-sectiune">O simplă secțiune</h3>
@@ -104,8 +97,7 @@ export default function JumpLinks() {
                     repellat.
                   </p>
                 </section>
-              </body>
-            </html>
+              </div>
           </DemoPreview>
           <Highlight
             className="my-5"

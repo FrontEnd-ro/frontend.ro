@@ -56,7 +56,7 @@ function useLoggedInOnly(isLoggedIn: boolean, path: string) {
   }
 }
 
-function useAnonymousOnly(router: NextRouter, isLoggedIn: boolean, nextHref: string) {
+function navigateIfAuthenticated(router: NextRouter, isLoggedIn: boolean, nextHref: string) {
   if (isLoggedIn && nextHref) {
     if (typeof window !== 'undefined') {
       router.replace(nextHref);
@@ -184,7 +184,7 @@ export {
   useOutsideClick,
   withSmoothScroll,
   useLoggedInOnly,
-  useAnonymousOnly,
+  navigateIfAuthenticated,
   withAuthModal,
   useKeyDown,
   useCurrentUrl,

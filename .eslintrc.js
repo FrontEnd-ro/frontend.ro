@@ -1,8 +1,6 @@
 module.exports = {
   extends: [
-    'airbnb',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
+    'next/core-web-vitals',
   ],
   rules: {
     'linebreak-style': 'off',
@@ -35,10 +33,8 @@ module.exports = {
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'react/prop-types': 'off',
     'import/no-unresolved': 'off', // Disabling becasue TS takes care of it
+    '@next/next/no-img-element': 'off',
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
   settings: {
     'import/resolver': {
       alias: {

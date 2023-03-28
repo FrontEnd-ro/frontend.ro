@@ -77,7 +77,7 @@ export default function RegularLoadingImages() {
           <DemoPreview>
             <div>
               {images.map(({ src, alt }) => (
-                <img src={src} alt={alt} />
+                <img key={`${src}_${alt}`} src={src} alt={alt} />
               ))}
 
             </div>

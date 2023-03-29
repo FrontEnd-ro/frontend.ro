@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { UserI } from '../../../shared/types/user.types';
 import { ChallengeI } from '../../../shared/types/challenge.types';
 import FolderStructure from '../../../shared/utils/FolderStructure';
-import { sanitize as sanitizeUser } from '../../../shared/user.shared-model';
+import UserModel from '../../user/user.model';
 import { ChallengeSubmissionI, ChallengeSubmissionTaskI, VerificationStatus } from '../../../shared/types/challengeSubmissions.types';
 
 const VerificationErrorSchema = new mongoose.Schema<VerificationStatus['error']>({
@@ -44,7 +44,7 @@ const sanitize = (challengeSubmission: ChallengeSubmissionI) :  ChallengeSubmiss
   }
 
   if (typeof sanitizedChallengeSubmission.user !== 'string') {
-    sanitizedChallengeSubmission.user = sanitizeUser(sanitizedChallengeSubmission.user);
+    sanitizedChallengeSubmission.user = UserModel.sanitize(sanitizedChallengeSubmission.user);
   }
 
   const propsToDelete = ['_id'];
@@ -69,7 +69,7 @@ const mapFromChallenge = (challenge: ChallengeI, user: UserI): ChallengeSubmissi
 
   return {
     ...challengeObject,
-    user: sanitizeUser(user),
+    user: UserModel.sanitize(user),
     tasks: challengeObject.tasks.map((task) => {
       // Do not return the task ID
       delete task._id;

@@ -10,7 +10,6 @@ import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/su
 import appConfig from '../config';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import UserModel from '../user/user.model';
-import { sanitize as sanitizeUser} from '../../shared/user.shared-model';
 import { UserI } from '../../shared/types/user.types';
 import NotificationModel from '../notification/notification.model';
 import { NotificationChannel, NotificationType, NotificationUrgency } from '../../shared/types/notification.types';

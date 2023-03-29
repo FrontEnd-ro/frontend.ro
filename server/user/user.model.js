@@ -1,17 +1,38 @@
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const SharedUserModel = require('../../shared/user.shared-model');
 const { AUTH_EXPIRATION, ServerError, validateAgainstSchemaProps, validateObjectId, MAX_USERNAME_LENGTH } = require('../ServerUtils');
 const { default: appConfig } = require('../config');
+const { UsersSchema } = require('./user.schema');
 
-const { UsersSchema, User } = SharedUserModel
+const User = mongoose.models.User || mongoose.model('User', UsersSchema);
 
 class UserModel {
   static search() {
     return User.find({});
   }
 
-  static ping = SharedUserModel.ping;
+  static async ping(token) {
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, appConfig.AUTH.secret, async (err, decodedInfo) => {
+        if (err) {
+          console.error('UserSharedModel.ping', err);
+          reject(new ServerError(401, 'Not authenticated'));
+          return;
+        }
+  
+        const { _id } = decodedInfo;
+  
+        const user = await findUserBy({ _id });
+        if (!user) {
+          reject(new ServerError(404, "User doesn't exist anymore!"));
+          return;
+        }
+  
+        resolve(user);
+      });
+    });
+  }
 
   static async verify(username, password) {
     const user = await UserModel.findUserBy({ username });
@@ -46,7 +67,11 @@ class UserModel {
     });
   }
 
-  static findUserBy = SharedUserModel.findUserBy;
+  static async findUserBy(filters) {
+    const user = await User.findOne(filters);
+   
+     return user || null;
+   }
 
   static async getUser({
     username,
@@ -89,7 +114,19 @@ class UserModel {
     );
   }
 
-  static sanitize = SharedUserModel.sanitize;
+  static sanitize(user) {
+    // TODO: decide on an approach to use among all schema
+    // https://github.com/FrontEnd-ro/frontend.ro/issues/438
+    let sanitizedUser = { ...user };
+    if (user instanceof mongoose.Document) {
+      sanitizedUser = { ...user.toObject() };
+    }
+    const propsToDelete = ['_id', '__v', 'password', 'github_access_token'];
+  
+    propsToDelete.forEach((prop) => delete sanitizedUser[prop]);
+  
+    return sanitizedUser;
+  }
 
   static sanitizeForPublic = (user) => {
     const sanitizedUser = UserModel.sanitize(user);

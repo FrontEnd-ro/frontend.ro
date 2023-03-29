@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { faExclamationCircle, faExclamationTriangle, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import {
   LessonCover,
@@ -47,9 +46,9 @@ export default function ImagesContent() {
   return (
     <>
       <LessonCover>
-        <Image
+        <img
           width="2400"
-          height="1260"
+          style={{ aspectRatio: '2400/1260' }}
           alt="Doodle cu rama unei imagini"
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_2400w.jpg`}
         />

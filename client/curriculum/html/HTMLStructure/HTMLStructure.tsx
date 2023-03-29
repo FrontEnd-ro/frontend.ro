@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import {
   LessonCover,
   LessonHeading,
@@ -23,9 +22,9 @@ function HTMLStructureContent() {
   return (
     <>
       <LessonCover>
-        <Image
+        <img
           width="2400"
-          height="1260"
+          style={{ aspectRatio: '2400/1260' }}
           alt="Stickman reprezentând elementele Head și Body"
           src={`${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_2400w.jpg`}
         />

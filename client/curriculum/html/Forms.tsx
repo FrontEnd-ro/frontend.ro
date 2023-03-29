@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import {
   LessonCover,
   LessonHeading,
@@ -18,9 +17,9 @@ export default function FormsContent() {
   return (
     <>
       <LessonCover>
-        <Image
+        <img
           width="2400"
-          height="1260"
+          style={{ aspectRatio: '2400/1260' }}
           alt="Doodle cu elemente din formulare"
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/forms_2400w.jpg`}
         />

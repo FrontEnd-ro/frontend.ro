@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import {
   LessonCover,
   LessonFigure,
@@ -18,9 +17,9 @@ export default function TextsContent() {
   return (
     <>
       <LessonCover>
-        <Image
+        <img
           width="2400"
-          height="1260"
+          style={{ aspectRatio: '2400/1260' }}
           alt="Elemente HTML pentru texte"
           src={`${process.env.CLOUDFRONT_PUBLIC}/seo/texts_2400w.jpg`}
         />

@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import {
   LessonCover,
   LessonHeading,
@@ -23,7 +22,7 @@ export default function AudioAndVideoContent() {
   return (
     <>
       <LessonCover>
-        <Image width="2400" height="1260" alt="Doodle cu un audio waveform și un video" src={coverImage} />
+        <img width="2400" style={{ aspectRatio: '2400/1260' }} alt="Doodle cu un audio waveform și un video" src={coverImage} />
       </LessonCover>
       <LessonFirstSentence>
         În lecția anterioară am aflat cum putem adăuga imagini pe site-urile

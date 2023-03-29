@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import {
   LessonCover,
   LessonFigure,
@@ -19,9 +18,9 @@ export default function VSCodeContent() {
   return (
     <>
       <LessonCover>
-        <Image
+        <img
           width="1200"
-          height="630"
+          style={{ aspectRatio: '1200/630' }}
           alt="Logo-ul VSCode"
           src={`${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`}
         />

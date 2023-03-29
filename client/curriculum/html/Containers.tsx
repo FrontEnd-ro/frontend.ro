@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { getLessonById } from '~/services/DataModel';
 import {
   LessonQuote,
@@ -21,7 +20,7 @@ function ContainersContent() {
   return (
     <>
       <LessonCover>
-        <Image width="2400" height="1260" alt="Doodle cu o cutie" src={coverImage} />
+        <img width="2400" style={{ aspectRatio: '2400/1260' }} alt="Doodle cu o cutie" src={coverImage} />
       </LessonCover>
       <LessonFirstSentence>
         Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru

@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { getLessonById } from '~/services/DataModel';
 import {
   LessonTip,
@@ -20,9 +19,9 @@ function HTMLValidationContent() {
   return (
     <>
       <LessonCover>
-        <Image
+        <img
           width="2400"
-          height="1260"
+          style={{ aspectRatio: '2400/1260' }}
           alt="Angry doodle to Valid HTML"
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_2400w.jpg`}
         />

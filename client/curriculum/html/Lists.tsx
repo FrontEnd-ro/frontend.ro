@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import {
   LessonCover,
@@ -20,9 +19,9 @@ export default function ListsContent() {
   return (
     <>
       <LessonCover>
-        <Image
+        <img
           width="2400"
-          height="1260"
+          style={{ aspectRatio: '2400/1260' }}
           alt="Doodle pentru un todo list"
           src={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_2400w.jpg`}
         />

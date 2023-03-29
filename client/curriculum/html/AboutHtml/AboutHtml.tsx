@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import {
   LessonCover,
   LessonFigure,
@@ -21,9 +20,9 @@ export default function AboutHtmlContent() {
   return (
     <>
       <LessonCover>
-        <Image
+        <img
           width="2400"
-          height="1260"
+          style={{ aspectRatio: '2400 / 1260' }}
           alt="Road-sign doodle with HTML, CSS and JS"
           src={`${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_2400w.jpg`}
         />

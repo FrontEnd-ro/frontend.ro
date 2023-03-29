@@ -1,19 +1,13 @@
-import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
-import { UserState } from '~/redux/user/types';
 import Link from '~/components/generic/Link';
+import { PublicUserI } from '~/../shared/types/user.types';
 
 import styles from './UserBio.module.scss';
 
 interface Props {
-  user: {
-    avatar: string;
-    name?: string;
-    username: string;
-    description?: string;
-  },
-  className?: string
+  user: PublicUserI;
+  className?: string;
 }
 
 function UserBio({ user, currentUser, className }: ConnectedProps<typeof connector> & Props) {

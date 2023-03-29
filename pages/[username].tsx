@@ -1,14 +1,10 @@
 import React from 'react';
 import NotFoundPage from './404';
+import { PublicUserI } from '../shared/types/user.types';
 import UserProfile from '~/components/user-profile/UserProfile';
 
 export default function Username({ publicProfile }: {
-  publicProfile: {
-    avatar: string;
-    name?: string;
-    username: string;
-    description?: string;
-  } | null
+  publicProfile: PublicUserI | null
 }) {
   if (publicProfile === null) {
     return <NotFoundPage />;

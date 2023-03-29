@@ -1,11 +1,10 @@
-import React from 'react';
+import { PublicUserI } from '~/../shared/types/user.types';
 import PageContainer from '~/components/PageContainer';
-import { UserState } from '~/redux/user/types';
 import svgCover from './no-activity.svg';
 
 import styles from './NoActivity.module.scss';
 
-function NoActivity({ user }: { user: { name?: string; username: string; } }) {
+function NoActivity({ user }: { user: PublicUserI }) {
   const nameOrUsername = user.name || user.username;
 
   return (

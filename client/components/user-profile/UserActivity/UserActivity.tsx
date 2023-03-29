@@ -15,14 +15,11 @@ import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialProgress from './TutorialProgress/TutorialProgress';
 import { aggregateTutorialProgress } from '~/services/Utils';
-import { UserRole } from '~/../shared/types/user.types';
+import { PublicUserI, UserRole } from '~/../shared/types/user.types';
 import Link from '~/components/generic/Link';
 
 interface Props {
-  profileUser: {
-    name?: string;
-    username: string;
-  }
+  profileUser: PublicUserI;
 }
 
 function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connector> & Props) {

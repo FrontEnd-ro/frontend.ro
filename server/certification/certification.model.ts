@@ -31,7 +31,7 @@ function sanitizeCertification(certification: Document<any, any, WIPPopulatedCer
   const sanitizedCertfication: WIPPopulatedCertificationI = JSON.parse(JSON.stringify(certification.toObject()));
 
   if (typeof sanitizedCertfication.user !== 'string') {
-    sanitizedCertfication.user = UserModel.sanitize(sanitizedCertfication.user);
+    sanitizedCertfication.user = UserModel.sanitizeForPublic(sanitizedCertfication.user);
   }
   sanitizedCertfication.lesson_exercises = sanitizedCertfication.lesson_exercises.map(lessonExercise => {
     return ExerciseModel.sanitize(lessonExercise)

@@ -2,7 +2,7 @@ import { PopulatedDoc, Document, ObjectId } from 'mongoose';
 import { ChallengeI } from './challenge.types';
 import { LessonExerciseI, WIPPopulatedLessonExerciseI } from './exercise.types';
 import { TutorialI } from './tutorial.types';
-import { UserI } from './user.types';
+import { PublicUserI, UserI } from './user.types';
 
 export interface CertificationI {
   // Optional because when we create certifications
@@ -43,7 +43,7 @@ export interface WIPPopulatedCertificationI {
 
   challenge: ChallengeI;
 
-  user: UserI;
+  user: PublicUserI;
 
   // Nanos
   timestamp: number;

@@ -118,7 +118,7 @@ async function PublicOrOwnExercise(req, res, next) {
 
     next();
   } catch (err) {
-    console.error("[OwnExercise]", {
+    console.error("[PublicOrOwnExercise]", {
       code: err.code,
       message: err.message
     });

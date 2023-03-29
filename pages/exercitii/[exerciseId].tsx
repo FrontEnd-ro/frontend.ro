@@ -1,10 +1,7 @@
-import React from 'react';
 import NotFoundPage from '../404';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
-import SharedUserModel from '~/../shared/user.shared-model';
-import SharedExerciseModel from '~/../shared/exercise.shared-model';
 import { Exercise } from '~/redux/user/types';
 import { ViewOrEditExercise } from '~/components/create-view-edit-exercise';
 
@@ -36,35 +33,26 @@ export default EditExercisePage;
 export async function getServerSideProps({ req, res, params }) {
   const { token } = req.cookies;
   const { exerciseId } = params;
+  const { default: fetch } = await import('node-fetch');
 
   try {
-    const exercise = await SharedExerciseModel.getById(exerciseId);
-
-    if (!exercise) {
-      return send404();
-    }
-
-    if (!token) {
-      if (exercise.private) {
-        return send404();
-      }
+    const resp = await fetch(`${process.env.ENDPOINT}/exercises/${exerciseId}`, {
+      headers: {
+        cookie: `token=${token}`,
+      },
+    });
+    if (!resp.ok) {
+      res.statusCode = resp.status;
       return {
         props: {
-          exercise: SharedExerciseModel.sanitize(exercise),
+          exercise: null,
         },
       };
     }
 
-    const user = await SharedUserModel.ping(token);
-
-    if (exercise.private && (!user || (user.username !== exercise.user.username))) {
-      return send404();
-    }
-
+    const exercise = await resp.json();
     return {
-      props: {
-        exercise: SharedExerciseModel.sanitize(exercise),
-      },
+      props: { exercise, },
     };
   } catch (err) {
     console.error('[exerciseId.tsx][getServerSideProps]', err);

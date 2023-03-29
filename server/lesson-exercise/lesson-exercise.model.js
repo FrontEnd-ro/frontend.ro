@@ -3,10 +3,10 @@ const {
   validateObjectId
 } = require('../ServerUtils');
 const { LESSONS_WITH_EXERCISES } = require('../../shared/SharedConstants');
-const { ExerciseJSONSchema } = require('../../shared/exercise.shared-model');
+const { ExerciseSchemaJSONDefinition } = require('../exercise/exercise.schema');
 
 const LessonExercisesJSONSchema = {
-  ...ExerciseJSONSchema,
+  ...ExerciseSchemaJSONDefinition,
   lesson: { type: String, enum: LESSONS_WITH_EXERCISES, required: true }
 }
 

@@ -4,9 +4,18 @@ const {
   validateAgainstSchemaProps,
   validateObjectId
 } = require('../ServerUtils');
+const UserModel = require('../user/user.model');
+const { ExerciseSchema } = require('./exercise.schema');
 
-const { ExercisesSchema, Exercise, getById, sanitize } = require('../../shared/exercise.shared-model');
+const Exercise = mongoose.models.Exercise || mongoose.model('Exercise', ExerciseSchema);
+
 class ExerciseModel {
+  // TODO: rename to getById
+  static get(_id) {
+    validateObjectId(_id);
+    return Exercise.findById(_id).populate('user');
+  }
+
   static getAllPublic() {
     return Exercise.find({ private: false });
   }
@@ -23,10 +32,8 @@ class ExerciseModel {
     return Exercise.find(query).populate("user");
   }
 
-  static get = getById;
-
   static create(payload) {
-    validateAgainstSchemaProps(payload, ExercisesSchema);
+    validateAgainstSchemaProps(payload, ExerciseSchema);
 
     const exercise = new Exercise(payload);
 
@@ -49,7 +56,7 @@ class ExerciseModel {
       throw new ServerError(404, `Couldn't update non-existent exercise with id=${_id}.`);
     }
 
-    validateAgainstSchemaProps(payload, ExercisesSchema);
+    validateAgainstSchemaProps(payload, ExerciseSchema);
     Object.assign(exercise, payload);
 
     return exercise.save();
@@ -76,7 +83,21 @@ class ExerciseModel {
     });
   }
 
-  static sanitize = sanitize;
+  static sanitize(exercise) {
+    // TODO: decide on an approach to use among all schema
+    // https://github.com/FrontEnd-ro/frontend.ro/issues/438
+    let sanitizedExercise = { ...exercise };
+    if (exercise instanceof mongoose.Document) {
+      sanitizedExercise = { ...exercise.toObject() };
+    }
+    const propsToDelete = ['__v', 'updatedAt', 'createdAt'];
+
+    propsToDelete.forEach((prop) => delete sanitizedExercise[prop]);
+
+    sanitizedExercise.user = UserModel.sanitizeForPublic(exercise.user);
+
+    return JSON.parse(JSON.stringify(sanitizedExercise));
+  }
 }
 
 module.exports = ExerciseModel;

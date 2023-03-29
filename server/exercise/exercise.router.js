@@ -38,7 +38,9 @@ exerciseRouter.get('/solved', [PrivateMiddleware], async function getSolvedExerc
 exerciseRouter.get('/:exerciseId', [PublicMiddleware, PublicOrOwnExercise], async function getExerciseById(req, res) {
   const { exerciseId } = req.params;
 
-  const exercise = await ExerciseModel.get(exerciseId);
+  const exercise = await ExerciseModel
+    .get(exerciseId)
+    .populate('user');
 
   if (!exercise) {
     throw new ServerError(404, `No exercise with id='${exerciseId}' found`);

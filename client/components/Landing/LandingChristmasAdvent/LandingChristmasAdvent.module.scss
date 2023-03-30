@@ -2,10 +2,10 @@
 
 .LandingChristmasAdvent {
   @extend %containerConfig;
+}
 
-  h2 {
-    font-family: 'Merienda', cursive;
-  }
+.Merienda {
+  font-family: 'Merienda', cursive;
 }
 
 .Preview {

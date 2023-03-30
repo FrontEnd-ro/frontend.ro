@@ -10,8 +10,10 @@ import FolderStructure, { toSandPackFiles } from '~/../shared/utils/FolderStruct
 import styles from './LandingChristmasAdvent.module.scss';
 
 const Sandpack = React.lazy(() => import('../../Sandpack/Sandpack'));
-
 const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
+  // Extracting the text here so we can easily send it to the Google Fonts API
+  // and load only the font for this text.
+  const TITLE_TEXT = 'Învață să programezi 3D cu Three.js și React!';
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -27,13 +29,14 @@ const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
 
   return (
     <section ref={ref} className={`${className} relative`}>
-      <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap" rel="stylesheet" /> 
+      <link
+        rel="stylesheet"
+        href={`https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap&text=${TITLE_TEXT.split(' ').join('')}`}
+      /> 
       <div className={styles.LandingChristmasAdvent}>
         <div>
           <div className="d-inline-block relative">
-            <h2 className="mb-0">
-              Învață să programezi 3D cu Three.js și React!
-            </h2>
+            <h2 className={`mb-0 ${styles.Merienda}`}>{TITLE_TEXT}</h2>
             <p className="text-xl mt-4">
               Împreună cu
               {' '}

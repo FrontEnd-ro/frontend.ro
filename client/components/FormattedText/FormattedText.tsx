@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './FormattedText.module.scss';
 
 type FormattedTextProps = {
-  as?: keyof JSX.IntrinsicElements;
+  as?: 'span' | 'strong';
   children?: React.ReactNode;
-} & React.HTMLAttributes<HTMLOrSVGElement>;
+} & React.HTMLAttributes<HTMLElement>;
 
 const FormattedText = ({
   as: Wrapper = 'span',

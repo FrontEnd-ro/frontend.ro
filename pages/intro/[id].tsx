@@ -45,7 +45,7 @@ const IntroLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription
 // We tried migrating to staticPaths BUT that conflicts
 // with the user fetch inside `_app.tsx` which means that navigating
 // directly to lesson pages leads to the website thinking you're logged out.
-export async function getServerSideProps({ req, res, params }) {
+export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
   let mdxContent = '';
@@ -61,7 +61,7 @@ export async function getServerSideProps({ req, res, params }) {
       GITHUB_URL,
       headings:  lessonInfo.chapters,
       icons: { faShare },
-      urlToShare: `${appConfig.APP.app_url}${req.url}`
+      urlToShare: `${appConfig.APP.app_url}/intro/${id}`
     }
     mdxContent = String(await compile(appendMdxScope(mdxAsString as unknown as string, MDX_SCOPE), {
       development: false,

@@ -23,7 +23,7 @@ import AudioAndVideoContent from '~/curriculum/html/AudioAndVideo';
 import AboutHtmlContent from '~/curriculum/html/AboutHtml';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
-import HTMLStructureContent from '~/curriculum/html/HTMLStructure/HTMLStructure';
+import HTMLStructureContent from '~/curriculum/html/HTMLStructure';
 
 const LESSON_TO_COMPONENT = {
   'audio-video': <AudioAndVideoContent />,

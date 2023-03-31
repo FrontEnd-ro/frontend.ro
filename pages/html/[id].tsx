@@ -10,7 +10,7 @@ import FormsContent from '~/curriculum/html/Forms';
 import ImagesContent from '~/curriculum/html/Images';
 import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
 import ListsContent from '~/curriculum/html/Lists';
-import HTMLStructureContent from '~/curriculum/html/HTMLStructure/HTMLStructure';
+import HTMLStructureContent from '~/curriculum/html/HTMLStructure';
 import TextsContent from '~/curriculum/html/TextElements';
 import { MDXService } from '~/services/MDXService';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';

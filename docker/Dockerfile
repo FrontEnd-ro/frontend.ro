@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/node:16-alpine
+FROM public.ecr.aws/docker/library/node:18-alpine
 RUN apk add g++ make py3-pip
 
 ARG NODE_CONFIG_ENV

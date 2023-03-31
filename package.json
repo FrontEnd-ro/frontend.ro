@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "engines": {
-    "node": ">=16.0.0 <17"
+    "node": ">=18"
   },
   "author": {
     "name": "Alexandru Pavaloi",
@@ -52,8 +52,8 @@
     "build": "tsc -p ./server/ && next build",
     "postbuild": "next-sitemap",
     "start": "node server-build/server/server.js",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
     "mongodump": "ts-node -P server/tsconfig.json mongodump.js",
     "mongorestore": "ts-node -P server/tsconfig.json mongorestore.js",
     "upload-mongodump-s3": "ts-node -P server/tsconfig.json upload-mongodump-s3",

@@ -7,7 +7,6 @@ import {
   LessonCover,
   LessonFigure,
   LessonHeading,
-  LessonResources,
   LessonTip,
   LessonQuote,
   LessonFirstSentence,
@@ -596,29 +595,6 @@ export default function LinksAndButtonsContent() {
         </LessonTip>
       </section>
       <div className="dots" />
-      <LessonResources
-        className="my-5"
-        links={[
-          {
-            text: 'Documentația completă a link-urilor pe MDN',
-            url:
-                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a',
-          },
-          {
-            text: 'Documentația completă a <button> pe MDN',
-            url:
-                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button',
-          },
-          {
-            text: 'Valoarea "noreferrer" pentru atributul "rel"',
-            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer',
-          },
-          {
-            text: 'Valoarea "noopener" pentru atributul "rel"',
-            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
-          },
-        ]}
-      />
     </>
   );
 }

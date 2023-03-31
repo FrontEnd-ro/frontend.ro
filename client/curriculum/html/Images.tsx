@@ -5,7 +5,6 @@ import {
   LessonFigure,
   LessonHeading,
   LessonQuote,
-  LessonResources,
   LessonTable,
   LessonTableProps,
   LessonTip,
@@ -704,20 +703,6 @@ export default function ImagesContent() {
         și îl vor arăta pe acesta.
       </p>
       <div className="dots" />
-      <LessonResources
-        className="my-5"
-        links={[{
-          text: 'Documentația completă a elementului <img> pe MDN',
-          url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img',
-        }, {
-          text: 'Documentația completă a elementului <picture> pe MDN',
-          url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
-        }, {
-          text: 'Mai multe detalii despre imagini Responsive',
-          url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
-        },
-        ]}
-      />
     </>
   );
 }

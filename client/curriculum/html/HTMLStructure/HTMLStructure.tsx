@@ -4,7 +4,6 @@ import {
   LessonHeading,
   LessonTip,
   LessonFigure,
-  LessonResources,
   LessonFirstSentence,
 } from '~/components/lessons';
 import { getLessonById } from '~/services/DataModel';
@@ -339,16 +338,6 @@ function HTMLStructureContent() {
           HTML (cu câteva excepții) vor fi adăugate aici.
         </p>
       </section>
-      <LessonResources
-        className="my-5"
-        links={[{
-          text: 'What\'s in head?',
-          url: 'https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML',
-        }, {
-          text: 'View Source',
-          url: 'https://developer.mozilla.org/en-US/docs/Tools/View_source',
-        }]}
-      />
     </>
   );
 }

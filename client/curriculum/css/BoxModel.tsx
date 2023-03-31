@@ -5,7 +5,6 @@ import {
   LessonFirstSentence,
   LessonHeading,
   LessonQuote,
-  LessonResources,
   LessonTip,
 } from '~/components/lessons';
 import Link from '~/components/generic/Link';
@@ -506,18 +505,6 @@ div {
           cum este folosit box model in CSS. Dacă totuși consideri că ai nevoie de ceva mai multe
           informații, poți folosi una dintre resursele de mai jos:
         </p>
-
-        <LessonResources
-          className="my-5"
-          links={[{
-            text: 'Documentația completă a box model-ului pe MDN',
-            url: 'https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model',
-          }, {
-            text: 'Documentația completă a proprietății box-sizing pe MDN',
-            url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing',
-          },
-          ]}
-        />
       </section>
     </>
   );

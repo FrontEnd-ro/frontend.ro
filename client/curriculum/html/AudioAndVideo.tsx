@@ -4,7 +4,6 @@ import {
   LessonHeading,
   LessonTip,
   LessonFigure,
-  LessonResources,
   LessonFirstSentence,
 } from '~/components/lessons';
 import Link from '~/components/generic/Link';
@@ -412,26 +411,6 @@ CSS (Cascading Style Sheets)
 
       </section>
       <div className="dots" />
-      <LessonResources
-        className="my-5"
-        links={[
-          {
-            text: 'Documentatia elementului <audio> pe MDN',
-            url:
-                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio',
-          },
-          {
-            text: 'Documentatia elementului <video> pe MDN',
-            url:
-                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video',
-          },
-          {
-            text: 'Documentatia elementului <track> pe MDN',
-            url:
-                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track',
-          },
-        ]}
-      />
     </>
   );
 }

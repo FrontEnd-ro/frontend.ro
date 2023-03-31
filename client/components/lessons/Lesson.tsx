@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-import { LessonMenu } from '~/components/lessons';
+import { LessonMenu, LessonResources } from '~/components/lessons';
 
 import styles from './Lesson.module.scss';
 import { withSmoothScroll } from '~/services/Hooks';
@@ -64,6 +64,9 @@ export default function Lesson({
         <div ref={articleWrapper} className={styles['article-wrapper']}>
           <LessonContent title={lessonInfo.title} contributors={lessonInfo.contributors ?? []}>
             {children}
+            {lessonInfo.resources !== undefined && (
+              <LessonResources className="my-5" links={lessonInfo.resources} />
+            )}
           </LessonContent>
           <div className="my-5 text-right mr-2">
             <p>

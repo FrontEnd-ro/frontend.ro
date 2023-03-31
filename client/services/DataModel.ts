@@ -32,6 +32,10 @@ export type LessonDescription = {
     }[]
   }[];
   withExercises?: boolean;
+  resources?: {
+    text: string;
+    href: string;
+  }[];
 };
 
 export const LESSONS: LessonDescription[] = [
@@ -100,6 +104,12 @@ export const LESSONS: LessonDescription[] = [
       { title: 'Extensii', id: 'extensii' },
       { title: 'BONUS - customizare', id: 'bonus-customizare' },
     ],
+    resources: [
+      {
+        text: 'Documentația completă a VisualStudio Code',
+        href: 'https://code.visualstudio.com/',
+      },
+    ]
   },
   /** HTML lessons */
   {
@@ -122,6 +132,16 @@ export const LESSONS: LessonDescription[] = [
       { title: 'Relații de rudenie', id: 'relatii' },
       { title: 'Resurse', id: 'resurse' },
     ],
+    resources: [
+      {
+        text: 'Lista completă de elemente HTML de pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element',
+      },
+      {
+        text: 'Lista completă de atribute posibile de pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes',
+      },
+    ]
   },
   {
     id: 'structura-pagina-html',
@@ -139,6 +159,16 @@ export const LESSONS: LessonDescription[] = [
       { title: 'Elementul <head>', id: 'head' },
       { title: 'Elementul <body>', id: 'body' },
       { title: 'Rezumat', id: 'rezumat' },
+    ],
+    resources: [
+      {
+        text: "What's in head?",
+        href: "https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML",
+      },
+      {
+        text: "View Source",
+        href: "https://developer.mozilla.org/en-US/docs/Tools/View_source",
+      },
     ],
   },
   {
@@ -219,6 +249,24 @@ export const LESSONS: LessonDescription[] = [
       { title: 'Atributul disabled', id: 'atributul-disabled' },
       { title: 'Link-uri vs butoane', id: 'linkuri-vs-butoane' },
     ],
+    resources: [
+      {
+        text: 'Documentația completă a link-urilor pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a',
+      },
+      {
+        text: 'Documentația completă a <button> pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button',
+      },
+      {
+        text: 'Valoarea "noreferrer" pentru atributul "rel"',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer',
+      },
+      {
+        text: 'Valoarea "noopener" pentru atributul "rel"',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
+      },
+    ]
   },
   {
     id: 'liste',
@@ -245,6 +293,20 @@ export const LESSONS: LessonDescription[] = [
       { title: 'Sub-liste', id: 'sub-liste' },
       { title: 'Bonus tips și concluzii', id: 'bonus-tips-si-concluzii' },
     ],
+    resources: [
+      {
+        text: 'Documentația completă a <ul> pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul',
+      },
+      {
+        text: 'Documentația completă a <ol> pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol',
+      },
+      {
+        text: 'Documentația completă a <dl> pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl',
+      },
+    ]
   },
   {
     id: 'containere',
@@ -305,6 +367,17 @@ export const LESSONS: LessonDescription[] = [
       },
       { title: 'Elementul <picture>', id: 'elementul-picture' },
     ],
+    resources: [{
+      text: 'Documentația completă a elementului <img> pe MDN',
+      href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img',
+      }, {
+        text: 'Documentația completă a elementului <picture> pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
+      }, {
+        text: 'Mai multe detalii despre imagini Responsive',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
+      },
+    ]
   },
   {
     id: 'audio-video',
@@ -338,6 +411,20 @@ export const LESSONS: LessonDescription[] = [
         }],
       },
     ],
+    resources: [
+      {
+        text: 'Documentatia elementului <audio> pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio',
+      },
+      {
+        text: 'Documentatia elementului <video> pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video',
+      },
+      {
+        text: 'Documentatia elementului <track> pe MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track',
+      },
+    ]
   },
   {
     id: 'formulare',
@@ -436,6 +523,13 @@ export const LESSONS: LessonDescription[] = [
       { title: 'Box-sizing', id: 'box-sizing' },
       { title: 'Box Model interactiv', id: 'box-model-interactiv' },
     ],
+    resources: [{
+      text: 'Documentația completă a box model-ului pe MDN',
+      href: 'https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model',
+    }, {
+      text: 'Documentația completă a proprietății box-sizing pe MDN',
+      href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing',
+    }]
   },
   {
     id: 'tranzitii',

@@ -5,7 +5,6 @@ import {
   LessonHeading,
   LessonTip,
   LessonFigure,
-  LessonResources,
   LessonFirstSentence,
 } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
@@ -371,26 +370,6 @@ export default function ListsContent() {
         </LessonTip>
       </section>
       <div className="dots" />
-      <LessonResources
-        className="my-5"
-        links={[
-          {
-            text: 'Documentația completă a <ul> pe MDN',
-            url:
-                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul',
-          },
-          {
-            text: 'Documentația completă a <ol> pe MDN',
-            url:
-                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol',
-          },
-          {
-            text: 'Documentația completă a <dl> pe MDN',
-            url:
-                'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl',
-          },
-        ]}
-      />
     </>
   );
 }

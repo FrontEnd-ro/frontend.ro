@@ -4,7 +4,7 @@ import { NotWroteYet } from '~/components/404';
 import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/404/NotFound';
 import { withSmoothScroll } from '~/services/Hooks';
-import { LessonHeading } from '~/components/lessons';
+import { LessonHeading, LessonResources } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
@@ -114,6 +114,9 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescript
             )}
             {!['vs-code', 'despre-html'].includes(lessonInfo.id) && (
               LESSON_TO_COMPONENT[lessonInfo.id]
+            )}
+            {lessonInfo.resources !== undefined && (
+              <LessonResources className="my-5" links={lessonInfo.resources} />
             )}
             {lessonInfo.withExercises === true && (
               <div>

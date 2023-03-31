@@ -28,7 +28,6 @@ import HTMLStructureContent from '~/curriculum/html/HTMLStructure/HTMLStructure'
 const LESSON_TO_COMPONENT = {
   'audio-video': <AudioAndVideoContent />,
   containere: <ContainersContent />,
-  'despre-html': <AboutHtmlContent />,
   formulare: <FormsContent />,
   imagini: <ImagesContent />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,
@@ -107,9 +106,13 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescript
             title={lessonInfo.title}
             contributors={lessonInfo.contributors}
           >
-            {lessonInfo.id === 'vs-code' ? (
+            {lessonInfo.id === 'vs-code' && (
               <VSCodeContent mdxContent={mdxContent} />
-            ) : (
+            )}
+            {lessonInfo.id === 'despre-html' && (
+              <AboutHtmlContent mdxContent={mdxContent} />
+            )}
+            {!['vs-code', 'despre-html'].includes(lessonInfo.id) && (
               LESSON_TO_COMPONENT[lessonInfo.id]
             )}
             {lessonInfo.withExercises === true && (
@@ -144,9 +147,8 @@ export async function getServerSideProps({ res, params }) {
     res.statusCode = 404;
   }
 
-  if (id === 'vs-code') {
-    const { default: mdxAsString } = await import('!raw-loader!~/curriculum/intro/VSCode.mdx');
-
+  if (lessonInfo.id === 'vs-code' || lessonInfo.id === 'despre-html') {
+    const mdxAsString = await MDXService.fetchMDX(lessonInfo.id);
     const MDX_SCOPE = {
       lessonInfo,
       CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,

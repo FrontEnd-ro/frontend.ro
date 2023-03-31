@@ -32,6 +32,30 @@ class MDXService {
     return Content;
   }
 
+  static async fetchMDX(lessonId: 'despre-noi' | 'vs-code' | 'despre-html'): Promise<string> {
+    let mdxContent = '';
+
+    switch (lessonId) {
+      case 'despre-noi': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/intro/despre-noi.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
+      case 'vs-code': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/intro/VSCode.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
+      case 'despre-html': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/AboutHtml.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
+    }
+
+    return mdxContent;
+  }
+
   // Kinda hackish way to inject outside variables/scope into MDX Files
   // As you can see we're doing this by specifically exporting a `SCOPE` variable
   // from the MDX file. Looks a bit weird, but should work as long as]

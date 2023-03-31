@@ -12,12 +12,12 @@ import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
 import ListsContent from '~/curriculum/html/Lists';
 import HTMLStructureContent from '~/curriculum/html/HTMLStructure/HTMLStructure';
 import TextsContent from '~/curriculum/html/TextElements';
+import { MDXService } from '~/services/MDXService';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 
 const LESSON_TO_COMPONENT = {
   'audio-video': <AudioAndVideoContent />,
   containere: <ContainersContent />,
-  'despre-html': <AboutHtmlContent />,
   formulare: <FormsContent />,
   imagini: <ImagesContent />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,
@@ -27,7 +27,7 @@ const LESSON_TO_COMPONENT = {
   validare: <HTMLValidationContent />,
 };
 
-const HtmlLesson = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => {
+const HtmlLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription | null; mdxContent: string; }) => {
   if (lessonInfo === null) {
     return <NotFoundPage />;
   }
@@ -45,7 +45,9 @@ const HtmlLesson = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) =>
         shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo}>
-        {LESSON_TO_COMPONENT[lessonInfo.id]}
+        {lessonInfo.id === 'despre-html' ? (
+          <AboutHtmlContent mdxContent={mdxContent} />
+        ) : LESSON_TO_COMPONENT[lessonInfo.id]}
       </Lesson>
     </>
   );
@@ -54,17 +56,28 @@ const HtmlLesson = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) =>
 // We tried migrating to staticPaths BUT that conflicts
 // with the user fetch inside `_app.tsx` which means that navigating
 // directly to lesson pages leads to the website thinking you're logged out.
-export function getServerSideProps({ res, params }) {
+export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
+  let mdxContent = '';
 
   if (lessonInfo === null) {
     res.statusCode = 404;
   }
 
+  if (lessonInfo.id === 'despre-html') {
+    const mdxAsString = await MDXService.fetchMDX(lessonInfo.id);
+    const MDX_SCOPE = {
+      lessonInfo,
+      CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
+    }
+    mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
+  }
+
   return {
     props: {
       lessonInfo,
+      mdxContent,
     },
   };
 }

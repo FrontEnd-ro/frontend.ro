@@ -1,5 +1,7 @@
+import { GetServerSideProps } from 'next';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
+import NotFoundPage from '~/components/404/NotFound';
 import TutorialPage from '~/tutorials/TutorialPage';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import { startedTutorial } from '~/redux/user/user.actions';
@@ -8,13 +10,18 @@ import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 
 type Props = {
-  tutorialInfo: WIPPopulatedTutorialI
+  // If `null` then the tutorial is missing, so we want to render a 404 Page
+  tutorialInfo: WIPPopulatedTutorialI | null;
 } & ConnectedProps<typeof connector>;
 
 const TutorialIndex = ({
   isLoggedIn, userTutorials, tutorialInfo, tutorialProgress, submissions, dispatch,
 }: Props) => {
-  const didStartTutorial = isLoggedIn && userTutorials.includes(tutorialInfo.tutorialId);
+  const didStartTutorial = isLoggedIn && userTutorials.includes(tutorialInfo?.tutorialId);
+
+  if (tutorialInfo === null) { 
+    return <NotFoundPage />;
+  }
 
   return (
     <TutorialPage tutorialInfo={tutorialInfo} isRootPage>
@@ -47,19 +54,28 @@ const connector = connect(mapStateToProps);
 
 export default connector(TutorialIndex);
 
-export const getServerSideProps = async () => {
-  const Tutorial = (await import('../../../server/tutorial/tutorial.model')).default;
-  const htmlTutorial = await Tutorial.findOne({ tutorialId: 'html' }).populate('lessons');
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  try {
+    const { default: fetch } = await import('node-fetch');
+    const resp = await fetch(`${process.env.ENDPOINT}/tutorials/html`);
 
-  // FIXME
-  // In theory only calling `.toObject()` should be enough to get a plain Object
-  // However, NextJS complains it cannot serialize it.
-  // This issue may hold the answer https://github.com/vercel/next.js/issues/11993.
-  const htmlTutorialObject = JSON.parse(JSON.stringify(htmlTutorial.toObject()));
-
-  return {
-    props: {
-      tutorialInfo: htmlTutorialObject,
-    },
-  };
+    if (!resp.ok) {
+      res.statusCode = resp.status;
+      return { props: {
+        tutorialInfo: null,
+      } }
+    }
+  
+    const htmlTutorial = await resp.json();
+    return {
+      props: {
+        tutorialInfo: htmlTutorial,
+      },
+    };
+  } catch (err) {
+    res.statusCode = 500;
+    throw new Error('Something went wrong when trying to fetch the tutorial', {
+      cause: err,
+    });
+  }
 };

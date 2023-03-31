@@ -4,6 +4,7 @@ import {
   LessonFigure,
   LessonHeading,
   LessonResources,
+  LessonFloatContent,
   LessonFirstSentence,
 } from '~/components/lessons';
 import { getLessonById } from '~/services/DataModel';
@@ -11,8 +12,6 @@ import FormattedText from '~/components/FormattedText';
 import Highlight from '~/components/Highlight/Highlight';
 import CodePenEmbed from '~/components/CodePenEmbed/CodePenEmbed';
 import List from '~/components/List';
-
-import styles from './AboutHtml.module.scss';
 
 export default function AboutHtmlContent() {
   const lessonInfo = getLessonById('despre-html');
@@ -44,26 +43,20 @@ export default function AboutHtmlContent() {
         </LessonHeading>
 
         <div className="my-10">
-          <img
-            width="140"
-            loading="lazy"
-            className={`${styles['foundation-image']} float-right ml-10`}
-            alt="House foundation doodle"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/house-foundation.png`}
-          />
+          <LessonFloatContent position="right">
+            <img
+              loading="lazy"
+              className="w-100"
+              alt="House foundation doodle"
+              src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/house-foundation.png`}
+            />
+          </LessonFloatContent>
           <p>
             Pentru o înțelegere mai bună, ne putem gândi la
             {' '}
             <span className="text-bold">construcția unei case</span>
             .
           </p>
-          <img
-            width="140"
-            loading="lazy"
-            className={`${styles['foundation-image']} d-none`}
-            alt="House foundation doodle"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/house-foundation.png`}
-          />
           <p>
             Fundația, pereții și acoperișul fac parte din structura de bază a
             casei, fără de care nu putem ajunge la un rezultat final. Corespondentul
@@ -78,25 +71,19 @@ export default function AboutHtmlContent() {
           </p>
         </div>
         <div className="my-10">
-          <img
-            width="200"
-            loading="lazy"
-            className={`${styles['chair-lightbulb-window-image']} float-left my-5 mr-10`}
-            alt="Chair, Lightbulb and window doodle"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/chair-lightbulb-window.png`}
-          />
+          <LessonFloatContent position='left'>
+            <img
+              loading="lazy"
+              className="w-100"
+              alt="Chair, Lightbulb and window doodle"
+              src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/chair-lightbulb-window.png`}
+            />
+          </LessonFloatContent>
           <p>
             După ce structura de bază este gata, urmeaza să definim culorile folosite,
             plasamentul geamurilor, a ușilor, becurilor, mobilei și al altor
             lucruri ce țin de design.
           </p>
-          <img
-            width="200"
-            loading="lazy"
-            className={`${styles['chair-lightbulb-window-image']} d-none my-5`}
-            alt="Chair, Lightbulb and window doodle"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/chair-lightbulb-window.png`}
-          />
           <p>
             Pentru un programator FrontEnd, acesta este pasul
             în care se introduce

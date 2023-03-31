@@ -20,7 +20,7 @@ import VSCodeContent from '~/curriculum/intro/VSCode';
 import TextsContent from '~/curriculum/html/TextElements';
 import ContainersContent from '~/curriculum/html/Containers';
 import AudioAndVideoContent from '~/curriculum/html/AudioAndVideo';
-import AboutHtmlContent from '~/curriculum/html/AboutHtml/AboutHtml';
+import AboutHtmlContent from '~/curriculum/html/AboutHtml';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
 import HTMLStructureContent from '~/curriculum/html/HTMLStructure/HTMLStructure';

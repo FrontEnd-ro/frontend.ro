@@ -1,0 +1,10 @@
+.LessonFloatContent {
+  width: 100%;
+}
+
+@media screen and (min-width: 500px) {
+  .LessonFloatContent {
+    width: 20%;
+    min-width: 10rem;
+  }
+}

@@ -8,6 +8,7 @@ import LessonHeading from './LessonHeading/LessonHeading';
 import LessonResources from './LessonResources/LessonResources';
 import LessonContributors from './LessonContributors/LessonContributors';
 import LessonFirstSentence from './LessonFirstSentence/LessonFirstSentence';
+import { LessonFloatContent } from './LessonFloatContent/LessonFloatContent';
 import Lesson from './Lesson';
 
 export {
@@ -20,6 +21,7 @@ export {
   LessonHeading,
   LessonResources,
   LessonContributors,
+  LessonFloatContent,
   LessonFirstSentence,
 };
 

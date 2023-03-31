@@ -1,18 +1,15 @@
-import { useMemo } from 'react';
-import * as runtime from 'react/jsx-runtime'
 import {
   LessonCover, LessonHeading, LessonFigure, LessonQuote,
 } from '~/components/lessons';
 import {
   FacebookButton, LinkedInButton, WhatsAppButton, CopyLinkButton,
 } from '~/components/SocialMediaButtons';
-import coverSvg from './despre-noi-cover.svg';
-import FormattedText from '~/components/FormattedText';
 import List from '~/components/List';
-import { runSync } from '@mdx-js/mdx';
+import { MDXProvider } from '@mdx-js/react';
+import coverSvg from './despre-noi-cover.svg';
+import { MDXService } from '~/services/MDXService';
+import FormattedText from '~/components/FormattedText';
 import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
-import { MDXProvider, useMDXComponents } from '@mdx-js/react';
-
 
 const MDX_COMPONENTS = {
   List,
@@ -28,10 +25,7 @@ const MDX_COMPONENTS = {
 }
 
 export default function AboutUsContent({ mdxContent }: { mdxContent: string }) {
-  const { default: Content } = useMemo(() => runSync(mdxContent, {
-    ...runtime,
-    useMDXComponents,
-  }), [mdxContent]);
+  const Content = MDXService.getComponent(mdxContent);
 
   return (
     <>

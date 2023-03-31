@@ -1,18 +1,14 @@
 import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
+import { GITHUB_URL } from '~/services/Constants';
+import appConfig from '~/../server/config/config';
+import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/404/NotFound';
 import VSCodeContent from '~/curriculum/intro/VSCode';
 import AboutUsContent from '~/curriculum/intro/despre-noi';
-import { GITHUB_URL } from '~/services/Constants';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
-import { compile } from '@mdx-js/mdx';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
-import appConfig from '~/../server/config/config';
-
-const LESSON_TO_COMPONENT = {
-  'vs-code': <VSCodeContent />,
-};
 
 const IntroLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription | null, mdxContent: string }) => {
   if (lessonInfo === null) {
@@ -32,11 +28,8 @@ const IntroLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription
         shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo}>
-        {lessonInfo.id === 'despre-noi' ? (
-          <AboutUsContent mdxContent={mdxContent} />
-        ) : (
-          LESSON_TO_COMPONENT[lessonInfo.id]
-        )}
+        {lessonInfo.id === "despre-noi" && <AboutUsContent mdxContent={mdxContent} />}
+        {lessonInfo.id === "vs-code" && <VSCodeContent mdxContent={mdxContent} />}
       </Lesson>
     </>
   );
@@ -63,13 +56,15 @@ export async function getServerSideProps({ res, params }) {
       icons: { faShare },
       urlToShare: `${appConfig.APP.app_url}/intro/${id}`
     }
-    mdxContent = String(await compile(appendMdxScope(mdxAsString as unknown as string, MDX_SCOPE), {
-      development: false,
-      outputFormat: 'function-body',
-      // This is what the next-mdx-remote also does,
-      // so let's put the same values (instead of `#`).
-      providerImportSource: '@mdx-js/react',
-    }));
+    mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
+  } else if (lessonInfo.id === 'vs-code') {
+    const { default: mdxAsString } = await import('!raw-loader!../../client/curriculum/intro/VSCode.mdx');
+
+    const MDX_SCOPE = {
+      lessonInfo,
+      CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
+    }
+    mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
   }
 
   return {
@@ -78,17 +73,6 @@ export async function getServerSideProps({ res, params }) {
       mdxContent,
     },
   };
-}
-
-// Kinda hackish way to inject outside variables/scope into MDX Files
-// As you can see we're doing this by specifically exporting a `SCOPE` variable
-// from the MDX file. Looks a bit weird, but should work as long as]
-// 1. The scope can be serialized to JSON
-// 2. We don't have another variable in the file called SCOPE
-// TODO: once we add more and more articles with MDX content, let's
-// move this into a separate file
-function appendMdxScope(compiledMdx: string, scope: Record<string, any>) {
-  return `export const SCOPE = ${JSON.stringify(scope)};\n\n${compiledMdx}`;
 }
 
 export default IntroLesson;

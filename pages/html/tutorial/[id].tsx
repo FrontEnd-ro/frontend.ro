@@ -1,6 +1,7 @@
 import Link from '~/components/generic/Link';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
+import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/404/NotFound';
 import { withSmoothScroll } from '~/services/Hooks';
 import { LessonHeading } from '~/components/lessons';
@@ -35,14 +36,13 @@ const LESSON_TO_COMPONENT = {
   'structura-pagina-html': <HTMLStructureContent />,
   texte: <TextsContent />,
   validare: <HTMLValidationContent />,
-  'vs-code': <VSCodeContent />,
 };
 
 // Naming this component `Temp` because eventually
 // will move this to the /html folder. So right now
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
-const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => {
+const HtmlLessonTemp = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription | null, mdxContent: string }) => {
   const getChapters = (lessonDescription: LessonDescription): Chapter[] => {
     if (!lessonDescription.withExercises) {
       return parseChapters(lessonDescription.chapters);
@@ -107,7 +107,11 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
             title={lessonInfo.title}
             contributors={lessonInfo.contributors}
           >
-            {LESSON_TO_COMPONENT[lessonInfo.id]}
+            {lessonInfo.id === 'vs-code' ? (
+              <VSCodeContent mdxContent={mdxContent} />
+            ) : (
+              LESSON_TO_COMPONENT[lessonInfo.id]
+            )}
             {lessonInfo.withExercises === true && (
               <div>
                 <LessonHeading as="h3" id="exercitii">
@@ -131,17 +135,29 @@ const HtmlLessonTemp = ({ lessonInfo }: { lessonInfo: LessonDescription | null }
 // We tried migrating to staticPaths BUT that conflicts
 // with the user fetch inside `_app.tsx` which means that navigating
 // directly to lesson pages leads to the website thinking you're logged out.
-export function getServerSideProps({ res, params }) {
+export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
+  let mdxContent = '';
 
   if (lessonInfo === null) {
     res.statusCode = 404;
   }
 
+  if (id === 'vs-code') {
+    const { default: mdxAsString } = await import('!raw-loader!~/curriculum/intro/VSCode.mdx');
+
+    const MDX_SCOPE = {
+      lessonInfo,
+      CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
+    }
+    mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
+  }
+
   return {
     props: {
       lessonInfo,
+      mdxContent,
     },
   };
 }

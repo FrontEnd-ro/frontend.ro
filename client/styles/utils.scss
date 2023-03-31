@@ -141,6 +141,10 @@
   height: 100%;
 }
 
+.w-80 {
+  width: 20em;
+}
+
 /** Display */
 .d-none {
   display: none;
@@ -400,6 +404,10 @@
 /** Gap */
 .gap-x-4 {
   column-gap: 1em;
+}
+
+.gap-x-8 {
+  column-gap: 2em;
 }
 
 /** User Select */

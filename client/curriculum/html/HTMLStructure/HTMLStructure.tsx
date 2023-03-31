@@ -13,7 +13,6 @@ import SideBySidePictures from '~/components/SideBySidePictures';
 import FormattedText from '~/components/FormattedText';
 import ResponsiveFlex from '~/components/ResponsiveFlex';
 import List from '~/components/List';
-import styles from './HTMLStructure.module.scss';
 
 function HTMLStructureContent() {
   const lessonInfo = getLessonById('structura-pagina-html');
@@ -37,7 +36,7 @@ function HTMLStructureContent() {
         <LessonHeading as="h2" id={lessonInfo.chapters[0].id}>
           {lessonInfo.chapters[0].title}
         </LessonHeading>
-        <ResponsiveFlex breakpoint={1000}>
+        <ResponsiveFlex breakpoint={1000} className="gap-x-8">
           <div>
             <p className="mb-4"> Fiecare pagină web este alcătuită din următoarele elemente principale: </p>
             <List as="ol" variant="checkmark">
@@ -76,11 +75,10 @@ function HTMLStructureContent() {
               </li>
             </List>
           </div>
-          <Highlight
-            language="html"
-            className={styles['main-structure-wrapper']}
-            code={`
-<!DOCTYPE html>
+          <div className="w-80">
+            <Highlight
+              language="html"
+              code={`<!DOCTYPE html>
 <html> 
   <head>
     <!-- 
@@ -93,7 +91,8 @@ function HTMLStructureContent() {
     -->
   </body>
 </html>`}
-          />
+            />
+          </div>
         </ResponsiveFlex>
       </section>
       <section className="my-5">

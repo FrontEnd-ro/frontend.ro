@@ -65,21 +65,21 @@ const Template: ComponentStory<typeof StickyScrollExplainerComponent> = (args) =
 
 const ExplanationExample = () => (
   <div style={{ border: '1px solid #ccc', padding: '10em 0' }}>
-    <p className="my-10">Lorem Ipsum is simply dummy text</p>
-    <p className="my-10">of the printing and typesetting industry.</p>
-    <p className="my-10">Lorem Ipsum has been the industry's</p>
-    <p className="my-10">standard dummy text ever since the 1500s,</p>
-    <p className="my-10">when an unknown printer took a galley of</p>
-    <p className="my-10">type and scrambled it to make a type</p>
-    <p className="my-10">specimen book. It has survived not only</p>
-    <p className="my-10">five centuries, but also the leap into</p>
-    <p className="my-10">electronic typesetting, remaining essentially</p>
-    <p className="my-10">unchanged. It was popularised in the</p>
-    <p className="my-10">1960s with the release of Letraset sheets</p>
-    <p className="my-10">containing Lorem Ipsum passages, and more</p>
-    <p className="my-10">recently with desktop publishing software</p>
-    <p className="my-10">like Aldus PageMaker including versions of</p>
-    <p className="my-10">Lorem Ipsum.</p>
+    <p className="my-16">Lorem Ipsum is simply dummy text</p>
+    <p className="my-16">of the printing and typesetting industry.</p>
+    <p className="my-16">Lorem Ipsum has been the industry's</p>
+    <p className="my-16">standard dummy text ever since the 1500s,</p>
+    <p className="my-16">when an unknown printer took a galley of</p>
+    <p className="my-16">type and scrambled it to make a type</p>
+    <p className="my-16">specimen book. It has survived not only</p>
+    <p className="my-16">five centuries, but also the leap into</p>
+    <p className="my-16">electronic typesetting, remaining essentially</p>
+    <p className="my-16">unchanged. It was popularised in the</p>
+    <p className="my-16">1960s with the release of Letraset sheets</p>
+    <p className="my-16">containing Lorem Ipsum passages, and more</p>
+    <p className="my-16">recently with desktop publishing software</p>
+    <p className="my-16">like Aldus PageMaker including versions of</p>
+    <p className="my-16">Lorem Ipsum.</p>
   </div>
 );
 

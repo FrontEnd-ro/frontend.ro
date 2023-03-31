@@ -151,7 +151,7 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
             </List>
 
           </section>
-          <ChipCarousel className="my-10" rows={chipRows} />
+          <ChipCarousel className="my-16" rows={chipRows} />
         </div>
 
         <div>

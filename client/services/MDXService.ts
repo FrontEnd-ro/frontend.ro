@@ -32,7 +32,7 @@ class MDXService {
     return Content;
   }
 
-  static async fetchMDX(lessonId: 'despre-noi' | 'vs-code' | 'despre-html'): Promise<string> {
+  static async fetchMDX(lessonId: string): Promise<string> {
     let mdxContent = '';
 
     switch (lessonId) {
@@ -48,6 +48,11 @@ class MDXService {
       }
       case 'despre-html': {
         const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/AboutHtml.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
+      case 'structura-pagina-html': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/HTMLStructure.mdx');
         mdxContent = mdxAsString as unknown as string;
         break;
       }

@@ -26,13 +26,15 @@ import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
 import HTMLStructureContent from '~/curriculum/html/HTMLStructure';
 
 const LESSON_TO_COMPONENT = {
+  'despre-html': (mdxContent: string ) => <AboutHtmlContent mdxContent={mdxContent} />,
+  'vs-code': (mdxContent: string ) => <VSCodeContent mdxContent={mdxContent} />,
   'audio-video': <AudioAndVideoContent />,
   containere: <ContainersContent />,
   formulare: <FormsContent />,
   imagini: <ImagesContent />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,
   liste: <ListsContent />,
-  'structura-pagina-html': <HTMLStructureContent />,
+  'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
   texte: <TextsContent />,
   validare: <HTMLValidationContent />,
 };
@@ -106,13 +108,9 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescript
             title={lessonInfo.title}
             contributors={lessonInfo.contributors}
           >
-            {lessonInfo.id === 'vs-code' && (
-              <VSCodeContent mdxContent={mdxContent} />
-            )}
-            {lessonInfo.id === 'despre-html' && (
-              <AboutHtmlContent mdxContent={mdxContent} />
-            )}
-            {!['vs-code', 'despre-html'].includes(lessonInfo.id) && (
+            {mdxContent !== '' ? (
+              LESSON_TO_COMPONENT[lessonInfo.id](mdxContent)
+            ) : (
               LESSON_TO_COMPONENT[lessonInfo.id]
             )}
             {lessonInfo.resources !== undefined && (
@@ -144,19 +142,19 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescript
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
+  let rawMDX = await MDXService.fetchMDX(lessonInfo.id);
   let mdxContent = '';
 
   if (lessonInfo === null) {
     res.statusCode = 404;
   }
 
-  if (lessonInfo.id === 'vs-code' || lessonInfo.id === 'despre-html') {
-    const mdxAsString = await MDXService.fetchMDX(lessonInfo.id);
+  if (rawMDX !== '') {
     const MDX_SCOPE = {
       lessonInfo,
       CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     }
-    mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
+    mdxContent = await MDXService.compile(rawMDX as unknown as string, MDX_SCOPE);
   }
 
   return {

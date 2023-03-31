@@ -16,13 +16,14 @@ import { MDXService } from '~/services/MDXService';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 
 const LESSON_TO_COMPONENT = {
+  'despre-html': (mdxContent: string ) => <AboutHtmlContent mdxContent={mdxContent} />,
   'audio-video': <AudioAndVideoContent />,
   containere: <ContainersContent />,
   formulare: <FormsContent />,
   imagini: <ImagesContent />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,
   liste: <ListsContent />,
-  'structura-pagina-html': <HTMLStructureContent />,
+  'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
   texte: <TextsContent />,
   validare: <HTMLValidationContent />,
 };
@@ -45,9 +46,11 @@ const HtmlLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription 
         shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo}>
-        {lessonInfo.id === 'despre-html' ? (
-          <AboutHtmlContent mdxContent={mdxContent} />
-        ) : LESSON_TO_COMPONENT[lessonInfo.id]}
+        {mdxContent !== '' ? (
+          LESSON_TO_COMPONENT[lessonInfo.id](mdxContent)
+        ) : (
+          LESSON_TO_COMPONENT[lessonInfo.id]
+        )}
       </Lesson>
     </>
   );
@@ -59,25 +62,25 @@ const HtmlLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription 
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
-  let mdxContent = '';
+  let rawMDX = await MDXService.fetchMDX(lessonInfo.id);
+  let compiledMDX = '';
 
   if (lessonInfo === null) {
     res.statusCode = 404;
   }
 
-  if (lessonInfo.id === 'despre-html') {
-    const mdxAsString = await MDXService.fetchMDX(lessonInfo.id);
+  if (rawMDX !== '') {
     const MDX_SCOPE = {
       lessonInfo,
       CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     }
-    mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
+    compiledMDX = await MDXService.compile(rawMDX as unknown as string, MDX_SCOPE);
   }
 
   return {
     props: {
       lessonInfo,
-      mdxContent,
+      mdxContent: compiledMDX,
     },
   };
 }

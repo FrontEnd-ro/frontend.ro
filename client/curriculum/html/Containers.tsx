@@ -299,7 +299,7 @@ function ContainersContent() {
           vizual și funcțional.
         </p>
         <div className="d-flex justify-content-between flex-wrap">
-          <div className="max-w-full mr-10 my-5">
+          <div className="max-w-full mr-16 my-5">
             <Highlight
               language="html"
               code={`

@@ -7,7 +7,7 @@ interface Props {
 
 const LessonFloatContent = ({ position, children }: PropsWithChildren<Props>) => {
   return (
-    <div className={`${styles.LessonFloatContent} float-${position} ${position === 'right' ? 'ml-10' : 'mr-10'}`}>
+    <div className={`${styles.LessonFloatContent} float-${position} ${position === 'right' ? 'ml-16' : 'mr-16'}`}>
       {children}
     </div>
   )

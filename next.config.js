@@ -4,11 +4,6 @@ const path = require('path');
 // Importing the non TypeScript version, as it's not supported here
 const appConfig = require('./server/config/config');
 
-
-const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/,
-});
-
 const nextConfig = {
   distDir: 'dist',
   env: {
@@ -35,4 +30,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withMDX(nextConfig);
+module.exports = nextConfig;

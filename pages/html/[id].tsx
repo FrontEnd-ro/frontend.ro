@@ -24,7 +24,7 @@ const LESSON_TO_COMPONENT = {
   'linkuri-si-butoane': <LinksAndButtonsContent />,
   liste: <ListsContent />,
   'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
-  texte: <TextsContent />,
+  texte: (mdxContent: string ) => <TextsContent mdxContent={mdxContent} />,
   validare: <HTMLValidationContent />,
 };
 

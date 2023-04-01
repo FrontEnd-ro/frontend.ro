@@ -61,6 +61,11 @@ class MDXService {
         mdxContent = mdxAsString as unknown as string;
         break;
       }
+      case 'texte': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/TextElements.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
     }
 
     return mdxContent;

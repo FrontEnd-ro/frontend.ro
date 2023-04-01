@@ -221,6 +221,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://devhints.io/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/dev-hints_500w.png`,
     },
+    {
+      title: '33 JavaScript Concepts',
+      url: 'https://github.com/leonardomso/33-js-concepts',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/33_js_concepts_500w.jpeg`
+    },
   ],
   [ResourceCategory.FONTS]: [
     {

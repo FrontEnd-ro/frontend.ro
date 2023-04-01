@@ -56,6 +56,11 @@ class MDXService {
         mdxContent = mdxAsString as unknown as string;
         break;
       }
+      case 'audio-video': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/AudioAndVideo.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
     }
 
     return mdxContent;

@@ -17,7 +17,7 @@ import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 
 const LESSON_TO_COMPONENT = {
   'despre-html': (mdxContent: string ) => <AboutHtmlContent mdxContent={mdxContent} />,
-  'audio-video': <AudioAndVideoContent />,
+  'audio-video': (mdxContent: string ) => <AudioAndVideoContent mdxContent={mdxContent} />,
   containere: <ContainersContent />,
   formulare: <FormsContent />,
   imagini: <ImagesContent />,

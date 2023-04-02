@@ -1,0 +1,220 @@
+{<LessonFirstSentence> Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru a crea layout-uri mai complexe. Aici intervin elementele de tip “container”.
+</LessonFirstSentence>}
+<section>
+ <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[0].id}>
+          {SCOPE.lessonInfo.chapters[0].title}
+</LessonHeading> 
+Fiecare pagina Web are un layout specific - adică o structură generală după care elementele sunt aranjate. Spre exemplu, pagina <a href="https://developer.mozilla.org"> Mozilla Developer Network</a> de mai jos are 4 mari secțiuni:
+
+<LessonFigure
+          withBorder
+          width={400}
+          alt="MDN Layout"
+          src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/MDN-layout.png`}
+    />
+Pagina <a href="https://codepen.io/pen/" target="_blank" rel="noreferrer"> https://codepen.io/pen/</a> pe de altă parte e organizată diferit, în 3 secțiuni principale:
+
+ <LessonFigure
+          withBorder
+          alt="CodePen Layout"
+          src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/CodePen-layout.png`}
+    />
+Aceste dreptunghiuri pe care noi le-am numerotat sunt <em className="text-bold"> elementele de tip container</em>. Ele nu au o funcționalitate și nici stiluri specifice, ci sunt folosite ca să grupeze alte elemente, ușurând astfel crearea layout-ului. Deseori, numele lor ne va da un indiciu despre situațiile în care trebuie să le folosim. Mai jos le vom rezuma pe <span className="text-bold"> cele mai des folosite </span> de noi:
+</section>
+
+<section>
+  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[1].id}>
+          {SCOPE.lessonInfo.chapters[1].title}
+  </LessonHeading>
+
+  Așa cum sugerează și numele lor:
+
+  <div className="float-right">
+
+  <Highlight language="html" code={`<body>
+  <header> ... </header>
+  <main> 
+    ... 
+  </main>
+  <footer> ... </footer>
+</body>`}
+       />
+  </div>
+
+  {<List as="ol" variant="checkmark" className="mr-2 ml-0">
+    <li className="mb-4"> Elementul <FormattedText as="strong"> {'<header>'} </FormattedText> grupează elemente aflate în antetul paginii (deseori în partea de sus). Des întâlnite aici sunt logo-ul, meniul de navigație, etc…
+    </li>
+    <li className="mb-4"> Elementul <FormattedText as="strong"> {'<main>'} </FormattedText> este locul unde vom adăuga elementele ce reprezintă “esența” paginii noastre. Cu alte cuvinte, cea mai importantă parte din pagină trebuie să se afle în aceste element
+    </li>
+    <li> Elementul <FormattedText as="strong"> {'<footer>'} </FormattedText> grupează elementele aflate în “subsol”-ul paginii. De obicei vom găsi aici logo-ul cât și alte link-uri de navigație pentru pagini mai puțin importante din site-ul nostru
+    </li>
+  </List>}
+
+    Cam orice pagina web are aceste 3 elemente (lăsăm mai jos 2 exemple).
+
+<SideBySidePictures direction="column"
+    img1={{
+            alt: 'MDN Header, Main & Footer',
+            src: `${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/MDN-layout-with-elements.png`,
+          }}
+    img2={{
+            alt: 'Instagram Main & Footer',
+            src: `${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/Instagram-layout.png`,
+          }}
+        />
+</section>
+
+<section>
+<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[2].id}>
+          {SCOPE.lessonInfo.chapters[2].title}
+</LessonHeading>
+
+
+ Așa cum îi spune și numele, aici vom grupa elemente de navigație către alte pagini din site-ul nostru. Spre exemplu, meniul lateral de navigație din această pagină se află într-un <FormattedText as="strong"> {'<nav>'} </FormattedText>:
+ <CodePenEmbed
+          user="iampava"
+          slug="NWjMBbY"
+          theme="dark"
+          defaultTab="html"
+          className="my-5"
+        />
+</section>
+
+<section>
+
+<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[3].id}>
+          {SCOPE.lessonInfo.chapters[3].title}
+</LessonHeading>
+Este folosit pentru a marca un articol - cel mai des în bloguri sau site-uri de știri. Spre exemplu <a href="https://css-tricks.com" target="_blank" rel="noreferrer"> CSS Tricks</a> are pe prima pagină 29 elemente de tip <FormattedText as="strong"> {'<article>'} </FormattedText>.
+<LessonFigure
+          withBorder
+          alt="Elementul <article> in site-ul CSS Tricks"
+          src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/article-screenshot.png`}
+        />
+</section>
+
+<section>
+  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[4].id}>
+          {SCOPE.lessonInfo.chapters[4].title}
+  </LessonHeading>
+  Elementul <FormattedText as="strong"> {'<section>'} </FormattedText> îl vom folosi pentru secțiuni generice dintr-un document/articol, fiecare cu titlul (heading) propriu. 
+
+  În această pagină de exemplu, fiecare sub-capitol se află într-o secțiune proprie:
+
+  <Highlight language="html" className="my-5" code={`<article>
+  <section>
+    <h2> De ce e important ce container folosim? </h2>
+    <p>
+      ...
+    </p>
+  </section>
+  <section>
+    <h2> Exerciții </h2>
+    <p>
+      ...
+    </p>
+  </section>
+</article>`}
+        />
+</section>
+
+<section>
+  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[5].id}>
+          {SCOPE.lessonInfo.chapters[5].title}
+  </LessonHeading>
+
+  Și am ajuns în sfârșit și la <FormattedText as="strong"> {'<div>'} </FormattedText>, cel mai popular element de tip container iar din păcate, de multe ori folosit incorect.
+
+  Elementul <FormattedText as="strong"> {'<div>'} </FormattedText> este un container generic, fără vreo însemnătate specială.
+  Dacă <FormattedText> {'<nav>'} </FormattedText> ne sugerează elemente de navigație, sau <FormattedText> {'<main>'} </FormattedText> specifică că acolo e cea mai importantă parte a paginii, <FormattedText> {'<div>'} </FormattedText> nu reprezinta nimic deci ar trebui folosit doar cand <span className="text-bold"> nici unul din celelalte elemente de tip container nu are sens</span>. Spre exemplu, în galeria de imagini de pe Unsplash elementul <FormattedText> {'<div>'} </FormattedText> e perfect ca și container pentru aceste elemente căci nu au vreo însemnătate specială, având nevoie de un container doar ca să le poziționăm în colțurile imaginii.
+ 
+<LessonFigure
+          withBorder
+          alt="Exemplu de bună folosire a elementului <div>"
+          src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/correct-div-usage.png`}
+        />
+</section>
+
+<section>
+<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[6].id}>
+          {SCOPE.lessonInfo.chapters[6].title}
+</LessonHeading>
+
+La prima vedere ai putea crede că nu prea contează ce containere folosim. Nu au stilizări proprii și nici funcționalități specifice, deci cele doua snippet-uri de mai jos sunt identice din punct de vedere vizual și funcțional.
+
+<div className="d-flex justify-content-between flex-wrap">
+  <div className="max-w-full mr-16 my-5">
+      <Highlight language="html" code={`<body>
+  <nav>
+    <a href="/"> Home </a>
+  </nav>
+  <main>
+    <p> Is there any difference? </p>
+  </main>
+</body>`}
+            />
+  </div>
+  <div className="max-w-full my-5">
+      <Highlight language="html" code={`<body>
+  <div>
+    <a href="/"> Home </a>
+  </div>
+  <div>
+    <p> Is there any difference? </p>
+  </div>
+</body>`}
+         />
+   </div>
+</div>
+
+  Totuși, problema devine evidentă atunci când încercăm să citim și să înțelegem cod ce nu folosește corect containerele. Spre exemplu, ce indicii despre layout și conținut îți oferă codul de mai jos?
+
+   <Highlight className="my-5" language="html" code={`<body>
+  <div>
+    <img src="logo" alt="logo">
+    <div>
+      <a href="/home"> Home </a>
+      <a href="/profile"> Profile </a>
+    </div>
+  </div>
+  <div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div>
+    <p> Copyright 2021 </p>
+  </div>
+</body>`}
+        />
+
+Hmm, din păcate codul de mai sus care folosește doar div-uri nu e foarte explicit. Ar trebui să pornim aplicația în browser ca să ne dăm seama de mai multe detalii.
+
+{<LessonQuote> Dar,  dacă am încerca să folosim și alte containere? </LessonQuote>}
+
+<Highlight className="my-5" language="html" code={` <body>
+  <header>
+    <img src="logo" alt="logo">
+    <nav>
+      <a href="/home"> Home </a>
+      <a href="/profile"> Profile </a>
+    </nav>
+  </header>
+  <main>
+    <article></article>
+    <article></article>
+    <article></article>
+    <article></article>
+  </main>
+  <footer>
+    <p> Copyright 2021 </p>
+  </footer>
+</body>`}
+        />
+
+ Deja lucrurile sunt mult mai clare 💪! Ne dăm ușor seama că avem un container în partea de sus (header) cu logo-ul și câteva linkuri de navigare, apoi partea principală a paginii ce conține o serie de articole, iar jos un footer cu informații de copyright.
+
+{<LessonQuote variant="centered"> Iar aici e esența folosirii corecte a containerelor. Nu pentru utilizatorii site-ului ci pentru colegii tăi developeri sau pentru tine din viitor, care vei citi codul și vei înțelege imediat despre ce e vorba! </LessonQuote>}
+
+</section>

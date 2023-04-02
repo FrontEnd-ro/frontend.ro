@@ -13,6 +13,7 @@ import ListsContent from '~/curriculum/html/Lists';
 import HTMLStructureContent from '~/curriculum/html/HTMLStructure';
 import TextsContent from '~/curriculum/html/TextElements';
 import { MDXService } from '~/services/MDXService';
+import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 
 const LESSON_TO_COMPONENT = {
@@ -22,7 +23,7 @@ const LESSON_TO_COMPONENT = {
   formulare: <FormsContent />,
   imagini: <ImagesContent />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,
-  liste: <ListsContent />,
+  liste: (mdxContent: string ) => <ListsContent mdxContent={mdxContent} />,
   'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
   texte: (mdxContent: string ) => <TextsContent mdxContent={mdxContent} />,
   validare: (mdxContent: string ) => <HTMLValidationContent mdxContent={mdxContent} />,
@@ -72,6 +73,7 @@ export async function getServerSideProps({ res, params }) {
   if (rawMDX !== '') {
     const MDX_SCOPE = {
       lessonInfo,
+      icons: { faThumbsUp },
       CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     }
     compiledMDX = await MDXService.compile(rawMDX as unknown as string, MDX_SCOPE);

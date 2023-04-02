@@ -4,6 +4,7 @@ import { NotWroteYet } from '~/components/404';
 import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/404/NotFound';
 import { withSmoothScroll } from '~/services/Hooks';
+import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { LessonHeading, LessonResources } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
@@ -33,7 +34,7 @@ const LESSON_TO_COMPONENT = {
   formulare: <FormsContent />,
   imagini: <ImagesContent />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,
-  liste: <ListsContent />,
+  liste: (mdxContent: string ) => <ListsContent mdxContent={mdxContent} />,
   'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
   texte: (mdxContent: string ) => <TextsContent mdxContent={mdxContent} />,
   validare:(mdxContent: string ) => <HTMLValidationContent mdxContent={mdxContent} />,
@@ -152,6 +153,7 @@ export async function getServerSideProps({ res, params }) {
   if (rawMDX !== '') {
     const MDX_SCOPE = {
       lessonInfo,
+      icons: { faThumbsUp },
       CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     }
     mdxContent = await MDXService.compile(rawMDX as unknown as string, MDX_SCOPE);

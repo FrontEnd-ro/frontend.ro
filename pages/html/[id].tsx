@@ -25,7 +25,7 @@ const LESSON_TO_COMPONENT = {
   liste: <ListsContent />,
   'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
   texte: (mdxContent: string ) => <TextsContent mdxContent={mdxContent} />,
-  validare: <HTMLValidationContent />,
+  validare: (mdxContent: string ) => <HTMLValidationContent mdxContent={mdxContent} />,
 };
 
 const HtmlLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription | null; mdxContent: string; }) => {

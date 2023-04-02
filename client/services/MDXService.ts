@@ -71,6 +71,11 @@ class MDXService {
         mdxContent = mdxAsString as unknown as string;
         break;
       }
+      case 'validare': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/HTMLValidation.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
     }
 
     return mdxContent;

@@ -29,7 +29,7 @@ const LESSON_TO_COMPONENT = {
   'despre-html': (mdxContent: string ) => <AboutHtmlContent mdxContent={mdxContent} />,
   'vs-code': (mdxContent: string ) => <VSCodeContent mdxContent={mdxContent} />,
   'audio-video': (mdxContent: string ) => <AudioAndVideoContent mdxContent={mdxContent} />,
-  containere: <ContainersContent />,
+  containere: (mdxContent: string ) => <ContainersContent mdxContent={mdxContent} />,
   formulare: <FormsContent />,
   imagini: <ImagesContent />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,

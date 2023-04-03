@@ -4,8 +4,8 @@ import { NotWroteYet } from '~/components/404';
 import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/404/NotFound';
 import { withSmoothScroll } from '~/services/Hooks';
-import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
-import { faExclamationCircle,faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp,faQuestionCircle, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { LessonHeading, LessonResources } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
@@ -34,7 +34,7 @@ const LESSON_TO_COMPONENT = {
   containere: (mdxContent: string ) => <ContainersContent mdxContent={mdxContent} />,
   formulare: (mdxContent: string ) => <FormsContent mdxContent={mdxContent} />,
   imagini: (mdxContent: string ) => <ImagesContent mdxContent={mdxContent} />,
-  'linkuri-si-butoane': <LinksAndButtonsContent />,
+  'linkuri-si-butoane': (mdxContent: string ) => <LinksAndButtonsContent mdxContent={mdxContent} />,
   liste: (mdxContent: string ) => <ListsContent mdxContent={mdxContent} />,
   'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
   texte: (mdxContent: string ) => <TextsContent mdxContent={mdxContent} />,
@@ -157,7 +157,7 @@ export async function getServerSideProps({ res, params }) {
   if (rawMDX !== '') {
     const MDX_SCOPE = {
       lessonInfo,
-      icons: { faThumbsUp, faExclamationCircle, faQuestion },
+      icons: { faThumbsUp, faExclamationCircle, faQuestion,faQuestionCircle, faThumbsDown, faShoppingCart },
       CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     }
     mdxContent = await MDXService.compile(rawMDX as unknown as string, MDX_SCOPE);

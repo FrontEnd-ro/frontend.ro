@@ -60,8 +60,8 @@
     "upload-monaco-editor-s3": "ts-node -P server/tsconfig.json upload-monaco-editor.js"
   },
   "dependencies": {
-    "@aws-sdk/client-lambda": "^3.42.0",
-    "@aws-sdk/client-s3": "^3.3.0",
+    "@aws-sdk/client-lambda": "^3.303.0",
+    "@aws-sdk/client-s3": "^3.304.0",
     "@codesandbox/sandpack-react": "^1.15.5",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",

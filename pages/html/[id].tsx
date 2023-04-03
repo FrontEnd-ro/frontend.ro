@@ -14,6 +14,7 @@ import HTMLStructureContent from '~/curriculum/html/HTMLStructure';
 import TextsContent from '~/curriculum/html/TextElements';
 import { MDXService } from '~/services/MDXService';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationCircle,faQuestion } from '@fortawesome/free-solid-svg-icons';
 import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
 
 const LESSON_TO_COMPONENT = {
@@ -21,7 +22,7 @@ const LESSON_TO_COMPONENT = {
   'audio-video': (mdxContent: string ) => <AudioAndVideoContent mdxContent={mdxContent} />,
   containere: (mdxContent: string ) => <ContainersContent mdxContent={mdxContent} />,
   formulare: (mdxContent: string ) => <FormsContent mdxContent={mdxContent} />,
-  imagini: <ImagesContent />,
+  imagini: (mdxContent: string ) => <ImagesContent mdxContent={mdxContent} />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,
   liste: (mdxContent: string ) => <ListsContent mdxContent={mdxContent} />,
   'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
@@ -76,7 +77,7 @@ export async function getServerSideProps({ res, params }) {
   if (rawMDX !== '') {
     const MDX_SCOPE = {
       lessonInfo,
-      icons: { faThumbsUp },
+      icons: { faThumbsUp, faExclamationCircle, faQuestion},
       CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     }
     compiledMDX = await MDXService.compile(rawMDX as unknown as string, MDX_SCOPE);

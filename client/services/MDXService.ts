@@ -102,6 +102,11 @@ class MDXService {
         mdxContent = mdxAsString as unknown as string;
         break;
       }
+      case 'linkuri-si-butoane': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/LinksAndButtons.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
     }
 
     return mdxContent;

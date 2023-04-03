@@ -47,21 +47,19 @@ export async function getServerSideProps({ res, params }) {
     res.statusCode = 404;
   }
 
+  const MDX_SCOPE = {
+    GITHUB_URL,
+    lessonInfo,
+    icons: { faShare },
+    CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
+    urlToShare: `${appConfig.APP.app_url}/intro/${id}`
+  }
+
   if (lessonInfo.id === 'despre-noi') {
     const mdxAsString = await MDXService.serverFetchMDX(lessonInfo.id);
-    const MDX_SCOPE = {
-      GITHUB_URL,
-      headings:  lessonInfo.chapters,
-      icons: { faShare },
-      urlToShare: `${appConfig.APP.app_url}/intro/${id}`
-    }
     mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
   } else if (lessonInfo.id === 'vs-code') {
     const mdxAsString = await MDXService.serverFetchMDX(lessonInfo.id);
-    const MDX_SCOPE = {
-      lessonInfo,
-      CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
-    }
     mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
   }
 

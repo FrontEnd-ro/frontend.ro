@@ -1,24 +1,16 @@
-const mongoose = require('mongoose');
-const { ServerError } = require('../ServerUtils');
+import mongoose from 'mongoose';
+import { LessonSchema } from './lesson.schema';
+import { LessonI } from '../../shared/types/lesson.types';
 
-const LessonsSchema = new mongoose.Schema({
-  lessonId: { type: String, required: true, unique: true },
-  views: { type: Number, required: true },
-}, {
-  timestamps: {
-    updatedAt: 'updatedAt',
-  },
-});
-
-const Lesson = mongoose.models.Lesson || mongoose.model('Lesson', LessonsSchema);
+const Lesson: mongoose.Model<LessonI> = mongoose.models.Lesson || mongoose.model('Lesson', LessonSchema);
 
 class LessonModel {
   static get(lessonId) {
     return Lesson.findOne({ lessonId });
   }
 
-  static async updateViews(lessonId, views) {
-    let lesson = null;
+  static async updateViews(lessonId, views): Promise<void> {
+    let lesson: mongoose.Document<any, any, LessonI> & LessonI = null;
 
     try {
       lesson = await LessonModel.get(lessonId);
@@ -56,4 +48,4 @@ class LessonModel {
   }
 }
 
-module.exports = LessonModel;
+export default LessonModel;

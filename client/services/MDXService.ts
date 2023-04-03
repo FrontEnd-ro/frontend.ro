@@ -97,6 +97,11 @@ class MDXService {
         mdxContent = mdxAsString as unknown as string;
         break;
       }
+      case 'imagini': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/Images.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
     }
 
     return mdxContent;

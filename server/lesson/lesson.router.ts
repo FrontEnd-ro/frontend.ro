@@ -1,5 +1,5 @@
 import express from 'express';
-import LessonModel from './lesson.model';
+import LessonModel, { sanitizeLesson } from './lesson.model';
 import { ServerError } from '../ServerUtils';
 
 const lessonRouter = express.Router();
@@ -13,7 +13,7 @@ lessonRouter.get('/:lessonId', async function getLesson(req, res) {
     return;
   }
 
-  res.json(lesson);
+  res.json(sanitizeLesson(lesson));
 });
 
 lessonRouter.post('/:lessonId/views', async function increaseViews(req, res) {
@@ -29,7 +29,7 @@ lessonRouter.post('/:lessonId/views', async function increaseViews(req, res) {
     }
 
     const updatedLesson = await LessonModel.get(lessonId);
-    res.json(updatedLesson);
+    res.json(sanitizeLesson(updatedLesson));
   } catch (err) {
     new ServerError(
       err.code || 500, 

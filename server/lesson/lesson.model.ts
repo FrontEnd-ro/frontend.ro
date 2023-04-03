@@ -1,3 +1,4 @@
+import pick from 'lodash/pick';
 import mongoose from 'mongoose';
 import { LessonSchema } from './lesson.schema';
 import { LessonI } from '../../shared/types/lesson.types';
@@ -48,4 +49,10 @@ class LessonModel {
   }
 }
 
+function sanitizeLesson(lesson: mongoose.Document<any, any, LessonI> & LessonI) {
+  const propsToKeep: (keyof LessonI)[] = ['lessonId', 'views'];
+  return pick(lesson.toJSON(), propsToKeep);
+}
+
 export default LessonModel;
+export { sanitizeLesson };

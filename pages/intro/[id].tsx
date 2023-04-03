@@ -10,7 +10,7 @@ import AboutUsContent from '~/curriculum/intro/despre-noi';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
 
-const IntroLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription | null, mdxContent: string }) => {
+const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescription | null, mdxContent?: string }) => {
   if (lessonInfo === null) {
     return <NotFoundPage />;
   }
@@ -45,6 +45,9 @@ export async function getServerSideProps({ res, params }) {
 
   if (lessonInfo === null) {
     res.statusCode = 404;
+    return {
+      props: { lessonInfo }
+    }
   }
 
   const MDX_SCOPE = {

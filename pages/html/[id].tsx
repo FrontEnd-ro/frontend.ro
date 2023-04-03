@@ -29,7 +29,7 @@ const LESSON_TO_COMPONENT = {
   validare: (mdxContent: string ) => <HTMLValidationContent mdxContent={mdxContent} />,
 };
 
-const HtmlLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription | null; mdxContent: string; }) => {
+const HtmlLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescription | null; mdxContent?: string; }) => {
   if (lessonInfo === null) {
     return <NotFoundPage />;
   }
@@ -68,6 +68,9 @@ export async function getServerSideProps({ res, params }) {
 
   if (lessonInfo === null) {
     res.statusCode = 404;
+    return {
+      props: { lessonInfo }
+    }
   }
 
   if (rawMDX !== '') {

@@ -44,7 +44,7 @@ const LESSON_TO_COMPONENT = {
 // will move this to the /html folder. So right now
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
-const HtmlLessonTemp = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription | null, mdxContent: string }) => {
+const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescription | null, mdxContent?: string }) => {
   const getChapters = (lessonDescription: LessonDescription): Chapter[] => {
     if (!lessonDescription.withExercises) {
       return parseChapters(lessonDescription.chapters);
@@ -148,6 +148,9 @@ export async function getServerSideProps({ res, params }) {
 
   if (lessonInfo === null) {
     res.statusCode = 404;
+    return {
+      props: { lessonInfo }
+    }
   }
 
   if (rawMDX !== '') {

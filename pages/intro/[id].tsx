@@ -48,7 +48,7 @@ export async function getServerSideProps({ res, params }) {
   }
 
   if (lessonInfo.id === 'despre-noi') {
-    const mdxAsString = await MDXService.fetchMDX(lessonInfo.id);
+    const mdxAsString = await MDXService.serverFetchMDX(lessonInfo.id);
     const MDX_SCOPE = {
       GITHUB_URL,
       headings:  lessonInfo.chapters,
@@ -57,7 +57,7 @@ export async function getServerSideProps({ res, params }) {
     }
     mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
   } else if (lessonInfo.id === 'vs-code') {
-    const mdxAsString = await MDXService.fetchMDX(lessonInfo.id);
+    const mdxAsString = await MDXService.serverFetchMDX(lessonInfo.id);
     const MDX_SCOPE = {
       lessonInfo,
       CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,

@@ -5,5 +5,7 @@ export interface LessonI {
 
   lessonId: string;
 
+  mdxContent?: string;
+
   views?: number;
 }

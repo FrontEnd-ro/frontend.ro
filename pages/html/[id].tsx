@@ -63,7 +63,7 @@ const HtmlLesson = ({ lessonInfo, mdxContent }: { lessonInfo: LessonDescription 
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
-  let rawMDX = await MDXService.fetchMDX(lessonInfo.id);
+  let rawMDX = await MDXService.serverFetchMDX(lessonInfo.id);
   let compiledMDX = '';
 
   if (lessonInfo === null) {

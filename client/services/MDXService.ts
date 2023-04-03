@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import * as runtime from 'react/jsx-runtime';
 import { compile, runSync } from '@mdx-js/mdx';
 import { useMDXComponents } from '@mdx-js/react';
+import { LessonI } from '~/../shared/types/lesson.types';
 
 class MDXService {
   static async compile(mdx: string, scope: Record<string, any>): Promise<string> {
@@ -32,13 +33,23 @@ class MDXService {
     return Content;
   }
 
-  static async fetchMDX(lessonId: string): Promise<string> {
+  // NOTE: this function is called inside `getServerSideProps` to 
+  // fetch MDX when rendering lessons.
+  static async serverFetchMDX(lessonId: string): Promise<string> {
     let mdxContent = '';
+    const { default: fetch } = await import('node-fetch');
 
     switch (lessonId) {
       case 'despre-noi': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/intro/despre-noi.mdx');
-        mdxContent = mdxAsString as unknown as string;
+        const resp = await fetch(`${process.env.ENDPOINT}/lessons/${lessonId}`);
+        const jsonResp = await resp.json();
+        
+        if (!resp.ok) {
+          console.error(`[serverFetchMDX] Failed to fetch lesson with lessonId=${lessonId}`, jsonResp);
+          throw new Error(jsonResp.code, jsonResp.message);
+        } else {
+          mdxContent = (jsonResp as LessonI).mdxContent;
+        }
         break;
       }
       case 'vs-code': {

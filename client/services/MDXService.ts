@@ -81,6 +81,11 @@ class MDXService {
         mdxContent = mdxAsString as unknown as string;
         break;
       }
+      case 'formulare': {
+        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/Forms.mdx');
+        mdxContent = mdxAsString as unknown as string;
+        break;
+      }
     }
 
     return mdxContent;

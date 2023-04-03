@@ -20,7 +20,7 @@ const LESSON_TO_COMPONENT = {
   'despre-html': (mdxContent: string ) => <AboutHtmlContent mdxContent={mdxContent} />,
   'audio-video': (mdxContent: string ) => <AudioAndVideoContent mdxContent={mdxContent} />,
   containere: (mdxContent: string ) => <ContainersContent mdxContent={mdxContent} />,
-  formulare: <FormsContent />,
+  formulare: (mdxContent: string ) => <FormsContent mdxContent={mdxContent} />,
   imagini: <ImagesContent />,
   'linkuri-si-butoane': <LinksAndButtonsContent />,
   liste: (mdxContent: string ) => <ListsContent mdxContent={mdxContent} />,

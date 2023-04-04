@@ -40,72 +40,20 @@ class MDXService {
     const { default: fetch } = await import('node-fetch');
 
     switch (lessonId) {
-      case 'despre-noi': {
+      case 'moduri-stilizare':
+      case 'box-model': {
+        // To be implemented
+      }
+      default: {
         const resp = await fetch(`${process.env.ENDPOINT}/lessons/${lessonId}`);
         const jsonResp = await resp.json();
-        
+
         if (!resp.ok) {
           console.error(`[serverFetchMDX] Failed to fetch lesson with lessonId=${lessonId}`, jsonResp);
           throw new Error(jsonResp.code, jsonResp.message);
         } else {
           mdxContent = (jsonResp as LessonI).mdxContent;
         }
-        break;
-      }
-      case 'vs-code': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/intro/VSCode.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'despre-html': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/AboutHtml.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'structura-pagina-html': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/HTMLStructure.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'audio-video': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/AudioAndVideo.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'texte': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/TextElements.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'containere': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/Containers.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'validare': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/HTMLValidation.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'liste': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/Lists.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'formulare': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/Forms.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'imagini': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/Images.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
-      }
-      case 'linkuri-si-butoane': {
-        const { default: mdxAsString } = await import('!raw-loader!~/curriculum/html/mdx/LinksAndButtons.mdx');
-        mdxContent = mdxAsString as unknown as string;
-        break;
       }
     }
 

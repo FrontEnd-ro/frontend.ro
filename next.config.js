@@ -12,6 +12,7 @@ const nextConfig = {
     CLOUDFRONT_PUBLIC: appConfig.CDN.static,
     GITHUB_CLIENT_ID: appConfig.GITHUB.id,
     RESET_CODE_LENGTH: appConfig.PASS_RESET_CODE.length,
+    LANGUAGE: appConfig.APP.language,
   },
   images: {
     domains: ['d3tycb976jpudc.cloudfront.net'],

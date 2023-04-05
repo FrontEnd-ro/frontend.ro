@@ -1,4 +1,5 @@
 import ConfettiGenerator from 'confetti-js';
+import useTranslation from 'next-translate/useTranslation'
 import React, { useEffect, useRef, useState } from 'react';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,6 +21,8 @@ interface Props {
 function LandingHero({ isLoggedIn, htmlTutorialState }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const { t } = useTranslation('common')
 
   const CONFIG: Record<'not_started' | 'started' | 'completed', { label: string; href: string }> = {
     not_started: {
@@ -58,7 +61,7 @@ function LandingHero({ isLoggedIn, htmlTutorialState }: Props) {
             onClick={() => setIsMenuOpen(true)}
             className={`${styles['menu-btn']} d-flex align-items-center absolute d-flex`}
           >
-            <span>Menu</span>
+            <span>{t('Menu')}</span>
             <FontAwesomeIcon icon={faBars} />
           </Button>
         )}

@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
 import { noop } from '~/services/Utils';
+import I18nProvider from 'next-translate/I18nProvider'
 import { UserState } from '~/redux/user/types';
 import { UserRole } from '../shared/types/user.types';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
@@ -28,9 +29,11 @@ export default function MyApp({ Component, pageProps }: any) {
 
   return (
     <Provider store={store}>
-      <IdentifyLogRocket />
-      <LoadNotifications />
-      <Component {...pageProps} />
+      <I18nProvider lang={process.env.LANGUAGE} namespaces={pageProps.namespaces}>
+        <IdentifyLogRocket />
+        <LoadNotifications />
+        <Component {...pageProps} />
+      </I18nProvider>
     </Provider>
   );
 }
@@ -55,6 +58,7 @@ MyApp.getInitialProps = async ({ ctx }) => {
     _applicationConfig: {
       navItems: [],
     },
+    namespaces: {}
   };
 
   const isClientSide = !ctx.req;
@@ -65,18 +69,24 @@ MyApp.getInitialProps = async ({ ctx }) => {
 
   const { token } = ctx.req?.cookies ?? {};
   if (!token) {
-    const applicationConfig = await fetchApplicationConfigServerSide();
+    const [applicationConfig, common] = await Promise.all([
+      fetchApplicationConfigServerSide(),
+      import(`../locales/${process.env.LANGUAGE}/common.json`).then(resp => resp.default),
+    ]);
+    pageProps.namespaces = { common };
     pageProps._applicationConfig = applicationConfig;
 
     return { pageProps };
   }
 
-  const [user, applicationConfig] = await Promise.all([
+  const [user, applicationConfig, common] = await Promise.all([
     fetchUserServiceSide(token),
     fetchApplicationConfigServerSide(),
+    import(`../locales/${process.env.LANGUAGE}/common.json`).then(resp => resp.default),
   ]);
 
   pageProps._serverUser = user;
+  pageProps.namespaces = { common };
   pageProps._applicationConfig = applicationConfig;
 
   return { pageProps };

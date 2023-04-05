@@ -11292,6 +11292,11 @@ next-tick@^1.1.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
+next-translate@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/next-translate/-/next-translate-2.0.4.tgz#c4412475206653e8bb9bbf6dc968f51b4fd9ccd4"
+  integrity sha512-X+85LLkCDeT1L9VuSSnyXem2mxEkWxiqmdqS574QLtM+br6HaKoN7bUVi+9bSc/R0cTSzHs3PcMICPvSQvLn8Q==
+
 next@^13.2.4:
   version "13.2.4"
   resolved "https://registry.yarnpkg.com/next/-/next-13.2.4.tgz#2363330392b0f7da02ab41301f60857ffa7f67d6"

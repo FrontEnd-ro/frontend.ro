@@ -1,3 +1,4 @@
+import Trans from 'next-translate/Trans'
 import ConfettiGenerator from 'confetti-js';
 import useTranslation from 'next-translate/useTranslation'
 import React, { useEffect, useRef, useState } from 'react';
@@ -26,15 +27,15 @@ function LandingHero({ isLoggedIn, htmlTutorialState }: Props) {
 
   const CONFIG: Record<'not_started' | 'started' | 'completed', { label: string; href: string }> = {
     not_started: {
-      label: 'Începe Tutorialul de HTML',
+      label: t('common:LandingHero.Start the HTML Tutorial'),
       href: '/html',
     },
     started: {
-      label: 'Continuă Tutorialul de HTML',
+      label: t('common:LandingHero.Continue the HTML Tutorial'),
       href: '/html/tutorial',
     },
     completed: {
-      label: 'Vezi certificarea HTML!',
+      label: t('common:LandingHero.See the HTML certification!'),
       href: '/html/tutorial/certification',
     },
   };
@@ -66,19 +67,17 @@ function LandingHero({ isLoggedIn, htmlTutorialState }: Props) {
           </Button>
         )}
       <section className={`${styles.LandingHero} ${isLoggedIn ? styles.isLoggedIn : ''} d-flex justify-content-between`}>
-        <AsideMenu hideScrollOnBody title="FrontEnd.ro" isOpen={isMenuOpen} close={() => setIsMenuOpen(false)}>
+        <AsideMenu hideScrollOnBody title={t('FrontEndro')} isOpen={isMenuOpen} close={() => setIsMenuOpen(false)}>
           <div className={`${styles['nav-wrapper']} absolute`}>
             <NavLinks />
           </div>
         </AsideMenu>
         <div className={styles['call-to-action']}>
-          <h1 className="m-0 d-inline-block"> FrontEnd.ro </h1>
+          <h1 className="m-0 d-inline-block"> {t('FrontEndro')} </h1>
           <p className={styles.description}>
-            Învață FrontEnd de la zero,
-            {' '}
-            <span className="d-block">
-              cu ajutorul comunității open source.
-            </span>
+            <Trans i18nKey='common:LandingHero.description' components={[
+              <span key='0' className="d-block" />
+            ]}/>
           </p>
           <div>
             <Link

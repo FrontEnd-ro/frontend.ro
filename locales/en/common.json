@@ -1,3 +1,10 @@
 {
-  "Menu": "Menu"
+  "Menu": "Menu",
+  "FrontEndro": "FrontendCademy",
+  "LandingHero": {
+    "description": "Learn FrontEnd development, <0>with help from the open-source community.</0>",
+    "Start the HTML Tutorial": "Start the HTML Tutorial",
+    "Continue the HTML Tutorial": "Continue the HTML Tutorial",
+    "See the HTML certification!": "See the HTML certification!"
+  }
 }

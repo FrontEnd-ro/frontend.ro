@@ -1,3 +1,10 @@
 {
-  "Menu": "Meniu"
+  "Menu": "Meniu",
+  "FrontEndro": "FrontEnd.ro",
+  "LandingHero": {
+    "description": "Învață FrontEnd de la zero, <0>cu ajutorul comunității open source.</0>",
+    "Start the HTML Tutorial": "Începe Tutorialul de HTML",
+    "Continue the HTML Tutorial": "Continuă Tutorialul de HTML",
+    "See the HTML certification!": "Vezi certificarea HTML!"
+  }
 }

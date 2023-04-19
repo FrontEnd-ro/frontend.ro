@@ -68,7 +68,12 @@ const PasswordReset = ({
       codeInputsRef.current.forEach((codeInput, index) => {
         codeInput.value = text[index];
       });
-      focusPasswordInput();
+
+      // Adding a small delay because of this bug
+      // https://github.com/FrontEnd-ro/frontend.ro/issues/959
+      setTimeout(() => {
+        focusPasswordInput();
+      }, 0)
     }
   };
 

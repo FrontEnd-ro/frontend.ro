@@ -1,9 +1,8 @@
-import Trans from 'next-translate/Trans'
 import ConfettiGenerator from 'confetti-js';
-import useTranslation from 'next-translate/useTranslation'
 import React, { useEffect, useRef, useState } from 'react';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation, Trans } from '~/services/typesafeNextTranslate';
 
 import Header from '~/components/Header';
 import Button from '~/components/Button';
@@ -23,19 +22,19 @@ function LandingHero({ isLoggedIn, htmlTutorialState }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('common');
 
   const CONFIG: Record<'not_started' | 'started' | 'completed', { label: string; href: string }> = {
     not_started: {
-      label: t('common:LandingHero.Start the HTML Tutorial'),
+      label: t('LandingHero.Start the HTML Tutorial'),
       href: '/html',
     },
     started: {
-      label: t('common:LandingHero.Continue the HTML Tutorial'),
+      label: t('LandingHero.Continue the HTML Tutorial'),
       href: '/html/tutorial',
     },
     completed: {
-      label: t('common:LandingHero.See the HTML certification!'),
+      label: t('LandingHero.See the HTML certification!'),
       href: '/html/tutorial/certification',
     },
   };

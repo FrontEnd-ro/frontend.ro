@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import * as runtime from 'react/jsx-runtime';
 import { compile, runSync } from '@mdx-js/mdx';
 import { useMDXComponents } from '@mdx-js/react';
-import { LessonI } from '~/../shared/types/lesson.types';
+import { LessonDescription } from './DataModel';
 
 class MDXService {
   static async compile(mdx: string, scope: Record<string, any>): Promise<string> {
@@ -35,29 +35,25 @@ class MDXService {
 
   // NOTE: this function is called inside `getServerSideProps` to 
   // fetch MDX when rendering lessons.
-  static async serverFetchMDX(lessonId: string): Promise<string> {
-    let mdxContent = '';
-    const { default: fetch } = await import('node-fetch');
-
-    switch (lessonId) {
-      case 'moduri-stilizare':
-      case 'box-model': {
-        // To be implemented
-      }
-      default: {
-        const resp = await fetch(`${process.env.ENDPOINT}/lessons/${lessonId}`);
-        const jsonResp = await resp.json();
-
-        if (!resp.ok) {
-          console.error(`[serverFetchMDX] Failed to fetch lesson with lessonId=${lessonId}`, jsonResp);
-          throw new Error(jsonResp.code, jsonResp.message);
-        } else {
-          mdxContent = (jsonResp as LessonI).mdxContent;
-        }
+  static async serverFetchMDX(lessonId: string, type: LessonDescription['type']): Promise<{
+    ok: true;
+    content: string;
+  } | {
+    ok: false;
+  }> {
+    const SPAN = `serverFetchMDX(${lessonId}, ${type})`;
+    try {
+      const { default: content } = await import(`!raw-loader!~/curriculum/${type}/mdx/${lessonId}.mdx`);
+      return {
+        ok: true,
+        content,
+      };
+    } catch (err) {
+      console.error(`[${SPAN}] Failed to read MDX Content`, err);
+      return {
+        ok: false
       }
     }
-
-    return mdxContent;
   }
 
   // Kinda hackish way to inject outside variables/scope into MDX Files

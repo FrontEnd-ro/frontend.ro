@@ -3,7 +3,6 @@ import { LessonI } from '../../shared/types/lesson.types';
 
 const LessonSchema: mongoose.Schema<LessonI> = new mongoose.Schema({
   lessonId: { type: String, required: true, unique: true },
-  mdxContent: { type: String, required: false, default: '' },
   views: { type: Number, required: true },
 }, {
   timestamps: {

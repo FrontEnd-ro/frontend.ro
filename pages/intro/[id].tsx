@@ -41,15 +41,14 @@ const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescri
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
-  let mdxContent = '';
+  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo.type);
 
-  if (lessonInfo === null) {
+  if (lessonInfo === null || !resp.ok) {
     res.statusCode = 404;
     return {
       props: { lessonInfo }
     }
   }
-
   const MDX_SCOPE = {
     GITHUB_URL,
     lessonInfo,
@@ -57,19 +56,12 @@ export async function getServerSideProps({ res, params }) {
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     urlToShare: `${appConfig.APP.app_url}/intro/${id}`
   }
-
-  if (lessonInfo.id === 'despre-noi') {
-    const mdxAsString = await MDXService.serverFetchMDX(lessonInfo.id);
-    mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
-  } else if (lessonInfo.id === 'vs-code') {
-    const mdxAsString = await MDXService.serverFetchMDX(lessonInfo.id);
-    mdxContent = await MDXService.compile(mdxAsString as unknown as string, MDX_SCOPE);
-  }
+  const compiledMDX = await MDXService.compile(resp.content, MDX_SCOPE);
 
   return {
     props: {
       lessonInfo,
-      mdxContent,
+      mdxContent: compiledMDX,
     },
   };
 }

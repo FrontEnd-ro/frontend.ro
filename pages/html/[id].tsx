@@ -64,24 +64,20 @@ const HtmlLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescrip
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
-  let rawMDX = await MDXService.serverFetchMDX(lessonInfo.id);
-  let compiledMDX = '';
+  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo.type);
 
-  if (lessonInfo === null) {
+  if (lessonInfo === null || !resp.ok) {
     res.statusCode = 404;
     return {
       props: { lessonInfo }
     }
   }
-
-  if (rawMDX !== '') {
-    const MDX_SCOPE = {
-      lessonInfo,
-      icons: { faThumbsUp, faExclamationCircle, faQuestion, faQuestionCircle, faThumbsDown, faShoppingCart},
-      CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
-    }
-    compiledMDX = await MDXService.compile(rawMDX as unknown as string, MDX_SCOPE);
+  const MDX_SCOPE = {
+    lessonInfo,
+    icons: { faThumbsUp, faExclamationCircle, faQuestion, faQuestionCircle, faThumbsDown, faShoppingCart },
+    CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
   }
+  const compiledMDX = await MDXService.compile(resp.content, MDX_SCOPE);
 
   return {
     props: {

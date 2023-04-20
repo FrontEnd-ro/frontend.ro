@@ -50,7 +50,7 @@ class LessonModel {
 }
 
 function sanitizeLesson(lesson: mongoose.Document<any, any, LessonI> & LessonI) {
-  const propsToKeep: (keyof LessonI)[] = ['lessonId', 'views', 'mdxContent'];
+  const propsToKeep: (keyof LessonI)[] = ['lessonId', 'views'];
   return pick(lesson.toJSON(), propsToKeep);
 }
 

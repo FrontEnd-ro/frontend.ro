@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import UserService from '~/services/api/User.service';
 import Button from '~/components/Button';
 import styles from './SubscribeForm.module.scss';
+import { Trans, useTranslation } from '~/services/typesafeNextTranslate';
 
 function SubscribeForm({ className = '' }: { className?: string }) {
+  const { t } = useTranslation('common');
   const [didSubscribe, setDidSubscribe] = useState(false);
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [error, setError] = useState(null);
@@ -21,7 +23,7 @@ function SubscribeForm({ className = '' }: { className?: string }) {
     }
 
     if (formEl['robot-check'].value !== ROBOT_STRING) {
-      setError('Hmm...ești robot cumva? 🤔');
+      setError(t('SubscribeForm.confirmationError'));
       return;
     }
 
@@ -40,14 +42,14 @@ function SubscribeForm({ className = '' }: { className?: string }) {
       })
       .catch((err) => {
         setIsSubscribing(false);
-        setError(err.message || 'Oups, ceva a mers greșit. Dă-mi un semn ca să pot rezolva problema :)');
+        setError(err.message || t('SubscribeForm.genericError'));
       });
   };
 
   return (
     <form onSubmit={submit} className={`${styles.SubscribeForm} ${className}`}>
       <label className="d-block mb-4">
-        <span className="m-0 d-block">Cum să-ți spunem?</span>
+        <span className="m-0 d-block">{t('SubscribeForm.What\'s your name?')}</span>
         <input className="w-100" disabled={isSubscribing} type="text" name="name" required />
       </label>
       <label className="d-block mb-4">
@@ -56,13 +58,10 @@ function SubscribeForm({ className = '' }: { className?: string }) {
       </label>
       <label className="d-block mb-4">
         <span className="mb-2 d-block">
-          Ca să ne asigurăm că nu ești robot,
-          {' '}
-          <br />
-          {' '}
-          scrie mai jos
-          {' '}
-          <strong>{ROBOT_STRING}</strong>
+          <Trans i18nKey='common:SubscribeForm.confirmation' components={[
+            <br key='0'/>,
+            <strong key='1'/>,
+          ]} values={{ ROBOT_STRING }} />
         </span>
         <input className="w-100" disabled={isSubscribing} type="text" name="robot-check" required />
       </label>
@@ -82,7 +81,7 @@ function SubscribeForm({ className = '' }: { className?: string }) {
             loading={isSubscribing}
             className="w-100"
           >
-            Abonează-te!
+            {t('Subscribe')}!
           </Button>
         )}
 

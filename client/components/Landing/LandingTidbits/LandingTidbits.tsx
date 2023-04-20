@@ -8,6 +8,7 @@ import Link from '~/components/generic/Link';
 import SVGArrow from '../../SVGArrow/SVGArrow';
 import StackedImages from '~/components/StackedImages';
 import { TidbitI } from '~/../shared/types/tidbit.types';
+import { Trans } from '~/services/typesafeNextTranslate';
 
 import styles from './LandingTidbits.module.scss';
 
@@ -114,16 +115,11 @@ const LandingTidbits = ({ tidbits }: { tidbits: Pick<TidbitI, 'title' | 'items' 
 const CallToAction = ({ arrowColor }: { arrowColor: string }) => (
   <div className={`${styles.CallToAction} relative`}>
     <h2 className="mb-8 d-inline-block">
-      Iar dacă ești deja
-      {' '}
-      <span className="text-blue">programator</span>
-      ,
-      <br />
-      În fiecare saptămână postăm
-      {' '}
-      <Link prefetch={false} href="/tidbits">
-        Tips & Tricks
-      </Link>
+      <Trans i18nKey='common:LandingTidbits.title' components={[
+        <span key='0' className="text-blue" />,
+        <br key='1' />,
+        <Link key='2' prefetch={false} href="/tidbits" />,
+      ]} />
     </h2>
     {(arrowColor !== '#fff' && arrowColor !== '#ffffff') && (
       <SVGArrow color={arrowColor} className={`${styles.SVGArrow} absolute`} />

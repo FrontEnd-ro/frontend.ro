@@ -14,6 +14,7 @@ import AsideMenu from '../layout/AsideMenu/AsideMenu';
 import NavLinks from '../NavLinks/NavLinks';
 import { ThemeVariant } from '~/services/Constants';
 import NotificationTooltip from '../notification-tooltip/NotificationTooltip';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 interface Props {
   href?: string;
@@ -34,6 +35,7 @@ function Header({
   theme = 'light',
   className = '',
 }: ConnectedProps<typeof connector> & Props) {
+  const { t } = useTranslation('common');
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const hasHighlightNavItems = navItems.some((item) => item.highlighted === true);
 
@@ -104,7 +106,7 @@ function Header({
         withNavMenu && (
           <AsideMenu
             hideScrollOnBody
-            title="FrontEnd.ro"
+            title={t('FrontEndro')}
             isOpen={isNavMenuOpen}
             className={styles['aside-menu']}
             close={() => setIsNavMenuOpen(false)}

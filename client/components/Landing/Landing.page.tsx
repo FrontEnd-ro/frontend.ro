@@ -6,6 +6,7 @@ import { RootState } from '~/redux/root.reducer';
 import LandingHero from './LandingHero/LandingHero';
 import { TidbitI } from '~/../shared/types/tidbit.types';
 import LandingAdCard from './LandingAdCard/LandingAdCard';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 import LandingResources from './LandingResources/LandingResources';
 import LandingSubscribe from './LandingSubscribe/LandingSubscribe';
 import LandingHTML from '~/components/Landing/LandingHtml/LandingHtml';
@@ -23,12 +24,15 @@ function LandingPage({
   tidbits: TidbitI[],
   htmlTutorialState: 'not_started' | 'started' | 'completed';
 }) {
+  const { t } = useTranslation('common');
+
   return (
     <>
       <SEOTags
+        // TODO: this should come via a config (like app_config) and not the i18n
         url="https://FrontEnd.ro"
-        title="FrontEnd.ro - Învață de la comunitatea open-source"
-        description="Vrei să înveți FrontEnd? Aici ai parte de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun."
+        title={t('Landing.title')}
+        description={t('Landing.description')}
       />
       {/*
         We're putting the styles here instead of Landing.module.scss

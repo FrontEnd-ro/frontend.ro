@@ -5,15 +5,17 @@ import { RootState } from '~/redux/root.reducer';
 import SVGArrow from '~/components/SVGArrow/SVGArrow';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import Highlight from '~/components/Highlight/Highlight';
+import { Trans, useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './LandingHtml.module.scss';
 
 const LandingHTML = ({ user, isLoggedIn, className = '' }: ConnectedProps<typeof connector> & { className?: string }) => {
+  const { t } = useTranslation('common');
   const code = `
 <!DOCTYPE html>
 <html lang="ro">
   <head>
-    <title>Abonează-te</title>
+    <title>${t('Subscribe')}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
@@ -26,14 +28,14 @@ const LandingHTML = ({ user, isLoggedIn, className = '' }: ConnectedProps<typeof
     <main>
       <form>
         <label>
-          <span> Nume </span>
+          <span> Name </span>
           <input type="text" name="name" required>
         </label>
         <label>
           <span> Email </span>
           <input type="email" name="email" required>
         </label>
-        <button type="submit"> Abonează-te </button>
+        <button type="submit"> ${t('Subscribe')} </button>
       </form>
     </main>
   </body>
@@ -42,13 +44,13 @@ const LandingHTML = ({ user, isLoggedIn, className = '' }: ConnectedProps<typeof
   const getCallToAction = (): { text: string; href: string; } => {
     if (!isLoggedIn || !user.tutorials.includes(HTML_TUTORIAL_ID)) {
       return {
-        text: 'Află mai multe',
+        text: t('LandingHtml.Find out more'),
         href: '/html',
       };
     }
 
     return {
-      text: 'Continuă tutorialul',
+      text: t('LandingHtml.Continue the tutorial'),
       href: '/html/tutorial',
     };
   };
@@ -61,18 +63,14 @@ const LandingHTML = ({ user, isLoggedIn, className = '' }: ConnectedProps<typeof
         <div>
           <div className="d-inline-block relative">
             <h2 className="mb-0">
-              Dacă vrei să înveți
-              {' '}
-              <span className="text-blue">FrontEnd</span>
-              {' '}
-              de la zero
-              <br />
-              Începe cu
-              <span className="text-bold"> Modulul de HTML </span>
+              <Trans i18nKey='common:LandingHtml.headline' components={[
+                <span key='0' className="text-blue"/>,
+                <br key='1' />,
+                <span key='2' className="text-bold" />,
+              ]}/>
             </h2>
             <p className="text-xl mt-4">
-              E special făcut pentru începători, și vei învăța să
-              înțelegi și să scrii cod ca cel de jos
+              {t('LandingHtml.description')}
             </p>
             <SVGArrow className={`${styles.SVGArrow} absolute`} />
           </div>

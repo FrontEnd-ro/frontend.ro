@@ -1,10 +1,50 @@
 {
   "Menu": "Meniu",
   "FrontEndro": "FrontEnd.ro",
+  "Subscribe": "Abonează-te",
+  "Landing": {
+    "title": "FrontEnd.ro - Învață de la comunitatea open-source",
+    "description": "Vrei să înveți FrontEnd? Aici ai parte de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun."
+  },
   "LandingHero": {
     "description": "Învață FrontEnd de la zero, <0>cu ajutorul comunității open source.</0>",
     "Start the HTML Tutorial": "Începe Tutorialul de HTML",
     "Continue the HTML Tutorial": "Continuă Tutorialul de HTML",
     "See the HTML certification!": "Vezi certificarea HTML!"
+  },
+  "LandingHtml": {
+    "Find out more": "Află mai multe",
+    "Continue the tutorial": "Continuă tutorialul",
+    "headline": "Dacă vrei să înveți <0>FrontEnd</0> de la zero <1/> Începe cu <2> Modulul de HTML </2>",
+    "description": "E special făcut pentru începători, și vei învăța să înțelegi și să scrii cod ca cel de jos"
+  },
+  "LandingChristmasAdvent": {
+    "title": "Învață să programezi 3D cu Three.js și React!",
+    "description" : "Împreună cu <0>Colorful Coding</0> v-am pregătit un tutorial 100% interactiv în care-l ajutați pe <1> Moș Crăciun </1> să repare fabrica de cadouri!",
+    "Start the tutorial": "Începe tutorialul",
+    "loadingError": "Nu am putut încărca exemplul. Încearcă să reîncarci pagina."
+  },
+  "LandingTidbits": {
+    "title": "Iar dacă ești deja <0>programator</0>, <1/> În fiecare saptămână postăm <2>Tips & Tricks</2>"
+  },
+  "LandingResources": {
+    "title": "Ah, aproape am uitat! Avem și o <0>listă de resurse</0> care să te ajute în cariera ta de FrontEnd developer"
+  },
+  "LandingSubscribe": {
+    "title": "Rămâi conectat la noutăți",
+    "description": "Dacă nu te-am convins încă să începi un tutorial, dar ai vrea să te ținem la curent cu noutățile (no spam, promitem) - lasă-ți email-ul aici și hai în comunitate."
+  },
+  "SubscribeForm": {
+    "welcome": "Bine ai venit în comunitate!",
+    "What's your name?": "Cum să-ți spunem?",
+    "Email": "Email",
+    "confirmation": "Ca să ne asigurăm că nu ești robot, <0/> scrie mai jos <1>{{ROBOT_STRING}}</1>",
+    "confirmationError": "Hmm...ești robot cumva? 🤔",
+    "genericError": "Oups, ceva a mers greșit. Dă-mi un semn ca să pot rezolva problema :)"
+  },
+  "Footer": {
+    "Contribute to the project on": "Contribuie la proiect pe",
+    "See components in": "Vezi componentele în",
+    "An open-source project started in Iași, Romania": "Un proiect open-source pornit din Iași, România"
   }
 }

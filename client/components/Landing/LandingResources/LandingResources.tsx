@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from '~/components/generic/Link';
+import { Trans } from '~/services/typesafeNextTranslate';
 import { ResourceDescription, RESOURCES } from '~/components/learn/Resources/resources-model';
 
 import styles from './LandingResources.module.scss';
@@ -17,15 +18,9 @@ const LandingResources = ({ className = '' }: { className?: string }) => {
     <div className={className}>
       <div className={styles.CallToAction}>
         <h2 className="mb-8 d-inline-block">
-          Ah, aproape am uitat!
-          Avem și o
-          {' '}
-          <Link prefetch={false} color="blue" href="/resurse">
-            listă de resurse
-          </Link>
-          {' '}
-          care să te ajute
-          în cariera ta de FrontEnd developer
+          <Trans i18nKey='common:LandingResources.title' components={[
+            <Link key='0' prefetch={false} color="blue" href="/resurse"/>,
+          ]} />
         </h2>
       </div>
       <div className={styles.Grid}>

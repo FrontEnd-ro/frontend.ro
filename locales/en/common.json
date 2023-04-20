@@ -1,10 +1,50 @@
 {
   "Menu": "Menu",
   "FrontEndro": "FrontendCademy",
+  "Subscribe": "Subscribe",
+  "Landing": {
+    "title": "FrontEndCademy - Learn FrontEnd development",
+    "description": "Want to learn FrontEnd? We've got free tutorials and a community of developers to help you improve your skills."
+  },
   "LandingHero": {
     "description": "Learn FrontEnd development, <0>with help from the open-source community.</0>",
     "Start the HTML Tutorial": "Start the HTML Tutorial",
     "Continue the HTML Tutorial": "Continue the HTML Tutorial",
     "See the HTML certification!": "See the HTML certification!"
+  },
+  "LandingHtml": {
+    "Find out more": "Find out more",
+    "Continue the tutorial": "Continue the tutorial",
+    "headline": "If you want to learn <0>FrontEnd</0> from scratch <1/> Start with the  <2> HTML Module </2>",
+    "description": "It's specially made for beginners, and you'll learn to write and understand code like the one below"
+  },
+  "LandingChristmasAdvent": {
+    "title": "Learn 3D programming with Three.js and React!",
+    "description" : "Together with <0>Colorful Coding</0> we created an interactive tutorial in which you help <1> Santa Claus </1> repair the gift factory.",
+    "Start the tutorial": "Start the tutorial",
+    "loadingError": "We couldn't load the example. Try reloading the page."
+  },
+  "LandingTidbits": {
+    "title": "And if you're already a <0>programmer</0>, <1/> Each week we post <2>Tips & Tricks</2>"
+  },
+  "LandingResources": {
+    "title": "Oh, almost forgot! We have a <0>list of resources</0> to help you in your FrontEnd development career"
+  },
+  "LandingSubscribe": {
+    "title": "Stay connected to what happens next",
+    "description": "If we haven't convinced you to start a tutorial yet, but you'd like us to keep you updated with future tutorials (no spam, we promise) - leave your email here and join the community."
+  },
+  "SubscribeForm": {
+    "welcome": "Welcome to the community!",
+    "What's your name?": "What's your name?",
+    "Email": "Email",
+    "confirmation": "To make sure you're not a robot, <0/> please write the word <1>{{ROBOT_STRING}}</1> below",
+    "confirmationError": "Hmm...are you a robot? 🤔",
+    "genericError": "Oups, something went wrong. Please let me know if the problem persists :)"
+  },
+  "Footer": {
+    "Contribute to the project on": "Contribute to the project on",
+    "See components in": "See components in",
+    "An open-source project started in Iași, Romania": "An open-source project started in Iași, Romania"
   }
 }

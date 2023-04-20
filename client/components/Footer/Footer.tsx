@@ -1,22 +1,24 @@
 import React from 'react';
 import { GITHUB_URL } from '~/services/Constants';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './Footer.module.scss';
 
 export default function Footer() {
+  const { t } = useTranslation('common');
   return (
     <footer className={styles.footer}>
       <section>
-        <h5> FrontEnd.ro </h5>
+        <h5> {t('FrontEndro')} </h5>
         <p>
-          Contribuie pe
+          {t('Footer.Contribute to the project on')}
           {' '}
           <a href={GITHUB_URL} target="_blank" rel="noreferrer">
             GitHub
           </a>
         </p>
         <p>
-          Vezi componentele în
+          {t('Footer.See components in')}
           {' '}
           <a href="https://storybook.frontend.ro" target="_blank" rel="noreferrer">
             Storybook
@@ -30,7 +32,7 @@ export default function Footer() {
           <a href="mailto:hello@frontend.ro">hello@frontend.ro</a>
         </p>
         <p>
-          Un proiect open-source pornit din Iași, România
+          {t('Footer.An open-source project started in Iași, Romania')}
           {' '}
           <span className="text-red">
             ❤

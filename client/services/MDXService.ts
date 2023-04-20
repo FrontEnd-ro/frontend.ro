@@ -35,7 +35,7 @@ class MDXService {
 
   // NOTE: this function is called inside `getServerSideProps` to 
   // fetch MDX when rendering lessons.
-  static async serverFetchMDX(lessonId: string, type: LessonDescription['type']): Promise<{
+  static async serverFetchMDX(lessonId: string, type: LessonDescription['type'], locale: string): Promise<{
     ok: true;
     content: string;
   } | {
@@ -43,7 +43,7 @@ class MDXService {
   }> {
     const SPAN = `serverFetchMDX(${lessonId}, ${type})`;
     try {
-      const { default: content } = await import(`!raw-loader!~/curriculum/${type}/${lessonId}.mdx`);
+      const { default: content } = await import(`!raw-loader!~/curriculum/${type}/${locale}/${lessonId}.mdx`);
       return {
         ok: true,
         content,

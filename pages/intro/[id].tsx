@@ -36,7 +36,7 @@ const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescri
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id);
-  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo.type);
+  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo.type, process.env.LANGUAGE);
 
   if (lessonInfo === null || !resp.ok) {
     res.statusCode = 404;

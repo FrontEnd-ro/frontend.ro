@@ -14,33 +14,6 @@ import LessonExercises from '~/components/lessons/LessonExercises/LessonExercise
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TableOfContents, { Chapter, parseChapters } from '~/components/TableOfContents';
 
-// Curriculum components
-import ListsContent from '~/curriculum/html/Lists';
-import FormsContent from '~/curriculum/html/Forms';
-import ImagesContent from '~/curriculum/html/Images';
-import VSCodeContent from '~/curriculum/intro/VSCode';
-import TextsContent from '~/curriculum/html/TextElements';
-import ContainersContent from '~/curriculum/html/Containers';
-import AudioAndVideoContent from '~/curriculum/html/AudioAndVideo';
-import AboutHtmlContent from '~/curriculum/html/AboutHtml';
-import HTMLValidationContent from '~/curriculum/html/HTMLValidation';
-import LinksAndButtonsContent from '~/curriculum/html/LinksAndButtons';
-import HTMLStructureContent from '~/curriculum/html/HTMLStructure';
-
-const LESSON_TO_COMPONENT = {
-  'despre-html': (mdxContent: string ) => <AboutHtmlContent mdxContent={mdxContent} />,
-  'vs-code': (mdxContent: string ) => <VSCodeContent mdxContent={mdxContent} />,
-  'audio-video': (mdxContent: string ) => <AudioAndVideoContent mdxContent={mdxContent} />,
-  containere: (mdxContent: string ) => <ContainersContent mdxContent={mdxContent} />,
-  formulare: (mdxContent: string ) => <FormsContent mdxContent={mdxContent} />,
-  imagini: (mdxContent: string ) => <ImagesContent mdxContent={mdxContent} />,
-  'linkuri-si-butoane': (mdxContent: string ) => <LinksAndButtonsContent mdxContent={mdxContent} />,
-  liste: (mdxContent: string ) => <ListsContent mdxContent={mdxContent} />,
-  'structura-pagina-html': (mdxContent: string ) => <HTMLStructureContent mdxContent={mdxContent} />,
-  texte: (mdxContent: string ) => <TextsContent mdxContent={mdxContent} />,
-  validare:(mdxContent: string ) => <HTMLValidationContent mdxContent={mdxContent} />,
-};
-
 // Naming this component `Temp` because eventually
 // will move this to the /html folder. So right now
 // it's just a Temporary solution while we're finishing
@@ -107,14 +80,10 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDes
       >
         <PageContainer>
           <LessonContent
+            mdxContent={mdxContent}
             title={lessonInfo.title}
             contributors={lessonInfo.contributors}
           >
-            {mdxContent !== '' ? (
-              LESSON_TO_COMPONENT[lessonInfo.id](mdxContent)
-            ) : (
-              LESSON_TO_COMPONENT[lessonInfo.id]
-            )}
             {lessonInfo.resources !== undefined && (
               <LessonResources className="my-5" links={lessonInfo.resources} />
             )}

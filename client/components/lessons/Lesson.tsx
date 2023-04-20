@@ -22,7 +22,8 @@ import LessonNavigation from './LessonNavigation/LessonNavigation';
 export default function Lesson({
   lessonInfo,
   children,
-}: PropsWithChildren<{ lessonInfo: LessonDescription }>) {
+  mdxContent,
+}: PropsWithChildren<{ lessonInfo: LessonDescription; mdxContent?: string; }>) {
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lesson = getLessonById(lessonInfo.id);
@@ -62,7 +63,7 @@ export default function Lesson({
       <main>
         <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} withNavMenu />
         <div ref={articleWrapper} className={styles['article-wrapper']}>
-          <LessonContent title={lessonInfo.title} contributors={lessonInfo.contributors ?? []}>
+          <LessonContent title={lessonInfo.title} contributors={lessonInfo.contributors ?? []} mdxContent={mdxContent}>
             {children}
             {lessonInfo.resources !== undefined && (
               <LessonResources className="my-5" links={lessonInfo.resources} />

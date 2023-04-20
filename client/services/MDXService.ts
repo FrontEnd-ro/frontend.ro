@@ -43,7 +43,7 @@ class MDXService {
   }> {
     const SPAN = `serverFetchMDX(${lessonId}, ${type})`;
     try {
-      const { default: content } = await import(`!raw-loader!~/curriculum/${type}/mdx/${lessonId}.mdx`);
+      const { default: content } = await import(`!raw-loader!~/curriculum/${type}/${lessonId}.mdx`);
       return {
         ok: true,
         content,

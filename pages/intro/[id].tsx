@@ -5,8 +5,6 @@ import { GITHUB_URL } from '~/services/Constants';
 import appConfig from '~/../server/config/config';
 import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/404/NotFound';
-import VSCodeContent from '~/curriculum/intro/VSCode';
-import AboutUsContent from '~/curriculum/intro/despre-noi';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { getLessonById, LessonDescription } from '~/services/DataModel';
 
@@ -27,10 +25,7 @@ const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescri
         url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={lessonInfo.ogImage}
       />
-      <Lesson lessonInfo={lessonInfo}>
-        {lessonInfo.id === "despre-noi" && <AboutUsContent mdxContent={mdxContent} />}
-        {lessonInfo.id === "vs-code" && <VSCodeContent mdxContent={mdxContent} />}
-      </Lesson>
+      <Lesson lessonInfo={lessonInfo} mdxContent={mdxContent} />
     </>
   );
 };

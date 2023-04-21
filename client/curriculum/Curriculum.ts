@@ -327,15 +327,7 @@ export const LESSONS: LessonConfig[] = [
     type: 'css',
     contributors: [DanielHutanu],
     withExercises: true,
-    chapters: [
-      { title: 'CSS Inline', id: 'css-inline' },
-      {
-        title: 'CSS Intern',
-        id: 'css-intern',
-      },
-      { title: 'CSS Extern', id: 'css-extern' },
-      { title: 'BONUS', id: 'bonus' },
-    ],
+    
   },
   {
     id: 'taguri-clase-si-id-uri',

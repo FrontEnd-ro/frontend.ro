@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
-import NotFoundPage from '~/components/404/NotFound';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import TutorialPage from '~/tutorials/TutorialPage';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import { startedTutorial } from '~/redux/user/user.actions';

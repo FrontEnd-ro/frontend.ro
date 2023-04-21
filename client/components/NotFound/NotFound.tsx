@@ -6,7 +6,7 @@ import Footer from '~/components/Footer';
 import PageContainer from '../PageContainer';
 import Link from '~/components/generic/Link';
 
-import styles from './404.module.scss';
+import styles from './NotFound.module.scss';
 
 export default function NotFoundPage() {
   return (

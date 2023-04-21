@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
-import NotFoundPage from '~/components/404/NotFound';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import { CHRISTMAS_ADVENT_ID } from '~/services/Constants';
 import { useCertification } from '~/services/api/Certification.service';
 import { FullScreenIDE } from '~/components/FullScreenIDE/FullScreenIDE';

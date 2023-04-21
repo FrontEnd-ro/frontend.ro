@@ -1,20 +1,15 @@
 import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
-import { NotWroteYet } from '~/components/404';
 import { GITHUB_URL } from '~/services/Constants';
 import appConfig from '~/../server/config/config';
 import { MDXService } from '~/services/MDXService';
-import NotFoundPage from '~/components/404/NotFound';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 
 const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null, mdxContent?: string }) => {
-  if (lessonInfo === null) {
+  if (lessonInfo === null || lessonInfo.written === false) {
     return <NotFoundPage />;
-  }
-
-  if (lessonInfo.written === false) {
-    return <NotWroteYet lesson={lessonInfo} />;
   }
 
   return (

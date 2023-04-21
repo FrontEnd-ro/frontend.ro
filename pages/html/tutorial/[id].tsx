@@ -1,8 +1,7 @@
 import Link from '~/components/generic/Link';
 import SEOTags from '~/components/SEOTags';
-import { NotWroteYet } from '~/components/404';
 import { MDXService } from '~/services/MDXService';
-import NotFoundPage from '~/components/404/NotFound';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import { withSmoothScroll } from '~/services/Hooks';
 import { faThumbsUp,faQuestionCircle, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -41,12 +40,8 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonCon
 
   withSmoothScroll();
 
-  if (lessonInfo === null) {
+  if (lessonInfo === null || lessonInfo.written === false) {
     return <NotFoundPage />;
-  }
-
-  if (lessonInfo.written === false) {
-    return <NotWroteYet lesson={lessonInfo} />;
   }
 
   const { Content, CONFIG } = MDXService.getComponent(mdxContent);

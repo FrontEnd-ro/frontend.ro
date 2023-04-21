@@ -1,4 +1,4 @@
-import NotFoundPage from '~/components/404/NotFound';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
 import CertificationComponent from '~/components/certification/Certification/Certification';
 import Header from '~/components/Header';

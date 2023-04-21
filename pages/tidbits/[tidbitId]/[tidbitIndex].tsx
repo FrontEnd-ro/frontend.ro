@@ -3,7 +3,7 @@ import { Tidbit } from '~/tidbits';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
-import NotFoundPage from '~/components/404/NotFound';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import { TidbitI } from '../../../shared/types/tidbit.types';
 
 interface Props {

@@ -1,18 +1,13 @@
 import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
-import { NotWroteYet } from '~/components/404';
-import NotFoundPage from '~/components/404/NotFound';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import { MDXService } from '~/services/MDXService';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import { faThumbsUp, faQuestionCircle, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const HtmlLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null; mdxContent?: string; }) => {
-  if (lessonInfo?.written === false) {
-    return <NotWroteYet lesson={lessonInfo} />;
-  }
-
-  if (lessonInfo === null) {
+  if (lessonInfo === null || lessonInfo.written === false) {
     return <NotFoundPage />;
   }
 

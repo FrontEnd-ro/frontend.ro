@@ -1,7 +1,6 @@
 import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
-import { NotWroteYet } from '~/components/404';
-import NotFoundPage from '~/components/404/NotFound';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import BoxModelContent from '~/curriculum/css/BoxModel';
 import StylingMethodsContent from '~/curriculum/css/StylingMethods';
@@ -12,12 +11,8 @@ const LESSON_TO_COMPONENT = {
 };
 
 const CssLesson = ({ lessonInfo }: { lessonInfo: LessonConfig | null }) => {
-  if (lessonInfo === null) {
+  if (lessonInfo === null || lessonInfo.written === false) {
     return <NotFoundPage />;
-  }
-
-  if (lessonInfo.written === false) {
-    return <NotWroteYet lesson={lessonInfo} />;
   }
 
   return (

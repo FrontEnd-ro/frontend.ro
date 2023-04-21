@@ -13,7 +13,7 @@ import DevToolsClone from '~/components/DevToolsClone';
 import SideBySidePictures from '~/components/SideBySidePictures';
 import coverSvg from './BoxModelCover.svg';
 import FormattedText from '~/components/FormattedText';
-import { getLessonById } from '~/services/DataModel';
+import { getLessonById } from '~/curriculum/Curriculum';
 import List from '~/components/List';
 
 export default function BoxModelContent() {

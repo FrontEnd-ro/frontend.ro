@@ -1,7 +1,7 @@
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { PropsWithChildren } from 'react';
-import { getAdjacentLessons } from '~/services/DataModel';
+import { getAdjacentLessons } from '~/curriculum/Curriculum';
 import styles from './LessonNavigation.module.scss';
 
 export default function LessonNavigation(

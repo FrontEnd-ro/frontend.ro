@@ -24,7 +24,7 @@ import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsi
 import HowToResolveFeedbackBanner from './HowToResolveFeedbackBanner/HowToResolveFeedbackBanner';
 
 import styles from './SolveExercise.module.scss';
-import { getLessonById } from '~/services/DataModel';
+import { getLessonById } from '~/curriculum/Curriculum';
 import Button from '../Button';
 import SolveExerciseSkeleton from './SolveExercise.skeleton';
 import FolderStructure from '~/../shared/utils/FolderStructure';

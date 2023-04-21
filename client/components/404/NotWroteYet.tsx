@@ -3,13 +3,13 @@ import SEOTags from '../SEOTags';
 import Header from '../Header';
 import Footer from '../Footer';
 import { GITHUB_URL } from '~/services/Constants';
-import { LessonDescription } from '~/services/DataModel';
+import { LessonConfig } from '~/curriculum/Curriculum';
 
 import styles from './404.module.scss';
 import PageContainer from '../PageContainer';
 
 interface Props {
-  lesson: LessonDescription
+  lesson: LessonConfig
 }
 
 export default function NotWroteYet({ lesson }: Props) {

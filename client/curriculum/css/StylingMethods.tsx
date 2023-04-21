@@ -11,7 +11,7 @@ import coverSvg from './StylingMethodsCover.svg';
 import { DeprecatedBasicEditor } from '~/components/Editor/BasicEditor';
 import { ExerciseFile, ExerciseFolder } from '~/../shared/utils/FolderStructure';
 import FormattedText from '~/components/FormattedText';
-import { getLessonById } from '~/services/DataModel';
+import { getLessonById } from '~/curriculum/Curriculum';
 import List from '~/components/List';
 
 export default function StylingMethodsContent() {

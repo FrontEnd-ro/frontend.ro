@@ -3,11 +3,11 @@ import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
 import { MDXService } from '~/services/MDXService';
-import { getLessonById, LessonDescription } from '~/services/DataModel';
+import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import { faThumbsUp, faQuestionCircle, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-const HtmlLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescription | null; mdxContent?: string; }) => {
+const HtmlLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null; mdxContent?: string; }) => {
   if (lessonInfo?.written === false) {
     return <NotWroteYet lesson={lessonInfo} />;
   }
@@ -44,7 +44,6 @@ export async function getServerSideProps({ res, params }) {
     }
   }
   const MDX_SCOPE = {
-    lessonInfo,
     icons: { faThumbsUp, faExclamationCircle, faQuestion, faQuestionCircle, faThumbsDown, faShoppingCart },
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
   }

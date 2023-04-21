@@ -2,7 +2,7 @@ import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import { NotWroteYet } from '~/components/404';
 import NotFoundPage from '~/components/404/NotFound';
-import { getLessonById, LessonDescription } from '~/services/DataModel';
+import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import BoxModelContent from '~/curriculum/css/BoxModel';
 import StylingMethodsContent from '~/curriculum/css/StylingMethods';
 
@@ -11,7 +11,7 @@ const LESSON_TO_COMPONENT = {
   'moduri-stilizare': <StylingMethodsContent />,
 };
 
-const CssLesson = ({ lessonInfo }: { lessonInfo: LessonDescription | null }) => {
+const CssLesson = ({ lessonInfo }: { lessonInfo: LessonConfig | null }) => {
   if (lessonInfo === null) {
     return <NotFoundPage />;
   }

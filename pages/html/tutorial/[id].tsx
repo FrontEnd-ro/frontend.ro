@@ -8,19 +8,18 @@ import { faThumbsUp,faQuestionCircle, faThumbsDown } from '@fortawesome/free-reg
 import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { LessonHeading, LessonResources } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
-import { getLessonById, LessonDescription } from '~/services/DataModel';
+import { getLessonById, LessonConfig, MDXLessonConfig } from '~/curriculum/Curriculum';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
 import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TableOfContents, { Chapter, parseChapters } from '~/components/TableOfContents';
-import { LessonConfig } from '~/curriculum/curriculum.types';
 
 // Naming this component `Temp` because eventually
 // will move this to the /html folder. So right now
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
-const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescription | null, mdxContent?: string }) => {
-  const getChapters = (lessonDescription: LessonDescription, chapters: LessonConfig['chapters']): Chapter[] => {
+const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null, mdxContent?: string }) => {
+  const getChapters = (lessonDescription: LessonConfig, chapters: MDXLessonConfig['chapters']): Chapter[] => {
     if (!lessonDescription.withExercises) {
       return parseChapters(chapters);
     }
@@ -125,7 +124,6 @@ export async function getServerSideProps({ res, params }) {
     }
   }
   const MDX_SCOPE = {
-    lessonInfo,
     icons: { faThumbsUp, faExclamationCircle, faQuestion, faQuestionCircle, faThumbsDown, faShoppingCart },
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
   }

@@ -6,9 +6,9 @@ import appConfig from '~/../server/config/config';
 import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/404/NotFound';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
-import { getLessonById, LessonDescription } from '~/services/DataModel';
+import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 
-const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescription | null, mdxContent?: string }) => {
+const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null, mdxContent?: string }) => {
   if (lessonInfo === null) {
     return <NotFoundPage />;
   }
@@ -46,7 +46,6 @@ export async function getServerSideProps({ res, params }) {
   }
   const MDX_SCOPE = {
     GITHUB_URL,
-    lessonInfo,
     icons: { faShare },
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     urlToShare: `${appConfig.APP.app_url}/intro/${id}`

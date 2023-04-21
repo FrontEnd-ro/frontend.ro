@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '~/components/generic/Link';
 import { LessonContributors } from '~/components/lessons';
-import { LessonDescription } from '~/services/DataModel';
+import { LessonConfig } from '~/curriculum/Curriculum';
 
 import styles from './LessonPreview.module.scss';
 
@@ -12,7 +12,7 @@ function LessonPreview({
   cover,
   description,
   contributors,
-}: LessonDescription) {
+}: LessonConfig) {
   return (
     <Link
       href={url}

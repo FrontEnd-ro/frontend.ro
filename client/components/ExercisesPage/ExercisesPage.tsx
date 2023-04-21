@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import Link from '~/components/generic/Link';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { Exercise } from '~/redux/user/types';
-import { LESSONS } from '~/services/DataModel';
+import { LESSONS } from '~/curriculum/Curriculum';
 import ExerciseService from '~/services/api/Exercise.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import ExercisePreview from '../ExercisePreview';

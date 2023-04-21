@@ -1,6 +1,6 @@
-// We'll eventually want to move all this information into the Database.
-// Until then, have them here in one place.
-
+// We might want to move this information into the DB when we reach
+// a bigger number of lessons. Until then, it's fine to keep it here,
+// together with the curriculum MDX files.
 import {
   Contributor,
   CatalinPopusoi,
@@ -10,9 +10,21 @@ import {
   RobertParasca,
   SebastianLatkolic,
   DanielHutanu,
-} from './contributors';
+} from '../services/contributors';
 
-export type LessonDescription = {
+// This is data exported from the MDX that is not required
+// outside the lesson. Thus, we keep it in the MDX, together
+// with the content.
+export type MDXLessonConfig = {
+  chapters: LessonChapter[];
+}
+
+// Unlike the config above, we expect to use this one
+// in other places except the lesson one. For example, we might
+// want to show a list of related lessons. This requires us
+// to be able to read all lessons and apply some basic filtering.
+// That's why we keep this information in this JSON, and not in MDX.
+export type LessonConfig = {
   id: string;
   written: boolean;
   title: string;
@@ -23,14 +35,7 @@ export type LessonDescription = {
   cover?: string;
   ogImage?: string;
   contributors?: Contributor[];
-  chapters?: {
-    title: string;
-    id: string;
-    subchapters?: {
-      title: string;
-      id: string
-    }[]
-  }[];
+  chapters?: LessonChapter[];
   withExercises?: boolean;
   resources?: {
     text: string;
@@ -38,7 +43,16 @@ export type LessonDescription = {
   }[];
 };
 
-export const LESSONS: LessonDescription[] = [
+type LessonChapter = {
+  title: string;
+  id: string;
+  subchapters?: {
+    title: string;
+    id: string
+  }[]
+}
+
+export const LESSONS: LessonConfig[] = [
   /** Intro lessons */
   {
     id: 'despre-noi',
@@ -460,19 +474,19 @@ export const LESSONS: LessonDescription[] = [
   },
 ];
 
-export function getUpcomingLesson(pathname: string): LessonDescription {
+export function getUpcomingLesson(pathname: string): LessonConfig {
   const upcomingLesson = LESSONS.find((article) => pathname.includes(article.url));
 
   return upcomingLesson || null;
 }
 
-export function getLessonById(id: string): LessonDescription {
+export function getLessonById(id: string): LessonConfig {
   const match = LESSONS.find((lesson) => lesson.id === id);
 
   return match || null;
 }
 
-export function getAdjacentLessons(id: string): LessonDescription[] {
+export function getAdjacentLessons(id: string): LessonConfig[] {
   /**
    * We want to be able to navigate to the next / previous written lessons.
    * There's no point in navigating to a lesson only to find out it hasn't been written yet.

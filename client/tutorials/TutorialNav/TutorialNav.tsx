@@ -2,7 +2,7 @@ import noop from 'lodash/noop';
 import ConfettiGenerator from 'confetti-js';
 import React, { useEffect, useRef } from 'react';
 import Link from '~/components/generic/Link';
-import { getLessonById } from '~/services/DataModel';
+import { getLessonById } from '~/curriculum/Curriculum';
 import ProgressLink from '~/components/ProgressLink';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 

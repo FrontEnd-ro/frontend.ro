@@ -17,14 +17,14 @@ import { Chapter, parseChapters } from '../TableOfContents';
 import LessonService from '~/services/api/Lesson.service';
 import LessonContent from './LessonContent/LessonContent';
 import LessonHeading from './LessonHeading/LessonHeading';
-import { getLessonById, LessonDescription } from '~/services/DataModel';
+import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import LessonNavigation from './LessonNavigation/LessonNavigation';
 
 export default function Lesson({
   lessonInfo,
   children,
   mdxContent = '',
-}: PropsWithChildren<{ lessonInfo: LessonDescription; mdxContent?: string; }>) {
+}: PropsWithChildren<{ lessonInfo: LessonConfig; mdxContent?: string; }>) {
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lesson = getLessonById(lessonInfo.id);

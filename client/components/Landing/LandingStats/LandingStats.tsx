@@ -7,7 +7,7 @@ import {
   StatsCardLayout4,
   StatsCardLayout6,
 } from '~/components/PlatformStats';
-import { LESSONS } from '~/services/DataModel';
+import { LESSONS } from '~/curriculum/Curriculum';
 import { GITHUB_ORG_URL, GITHUB_URL } from '~/services/Constants';
 
 import styles from './LandingStats.module.scss';

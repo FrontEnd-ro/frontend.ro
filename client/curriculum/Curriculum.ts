@@ -457,12 +457,6 @@ export const LESSONS: LessonConfig[] = [
   },
 ];
 
-export function getUpcomingLesson(pathname: string): LessonConfig {
-  const upcomingLesson = LESSONS.find((article) => pathname.includes(article.url));
-
-  return upcomingLesson || null;
-}
-
 export function getLessonById(id: string): LessonConfig {
   const match = LESSONS.find((lesson) => lesson.id === id);
 

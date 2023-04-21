@@ -7,6 +7,7 @@ import { faThumbsUp,faQuestionCircle, faThumbsDown } from '@fortawesome/free-reg
 import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { LessonHeading, LessonResources } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 import { getLessonById, LessonConfig, MDXLessonConfig } from '~/curriculum/Curriculum';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
 import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
@@ -18,6 +19,7 @@ import TableOfContents, { Chapter, parseChapters } from '~/components/TableOfCon
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
 const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null, mdxContent?: string }) => {
+  const { t } = useTranslation('common');
   const getChapters = (lessonDescription: LessonConfig, chapters: MDXLessonConfig['chapters']): Chapter[] => {
     if (!lessonDescription.withExercises) {
       return parseChapters(chapters);
@@ -50,9 +52,9 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonCon
   return (
     <>
       <SEOTags
-        title={`${lessonInfo.title} | Lecție HTML`}
+        title={`${lessonInfo.title} | ${t('lessons.HTML Lesson')}`}
         description={lessonInfo.description}
-        url={`https://FrontEnd.ro${lessonInfo.url}`}
+        url={`https://FrontEnd.ro/html/tutorial/${lessonInfo.id}`}
         shareImage={lessonInfo.ogImage}
       />
       <PageWithAsideMenu menu={{
@@ -109,8 +111,8 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonCon
 // directly to lesson pages leads to the website thinking you're logged out.
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
-  const lessonInfo = getLessonById(id);
-  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo.type, process.env.LANGUAGE);
+  const lessonInfo = getLessonById(id, process.env.LANGUAGE as 'en' | 'ro');
+  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE);
 
   if (lessonInfo === null || !resp.ok) {
     res.statusCode = 404;

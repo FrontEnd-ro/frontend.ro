@@ -24,6 +24,7 @@ import SubmissionPreview from '../SubmissionPreview/SubmissionPreview';
 import RoutingUtils from '~/services/utils/Routing.utils';
 import { Checkbox } from '~/components/Form';
 import DiffEditorLazy from '../Editor/DiffEditor/DiffEditor.lazy';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 interface Props {
   username: string;
@@ -40,6 +41,7 @@ function OfferFeedback({
 }: ConnectedProps<typeof connector> & Props) {
   const router = useRouter();
   const solutionRef = useRef(null);
+  const { lang } = useTranslation('common');
   const [fetchError, setFetchError] = useState(false);
   const [isSendingFeedback, setIsSendingFeedback] = useState(false);
   const [submission, setSubmission] = useState<Submission>(null);
@@ -146,7 +148,7 @@ function OfferFeedback({
 
   return (
     <PageWithAsideMenu menu={{
-      title: getLessonById(submission.exercise.lesson).title,
+      title: getLessonById(submission.exercise.lesson, lang).title,
       Component: (
         <AsideNav submissions={[]} versions={versions} />
       ),

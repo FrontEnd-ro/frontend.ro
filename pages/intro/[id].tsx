@@ -5,9 +5,11 @@ import appConfig from '~/../server/config/config';
 import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 
 const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null, mdxContent?: string }) => {
+  const { t } = useTranslation('common');
   if (lessonInfo === null || lessonInfo.written === false) {
     return <NotFoundPage />;
   }
@@ -15,9 +17,9 @@ const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig
   return (
     <>
       <SEOTags
-        title={`${lessonInfo.title} | Lecție introductivă`}
+        title={`${lessonInfo.title} | ${t('lessons.Introductive Lesson')}`}
         description={lessonInfo.description}
-        url={`https://FrontEnd.ro${lessonInfo.url}`}
+        url={`https://FrontEnd.ro/intro/${lessonInfo.id}`}
         shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo} mdxContent={mdxContent} />
@@ -30,8 +32,8 @@ const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig
 // directly to lesson pages leads to the website thinking you're logged out.
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
-  const lessonInfo = getLessonById(id);
-  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo.type, process.env.LANGUAGE);
+  const lessonInfo = getLessonById(id, process.env.LANGUAGE as 'en' | 'ro');
+  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE);
 
   if (lessonInfo === null || !resp.ok) {
     res.statusCode = 404;

@@ -38,7 +38,7 @@ export const useTranslation = <T extends keyof TranslationKeys>(
         default?: string;
       }
     ) => t(s, q, o),
-    lang,
+    lang: lang as 'ro' | 'en',
   };
 };
 

@@ -5,6 +5,7 @@ import Link from '~/components/generic/Link';
 import { getLessonById } from '~/curriculum/Curriculum';
 import ProgressLink from '~/components/ProgressLink';
 import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './TutorialNav.module.scss';
 
@@ -18,8 +19,9 @@ const TutorialNav = ({
   tutorialProgress,
   showDashboardLink = false,
 }: TutorialNavProps) => {
+  const { lang } = useTranslation('common');
   const lessonInfos = tutorialProgress.lessons
-    .map((lesson) => getLessonById(lesson.lessonId));
+    .map((lesson) => getLessonById(lesson.lessonId, lang));
   const hasCertification = tutorialProgress.certification !== null;
 
   return (
@@ -49,7 +51,7 @@ const TutorialNav = ({
               ${styles.ProgressLink}
               ${(lesson.locked && !hasCertification) ? styles['ProgressLink--locked'] : ''}
             `}
-              title={lessonInfos[index].title}
+              title={lessonInfos[index]?.title ?? ''}
               completePercentage={completePercentage}
               // FIXME: temp path until we move this to a first-class page.
               href={`/${tutorialId}/tutorial/${lesson.lessonId}`}

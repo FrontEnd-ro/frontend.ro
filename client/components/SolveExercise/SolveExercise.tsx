@@ -38,6 +38,7 @@ import { APIErrorReasons } from '~/../shared/SharedConstants';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 import { startedTutorial } from '~/redux/user/user.actions';
 import InitForm from '../Editor/InitForm/InitForm';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 interface Props {
   exerciseId: string;
@@ -68,6 +69,7 @@ function SolveExercise({
   dispatch,
 }: ConnectedProps<typeof connector> & Props) {
   const router = useRouter();
+  const { lang } = useTranslation('common');
   const [submission, setSubmission] = useState<Submission>(null);
   const [versions, setVersions] = useState<SubmissionVersionI[]>([]);
   const [fetchError, setFetchError] = useState(false);
@@ -401,14 +403,14 @@ function SolveExercise({
 
   return (
     <PageWithAsideMenu menu={{
-      title: getLessonById(submission.exercise.lesson).title,
+      title: getLessonById(submission.exercise.lesson, lang).title,
       Component: (
         <AsideNav
           versions={versions}
           submissions={submissionList}
           currentExerciseId={submission.exercise._id}
           // FIXME: the tutorial ID should be dynamic
-          lessonHref={`/${HTML_TUTORIAL_ID}/tutorial/${getLessonById(submission.exercise.lesson).id}`}
+          lessonHref={`/${HTML_TUTORIAL_ID}/tutorial/${getLessonById(submission.exercise.lesson, lang).id}`}
         />
       ),
     }}

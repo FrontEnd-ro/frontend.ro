@@ -50,5 +50,10 @@
   "NotFoundPage": {
     "message": "Se pare că pagina pe care o cauți nu mai există.",
     "callToAction": "Navighează acasă!"
+  },
+  "lessons": {
+    "Introductive Lesson": "Lecție Introductivă",
+    "HTML Lesson": "Lecție HTML",
+    "CSS Lesson": "Lecție CSS"
   }
 }

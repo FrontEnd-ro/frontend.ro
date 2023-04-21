@@ -3,8 +3,10 @@ import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import { MDXService } from '~/services/MDXService';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 const CssLesson = ({ lessonInfo,  mdxContent = ''  }: { lessonInfo: LessonConfig | null;  mdxContent?: string; }) => {
+  const { t } = useTranslation('common');
   if (lessonInfo === null || lessonInfo.written === false) {
     return <NotFoundPage />;
   }
@@ -12,9 +14,9 @@ const CssLesson = ({ lessonInfo,  mdxContent = ''  }: { lessonInfo: LessonConfig
   return (
     <>
       <SEOTags
-        title={`${lessonInfo.title} | Lecție CSS`}
+        title={`${lessonInfo.title} | ${t('lessons.CSS Lesson')}`}
         description={lessonInfo.description}
-        url={`https://FrontEnd.ro${lessonInfo.url}`}
+        url={`https://FrontEnd.ro/css/${lessonInfo.id}`}
         shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo} mdxContent={mdxContent}/>
@@ -27,8 +29,8 @@ const CssLesson = ({ lessonInfo,  mdxContent = ''  }: { lessonInfo: LessonConfig
 // directly to lesson pages leads to the website thinking you're logged out.
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
-  const lessonInfo = getLessonById(id);
-  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo.type, process.env.LANGUAGE);
+  const lessonInfo = getLessonById(id, process.env.LANGUAGE as 'en' | 'ro');
+  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE);
 
 
   if (lessonInfo === null || !resp.ok) {

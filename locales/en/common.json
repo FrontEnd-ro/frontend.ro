@@ -50,5 +50,10 @@
   "NotFoundPage": {
     "message": "It looks like the page you're looking for doesn't exist.",
     "callToAction": "Navigate home!"
+  },
+  "lessons": {
+    "Introductive Lesson": "Introductive Lesson",
+    "HTML Lesson": "HTML Lesson",
+    "CSS Lesson": "CSS Lesson"
   }
 }

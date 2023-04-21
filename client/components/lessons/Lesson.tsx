@@ -19,15 +19,17 @@ import LessonContent from './LessonContent/LessonContent';
 import LessonHeading from './LessonHeading/LessonHeading';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import LessonNavigation from './LessonNavigation/LessonNavigation';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 export default function Lesson({
   lessonInfo,
   children,
   mdxContent = '',
 }: PropsWithChildren<{ lessonInfo: LessonConfig; mdxContent?: string; }>) {
+  const { lang } = useTranslation('common');
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const lesson = getLessonById(lessonInfo.id);
+  const lesson = getLessonById(lessonInfo.id, lang);
 
   withSmoothScroll(articleWrapper);
 
@@ -54,7 +56,7 @@ export default function Lesson({
   return (
     <div className={styles.lesson}>
       <LessonMenu
-        url={lesson.url}
+        url={`/${lesson.type}/${lesson.id}`}
         isOpen={isMenuOpen}
         close={() => setIsMenuOpen(false)}
         onScrollTop={scrollTop}

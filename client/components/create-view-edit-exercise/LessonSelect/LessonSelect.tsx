@@ -2,7 +2,8 @@ import React from 'react';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactSelect from 'react-select';
-import { LESSONS } from '~/curriculum/Curriculum';
+import { getLessons } from '~/curriculum/Curriculum';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './LessonSelect.module.scss';
 
@@ -20,13 +21,13 @@ interface Props {
 }
 
 function LessonSelect({ selectedId, onChange } : Props) {
-  const chapterLessonPairs = LESSONS
+  const { lang } = useTranslation('common');
+  const chapterLessonPairs = getLessons(lang)
     .filter((lesson) => lesson.written)
     .map((lesson) => ({
       value: {
         chapter: lesson.type,
-        // FIXME
-        id: lesson.url.split('/').pop(),
+        id: lesson.id,
       },
       label: `${lesson.type}/${lesson.title}`,
     }));

@@ -2,11 +2,13 @@ import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { MDXService } from '~/services/MDXService';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import { faThumbsUp, faQuestionCircle, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const HtmlLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null; mdxContent?: string; }) => {
+  const { t } = useTranslation('common');
   if (lessonInfo === null || lessonInfo.written === false) {
     return <NotFoundPage />;
   }
@@ -14,9 +16,9 @@ const HtmlLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig 
   return (
     <>
       <SEOTags
-        title={`${lessonInfo.title} | Lecție HTML`}
+        title={`${lessonInfo.title} | ${t('lessons.HTML Lesson')}`}
         description={lessonInfo.description}
-        url={`https://FrontEnd.ro${lessonInfo.url}`}
+        url={`https://FrontEnd.ro/html/${lessonInfo.id}`}
         shareImage={lessonInfo.ogImage}
       />
       <Lesson lessonInfo={lessonInfo} mdxContent={mdxContent} />
@@ -29,8 +31,8 @@ const HtmlLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig 
 // directly to lesson pages leads to the website thinking you're logged out.
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
-  const lessonInfo = getLessonById(id);
-  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo.type, process.env.LANGUAGE);
+  const lessonInfo = getLessonById(id, process.env.LANGUAGE as 'ro' | 'en');
+  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE);
 
   if (lessonInfo === null || !resp.ok) {
     res.statusCode = 404;

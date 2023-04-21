@@ -1,0 +1,80 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'How to validate a HTML page?', id: 'how-to-validate' },
+    { title: 'Why are invalid pages working as usual?', id: 'invalid-pages' },
+    { title: 'Why should you validate your code?', id: 'why-validate' },
+  ]
+};
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400/1260' }}
+    alt="Angry doodle to Valid HTML"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/seo/html-validation_2400w.jpg`}
+  />
+</LessonCover>}
+<LessonFirstSentence> Although we can build working apps with invalid HTML, we should never do this. Let's see why, and how to make sure we're writing valid code. </LessonFirstSentence>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+
+  The <a target="_blank" rel="noreferrer" className="text-bold" href="https://validator.w3.org/" > W3C Validator </a> website is the best resource to validate web pages. We can either validate an existing page by using it's URL, or a snippet of code by copy-pasting it directly.
+
+  <LessonFigure withBorder alt="Erori de validare" src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/invalid-page.png`} />
+
+  <LessonFigure withBorder alt="O pagină 100% validă" src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/valid-page.png`}/>
+
+  {<LessonTip> Some pages will have warnings (highlighted in yellow). Don't worry about those, they are not errors :)
+  </LessonTip>}
+</section>
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+
+  Unlike other languages, we can write invalid HTML and our site will still work, most of the time exactly the way we want it to. The reason is the following:
+
+  <LessonQuote variant="centered"> Instead of showing a blank page, or an error message, the browser tries to solve the problems in order to show something to the users. </LessonQuote>
+
+  In other words, let's assume we have the following code snippet where we didn't correctly close the <FormattedText as="span">{'</h1>'} </FormattedText> tag:
+
+  <Highlight language="html" className="my-5" code={`<h1> FrontEnd.ro </h2>
+<p>
+  Bine ai venit și spor la 
+  învățat.
+</p>`} />
+
+  However, if we open the browser we'll see the result we wanted: a title followed by a text paragraph. The browser notices our error and tries to fix it by replacing <FormattedText as="span"> {'</h2>'} </FormattedText> with <FormattedText as="span"> {'</h1>'} </FormattedText>.
+
+  To be 100% sure of this let's open the <span className="text-bold">Elements/Inspector</span> panel from DevTools:
+  <LessonFigure
+    withBorder
+    src="/images/lessons/html-validation/valid-elements-panel.png"
+    alt="The browser fixes the problem by correctly closing the <h1>"
+  />
+</section>
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+  <LessonQuote variant="centered"> A valid page means a well implemented page! </LessonQuote>
+
+  {<List as="ol" variant="checkmark">
+    <li> helps on SEO and accesibility <a
+        rel="noreferrer"
+        target="_blank"
+        href="https://developers.google.com/search/docs/advanced/guidelines/webmaster-guidelines?visit_id=637616726211009973-2385660763&rd=1#help-visitors-use-your-pages">
+        SEO și accesibilitate </a>
+    </li>
+    <li> improves performance </li>
+    <li>
+      doesn't leave anything to chance. The website looks and works the same in all browsers.
+    </li>
+  </List>}
+
+</section>

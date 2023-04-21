@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { PropsWithChildren } from 'react';
 import { getAdjacentLessons } from '~/curriculum/Curriculum';
 import styles from './LessonNavigation.module.scss';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 export default function LessonNavigation(
   { lessonId, className }: PropsWithChildren<{ lessonId: string, className?: string }>,
 ) {
-  const adjacentLessons = getAdjacentLessons(lessonId);
+  const { lang } = useTranslation('common');
+  const adjacentLessons = getAdjacentLessons(lessonId, lang);
 
   if (adjacentLessons.length === 0) return null;
 
@@ -16,7 +18,7 @@ export default function LessonNavigation(
   return (
     <nav className={`${className} ${styles.lessonNavigation} d-flex flex-column`}>
       {previousLesson && (
-        <a href={previousLesson.url} className="flex-1 no-underline">
+        <a href={`/${previousLesson.type}/${previousLesson.id}`} className="flex-1 no-underline">
           <article>
             <div className="inline-flex align-items-center">
               <FontAwesomeIcon icon={faChevronLeft} height="14" />
@@ -28,7 +30,7 @@ export default function LessonNavigation(
         </a>
       )}
       {nextLesson && (
-        <a href={nextLesson.url} className="flex-1 no-underline">
+        <a href={`/${nextLesson.type}/${nextLesson.id}`} className="flex-1 no-underline">
           <article>
             <div className="inline-flex align-items-center">
               <span className="mr-1">Lecția următoare</span>

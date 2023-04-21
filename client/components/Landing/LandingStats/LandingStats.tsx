@@ -7,13 +7,15 @@ import {
   StatsCardLayout4,
   StatsCardLayout6,
 } from '~/components/PlatformStats';
-import { LESSONS } from '~/curriculum/Curriculum';
+import { getLessons } from '~/curriculum/Curriculum';
 import { GITHUB_ORG_URL, GITHUB_URL } from '~/services/Constants';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './LandingStats.module.scss';
 
 function LandingStats() {
-  const lessonsWritten = LESSONS.filter((lesson) => lesson.written);
+  const { lang } = useTranslation('common');
+  const lessonsWritten = getLessons(lang).filter((lesson) => lesson.written);
 
   return (
     <section className={styles['landing-stats']}>

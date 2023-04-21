@@ -6,16 +6,17 @@ import { LessonConfig } from '~/curriculum/Curriculum';
 import styles from './LessonPreview.module.scss';
 
 function LessonPreview({
+  id,
   title,
   written,
-  url,
   cover,
+  type,
   description,
   contributors,
 }: LessonConfig) {
   return (
     <Link
-      href={written ? url : '#'}
+      href={written ? `/${type}/${id}` : '#'}
       prefetch={false}
       className={`
         ${styles['lesson-preview']} 

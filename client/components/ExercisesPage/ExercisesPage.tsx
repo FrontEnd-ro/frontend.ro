@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import Link from '~/components/generic/Link';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { Exercise } from '~/redux/user/types';
-import { LESSONS } from '~/curriculum/Curriculum';
+import { getLessons } from '~/curriculum/Curriculum';
 import ExerciseService from '~/services/api/Exercise.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import ExercisePreview from '../ExercisePreview';
@@ -11,10 +11,12 @@ import PageContainer from '../PageContainer';
 import Spinner from '../Spinner';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 import { RootState } from '~/redux/root.reducer';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './ExercisesPage.module.scss';
 
 function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
+  const { lang } = useTranslation('common');
   const [submissions, setSubmissions] = useState<Submission[]>(undefined);
   const [lessonExercises, setLessonExercises] = useState<Exercise[]>(undefined);
 
@@ -97,7 +99,7 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
         </Link>
       </p>
       {(!lessonExercises || !submissions) && (<Spinner showText text="Încărcăm exercițiile" />)}
-      {LESSONS
+      {getLessons(lang)
         .filter((lesson) => mergedData.hasOwnProperty(lesson.id))
         .map((lesson) => (
           <section className={styles['lesson-section']}>

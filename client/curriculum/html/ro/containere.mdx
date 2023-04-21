@@ -1,3 +1,23 @@
+export const CONFIG = {
+  chapters: [
+    {
+      title: 'De ce avem nevoie de aceste elemente?',
+      id: 'why',
+    }, {
+      title: 'Header, Main și Footer',
+      id: 'header-main-footer',
+    },
+    { title: 'Nav', id: 'nav' },
+    { title: 'Article', id: 'article' },
+    { title: 'Section', id: 'section' },
+    { title: 'Div', id: 'div' },
+    {
+      title: 'De ce e important ce container folosim?',
+      id: 'importanta-containerelor',
+    },
+  ],
+};
+
 {<LessonCover>
   <img
     width="2400"
@@ -9,8 +29,8 @@
 {<LessonFirstSentence> Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru a crea layout-uri mai complexe. Aici intervin elementele de tip “container”.
 </LessonFirstSentence>}
 <section>
- <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[0].id}>
-          {SCOPE.lessonInfo.chapters[0].title}
+ <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+          {CONFIG.chapters[0].title}
 </LessonHeading> 
 Fiecare pagina Web are un layout specific - adică o structură generală după care elementele sunt aranjate. Spre exemplu, pagina <a href="https://developer.mozilla.org"> Mozilla Developer Network</a> de mai jos are 4 mari secțiuni:
 
@@ -31,8 +51,8 @@ Aceste dreptunghiuri pe care noi le-am numerotat sunt <em className="text-bold">
 </section>
 
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[1].id}>
-          {SCOPE.lessonInfo.chapters[1].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+          {CONFIG.chapters[1].title}
   </LessonHeading>
 
   Așa cum sugerează și numele lor:
@@ -73,8 +93,8 @@ Aceste dreptunghiuri pe care noi le-am numerotat sunt <em className="text-bold">
 </section>
 
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[2].id}>
-          {SCOPE.lessonInfo.chapters[2].title}
+<LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+          {CONFIG.chapters[2].title}
 </LessonHeading>
 
 
@@ -90,8 +110,8 @@ Aceste dreptunghiuri pe care noi le-am numerotat sunt <em className="text-bold">
 
 <section>
 
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[3].id}>
-          {SCOPE.lessonInfo.chapters[3].title}
+<LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+          {CONFIG.chapters[3].title}
 </LessonHeading>
 Este folosit pentru a marca un articol - cel mai des în bloguri sau site-uri de știri. Spre exemplu <a href="https://css-tricks.com" target="_blank" rel="noreferrer"> CSS Tricks</a> are pe prima pagină 29 elemente de tip <FormattedText as="strong"> {'<article>'} </FormattedText>.
 <LessonFigure
@@ -102,8 +122,8 @@ Este folosit pentru a marca un articol - cel mai des în bloguri sau site-uri de
 </section>
 
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[4].id}>
-          {SCOPE.lessonInfo.chapters[4].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[4].id}>
+          {CONFIG.chapters[4].title}
   </LessonHeading>
   Elementul <FormattedText as="strong"> {'<section>'} </FormattedText> îl vom folosi pentru secțiuni generice dintr-un document/articol, fiecare cu titlul (heading) propriu. 
 
@@ -127,8 +147,8 @@ Este folosit pentru a marca un articol - cel mai des în bloguri sau site-uri de
 </section>
 
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[5].id}>
-          {SCOPE.lessonInfo.chapters[5].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[5].id}>
+          {CONFIG.chapters[5].title}
   </LessonHeading>
 
   Și am ajuns în sfârșit și la <FormattedText as="strong"> {'<div>'} </FormattedText>, cel mai popular element de tip container iar din păcate, de multe ori folosit incorect.
@@ -144,8 +164,8 @@ Este folosit pentru a marca un articol - cel mai des în bloguri sau site-uri de
 </section>
 
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[6].id}>
-          {SCOPE.lessonInfo.chapters[6].title}
+<LessonHeading as="h2" id={CONFIG.chapters[6].id}>
+          {CONFIG.chapters[6].title}
 </LessonHeading>
 
 La prima vedere ai putea crede că nu prea contează ce containere folosim. Nu au stilizări proprii și nici funcționalități specifice, deci cele doua snippet-uri de mai jos sunt identice din punct de vedere vizual și funcțional.

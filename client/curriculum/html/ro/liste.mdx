@@ -1,3 +1,20 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'Tipuri de liste', id: 'tipuri-de-liste' },
+    {
+      title: 'Liste neordonate',
+      id: 'liste-neordonate',
+    },
+    { title: 'Liste ordonate', id: 'liste-ordonate' },
+    {
+      title: 'Atributele acceptate de listele ordonate',
+      id: 'atributele-acceptate-de-listele-ordonate',
+    },
+    { title: 'Sub-liste', id: 'sub-liste' },
+    { title: 'Bonus tips și concluzii', id: 'bonus-tips-si-concluzii' },
+  ],
+};
+
 {<LessonCover>
   <img
     width="2400"
@@ -9,8 +26,8 @@
 {<LessonFirstSentence> În dezvoltarea modernă a web-ului, listele sunt elemente HTML utilizate frecvent atât pentru navigație cât și pentru conținut general, contribuind la crearea unui document bine structurat, accesibil și ușor de întreținut.
 </LessonFirstSentence>}
 <section>
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[0].id}>
-          {SCOPE.lessonInfo.chapters[0].title}
+<LessonHeading as="h3" id={CONFIG.chapters[0].id}>
+          {CONFIG.chapters[0].title}
 </LessonHeading>
 Există două tipuri de liste des folosite în HTML:
 {<List variant="bullets">
@@ -24,8 +41,8 @@ Fiecare tip de listă are un înțeles și un scop specific într-o pagină web.
 </section>
 
 <section>
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[1].id}>
-          {SCOPE.lessonInfo.chapters[1].title}
+<LessonHeading as="h3" id={CONFIG.chapters[1].id}>
+          {CONFIG.chapters[1].title}
 </LessonHeading>
 
 Sunt utilizate când un set de elemente pot fi folosite în orice ordine, ca în lista de cumpărături de mai jos:
@@ -55,8 +72,8 @@ Cu o stilizare potrivită, listele neordonate sunt folosite la <strong> realizar
 
 <section>
 
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[2].id}>
-          {SCOPE.lessonInfo.chapters[2].title}
+<LessonHeading as="h3" id={CONFIG.chapters[2].id}>
+          {CONFIG.chapters[2].title}
 </LessonHeading>
  Listele ordonate afișează elementele enumerate într-o ordine specifică, fie că este vorba de enumerări cu cifre arabe, cifre romane sau litere. Un exemplu potrivit ar fi instrucțiunile pentru a găti o prăjitură:
  <Highlight className="my-5" language="html" code={`<ol>
@@ -73,8 +90,8 @@ Acestea au o structura similară cu cele neordonate, singura diferență fiind t
 </section>
 
 <section>
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[3].id}>
-          {SCOPE.lessonInfo.chapters[3].title}
+<LessonHeading as="h3" id={CONFIG.chapters[3].id}>
+          {CONFIG.chapters[3].title}
 </LessonHeading>
  Dacă vrem ca enumerarea elementelor din listă să se facă cu un anumit tip de cifră sau cu litere, ne putem folosi de atributul <FormattedText as="strong"> type</FormattedText>. Acesta acceptă ca valori:
  {<List variant="bullets">
@@ -117,8 +134,8 @@ Putem opta chiar să enumerăm elementele unei liste ordonate începând de la u
 
       <section>
 
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[4].id}>
-          {SCOPE.lessonInfo.chapters[4].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[4].id}>
+          {CONFIG.chapters[4].title}
   </LessonHeading>
 O listă poate conține o altă listă. Acest lucru este foarte util dacă vrem să reprezentăm un meniu de navigare pe mai multe nivele:
 <Highlight className="my-5" language="html" code={`<ol>
@@ -145,8 +162,8 @@ O listă poate conține o altă listă. Acest lucru este foarte util dacă vrem 
  </section>
 
  <section>
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[5].id}>
-          {SCOPE.lessonInfo.chapters[5].title}
+<LessonHeading as="h3" id={CONFIG.chapters[5].id}>
+          {CONFIG.chapters[5].title}
 </LessonHeading>
 Există și un al treilea tip de listă pe care-l vei întâlni mai rar dar e totuși bine să-l știi: <FormattedText as="strong">{'<dl>'}</FormattedText> (description list). Îl vom folosi când definim termeni sau asociem perechi de valori, ca în exemplul de mai jos:
  <Highlight language="html" code={`<dl>

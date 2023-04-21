@@ -1,3 +1,19 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'Downloadează-l și instalează-l', id: 'downloadeaza-si-instaleaza' },
+    { title: 'Workspace setup', id: 'workspace-setup' },
+    { title: 'Componența VisualStudio Code', id: 'componenta-VSCode' },
+    { title: 'Scurtături', id: 'scurtaturi' },
+    {
+      title: 'Indentarea și formatarea codului',
+      id: 'indentarea-si-formatarea-codului',
+    },
+    { title: 'Formatarea codului la save', id: 'formatarea-codului-la-save' },
+    { title: 'Extensii', id: 'extensii' },
+    { title: 'BONUS - customizare', id: 'bonus-customizare' },
+  ],
+};
+
 {<LessonCover>
   <img
     width="1200"
@@ -18,8 +34,8 @@ Ca să fim aliniați în acest proces de învățare ne vom folosi de un <strong
 Este extrem de popular pentru partea de <strong>FrontEnd</strong>, dar printr-o serie de extensii poate fi folosit și pentru alte limbaje/tehnologii.
 
 <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[0].id}>
-    {SCOPE.lessonInfo.chapters[0].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
   </LessonHeading>
 
 Dacă dăm click pe link-ul de mai jos, vom fi direcționați către site-ul oficial de unde putem descărca versiunea pentru sistemul nostru de operare. Procesul de instalare este unul simplu, dar dacă întâlnești probleme, dă-ne un semn.
@@ -39,8 +55,8 @@ Dacă dăm click pe link-ul de mai jos, vom fi direcționați către site-ul ofi
 />
 </section>
 <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[1].id}>
-    {SCOPE.lessonInfo.chapters[1].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
   </LessonHeading>
 
   Ok, acum că l-am instalat, vom deschide VS Code.
@@ -75,8 +91,8 @@ Dacă dăm click pe link-ul de mai jos, vom fi direcționați către site-ul ofi
   </LessonTip>}
 </section>
 <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[2].id}>
-    {SCOPE.lessonInfo.chapters[2].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
   </LessonHeading>
   
   OK, acum că am aflat cum putem deschide un proiect și crea fișiere să ne concentrăm atenția și pe alte lucruri utile în procesul nostru de codare pe care le oferă editorul și despre care e bine să știm.
@@ -107,8 +123,8 @@ Dacă dăm click pe link-ul de mai jos, vom fi direcționați către site-ul ofi
   </List>}
 </section>
 <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[3].id}>
-    {SCOPE.lessonInfo.chapters[3].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
   </LessonHeading>
 
   Ca și programatori e foarte important ca tool-urile pe care le folosim să ne crească productivitatea, mai ales când vine vorba de taskuri foarte repetitive.
@@ -124,8 +140,8 @@ Dacă dăm click pe link-ul de mai jos, vom fi direcționați către site-ul ofi
     />
 </section>
 <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[4].id}>
-    {SCOPE.lessonInfo.chapters[4].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
   </LessonHeading>
   Este foarte important să indentăm codul și să îl formatăm de fiecare dată. Ne ajută să avem o viziune clară, să ne aliniem cu întreaga comunitate și să respectăm cele mai bune practici.
 
@@ -139,8 +155,8 @@ Dacă dăm click pe link-ul de mai jos, vom fi direcționați către site-ul ofi
   />
 </section>
 <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[5].id}>
-    {SCOPE.lessonInfo.chapters[5].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[5].id}>
+    {CONFIG.chapters[5].title}
   </LessonHeading>
 
   Până acum am rulat manual o comandă pentru a formata codul nostru. Dar putem automatiza acest proces să se întâmple de fiecare dată când dăm Save (Ctrl + S).
@@ -154,8 +170,8 @@ Dacă dăm click pe link-ul de mai jos, vom fi direcționați către site-ul ofi
   />
 </section>
 <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[6].id}>
-    {SCOPE.lessonInfo.chapters[6].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[6].id}>
+    {CONFIG.chapters[6].title}
   </LessonHeading>
 
   Extensiile ne permit să adăugăm diverse funcționalități care să vină în sprijinul dezvoltării codului. Cum ziceam și în introducere, de obicei sunt scrise de comunitate și open-source.
@@ -177,8 +193,8 @@ Dacă dăm click pe link-ul de mai jos, vom fi direcționați către site-ul ofi
   Să luăm spre exemplu extensia <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank" rel="noreferrer"> <strong>Live Server</strong> </a>. Aceasta pornește un <em>server de dezvoltare local</em> ce va da refresh la pagină în browser de fiecare dată când modificăm ceva în fișier. Deci nu mai trebuie noi să ținem minte să facem asta pentru a vedea ultimele modificări.
 </section>
 <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[7].id}>
-    {SCOPE.lessonInfo.chapters[7].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[7].id}>
+    {CONFIG.chapters[7].title}
   </LessonHeading>
 
   Sunt multe multe lucruri faine pe care le oferă VS Code. Nu reușim să le includem pe toate în această lecție, aici vrem să acoperim lucrurile care contează acum pentru începutul carierei tale de developer. Dar vrem să discutăm un pic și despre partea customizabilă, ca să ne creem un environment cât mai plăcut.

@@ -1,3 +1,34 @@
+export const CONFIG = {
+  chapters: [
+    { title: '<a> element', id: 'a-element' },
+    {
+      title: 'Exemple unde folosim tag-ul a',
+      id: 'exemple-unde-folosim-tagul-a',
+    },
+    {
+      title: 'Link-uri către email-uri',
+      id: 'emails',
+    },
+    {
+      title: 'Link-uri către numere de telefon',
+      id: 'tel',
+    },
+    {
+      title: 'Link-uri de download',
+      id: 'download',
+    },
+    {
+      title: 'Atributul target=”_blank”',
+      id: 'atributul-target-blank',
+    },
+    { title: 'Întrebări BONUS', id: 'intrebari-bonus' },
+    { title: '<button> element', id: 'button-element' },
+    { title: 'Atributul type', id: 'atributul-type' },
+    { title: 'Atributul disabled', id: 'atributul-disabled' },
+    { title: 'Link-uri vs butoane', id: 'linkuri-vs-butoane' },
+  ],
+};
+
 export const relativeUrlExample = {
   files: [],
   folders: [{
@@ -77,8 +108,8 @@ export const relativeUrlExample = {
 </LessonCover>}
 <LessonFirstSentence> Deși la prima vedere pare un subiect simplu, sunt totuși multe de știut despre link-uri și butoane în HTML. În acest articol vom discuta despre markup, atribute și cele mai bune practici. Totodată, vom trata împreună cele două concepte pentru că de multe ori se folosesc link-uri în loc de butoane și invers. </LessonFirstSentence>
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[0].id}>
-  {SCOPE.lessonInfo.chapters[0].title}
+<LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+  {CONFIG.chapters[0].title}
 </LessonHeading>
 
 Elementul <FormattedText as="strong">{'<a>'}</FormattedText> denumit și <i>ancoră</i> sau <i>link</i> este unul din cele mai uzuale elemente folosite pentru construirea paginilor web. Dacă vrem să ne mutam la o altă pagină sau la o altă zonă în cadrul aceleiași pagini, atunci vom folosi acest element. Pentru a specifica destinația link-ului vom folosi atributul <FormattedText as="strong">href</FormattedText>.
@@ -86,8 +117,8 @@ Elementul <FormattedText as="strong">{'<a>'}</FormattedText> denumit și <i>anco
 </section>
 
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[1].id}>
-  {SCOPE.lessonInfo.chapters[1].title}
+<LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+  {CONFIG.chapters[1].title}
 </LessonHeading>
 
 <LessonHeading as="h3" id="cele-mai-uzuale"> Cele mai uzuale </LessonHeading>
@@ -135,8 +166,8 @@ Deși nu am ajuns la partea de CSS, merită menționat că jump links pot să be
 />
 </section>
 <section>
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[2].id}>
-  {SCOPE.lessonInfo.chapters[2].title}
+<LessonHeading as="h3" id={CONFIG.chapters[2].id}>
+  {CONFIG.chapters[2].title}
 </LessonHeading>
 
 Sunt situații în care vrem să oferim unui utilizator posibilitatea de a <strong> deschide email-ul precompletat către o adresă</strong>. În cazul acesta ne vom folosi de <FormattedText as="strong">mailto</FormattedText>:
@@ -158,8 +189,8 @@ Trimite email la Frontend.ro
   alt="Opțiunea mailto pentru a ușura trimiterea de email-uri"
 />
 
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[3].id}>
-  {SCOPE.lessonInfo.chapters[3].title}
+<LessonHeading as="h3" id={CONFIG.chapters[3].id}>
+  {CONFIG.chapters[3].title}
 </LessonHeading>
 
 Mai mult, dacă vrem să arătăm în pagină numere de telefon e recomandat să folosim link-uri, pentru a ne deschide direct aplicația prin care sunăm:
@@ -186,8 +217,8 @@ Mai mult, dacă vrem să arătăm în pagină numere de telefon e recomandat să
   alt="Link-uri către numere de telefon"
 />
 
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[4].id}>
-  {SCOPE.lessonInfo.chapters[4].title}
+<LessonHeading as="h3" id={CONFIG.chapters[4].id}>
+  {CONFIG.chapters[4].title}
 </LessonHeading>
 
 Împreuna cu atributul <FormattedText as="strong">download</FormattedText> putem instrui browser-ul să downloadeze fișierul din cadrul link-ului în loc să îl deschidă în pagina curentă:
@@ -205,8 +236,8 @@ Mai mult, dacă vrem să arătăm în pagină numere de telefon e recomandat să
 </section>
 
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[5].id}>
-  {SCOPE.lessonInfo.chapters[5].title}
+<LessonHeading as="h2" id={CONFIG.chapters[5].id}>
+  {CONFIG.chapters[5].title}
 </LessonHeading>
 
 În afară de atributele prezentate, un alt atribut des folosit este <FormattedText as="strong"> target</FormattedText>, care ne indică cum să deschidem link-ul din href.
@@ -226,8 +257,8 @@ Apasă pe următorul link pentru a-l deschide într-un nou tab 👉 <a href="htt
 </section>
 
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[6].id}>
-  {SCOPE.lessonInfo.chapters[6].title}
+<LessonHeading as="h2" id={CONFIG.chapters[6].id}>
+  {CONFIG.chapters[6].title}
 </LessonHeading>
 
 În continuare vom raspunde la câteva întrebări pe care noi ca și developeri ni le putem adresa pe măsură ce codăm și ne întâlnim cu diverse situații:
@@ -292,8 +323,8 @@ Alături avem o imagine într-un link. Dacă dăm click pe ea, ne va duce pa pag
 
 </section>
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[7].id}>
-  {SCOPE.lessonInfo.chapters[7].title}
+<LessonHeading as="h2" id={CONFIG.chapters[7].id}>
+  {CONFIG.chapters[7].title}
 </LessonHeading>
 
 Elementul html  <FormattedText as="strong">{'<button>'}</FormattedText> este folosit atunci când vrem să facem o acțiune (exemple: arată/ascunde un meniu, play sau pause la un video, trimite un comentariu, etc)
@@ -310,8 +341,8 @@ Spre deosebire de link-uri, butoanele <strong>NU</strong> schimbă pagina. Totu�
 </section>
 <section>
 
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[8].id}>
-  {SCOPE.lessonInfo.chapters[8].title}
+<LessonHeading as="h2" id={CONFIG.chapters[8].id}>
+  {CONFIG.chapters[8].title}
 </LessonHeading>
 
 Cele 2 tipuri de butoane pe care le vom folosi cel mai des în aplicațiile noastre sunt:
@@ -354,8 +385,8 @@ unui form -->
 />
 </section>
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[9].id}>
-  {SCOPE.lessonInfo.chapters[9].title}
+<LessonHeading as="h2" id={CONFIG.chapters[9].id}>
+  {CONFIG.chapters[9].title}
 </LessonHeading> 
 
 Acest atribut boolean împiedică interactivitatea cu butonul: nu poate fi apăsat sau focusat. Cel mai comun pattern este în cazul autentificării pe un site:
@@ -400,8 +431,8 @@ Acest atribut boolean împiedică interactivitatea cu butonul: nu poate fi apăs
 </section>
 
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[10].id}>
-  {SCOPE.lessonInfo.chapters[10].title}
+<LessonHeading as="h2" id={CONFIG.chapters[10].id}>
+  {CONFIG.chapters[10].title}
 </LessonHeading>
 
  Ca o scurtă recapitulare, folosim link-uri dacă se schimbă pagina sau facem jump la o secțiune din pagină, iar de butoane dacă facem o acțiune.

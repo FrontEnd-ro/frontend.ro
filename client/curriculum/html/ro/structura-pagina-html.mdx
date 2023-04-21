@@ -1,3 +1,12 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'Structura de bază', id: 'structura' },
+    { title: 'Elementul <head>', id: 'head' },
+    { title: 'Elementul <body>', id: 'body' },
+    { title: 'Rezumat', id: 'rezumat' },
+  ],
+}
+
 {<LessonCover>
   <img
     width="2400"
@@ -12,8 +21,8 @@
   multe elemente descriptive și nu numai.
 </LessonFirstSentence>}
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[0].id}>
-    {SCOPE.lessonInfo.chapters[0].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
   </LessonHeading>
   <ResponsiveFlex breakpoint={1000} className="gap-x-8">
     <div>
@@ -53,8 +62,8 @@
   </ResponsiveFlex>
 </section>
 <section className="my-5">
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[1].id}>
-    {SCOPE.lessonInfo.chapters[1].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
   </LessonHeading>
   
   În <FormattedText as="strong">{'<head>'}</FormattedText> vom introduce elemente ce ne descriu website-ul, precum:
@@ -141,8 +150,8 @@
   </LessonTip>}
 </section>
 <section className="my-5">
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[2].id}>
-    {SCOPE.lessonInfo.chapters[2].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
   </LessonHeading>
   De la sine prin denumirea lui, elementul body (trupul) este responsabil pentru <strong>conținutul care-l vedem și cu care interacționăm efectiv în website</strong>.
   
@@ -178,8 +187,8 @@
   </LessonTip>}
 </section>
 <section className="my-5">
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[3].id}>
-    {SCOPE.lessonInfo.chapters[3].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
   </LessonHeading>
 
   În <FormattedText as="strong"> {'<head>'} </FormattedText> adăugam două tipuri de elemente:

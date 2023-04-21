@@ -1,8 +1,9 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import * as runtime from 'react/jsx-runtime';
 import { compile, runSync } from '@mdx-js/mdx';
 import { useMDXComponents } from '@mdx-js/react';
 import { LessonDescription } from './DataModel';
+import { LessonConfig } from '~/curriculum/curriculum.types';
 
 class MDXService {
   static async compile(mdx: string, scope: Record<string, any>): Promise<string> {
@@ -18,19 +19,32 @@ class MDXService {
     return result.toString();
   }
 
-  static getComponent(mdxContent: string) {
+  static getComponent(mdxContent: string): {
+    Content: () => JSX.Element;
+    CONFIG: LessonConfig;
+  } {
     // Here ESLint is messing up. We're not inside a class component
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { default: Content } = useMemo(
-      () =>
-        runSync(mdxContent, {
+    const { default: Content, CONFIG } = useMemo(
+      () => {
+        if (mdxContent === '') {
+          return {
+            default: () => React.Fragment,
+            CONFIG: {
+              chapters: []
+            }
+          }
+        }
+
+        return runSync(mdxContent, {
           ...runtime,
           useMDXComponents,
-        }),
+        });
+      },
       [mdxContent]
     );
 
-    return Content;
+    return { Content, CONFIG };
   }
 
   // NOTE: this function is called inside `getServerSideProps` to 

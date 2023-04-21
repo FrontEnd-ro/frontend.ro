@@ -1,3 +1,11 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'Cum validăm o pagină HTML?', id: 'cum-validam' },
+    { title: 'De ce merg site-urile invalide?', id: 'pagini-invalide' },
+    { title: 'De ce e importantă validarea?', id: 'de-ce-validam' },
+  ]
+};
+
 {<LessonCover>
   <img
     width="2400"
@@ -8,8 +16,8 @@
 </LessonCover>}
 <LessonFirstSentence> Deși putem "scăpa" fără să scriem HTML valid, acest lucru nu e deloc încurajat. Hai să vedem de ce, și cum ne putem asigura că scriem cod corect. </LessonFirstSentence>
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[0].id}>
-  {SCOPE.lessonInfo.chapters[0].title}
+<LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+  {CONFIG.chapters[0].title}
 </LessonHeading>
 
 Site-ul <a target="_blank" rel="noreferrer" className="text-bold" href="https://validator.w3.org/" > W3C Validator </a> este cea mai bună resursă pe care o știm pentru a valida paginile Web. Putem introduce URL-ul paginii pe care vrem să o validăm, sau direct codul HTML ce ne interesează.
@@ -23,8 +31,8 @@ Site-ul <a target="_blank" rel="noreferrer" className="text-bold" href="https://
 </section>
 
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[1].id}>
-  {SCOPE.lessonInfo.chapters[1].title}
+<LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+  {CONFIG.chapters[1].title}
 </LessonHeading>
 
   Spre deosebire de alte limbaje, chiar dacă nu scriem un HTML corect site-ul nostru va funcționa, poate chiar exact cum ne dorim. Motivul e următorul:
@@ -49,8 +57,8 @@ Pentru a ne convinge de asta putem deschide panoul <span className="text-bold">E
 </section>
 
 <section>
-<LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[2].id}>
-  {SCOPE.lessonInfo.chapters[2].title}
+<LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+  {CONFIG.chapters[2].title}
 </LessonHeading>
 <LessonQuote variant="centered"> Pe scurt, un site valid este un site bine făcut! </LessonQuote>
 

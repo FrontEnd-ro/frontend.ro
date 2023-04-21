@@ -1,3 +1,23 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'Elementul <img>', id: 'elementul-img' },
+    { title: 'Width & Height', id: 'width-height' },
+    { title: 'Lazy loading', id: 'lazy-loading' },
+    {
+      title: 'Imagini responsive',
+      id: 'imagini-responsive',
+      subchapters: [{
+        title: 'Atributul srcset',
+        id: 'srcset',
+      }, {
+        title: 'Proprietatea image-set',
+        id: 'image-set',
+      }],
+    },
+    { title: 'Elementul <picture>', id: 'elementul-picture' },
+  ],
+};
+
 export const sizesTable = {
   head: ['JPG', 'WebP', 'AVIF'],
   side: ['4000 x 2666', '2000 x 1333', '800 x 533'],
@@ -32,8 +52,8 @@ export const sizesTable = {
 </LessonFirstSentence>}
 
 <section>
-    <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[0].id}>
-      {SCOPE.lessonInfo.chapters[0].title}
+    <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+      {CONFIG.chapters[0].title}
     </LessonHeading>
 
 Primul și cel mai comun mod de a adăuga o imagine este folosind elementul <strong>img</strong> alături de 2 atribute:
@@ -77,8 +97,8 @@ Primul și cel mai comun mod de a adăuga o imagine este folosind elementul <str
 
 </section>
 <section>
-    <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[1].id}>
-      {SCOPE.lessonInfo.chapters[1].title}
+    <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+      {CONFIG.chapters[1].title}
     </LessonHeading>
 
 De multe ori imaginile de pe site-uri își vor adapta dimensiunea în funcție de ecranul dispozitivului folosit: mai mici pe telefoane și tablete, mai mari pe laptop-uri și desktop-uri.
@@ -132,8 +152,8 @@ Ce am arătat până acum reprezintă fundamentele imaginilor în HTML. Sunt luc
  Mai jos continuăm să discutăm despre diverse tehnici pentru a optimiza servirea imaginilor și a oferi cea mai bună experiență posibilă, care la rândul ei va mări șansele ca <a href="https://web.dev/site-speed-and-business-metrics/" target="_blank" rel="noreferrer"> proiectul/business-ul nostru să aibă succes</a>.
 </section>
 <section>
-    <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[2].id}>
-      {SCOPE.lessonInfo.chapters[2].title}
+    <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+      {CONFIG.chapters[2].title}
     </LessonHeading>
 
   {<LessonQuote> Most of the images on the web are downloaded, decoded and rendered only never to be seen, as [...] the user never scrolled that far. - <small> <a href="https://twitter.com/yoavweiss" target="_blank" rel="noopener noreferrer">Yoav Weiss</a> </small> </LessonQuote>}
@@ -162,8 +182,8 @@ Pentru a rezolva această problemă vom folosi atributul <strong>loading</strong
 Acum browserul va descărca imaginea doar când ne <em>"apropiem"</em> de ea. Fiecare browser are propriile metrici legate de ce înseamnă această apropiere, însă nu trebuie să ne batem capul cu asta. Regula generală e să adăugăm atributul <FormattedText as="strong">loading="lazy"</FormattedText> dacă avem multe imagini în pagină.
  </section>
 <section>
-    <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[3].id}>
-      {SCOPE.lessonInfo.chapters[3].title}
+    <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+      {CONFIG.chapters[3].title}
     </LessonHeading>
 Am pornit de la imagini simple, am optimizat experiența folosind atributele width/height iar apoi am reușit să incărcăm doar imaginile de care avem nevoie folosind atributul <FormattedText as="strong"> loading </FormattedText>. Acum e momentul să mergem un pas mai departe în călătoria spre performanță și să încărcăm imaginea cea mai potrivită din punct de vedere al rezoluției.
 <LessonFigure
@@ -191,8 +211,8 @@ Am pornit de la imagini simple, am optimizat experiența folosind atributele wid
   Ideal ar fi ca pe telefon să încărcăm exact aceeași imagine dar la o rezoluție mai mică, pe tabletă la o rezoluție mijlocie și la o rezoluție cât mai inaltă pe ecrane mari: desktop and beyond.
 
   <section>
-      <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[3].subchapters[0].id}>
-        {SCOPE.lessonInfo.chapters[3].subchapters[0].title}
+      <LessonHeading as="h3" id={CONFIG.chapters[3].subchapters[0].id}>
+        {CONFIG.chapters[3].subchapters[0].title}
       </LessonHeading>
 
  Din fericire putem rezolva această problemă folosindu-ne de atributele <strong>srcset</strong> și <strong>sizes</strong>. Hai să luăm imaginea noastră și să facem resize la 3 rezoluții diferite:
@@ -248,8 +268,8 @@ De exemplu, cu o valoare de 2 și o lățime de 650px se va incărca imaginea <s
 
 </section>
 <section>
-    <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[3].subchapters[1].id}>
-      {SCOPE.lessonInfo.chapters[3].subchapters[1].title}
+    <LessonHeading as="h3" id={CONFIG.chapters[3].subchapters[1].id}>
+      {CONFIG.chapters[3].subchapters[1].title}
     </LessonHeading>
 
 Până de curând singurul mod de a face imaginile din CSS (cele puse prin <FormattedText as="strong">background-image:</FormattedText>) responsive a fost să punem mai multe reguli <FormattedText as="strong">@media-query</FormattedText> și să specificăm pentru fiecare o altă imagine.
@@ -279,8 +299,8 @@ Dar odată cu introducerea proprietății <a target="_blank" className="text-bol
 </section>
 </section>
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[4].id}>
-    {SCOPE.lessonInfo.chapters[4].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
   </LessonHeading>
 
  După cum ai văzut până acum, elementul <FormattedText as="span">{'<img>'}</FormattedText> - deși destul de simplu în utilizare - ne oferă mai multe funcționalități care ne permit să optimizăm imaginile și experiența utilizatorilor. Cu toate acestea, a mai rămas totuși o ultimă optimizare, și anume folosirea unor formate moderne pentru imagini.

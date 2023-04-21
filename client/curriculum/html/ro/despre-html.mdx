@@ -1,3 +1,14 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'O simplă analogie', id: 'analogie' },
+    { title: 'Ce este HTML?', id: 'intro' },
+    { title: 'Elemente', id: 'elemente' },
+    { title: 'Atribute', id: 'atribute' },
+    { title: 'Relații de rudenie', id: 'relatii' },
+    { title: 'Resurse', id: 'resurse' },
+  ],
+}
+
 {<LessonCover>
   <img
     width="2400"
@@ -10,8 +21,8 @@
   La baza oricărei aplicații web stau, de obicei, trei limbaje: <span className="border-bottom-1px">HTML</span>, <span className="border-bottom-1px">CSS</span> și <span className="border-bottom-1px">Javascript</span> . Dacă vă întrebați de ce e nevoie de toate, ei bine fiecare are propriul scop bine definit.
 </LessonFirstSentence>}
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[0].id}>
-    {SCOPE.lessonInfo.chapters[0].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
   </LessonHeading>
   <div className="my-16">
     <LessonFloatContent position="right">
@@ -58,8 +69,8 @@
   Noi ne vom concentra aici pe primul limbaj dintre cele trei enumerate mai sus, și anume HTML.
 </section>
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[1].id}>
-    {SCOPE.lessonInfo.chapters[1].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
   </LessonHeading>
 
   <strong>HTML (Hyper Text Markup Language)</strong> este limbajul standard de markup folosit pentru a defini structura de bază a unei pagini web. Nu este un limbaj de programare propriu-zis, ci doar un limbaj descriptiv, bazat pe <em>XML</em>.
@@ -67,8 +78,8 @@
   Majoritatea persoanelor consideră că HTML este foarte usor și îl tratează destul de superficial. Chiar dacă HTML este, într-adevăr, mai ușor decât celelalte două limbaje, el trebuie învățat bine și corect. Dacă vei face asta, vei avea o fundație foarte bună peste care vei putea așeza cunoștințele de CSS și JS 💪.
 </section>
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[2].id}>
-    {SCOPE.lessonInfo.chapters[2].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
   </LessonHeading>
 
   Orice fișier HTML este construit din elemente, numite și <strong>tags</strong>. Ele sunt formate din perechi de forma <FormattedText as="strong">{'<element> </element>'}</FormattedText>. Primul se numește <strong>tag de deschidere </strong> <em>(opening tag)</em> , iar al doilea <strong>tag de închidere </strong> <em>(closing tag)</em>.
@@ -103,8 +114,8 @@
   Probabil te intrebi ce înseamnă <strong>type="text"</strong> și <strong>placeholder="Nume"</strong>. Ele se numesc <em className="text-bold">atribute</em>. Hai să vedem care este scopul acestora.
 </section>
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[3].id}>
-    {SCOPE.lessonInfo.chapters[3].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
   </LessonHeading>
 
   Fiecare element poate avea o serie de atribute prin care noi putem fie să <em className="text-bold">controlam comportamentul acestuia</em>, fie să îl <em className="text-bold"> identificăm ulterior </em> din CSS sau JS. Atributele sunt perechi de tip <FormattedText as="strong"> cheie=“valoare” </FormattedText> care sunt scrise în interiorul unui opening tag.
@@ -117,8 +128,8 @@
   />
 </section>
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[4].id}>
-    {SCOPE.lessonInfo.chapters[4].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
   </LessonHeading>
 
   Bineințeles că o aplicatie web nu contine doar unul sau două elemente. În majoritatea cazurilor, avem nevoie de zeci sau sute de elemente doar pentru o singură pagină. Aceste elemente sunt adăugate pe baza unor <strong>relații de rudenie</strong>.
@@ -148,8 +159,8 @@
 </section>
 <div className="dots" />
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[5].id}>
-    {SCOPE.lessonInfo.chapters[5].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[5].id}>
+    {CONFIG.chapters[5].title}
   </LessonHeading>
   
   Ceea ce am prezentat mai sus este doar vârful iceberg-ului. În lecțiile următoare vei învăța care este structura de bază a unei aplicații web, cum să îți validezi HTML-ul scris, precum și informații mai detaliate despre cele mai importante elemente. Până atunci, îti vom lăsa mai jos o listă de resurse cu elemente și atribute de bază"

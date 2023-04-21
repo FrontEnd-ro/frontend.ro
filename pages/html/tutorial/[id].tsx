@@ -13,15 +13,16 @@ import LessonContent from '~/components/lessons/LessonContent/LessonContent';
 import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TableOfContents, { Chapter, parseChapters } from '~/components/TableOfContents';
+import { LessonConfig } from '~/curriculum/curriculum.types';
 
 // Naming this component `Temp` because eventually
 // will move this to the /html folder. So right now
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
 const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDescription | null, mdxContent?: string }) => {
-  const getChapters = (lessonDescription: LessonDescription): Chapter[] => {
+  const getChapters = (lessonDescription: LessonDescription, chapters: LessonConfig['chapters']): Chapter[] => {
     if (!lessonDescription.withExercises) {
-      return parseChapters(lessonDescription.chapters);
+      return parseChapters(chapters);
     }
 
     return [
@@ -29,7 +30,7 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDes
         title: 'Lectie',
         id: 'lectie',
         href: '#lectie',
-        subchapters: parseChapters(lessonInfo.chapters),
+        subchapters: parseChapters(chapters),
       },
       {
         title: 'Exerciții',
@@ -49,7 +50,8 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDes
     return <NotWroteYet lesson={lessonInfo} />;
   }
 
-  const chapters = getChapters(lessonInfo);
+  const { Content, CONFIG } = MDXService.getComponent(mdxContent);
+  const chapters = getChapters(lessonInfo, CONFIG.chapters);
 
   return (
     <>
@@ -84,6 +86,7 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonDes
             title={lessonInfo.title}
             contributors={lessonInfo.contributors}
           >
+            <Content />
             {lessonInfo.resources !== undefined && (
               <LessonResources className="my-5" links={lessonInfo.resources} />
             )}

@@ -1,7 +1,6 @@
 import { MDXProvider } from '@mdx-js/react';
 import { PropsWithChildren } from 'react';
 import { Contributor } from '~/services/contributors';
-import { MDXService } from '~/services/MDXService';
 
 import styles from './LessonContent.module.scss';
 import List from '~/components/List/List';
@@ -63,10 +62,6 @@ const LessonContent = ({ title, contributors, mdxContent = '', children }: Props
     DemoPreview,
   }
 
-  const Content = mdxContent !== ''
-    ? MDXService.getComponent(mdxContent)
-    : <></>;
-
   return (
     <article className={styles.LessonContent}>
       <h1>
@@ -75,12 +70,9 @@ const LessonContent = ({ title, contributors, mdxContent = '', children }: Props
       {contributors.length > 0 && (
         <LessonContributors className="absolute" contributors={contributors} />
       )}
-      {mdxContent !== '' && (
-        <MDXProvider components={MDX_COMPONENTS}>
-          <Content />
-        </MDXProvider>
-      )}
-      {children}
+      <MDXProvider components={MDX_COMPONENTS}>
+        {children}
+      </MDXProvider>
     </article>
   );
 };

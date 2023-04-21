@@ -9,6 +9,7 @@ import Footer from '~/components/Footer';
 import { LessonMenu, LessonResources } from '~/components/lessons';
 
 import styles from './Lesson.module.scss';
+import { MDXService } from '~/services/MDXService';
 import { withSmoothScroll } from '~/services/Hooks';
 import { GITHUB_URL } from '~/services/Constants';
 import LessonExercises from './LessonExercises/LessonExercises';
@@ -22,7 +23,7 @@ import LessonNavigation from './LessonNavigation/LessonNavigation';
 export default function Lesson({
   lessonInfo,
   children,
-  mdxContent,
+  mdxContent = '',
 }: PropsWithChildren<{ lessonInfo: LessonDescription; mdxContent?: string; }>) {
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,12 +35,13 @@ export default function Lesson({
     articleWrapper.current.scrollTo(0, 0);
   };
 
+  const { Content, CONFIG } = MDXService.getComponent(mdxContent);
   const chaptersWithHref: Chapter[] = lessonInfo.withExercises
     ? [
-      ...parseChapters(lessonInfo.chapters ?? []),
+      ...parseChapters(CONFIG.chapters ?? []),
       { title: 'Exerciții', id: 'exercitii', href: '#exercitii' },
     ]
-    : parseChapters(lessonInfo.chapters ?? []);
+    : parseChapters(CONFIG.chapters ?? []);
 
   useEffect(() => {
     LessonService
@@ -64,6 +66,7 @@ export default function Lesson({
         <Header href="/lectii" onMenuClick={() => setIsMenuOpen(true)} withNavMenu />
         <div ref={articleWrapper} className={styles['article-wrapper']}>
           <LessonContent title={lessonInfo.title} contributors={lessonInfo.contributors ?? []} mdxContent={mdxContent}>
+            <Content />
             {children}
             {lessonInfo.resources !== undefined && (
               <LessonResources className="my-5" links={lessonInfo.resources} />

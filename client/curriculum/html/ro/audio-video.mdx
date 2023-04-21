@@ -1,3 +1,27 @@
+export const CONFIG = {
+  chapters: [
+    {
+      title: 'Elementul <audio>',
+      id: 'audio-element',
+      subchapters: [{
+        title: 'Atributele elementului <audio>',
+        id: 'atributele-elementului-audio',
+      }],
+    },
+    {
+      title: 'Elementul <video>',
+      id: 'video-element',
+      subchapters: [{
+        title: 'Atributele elementului <video>',
+        id: 'atributele-elementului-video',
+      }, {
+        title: 'Subtitrări sau Captions',
+        id: 'subtitles-captions',
+      }],
+    },
+  ],
+};
+
 {<LessonCover>
   <img
     width="2400"
@@ -10,8 +34,8 @@
   În lecția anterioară am aflat cum putem adăuga imagini pe site-urile noastre. Cum ar fi dacă v-am spune că putem adăuga fișiere audio și video pentru a oferi și mai multă interactivitate paginilor dezvoltate de noi? Ei bine, hai să vedem cum putem face asta.
 </LessonFirstSentence>}
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[0].id}>
-    {SCOPE.lessonInfo.chapters[0].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
   </LessonHeading>
    
    Elementul <FormattedText as="strong">{'<audio>'}</FormattedText> este folosit pentru a adăuga fișiere audio paginii tale web. Următorul exemplu arată o simplă utilizare a lui, cu ajutorul atributului <FormattedText as="strong">src</FormattedText>:
@@ -52,8 +76,8 @@ Elementul <FormattedText as="strong">{'<p>'}</FormattedText> din exemplul de mai
 </section>
 
  <section>
-  <LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[0].subchapters[0].id}>
-          {SCOPE.lessonInfo.chapters[0].subchapters[0].title}
+  <LessonHeading as="h3" id={CONFIG.chapters[0].subchapters[0].id}>
+          {CONFIG.chapters[0].subchapters[0].title}
   </LessonHeading>
 
   Pentru a vedea lista întreaga a atributelor, <a target="_blank" rel="noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#attributes"> accesează MDN</a>.
@@ -91,8 +115,8 @@ Elementul <FormattedText as="strong">{'<p>'}</FormattedText> din exemplul de mai
 </section>
 
 <section>
-  <LessonHeading as="h2" id={SCOPE.lessonInfo.chapters[1].id}>
-    {SCOPE.lessonInfo.chapters[1].title}
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
   </LessonHeading>
 
    Elementul <FormattedText as="strong">{'<video>'}</FormattedText> ne permite adăugarea unui video pe pagina noastră. Cel mai simplu mod de utilizare este - similar ca la audio - prin atributul <FormattedText as="strong">src</FormattedText>.
@@ -119,8 +143,8 @@ Elementul <FormattedText as="strong">{'<p>'}</FormattedText> din exemplul de mai
 </section>
 
 <section>
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[1].subchapters[0].id}>
-          {SCOPE.lessonInfo.chapters[1].subchapters[0].title}
+<LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[0].id}>
+          {CONFIG.chapters[1].subchapters[0].title}
 </LessonHeading>
 
 Trebuie să știi că toate <a href="#atributele-elementului-audio"> atributele elementului audio</a> menționate mai sus sunt <strong>valabile și pentru clipuri video</strong>. Pe lângă acestea, unui video putem să-i specificăm și:
@@ -155,8 +179,8 @@ Trebuie să știi că toate <a href="#atributele-elementului-audio"> atributele 
 </section>
 
 <section>
-<LessonHeading as="h3" id={SCOPE.lessonInfo.chapters[1].subchapters[1].id}>
-          {SCOPE.lessonInfo.chapters[1].subchapters[1].title}
+<LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[1].id}>
+          {CONFIG.chapters[1].subchapters[1].title}
 </LessonHeading>
 
 Unui element video putem să-i atașăm subtitrări sau captions. Mai întâi creem un fișier în format <FormattedText>.vtt </FormattedText> unde vom configura timpii subitrării:

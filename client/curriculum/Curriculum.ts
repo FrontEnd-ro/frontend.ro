@@ -350,15 +350,6 @@ export const LESSONS: LessonConfig[] = [
     type: 'css',
     contributors: [CatalinPopusoi],
     withExercises: false,
-    chapters: [
-      { title: 'Componentele Box Model', id: 'componentele-box-model' },
-      { title: 'Border', id: 'border' },
-      { title: 'Margin', id: 'margin' },
-      { title: 'Padding', id: 'padding' },
-      { title: 'DevTools Box Model', id: 'devtools-box-model' },
-      { title: 'Box-sizing', id: 'box-sizing' },
-      { title: 'Box Model interactiv', id: 'box-model-interactiv' },
-    ],
     resources: [{
       text: 'Documentația completă a box model-ului pe MDN',
       href: 'https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model',

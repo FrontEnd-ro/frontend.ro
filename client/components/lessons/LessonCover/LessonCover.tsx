@@ -11,12 +11,17 @@ export default function LessonCover(
   const coverRef = useRef(null);
 
   const onResize = (rect: DOMRectReadOnly) => {
-    const viewBox = coverRef.current.querySelector('svg').getAttribute('viewBox').split(' ');
+    const svg: SVGElement | null = coverRef.current.querySelector('svg');
+    if (svg === null) {
+      return;
+    }
+
+    const viewBox = svg.getAttribute('viewBox').split(' ');
 
     if (rect.width < 400) {
-      coverRef.current.querySelector('svg').setAttribute('viewBox', [resizeOffset, viewBox.slice(1)].join(' '));
+      svg.setAttribute('viewBox', [resizeOffset, viewBox.slice(1)].join(' '));
     } else {
-      coverRef.current.querySelector('svg').setAttribute('viewBox', [0, viewBox.slice(1)].join(' '));
+      svg.setAttribute('viewBox', [0, viewBox.slice(1)].join(' '));
     }
   };
 

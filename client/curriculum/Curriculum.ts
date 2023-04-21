@@ -316,6 +316,31 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
           href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track',
         },
       ]
+    },
+    en: {
+      id: 'audio-video',
+      written: true,
+      title: 'Video and Audio',
+      description: 'Images bring life to our websites, but we can move a step forward using video and audio elements',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/video-audio/lesson-gallery__cover__1200w.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_1200w.jpg`,
+      contributors: [SebastianLatkolic, Pava],
+      withExercises: false,
+      type: 'html',
+      resources: [
+        {
+          text: 'Documentation for the <audio> element on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio',
+        },
+        {
+          text: 'Documentation for the <video> element on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video',
+        },
+        {
+          text: 'Documentation for the <track> element on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track',
+        },
+      ]
     }
   },
   {

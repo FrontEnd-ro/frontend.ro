@@ -1,0 +1,236 @@
+export const CONFIG = {
+  chapters: [
+    {
+      title: '<audio> element',
+      id: 'audio-element',
+      subchapters: [{
+        title: 'Attributes for <audio> element',
+        id: 'atributele-elementului-audio',
+      }],
+    },
+    {
+      title: '<video> element',
+      id: 'video-element',
+      subchapters: [{
+        title: 'Attributes for <video> element',
+        id: 'atributele-elementului-video',
+      }, {
+        title: 'Subtitles or Captions',
+        id: 'subtitles-captions',
+      }],
+    },
+  ],
+};
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: "2400/1260" }}
+    alt="Doodle with audio waveform and a video"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/seo/video-audio_2400w.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence>
+  In the previous lesson we learned how to add images on our websites. But images are not so interactive. Instead, we can add audio and video files to offer even more interactivity to our pages. Let's see how we can do this.
+</LessonFirstSentence>}
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+   
+   The <FormattedText as="strong">{'<audio>'}</FormattedText> element is used to add audio files to our pages. The following example shows a simple usecase, using the <FormattedText as="strong">src</FormattedText> attribute:
+   
+  <Highlight className="my-5" language="html" code={`<audio src="audio-file.mp3"></audio>`} />
+
+  Another method to declare the source of an <FormattedText as="strong">{'<audio>'}</FormattedText> element is by using multiple <FormattedText as="strong">{'<source>'}</FormattedText> elements. Each of them needs to use the <FormattedText as="strong">src</FormattedText> and <FormattedText as="strong">type</FormattedText> attributes in order to specify the asset source and type.
+
+  {<LessonTip>
+    Not all browsers support every type of audio file, so it is recommended that we provide several different formats (mp3, ogg, etc.) and the browser will choose the first compatible one.
+  </LessonTip>}
+
+  <Highlight className="my-5" language="html" code={`<audio>
+  <source src="audio-file.mp3" type="audio/mpeg" />
+  <source src="audio-file.ogg" type="audio/ogg" />
+  <p>
+    Your browser doesn't support audio files.
+    Use <a href="audio-file.mp3">this link</a> 
+    to access it.
+  </p>
+</audio> 
+`}
+  />
+ <DemoPreview>
+    <audio style={{ border: '1px solid #000' }} controls className="mb-2">
+    <source
+      src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}
+      type="audio/mp4"/>
+    <source
+      src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.mp3`}
+      type="audio/mpeg"/>
+        Your browser doesn't support audio files. Use <a href={`${SCOPE.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}>this link</a> to access it.
+    </audio>
+    {<Link prefetch={false} target="_blank" className="d-block" href="/demo/html/audio">
+      Open the demo in a new page
+    </Link>} 
+  </DemoPreview>
+  
+  The <FormattedText as="strong">{'<p>'}</FormattedText> element in the above example has a "fallback" role. This will be only shown if the browser doesn't support any of the provided file formats.
+</section>
+
+ <section>
+  <LessonHeading as="h3" id={CONFIG.chapters[0].subchapters[0].id}>
+    {CONFIG.chapters[0].subchapters[0].title}
+  </LessonHeading>
+
+  To see the full list of supported attributes, <a target="_blank" rel="noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#attributes"> have a look on MDN</a>.
+  Here we'll present the most used ones:
+
+  {<List variant="bullets">
+    <li className="mb-4"> 
+      <FormattedText as="strong">src</FormattedText>  – specifies the location to the audio asset
+    </li>
+    <li className="mb-4">
+      <FormattedText as="strong">type</FormattedText> – specifies the type of the audio asset
+    </li>
+    <li className="mb-4"> 
+      <FormattedText as="strong">controls</FormattedText>  – if this attribute is present then the browser will offer controls to play/pause, change volume, etc.
+    </li>
+  </List>}
+
+  <Highlight className="my-5" language="html" code={`<audio controls>
+  <source src="audio-file.mp3" type="audio/mpeg" />
+
+  <source src="audio-file.ogg" type="audio/ogg" />
+
+   <p>
+      Your browser doesn't support audio files.
+      Use <a href="audio-file.mp3">this link</a> 
+      to access it.
+  </p>
+</audio>
+`}
+/>
+ 
+  {<LessonTip>
+    Remember that the order of <FormattedText as="strong">{'<source>'}</FormattedText> elements is extremely important because the browser will read them one at a time, from top to bottom, and choose the first compatible one.
+  </LessonTip>}
+</section>
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+  The <FormattedText as="strong">{'<video>'}</FormattedText> element allows us to add videos on our pages. The easiest way to add a video - just like in the case of an audio element - is via the <FormattedText as="strong">src</FormattedText> attribute.
+
+  <Highlight className="my-5" language="html" code={`<video src="video-file.mp4"></video>`}/>
+
+  <strong>Similarly with the audio element</strong>, we can specify multiple sources for our video asset using the <FormattedText as="strong">{'<source>'}</FormattedText> element:
+
+  <Highlight className="my-5" language="html" code={`<video>
+  <source src="video-file.webm" type="video/webm" />
+        
+  <source src="video-file.mp4" type="video/mp4" />
+        
+  <p>
+    Your browser doesn't support video assets.
+    Use <a href="video-file.webm">this link</a> 
+    to access it.
+  </p>
+</video>
+`}
+/>
+
+  <LessonFigure isVideo withBorder src={`${SCOPE.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`} alt="Example of using the <video> element" demo="/demo/html/video" />
+</section>
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[0].id}>
+    {CONFIG.chapters[1].subchapters[0].title}
+  </LessonHeading>
+
+  It's worth noting that all the <a href={CONFIG.chapters[0].subchapters[0]}> attributes of the audio element</a> mentioned above are <strong>valid for video elements as well</strong>. Besides this, for a video element we can also use:
+
+  {<List variant="bullets">
+    <li className="mb-4"> <FormattedText as="strong">width</FormattedText> – to specify the pixel width of the video
+    </li>
+    <li className="mb-4"> <FormattedText as="strong">height</FormattedText> – to specify the pixel height of the video
+    </li>
+    <li className="mb-4"> <FormattedText as="strong">muted</FormattedText> – by setting this attribute the video will initially be muted. However, this can be easily changed by the user if we also specify the <FormattedText as="span">controls</FormattedText> attribute
+    </li>
+    <li> <FormattedText as="strong">autoplay</FormattedText> – the video will start playing as soon as you enter the page
+    </li>
+  </List>}
+
+  <Highlight className="my-5" language="html" code={`<video controls muted autoplay width="350" height=”250”>
+
+  <source src="video-file.webm" type="video/webm" />
+  <source src="video-file.mp4" type="video/mp4" />
+        
+  <p>
+    Your browser doesn't support video assets.
+    Use <a href="video-file.webm">this link</a> 
+    to access it.
+  </p>
+</video>
+`}
+/>
+
+{<LessonTip> Here we presented only the most common attributes. For the full list <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes" rel="noreferrer"> have a look on MDN</a>.
+</LessonTip>}
+</section>
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[1].id}>
+    {CONFIG.chapters[1].subchapters[1].title}
+  </LessonHeading>
+
+  We can also attach subtitles/captions to video elements. First we create a file of <FormattedText>.vtt </FormattedText> format where we configure the times of the subtitle:
+
+  <Highlight language="html" className="my-5" code={`WEBVTT
+
+00:00.700 --> 00:04.000
+As a FrontEnd developer you'll work with 3 programming languages:
+
+00:04.500 --> 00:08.000
+HTML (Hyper Text Markup Language)
+CSS (Cascading Style Sheets)
+and JavaScript`}
+/>
+
+  and then we link it to the <strong> video </strong> via the <FormattedText> {'<track>'} </FormattedText> element
+
+  <Highlight language="html" code={`<video muted autoplay controls>
+  
+  <source 
+    type="video/mp4"
+    src="https://d3tycb976jpudc.cloudfront.net/public/video/video-element-demo.mp4"  
+  />
+  
+  <track default srclang="en" src="/video/captions.vtt" />
+
+</video>
+`}
+/>
+
+  <LessonTip> The source of the <strong> track </strong> element needs to be on the same origin as the web page, otherwise it won't work. </LessonTip>
+
+  <video muted autoPlay controls loop className="max-w-full">
+    <source
+      src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mp4`}
+      type="video/mp4"
+    />
+
+    <source
+      src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/video/video-element-demo.mkv`}
+      type="video/x-matroska"
+    />
+
+    <track
+      default
+      srcLang="en"
+      src="/video/captions.vtt"
+    />
+  </video>
+
+</section>

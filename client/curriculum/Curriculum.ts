@@ -103,6 +103,24 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
           href: 'https://code.visualstudio.com/',
         },
       ]
+    },
+    en: {
+      id: 'vs-code',
+      written: true,
+      title: 'Visual Studio Code',
+      description:
+        'Short introduction for the application you\'ll be using to write code, and much more.',
+      type: 'intro',
+      contributors: [Diana],
+      withExercises: false,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`,
+      resources: [
+        {
+          text: 'Full documentation for VisualStudio Code',
+          href: 'https://code.visualstudio.com/',
+        },
+      ]
     }
   },
   /** HTML lessons */

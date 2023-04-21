@@ -1,0 +1,211 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'Download and install', id: 'downloadeaza-si-instaleaza' },
+    { title: 'Workspace setup', id: 'workspace-setup' },
+    { title: 'VSCode walk-through', id: 'componenta-VSCode' },
+    { title: 'Shortcuts', id: 'scurtaturi' },
+    {
+      title: 'Indentation and code formatting',
+      id: 'indentarea-si-formatarea-codului',
+    },
+    { title: 'Formatarea codului la save', id: 'formatarea-codului-la-save' },
+    { title: 'Extensions', id: 'extensii' },
+    { title: 'BONUS - customization', id: 'bonus-customizare' },
+  ],
+};
+
+{<LessonCover>
+  <img
+    width="1200"
+    alt="VSCode logo"
+    style={{ aspectRatio: '1200/630' }}
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence>
+  Learning programming can seem intimidating, especially for those coming from completely different fields. Well, you've arrived at the right place because we'll guide you to make this process as pleasant and interactive as possible.
+</LessonFirstSentence>}
+
+To be aligned in this learning process we'll use a <strong>tool</strong> used by a lot of developers: <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer"> <strong>Visual Studio Code</strong> </a>. This is an <strong>open source</strong> code editor that offers a lot of features for fast coding.
+
+It's extremely popular for <strong>FrontEnd</strong> development, but through a series of extensions can be used for other languages as well.
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+
+  If we click the link below we'll be redirected on the official website from which we can download the version for our operating system. The installation process is straightforward but if you run into any problems don't hesitate to get in touch with us.
+
+  <Link href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">
+    https://code.visualstudio.com/download
+  </Link>
+
+  <LessonFigure withBorder src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/download-VSCode.jpg`} alt="Download Visual Studio Code from the official website" />
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+  Now that you've installed it, let's start VS Code and open a project. To do this we can <strong>drag and drop</strong> a folder or we can choose the <strong>Open Folder</strong> option.
+
+  <LessonFigure
+    isVideo
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/adaugare-proiect-vs-code.mp4`}
+    alt="How to add a project in VS Code."
+  />
+
+  Now that we opened the folder in the editor, we'll see in the left sidebar the name of the folder, together with the files it contains.
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/files-and-folders.png`}
+    alt="The folder and it's containing files"
+  />
+
+  To create a new file we'll either use the <FormattedText as="strong">New file</FormattedText> (CTRL + N) option, or we'll select the first icon (near the project name).
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/create-file.png`}
+    alt="Creating a new file."
+  />
+
+  {<LessonTip>
+    Depending on the type of the file we need in our project, we'll use the appropriate extension. HTML files will have the <strong>.html</strong> extension (like in the example above), CSS files will have the <strong>.css</strong> extension, and the Javascript files will have the <strong>.js</strong> extension. We can use whatever language we want, but in the context of FrontEnd development we'll only concern with those three.
+  </LessonTip>}
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+  
+  Now that we've opened a project and we can create new files, let's concentrate on other useful things that help us in the coding process.
+
+  On the left side of the screen we have <strong>The Activity Bar</strong>:
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/activity-bar.png`}
+    alt="Activity bar in VS Code."
+  />
+
+  {<List as="ol" variant="count">
+    <li>
+      We start with the first option from the top named <strong>File Explorer</strong>, where we'll find all the files and folders inside the project.
+    </li>
+    <li>
+      Continuing with the <strong>Search</strong> one, we'll use this for global text-search, meaning in all files from all folders.
+    </li>
+    <li>
+      <strong>Source Control</strong> is the place where we can collaborate via <strong>Git</strong>, using a visual interface.
+    </li>
+    <li>
+      <strong>Extensions View</strong> - is the place where we can download programs <strong> created by the community </strong> (named extension) which extend the editor with additional functionality. We'll talk more about them <Link href={`#${CONFIG.chapters[6].id}`}> later in the article </Link>.
+    </li>
+  </List>}
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+
+  As programmers it's very important that the tools we use increase our productivity, especially when it comes to repetitive tasks.
+
+  That's why each editor has a series of keyboard Shortcuts that allows us to perform certain actions much faster than with the mouse/touchpad. At the beginning you might want to do everything with the mouse, but believe us that keyboard is much much faster.
+
+  Below we'll share our top 3 keyboard shortcuts when working in VS Code. We highly suggest you start using them now:
+
+   <LessonFigure
+      withBorder
+      src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/shortcuts.png`}
+      alt="Shortcuts VS Code."
+    />
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
+  </LessonHeading>
+
+  It's very important to correctly format the code we're writing. It helps us to understand it easier, read it faster, plus we're following best practices from the entire development community.
+
+  To perform a code formatting we'll use the <strong> Format Document </strong> from the <strong> Command Palette </strong> menu (see shortcutcuts above).
+
+  <LessonFigure
+    isVideo
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/format-document.mp4`}
+    alt="Formatting code in an HTML file."
+  />
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[5].id}>
+    {CONFIG.chapters[5].title}
+  </LessonHeading>
+
+  Previously we talked about formatting code manually, by going in the <strong> Command Pallete </strong>. However, we can automate this process and have it done automatically on each Save (Ctrl + S).
+
+  In the <strong>User Settings</strong> section (where we can get from the  <strong>Command Pallete</strong>) we can find the <strong>Format On Save</strong> option and toggle it on.
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/formatarea-codului-la-save.png`}
+    alt="Formatting code on save."
+  />
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[6].id}>
+    {CONFIG.chapters[6].title}
+  </LessonHeading>
+
+  Extensions allow us to add various functionality that helps with software development. As we mentioned in the intro, usually these extensions are written by the community, meaning regular people like you and me.
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/extensii.png`}
+    alt="Extensions"
+  />
+  
+  Each extension on this list includes a short description, who created it and the number of downloads together with a rating. 
+  Fiecare extensie din listă include o scurtă descriere, cine a publicat-o, numărul de descărcări și un rating. If we click on one we will see more details displayed on the right side of the screen.
+  
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/detalii-extensii.png`}
+    alt="Extensions"
+  />
+
+  Let's take for example the <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank" rel="noreferrer"> <strong>Live Server</strong> </a> extension. This allows us to start a <em>local development sever</em> that will refresh the page each time we modify something in the file. Thus, we don't need to manually do this to see the code changes.
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[7].id}>
+    {CONFIG.chapters[7].title}
+  </LessonHeading>
+
+  There are a lot of useful features that VS Code offers, and unfortunately we don't have time to go through all of them now. We focused on the most important thing, to help you at the start of your career. However, we don't want to end this article without talking about customizations, and how we can create an appealing development environment.
+
+  So a feature you might like is changing the color palette.
+
+  {<List as="ol" variant="count">
+    <li>
+      Open the <strong> Color Theme </strong> from the <strong> Command Pallete </strong>.
+    </li>
+    <li>
+      Use the 'up' and 'down' keys to preview the different templates.
+    </li>
+    <li>
+      Select the color theme you want by pressing <strong>ENTER</strong>.
+    </li>
+  </List>}
+
+  psst: you can install additional themes from the Extensions panel. We really like <a href="https://draculatheme.com/visual-studio-code" target="_blank" rel="noreferrer"> Dracula Theme 🧛‍♂️ </a>
+
+  <LessonFigure
+    isVideo
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/vs-code/color-theme.mp4`}
+    alt="Install extensions to customize the color palette."
+  />
+</section>

@@ -46,5 +46,9 @@
     "Contribute to the project on": "Contribute to the project on",
     "See components in": "See components in",
     "An open-source project started in Iași, Romania": "An open-source project started in Iași, Romania"
+  },
+  "NotFoundPage": {
+    "message": "It looks like the page you're looking for doesn't exist.",
+    "callToAction": "Navigate home!"
   }
 }

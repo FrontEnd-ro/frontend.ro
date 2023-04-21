@@ -46,5 +46,9 @@
     "Contribute to the project on": "Contribuie la proiect pe",
     "See components in": "Vezi componentele în",
     "An open-source project started in Iași, Romania": "Un proiect open-source pornit din Iași, România"
+  },
+  "NotFoundPage": {
+    "message": "Se pare că pagina pe care o cauți nu mai există.",
+    "callToAction": "Navighează acasă!"
   }
 }

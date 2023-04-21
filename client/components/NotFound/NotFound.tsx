@@ -1,14 +1,15 @@
-import React from 'react';
 import Head from 'next/head';
 
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import PageContainer from '../PageContainer';
 import Link from '~/components/generic/Link';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './NotFound.module.scss';
 
 export default function NotFoundPage() {
+  const { t } = useTranslation('common');
   return (
     <>
       <Head>
@@ -23,10 +24,10 @@ export default function NotFoundPage() {
             <span aria-label="Sad face emoji" role="img">😞</span>
           </h1>
           <h2>
-            Se pare că pagina pe care o cauți nu mai există.
+            {t('NotFoundPage.message')}
           </h2>
           <Link prefetch={false} variant="contained" color="blue" className={styles.cta} href="/">
-            Navighează acasă!
+            {t('NotFoundPage.callToAction')}
           </Link>
         </PageContainer>
 

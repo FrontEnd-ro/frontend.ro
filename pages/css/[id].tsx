@@ -2,13 +2,7 @@ import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
-import BoxModelContent from '~/curriculum/css/BoxModel';
 import { MDXService } from '~/services/MDXService';
-
-const LESSON_TO_COMPONENT = {
-  'box-model': <BoxModelContent />,
-  'moduri-stilizare': <></>,
-};
 
 const CssLesson = ({ lessonInfo,  mdxContent = ''  }: { lessonInfo: LessonConfig | null;  mdxContent?: string; }) => {
   if (lessonInfo === null || lessonInfo.written === false) {
@@ -23,9 +17,7 @@ const CssLesson = ({ lessonInfo,  mdxContent = ''  }: { lessonInfo: LessonConfig
         url={`https://FrontEnd.ro${lessonInfo.url}`}
         shareImage={lessonInfo.ogImage}
       />
-      <Lesson lessonInfo={lessonInfo} mdxContent={mdxContent}>
-        {LESSON_TO_COMPONENT[lessonInfo.id]}
-      </Lesson>
+      <Lesson lessonInfo={lessonInfo} mdxContent={mdxContent}/>
     </>
   );
 };

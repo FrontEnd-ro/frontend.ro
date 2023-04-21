@@ -27,6 +27,7 @@ import SideBySidePictures from '~/components/SideBySidePictures/SideBySidePictur
 import { DeprecatedBasicEditor } from '~/components/Editor/BasicEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DemoPreview } from '~/components/demo';
+import DevToolsClone from '~/components/DevToolsClone';
 
 interface Props {
   title: string;
@@ -60,6 +61,7 @@ const LessonContent = ({ title, contributors, mdxContent = '', children }: Props
     FontAwesomeIcon,
     LessonTable,
     DemoPreview,
+    DevToolsClone
   }
 
   return (

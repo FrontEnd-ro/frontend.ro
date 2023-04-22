@@ -1,0 +1,253 @@
+export const CONFIG = {
+  chapters: [
+    {
+      title: 'Why do we need those elements?',
+      id: 'why',
+    }, {
+      title: 'Header, Main and Footer',
+      id: 'header-main-footer',
+    },
+    { title: 'Nav', id: 'nav' },
+    { title: 'Article', id: 'article' },
+    { title: 'Section', id: 'section' },
+    { title: 'Div', id: 'div' },
+    {
+      title: 'Why it\'s important to choose the right container?',
+      id: 'importanta-containerelor',
+    },
+  ],
+};
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400/1260' }}
+    alt="Doodle cu o cutie"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/seo/containers_2400w.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence> We've covered some basic elements, but haven't talked about how we organize them to create more complex layouts. This is where elemenents with "container" role come into play.
+</LessonFirstSentence>}
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+
+  Each Web page has a specific layout - that is, a general structure according to which the elements are arranged. For example the <a href="https://developer.mozilla.org"> Mozilla Developer Network</a> page below has 4 main sections:
+
+  <LessonFigure
+    withBorder
+    width={400}
+    alt="MDN Layout"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/MDN-layout.png`}
+  />
+
+  On the other hand the <a href="https://codepen.io/pen/" target="_blank" rel="noreferrer"> https://codepen.io/pen/</a> page is organized differently, in 3 main sections:
+
+  <LessonFigure
+    withBorder
+    alt="CodePen Layout"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/CodePen-layout.png`}
+  />
+
+  These rectangles that we have highlighted are the <em className="text-bold"> container elements</em>. They do not have specific functionality or styles, and are only used to group other elements, thus facilitating the creation of the layout. Often, their names will give us a hint about the situations in which we should use them. Below we will summarize the <span className="text-bold"> most frequently used </span> ones:
+</section>
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+  Just like the name suggests:
+
+  <div className="float-right">
+
+  <Highlight language="html" code={`<body>
+  <header> ... </header>
+  <main> 
+    ... 
+  </main>
+  <footer> ... </footer>
+</body>`}
+       />
+  </div>
+
+  {<List as="ol" variant="checkmark" className="mr-2 ml-0">
+    <li className="mb-4"> <FormattedText as="strong"> {'<header>'} </FormattedText> is used to group elements in the page header (often at the top). Most of the times we'll put there the logo, a navigation menu, and maybe the avatar of the logged in user...
+    </li>
+    <li className="mb-4"> <FormattedText as="strong"> {'<main>'} </FormattedText> is the place where we will add the elements that represent the "essence" of our page. In other words, the most important part of the page must be here
+    </li>
+    <li> <FormattedText as="strong"> {'<footer>'} </FormattedText> is used to group elements located in the "footer" of the page. We'll usually find here navigation links for less important pages of our site, and some contact information about ourselves.
+    </li>
+  </List>}
+
+  Pretty much every page has those 3 elements. Take a look at the examples below:
+
+  <SideBySidePictures direction="column"
+    img1={{
+      alt: 'MDN Header, Main & Footer',
+      src: `${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/MDN-layout-with-elements.png`,
+    }}
+    img2={{
+      alt: 'Instagram Main & Footer',
+      src: `${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/Instagram-layout.png`,
+    }}
+  />
+</section>
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+
+  Just as the name suggestions, here we'll group navigation links to other pages in our website. For example, the left-side menu in this page is grouped in a <FormattedText as="strong"> {'<nav>'} </FormattedText> element:
+
+  <CodePenEmbed
+      user="iampava"
+      slug="NWjMBbY"
+      theme="dark"
+      defaultTab="html"
+      className="my-5"
+    />
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+  
+  This element represents an article, most often used in blogs or news websites. For example <a href="https://css-tricks.com" target="_blank" rel="noreferrer"> CSS Tricks</a> has on it's landing page more than 20 <FormattedText as="strong"> {'<article>'} </FormattedText> elements.
+
+  <LessonFigure
+    withBorder
+    alt="<article> elements in CSS Tricks website"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/article-screenshot.png`}
+  />
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
+  </LessonHeading>
+
+  The <FormattedText as="strong"> {'<section>'} </FormattedText> element is used for generic sections in a document or article, each of them usually having it's own heading.
+
+  For example, in this page each sub-chapter is grouped in it's own section:
+
+  <Highlight language="html" className="my-5" code={`<article>
+  <section>
+    <h2> Why it's important to choose the right container? </h2>
+    <p>
+      ...
+    </p>
+  </section>
+  <section>
+    <h2> Exercises </h2>
+    <p>
+      ...
+    </p>
+  </section>
+</article>`}
+  />
+</section>
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[5].id}>
+    {CONFIG.chapters[5].title}
+  </LessonHeading>
+
+  And finally we reach the <FormattedText as="strong"> {'<div>'} </FormattedText> container, the most popular element of this type, which unfortunately is incorrectly used a lot of times.
+
+  <FormattedText as="strong"> {'<div>'} </FormattedText> is a generic container, without any special meaning. While elements such as <FormattedText> {'<nav>'} </FormattedText> suggest navigation links, and <FormattedText> {'<main>'} </FormattedText> represents the most important part of the page, <FormattedText> {'<div>'} </FormattedText> has no special meaning thus it should be used only when <span className="text-bold"> no other container element makes sense </span>.
+
+  For example, in the <a href="https://unsplash.com/">Unsplash </a> image gallery, the <FormattedText> {'<div>'} </FormattedText> element is perfect as a container for those elements, as they don't hold any special meaning. We just need to position them on the edges of the image.
+
+  <LessonFigure
+    withBorder
+    alt="Example of good usage for the <div> element"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/correct-div-usage.png`}
+  />
+</section>
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[6].id}>
+    {CONFIG.chapters[6].title}
+  </LessonHeading>
+
+  At first glance you might think that it doesn't really matter which containers we use. They don't have any functionality or specific styling, so the two snippets below are visually and functionally identical.
+
+<div className="d-flex justify-content-between flex-wrap">
+  <div className="max-w-full mr-16 my-5">
+      <Highlight language="html" code={`<body>
+  <nav>
+    <a href="/"> Home </a>
+  </nav>
+  <main>
+    <p> Is there any difference? </p>
+  </main>
+</body>`}
+            />
+  </div>
+  <div className="max-w-full my-5">
+      <Highlight language="html" code={`<body>
+  <div>
+    <a href="/"> Home </a>
+  </div>
+  <div>
+    <p> Is there any difference? </p>
+  </div>
+</body>`}
+         />
+   </div>
+</div>
+
+  However, the problem becomes obvious when we try to read and understand code that doesn't correctly use containers. For example, does the code below give us any hints about the layout?
+
+   <Highlight className="my-5" language="html" code={`<body>
+  <div>
+    <img src="logo" alt="logo">
+    <div>
+      <a href="/home"> Home </a>
+      <a href="/profile"> Profile </a>
+    </div>
+  </div>
+  <div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div>
+    <p> Copyright 2021 </p>
+  </div>
+</body>`}
+        />
+
+  Unfortunately not... It uses only divs so it's not very explicit. We should start the application in the browser to find out more details.
+
+  {<LessonQuote> What if we use different containers? </LessonQuote>}
+
+<Highlight className="my-5" language="html" code={` <body>
+  <header>
+    <img src="logo" alt="logo">
+    <nav>
+      <a href="/home"> Home </a>
+      <a href="/profile"> Profile </a>
+    </nav>
+  </header>
+  <main>
+    <article></article>
+    <article></article>
+    <article></article>
+    <article></article>
+  </main>
+  <footer>
+    <p> Copyright 2021 </p>
+  </footer>
+</body>`}
+        />
+
+  Things are much clearer already 💪! We can easily imagine how the page looks like based on the code. We have a container at the top (header) with the logo and some navigation links, then the main part of the page containing a series of articles, and below a footer with copyright information.
+
+  {/* TODO: also mention accessibility  */}
+
+  {<LessonQuote variant="centered"> And this is the main reason why correctly using containers is so important. Not necesarily for the users of the site but for your fellow developers or for you in the future, who will read the code and immediately understand what it is about!</LessonQuote>}
+</section>

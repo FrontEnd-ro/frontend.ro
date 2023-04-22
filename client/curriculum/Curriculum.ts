@@ -315,6 +315,18 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
       ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`,
       type: 'html',
+    },
+    en: {
+      id: 'containere',
+      written: true,
+      title: 'Containers',
+      description:
+        'We\'ve covered some basic elements, but haven\'t talked about how we organize them to create more complex layouts. This is where elemenents with "container" role come into play.',
+      contributors: [Pava],
+      withExercises: true,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`,
+      type: 'html',
     }
   },
   {

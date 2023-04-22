@@ -1,0 +1,181 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'Headings', id: 'titluri' },
+    { title: 'Paragraphs', id: 'paragrafe' },
+    { title: 'The <hr> element', id: 'elementul-hr' },
+    { title: 'Quotes', id: 'citate' },
+    { title: '<em> & <strong> elements', id: 'em-strong' },
+  ],
+};
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400/1260' }}
+    alt="HTML elements for texts"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/seo/texts_2400w.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence>
+  This article explains what HTML elements we can use for text content by adding headings and paragraphs, emphasizing words, and more.
+</LessonFirstSentence>}
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+
+  HTML offers six elements for headings: <FormattedText as="strong">{'<h1>'}</FormattedText>, <FormattedText as="strong">{'<h2>'}</FormattedText>, <FormattedText as="strong">{'<h3>'}</FormattedText>, <FormattedText as="strong">{'<h4>'}</FormattedText>, <FormattedText as="strong">{'<h5>'}</FormattedText> and <FormattedText as="strong">{'<h6>'}</FormattedText>.
+  
+  <FormattedText as="strong">{'<h1>'}</FormattedText> is used for the main title of the page. The rest of the headings are used for sub-titles, in order of importance. It's recommended to have <strong>just one {'<h1>'}</strong> in each page, to help search engines figure out the subject discussed there.
+
+  <Highlight className="my-5" language="html" code={`<h1> Texts | HTML Lesson </h1>`} />
+
+  The browsers add their own initial styling to HTML elements, thus <FormattedText as="strong">{'<h1>'}</FormattedText> will have a bigger font size, while <FormattedText as="strong">{'<h6>'}</FormattedText> a much smaller one. However, this rule is not set in stone.
+
+  We have total control over those styles via <Link prefetch={false} href="/css/intro">CSS</Link>, which we'll discuss in a follow up lesson.
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/demo-assets/headings.png`}
+    alt="All 6 headings"
+    demo="/demo/html/titluri"
+  />
+
+  When creating the page structure it's good follow a few best practices:
+
+  {<LessonTip>
+    When using a heading, make sure you've also used all the previous ones in the page so far. In other words, if we want to use a level 4 heading  - <strong>h4</strong>, the page should already have h1-h3 headings. Otherwise, it wouldn't make sense to jump to <strong>h4</strong>, right?
+  </LessonTip>}
+
+  {<LessonTip>
+    Although we have 6 headings at our disposal, we shouldn't use more than 3 per page. If however we feel the need to use more titles, maybe it's time to create a new page.
+  </LessonTip>}
+</section>
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+  
+  Text paragraph elements are added using the <FormattedText as="strong">{'<p>'}</FormattedText> tag. We'll use this for adding normal text, without any special meaning or property.
+
+  <Highlight className="my-5" language="html" code={`<p> This is a parapgraph with a few words. </p>`} />
+
+  Each <FormattedText as="strong">{'<p>'}</FormattedText> tag will be rendered on a newline (we say that paragraphs are <a target="_blank" rel="noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements">block elements</a>). Same thing happens with headings, as you can see in the below demo.
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/demo-assets/paragraphs-and-headings.png`}
+    alt="Paragraphs and headings"
+    demo="/demo/html/paragrafe-titluri"
+  />
+
+  <div className="dots" />
+
+  If you've experimented with writting HTML so far, you might have noticed that adding a <FormattedText as="strong">newline</FormattedText> inside a paragraph won't actually show the text on a new line. If you want to make this happen, we recommend adding a new paragraph. Another option is to use the <FormattedText as="strong">{'<br>'}</FormattedText> tag.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<p>
+  Today I coded together with <br>
+  Alex, <br>
+  Diana and <br>
+  Antonia.
+</p>`} />
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/demo-assets/line-break.png`}
+    alt="The <br> element"
+    demo="/demo/html/elementul-br"
+  />
+</section>
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+
+  The <FormattedText as="strong">{'<hr>'}</FormattedText> (horizontal line) element is a separator for sections/elements in the page.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<p> Our first house rule: Always smile! </p>
+<hr>
+<p> Second rule: Bring cookies! </p>
+      `}
+  />
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/demo-assets/horizontal-line.png`}
+    alt="The <hr> (horizontal-line) element"
+    demo="/demo/html/elementul-hr"
+  />
+</section>
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+  
+  When we want to add a longer quote we'll use the <FormattedText as="strong">{'<blockquote>'}</FormattedText> element. This also applies some special stylings to the text:
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<blockquote 
+  cite="https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step"
+>
+  <p> A journey of a thousand miles begins with a single step. </p>
+</blockquote>`} />
+
+  If however you want to add a shorter quote, let's use the <FormattedText as="strong">{'<q>'}</FormattedText> (quote) element.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<p>
+  As Roosevelt said,
+  <q cite="https://www.goodreads.com/quotes/10002-it-is-hard-to-fail-but-it-is-worse-never">
+    It is hard to fail, but it is worse never to have tried to succeed.
+  </q>
+</p>`} />
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/demo-assets/quotes.png`}
+    alt="Quotes"
+    demo="/demo/html/citate"
+  />
+
+  {<LessonTip>
+    Both code snippets above have the <FormattedText as="strong">cite</FormattedText> attribute that we use to specify the source of the quote.
+  </LessonTip>}
+</section>
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
+  </LessonHeading>
+  
+  In ordinary language we often underline words to change the meaning of a sentence, and we want to mark certain words as important or different in some way.
+  
+  HTML offers different semantic elements that allow us to give special meaning to different words/phrases. One of those elements is the <FormattedText as="strong">{'<em>'}</FormattedText> tag.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<p>
+  I am <em> very happy </em> you got the job!
+</p>`} />
+
+  We also have access to the <FormattedText as="strong">{'<strong>'}</FormattedText> element, used to mark an item as very important. As a semantic element, it is recognized by screen readers and played with a different tone of voice.
+
+  Although browsers show this content in a bold font, <strong>we shouldn't use</strong> the <FormattedText as="span">{'<strong>'}</FormattedText> element only to get this styling result.
+  
+  So, if you have a normal word/phrase but you want to mark it as bold, we recommend using the <FormattedText as="span">{'<span>'}</FormattedText> element and CSS rules for this.
+</section>

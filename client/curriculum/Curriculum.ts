@@ -209,6 +209,18 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       withExercises: true,
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
       ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`,
+    },
+    en: {
+      id: 'texte',
+      written: true,
+      title: 'Text elements',
+      description:
+        'We have several elements we can use when it comes to texts, and here we learn when and how to use them.',
+      type: 'html',
+      contributors: [Diana],
+      withExercises: true,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`,
     }
   },
   {

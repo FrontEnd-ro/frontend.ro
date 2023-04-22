@@ -1,0 +1,201 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'General structure', id: 'structura' },
+    { title: '<head> element', id: 'head' },
+    { title: '<body> element', id: 'body' },
+    { title: 'Summary', id: 'rezumat' },
+  ],
+}
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400/1260' }}
+    alt="Stickman doodle representing the <head> and <body> elements"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/seo/html-structure_2400w.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence>
+  Any website, whether it is a presentation site or a complex video editor, contains the same basic HTML structure.
+</LessonFirstSentence>}
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+  <ResponsiveFlex breakpoint={1000} className="gap-x-8">
+    <div>
+      Every web page is made up of the following elements:
+
+      {<List as="ol" variant="checkmark" className="mt-4">
+        <li className="mb-4">
+          <FormattedText as="strong">{'<!DOCTYPE html>'}</FormattedText> this tells the browser that we have an HTML document
+        </li>
+        <li className="mb-4">
+          <FormattedText as="strong">{'<html>'}</FormattedText> is the parent element of every page
+        </li>
+        <li className="mb-4">
+          <FormattedText as="strong">{'<head>'}</FormattedText> and <FormattedText as="strong">{'<body>'}</FormattedText> are children of the <FormattedText as="strong"> {'<html>'} </FormattedText> element and will be used only once, in this order:
+        </li>
+      </List>}
+    </div>
+    <div className="w-80">
+      <Highlight
+        language="html"
+        code={`<!DOCTYPE html>
+<html> 
+  <head>
+    <!--
+      ...
+    -->
+  </head>
+  <body>
+    <!-- 
+      ...
+    -->
+  </body>
+</html>`}
+      />
+    </div>
+  </ResponsiveFlex>
+</section>
+<section className="my-5">
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+  
+  In <FormattedText as="strong">{'<head>'}</FormattedText> we'll write elements that describe the page website, lile:
+
+  {<List variant="bullets">
+    <li>page title</li>
+    <li>author</li>
+    <li>description</li>
+  </List>}
+  <Highlight
+          className="my-5"
+          language="html"
+          code={`<head>
+  <title> FrontendCademy - Learn from the open-source community </title>
+
+  <meta name="author" content="Alexandru Păvăloi">
+
+  <meta 
+    name="description"
+    content="Want to learn FrontEnd? We've got free tutorials and a community of developers to help you improve your skills." 
+  >
+</head>`} />
+
+  <strong>The title will be shown in the browser tab</strong>, and together with the description we will also see them in <strong>search engines</strong>. For example, look how our site looks after a Google search:
+
+  <LessonFigure
+    withBorder
+    alt="Title and description of this website on Google"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/frontend-ro-google-search.png`}
+  />
+
+  Moreover, by using <FormattedText as="strong">{'<meta>'}</FormattedText> tags we can control how the site appears when shared on social networks such as Twitter, Facebook, LinkedIn, etc. This means that we as programmers choose which image, title and description will appear on these social platforms:
+
+  <SideBySidePictures
+    img1={{
+      alt: 'Facebook share',
+      src: `${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/frontend-ro-facebook-share.png`,
+    }}
+    img2={{
+      alt: 'LinkedIn Share',
+      src: `${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/frontend-ro-linkedin-share.png`,
+    }}
+  />
+
+  To get them above result we added the following tags in <FormattedText as="strong">{'<head>'}</FormattedText>:
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<meta property="og:type" content="website" />
+<meta property="og:url" content="https://FrontEnd.ro" />
+
+<meta 
+  property="og:title" 
+  content="FrontEnd.ro - Învață de la comunitatea open-source" 
+/>
+<meta 
+  property="og:description"
+  content="Vrei să înveți FrontEnd? Aici ai parte 
+    de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun." />
+
+<meta property="og:image" content="https://frontend.ro/main-seo-image.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />`}/>
+
+  {<LessonTip>
+    The values inside <FormattedText as="strong">property=""</FormattedText> and <FormattedText as="strong">content=""</FormattedText> attributes from the above code are specific to the <a href="https://ogp.me/">Open Graph</a> standard.
+  </LessonTip>}
+
+  But this is not all. Inside <FormattedText as="strong">{'<head>'}</FormattedText> we'll add links to other resources used by our website. For example: CSS stylesheets, JavaScript code, etc.JavaScript etc.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<link rel="stylesheet" href="/css/styles.css" />
+
+<script src="/js/script.js"></script>
+`} />
+
+  {<LessonTip>
+    Don't forget that you can see the code of every website by <FormattedText as="span">Right Clicking {'->'} View Page Source</FormattedText>
+  </LessonTip>}
+</section>
+<section className="my-5">
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+
+  As the name suggests, the <FormattedText as='span'>{'<body>'}</FormattedText> element is responsible for the content <strong>we see and interact with</strong> in the page.
+
+  Here we'll add all elements that we need for our page: texts, buttons, images, videos, lists, tables, and so on... With a few exceptions, pretty much all HTML elements can be added here.
+
+  <Highlight
+    language="html"
+    className="my-5"
+    code={`<body>
+
+  <header>
+    <a href="https://FrontendCademy.com">
+      FrontendCademy
+    </a>
+  </header>
+
+  <main>
+    <h1> Learn FrontEnd</h1>
+
+    <ul>
+      <li> HTML </li>
+      <li> CSS </li>
+      <li> JS </li>
+    </ul>
+  </main>
+
+</body>`} />
+
+  {<LessonTip>
+    Above we have a small demo of the {'<body>'} element that contains a link, a title and an ordered list.
+  </LessonTip>}
+</section>
+<section className="my-5">
+  <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+
+  In <FormattedText as="strong"> {'<head>'} </FormattedText> we add two types of eleemnts:
+
+  {<List variant="bullets">
+    <li>
+      <strong>Descriptive elements</strong>, which give us information about the site/app and are useful for SEO (search engine optimisation), including social networks
+    </li>
+    <li>
+      <strong>Links to resources used by our site</strong> like: CSS stylesheets, JavaScript files, images, fonts etc.
+    </li>
+  </List>}
+
+  In <FormattedText as="strong">{'<body>'}</FormattedText> we add the elements that are visibly part of our site, and with which users will interact. Almost all HTML elements (with a few exceptions) will be added here.
+</section>

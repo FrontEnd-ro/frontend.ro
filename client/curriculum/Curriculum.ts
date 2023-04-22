@@ -169,6 +169,27 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
           href: "https://developer.mozilla.org/en-US/docs/Tools/View_source",
         },
       ],
+    },
+    en: {
+      id: 'structura-pagina-html',
+      written: true,
+      title: 'Structure of every HTML page',
+      description: 'Any website, whether it is a presentation site or a complex video editor, contains the same basic HTML structure.',
+      type: 'html',
+      contributors: [IulianRedinciuc, Pava],
+      withExercises: false,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`,
+      resources: [
+        {
+          text: "What's in head?",
+          href: "https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML",
+        },
+        {
+          text: "View Source",
+          href: "https://developer.mozilla.org/en-US/docs/Tools/View_source",
+        },
+      ],
     }
   },
   {

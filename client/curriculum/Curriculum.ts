@@ -438,6 +438,17 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
       ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/forms_1200w.jpg`,
       type: 'html',
+    },
+    en: {
+      id: 'formulare',
+      written: true,
+      title: 'Forms',
+      description: 'What elements can we use to build modern forms, and what are the best practices regarding them?',
+      contributors: [RobertParasca, Pava],
+      withExercises: true,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/forms_1200w.jpg`,
+      type: 'html',
     }
   },
   /** CSS Lessons */

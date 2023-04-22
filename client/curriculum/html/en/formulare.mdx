@@ -1,0 +1,248 @@
+export const CONFIG = {
+  chapters: [
+    { title: '<form> element', id: 'form' },
+    {
+      title: '<input> element',
+      id: 'input',
+      subchapters: [{
+        title: 'Radio input',
+        id: 'radio',
+      }],
+    },
+    { title: '<textarea> element', id: 'textarea' },
+    { title: '<select> element', id: 'select' },
+    {
+      title: 'Good practices',
+      id: 'bune-practici',
+      subchapters: [{
+        title: '<label> element',
+        id: 'label',
+      }, {
+        title: 'Submit button',
+        id: 'submit-button',
+      }],
+    },
+  ],
+};
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400/1260' }}
+    alt="Doodle with form elements"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/seo/forms_2400w.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence> Forms are an essential part of the Internet, giving users a way to submit data. Whether you signed up on Github to work on an interesting project or ordered a new item of clothing, you've definitely filled in a form.</LessonFirstSentence>}
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+      {CONFIG.chapters[0].title}
+  </LessonHeading>
+
+  Regardless of what purpose you're building the form for, you'll use the <strong className="strong formatted">{'<form>'} </strong> element to group the fields that users can fill in. For example, a short login form looks like this:
+
+  <CodePenEmbed
+    user="iampava"
+    slug="mdmENZO"
+    theme="dark"
+    defaultTab="html"
+  />
+
+  {<LessonTip> You may have noticed that in the above example we have several <FormattedText as="span"> {'<label>'} </FormattedText> elements and at the end a button with <FormattedText as="span">type="submit"</FormattedText>. Although they are not mandatory, they are <strong> good practices</strong> that we'll talk about <a href={`#${CONFIG.chapters[4].id}`}> a bit later in the article </a>.</LessonTip>}
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+  It is the most popular element used in forms and through the <FormattedText as="strong"> type="" </FormattedText> attribute we can control how it behaves.
+
+  Below we have a collection of inputs, each with a different value for the <strong>type</strong> attribute, which allow us to fill in text, passwords, calendar dates, even upload files, or choose colors:
+
+  <CodePenEmbed
+    user="iampava"
+    slug="ZEKOgPm"
+    theme="dark"
+    defaultTab="html"
+  />
+
+  {<LessonTip> If you want to find all the possible values for the <span className="text-bold">type</span> attribute, have a look at <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types" target="_blank" rel="noreferrer">the documentation on MDN</a>. </LessonTip>}
+
+  Other attributes you will use day-to-day for the <FormattedText as="span"> {'<input>'} </FormattedText> element are:
+  
+  <dl>
+    <dt className="text-bold"> required </dt>
+    <dd className="mb-4"> marks the field as required. </dd>
+
+    <dt className="text-bold"> disabled </dt>
+    {/* TODO: what is the different between `disabled` and `readonly` */}
+    <dd className="mb-4"> is used if we want a field to not be editable. </dd>
+
+    <dt className="text-bold"> placeholder </dt>
+    <dd className="mb-4"> represents the text in the input when there is no value in it. The moment you start typing in the input, this placeholder disappears. </dd>
+
+    <dt className="text-bold"> name </dt>
+    <dd className="mb-4"> is used to identify the data in the form. We will use it either on the FrontEnd (JavaScript) or on the BackEnd to access the data from the form. </dd>
+
+    <dt className="text-bold"> value </dt>
+    <dd className="mb-4"> to have a prefilled value. The user can change it if the <FormattedText as="span">disabled</FormattedText> attribute is not present. </dd>
+
+    <dt className="text-bold"> autofocus </dt>
+    <dd className="mb-4"> indicates whether the field should be "focused" or not. </dd>
+
+    <dt className="text-bold"> inputmode </dt>
+    <dd className="mb-4"> this attribute indicates the type of virtual keyboard that will appear to the user when entering from the phone. </dd>
+  </dl>
+
+  We listed them above, but let's see them in action:
+
+  <CodePenEmbed
+    user="iampava"
+    slug="yLbagmM"
+    theme="dark"
+    defaultTab="html"
+  />
+
+  <section>
+    <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[0].id}>
+      {CONFIG.chapters[1].subchapters[0].title}
+    </LessonHeading>
+
+    A slightly more special input than the others is <FormattedText as="span"> {'<input type="radio">'} </FormattedText>. We will use it to choose a single option from several predefined possibilities:
+
+    <CodePenEmbed
+      user="iampava"
+      slug="XWRjMxy"
+      theme="dark"
+      defaultTab="html"
+    />
+
+    The key to the above functionality is the <FormattedText as="span">name=""</FormattedText> attribute which has the same value for the inputs we want grouped. Moreover, we can use the <FormattedText as="span"> checked </FormattedText> attribute to have a certain option preselected.
+  </section>
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+
+  It is similar to <FormattedText as="span">{'<input type="text" />'}</FormattedText> except that it allows writing longer text, that spreads on multiple lines:
+
+  {/* ------- CODEPEN BUG: FIXME in the future ------- */}
+  {/*
+      Embedding the Pen via our `<CodePenEmbed>` compoent
+      doesn't work as expected if `editable=true`.
+      In this case the Result shows, but the code is not there (empty).
+
+      <CodePenEmbed
+        user="iampava"
+        slug="qBmarzW"
+        theme="dark"
+        defaultTab="html"
+      />
+
+      If however `editable=false`, it works (see blow).
+      We suspect this may be a bug with CodePen itself.
+
+      Contacted them via the `Support` form.
+      Awaiting response
+    */}
+  <CodePenEmbed
+    user="iampava"
+    slug="qBmarzW"
+    theme="dark"
+    defaultTab="html"
+    editable={false}
+    />
+
+  {<LessonTip> All attributes mentioned above, regarding inputs (except <FormattedText as="span">type=""</FormattedText>) are available for <FormattedText as="span">{'<textarea>'}</FormattedText> as well. </LessonTip>}
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+
+  With the <FormattedText as="span"> {'<select>'} </FormattedText> element we give the user a "dropdown menu" with a list of options to choose from. A good example of this is a registration form where you can choose your country of birth:
+
+  <CodePenEmbed
+    user="iampava"
+    slug="ZEKpKYV"
+    theme="dark"
+    defaultTab="html"
+  />
+
+  We insert the options via the <FormattedText as="span">{'<option>'}</FormattedText> element which must receive the attribute <FormattedText as="span">value=""</FormattedText> and optionally the attribute <FormattedText as="span">selected</FormattedText> to preselect the option.
+
+  {<LessonTip> In addition to the attributes mentioned above - many of which are valid for the select element - we also have the <FormattedText as="span">multiple</FormattedText> attribute to allow multiple selection.</LessonTip>}
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
+  </LessonHeading>
+  
+  As the name suggests, they are programming techniques that indicate how you should do certain things in order to have the best possible and qualitative result.
+
+  <section>
+    <LessonHeading as="h3" id={CONFIG.chapters[4].subchapters[0].id}>
+      {CONFIG.chapters[4].subchapters[0].title}
+    </LessonHeading>
+
+    With the help of this element we associate a text description to a field in the form. There are two methods by which we can correctly use a <span className="text-bold">label</span>:
+
+    {<List as="ol" variant="checkmark">
+      <li> via the <FormattedText as="span">for=""</FormattedText> attribute which must have the same value as the <FormattedText as="span">id=""</FormattedText> attribute of the associated field
+
+      <Highlight
+          className="my-5"
+          language="html"
+          code={`<label for="usernameInput"> Username * </label>
+<input id="usernameInput" name="username" type="text" required />`}
+            />
+      </li>
+      <li> adding the input straight into the label:
+        <Highlight
+          className="my-5"
+          language="html"
+          code={`<label>
+<span> Username * </span>
+<input id="usernameInput" name="username" type="text" required />
+</label>`}
+            /> </li>
+  </List>}
+
+  It is highly recommended to add a label to every form fields because:
+
+  {<List as="ol" variant="checkmark">
+    <li> will make it easier for the user to understand what needs to be filled in, and unlike a <strong> placeholder </strong> the text remains visible even after you start typing inside
+     </li>
+
+    <li className="mt-4"> if we click on the label it will focus/select the input, which is an extremely useful thing <strong> especially for mobile devices</strong>. Try it yourself in the demo below where the first 2 radios have no label, so you have to click exactly on them, unlike the following which you can select by clicking on the text as well:
+
+    <CodePenEmbed
+      user="iampava"
+      slug="VwbKWXB"
+      theme="dark"
+      defaultTab="html"
+      className="mt-4"
+    />
+    </li>
+    </List>}
+
+    </section>
+    <section>
+      <LessonHeading as="h3" id={CONFIG.chapters[4].subchapters[1].id}>
+        {CONFIG.chapters[4].subchapters[1].title}
+      </LessonHeading>
+            
+      Another good practice is to have a <FormattedText as="span">{'<button type="submit">'}</FormattedText> at the end of every form.
+          
+      In addition to the fact that by clicking on it we will send the form, we will also be able to send it by pressing <FormattedText as="span">↪ ENTER</FormattedText> in any input. An interaction that you surely use every day, but which would be more difficult to implement without this element.
+
+      <CodePenEmbed
+        user="iampava"
+        slug="poPEwQE"
+        theme="dark"
+        defaultTab="html"
+      />
+  </section>
+</section>

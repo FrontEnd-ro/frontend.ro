@@ -322,6 +322,31 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
           href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl',
         },
       ]
+    },
+    en: {
+      id: 'liste',
+      written: true,
+      title: 'Lists',
+      description: 'Let\'s talk about the 3 types of lists and when to use each one.',
+      contributors: [Diana],
+      withExercises: true,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_1200w.jpg`,
+      type: 'html',
+      resources: [
+        {
+          text: 'Full documentation for the <ul> element on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul',
+        },
+        {
+          text: 'Full documentation for the <ol> element on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol',
+        },
+        {
+          text: 'Full documentation for the <dl> element on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl',
+        },
+      ]
     }
   },
   {

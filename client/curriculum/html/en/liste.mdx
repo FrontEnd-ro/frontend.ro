@@ -1,0 +1,209 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'Types of lists', id: 'tipuri-de-liste' },
+    {
+      title: 'Unordered lists',
+      id: 'liste-neordonate',
+    },
+    { title: 'Ordered lists', id: 'liste-ordonate' },
+    {
+      title: 'Attributes accepted by ordered lists',
+      id: 'atributele-acceptate-de-listele-ordonate',
+    },
+    { title: 'Nested lists', id: 'sub-liste' },
+    { title: 'Bonus tips and takeaways', id: 'bonus-tips-si-concluzii' },
+  ],
+};
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400/1260' }}
+    alt="Doodle for a todo list"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/seo/lists_2400w.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence> In modern web development, lists are HTML elements frequently used for both navigation and general content, helping to create a well-structured, accessible, and maintainable document.</LessonFirstSentence>}
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+  
+  Există două tipuri de liste des folosite în HTML:
+  
+  {<List variant="bullets">
+    <li className="mb-4"> <FormattedText as="strong">Unordered lists</FormattedText> - used to group a set of elements that do not require a particular order
+    </li>
+    <li> <FormattedText as="strong">Ordered lists</FormattedText> - used to group a set of elements that have a specific order
+    </li>
+</List>}
+
+  Each type of list has a specific meaning and purpose in a web page. Let's take them one at a time:
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+  They are used when a set of items can be used in any order, as in the shopping list below:
+
+  <Highlight className="my-5" language="html" code={`<ul>
+  <li> pâine </li>
+  <li> cafea </li>
+  <li> lapte </li>
+  <li> unt </li>
+</ul>
+`} />
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/liste-neordonate.png"
+    alt="Unordered lists"
+    demo="/demo/html/liste-neordonate"
+  />
+
+  {<LessonTip> Notice how we use 2 types of elements to define a list: as a container we have <FormattedText as="strong">{'<ul>'}</FormattedText> (unordered list) to define the list, and then each element in its own <FormattedText as="strong">{'<li>'}</FormattedText> (list item) tag.</LessonTip>}
+
+  With proper styling, unordered lists are used to <strong> make web page menus</strong>. <a href="https://github.com" target="_blank" rel="noreferrer"> GitHub </a> is a good example, they use unordered lists for the navigation menu:
+
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/github_unordered-list.jpeg"
+    alt="GitHub uses an unordered list in the navigation menu" 
+  />
+
+  <LessonTip> While we haven't gotten to the CSS part yet, it's good to know that unordered lists have some polka dots as their default style. We can customize them using our own image or we can ditch them altogether. We'll discuss more in the styling chapter.</LessonTip>
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+
+  Ordered lists display items in a specific order, whether they are listings with Arabic numerals, Roman numerals, or letters. A good example would be the cooking recipe for baking a cake:
+
+ <Highlight className="my-5" language="html" code={`<ol>
+    <li> Buy the necessary ingredients </li>
+    <li> Mix the ingredients </li>
+    <li> Put the mixture in a cooking pot </li>
+    <li> Bake the cake in the oven for one hour </li>
+    <li> Remove the cake from the oven </li>
+</ol>     
+`} />
+
+  They have a similar structure to the unordered ones, the only difference being the tag: <FormattedText as="strong">{'<ol>'}</FormattedText> (ordered list). It is obvious that if we change the order of the elements in the list, it will no longer have any meaning.
+
+  <LessonFigure withBorder src="https://d3tycb976jpudc.cloudfront.net/demo-assets/liste-ordonate.png" alt="Ordered list" demo="/demo/html/liste-ordonate" />
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+
+  If we want the enumeration of the list items to be done with a certain type of numbers or letters, we can use the <FormattedText as="strong">type</FormattedText> attribute. It accepts as values:
+
+  {<List variant="bullets">
+    <li className="mb-4"> <FormattedText as="strong">1</FormattedText> – for enumeration using arabic numerals;
+    </li>
+    <li className="mb-4"> <FormattedText as="strong">i</FormattedText> or <FormattedText as="strong">I</FormattedText> – for enumeration with lowercase or uppercase roman numbers;
+    </li>
+    <li className="mb-4"> <FormattedText as="strong">a</FormattedText> or <FormattedText as="strong">A</FormattedText> – for enumeration with lowercase or uppercase letters;
+    </li>
+  </List>}
+
+  <Highlight className="my-5" language="html" code={`<ol type="I">
+  <li> Turn on the laptop </li>
+  <li> Open Visual Studio Code </li>
+  <li> Start coding </li>
+</ol>
+`} />
+
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/atributul-type-pentru-liste-ordonate.png"
+    alt="'type' attribute for ordered lists"
+    demo="/demo/html/atributul-type-pentru-liste-ordonate"
+  />
+
+  If we want the list to start enumerating from the furthest number/letter and end with the first one, we will use the <FormattedText as="strong">reversed</FormattedText> attribute.
+
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/atributul-reversed-pentru-liste-ordonate.png"
+    alt="Atributul 'reversed' pentru liste ordonate"
+    demo="/demo/html/atributul-reversed-pentru-liste-ordonate"
+  />
+
+  We can even choose to enumerate the elements of an ordered list starting from a specific number/letter. For this we will use the <FormattedText as="strong">start</FormattedText> attribute, giving as value the number or letter from which we want to start counting:
+
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/atributul-start-pentru-liste-ordonate.png"
+    alt="'start' attribute for ordered lists"
+    demo="/demo/html/atributul-start-pentru-liste-ordonate"
+  />
+</section>
+
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
+  </LessonHeading>
+
+  A list can contain another list. This is very useful if we want to represent a multi-level navigation menu:
+
+  <Highlight className="my-5" language="html" code={`<ol>
+  <li> 
+    FrontEnd
+    <ol>
+      <li> HTML </li>
+      <li> CSS </li>
+      <li> JavaScript </li>
+    </ol>
+  </li>
+  <li> Back-end </li>
+  <li> Mobile development </li>
+</ol>
+`} />
+
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/sub-liste.png"
+    alt="Nested lists"
+    demo="/demo/html/sub-liste"
+  />
+
+  In the above example we have included an ordered list within an unordered list, but we can very well include any type of list within any other. What is important to remember is that the nesting level should not be higher than 3 as things may get confusing.
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[5].id}>
+    {CONFIG.chapters[5].title}
+  </LessonHeading>
+
+  There is also a third type of list that you will encounter less often but it is still good to know: <FormattedText as="strong">{'<dl>'}</FormattedText> (description list). We will use it when we define terms or associate pairs of values, as in the example below:
+
+  <Highlight language="html" code={`<dl>
+  <dt> HTML </dt>
+  <dd> Hyper Text Markup Language </dd>
+
+  <dt> CSS </dt>
+  <dd> Cascading Style Sheets </dd>
+</dl>`} />
+
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/liste-de-descrieri.png"
+    alt="Description lists"
+    demo="/demo/html/liste-de-descrieri"
+  />
+
+<div className="dots" />
+  Pentru a alege ce tip de listă să folosim ne putem adresa două întrebări:
+  <dl>
+    <dt className="text-bold">Define terms or associate other name/value pairs? </dt>
+    <dd className="mb-4"> If so, we will use a list of descriptions. </dd>
+    <dt className="text-bold"> Does the order of the list items matter? </dt>
+    <dd> If so, we use an ordered list, otherwise we use an unordered list. </dd>
+  </dl>
+
+  {<LessonTip icon={SCOPE.icons.faThumbsUp}> And finally, don't forget that the elements <strong>{'<ul>'}</strong>, <strong>{'<ol>'}</strong> and <strong>{'<dl>'}</strong> help both screen-readers and other developers who will understand your code more easily. Let's use them when it comes to lists. </LessonTip>}
+</section>
+
+<div className="dots" />

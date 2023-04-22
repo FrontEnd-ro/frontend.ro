@@ -146,6 +146,27 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
           href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes',
         },
       ]
+    },
+    en: {
+      id: 'despre-html',
+      written: true,
+      title: 'About HTML',
+      description: 'Learn the basic principles of this language and write your first lines of code of this language and write your first lines of code.',
+      type: 'html',
+      contributors: [CatalinPopusoi],
+      withExercises: true,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/lesson-gallery__cover.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`,
+      resources: [
+        {
+          text: 'Full list of HTML elements on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element',
+        },
+        {
+          text: 'Full list of HTML attributes on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes',
+        },
+      ]
     }
   },
   {

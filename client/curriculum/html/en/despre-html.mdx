@@ -1,0 +1,170 @@
+export const CONFIG = {
+  chapters: [
+    { title: 'A simple analogy', id: 'analogie' },
+    { title: 'What is HTML?', id: 'intro' },
+    { title: 'Elements', id: 'elemente' },
+    { title: 'Attributes', id: 'atribute' },
+    { title: 'Child-parent relationship', id: 'relatii' },
+    { title: 'Resources', id: 'resurse' },
+  ],
+}
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400 / 1260' }}
+    alt="Road-sign doodle with HTML, CSS and JS"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/seo/about-html_2400w.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence>
+  Every web app is built using three programming languages: <span className="border-bottom-1px">HTML</span>, <span className="border-bottom-1px">CSS</span> and <span className="border-bottom-1px">Javascript</span>. Each one has a well defined purpose, and as a FrontEnd developer we need to know all of them.
+</LessonFirstSentence>}
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+  <div className="my-16">
+    <LessonFloatContent position="right">
+      <img
+        loading="lazy"
+        className="w-100"
+        alt="House foundation doodle"
+        src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/house-foundation.png`}
+      />
+    </LessonFloatContent>
+
+    To get a better understanding, let's think of <span className="text-bold">building a house</span>.
+
+    The foundation, walls and roof are part of the base structure of the house, and are critical to having being able to live in it. The counterpart of this structure in the case of a web application is <em>HTML</em>.
+
+    Just like building a house starts with it's foundation, building a web page starts with the HTML.
+  </div>
+  <div className="my-16">
+    <LessonFloatContent position='left'>
+      <img
+        loading="lazy"
+        className="w-100"
+        alt="Chair, Lightbulb and window doodle"
+        src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/chair-lightbulb-window.png`}
+      />
+    </LessonFloatContent>
+
+    After the base structure is ready, we will define the colors of the walls, the placement of windows, doors, light bulbs, furniture and other things related to the design.
+
+    For a FrontEnd programmer, this is the step where the <em>CSS</em> comes in.
+  </div>
+  <div className="clear-both">
+    <img
+      width="100"
+      loading="lazy"
+      className="float-right ml-16"
+      alt="Pulsating lightbulb"
+      style={{ position: 'relative', bottom: '1em' }}
+      src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/pulsating-lightbulb.gif`}
+    />
+    
+    Finally, we need the windows, doors and light bulbs placed in the previous step to work properly. As you might have guessed, in the case of a web application, this interactivity is done via <em>Javascript</em>.
+  </div>
+  We will focus here on the first of the three languages listed above: HTML.
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+  <strong>HTML (Hyper Text Markup Language)</strong>is the standard language used to define the structure of a web page. It is not a proper programming language, but only a descriptive language, based on <em>XML</em>
+
+  Most people consider HTML to be very easy and treat it quite superficially. Even though HTML is indeed easier than the other two languages, it must be learned well and correctly. If you do this, you will have a very good foundation on which you can lay your knowledge of CSS and JS 💪.
+
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+
+  Every HTML page is made up of elements from elements, also called <strong>tags</strong>. They consist of pairs of the form <FormattedText as="strong">{'<element> </element>'}</FormattedText>. The first is called <strong>opening tag</strong>, and the second <strong>closing tag </strong>.
+
+  <LessonFigure
+    alt="Opening and closing tags"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/opening-closing-tag.png`}
+  />
+
+  Inside this pair we can have other elements or text content, as in the example below:
+
+  <CodePenEmbed
+    user="iampava"
+    slug="GRmxmMj"
+    theme="dark"
+    defaultTab="html"
+    className="my-5"
+  />
+
+  Specifically, the <FormattedText as="strong">{'<section>'}</FormattedText> element has other two elements as content (<FormattedText as="strong">{'<h1>'}</FormattedText> and <FormattedText as="strong"> {'<p>'} </FormattedText>), while these two elements only have text content inside.
+
+  There are also elements that do not need content (for example, the <FormattedText as="strong">input</FormattedText> or <FormattedText as="strong"> img </FormattedText> elements). These are called <strong>self-closing tags</strong>, and we write them without a closing tag, like so: <FormattedText as="strong">{'<element />'}</FormattedText>. Below we'll show some examples of self-closing elements/tags.
+
+  <CodePenEmbed
+    user="iampava"
+    slug="jOmzmYZ"
+    theme="dark"
+    defaultTab="html"
+    className="my-5"
+  />
+
+  You are probably wondering what <strong>type="text"</strong> and <strong>placeholder="Name"</strong> from the example above mean. They are called <em className="text-bold">attributes</em>. Let's see what their purpose is.
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+
+  Each element can have a number of attributes by which we can either <em className="text-bold">control its behavior</em> or <em className="text-bold">identify it later </em > from CSS or JS. Attributes are pairs of type <FormattedText as="strong"> key="value" </FormattedText> that are written inside an opening tag.
+
+  Looking back at the house analogy, if we think of a light bulb it's possible attributes could be the type: LED or incandescent, the color of the light, its intensity, size, etc. In HTML, a light bulb element that is <strong>LED</strong> and <strong>blue</strong> could be written as follows:
+
+  <LessonFigure
+    alt="Attributes for a self-closing tag"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/attributes.png`}
+  />
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
+  </LessonHeading>
+
+  A web application doesn't just contain one or two elements. In most cases, we need dozens or hundreds of elements just for a single page. These elements are added in each other, thus creating parent-child-sibling <strong>relationships</strong>.
+
+  There are three types of elements, depending on these relationships:
+
+  {<List variant="bullets">
+    <li>
+      <strong>parent elements</strong>
+    </li>
+    <li>
+      <strong>child elements</strong>
+    </li>
+    <li>
+      <strong>sibling elements</strong>
+    </li>
+  </List>}
+
+  In the example above the heading (<FormattedText as="strong">h1</FormattedText>) and the paragraph (<FormattedText as="strong">p</FormattedText>) are siblings, because they are on the same level.
+
+  Below, you can see the <FormattedText as="strong"> parent-child </FormattedText> relationship, where the <FormattedText as="strong">{'<div>'}</FormattedText> element is the parent of <FormattedText as="strong">{'<p>'}</FormattedText>.
+
+  <Highlight language='html' className="my-5" code={`<div>
+  <p>This is a paragraph</p>
+</div>`} />
+  
+</section>
+<div className="dots" />
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[5].id}>
+    {CONFIG.chapters[5].title}
+  </LessonHeading>
+  
+  What we have presented above is only the tip of the iceberg. In the following lessons you will learn the basic structure of a web application, how to validate your HTML code, and the most important elements for building web apps.
+  
+  Until then, we'll share with you with a list of resources regarding basic elements and attributes"
+</section>

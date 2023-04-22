@@ -373,6 +373,28 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
           href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
         },
       ]
+    },
+    en: {
+      id: 'imagini',
+      written: true,
+      title: 'Images',
+      description: 'Learn how to add and optimize images in your web pages.',
+      contributors: [Pava],
+      withExercises: true,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`,
+      type: 'html',
+      resources: [{
+        text: 'Full documentation of the <img> element on MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img',
+        }, {
+          text: 'Full documentation of the <picture> element on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
+        }, {
+          text: 'More details about Responsive images',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture',
+        },
+      ]
     }
   },
   {

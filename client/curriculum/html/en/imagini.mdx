@@ -1,0 +1,378 @@
+export const CONFIG = {
+  chapters: [
+    { title: '<img> element', id: 'elementul-img' },
+    { title: 'Width & Height', id: 'width-height' },
+    { title: 'Lazy loading', id: 'lazy-loading' },
+    {
+      title: 'Responsive images',
+      id: 'imagini-responsive',
+      subchapters: [{
+        title: 'srcset attribute',
+        id: 'srcset',
+      }, {
+        title: 'image-set property',
+        id: 'image-set',
+      }],
+    },
+    { title: '<picture> element', id: 'elementul-picture' },
+  ],
+};
+
+export const sizesTable = {
+  head: ['JPG', 'WebP', 'AVIF'],
+  side: ['4000 x 2666', '2000 x 1333', '800 x 533'],
+  rows: [
+    [
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__high.jpg" target="_blank" rel="noreferrer">2.7MB</a>',
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__high.webp" target="_blank" rel="noreferrer">2MB</a>',
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__high.avif" target="_blank" rel="noreferrer">376kb</a>',
+    ],
+    [
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.jpg" target="_blank" rel="noreferrer">947kb</a>',
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.webp" target="_blank" rel="noreferrer">838kb</a>',
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.avif" target="_blank" rel="noreferrer">181kb</a>',
+    ],
+    [
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.jpg" target="_blank" rel="noreferrer">169kb</a>',
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.webp" target="_blank" rel="noreferrer">150kb</a>',
+      '<a href="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle__med.avif" target="_blank" rel="noreferrer">35kb</a>',
+    ],
+  ],
+};
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400/1260' }}
+    alt="Doodle with an image frame"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/seo/html-images_2400w.jpg`}
+  />
+</LessonCover>}
+{<LessonFirstSentence> I think we can all agree that an Internet without images would be pretty boring. So let's see how we can add images to our websites and what are the best practices related to this topic.
+</LessonFirstSentence>}
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+
+  The first and most common way to add an image is using the <strong>img</strong> element along with 2 attributes:
+  {<List variant="bullets">
+    <li> <strong>src</strong>: to specify the image URL </li>
+    <li> <strong>alt</strong>: to describe the content of the image in case it cannot be loaded </li>
+  </List>}
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`
+<img 
+  src="golden-retrieve-and-ball.jpg" 
+  alt="Golden retriever biting blue ball"
+/>`}
+    />
+  
+  If the image is at that URL and we have an internet connection we will get a page like the image on the left. However, if the browser could not load the image, we will see the text description as in the right example.
+
+  <SideBySidePictures
+    img1={{
+      src: 'https://d3tycb976jpudc.cloudfront.net/demo-assets/golden-retriever-and-ball.jpg',
+      alt: 'Image successfully loaded in a web page',
+      demo: '/demo/html/imagine-incarcata-cu-succes',
+    }}
+    img2={{
+      src: '/images/lessons/images/image-alt.png',
+      alt: 'Text description of the image, if it could not be loaded',
+      demo: '/demo/html/text-alternativ-imagine',
+    }}
+  />
+
+  It is very important not to forget the <strong>alt</strong> attribute. In addition to the usecase mentioned above, it also helps people with disabilities who consume Web content via screen readers.
+
+  {/* Uite un demo folosind progamul XXX? */}
+
+  {/* TODO: add audio demo */}
+  {/* <AudioPlayer className="my-5" src="" title="Web captions demo" /> */}
+
+  {<LessonTip> That's why a page that contains images <strong>without the alt attribute</strong> is not <Link prefetch={false} href="/html/validarea-paginilor-html"> valid</Link>. </LessonTip>}
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+  Very often images will adapt their size according to the screen of the device used: smaller on phones and tablets, larger on laptops and desktops.
+
+  In the gallery below we have 2 images per row, each occupying exactly 45% of the screen width - whatever that is.
+
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/fixed-gallery.png"
+    alt="Galerie cu 2 imagini pe fiecare rând"
+    demo="/demo/html/galerie-imagini-fixa"
+  />
+
+  But there are situations where an image will have the same fixed dimensions regardless of the device. An example would be a company logo usually found in the <FormattedText as="strong">{'<header>'}</FormattedText> of the page.
+
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/fixed-size-image.png"
+    alt="Imagine cu dimensiunile fixe"
+    demo="/demo/html/imagine-cu-dimensiuni-fixe"
+  />
+
+  In such cases, when we <strong>know the size in advance</strong>, it is recommended to add the <strong> width </strong> and <strong> height</strong> attributes as well.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<img 
+  src="logo.png" 
+  width="212" 
+  height="70"
+  alt="FrontendCademy logo" 
+/>`}
+  />
+
+  Thus, the browser will know the dimensions of the image before downloading it and the user experience will be extremely fluid. This way we avoid the situation below where the text is re-arranged after the image is loaded - a problem known as <strong>content/layout shifting</strong>.
+
+  <LessonFigure
+    isVideo
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/content-shift.mp4"
+    alt="Text content gets rearranged after the image is loaded"
+    demo="/demo/html/content-shifting"
+  />
+</section>
+<div className="dots" />
+<section>
+  What we've shown so far is the basics of images in HTML. These are the things you will use in the vast majority of cases…
+
+  Below we continue to discuss various techniques to optimize image serving and provide the best possible experience, which in turn will increase the chances that <a href="https://web.dev/site-speed-and-business -metrics/" target="_blank" rel="noreferrer"> our project/business is successful</a>.
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+
+  {<LessonQuote> Most of the images on the web are downloaded, decoded and rendered only never to be seen, as [...] the user never scrolled that far. - <small> <a href="https://twitter.com/yoavweiss" target="_blank" rel="noopener noreferrer">Yoav Weiss</a> </small> </LessonQuote>}
+
+  The quote above remains - unfortunately - just as true... How many times have you opened a web page and then left without reading more than the first paragraph?
+
+  But in the background, the browser loaded all the images, which is a waste because we didn't see them all. Ideally, we should only load images <strong> when we need them</strong>.
+  
+  {/* , */}
+  {/* cum se întâmplă în video-ul din dreapta. */}
+  {/* TODO: video demo */}
+  {/* <h1> VIDEO DEMO </h1> */}
+
+  To solve this problem we will use the <strong>loading</strong> attribute with the <strong>lazy</strong> value.
+<Highlight
+  className="my-5"
+  language="html"
+  code={`<img 
+  alt="Eiffel tower during night"
+  src="eiffel-tower-during-night.jpg"
+  loading="lazy"
+/>
+`} />
+
+  Now the browser will only download an image when we <em>"get close"</em> to it. Each browser has its own metrics for what this proximity means, but we don't need to concern ourselves with it The good practice is to add the attribute <FormattedText as="strong">loading="lazy"</FormattedText> if we have many images on the page.
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+
+  We started with simple images, optimized the experience using the width/height attributes and then managed to load only the images we need using the <FormattedText as="strong"> loading </FormattedText> attribute. Now it's time to take the performance journey one step further and upload the most appropriate image in terms of resolution.
+  
+  <LessonFigure
+    withBorder
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/full-screen-image-illustration.jpg"
+    alt="Full-screen image in a Web page"
+  />
+
+  <LessonQuote>
+    At what resolution do we save the image to be 100% clear on all devices?
+  </LessonQuote>
+
+  Knowing that the site can be seen both on mobile devices with smaller screens, as well as on desktops or even TVs, a first solution would be to save the image in a very high resolution - say 4K - to make sure it looks ok on all devices.
+
+  {/* Pentru imaginea folosita ca demo in acest capitol inseamna o dimensiune de xMB. */}
+
+  <strong> Although the solution would work, it is not at all efficient</strong> because we will always download the same high resolution image and many MBs. On the phone for example, where the screen is smaller, we don't need all 8+ million pixels (3840 x 2160). If we also take into account the Internet connection, the experience can look like this:
+
+  <LessonFigure
+    isVideo
+    withBorder
+    demo="/demo/html/incarcarea-unei-imagini-mari"
+    src="https://d3tycb976jpudc.cloudfront.net/demo-assets/huge-image-loading.mp4"
+    alt="Loading a big image on a slow connection"
+  />
+
+  Ideally, we should load the exact same image on the phone but at a lower resolution, on the tablet at a medium resolution and at a high resolution on large screens: desktop and beyond.
+
+  <section>
+    <LessonHeading as="h3" id={CONFIG.chapters[3].subchapters[0].id}>
+      {CONFIG.chapters[3].subchapters[0].title}
+    </LessonHeading>
+
+    Fortunately, we can solve this problem by using the <strong>srcset</strong> and <strong>sizes</strong> attributes. Let's take our image and resize it to 3 different resolutions:
+
+    <LessonFigure
+      withBorder
+      src="https://d3tycb976jpudc.cloudfront.net/demo-assets/red_bycicle_resize_infographic.jpg"
+      alt="Same image in 3 different dimension"
+    />
+
+    <LessonTip> On Windows we can resize using <strong>Paint</strong> and on MacOS using <strong> <a href="https://support.apple.com/guide/preview/resize-rotate-or-flip-an-image-prvw2015/mac" target="_blank" rel="noreferrer">Preview App</a></strong>. </LessonTip> 
+
+    Then we'll add the <strong>srcset</strong> attribute where we define the different image sources along with the size (in width) of each. And with the <strong>sizes</strong> attribute we will specify what size the image will have depending on the screen size:
+
+    <Highlight className="my-5" language="html" code={`<img srcset="
+    /red_bycicle__high.jpg 4000w,
+    /red_bycicle__med.jpg 2000w,
+    /red_bycicle__low.jpg 800w,
+  " 
+  sizes="(max-width: 800px) 700px, 1000px"
+  alt="Red bycicle wheel"
+  src="/red_bycicle__med.jpg"
+/>`}
+          />
+{/* <LessonTip icon={faQuestionCircle}>
+            Atributul
+            {' '}
+            <strong>style</strong>
+            {' '}
+            este folosit pentru a adauga reguli
+            CSS elementelor.
+            {' '}
+            Inca nu am ajuns la acel capitol deci e absolut normal sa nu stii ce face.
+            <br />
+            {' '}
+            <br />
+            Totusi, te rugam sa-l pui acolo, impreuna cu valoarea `max-width: 100%.
+            Astfel ne asiguram ca imaginile nu vor iesi din pagina.
+          </LessonTip> */}
+
+    Aaaand voilà. If we go into <a href="/intro/devtools">responsive mode</a> - and keep the <strong>network</strong> tab open we will notice how different image sources load at different resolutions.
+    
+    <LessonFigure
+      isVideo
+      withBorder
+      demo="/demo/html/atributul-srcset"
+      src="https://d3tycb976jpudc.cloudfront.net/demo-assets/img-srcset.mp4"
+      alt="Based on the screen resolution we load a different version of the same image"
+    />
+
+    <LessonTip icon={SCOPE.icons.faExclamationCircle}> An image with <FormattedText as="span">srcset=""</FormattedText> must also contain the <FormattedText as="span">src=""</FormattedText> attribute in order to be valid. The reason is that older browsers don't understand the <FormattedText as="span">srcset</FormattedText> attribute, so they will ignore it and show the image from <FormattedText as="span">src</FormattedText>.</LessonTip>
+
+    We encourage you to experiment with the <Link prefetch={false} target="_blank" href="intro/devtools"> DRP (Device Pixel Ratio) option</Link>. For example, with a value of 2 and a width of 650px the image <strong>red_bycicle__med.jpg</strong> will load.
+</section>
+  <section>
+    <LessonHeading as="h3" id={CONFIG.chapters[3].subchapters[1].id}>
+      {CONFIG.chapters[3].subchapters[1].title}
+    </LessonHeading>
+
+    Until recently the only way to have responsive CSS images (those placed via <FormattedText as="strong">background-image:</FormattedText>) was to put multiple <FormattedText as="strong">@media rules -query</FormattedText> and specify a different image for each.
+
+    But with the introduction of the <a target="_blank" className="text-bold" href="https://developer.mozilla.org/en-US/docs/Web/CSS/image/image-set()" rel="noreferrer" > image-set() property</a> we can let the browser choose the best image based on the screen resolution:
+
+    <Highlight language="css" code={`.cover {
+    height: 50vh;
+
+    background-image: -webkit-image-set(
+      url("red_bycicle__low.jpg") 1x,
+      url("red_bycicle__med.jpg") 2x, 
+      url("red_bycicle__high.jpg") 4x
+    );
+
+    background-image: image-set(
+      url("red_bycicle__low.jpg") 1x,
+      url("red_bycicle__med.jpg") 2x, 
+      url("red_bycicle__high.jpg") 4x
+    );
+  }`} />
+
+    <LessonTip icon={SCOPE.icons.faQuestion}> This property doesn't have native support in all Browsers yet, so in the example above I prefixed the rule with <FormattedText as="span">-webkit</FormattedText> to work in Chrome and Safari as well.</LessonTip>
+  </section>
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
+  </LessonHeading>
+
+  As you've seen so far, the <FormattedText as="span">{'<img>'}</FormattedText> element - although quite simple to use - provides us with several functionalities that allow us to optimize images and the user experience. However, there is still one last optimization left, namely the use of modern image formats.
+
+  <LessonQuote> Why would we want other formats? Aren't <strong>JPG</strong> or <strong>PNG</strong> good enough? </LessonQuote>
+
+  Hmmm... not really. There are more modern formats like <strong>WebP</strong> or <strong>AVIF</strong> that offer the same image quality at a smaller size. Look at the size differences of this image depending on the format:
+
+  <LessonTable {...sizesTable} className="my-5" />
+
+  As you can see WebP and AVIF formats are smaller than JPG or PNG, so images in this format will load faster than the others. The problem is that not all browsers understand these new formats.
+
+  As we see on <a href="https://CanIUse.com" target="_blank" rel="noreferrer">Can I use...</a> - AVIF is only supported in the latest versions of Google Chrome while WebP is more common but still missing from IOS 13 or Internet Explorer 11.
+
+  <SideBySidePictures
+    direction="column"
+    img1={{
+      src: 'https://d3tycb976jpudc.cloudfront.net/demo-assets/caniuse-webp.png',
+      alt: 'Suportul browserelor pentru formatul WebP',
+      demo: 'https://caniuse.com/?search=webp',
+    }}
+    img2={{
+      src: 'https://d3tycb976jpudc.cloudfront.net/demo-assets/caniuse-avif.png',
+      alt: 'Suportul browserelor pentru formatul Avif',
+      demo: 'https://caniuse.com/?search=avif',
+    }}
+  />
+
+  So we need a way for browsers that understand <strong>WebP</strong> or <strong>Avif</strong> to download these formats, while the others stick to JPG. This technique is generally called <a href="/concepte/graceful-degradation">graceful degradation</a>.
+
+  Thankfully, this solution is enabled by the <FormattedText as="strong">{'<picture>'}</FormattedText> tag, where we can specify multiple sources for an image and let the browser choose the one it understands.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<picture>
+  <source 
+    srcset="
+      red_bycicle__high.avif 4000w, 
+      red_bycicle__med.avif 2000w, 
+      red_bycicle__low.avif 800w" 
+    type="image/avif">
+
+  <source 
+    srcset="
+      red_bycicle__high.webp 4000w, 
+      red_bycicle__med.webp 2000w, 
+      red_bycicle__low.webp 800w"
+    type="image/webp">
+
+  <source 
+    srcset="
+      red_bycicle__high.jpg 4000w, 
+      red_bycicle__med.jpg 2000w, 
+      red_bycicle__low.jpg 800w" 
+    type="image/jpeg">
+
+  <img 
+    alt="Red bycicle wheel"
+    loading="lazy"
+    srcset="
+      red_bycicle__high.jpg 4000w, 
+      red_bycicle__med.jpg 2000w, 
+      red_bycicle__low.jpg 800w
+    "
+    src="red_bycicle__med.jpg"
+  >
+</picture>`}
+/>
+</section>
+
+The order of the <FormattedText as="strong">{'<source>'}</FormattedText> elements is extremely important because the browser will go through them from top to bottom and choose the first compatible one. Also, in each of them we must add - via the <strong>srcset</strong> attribute - several sources of different sizes. Thus the browser not only chooses the best format, but also the optimal image size. Best of both worlds! 💪
+
+PS: maybe you noticed that last <FormattedText as="strong">{'<img>'}</FormattedText> tag. Well, we need it to specify the description of the image - in case it cannot be loaded, as well as for possibly adding some extra attributes - such as <strong>loading</strong>. And in the rare case where users are using old browsers that don't understand the <FormattedText as="strong">{'<picture>'}</FormattedText> element, they will still understand the <FormattedText as="strong">{'<img>'}</FormattedText> and they will show this one.
+
+<div className="dots" />

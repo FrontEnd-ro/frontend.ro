@@ -549,6 +549,17 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       type: 'css',
       contributors: [DanielHutanu],
       withExercises: true,
+    },
+    en: {
+      id: 'moduri-stilizare',
+      written: true,
+      title: 'The 3 styling methods',
+      description: 'Learn the ways we can apply styles to web pages.',
+      cover: '/images/lessons/styling-methods__cover.svg',
+      ogImage: 'https://frontend.ro/seo/styling-methods.jpg',
+      type: 'css',
+      contributors: [DanielHutanu],
+      withExercises: true,
     }
   },
   {

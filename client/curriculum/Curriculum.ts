@@ -63,6 +63,16 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       contributors: [Pava],
       withExercises: false,
       cover: '/images/lessons/lesson-0__cover.svg',
+    },
+    en: {
+      id: 'despre-noi',
+      written: true,
+      title: 'About us',
+      description: 'What makes us different and why you would like to learn with us.',
+      type: 'intro',
+      contributors: [Pava],
+      withExercises: false,
+      cover: '/images/lessons/lesson-0__cover.svg',
     }
   },
   {

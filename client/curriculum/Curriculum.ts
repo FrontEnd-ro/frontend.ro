@@ -580,6 +580,25 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         text: 'Documentația completă a proprietății box-sizing pe MDN',
         href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing',
       }]
+    },
+    en: {
+      id: 'box-model',
+      written: true,
+      title: 'Box model',
+      cover: '/images/lessons/box-model/cover.svg',
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`,
+      description:
+        'Although some sites are really WOW, each element is actually a rectangle with some more special properties called a Box Model. Here we learn about him.',
+      type: 'css',
+      contributors: [CatalinPopusoi],
+      withExercises: false,
+      resources: [{
+        text: 'Full documentation of box model on MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model',
+      }, {
+        text: 'Full documentation of box-sizing property on MDN',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing',
+      }]
     }
   },
   {

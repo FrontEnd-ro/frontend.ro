@@ -5,7 +5,7 @@ import Document, {
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="ro">
+      <Html lang={process.env.LANGUAGE}>
         <Head />
         <body>
           <Main />

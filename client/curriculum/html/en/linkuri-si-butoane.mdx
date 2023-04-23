@@ -1,0 +1,435 @@
+export const CONFIG = {
+  chapters: [
+    { title: '<a> element', id: 'a-element' },
+    {
+      title: 'Examples where we use the <a> tag',
+      id: 'exemple-unde-folosim-tagul-a',
+      subchapters: [{
+        title: 'Most commonly used',
+        id: 'cele-mai-uzuale'
+      }, {
+        title: 'Links to emails',
+        id: 'emails',
+      }, {
+        title: 'Links to phone numbers',
+        id: 'tel',
+      },
+      {
+        title: 'Links that download files',
+        id: 'download',
+      }]
+    },
+    {
+      title: 'The target=”_blank” attribute',
+      id: 'atributul-target-blank',
+    },
+    { title: 'BONUS Questions', id: 'intrebari-bonus' },
+    { title: '<button> element', id: 'button-element' },
+    { title: 'The "type" attribute', id: 'atributul-type' },
+    { title: 'The "disabled" attribute', id: 'atributul-disabled' },
+    { title: 'Links vs buttons', id: 'linkuri-vs-butoane' },
+  ],
+};
+
+export const relativeUrlExample = {
+  files: [],
+  folders: [{
+    key: 'home',
+    name: 'home',
+    files: [{
+      key: 'home.html',
+      name: 'home.html',
+      content: `<!DOCTYPE html>
+<html>
+<head>
+  <title>Relative URL</title>
+</head>
+<body>
+    <h1>Home Page</h1>
+    <a href="info.html"> Go to info page </a>
+</body>
+</html>
+      `,
+    }, {
+      key: 'info.html',
+      name: 'info.html',
+      content: `<!DOCTYPE html>
+<html>
+<head>
+  <title>Info | Home page</title>
+</head>
+<body>
+    <h1>Info regarding the Home page</h1>
+</body>
+</html>
+`,
+    }],
+    folders: [],
+  }, {
+    key: 'about',
+    name: 'about',
+    folders: [],
+    files: [{
+      key: 'about.html',
+      name: 'about.html',
+      content: `<!DOCTYPE html>
+<html>
+<head>
+  <title>Relative URL</title>
+</head>
+<body>
+    <h1>About page</h1>
+    <a href="info.html"> Go to info page </a>
+</body>
+</html>
+`,
+    }, {
+      key: 'info.html',
+      name: 'info.html',
+      content: `<!DOCTYPE html>
+<html>
+<head>
+  <title>Info | About page</title>
+</head>
+<body>
+    <h1>Info regarding the About page</h1>
+</body>
+</html>
+`,
+    }],
+  }],
+};
+
+{<LessonCover>
+  <img
+    width="2400"
+    style={{ aspectRatio: '2400/1260' }}
+    alt="Doodle representing a button and multiple links"
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_2400w.jpg`}
+  />
+</LessonCover>}
+<LessonFirstSentence> Although it seems like a simple topic at first glance, there is still a lot to know about links and buttons in HTML. In this article we will discuss markup, attributes and best practices. Also, we will treat the two concepts together because links are often used instead of buttons and vice versa. </LessonFirstSentence>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[0].id}>
+    {CONFIG.chapters[0].title}
+  </LessonHeading>
+
+  The <FormattedText as="strong">{'<a>'}</FormattedText> element also called <i>anchor</i> or <i>link</i> is one of the most common elements used to build pages web. If we want to move to another page or another area within the same page, then we will use this element. To specify the destination of the link we will use the <FormattedText as="strong">href</FormattedText> attribute.
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[1].id}>
+    {CONFIG.chapters[1].title}
+  </LessonHeading>
+
+  <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[0].id}>
+    {CONFIG.chapters[1].subchapters[0].title}
+  </LessonHeading>
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<a href="https://frontendcademy.com/"> FrontendCademy </a>`}
+  />
+
+  In this case, we say it's a <strong>link to an absolute URL</strong> - that is, a URL that contains the entire address of a page. This type of URL is often encountered when a website links to another website.
+
+  We can also have <strong>URLs</strong>, whose final destination is computed according to the page we're currently on. In the example below we have the same link in both <FormattedText as="strong"> about.html </FormattedText> and <FormattedText as="strong"> home.html </FormattedText>:
+
+  <Highlight
+    language="html"
+    code={`<a href="info.html"> Go to info page </a>`}
+  />
+
+  Yet, we arrive at different destinations based on the page we're on:
+
+  <DeprecatedBasicEditor folderStructure={relativeUrlExample} readOnly />
+  
+  Very useful are the links that lead to a section of the same page or the so-called <FormattedText as="strong">jump links</FormattedText>.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<a href="#comments"> 
+Jump to the comments section
+</a> 
+<h2 id="comments">Comments</h2>
+<!-- ... -->`}
+/>
+
+  <LessonTip> Notice the <FormattedText as="strong">id</FormattedText> attribute. This is how we connect the link to the section of the page we want to reach. </LessonTip>
+
+  While we haven't gotten to the CSS part, it's worth mentioning that jump links can benefit from <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior">smooth scrolling </a> for users to have a more pleasant experience:
+
+  <LessonFigure
+    isVideo
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/smooth-scrolling.mp4`}
+    alt="Smooth scrolling demo"
+    demo="/demo/html/jump-links"
+  />
+</section>
+<section>
+  <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[1].id}>
+    {CONFIG.chapters[1].subchapters[1].title}
+  </LessonHeading>
+
+  {/* TODO: this is not very explicit. What does it exactly mean? Let's rewrite this */}
+  There are situations when a user might want to send an email to our contact address. In this case we'll use the <FormattedText as="strong">mailto</FormattedText> on the anchor tag. This will open the email client, with the email already prefilled:
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<a href="mailto:hello@FrontEndCademy.com">
+Send email to FrontEndCademy
+</a>`}
+/>
+
+  Click on the adjacent link and your email client will open, pre-filled with our address 👉 <a href="mailto:hello@frontendcademy.com">Send email to FrontEndCademy</a>.
+
+ <LessonFigure
+  isVideo
+  withBorder
+  src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/mailto.mp4`}
+  alt="'mailto' option to make it easy to send emails"
+/>
+
+  <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[2].id}>
+    {CONFIG.chapters[1].subchapters[2].title}
+  </LessonHeading>
+
+  Moreover, if we want to show phone numbers on the page, it is recommended to use links, to directly open the application through which we call:
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<a href="tel:+49.157.0156">+49 157 0156</a>
+<a href="tel:+1(555)5309">(555) 5309</a>
+  `} />
+
+  Click on one of the numbers below to see how the calling app opens on your phone (you can click without worry, you won't call them directly if you do that)
+
+ {<List variant="bullets">
+    <li> <a href="tel:+49.157.0156">+49 157 0156</a> </li>
+    <li> <a href="tel:+1(555)5309">(555) 5309</a></li>
+  </List>}
+
+  <LessonFigure
+    isVideo
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/link-to-tel.mp4`}
+    alt="Links to phone numbers"
+  />
+
+  <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[3].id}>
+    {CONFIG.chapters[1].subchapters[3].title}
+  </LessonHeading>
+
+  Together with the <FormattedText as="strong">download</FormattedText> attribute we can instruct the browser to download the file from within the link instead of opening it in the current page:
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<a href="https://FrontendCademy.com/logo.png" download> Download our logo </a>`}
+  />
+
+  Click on the link next to download our logo 👉 <a href="/logo.png" download> Download our logo </a>
+
+  Now that we have familiarized ourselves with practical situations where we can use links, we have gotten a little used to the markup and some of the attributes that can accompany the element, we can talk about some good practices to keep in mind.
+</section>
+
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[2].id}>
+    {CONFIG.chapters[2].title}
+  </LessonHeading>
+
+  Apart from the attributes shown above, another one often used is <FormattedText as="strong"> target</FormattedText>, which tells us how to open the link in the href.
+
+  As developers, we will most often encounter the situation of using <FormattedText as="strong"> target="_blank" </FormattedText> (the link will be opened in a new window or tab). When using the <strong>_blank</strong> value, it is recommended to add a new attribute for security, namely: <FormattedText as="strong"> rel=”noopener noreferrer” </FormattedText>.
+
+  <Highlight
+    className="my-5"
+    language="html"
+    code={`<a href="https://frontendcademy.com" target="_blank" rel="noopener noreferrer">
+Links will open in a new tab
+</a>`} />
+
+  Click on the following link to open it in a new tab 👉 <a href="https://Frontendcademy.com" target="_blank" rel="noopener noreferrer"> The link opens in a new tab </ a>
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[3].id}>
+    {CONFIG.chapters[3].title}
+  </LessonHeading>
+
+  Below we will answer some questions that we as developers can ask ourselves as we code and encounter various situations:
+
+  <LessonQuote> Can we just use an <FormattedText as="strong">icon</FormattedText> inside a link? </LessonQuote>
+
+  Unfortunately, a simple icon would not give us enough contextual information about the link, so it would not really be recommended. If we still have to use such an icon, a good practice would be to add some visually hidden text to the link, which will still be read by <strong>screen readers</strong>:
+
+<Highlight
+  className="my-5"
+  language="html"
+  code={`<a href="https://fontawesome.com/">
+  <svg width="24" height="24" viewBox="0 0 1024 1024">
+    <g>
+      <path d="M384 928c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z" />
+      <path d="M1024 928c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z" />
+      <path d="M1024 512v-384h-768c0-35.346-28.654-64-64-64h-192v64h128l48.074 412.054c-29.294 23.458-48.074 59.5-48.074 99.946 0 70.696 57.308 128 128 128h768v-64h-768c-35.346 0-64-28.654-64-64 0-0.218 0.014-0.436 0.016-0.656l831.984-127.344z" />
+    </g>
+  </svg>
+  <!-- Se comporta ca un label ce e ascuns -->
+  <span style="position: absolute; opacity: 0">
+    Shopping cart
+  </span>
+</a>`}
+/>
+
+  For example, the following link contains only an icon for a shopping cart, but it is at the same time accessible for those who use screen readers 👉: <a href="https://fontawesome.com/"> <FontAwesomeIcon width= "24" icon={SCOPE.icons.faShoppingCart} /> <span style={{ position: 'absolute', opacity: '0' }}> Shopping Cart </span></a>
+
+  <LessonTip icon={SCOPE.icons.faQuestionCircle}> The <FormattedText as="strong">style</FormattedText> attribute is used to add CSS rules to elements. I haven't gotten to that chapter yet so it's ok if you don't know how to use it. However, please keep it in the example so it works as we expect. </LessonTip>
+
+  <LessonQuote> Can we use an <FormattedText as="strong">image</FormattedText> inside a link? </LessonQuote>
+
+  Absolutely!!! We will often need to do this in our projects:
+
+<Highlight
+  className="my-5"
+  language="html"
+  code={`<a href="https://FrontEndCademy.com">
+<img 
+  height="48" 
+  alt="FrontendCademy LOGO." 
+  src="https://FrontEndCademy.com/images/logo.png" 
+/>
+</a>`}
+/>
+
+  Here we have a picture in a link. If we click on it, it will take us to the main page (home page) 👉 <a style={{ verticalAlign: 'middle' }} href="/"> <img height="48" src="/logo.png " alt="FrontEndCademy LOGO." /> </a>
+
+{/* this demo 👇 is not very clear at this moment, when we will have more CSS lessons,
+   maybe we can uncomment this part */}
+{/* <LessonQuote>
+    Putem folosi bucăți mari de cod în interiorul unui link?
+  </LessonQuote>
+  <p>Răspunsul la această întrebare este că nu e tocmai o idee bună.</p>
+  <LessonFigure
+    withBorder
+    src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/demo-link.png`}
+    alt="2 metode diferite prin care putem folosi link-urile în raport cu bucăți
+    mai mari de cod și implicațiile lor"
+    demo="/demo/html/linkuri-care-contin-bucati-mari-de-continut"
+  /> */}
+
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[4].id}>
+    {CONFIG.chapters[4].title}
+  </LessonHeading>
+
+  The <FormattedText as="strong">{'<button>'}</FormattedText> element is used when we want to do an action (examples: show/hide a menu, play or pause a video, send a comment, etc.)
+
+<Highlight
+  language="html"
+  code={`<button type="button">
+  Open menu
+</button>`}
+/>
+
+Unlike links, buttons <strong>should not</strong> change the page. However, if we have a form with a login button, we click on it, wait, then we are directed to a new page, we can say that the action triggered by the button changed the page. In this case it's ok :)
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[5].id}>
+    {CONFIG.chapters[5].title}
+  </LessonHeading>
+
+  The 2 types of buttons we will use most often in our applications are:
+
+  {<List variant="bullets">
+    <li> <FormattedText as="strong">type="button"</FormattedText> </li>
+    <li> <FormattedText as="strong">type="submit"</FormattedText>: (used within forms - we'll discuss more when we get to this lesson) </li>
+  </List>}
+
+  A good practice is to always specify their type.
+
+  In addition to submit and button, type can also have the value <FormattedText as="strong">reset</FormattedText>. Here's an example that includes all 3:
+
+<Highlight
+  className="my-5"
+  language="html"
+  code={`<form action="/" method="POST">
+<input type="text" name="name" id="name" style="padding: 0.7em; border-radius: 5px; "/>
+
+<!-- If we want to be more explicit... -->
+<button type="submit" style="padding: .5em; border: none; color: #fff; font-size: 1.2em; border-radius: 5px; background: #58af58">Submit</button>
+
+<!-- ...or reset the value of our inputs
+lor inițială (tinde să enerveze userii) -->
+<button type="reset" style="padding: .5em; border: none; color: #fff; font-size: 1.2em; border-radius: 5px; background: #77838b">Reset</button>
+
+<!-- This prevents the submit action from happening, which can sometimes be useful within a form -->
+<button type="button" style="padding: .5em; border: none; color: #fff; font-size: 1.2em; border-radius: 5px; background: #2980b9">Non-submitting button</button>
+</form>
+  `}
+/>
+
+  <LessonFigure
+    withBorder
+    src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/buttons-types.png`}
+    alt="Types of buttons"
+    demo="/demo/html/tipuri-de-butoane"
+  />
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[6].id}>
+    {CONFIG.chapters[6].title}
+  </LessonHeading> 
+
+  This boolean attribute prevents interactivity with the button: it cannot be pressed or focused. The most common pattern is in the case of authentication on a website:
+
+{/* <Highlight
+    className="my-5"
+    language="html"
+    code={`
+<form className="login-container">
+<label htmlFor="email">Introdu adresa de email:</label>
+<input type="email" id="email" placeholder="Email" />
+<label htmlFor="password">Introdu parola:</label>
+<input type="password" id="password" placeholder="Password" />
+<button type="submit" disabled>Loghează-te</button>
+</form>
+  `}
+  />
+  <LessonFigure
+    withBorder
+    src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/disabled-button.png`}
+    alt="Atributul disabled"
+    demo="/demo/html/butoane-atributul-disabled"
+  /> */}
+{<List as="ol" style={{ listStyle: 'revert' }}>
+  <li> fill in the form </li>
+
+  <li> we press the login button </li>
+
+  <li> the button becomes <strong> disabled </strong> while sending data to the server and waiting for a response (to prevent the user trying again while authentication is still in progress) </li>
+
+  <li> if the login fails, we can display an informative message explaining why it couldn't happen and enable the button only at the end to try again. </li>
+
+</List>}
+
+<LessonFigure
+  isVideo
+  withBorder
+  src={`${SCOPE.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/form_validation_with_disabled_button.mp4`}
+  alt="Form validation with disabled button"
+/>
+</section>
+<section>
+  <LessonHeading as="h2" id={CONFIG.chapters[7].id}>
+    {CONFIG.chapters[7].title}
+  </LessonHeading>
+
+  As a quick recap, we use links if we change the page or jump to a section of the page, and buttons if we do an action.
+
+  <LessonTip icon={SCOPE.icons.faThumbsDown}> We cannot have links in buttons or buttons in links - invalid markup. </LessonTip>
+</section>
+<div className="dots" />

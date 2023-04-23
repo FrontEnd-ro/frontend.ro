@@ -295,6 +295,35 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
           href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
         },
       ]
+    },
+    en: {
+      id: 'linkuri-si-butoane',
+      written: true,
+      title: 'Links and buttons',
+      description: 'Learn to use links and buttons in HTML and the difference between them.',
+      type: 'html',
+      contributors: [Diana],
+      withExercises: true,
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/lesson-gallery__cover.png`,
+      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_1200w.jpg`,
+      resources: [
+        {
+          text: 'Full documentation of anchors on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a',
+        },
+        {
+          text: 'Full documentation of buttons on MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button',
+        },
+        {
+          text: 'The "noreferrer" value for the "rel" attribute',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer',
+        },
+        {
+          text: 'The "noopener" value for the "rel" attribute',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
+        },
+      ]
     }
   },
   {

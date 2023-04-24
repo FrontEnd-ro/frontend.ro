@@ -11,7 +11,7 @@ import { loadSubmissions, searchSubmissions } from '~/redux/exercise-submissions
 import PageContainer from '../PageContainer';
 import Button from '~/components/Button';
 
-import SubmissionService from '~/services/api/Submission.service';
+import AdminSubmissionService from '~/services/api/AdminSubmission.service';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 import { Submission } from '~/redux/exercise-submissions/types';
 import List from '../List';
@@ -76,7 +76,7 @@ class Teach extends React.Component<ConnectedProps<typeof connector>, State> {
     this.setState({ loading: true });
 
     try {
-      const newSubmissions = await SubmissionService.searchSubmissions(submissions.page, '', Object.values(SubmissionStatus));
+      const newSubmissions = await AdminSubmissionService.searchSubmissions(submissions.page, '', Object.values(SubmissionStatus));
       dispatch(loadSubmissions(newSubmissions));
     } catch (err) {
       SweetAlertService.toast({ type: 'error', text: err });

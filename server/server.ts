@@ -27,6 +27,7 @@ import tutorialRouter from './tutorial/tutorial.router';
 import tidbitRouter from './tidbit/tidbit.router';
 import challengeRouter from './challenge/challenge.router';
 import challengeSubmissionRouter from './challenge/challengeSubmission/challengeSubmission.router';
+import { adminSubmissionRouter } from './submission/admin-submission.router';
 
 const port = appConfig.APP.port || appConfig.APP.default_port;
 const app = express();
@@ -52,6 +53,7 @@ app.use('/api/auth', userRouter);
 app.use('/api/exercises', exerciseRouter);
 app.use('/api/lesson-exercises', lessonExerciseRouter);
 app.use('/api/submissions', submissionRouter);
+app.use('/api/admin-submissions', adminSubmissionRouter);
 app.use('/api/demo', demoRouter);
 app.use('/api/events', eventRouter);
 app.use('/api/github', githubRouter);

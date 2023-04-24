@@ -5,6 +5,7 @@ import PageContainer from '../PageContainer';
 import Spinner from '../Spinner';
 import { RootState } from '~/redux/root.reducer';
 import SubmissionService from '~/services/api/Submission.service';
+import AdminSubmissionService from '~/services/api/AdminSubmission.service';
 import { Submission } from '~/redux/exercise-submissions/types';
 
 import { timeAgo } from '~/services/Utils';
@@ -67,7 +68,7 @@ function OfferFeedback({
   }, [submission]);
 
   const fetchSubmission = () => {
-    SubmissionService
+    AdminSubmissionService
       .getUserSubmission(username, exerciseId)
       .then((submission) => setSubmission(submission))
       .catch((err) => {
@@ -82,9 +83,9 @@ function OfferFeedback({
     let ApiToCall;
 
     if (isCorrect) {
-      ApiToCall = SubmissionService.approveSubmission;
+      ApiToCall = AdminSubmissionService.approveSubmission;
     } else {
-      ApiToCall = SubmissionService.sendFeedback;
+      ApiToCall = AdminSubmissionService.sendFeedback;
     }
 
     ApiToCall(submission._id, feedbacks)

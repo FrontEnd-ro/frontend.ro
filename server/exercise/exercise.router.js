@@ -29,12 +29,6 @@ exerciseRouter.get('/', [PrivateMiddleware], async function getUserExercises(req
   res.json(sanitizedResults);
 })
 
-exerciseRouter.get('/solved', [PrivateMiddleware], async function getSolvedExercises(req, res) {
-  let results = await SubmissionModel.getAllUserSubmissions(req.body.user._id);
-  let sanitizedResults = results.map(SubmissionModel.sanitize);
-  res.json(sanitizedResults);
-})
-
 exerciseRouter.get('/:exerciseId', [PublicMiddleware, PublicOrOwnExercise], async function getExerciseById(req, res) {
   const { exerciseId } = req.params;
 

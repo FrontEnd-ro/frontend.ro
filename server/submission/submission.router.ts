@@ -17,6 +17,12 @@ const submissionRouter = express.Router();
 // let's not use a separate main route, rather use a sub-route here.
 submissionRouter.use('/versions', submissionVersionRouter);
 
+submissionRouter.get('/', [PrivateMiddleware], async function getOwnSubmissions(req, res) {
+  let results = await SubmissionModel.getAllUserSubmissions(req.body.user._id);
+  let sanitizedResults = results.map(SubmissionModel.sanitize);
+  res.json(sanitizedResults);
+});
+
 submissionRouter.get('/exercise/:exerciseId', [PrivateMiddleware, SolvableExercise], async function getSubmissionByExercise(req, res) {
   const { exerciseId } = req.params;
   const { user } = req.body;

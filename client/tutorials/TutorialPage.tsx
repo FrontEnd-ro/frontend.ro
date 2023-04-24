@@ -6,7 +6,7 @@ import { RootState } from '~/redux/root.reducer';
 import PageContainer from '~/components/PageContainer';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import maybeFetchTutorialProgress from './tutorial.utils';
-import ExerciseService from '~/services/api/Exercise.service';
+import SubmissionService from '~/services/api/Submission.service';
 import { getEmptyTutorialProgress } from '~/services/Utils';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { loadSubmissions } from '~/redux/progress/progress.actions';
@@ -45,7 +45,7 @@ function TutorialPage({
 
   const fetchSubmissions = async () => {
     try {
-      const submissions = await ExerciseService.getSolvedExercises();
+      const submissions = await SubmissionService.getOwnSubmissions();
       dispatch(loadSubmissions(tutorialInfo.tutorialId, submissions));
     } catch (err) {
       console.error('HtmlTutorialDashboard.fetchSubmissions', err);

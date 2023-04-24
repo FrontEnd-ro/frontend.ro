@@ -7,7 +7,7 @@ import ExercisePreview from '~/components/ExercisePreview';
 import { RootState } from '~/redux/root.reducer';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
-import ExerciseService from '~/services/api/Exercise.service';
+import SubmissionService from '~/services/api/Submission.service';
 import { SkeletonRect } from '~/components/SkeletonScreens';
 
 import styles from './LessonExercises.module.scss';
@@ -34,8 +34,8 @@ function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<
       });
 
     if (isLoggedIn) {
-      ExerciseService
-        .getSolvedExercises()
+      SubmissionService
+        .getOwnSubmissions()
         .then((resp) => setSubmissions(resp))
         .catch((err) => console.error(err));
     } else {

@@ -2,6 +2,11 @@ import HttpService from './Http.service';
 import { SubmissionStatus, WIPSanitiedSubmission } from '~/../shared/types/submission.types';
 
 class SubmissionService {
+  static getOwnSubmissions() {
+    return HttpService.get(`${process.env.ENDPOINT}/submissions/`)
+      .then((response) => response.json());
+  }
+
   static getOwnSubmission(exerciseId: string) {
     return HttpService
       .get(`${process.env.ENDPOINT}/submissions/exercise/${exerciseId}`)

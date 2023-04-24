@@ -4,7 +4,7 @@ import Link from '~/components/generic/Link';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { Exercise } from '~/redux/user/types';
 import { getLessons } from '~/curriculum/Curriculum';
-import ExerciseService from '~/services/api/Exercise.service';
+import SubmissionService from '~/services/api/Submission.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import ExercisePreview from '../ExercisePreview';
 import PageContainer from '../PageContainer';
@@ -29,8 +29,8 @@ function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
       .catch((err) => console.error(err));
 
     if (isLoggedIn) {
-      ExerciseService
-        .getSolvedExercises()
+      SubmissionService
+        .getOwnSubmissions()
         .then((resp) => setSubmissions(resp))
         .catch((err) => console.error(err));
     } else {

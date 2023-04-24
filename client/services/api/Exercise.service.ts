@@ -38,12 +38,6 @@ class ExerciseService {
       .then((resp) => resp.json());
   }
 
-  // TODO: rename to "getSolvedOrInProgress" exercises
-  static getSolvedExercises() {
-    return HttpService.get(`${process.env.ENDPOINT}/exercises/solved`)
-      .then((response) => response.json());
-  }
-
   static getCreatedExercises() {
     return HttpService.get(`${process.env.ENDPOINT}/exercises`)
       .then((response) => response.json());

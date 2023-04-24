@@ -17,6 +17,7 @@ import TutorialProgress from './TutorialProgress/TutorialProgress';
 import { aggregateTutorialProgress } from '~/services/Utils';
 import { PublicUserI, UserRole } from '~/../shared/types/user.types';
 import Link from '~/components/generic/Link';
+import SubmissionService from '~/services/api/Submission.service';
 
 interface Props {
   profileUser: PublicUserI;
@@ -25,7 +26,7 @@ interface Props {
 function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connector> & Props) {
   const isOwnProfile = currentUser.info && currentUser.info.username === profileUser.username;
   const [didError, setDidError] = useState(false);
-  const [solvedExercises, setSolvedExercises] = useState<Submission[]>(undefined);
+  const [submissions, setSubmissions] = useState<Submission[]>(undefined);
   const [tutorialsProgress, setTutorialsProgress] = useState<TutorialProgressI[]>(undefined);
 
   const fetchTutorialsProgress = async () => {
@@ -45,14 +46,14 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
   useEffect(() => {
     // Solved exercises
     if (isOwnProfile) {
-      ExerciseService
-        .getSolvedExercises()
-        .then((resp) => setSolvedExercises(resp))
+      SubmissionService
+        .getOwnSubmissions()
+        .then((resp) => setSubmissions(resp))
         .catch((err) => console.error(err));
 
       fetchTutorialsProgress();
     } else {
-      setSolvedExercises([]);
+      setSubmissions([]);
       setTutorialsProgress([]);
     }
   }, []);
@@ -67,7 +68,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
     );
   }
 
-  if (!solvedExercises || !tutorialsProgress) {
+  if (!submissions || !tutorialsProgress) {
     // Loading
     return null;
   }
@@ -122,7 +123,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
         Exerciții rezolvate
       </h2>
       <div className={styles['exercises-wrapper']}>
-        {solvedExercises.map((submission: Submission) => (
+        {submissions.map((submission: Submission) => (
           <ExercisePreview
             key={submission._id}
             exercise={submission.exercise}
@@ -136,7 +137,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
             ].includes(submission.status)}
           />
         ))}
-        {solvedExercises.length === 0 && (
+        {submissions.length === 0 && (
           <Link prefetch={false} href="/exercitii" className="d-flex align-items-center justify-content-center no-underline text-center">
             <FontAwesomeIcon icon={faPlus} width="32" height="32" />
             <span> Rezolvă un exercițiu </span>

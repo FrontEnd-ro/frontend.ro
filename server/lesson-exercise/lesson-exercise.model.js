@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 const {
   validateObjectId
 } = require('../ServerUtils');
-const { LESSONS_WITH_EXERCISES } = require('../../shared/SharedConstants');
 const { ExerciseSchemaJSONDefinition } = require('../exercise/exercise.schema');
 
 const LessonExercisesJSONSchema = {
   ...ExerciseSchemaJSONDefinition,
-  lesson: { type: String, enum: LESSONS_WITH_EXERCISES, required: true }
+  lesson: { type: String, required: true }
 }
 
 const LessonExercisesSchema = new mongoose.Schema(

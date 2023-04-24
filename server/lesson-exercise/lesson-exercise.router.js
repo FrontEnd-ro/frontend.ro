@@ -3,7 +3,6 @@ const { ServerError } = require('../ServerUtils');
 const { PublicMiddleware } = require('../Middlewares');
 const LessonExerciseModel = require('./lesson-exercise.model');
 import { SubmissionStatus } from '../../shared/types/submission.types';
-const { LESSONS_WITH_EXERCISES } = require('../../shared/SharedConstants');
 const SubmissionModel = require('../submission/submission.model');
 
 const lessonExerciseRouter = express.Router();
@@ -35,11 +34,6 @@ lessonExerciseRouter.get('/:exerciseId', [PublicMiddleware], async function getL
 lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function getAllExercisesForLesson(req, res) {
   const { lessonId } = req.params;
   const { user } = req.body;
-
-  // if (!LESSONS_WITH_EXERCISES.includes(lessonId)) {
-  //   new ServerError(404, `Nu există lecția cu id-ul: ${lessonId}`).send(res);
-  //   return
-  // }
 
   try {
     let exercises = await LessonExerciseModel.getAllFromLesson(lessonId);

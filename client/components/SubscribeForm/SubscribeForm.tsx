@@ -10,7 +10,7 @@ function SubscribeForm({ className = '' }: { className?: string }) {
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [error, setError] = useState(null);
 
-  const ROBOT_STRING = 'frontend.ro';
+  const ROBOT_STRING = 'frontend';
 
   const submit = (e) => {
     e.preventDefault();

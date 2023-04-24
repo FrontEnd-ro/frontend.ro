@@ -15,10 +15,12 @@ import HtmlFakeDiploma from './components/HtmlFakeDiploma/HtmlFakeDiploma';
 import {
   CopyLinkButton, FacebookButton, LinkedInButton, WhatsAppButton,
 } from '~/components/SocialMediaButtons';
+import { Trans, useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './HtmlLanding.module.scss';
 
 const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
+  const { t } = useTranslation('common');
   const urlToShare = useCurrentUrl();
   const tutorialUrl = `/${HTML_TUTORIAL_ID}/tutorial`;
   const didStartTutorial = tutorials.includes(HTML_TUTORIAL_ID);
@@ -41,15 +43,11 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
       <Header theme="dark" withNavMenu />
       <main data-certification-page className={styles.HtmlLanding}>
         <div className={`${styles.hero} d-flex align-items-center justify-content-center bg-black text-white`}>
-          <h1 className="text-center mb-0"> Învață HTML de la zero </h1>
+          <h1 className="text-center mb-0"> {t('HtmlLanding.Learn HTML from scratch')} </h1>
           <p>
-            printr-un curs online, focusat pe
-            {' '}
-            <span className={styles['text-chip']}>
-              practică și feedback
-            </span>
-            {' '}
-            de la developeri cu experiență
+            <Trans i18nKey='common:HtmlLanding.description' components={[
+              <span key='0' className={styles['text-chip']} />,
+            ]} />
           </p>
           <div className={`${styles['hero-controls']} d-flex align-items-center justify-content-between`}>
             {didStartTutorial ? (
@@ -69,16 +67,16 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
                   </OptionsDrawer.Element>
                 </OptionsDrawer>
                 <Link prefetch={false} href={tutorialUrl} color="blue" variant="contained">
-                  Continuă Tutorialul
+                  {t('Continue the tutorial')}
                 </Link>
               </>
             ) : (
               <>
                 <Link prefetch={false} onClick={navigateToFirstSection} href="#what-is-html" variant="contained" color="white">
-                  Află mai multe
+                  {t('Find out more')}
                 </Link>
                 <Link prefetch={false} href={tutorialUrl} color="blue" variant="contained">
-                  Începe acum
+                  {t('Start now')}
                 </Link>
               </>
             )}
@@ -89,26 +87,19 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
         <div id="what-is-html">
           <div className={styles.section}>
             <h2 className={styles['section-heading']}>
-              Ce este HTML-ul?
+              {t('HtmlLanding.What is HTML?')}
             </h2>
 
             <p className={styles['section-text']}>
-              Este punctul de start în călătoria fiecărui
-              {' '}
-              <a href="/intro/ce-este-frontend-ul">FrontEnd developer</a>
-              .
+              <Trans i18nKey='common:HtmlLanding.htmlDescription' components={[
+                <a key='0' href="/intro/ce-este-frontend-ul" />
+              ]} />
             </p>
             <p className={styles['section-text']}>
-              Alături de
-              {' '}
-              <span className="text-bold"> CSS </span>
-              {' '}
-              și
-              {' '}
-              <span className="text-bold"> JavaScript </span>
-              {' '}
-              este unul din cele 3 limbaje pe care
-              trebuie să le înveți pentru a construi site-uri și aplicații web.
+              <Trans i18nKey='common:HtmlLanding.frontendLanguages' components={[
+                <span key='0' className="text-bold" />,
+                <span key='1' className="text-bold" />
+              ]} />
             </p>
           </div>
           <div className={styles['HtmlCssJs-wrapper']}>
@@ -119,34 +110,28 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
         <div>
           <section className={styles.section}>
             <h2 className={styles['section-heading']}>
-              Ce vei învăța?
+              {t('HtmlLanding.What will you learn?')}
             </h2>
             <p className={styles['section-text']}>
-              Cursul acesta e destinat persoanelor cu zero (sau foarte puțină)
-              experiență în FrontEnd, deci vom începe de la lucrurile de bază
-              și apoi continua cu multă practică.
+              {t('HtmlLanding.whatWillYouLearnDescription')}
             </p>
             <List className={`${styles['learn-list']} ${styles['section-text']}`} variant="checkmark">
               <li className="mt-8">
-                Ce e FrontEnd development-ul?
+                {t('HtmlLanding.whatYouWillLearn.1')}
               </li>
               <li className="mt-4">
-                Care e rolul HTML-ului în cadrul ramurii de FrontEnd?
+                {t('HtmlLanding.whatYouWillLearn.2')}
               </li>
               <li className="mt-4">
-                Cum să folosești
-                {' '}
-                <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
-                  VSCode
-                </a>
-                {' '}
-                ca și editor de cod
+                <Trans i18nKey='common:HtmlLanding.whatYouWillLearn.3' components={[
+                  <a key='0' href="https://code.visualstudio.com/" target="_blank" rel="noreferrer" />
+                ]} />
               </li>
               <li className="mt-4">
-                Care sunt și cum să folosești cele mai importante elemente HTML
+                {t('HtmlLanding.whatYouWillLearn.4')}
               </li>
               <li className="mt-4">
-                Bune practici în zona de scriere a codului, accesibilitate și perfomanță
+                {t('HtmlLanding.whatYouWillLearn.5')}
               </li>
             </List>
 
@@ -157,7 +142,7 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
         <div>
           <div className={styles.section}>
             <h2 className={styles['section-heading']}>
-              Cum funcționează cursul?
+              {t('HtmlLanding.How does the course work?')}
             </h2>
           </div>
           <HtmlHowItWorks className={styles.HtmlHowItWorks} />
@@ -166,12 +151,10 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
         <div>
           <div className={styles.section}>
             <h2 className={styles['section-heading']}>
-              Iar la final primești o certificare!
+            {t('HtmlLanding.certification.title')}
             </h2>
             <p className={styles['section-text']}>
-              În programare nu contează prea mult diplomele în sine, ci ce știi să faci.
-              De aceea, folosește această certificare ca o dovadă că ai reușit să scrii cod
-              real, gata de producție, validat de developeri cu experiență!
+              {t('HtmlLanding.certification.description')}
             </p>
           </div>
           <div className={styles.section}>
@@ -182,17 +165,17 @@ const HtmlLanding = ({ tutorials }: ConnectedProps<typeof connector>) => {
         <div>
           <div className={styles.section}>
             <h2 className={styles['section-heading']}>
-              Gata să începem?
+              {t('HtmlLanding.Ready to begin?')}
             </h2>
           </div>
           <div className="text-center text-2xl">
             {didStartTutorial ? (
               <Link prefetch={false} href={tutorialUrl} color="blue" variant="contained">
-                Continuă Tutorialul
+                {t('Continue the tutorial')}
               </Link>
             ) : (
               <Link prefetch={false} color="blue" variant="contained" href={tutorialUrl}>
-                Începe Tutorialul
+                {t('Start the tutorial')}
               </Link>
             )}
           </div>

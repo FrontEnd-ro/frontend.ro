@@ -2,6 +2,11 @@
   "Menu": "Menu",
   "FrontEndro": "FrontendCademy",
   "Subscribe": "Subscribe",
+  "Find out more": "Find out more",
+  "Start now": "Start now",
+  "Congratulations!": "Congratulations!",
+  "Start the tutorial": "Start the tutorial",
+  "Continue the tutorial": "Continue the tutorial",
   "Landing": {
     "title": "FrontEndCademy - Learn FrontEnd development",
     "description": "Want to learn FrontEnd? We've got free tutorials and a community of developers to help you improve your skills."
@@ -13,15 +18,12 @@
     "See the HTML certification!": "See the HTML certification!"
   },
   "LandingHtml": {
-    "Find out more": "Find out more",
-    "Continue the tutorial": "Continue the tutorial",
     "headline": "If you want to learn <0>FrontEnd</0> from scratch <1/> Start with the  <2> HTML Module </2>",
     "description": "It's specially made for beginners, and you'll learn to write and understand code like the one below"
   },
   "LandingChristmasAdvent": {
     "title": "Learn 3D programming with Three.js and React!",
     "description" : "Together with <0>Colorful Coding</0> we created an interactive tutorial in which you help <1> Santa Claus </1> repair the gift factory.",
-    "Start the tutorial": "Start the tutorial",
     "loadingError": "We couldn't load the example. Try reloading the page."
   },
   "LandingTidbits": {
@@ -51,9 +53,84 @@
     "message": "It looks like the page you're looking for doesn't exist.",
     "callToAction": "Navigate home!"
   },
+  "HtmlLanding": {
+    "Learn HTML from scratch": "Learn HTML from scratch",
+    "description": "with an online course, focused on <0>practice and feedback</0> from experienced developers",
+    "What is HTML?": "What is HTML?",
+    "htmlDescription": "Is the starting point of every <0>FrontEnd developer's</0> journey.",
+    "frontendLanguages": "Together with <0> CSS </0> and <1> JavaScript </1> it is one of the 3 languages you have to learn to build websites and web applications.",
+    "What will you learn?": "What will you learn?",
+    "whatWillYouLearnDescription": "This course is created for people with zero (or very little) FrontEnd experience, so we'll start with the basics and then continue with lots of practice.",
+    "whatYouWillLearn": {
+      "1": "What is FrontEnd development?",
+      "2": "What is the role of HTML in FrontEnd development?",
+      "3": "How to use <0>VSCode</0> as a code editor",
+      "4": "What are most important HTML elements and how to use them?",
+      "5": "Best practices in the area of code writing, accessibility and performance"
+    },
+    "How does the course work?": "How does the course work?",
+    "certification": {
+      "title": "At the end you'll be awarded a certification!",
+      "description": "In programming, it's not so much the degrees themselves, but what your technical skills are. So use this certification as proof that you've written real, production-ready code validated by experienced developers!"
+    },
+    "Ready to begin?": "Ready to start?"
+  },
   "lessons": {
     "Introductive Lesson": "Introductive Lesson",
     "HTML Lesson": "HTML Lesson",
     "CSS Lesson": "CSS Lesson"
+  },
+  "HtmlCssJs": {
+    "htmlDescription": "Defines the page structure",
+    "cssDescription": "Add colors, spacing, fonts, etc. It makes the page beautiful and easy to use.",
+    "jsDescription": "Add functionality: you can create tasks and then mark them as completed."
+  },
+  "CheckboxOnboarding": {
+    "description": "Click the checkboxes to see what the component below looks like without CSS or JavaScript."
+  },
+  "HtmlHowItWorks": {
+    "1": {
+      "title": "Read the lesson",
+      "content": {
+        "1": "Each concept is explained through a text lesson, with code examples."
+      }
+    },
+    "2": {
+      "title": "Solve the exercises",
+      "content": {
+        "1": "At the end of each lesson you will find one or more exercises, which you must <0> solve </0> and then send to us for <1>feedback</1>."
+      }
+    },
+    "3": {
+      "title": "We review your solution",
+      "content": {
+        "1": "We look at each solved exercise to see if it is correct and follows good programming practices."
+      }
+    },
+    "4": {
+      "title": "We send you feedback",
+      "content": {
+        "1": "If the exercise is not correct, we send you improvement feedback directly in the platform."
+      }
+    },
+    "5": {
+      "title": "You update the code",
+      "content": {
+        "1": "Based on the feedback received you will modify the solution, and then submit it once more for evaluation."
+      }
+    },
+    "6": {
+      "title": "We review it again",
+      "content": {
+        "1": "We are looking over this new solution again, to confirm if your changes are correct."
+      }
+    },
+    "7": {
+      "title": "We approve your solution!"
+    }
+  },
+  "Diploma": {
+    "description:no-exercises": "has successfully finished the <0> {{TUTORIAL}} </0>.",
+    "description:exercises": "has successfully finished the <0>{{TUTORIAL}}</0> successfully solving all {{COUNT}} exercises."
   }
 }

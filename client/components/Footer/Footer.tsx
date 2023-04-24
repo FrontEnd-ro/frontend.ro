@@ -5,7 +5,10 @@ import { useTranslation } from '~/services/typesafeNextTranslate';
 import styles from './Footer.module.scss';
 
 export default function Footer() {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
+  const email = lang === 'ro'
+    ? 'hello@frontend.ro'
+    : 'hello@frontendcademy.com';
   return (
     <footer className={styles.footer}>
       <section>
@@ -29,7 +32,7 @@ export default function Footer() {
       <section>
         <h5> Contact </h5>
         <p>
-          <a href="mailto:hello@frontend.ro">hello@frontend.ro</a>
+          <a href={`mailto:${email}`}>{email}</a>
         </p>
         <p>
           {t('Footer.An open-source project started in Iași, Romania')}

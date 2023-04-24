@@ -55,7 +55,7 @@ const LandingChristmasAdvent = ({ className = '' }: { className?: string }) => {
           </div>
           <div>
             <Link prefetch={false} href={CHRISTMAS_ADVENT_ID} variant="contained" color="green" className="mt-2 text-xl d-inline-block">
-              {t('LandingChristmasAdvent.Start the tutorial')}
+              {t('Start the tutorial')}
             </Link>
           </div>
         </div>

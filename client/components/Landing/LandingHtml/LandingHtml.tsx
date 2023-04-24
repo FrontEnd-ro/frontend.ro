@@ -44,13 +44,13 @@ const LandingHTML = ({ user, isLoggedIn, className = '' }: ConnectedProps<typeof
   const getCallToAction = (): { text: string; href: string; } => {
     if (!isLoggedIn || !user.tutorials.includes(HTML_TUTORIAL_ID)) {
       return {
-        text: t('LandingHtml.Find out more'),
+        text: t('Find out more'),
         href: '/html',
       };
     }
 
     return {
-      text: t('LandingHtml.Continue the tutorial'),
+      text: t('Continue the tutorial'),
       href: '/html/tutorial',
     };
   };

@@ -7,6 +7,7 @@ import ModifySolution from '../ModifySolution/ModifySolution';
 import ReadTheLesson from '../ReadTheLesson/ReadTheLesson';
 import ReceiveFeedback from '../ReceiveFeedback/ReceiveFeedback';
 import SolutionApproved from '../SolutionApproved/SolutionApproved';
+import { Trans, useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './HtmlHowItWorks.module.scss';
 
@@ -22,61 +23,44 @@ const HtmlHowItWorks = ({ className }: { className?: string}) => {
 };
 
 const Explainer = () => {
+  const { t } = useTranslation('common');
   const explanations = [{
-    title: 'Citești lecția',
+    title: t('HtmlHowItWorks.1.title'),
     paragraphs: [
-      <> Fiecare concept e explicat printr-o lecție text, cu exemple de cod. </>,
+      t('HtmlHowItWorks.1.content.1')
     ],
   }, {
-    title: 'Rezolvi exercițiile',
+    title: t('HtmlHowItWorks.2.title'),
     paragraphs: [
       <>
-        La finalul fiecărei lecții vei găsi unul sau mai multe exerciții,
-        pe care trebuie să le
-        {' '}
-        <span className="text-bold"> rezolvi </span>
-        {' '}
-        iar apoi să ni le trimiți pentru
-        {' '}
-        <span className="text-bold">feedback</span>
-        .
+        <Trans i18nKey='common:HtmlHowItWorks.2.content.1' components={[
+          <span key='0' className="text-bold" />,
+          <span key='1' className="text-bold" />,
+        ]} />
       </>,
     ],
   }, {
-    title: 'Îți evaluăm soluția',
+    title: t('HtmlHowItWorks.3.title'),
     paragraphs: [
-      <>
-        Ne uităm pe fiecare exercițiu rezolvat
-        să vedem dacă e corect și respectă bunele practici
-        de programare.
-      </>,
+      t('HtmlHowItWorks.3.content.1')
     ],
   }, {
-    title: 'Îți trimitem feedback',
+    title: t('HtmlHowItWorks.4.title'),
     paragraphs: [
-      <>
-        Dacă exercitiul nu e corect, îți trimitem
-        feedback de îmbunătățire direct în platformă.
-      </>,
+      t('HtmlHowItWorks.4.content.1')
     ],
   }, {
-    title: 'Modifici soluția',
+    title: t('HtmlHowItWorks.5.title'),
     paragraphs: [
-      <>
-        Pe baza feedback-ului primit vei modifica soluția,
-        iar apoi o trimiți încă o dată către evaluare.
-      </>,
+      t('HtmlHowItWorks.5.content.1')
     ],
   }, {
-    title: 'O evaluăm din nou',
+    title: t('HtmlHowItWorks.6.title'),
     paragraphs: [
-      <>
-        Ne uitam iar peste această nouă soluție, să confirmăm
-        dacă schimbările tale sunt corecte.
-      </>,
+      t('HtmlHowItWorks.6.content.1')
     ],
   }, {
-    title: 'Îți acceptăm soluția!',
+    title: t('HtmlHowItWorks.7.title'),
     paragraphs: [],
   }];
 
@@ -106,7 +90,7 @@ const FullAnimation = ({ percentage }: { percentage: number }) => {
   const code = `<!DOCTYPE html>
 <html lang="ro">
 <head>
-  <title>Exercitiu HTML</title>
+  <title>HTML Exercise</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -121,7 +105,7 @@ const FullAnimation = ({ percentage }: { percentage: number }) => {
   const finalCode = `<!DOCTYPE html>
 <html lang="ro">
 <head>
-  <title>Exercitiu HTML</title>
+  <title>HTML Exercise</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -228,7 +212,7 @@ const SolveTheExercise = ({ percentage }: { percentage: number }) => {
   const code = `<!DOCTYPE html>
 <html lang="ro">
 <head>
-  <title>Exercitiu HTML</title>
+  <title>HTML Exercise</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>

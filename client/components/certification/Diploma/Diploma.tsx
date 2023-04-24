@@ -5,6 +5,7 @@ import { faDownload, faShare } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '~/services/Utils';
 import { PublicUserI } from '~/../shared/types/user.types';
 import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
+import { Trans, useTranslation } from '~/services/typesafeNextTranslate';
 import { FacebookButton, LinkedInButton, CopyLinkButton } from '~/components/SocialMediaButtons';
 
 import styles from './Diploma.module.scss';
@@ -41,6 +42,7 @@ const Diploma = ({
   showSignature = true,
   showQRCode = true,
 }: Props) => {
+  const { t, lang } = useTranslation('common');
   const [fullCertificationUrl, setFullCertificationUrl] = useState(certification.url);
   useEffect(() => {
     setFullCertificationUrl(`${window.location.origin}${certification.url}`);
@@ -52,8 +54,8 @@ const Diploma = ({
     // https://github.com/FrontEnd-ro/frontend.ro/issues/449
     <section data-diploma className={`${styles.Diploma} ${styles[`Diploma-${variant}`]} relative`}>
       <div className={`${styles.meta} absolute d-flex justify-content-between align-items-center mb-4`}>
-        <a href="https://FrontEnd.ro">
-          FrontEnd.ro
+        <a href={lang === 'ro' ? "https://FrontEnd.ro" : "https://FrontendCademy.com"}>
+          {t('FrontEndro')}
         </a>
         <time dateTime={format(certification.date.getTime(), 'yyyy-MM-dd')}>
           {formatDate(certification.date)}
@@ -80,19 +82,16 @@ const Diploma = ({
           />
         </a>
         <p>
-          a completat
-          <a className="mt-4 mb-4 d-block text-bold" href={`/${tutorial?.tutorialId ?? challenge?.challengeId}`}>
-            {tutorial?.name ?? challenge?.title}
-          </a>
-          {certification.exerciseCount > 0 && (
-            <>
-              rezolvând cu succes toate cele
-              {' '}
-              {certification.exerciseCount}
-              {' '}
-              exerciții.
-            </>
-          )}
+          <Trans
+            i18nKey={certification.exerciseCount > 0 ? 'common:Diploma.description:exercises' : 'common:Diploma.description:no-exercises'}
+            components={[
+              <a key='0' className="mt-4 mb-4 d-block text-bold" href={`/${tutorial?.tutorialId ?? challenge?.challengeId}`} />
+            ]}
+            values={{
+              TUTORIAL: tutorial?.name ?? challenge?.title,
+              COUNT: certification.exerciseCount
+            }}
+          />
         </p>
       </div>
       <footer className="relative d-flex justify-content-between align-items-end">

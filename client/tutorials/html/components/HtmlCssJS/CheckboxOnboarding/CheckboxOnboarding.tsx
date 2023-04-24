@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './CheckboxOnboarding.module.scss';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 const CheckboxOnboarding = ({ className = '' }: { className?: string }) => {
+  const { t } = useTranslation('common');
   return (
     <p className={`${styles.CheckboxOnboarding} ${className}`}>
-      Apasă pe checkbox-uri pentru a vedea cum arată
-      componenta de mai jos fără CSS sau JavaScript.
+      {t('CheckboxOnboarding.description')}
     </p>
   );
 };

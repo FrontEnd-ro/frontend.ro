@@ -64,29 +64,30 @@ MyApp.getInitialProps = async ({ ctx }) => {
   const isClientSide = !ctx.req;
 
   if (isClientSide) {
+    pageProps.namespaces = await loadLocaleNamespaces(process.env.LANGUAGE);
     return { pageProps };
   }
 
   const { token } = ctx.req?.cookies ?? {};
   if (!token) {
-    const [applicationConfig, common] = await Promise.all([
+    const [applicationConfig, namespaces] = await Promise.all([
       fetchApplicationConfigServerSide(),
-      import(`../locales/${process.env.LANGUAGE}/common.json`).then(resp => resp.default),
+      loadLocaleNamespaces(process.env.LANGUAGE)
     ]);
-    pageProps.namespaces = { common };
+    pageProps.namespaces = namespaces;
     pageProps._applicationConfig = applicationConfig;
 
     return { pageProps };
   }
 
-  const [user, applicationConfig, common] = await Promise.all([
+  const [user, applicationConfig, namespaces] = await Promise.all([
     fetchUserServiceSide(token),
     fetchApplicationConfigServerSide(),
-    import(`../locales/${process.env.LANGUAGE}/common.json`).then(resp => resp.default),
+    loadLocaleNamespaces(process.env.LANGUAGE)
   ]);
 
   pageProps._serverUser = user;
-  pageProps.namespaces = { common };
+  pageProps.namespaces = namespaces;
   pageProps._applicationConfig = applicationConfig;
 
   return { pageProps };
@@ -184,4 +185,12 @@ function useFathom(trackingCode: string, userInfo?: UserState['info']) {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
     };
   }, [trackingCode, userInfo?.role]);
+}
+
+async function loadLocaleNamespaces(lang: string): Promise<{
+  common: Record<string, any>
+}> {
+  const common = await import(`../locales/${lang}/common.json`).then(resp => resp.default);
+
+  return { common };
 }

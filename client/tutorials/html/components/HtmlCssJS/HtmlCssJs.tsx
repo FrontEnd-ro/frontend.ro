@@ -4,6 +4,7 @@ import TodoExample from './TodoExample/TodoExample';
 import GradientText from '~/components/GradientText/GradientText';
 
 import styles from './HtmlCssJs.module.scss';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 import CheckboxOnboarding from './CheckboxOnboarding/CheckboxOnboarding';
 
 interface Config {
@@ -130,23 +131,27 @@ const HTMLBlob = ({ transitionDuration }: { transitionDuration: string }) => (
 );
 
 const HTMLExplanation = React.forwardRef<HTMLDivElement, ExplanationBlobProps>(
-  ({ enabled, blobTransitionDuration }: ExplanationBlobProps, ref) => (
-    <div
-      ref={ref}
-      className={`${styles.Explanation} ${styles.HTMLExplanation} ${enabled ? styles.enabled : ''}`}
-    >
-      <HTMLBlob transitionDuration={blobTransitionDuration} />
-      <div className={styles['explanation-text']}>
-        <GradientText angle={170} fromColor="var(--blue)" toColor="var(--red)" className="text-2xl m-0 text-bold d-inline-block">
-          HTML
-        </GradientText>
-        <p className={`${styles.description} mt-4 mb-0`}>
-          Definește structura de bază
-        </p>
+  ({ enabled, blobTransitionDuration }: ExplanationBlobProps, ref) => {
+    const { t } = useTranslation('common');
+    return (
+      <div
+        ref={ref}
+        className={`${styles.Explanation} ${styles.HTMLExplanation} ${enabled ? styles.enabled : ''}`}
+      >
+        <HTMLBlob transitionDuration={blobTransitionDuration} />
+        <div className={styles['explanation-text']}>
+          <GradientText angle={170} fromColor="var(--blue)" toColor="var(--red)" className="text-2xl m-0 text-bold d-inline-block">
+            HTML
+          </GradientText>
+          <p className={`${styles.description} mt-4 mb-0`}>
+            {t('HtmlCssJs.htmlDescription')}
+          </p>
+        </div>
       </div>
-    </div>
-  ),
-);
+    )
+  });
+
+HTMLExplanation.displayName = 'HTMLExplanation';
 
 /** ****************************** CSS Explanation */
 const CSSBlob = ({ transitionDuration }: { transitionDuration: string }) => (
@@ -178,24 +183,27 @@ const CSSBlob = ({ transitionDuration }: { transitionDuration: string }) => (
 );
 
 const CSSExplanation = React.forwardRef<HTMLDivElement, ExplanationBlobProps>(
-  ({ enabled, blobTransitionDuration }: ExplanationBlobProps, ref) => (
-    <div
-      ref={ref}
-      className={`${styles.Explanation} ${styles.CSSExplanation} ${enabled ? styles.enabled : ''}`}
-    >
-      <CSSBlob transitionDuration={blobTransitionDuration} />
-      <div className={styles['explanation-text']}>
-        <GradientText angle={10} fromColor="var(--red)" toColor="var(--yellow)" className="text-2xl m-0 text-bold d-inline-block">
-          CSS
-        </GradientText>
-        <p className={`${styles.description} mt-4 mb-0`}>
-          Adaugă culori, spațieri, fonturi, etc.
-          Practic, face pagina frumoasă și ușor de utilizat.
-        </p>
+  ({ enabled, blobTransitionDuration }: ExplanationBlobProps, ref) => {
+    const { t } = useTranslation('common');
+    return (
+      <div
+        ref={ref}
+        className={`${styles.Explanation} ${styles.CSSExplanation} ${enabled ? styles.enabled : ''}`}
+      >
+        <CSSBlob transitionDuration={blobTransitionDuration} />
+        <div className={styles['explanation-text']}>
+          <GradientText angle={10} fromColor="var(--red)" toColor="var(--yellow)" className="text-2xl m-0 text-bold d-inline-block">
+            CSS
+          </GradientText>
+          <p className={`${styles.description} mt-4 mb-0`}>
+            {t('HtmlCssJs.cssDescription')}
+          </p>
+        </div>
       </div>
-    </div>
-  ),
-);
+    )
+  });
+
+CSSExplanation.displayName = 'CSSExplanation';
 
 /* ******************************* JavaScript Explanation */
 const JSBlob = ({ transitionDuration }: { transitionDuration: string }) => (
@@ -228,22 +236,26 @@ const JSBlob = ({ transitionDuration }: { transitionDuration: string }) => (
 );
 
 const JSExplanation = React.forwardRef<HTMLDivElement, ExplanationBlobProps>(
-  ({ enabled, blobTransitionDuration }: ExplanationBlobProps, ref) => (
-    <div
-      ref={ref}
-      className={`${styles.Explanation} ${styles.JSExplanation} ${enabled ? styles.enabled : ''}`}
-    >
-      <JSBlob transitionDuration={blobTransitionDuration} />
-      <div className={styles['explanation-text']}>
-        <GradientText angle={10} fromColor="var(--yellow)" toColor="var(--black)" className="text-2xl m-0 text-bold d-inline-block">
-          JavaScript
-        </GradientText>
-        <p className={`${styles.description} mt-4 mb-0`}>
-          Adaugă funcționalitate: poți crea taskuri, iar apoi să le marchezi drept rezolvate.
-        </p>
+  ({ enabled, blobTransitionDuration }: ExplanationBlobProps, ref) => {
+    const { t } = useTranslation('common');
+    return (
+      <div
+        ref={ref}
+        className={`${styles.Explanation} ${styles.JSExplanation} ${enabled ? styles.enabled : ''}`}
+      >
+        <JSBlob transitionDuration={blobTransitionDuration} />
+        <div className={styles['explanation-text']}>
+          <GradientText angle={10} fromColor="var(--yellow)" toColor="var(--black)" className="text-2xl m-0 text-bold d-inline-block">
+            JavaScript
+          </GradientText>
+          <p className={`${styles.description} mt-4 mb-0`}>
+            {t('HtmlCssJs.jsDescription')}
+          </p>
+        </div>
       </div>
-    </div>
-  ),
-);
+    )
+  });
+
+JSExplanation.displayName = 'JSExplanation';
 
 export default HtmlCssJs;

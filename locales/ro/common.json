@@ -2,6 +2,11 @@
   "Menu": "Meniu",
   "FrontEndro": "FrontEnd.ro",
   "Subscribe": "Abonează-te",
+  "Start now": "Începe acum",
+  "Congratulations!": "Felicitări!",
+  "Find out more": "Află mai multe",
+  "Start the tutorial": "Începe tutorialul",
+  "Continue the tutorial": "Continuă tutorialul",
   "Landing": {
     "title": "FrontEnd.ro - Învață de la comunitatea open-source",
     "description": "Vrei să înveți FrontEnd? Aici ai parte de tutoriale gratuite și o comunitate de developeri care te vor ajuta să devii mai bun."
@@ -13,15 +18,12 @@
     "See the HTML certification!": "Vezi certificarea HTML!"
   },
   "LandingHtml": {
-    "Find out more": "Află mai multe",
-    "Continue the tutorial": "Continuă tutorialul",
     "headline": "Dacă vrei să înveți <0>FrontEnd</0> de la zero <1/> Începe cu <2> Modulul de HTML </2>",
     "description": "E special făcut pentru începători, și vei învăța să înțelegi și să scrii cod ca cel de jos"
   },
   "LandingChristmasAdvent": {
     "title": "Învață să programezi 3D cu Three.js și React!",
     "description" : "Împreună cu <0>Colorful Coding</0> v-am pregătit un tutorial 100% interactiv în care-l ajutați pe <1> Moș Crăciun </1> să repare fabrica de cadouri!",
-    "Start the tutorial": "Începe tutorialul",
     "loadingError": "Nu am putut încărca exemplul. Încearcă să reîncarci pagina."
   },
   "LandingTidbits": {
@@ -51,9 +53,84 @@
     "message": "Se pare că pagina pe care o cauți nu mai există.",
     "callToAction": "Navighează acasă!"
   },
+  "HtmlLanding": {
+    "Learn HTML from scratch": "Învață HTML de la zero",
+    "description": "printr-un curs online, focusat pe <0>practică și feedback</0> de la developeri cu experiență",
+    "What is HTML?": "Ce este HTML-ul?",
+    "htmlDescription": "Este punctul de start în călătoria fiecărui <0>FrontEnd developer</0>.",
+    "frontendLanguages": "Alături de <0> CSS </0> și <1> JavaScript </1> este unul din cele 3 limbaje pe care trebuie să le înveți pentru a construi site-uri și aplicații web.",
+    "What will you learn?": "Ce vei învăța?",
+    "whatWillYouLearnDescription": "Cursul acesta e destinat persoanelor cu zero (sau foarte puțină) experiență în FrontEnd, deci vom începe de la lucrurile de bază și apoi continua cu multă practică.",
+    "whatYouWillLearn": {
+      "1": "Ce e FrontEnd development-ul?",
+      "2": "Care e rolul HTML-ului în cadrul ramurii de FrontEnd?",
+      "3": "Cum să folosești <0>VSCode</0> ca și editor de cod",
+      "4": "Care sunt și cum să folosești cele mai importante elemente HTML",
+      "5": "Bune practici în zona de scriere a codului, accesibilitate și perfomanță"
+    },
+    "How does the course work?": "Cum funcționează cursul?",
+    "certification": {
+      "title": "Iar la final primești o certificare!",
+      "description": "În programare nu contează prea mult diplomele în sine, ci ce știi să faci. De aceea, folosește această certificare ca o dovadă că ai reușit să scrii cod real, gata de producție, validat de developeri cu experiență!"
+    },
+    "Ready to begin?": "Gata să începem?"
+  },
   "lessons": {
     "Introductive Lesson": "Lecție Introductivă",
     "HTML Lesson": "Lecție HTML",
     "CSS Lesson": "Lecție CSS"
+  },
+  "HtmlCssJs": {
+    "htmlDescription": "Definește structura de bază",
+    "cssDescription": "Adaugă culori, spațieri, fonturi, etc. Practic, face pagina frumoasă și ușor de utilizat.",
+    "jsDescription": "Adaugă funcționalitate: poți crea taskuri, iar apoi să le marchezi drept rezolvate."
+  },
+  "CheckboxOnboarding": {
+    "description": "Apasă pe checkbox-uri pentru a vedea cum arată componenta de mai jos fără CSS sau JavaScript."
+  },
+  "HtmlHowItWorks": {
+    "1": {
+      "title": "Citești lecția",
+      "content": {
+        "1": "Fiecare concept e explicat printr-o lecție text, cu exemple de cod."
+      }
+    },
+    "2": {
+      "title": "Rezolvi exercițiile",
+      "content": {
+        "1": "La finalul fiecărei lecții vei găsi unul sau mai multe exerciții, pe care trebuie să le <0> rezolvi </0> iar apoi să ni le trimiți pentru <1>feedback</1>."
+      }
+    },
+    "3": {
+      "title": "Îți evaluăm soluția",
+      "content": {
+        "1": "Ne uităm pe fiecare exercițiu rezolvat să vedem dacă e corect și respectă bunele practici de programare."
+      }
+    },
+    "4": {
+      "title": "Îți trimitem feedback",
+      "content": {
+        "1": "Dacă exercitiul nu e corect, îți trimitem feedback de îmbunătățire direct în platformă."
+      }
+    },
+    "5": {
+      "title": "Modifici soluția",
+      "content": {
+        "1": "Pe baza feedback-ului primit vei modifica soluția, iar apoi o trimiți încă o dată către evaluare."
+      }
+    },
+    "6": {
+      "title": "O evaluăm din nou",
+      "content": {
+        "1": "Ne uitam iar peste această nouă soluție, să confirmăm dacă schimbările tale sunt corecte."
+      }
+    },
+    "7": {
+      "title": "Îți acceptăm soluția!"
+    }
+  },
+  "Diploma": {
+    "description:no-exercises": "a completat <0> {{TUTORIAL}} </0>.",
+    "description:exercises": "a completat <0> {{TUTORIAL}} </0> rezolvând cu succes toate cele {{COUNT}} exerciții."
   }
 }

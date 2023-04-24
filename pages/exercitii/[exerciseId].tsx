@@ -2,10 +2,10 @@ import NotFoundPage from '../404';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
-import { Exercise } from '~/redux/user/types';
+import { LessonExercise } from '~/redux/user/types';
 import { ViewOrEditExercise } from '~/components/create-view-edit-exercise';
 
-function EditExercisePage({ exercise }: { exercise?: Exercise }) {
+function EditExercisePage({ exercise }: { exercise?: LessonExercise }) {
   const authorNameOrUsername = exercise?.user?.name || exercise?.user?.username;
   const exerciseChapter = exercise?.type;
 
@@ -36,7 +36,7 @@ export async function getServerSideProps({ req, res, params }) {
   const { default: fetch } = await import('node-fetch');
 
   try {
-    const resp = await fetch(`${process.env.ENDPOINT}/exercises/${exerciseId}`, {
+    const resp = await fetch(`${process.env.ENDPOINT}/lesson-exercises/${exerciseId}`, {
       headers: {
         cookie: `token=${token}`,
       },

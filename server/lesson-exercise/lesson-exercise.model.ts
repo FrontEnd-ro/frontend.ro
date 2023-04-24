@@ -1,41 +1,39 @@
-const mongoose = require('mongoose');
-const {
-  ServerError,
-  validateAgainstSchemaProps,
-  validateObjectId
-} = require('../ServerUtils');
-const UserModel = require('../user/user.model');
-const { ExerciseSchema } = require('./exercise.schema');
+import UserModel from '../user/user.model';
+import mongoose, { Document } from 'mongoose';
+import { UserI } from '../../shared/types/user.types';
+import { LessonExercisesSchema, LessonExercise } from "./lesson-exercise.schema";
+import {  WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
+import { ServerError, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
 
-const Exercise = mongoose.models.Exercise || mongoose.model('Exercise', ExerciseSchema);
-
-class ExerciseModel {
-  // TODO: rename to getById
+class LessonExerciseModel {
   static get(_id) {
-    validateObjectId(_id);
-    return Exercise.findById(_id).populate('user');
+    validateObjectId();
+
+    return LessonExercise
+      .findById(_id)
+      .populate('user');
   }
 
-  static getAllPublic() {
-    return Exercise.find({ private: false });
+  static async getAll() {
+    const lessons = await LessonExercise
+      .find({})
+      .populate<{ user: UserI}>('user');
+
+    return lessons;
   }
 
-  static getUserExercises(userId, publicOnly = false) {
-    const query = {
-      user: userId
-    }
+  static async getAllFromLesson(lessonId): Promise<Document<any, any, WIPPopulatedLessonExerciseI>[]> {
+    const lessons = await LessonExercise
+      .find({ lesson: lessonId })
+      .populate<{ user: UserI }>('user');
 
-    if (publicOnly) {
-      query.private = false
-    }
-
-    return Exercise.find(query).populate("user");
+    return lessons;
   }
 
   static create(payload) {
-    validateAgainstSchemaProps(payload, ExerciseSchema);
+    validateAgainstSchemaProps(payload, LessonExercisesSchema);
 
-    const exercise = new Exercise(payload);
+    const exercise = new LessonExercise(payload);
 
     return new Promise((resolve, reject) => {
       exercise.save((err, data) => {
@@ -50,22 +48,22 @@ class ExerciseModel {
 
   static async update(_id, payload) {
     validateObjectId(_id);
-    const exercise = await Exercise.findById(_id);
+    const exercise = await LessonExercise.findById(_id);
 
     if (!exercise) {
       throw new ServerError(404, `Couldn't update non-existent exercise with id=${_id}.`);
     }
 
-    validateAgainstSchemaProps(payload, ExerciseSchema);
+    validateAgainstSchemaProps(payload, LessonExercisesSchema);
     Object.assign(exercise, payload);
 
     return exercise.save();
   }
 
-  static async delete(_id) {
+  static async delete(_id): Promise<void> {
     validateObjectId(_id);
 
-    const exercise = await Exercise.findById(_id);
+    const exercise = await LessonExercise.findById(_id);
 
     if (!exercise) {
       throw new ServerError(404, `Couldn't delete non-existent exercise with id=${_id}.`);
@@ -100,4 +98,4 @@ class ExerciseModel {
   }
 }
 
-module.exports = ExerciseModel;
+export default LessonExerciseModel;

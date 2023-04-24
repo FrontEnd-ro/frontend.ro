@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 import { SubmissionSchema } from './submission.schema';
 const { PAGE_SIZE, ServerError, validateAgainstSchemaProps, validateObjectId } = require('../ServerUtils');
 import UserModel from '../user/user.model';
-import ExerciseModel from '../exercise/exercise.model';
 import { SubmissionStatus } from '../../shared/types/submission.types';
+import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 
 /** Initialize the User Schema because we need it when referencing & populating the results */
 require('../user/user.model');
-require('../exercise/exercise.model');
 require('../lesson-exercise/lesson-exercise.model');
 
 SubmissionSchema.index({ user: 1, exercise: 1 }, { unique: true });
@@ -193,7 +192,7 @@ class SubmissionModel {
     }
 
     sanitizedSubmission.user = UserModel.sanitize(sanitizedSubmission.user);
-    sanitizedSubmission.exercise = ExerciseModel.sanitize(sanitizedSubmission.exercise);
+    sanitizedSubmission.exercise = LessonExerciseModel.sanitize(sanitizedSubmission.exercise);
 
     const propsToDelete = ['__v'];
 

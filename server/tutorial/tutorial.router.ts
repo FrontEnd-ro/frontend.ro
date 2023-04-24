@@ -4,6 +4,7 @@ import { ServerError } from '../ServerUtils';
 import { UserI } from '../../shared/types/user.types';
 import Tutorial, { sanitizeTutorial } from './tutorial.model';
 import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
+import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
 import { Certification, sanitizeCertification } from '../certification/certification.model';
 import { TutorialI, TutorialProgressI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
@@ -12,7 +13,6 @@ import { WIPPopulatedCertificationI } from '../../shared/types/certification.typ
 import { Document } from 'mongoose';
 
 const SubmissionModel = require('../submission/submission.model')
-const LessonExerciseModel = require('../lesson-exercise/lesson-exercise.model');
 
 const tutorialRouter = express.Router();
 
@@ -104,11 +104,7 @@ tutorialRouter.get('/:tutorialId/progress', [
       certification: null,
     };
 
-    const [submissions, lessonExercises, certification]: [
-      WIPPopulatedSubmissionI[],
-      WIPPopulatedLessonExerciseI[],
-      Document<any, any, WIPPopulatedCertificationI>
-    ] = await Promise.all([
+    const [submissions, lessonExercises, certification] = await Promise.all([
       SubmissionModel.getAllUserSubmissions(user._id.toString()),
       LessonExerciseModel.getAll(),
       Certification.findOne({

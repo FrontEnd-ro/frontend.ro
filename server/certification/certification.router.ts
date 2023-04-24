@@ -1,3 +1,4 @@
+import { Document } from 'mongoose';
 import express, { Request, Response } from 'express';
 import { ServerError } from '../ServerUtils';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
@@ -121,7 +122,7 @@ export async function maybeCreateCertification(
     return;
   }
 
-  const tutorialExercises: WIPPopulatedLessonExerciseI[] = (
+  const tutorialExercises: Document<any, any, WIPPopulatedLessonExerciseI>[] = (
     await Promise.all(
       (tutorial.lessons as LessonI[]).map((lesson) =>
         LessonExerciseModel.getAllFromLesson(lesson.lessonId)

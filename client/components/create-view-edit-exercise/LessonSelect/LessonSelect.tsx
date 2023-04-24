@@ -7,17 +7,9 @@ import { useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './LessonSelect.module.scss';
 
-interface LessonOption {
-  value: {
-    chapter: string;
-    id: string;
-  },
-  label: string;
-}
-
 interface Props {
   selectedId?: string,
-  onChange: (value: LessonOption) => void
+  onChange: (value: string | null) => void
 }
 
 function LessonSelect({ selectedId, onChange } : Props) {
@@ -32,7 +24,7 @@ function LessonSelect({ selectedId, onChange } : Props) {
       label: `${lesson.type}/${lesson.title}`,
     }));
 
-  const defaultValue = chapterLessonPairs.find((pair) => pair.label === selectedId);
+  const defaultValue = chapterLessonPairs.find((pair) => pair.value.id === selectedId);
 
   return (
     <div className={styles['lesson-select']}>
@@ -43,8 +35,16 @@ function LessonSelect({ selectedId, onChange } : Props) {
       </p>
       <ReactSelect
         isSearchable
+        isClearable
         placeholder=""
-        onChange={onChange}
+        isMulti={false}
+        onChange={(pair) => {
+          if (pair === null) {
+            onChange(null);
+          } else {
+            onChange(pair.value.id)
+          }
+        }}
         className={styles.select}
         defaultValue={defaultValue}
         options={chapterLessonPairs}

@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import { RootState } from '~/redux/root.reducer';
-import { Exercise } from '~/redux/user/types';
+import { LessonExercise } from '~/redux/user/types';
 import FolderStructure from '~/../shared/utils/FolderStructure';
 import {
   FileDictionary,
@@ -18,30 +18,28 @@ import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 
 import styles from './NewExercise.module.scss';
-import PrivacyControls from './PrivacyControls/PrivacyControls';
 
 import viewCover from './the-search.svg';
 import editCover from './coding.svg';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
-import ExerciseService from '~/services/api/Exercise.service';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
 import Button from '~/components/Button';
 import { ExerciseType } from '~/../shared/types/exercise.types';
 
 function ViewOrEditExercise({
   exercise,
   userInfo,
-}: ConnectedProps<typeof connector> & { exercise: Exercise }) {
+}: ConnectedProps<typeof connector> & { exercise: LessonExercise }) {
   const isOwnExercise = userInfo && (userInfo.username === exercise.user.username);
   const nameOrUsername = exercise.user.name || exercise.user.username;
 
   const [body, setBody] = useState(exercise.body);
-  const [suggestion, setSuggestion] = useState(exercise.suggestion);
+  const [lesson, setLesson] = useState<string | null>(exercise.lesson);
   const [bodyError, setBodyError] = useState(null);
   const [solutionError, setSolutionError] = useState(null);
 
   const filesToUpload = useRef<FileDictionary>({});
 
-  const [isPrivate, setIsPrivate] = useState(exercise.private);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -68,7 +66,6 @@ function ViewOrEditExercise({
   const updateExercise = async (
     formData: {
       type: ExerciseType,
-      private: 'true' | 'false'
     },
   ) => {
     if (!validateRequiredData()) {
@@ -91,13 +88,12 @@ function ViewOrEditExercise({
     }
 
     try {
-      await ExerciseService.updateExercise(
+      await LessonExerciseService.updateExercise(
         exercise._id,
         {
-          suggestion,
+          lesson,
           body: newBody,
           type: formData.type,
-          private: formData.private === 'true',
           example: exampleRef.current ? exampleRef.current.getFolderStructure() : null,
           solution: solutionRef.current ? solutionRef.current.getFolderStructure() : null,
         },
@@ -134,7 +130,7 @@ function ViewOrEditExercise({
 
     try {
       setIsDeleting(true);
-      await ExerciseService.delete(exercise._id);
+      await LessonExerciseService.delete(exercise._id);
       SweetAlertService.toast({
         type: 'success',
         text: 'Exercițiu șters cu success',
@@ -313,11 +309,10 @@ function ViewOrEditExercise({
         {isOwnExercise && (
           <>
             <ChapterControls form="createForm" />
-            <PrivacyControls form="createForm" isPrivate={isPrivate} onPrivacyChange={setIsPrivate} />
             <footer className="d-flex align-items-center justify-content-between">
               <LessonSelect
-                selectedId={exercise.suggestion}
-                onChange={(value) => setSuggestion(value.label)}
+                selectedId={exercise.lesson}
+                onChange={(value) => setLesson(value)}
               />
               <div>
                 <Button

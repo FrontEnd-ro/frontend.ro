@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Link from '~/components/generic/Link';
 import { Submission } from '~/redux/exercise-submissions/types';
-import { Exercise } from '~/redux/user/types';
+import { LessonExercise } from '~/redux/user/types';
 import { getLessons } from '~/curriculum/Curriculum';
 import SubmissionService from '~/services/api/Submission.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
@@ -18,7 +18,7 @@ import styles from './ExercisesPage.module.scss';
 function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
   const { lang } = useTranslation('common');
   const [submissions, setSubmissions] = useState<Submission[]>(undefined);
-  const [lessonExercises, setLessonExercises] = useState<Exercise[]>(undefined);
+  const [lessonExercises, setLessonExercises] = useState<LessonExercise[]>(undefined);
 
   const isLoggedIn = !!user.info;
 

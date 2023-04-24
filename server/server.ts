@@ -11,9 +11,7 @@ import appConfig from './config';
 
 /** API routers */
 const userRouter = require('./user/user.router');
-const exerciseRouter = require('./exercise/exercise.router');
 const submissionRouter = require('./submission/submission.router');
-const lessonExerciseRouter = require('./lesson-exercise/lesson-exercise.router');
 const demoRouter = require('./demo.router');
 const eventRouter = require('./event/event.router');
 const githubRouter = require('./github/github.router.js');
@@ -28,6 +26,7 @@ import tidbitRouter from './tidbit/tidbit.router';
 import challengeRouter from './challenge/challenge.router';
 import challengeSubmissionRouter from './challenge/challengeSubmission/challengeSubmission.router';
 import { adminSubmissionRouter } from './submission/admin-submission.router';
+import lessonExerciseRouter from './lesson-exercise/lesson-exercise.router';
 
 const port = appConfig.APP.port || appConfig.APP.default_port;
 const app = express();
@@ -50,7 +49,6 @@ app.use('/_next', express.static('/../dist'));
 
 /** API routers */
 app.use('/api/auth', userRouter);
-app.use('/api/exercises', exerciseRouter);
 app.use('/api/lesson-exercises', lessonExerciseRouter);
 app.use('/api/submissions', submissionRouter);
 app.use('/api/admin-submissions', adminSubmissionRouter);

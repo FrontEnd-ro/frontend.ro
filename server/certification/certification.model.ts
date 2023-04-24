@@ -6,7 +6,7 @@ import { LessonI } from '../../shared/types/lesson.types';
 import { LambdaService } from '../services/Lambda.service';
 const UserModel = require('../user/user.model');
 const SubmissionModel = require('../submission/submission.model');
-import ExerciseModel from '../exercise/exercise.model';
+import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
 import { CertificationI, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
@@ -34,7 +34,7 @@ function sanitizeCertification(certification: Document<any, any, WIPPopulatedCer
     sanitizedCertfication.user = UserModel.sanitizeForPublic(sanitizedCertfication.user);
   }
   sanitizedCertfication.lesson_exercises = sanitizedCertfication.lesson_exercises.map(lessonExercise => {
-    return ExerciseModel.sanitize(lessonExercise)
+    return LessonExerciseModel.sanitize(lessonExercise)
   });
 
   return sanitizedCertfication;

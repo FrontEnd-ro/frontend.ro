@@ -7,7 +7,6 @@ import PageContainer from '~/components/PageContainer';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { RootState } from '~/redux/root.reducer';
 import { UserState } from '~/redux/user/types';
-import ExerciseService from '~/services/api/Exercise.service';
 import NoActivity from '../NoActivity/NoActivity';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 import styles from './UserActivity.module.scss';
@@ -18,6 +17,8 @@ import { aggregateTutorialProgress } from '~/services/Utils';
 import { PublicUserI, UserRole } from '~/../shared/types/user.types';
 import Link from '~/components/generic/Link';
 import SubmissionService from '~/services/api/Submission.service';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
+import { WIPPopulatedLessonExerciseI } from '~/../shared/types/exercise.types';
 
 interface Props {
   profileUser: PublicUserI;
@@ -146,19 +147,18 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
       </div>
       <hr />
       {isOwnProfile && currentUser.info.role.includes(UserRole.ADMIN) && (
-        <CreatedExercises />
+        <AllExercises />
       )}
     </PageContainer>
   );
 }
 
-// Only show this component for Logged In Admin Users
-const CreatedExercises = () => {
-  const [createdExercises, setCreatedExercises] = useState([]);
+const AllExercises = () => {
+  const [createdExercises, setCreatedExercises] = useState<WIPPopulatedLessonExerciseI[]>([]);
 
   useEffect(() => {
-    ExerciseService
-      .getCreatedExercises()
+    LessonExerciseService
+      .getAllLessonExercises()
       .then((exercises) => {
         setCreatedExercises(exercises);
       })
@@ -169,14 +169,13 @@ const CreatedExercises = () => {
 
   return (
     <section>
-      <h2> Exerciții create </h2>
+      <h2> Toate exercițiile din platformă </h2>
       <div className={styles['exercises-wrapper']}>
         {createdExercises.map((ex) => (
           <ExercisePreview
             key={ex._id}
             exercise={ex}
             href={`exercitii/${ex._id}`}
-            isPrivate={ex.private}
             viewMode="TEACHER"
             feedbackCount={0}
             isApproved={false}

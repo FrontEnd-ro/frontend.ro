@@ -1,4 +1,4 @@
-import { Exercise } from '../user/types';
+import { LessonExercise } from '../user/types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 
 interface SubmissionFeedback {
@@ -20,7 +20,7 @@ interface User {
 export interface Submission {
   _id: string;
   user: User;
-  exercise: Exercise;
+  exercise: LessonExercise;
   status: SubmissionStatus;
   submittedAt: number;
   updatedAt: number;

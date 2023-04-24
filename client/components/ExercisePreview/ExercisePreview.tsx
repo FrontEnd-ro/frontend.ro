@@ -5,7 +5,7 @@ import { faLock, faPlay } from '@fortawesome/free-solid-svg-icons';
 import Link from '~/components/generic/Link';
 import styles from './ExercisePreview.module.scss';
 import Markdown from '../Markdown';
-import { Exercise } from '~/redux/user/types';
+import { LessonExercise } from '~/redux/user/types';
 
 export type ExerciseViewMode = 'STUDENT' | 'TEACHER'
 
@@ -13,7 +13,7 @@ interface Props {
   href: string;
   viewMode: ExerciseViewMode;
   isPrivate?: boolean;
-  exercise: Exercise,
+  exercise: LessonExercise,
   feedbackCount: number;
   isApproved: boolean;
 

@@ -6,12 +6,11 @@ import Login from '../login';
 import Button from '~/components/Button';
 import MarkdownTextarea from '../MarkdownTextarea';
 import { RootState } from '~/redux/root.reducer';
-import PrivacyControls from './PrivacyControls/PrivacyControls';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
 import svgCover from './dev-focus.svg';
 import styles from './NewExercise.module.scss';
-import ExerciseService from '~/services/api/Exercise.service';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 import { DeprecatedBasicEditor } from '../Editor/BasicEditor';
@@ -40,7 +39,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
   const [showSolutionEditor, setShowSolutionEditor] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
-  const [suggestion, setSuggestion] = useState(null);
+  const [lesson, setLesson] = useState(null);
 
   const filesToUpload = useRef<FileDictionary>({});
 
@@ -59,7 +58,6 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
   const createExercise = async (
     formData: {
       type: ExerciseType,
-      private: 'true' | 'false'
     },
     userInfo: UserState['info'] = user.info,
   ) => {
@@ -82,11 +80,10 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
     }
 
     try {
-      await ExerciseService.createExercise({
-        suggestion,
+      await LessonExerciseService.createExercise({
+        lesson,
         body: newBody,
         type: formData.type,
-        private: formData.private === 'true',
         example: exampleRef.current ? exampleRef.current.getFolderStructure() : null,
         solution: solutionRef.current ? solutionRef.current.getFolderStructure() : null,
       });
@@ -228,9 +225,8 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
           }
         </div>
         <ChapterControls form="createForm" />
-        <PrivacyControls form="createForm" isPrivate={isPrivate} onPrivacyChange={setIsPrivate} />
         <footer className="d-flex align-items-center justify-content-between">
-          <LessonSelect onChange={(value) => setSuggestion(value.label)} />
+          <LessonSelect onChange={(value) => setLesson(value)} />
           <div>
             <Button
               variant="blue"

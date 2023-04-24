@@ -2,7 +2,7 @@ import { uuid } from '~/services/Utils';
 import { extractExtension } from '~/services/utils/FileUtils';
 import { MAX_MEDIA_BYTES, MAX_MEDIA_MB } from '~/../shared/SharedConstants';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
-import ExerciseService from '~/services/api/Exercise.service';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
 
 export { default as NewExercise } from './NewExercise';
 export { default as ViewOrEditExercise } from './ViewOrEditExercise';
@@ -80,7 +80,7 @@ export async function uploadMedia(body: string, filesToUpload: FileDictionary) {
 
   // 2. Upload to AWS
   const results = await Promise.allSettled(Object.keys(filesToUpload).map((id) => {
-    return ExerciseService.uploadMedia(id, filesToUpload[id].file);
+    return LessonExerciseService.uploadMedia(id, filesToUpload[id].file);
   }));
 
   const fulfilledResults = results

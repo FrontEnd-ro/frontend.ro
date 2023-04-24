@@ -7,8 +7,8 @@ export enum ExerciseType {
   JS = 'js',
 }
 
-export interface ExerciseI {
-  // TODO: is this the correct way of defining IDs?
+export interface LessonExerciseI {
+    // TODO: is this the correct way of defining IDs?
   // https://github.com/FrontEnd-ro/frontend.ro/issues/442
   _id: string;
 
@@ -24,17 +24,13 @@ export interface ExerciseI {
 
   solution: string;
 
-  private: boolean;
-
   // Lesson suggestion for which this exercise was created
   //
   // IMPORTANT: this is not the lesson ID, but a basic string
   // for human-users to understand when looking at the exercise/DB.
   // Examples: "html/Despre HTML"
   suggestion?: string;
-}
 
-export interface LessonExerciseI extends ExerciseI {
   // Lesson to which this exercise is assigned to
   // This is not an UUID
   lesson: string;

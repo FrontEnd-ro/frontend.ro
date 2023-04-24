@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('./user/user.model');
 const { ServerError, parseBearerToken } = require('./ServerUtils');
-const ExerciseModel = require('./exercise/exercise.model');
-const LessonExerciseModel = require('./lesson-exercise/lesson-exercise.model');
+const { default: LessonExerciseModel } = require('./lesson-exercise/lesson-exercise.model');
 const { UserRole } = require('../shared/types/user.types');
 const { default: appConfig } = require('./config');
 
@@ -101,60 +100,6 @@ function UserRoleMiddleware(role) {
 }
 
 /****************** Exercise Middleware */
-async function PublicOrOwnExercise(req, res, next) {
-  const { exerciseId } = req.params;
-
-  try {
-    const exercise = await ExerciseModel.get(exerciseId);
-    if (!exercise) {
-      new ServerError(404, 'Exercițiul nu există.').send(res);
-      return
-    }
-
-    if (exercise.private) {
-      await OwnExercise(req, res, next);
-      return;
-    }
-
-    next();
-  } catch (err) {
-    console.error("[PublicOrOwnExercise]", {
-      code: err.code,
-      message: err.message
-    });
-
-    new ServerError(err.code, err.message).send(res);
-    return
-  }
-}
-
-async function OwnExercise(req, res, next) {
-  const { exerciseId } = req.params;
-
-  try {
-    const exercise = await ExerciseModel.get(exerciseId);
-    if (!exercise) {
-      new ServerError(404, 'Exercițiul nu există.').send(res);
-      return
-    }
-
-    if (req.body.user?.username !== exercise.user.username) {
-      new ServerError(403, 'Doar autorul acestui exercițiu îl poate accesa.').send(res);
-      return
-    }
-
-    next();
-  } catch (err) {
-    console.error("[OwnExercise]", {
-      code: err.code,
-      message: err.message
-    });
-
-    new ServerError(err.code, err.message).send(res);
-    return
-  }
-}
-
 async function SolvableExercise(req, res, next) {
   const { exerciseId } = req.params;
 
@@ -179,8 +124,6 @@ async function SolvableExercise(req, res, next) {
 module.exports = {
   PublicMiddleware,
   PrivateMiddleware,
-  PublicOrOwnExercise,
   UserRoleMiddleware,
-  OwnExercise,
   SolvableExercise,
 }

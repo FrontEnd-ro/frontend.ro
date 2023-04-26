@@ -29,7 +29,6 @@ export default function Lesson({
   const { lang } = useTranslation('common');
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const lesson = getLessonById(lessonInfo.id, lang);
 
   withSmoothScroll(articleWrapper);
 
@@ -56,7 +55,7 @@ export default function Lesson({
   return (
     <div className={styles.lesson}>
       <LessonMenu
-        url={`/${lesson.type}/${lesson.id}`}
+        url={`/${lessonInfo.type}/${lessonInfo.id}`}
         isOpen={isMenuOpen}
         close={() => setIsMenuOpen(false)}
         onScrollTop={scrollTop}

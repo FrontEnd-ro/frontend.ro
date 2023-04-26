@@ -66,11 +66,14 @@ function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<
     });
   }
 
+  if (isFetching === false && exercises.length === 0) {
+    return <NoLessonExercises />
+  }
+
   return (
     <div className={`
       ${styles.exercises}
       ${isFetching ? styles['exercises--fetching'] : ''}
-      ${exercises?.length === 0 ? styles['exercises--empty'] : ''}
     `}
     >
       {isFetching && (
@@ -86,7 +89,7 @@ function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<
         </div>
       )}
 
-      {!isFetching && (exercises.length > 0 ? (
+      {!isFetching && exercises.length > 0 && (
         <div className={styles['exercises-wrapper']}>
           {mergedData.map((sub) => (
             <ExercisePreview
@@ -107,22 +110,26 @@ function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<
             />
           ))}
         </div>
-      ) : (
-        <p className="mb-0">
-          <strong> În curând vom adăuga exerciții </strong>
-          {' '}
-          la această lecție.
-          Până atunci poți să rezolvi celelalte
-          {' '}
-          <Link prefetch={false} className="text-bold" href="/exercitii">
-            exerciții disponibile
-          </Link>
-          .
-        </p>
-      ))}
+      )}
     </div>
   );
 }
+
+const NoLessonExercises = () => (
+  <div className={`${styles.exercises} ${styles['exercises--empty']}`}>
+    <p className="m-0 p-3">
+      <strong> În curând vom adăuga exerciții </strong>
+      {' '}
+      la această lecție.
+      Până atunci poți să rezolvi celelalte
+      {' '}
+      <Link prefetch={false} className="text-bold" href="/exercitii">
+        exerciții disponibile
+      </Link>
+      .
+    </p>
+  </div>
+)
 
 function mapStateToProps(state: RootState) {
   return {

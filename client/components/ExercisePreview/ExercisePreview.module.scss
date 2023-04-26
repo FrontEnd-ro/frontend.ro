@@ -92,27 +92,6 @@
     }
   }
 
-  .tags {
-    width: 50%;
-    max-width: calc(100% - 9em);
-
-    span {
-      opacity: 0.75;
-      font-size: 14px;
-      line-height: 4em;
-      font-weight: bold;
-      padding: 0.25em 0.5em;
-
-      &::before {
-        content: '#';
-        font-size: 2em;
-        margin-right: 1px;
-        color: color(blue);
-        vertical-align: bottom;
-      }
-    }
-  }
-
   &.is--done footer,
   &.is--waiting footer,
   &.has--issues footer {

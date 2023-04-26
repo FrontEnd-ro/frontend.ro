@@ -17,8 +17,6 @@ export interface ExerciseI {
 
   type: ExerciseType;
 
-  tags: string[];
-
   body: string;
 
   // Starting code

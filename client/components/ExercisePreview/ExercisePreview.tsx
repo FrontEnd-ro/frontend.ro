@@ -63,18 +63,9 @@ function ExercisePreview({
             </span>
           )}
           {(viewMode === 'TEACHER' || !infoMessage) && (
-            <>
-              <Link className={styles.avatar} href={`/${exercise.user.username}`}>
-                <img src={exercise.user.avatar} alt="Author avatar" />
-              </Link>
-              <div className={`${styles.tags} truncate d-inline-block`}>
-                {exercise.tags.map((t) => (
-                  <span className="text-bold" key={t}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </>
+            <Link className={styles.avatar} href={`/${exercise.user.username}`}>
+              <img src={exercise.user.avatar} alt="Author avatar" />
+            </Link>
           )}
         </>
         <Link

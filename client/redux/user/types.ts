@@ -29,7 +29,6 @@ export interface Exercise {
   private: boolean;
   solution: string;
   suggestion?: string;
-  tags: string[];
   type: ExerciseType;
   user: PublicUserI;
   lesson?: string;

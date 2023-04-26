@@ -116,7 +116,7 @@ const _BasicEditor = ({
   }, [readOnlyTooltipMessage, didLoadEditor]);
 
   useEffect(() => {
-    if (!editor.current || onChange === undefined) {
+    if (!didLoadEditor || onChange === undefined) {
       return noop;
     }
 
@@ -124,7 +124,7 @@ const _BasicEditor = ({
       onChange(editor.current.getValue());
     });
     return () => modelListenerRef.dispose();
-  }, [onChange]);
+  }, [onChange, didLoadEditor]);
 
   useEffect(() => {
     if (file !== undefined && editor.current !== null) {

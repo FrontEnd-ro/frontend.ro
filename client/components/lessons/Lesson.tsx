@@ -24,8 +24,9 @@ import { useTranslation } from '~/services/typesafeNextTranslate';
 export default function Lesson({
   lessonInfo,
   children,
+  exerciseCount = 0,
   mdxContent = '',
-}: PropsWithChildren<{ lessonInfo: LessonConfig; mdxContent?: string; }>) {
+}: PropsWithChildren<{ lessonInfo: LessonConfig; exerciseCount?: number; mdxContent?: string; }>) {
   const { lang } = useTranslation('common');
   const articleWrapper = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,7 +38,7 @@ export default function Lesson({
   };
 
   const { Content, CONFIG } = MDXService.getComponent(mdxContent);
-  const chaptersWithHref: Chapter[] = lessonInfo.withExercises
+  const chaptersWithHref: Chapter[] = exerciseCount > 0
     ? [
       ...parseChapters(CONFIG.chapters ?? []),
       { title: 'Exerciții', id: 'exercitii', href: '#exercitii' },
@@ -82,7 +83,7 @@ export default function Lesson({
               </a>
             </p>
           </div>
-          {lessonInfo.withExercises === true && (
+          {exerciseCount > 0 && (
             <div className={styles.exercises}>
               <LessonHeading as="h3" id="exercitii">
                 Exerciții

@@ -29,6 +29,17 @@ class LessonExerciseService {
       .then((resp) => resp.json());
   }
 
+  static async getCountOfExercisesForLesson(lessonId: string) {
+    const resp = await HttpService.head(`${process.env.ENDPOINT}/lesson-exercises/lesson/${lessonId}/count`);
+    const header = resp.headers.get('X-Exercise-Count');
+
+    const count = Number(header);
+    if (Number.isNaN(count)) {
+      return 0;
+    }
+    return count;
+  }
+
   static uploadMedia(name: string, file: File): Promise<any> {
     const formData = new FormData();
     formData.append('name', name);

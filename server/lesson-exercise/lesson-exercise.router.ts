@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Response } from 'express';
 const multer = require('multer');
 import appConfig from '../config/config';
 import { ServerError } from '../ServerUtils';
@@ -63,6 +63,20 @@ lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function
     });
 
     res.json(result);
+  } catch (err) {
+    new ServerError(err.code, err.message).send(res);
+  }
+});
+
+// Returns a header named `X-Exercise-Count` so we know how many exercises we have
+lessonExerciseRouter.head('/lesson/:lessonId/count', [PublicMiddleware], async function getCountOfExercisesForLesson(req, res: Response) {
+  const { lessonId } = req.params;
+  const HEADER_NAME = 'X-Exercise-Count';
+
+  try {
+    let count = await LessonExerciseModel.getCount(lessonId);
+    res.set(HEADER_NAME, count.toString());
+    res.end();
   } catch (err) {
     new ServerError(err.code, err.message).send(res);
   }

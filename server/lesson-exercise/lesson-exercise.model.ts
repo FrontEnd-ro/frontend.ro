@@ -14,6 +14,14 @@ class LessonExerciseModel {
       .populate('user');
   }
 
+  static async getCount(lessonId: string) {
+    const count = await LessonExercise
+      .find({ lesson: lessonId })
+      .count();
+
+    return count;
+  }
+
   static async getAll() {
     const lessons = await LessonExercise
       .find({})

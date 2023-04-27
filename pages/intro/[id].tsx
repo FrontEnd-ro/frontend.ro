@@ -7,8 +7,9 @@ import NotFoundPage from '~/components/NotFound/NotFound';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
 
-const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null, mdxContent?: string }) => {
+const IntroLesson = ({ lessonInfo, exerciseCount, mdxContent = '' }: { lessonInfo: LessonConfig | null, exerciseCount?: number, mdxContent?: string }) => {
   const { t } = useTranslation('common');
   if (lessonInfo === null || lessonInfo.written === false) {
     return <NotFoundPage />;
@@ -22,7 +23,11 @@ const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig
         url={`https://FrontEnd.ro/intro/${lessonInfo.id}`}
         shareImage={lessonInfo.ogImage}
       />
-      <Lesson lessonInfo={lessonInfo} mdxContent={mdxContent} />
+      <Lesson
+        lessonInfo={lessonInfo}
+        exerciseCount={exerciseCount}
+        mdxContent={mdxContent}
+      />
     </>
   );
 };
@@ -33,9 +38,12 @@ const IntroLesson = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id, process.env.LANGUAGE as 'en' | 'ro');
-  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE);
+  const [mdxResp, exerciseCount] = await Promise.all([
+    MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE),
+    LessonExerciseService.getCountOfExercisesForLesson(id)
+  ]);
 
-  if (lessonInfo === null || !resp.ok) {
+  if (lessonInfo === null || !mdxResp.ok) {
     res.statusCode = 404;
     return {
       props: { lessonInfo }
@@ -47,11 +55,12 @@ export async function getServerSideProps({ res, params }) {
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     urlToShare: `${appConfig.APP.app_url}/intro/${id}`
   }
-  const compiledMDX = await MDXService.compile(resp.content, MDX_SCOPE);
+  const compiledMDX = await MDXService.compile(mdxResp.content, MDX_SCOPE);
 
   return {
     props: {
       lessonInfo,
+      exerciseCount,
       mdxContent: compiledMDX,
     },
   };

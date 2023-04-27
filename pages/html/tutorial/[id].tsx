@@ -8,6 +8,7 @@ import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/fre
 import { LessonHeading, LessonResources } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
 import { useTranslation } from '~/services/typesafeNextTranslate';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
 import { getLessonById, LessonConfig, MDXLessonConfig } from '~/curriculum/Curriculum';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
 import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
@@ -18,10 +19,10 @@ import TableOfContents, { Chapter, parseChapters } from '~/components/TableOfCon
 // will move this to the /html folder. So right now
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
-const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null, mdxContent?: string }) => {
+const HtmlLessonTemp = ({ lessonInfo, exerciseCount = 0, mdxContent = '' }: { lessonInfo: LessonConfig | null, exerciseCount?: number, mdxContent?: string }) => {
   const { t } = useTranslation('common');
-  const getChapters = (lessonDescription: LessonConfig, chapters: MDXLessonConfig['chapters']): Chapter[] => {
-    if (!lessonDescription.withExercises) {
+  const getChapters = (chapters: MDXLessonConfig['chapters']): Chapter[] => {
+    if (!exerciseCount) {
       return parseChapters(chapters);
     }
 
@@ -47,7 +48,7 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonCon
   }
 
   const { Content, CONFIG } = MDXService.getComponent(mdxContent);
-  const chapters = getChapters(lessonInfo, CONFIG.chapters);
+  const chapters = getChapters(CONFIG.chapters);
 
   return (
     <>
@@ -86,7 +87,7 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonCon
             {lessonInfo.resources !== undefined && (
               <LessonResources className="my-5" links={lessonInfo.resources} />
             )}
-            {lessonInfo.withExercises === true && (
+            {exerciseCount > 0 && (
               <div>
                 <LessonHeading as="h3" id="exercitii">
                   Exerciții
@@ -112,9 +113,12 @@ const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonCon
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
   const lessonInfo = getLessonById(id, process.env.LANGUAGE as 'en' | 'ro');
-  const resp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE);
+  const [mdxResp, exerciseCount] = await Promise.all([
+    MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE),
+    LessonExerciseService.getCountOfExercisesForLesson(id)
+  ]);
 
-  if (lessonInfo === null || !resp.ok) {
+  if (lessonInfo === null || !mdxResp.ok) {
     res.statusCode = 404;
     return {
       props: { lessonInfo }
@@ -124,11 +128,12 @@ export async function getServerSideProps({ res, params }) {
     icons: { faThumbsUp, faExclamationCircle, faQuestion, faQuestionCircle, faThumbsDown, faShoppingCart },
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
   }
-  const compiledMDX = await MDXService.compile(resp.content, MDX_SCOPE);
+  const compiledMDX = await MDXService.compile(mdxResp.content, MDX_SCOPE);
 
   return {
     props: {
       lessonInfo,
+      exerciseCount,
       mdxContent: compiledMDX,
     },
   };

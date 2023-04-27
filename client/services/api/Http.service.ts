@@ -2,6 +2,10 @@ import cookie from 'cookie';
 import SweetAlertService from '../sweet-alert/SweetAlert.service';
 
 class Http {
+  head(url: string, options = {}, preventErrorAlert = false) {
+    return this.httpGeneric(url, { ...options, method: 'HEAD' }, preventErrorAlert);
+  }
+
   get(url: string, options = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, { ...options, method: 'GET' }, preventErrorAlert);
   }
@@ -44,14 +48,18 @@ class Http {
     options: Record<string, any> = {},
     preventErrorAlert = false,
   ) {
-    const cookies = cookie.parse(document.cookie);
     const headersInit: HeadersInit = {
       'content-type': 'application/json',
     };
+    let cookies: Record<string, string> = {};
 
-    // https://github.com/FrontEnd-ro/frontend.ro/issues/505
-    if (cookies.token) {
-      headersInit.Authorization = `Bearer ${cookies.token}`;
+    if (globalThis.document) {
+      cookies = cookie.parse(document.cookie);
+
+      // https://github.com/FrontEnd-ro/frontend.ro/issues/505
+      if (cookies.token) {
+        headersInit.Authorization = `Bearer ${cookies.token}`;
+      }
     }
 
     if (options.body && !(options.body instanceof FormData)) {

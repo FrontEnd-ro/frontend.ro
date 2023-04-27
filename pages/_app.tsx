@@ -6,6 +6,7 @@ import { noop } from '~/services/Utils';
 import I18nProvider from 'next-translate/I18nProvider'
 import { UserState } from '~/redux/user/types';
 import { UserRole } from '../shared/types/user.types';
+import UserService from '~/services/api/User.service';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
 import LoadNotifications from '~/components/LoadNotifications/LoadNotifications';
 import { ApplicationConfig, loadConfig } from '~/redux/application-config.reducer';
@@ -81,7 +82,11 @@ MyApp.getInitialProps = async ({ ctx }) => {
   }
 
   const [user, applicationConfig, namespaces] = await Promise.all([
-    fetchUserServiceSide(token),
+    UserService.ping({
+      headers: {
+        cookie: `token=${token}`,
+      },
+    }),
     fetchApplicationConfigServerSide(),
     loadLocaleNamespaces(process.env.LANGUAGE)
   ]);
@@ -93,46 +98,12 @@ MyApp.getInitialProps = async ({ ctx }) => {
   return { pageProps };
 };
 
-async function fetchUserServiceSide(token: string) {
-  const SPAN = '[fetchUserServiceSide]';
-
-  try {
-    const { default: fetch } = await import('node-fetch');
-
-    // Accessing the DB code directly fails (cannot find module 'fs').
-    // It happened after adding the `node-config` package. Thus, to fix
-    // it we refactored this code to use `fetch`.
-    const resp = await fetch(`${process.env.ENDPOINT}/auth/ping`, {
-      headers: {
-        cookie: `token=${token}`,
-      },
-    });
-
-    if (!resp.ok) {
-      return null;
-    }
-
-    const user = await resp.json();
-    return user;
-  } catch (err) {
-    console.error(`${SPAN} Failed to fetch user server side`, err);
-  }
-
-  return null;
-}
-
 async function fetchApplicationConfigServerSide(): Promise<ApplicationConfig> {
   const SPAN = '[fetchApplicationConfigServerSide]';
 
   const emptyConfig = { navItems: [] };
   try {
-    const { default: fetch } = await import('node-fetch');
-    const resp = await fetch(`${process.env.ENDPOINT}/application-config`);
-    if (!resp.ok) {
-      return emptyConfig;
-    }
-
-    const applicationConfig = await resp.json();
+    const applicationConfig = await ApplicationConfigService.get();
     return applicationConfig;
   } catch (err) {
     console.error(`${SPAN} Failed to fetch ApplicationConfig server side`, err);

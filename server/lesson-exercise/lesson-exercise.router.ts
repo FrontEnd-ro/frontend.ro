@@ -36,7 +36,7 @@ lessonExerciseRouter.get('/:exerciseId', [PublicMiddleware], async function getL
     }
     res.json(result);
   } catch (err) {
-    new ServerError(err.code, err.message).send(res);
+    new ServerError(err.code ?? 500, err.message ?? 'Failed to fetch lesson exercise').send(res);
   }
 });
 

@@ -30,6 +30,11 @@ challengeSubmissionRouter.get('/:challengeId', [
     const SPAN = `[getChallengeSubmission, challengeId=${challengeId}, username=${user?.username}]`;
     const challenge = await Challenge.findOne({ challengeId });
 
+    if (challenge === null) {
+      new ServerError(404, "No challenge found").send(res);
+      return;
+    }
+
     const isLoggedIn = user !== undefined;
     if (!isLoggedIn) {
       console.log(`${SPAN} User not logged in. Returning an empty one on the fly.`);

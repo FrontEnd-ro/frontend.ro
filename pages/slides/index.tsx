@@ -4,6 +4,7 @@ import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import PresentationGallery from '~/components/PresentationGallery';
 import { PresentationI } from '~/components/PresentationPreview';
+import PresentationService from '~/services/api/Presentation.service';
 
 function Slides({ presentations }: {presentations: PresentationI[]}) {
   return (
@@ -22,12 +23,8 @@ function Slides({ presentations }: {presentations: PresentationI[]}) {
 }
 
 export async function getServerSideProps() {
-  const { default: appConfig } = await import('../../server/config');
-  const { default: fetch } = await import('node-fetch');
-
   try {
-    const resp = await fetch(`${appConfig.APP.endpoint}/presentations`);
-    const presentations = await resp.json();
+    const presentations = await PresentationService.getAll()
 
     return {
       props: {

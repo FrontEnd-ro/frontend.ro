@@ -4,6 +4,7 @@ import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import { LessonExercise } from '~/redux/user/types';
 import { ViewOrEditExercise } from '~/components/create-view-edit-exercise';
+import LessonExerciseService from '~/services/api/LessonExercise.service';
 
 function EditExercisePage({ exercise }: { exercise?: LessonExercise }) {
   const authorNameOrUsername = exercise?.user?.name || exercise?.user?.username;
@@ -33,24 +34,13 @@ export default EditExercisePage;
 export async function getServerSideProps({ req, res, params }) {
   const { token } = req.cookies;
   const { exerciseId } = params;
-  const { default: fetch } = await import('node-fetch');
 
   try {
-    const resp = await fetch(`${process.env.ENDPOINT}/lesson-exercises/${exerciseId}`, {
+    const exercise = await LessonExerciseService.getLessonExercise(exerciseId, {
       headers: {
         cookie: `token=${token}`,
       },
     });
-    if (!resp.ok) {
-      res.statusCode = resp.status;
-      return {
-        props: {
-          exercise: null,
-        },
-      };
-    }
-
-    const exercise = await resp.json();
     return {
       props: { exercise, },
     };

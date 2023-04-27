@@ -2,9 +2,9 @@ import HttpService from './Http.service';
 import { ChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 
 class ChallengeSubmissionService {
-  static async get(challengeId: string): Promise<ChallengeSubmissionI> {
+  static async get(challengeId: string, options?: RequestInit): Promise<ChallengeSubmissionI> {
     const challenge: ChallengeSubmissionI = await HttpService
-      .get(`${process.env.ENDPOINT}/challenge-submissions/${challengeId}`)
+      .get(`${process.env.ENDPOINT}/challenge-submissions/${challengeId}`, options)
       .then((resp) => resp.json());
 
     return challenge;

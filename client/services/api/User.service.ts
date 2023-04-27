@@ -1,8 +1,8 @@
 import HttpService from './Http.service';
 
 class UserService {
-  static ping() {
-    return HttpService.get(`${process.env.ENDPOINT}/auth/ping`).then((resp) => resp.json());
+  static ping(options?: RequestInit) {
+    return HttpService.get(`${process.env.ENDPOINT}/auth/ping`, options).then((resp) => resp.json());
   }
 
   static subscribe({ name, email }) {

@@ -17,9 +17,9 @@ class LessonExerciseService {
       .then((resp) => resp.json());
   }
 
-  static getLessonExercise(exerciseId: string) {
+  static getLessonExercise(exerciseId: string, options?: RequestInit) {
     return HttpService
-      .get(`${process.env.ENDPOINT}/lesson-exercises/${exerciseId}`)
+      .get(`${process.env.ENDPOINT}/lesson-exercises/${exerciseId}`, options)
       .then((resp) => resp.json());
   }
 

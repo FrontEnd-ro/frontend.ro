@@ -4,6 +4,7 @@ import CertificationComponent from '~/components/certification/Certification/Cer
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
+import CertificationService from '~/services/api/Certification.service';
 
 export default function CertificationPage(
   { certification }: { certification: WIPPopulatedCertificationI },
@@ -36,31 +37,19 @@ export default function CertificationPage(
   );
 }
 
-export async function getServerSideProps({ res, req, params }) {
-  const { token } = req?.cookies ?? {};
-  const { default: fetch } = await import('node-fetch');
-
+export async function getServerSideProps({ res, params }) {
   const pageProps = {
     props: {
       certification: null,
     },
   };
 
-  const resp = await fetch(`${process.env.ENDPOINT}/certifications/${params.certificationId}`, {
-    headers: {
-      cookie: `token=${token}`,
-    },
-  });
-  if (!resp.ok) {
-    res.statusCode = resp.status;
-    return {
-      props: {
-        certification: null,
-      },
-    };
+  try {
+    const certification = await CertificationService.getById(params.certificationId);
+    pageProps.props.certification = certification;
+  } catch (err) {
+    res.statusCode = err.code === 404 ? 404 : 500;
   }
 
-  const certification = await resp.json();
-  pageProps.props.certification = certification;
   return pageProps;
 }

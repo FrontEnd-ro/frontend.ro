@@ -5,6 +5,7 @@ import NotFoundPage from '~/components/NotFound/NotFound';
 import TutorialPage from '~/tutorials/TutorialPage';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import { startedTutorial } from '~/redux/user/user.actions';
+import TutorialService from '~/services/api/Tutorial.service';
 import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
 import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
@@ -56,20 +57,10 @@ export default connector(TutorialIndex);
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   try {
-    const { default: fetch } = await import('node-fetch');
-    const resp = await fetch(`${process.env.ENDPOINT}/tutorials/html`);
-
-    if (!resp.ok) {
-      res.statusCode = resp.status;
-      return { props: {
-        tutorialInfo: null,
-      } }
-    }
-  
-    const htmlTutorial = await resp.json();
+    const tutorialInfo = await TutorialService.getInfo('html');
     return {
       props: {
-        tutorialInfo: htmlTutorial,
+        tutorialInfo,
       },
     };
   } catch (err) {

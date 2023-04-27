@@ -1,5 +1,6 @@
-import { Response } from 'node-fetch';
 import LandingPage from '~/components/Landing';
+import TidbitService from '~/services/api/Tidbit.service';
+import TutorialService from '~/services/api/Tutorial.service';
 
 export default LandingPage;
 
@@ -7,7 +8,6 @@ export default LandingPage;
 // trigger a rebuild when this DB collection changes.
 export async function getServerSideProps(ctx) {
   const { token } = ctx.req?.cookies ?? {};
-  const { default: fetch } = await import('node-fetch');
   const SPAN = '[pages/index.tsx, getServerSideProps]';
 
   const pageProps = {
@@ -19,15 +19,14 @@ export async function getServerSideProps(ctx) {
 
   try {
     const [tidbits, htmlTutorialState] = await Promise.all([
-      fetch(`${process.env.ENDPOINT}/tidbits?field=title&field=textColor&field=backgroundColor&field=tidbitId&field=items[1].imageSrc`)
-        .then(parseJSONOrThrowIfNot200),
+      TidbitService.getAll(['title', 'textColor', 'backgroundColor', 'tidbitId', 'items[1].imageSrc']),
       !token
         ? Promise.resolve({ status: 'not_started' })
-        : fetch(`${process.env.ENDPOINT}/tutorials/html/status`, {
+        : TutorialService.getTutorialStatus('html', {
           headers: {
             cookie: `token=${token}`,
-          },
-        }).then(parseJSONOrThrowIfNot200),
+          }
+        })
     ]);
 
     pageProps.props.tidbits = tidbits;
@@ -37,12 +36,4 @@ export async function getServerSideProps(ctx) {
   }
 
   return pageProps;
-}
-
-function parseJSONOrThrowIfNot200(resp: Response) {
-  if (!resp.ok) {
-    throw new Error(`Unexpected response status: ${resp.status}`);
-  }
-
-  return resp.json();
 }

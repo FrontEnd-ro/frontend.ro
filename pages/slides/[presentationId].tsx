@@ -4,6 +4,7 @@ import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import PresentationPreview, { PresentationI } from '~/components/PresentationPreview';
+import PresentationService from '~/services/api/Presentation.service';
 
 function PresentationPage({ presentation }: { presentation: PresentationI }) {
   if (!presentation) {
@@ -26,20 +27,8 @@ function PresentationPage({ presentation }: { presentation: PresentationI }) {
 }
 
 export async function getServerSideProps({ res, params }) {
-  const { default: fetch } = await import('node-fetch');
-  const { default: appConfig } = await import('../../server/config');
-
   try {
-    const resp = await fetch(`${appConfig.APP.endpoint}/presentations/${params.presentationId}`);
-    const presentation = await resp.json();
-
-    if (!resp.ok) {
-      res.statusCode = 404;
-      return {
-        props: {},
-      };
-    }
-
+    const presentation = await PresentationService.get(params.presentationId);
     return {
       props: {
         presentation,

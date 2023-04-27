@@ -5,6 +5,7 @@ import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { TidbitI } from '../../../shared/types/tidbit.types';
+import TidbitService from '~/services/api/Tidbit.service';
 
 interface Props {
   tidbit: TidbitI;
@@ -46,18 +47,15 @@ const TidbitPage = ({ tidbit, tidbitIndex }: Props) => {
 export async function getServerSideProps({ res, params }) {
   // Tidbit index starts from 1
   const { tidbitId, tidbitIndex } = params;
-  const { default: fetch } = await import('node-fetch');
-  const resp = await fetch(`${process.env.ENDPOINT}/tidbits/${tidbitId}`);
 
   let tidbit: TidbitI | null = null;
-  if (!resp.ok) {
-    res.statusCode = 404;
-  } else {
-    tidbit = await resp.json();
-
+  try {
+    tidbit = await TidbitService.getById(tidbitId);
     if (tidbitIndex - 1 < 0 || tidbitIndex - 1 >= tidbit.items.length) {
       res.statusCode = 404;
     }
+  } catch (err) {
+    res.statusCode = err.code === 404 ? 404 : 500;
   }
 
   return {

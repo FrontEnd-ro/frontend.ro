@@ -1,6 +1,12 @@
 import HttpService from './Http.service';
 
 class PresentationService {
+  static getAll() {
+    return HttpService
+      .get(`${process.env.ENDPOINT}/presentations`)
+      .then((resp) => resp.json());
+  }
+
   static get(presentationId: string) {
     return HttpService
       .get(`${process.env.ENDPOINT}/presentations/${presentationId}`)

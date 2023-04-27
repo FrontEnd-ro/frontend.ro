@@ -4,6 +4,7 @@ import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import { TidbitI } from '~/../shared/types/tidbit.types';
+import TidbitService from '~/services/api/Tidbit.service';
 
 const TidbitGalleryPage = ({ tidbits }: {tidbits: TidbitI[]}) => {
   return (
@@ -24,10 +25,7 @@ const TidbitGalleryPage = ({ tidbits }: {tidbits: TidbitI[]}) => {
 // We don't want this to be a `getStaticProps` because we don't
 // trigger a rebuild when this DB collection changes.
 export async function getServerSideProps() {
-  const { default: fetch } = await import('node-fetch');
-
-  const resp = await fetch(`${process.env.ENDPOINT}/tidbits?field=title&field=backgroundColor&field=tidbitId&field=items[0].imageSrc`);
-  const tidbits: TidbitI[] = await resp.json();
+  const tidbits: TidbitI[] = await TidbitService.getAll(['title', 'backgroundColor', 'tidbitId', 'items[0].imageSrc']);
 
   return {
     props: {

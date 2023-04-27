@@ -1,6 +1,13 @@
 import cookie from 'cookie';
 import SweetAlertService from '../sweet-alert/SweetAlert.service';
 
+
+/**
+ * VERY IMPORTANT
+ * This needs to contain code that can be called from both
+ * client side (browser) and server. This is because we're
+ * calling some APIs when Server Side Rendeing via Next.
+ */
 class Http {
   head(url: string, options = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, { ...options, method: 'HEAD' }, preventErrorAlert);
@@ -83,7 +90,8 @@ class Http {
         });
       })
       .catch((err) => {
-        if ((!err || !err.code || err.code === 500) && !preventErrorAlert) {
+        const isOnClientSide = globalThis.document !== undefined;
+        if ((!err || !err.code || err.code === 500) && !preventErrorAlert && isOnClientSide) {
           SweetAlertService.error({
             text: err.message || 'Refresh-uiește pagina și încearcă din nou.',
             buttonText: 'Ok!',

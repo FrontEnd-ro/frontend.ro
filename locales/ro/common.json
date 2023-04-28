@@ -130,7 +130,7 @@
     }
   },
   "Diploma": {
-    "description:no-exercises": "a completat <0> {{TUTORIAL}} </0>.",
+    "description:no-exercises": "a completat <0> {{TUTORIAL}} </0>",
     "description:exercises": "a completat <0> {{TUTORIAL}} </0> rezolvând cu succes toate cele {{COUNT}} exerciții."
   },
   "Resources": {

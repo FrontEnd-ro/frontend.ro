@@ -130,7 +130,7 @@
     }
   },
   "Diploma": {
-    "description:no-exercises": "has successfully finished the <0> {{TUTORIAL}} </0>.",
+    "description:no-exercises": "has successfully finished <0> {{TUTORIAL}} </0>",
     "description:exercises": "has successfully finished the <0>{{TUTORIAL}}</0> successfully solving all {{COUNT}} exercises."
   },
   "Resources": {

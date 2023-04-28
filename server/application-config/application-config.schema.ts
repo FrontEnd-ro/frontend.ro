@@ -32,7 +32,7 @@ const ApplicationConfigSchema = new mongoose.Schema<ApplicationConfig>({
   navItems: [{ type: NavItem, required: false }],
 });
 
-const ApplicationConfig: mongoose.Model<ApplicationConfig> = mongoose.models.ApplicationConfig
+const ApplicationConfigModel: mongoose.Model<ApplicationConfig> = mongoose.models.ApplicationConfig
   || mongoose.model<ApplicationConfig>('ApplicationConfig', ApplicationConfigSchema);;
 
-export { ApplicationConfig };
+export { ApplicationConfigModel };

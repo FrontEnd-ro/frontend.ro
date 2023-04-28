@@ -74,7 +74,8 @@ certificationRouter.get('/challenge/:challengeId', [
         user: user._id.toString(),
       })
         .populate('user')
-        .populate('lesson_exercises');
+        .populate('lesson_exercises')
+        .populate<{ challenge: ChallengeI }>('challenge');
   
       if (certification === null) {
         new ServerError(404, `Nu există nici o certificare pentru challengeId=${challengeId}`).send(res);

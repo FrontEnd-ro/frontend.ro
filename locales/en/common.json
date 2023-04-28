@@ -188,5 +188,10 @@
         "description": "They improve your entire experience as a developer."
       }
     }
+  },
+  "Tidbits": {
+    "seo_description": "Tips & tricks about FrontEnd development.",
+    "description": "Tips & Tricks about Web Development",
+    "All Tidbits": "All Tidbits"
   }
 }

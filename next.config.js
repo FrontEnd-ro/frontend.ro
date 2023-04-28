@@ -8,6 +8,7 @@ const nextConfig = {
   distDir: 'dist',
   env: {
     APP_ENV: appConfig.APP.env,
+    APP_URL: appConfig.APP.app_url,
     ENDPOINT:  appConfig.APP.endpoint,
     CLOUDFRONT_PUBLIC: appConfig.CDN.static,
     GITHUB_CLIENT_ID: appConfig.GITHUB.id,

@@ -8,6 +8,7 @@ import { useKeyDown } from '~/services/Hooks';
 import BaseTidbitItem from '../BaseTidbitItem';
 import { TidbitI } from '~/../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 import Highlight, { Language } from '~/components/Highlight/Highlight';
 import TidbitGalleryItem from '../TidbitGalleryItem/TidbitGalleryItem';
 
@@ -20,6 +21,7 @@ interface Props {
 
 const Tidbit = ({ tidbit, index }: Props) => {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const [nextTidbit, setNextTidbit] = useState<TidbitI>(null);
   const [previousTidbit, setPreviousTidbit] = useState<TidbitI>(null);
 
@@ -129,7 +131,7 @@ const Tidbit = ({ tidbit, index }: Props) => {
         <nav className={`${styles['footer-nav']} d-flex justify-content-between mb-8`}>
           <Link prefetch={false} href={previousTidbit !== null ? `/tidbits/${previousTidbit.tidbitId}/1` : '/tidbits'} className="d-flex">
             <FontAwesomeIcon className="mr-2" width={14} icon={faArrowLeft} />
-            {previousTidbit !== null ? previousTidbit.title : 'Toate Tidbit\'s-urile'}
+            {previousTidbit !== null ? previousTidbit.title : t('Tidbits.All Tidbits')}
           </Link>
 
           {nextTidbit !== null && (

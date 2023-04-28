@@ -5,15 +5,17 @@ import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import { TidbitI } from '~/../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
+import { useTranslation } from '~/services/typesafeNextTranslate';
 
 const TidbitGalleryPage = ({ tidbits }: {tidbits: TidbitI[]}) => {
+  const { t, lang } = useTranslation('common');
   return (
     <>
       <SEOTags
-        url="https://FrontEnd.ro/tidbits"
-        title="Tidbits | FrontEnd.ro"
+        url={`${process.env.APP_URL}/tidbits`}
+        title={`Tidbits | ${t('FrontEndro')}`}
         shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/tidbits_1200w.jpeg`}
-        description="Tips & tricks vizuale despre FrontEnd development."
+        description={t('Tidbits.seo_description')}
       />
       <Header withNavMenu />
       <TidbitGallery tidbits={tidbits} />

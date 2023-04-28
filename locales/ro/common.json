@@ -188,5 +188,10 @@
         "description": "Îți îmbunătățesc întreaga experiență ca și developer."
       }
     }
+  },
+  "Tidbits": {
+    "seo_description": "Tips & tricks vizuale despre FrontEnd development.",
+    "description": "Tips & Tricks despre Web Development",
+    "All Tidbits": "Toate Tidbit's-urile"
   }
 }

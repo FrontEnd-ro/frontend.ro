@@ -1,5 +1,3 @@
-import React from 'react';
-import Link from '~/components/generic/Link';
 import { ResourceDescription } from '../resources-model';
 
 import styles from './ResourcePreview.module.scss';
@@ -10,11 +8,10 @@ function ResourcePreview({
   cover,
 }: ResourceDescription) {
   return (
-    <Link
+    <a
       href={url}
       target="_blank"
       rel="noreferrer"
-      prefetch={false}
       className={`
       ${styles['resource-preview']} 
       w-100 h-100 d-flex flex-column no-underline
@@ -31,7 +28,7 @@ function ResourcePreview({
           {title}
         </h3>
       </div>
-    </Link>
+    </a>
   );
 }
 

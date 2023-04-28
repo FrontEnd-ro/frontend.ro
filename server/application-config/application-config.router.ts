@@ -1,10 +1,10 @@
-const express = require('express');
-const { ServerError } = require('../ServerUtils');
-const ApplicationConfigModel = require('./application-config.model');
+import { ServerError } from '../ServerUtils';
+import express, { Request, Response } from 'express';
+import { ApplicationConfigModel } from './application-config.model';
 
 const applicationConfigRouter = express.Router();
 
-applicationConfigRouter.get('/', async function getApplicationConfig(req, res) {
+applicationConfigRouter.get('/', async function getApplicationConfig(req: Request, res: Response) {
   try {
     const config = await ApplicationConfigModel.get();
     res.json(config);
@@ -14,5 +14,4 @@ applicationConfigRouter.get('/', async function getApplicationConfig(req, res) {
   }
 });
 
-
-module.exports = applicationConfigRouter;
+export default applicationConfigRouter;

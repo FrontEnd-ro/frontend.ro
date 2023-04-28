@@ -1,17 +1,4 @@
-export interface ApplicationConfig {
-  ad?: {
-    id: string;
-    text: string;
-    cta?: string;
-    ctaLink?: string;
-  },
-  navItems: {
-    _id: string;
-    text: string;
-    href: string;
-    highlighted?: boolean;
-  }[],
-}
+import { ApplicationConfig } from "~/../shared/types/application-config.types";
 
 const LOAD_CONFIG = 'config/LOAD_CONFIG';
 

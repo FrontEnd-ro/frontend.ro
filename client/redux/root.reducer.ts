@@ -11,11 +11,9 @@ import {
   progressReducer as progress,
   ProgressState,
 } from './progress/progress.reducer';
-import {
-  ApplicationConfig,
-  applicationConfigReducer as applicationConfig,
-} from './application-config.reducer';
+import { applicationConfigReducer as applicationConfig } from './application-config.reducer';
 import { SubmissionState } from './exercise-submissions/types';
+import { ApplicationConfig } from '~/../shared/types/application-config.types';
 
 const rootReducer = (
   state: CombinedState<{

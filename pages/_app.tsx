@@ -9,9 +9,10 @@ import { UserRole } from '../shared/types/user.types';
 import UserService from '~/services/api/User.service';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
 import LoadNotifications from '~/components/LoadNotifications/LoadNotifications';
-import { ApplicationConfig, loadConfig } from '~/redux/application-config.reducer';
+import { loadConfig } from '~/redux/application-config.reducer';
 import { createStoreWithPreloadedData } from '~/redux/store';
 import { defaultUserState } from '~/redux/user/user.reducer';
+import { ApplicationConfig } from '../shared/types/application-config.types';
 import ApplicationConfigService from '~/services/api/ApplicationConfig.service';
 
 import '~/styles/index.scss';

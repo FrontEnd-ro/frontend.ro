@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ApplicationConfig } from '~/redux/application-config.reducer';
 import Button from '~/components/Button';
 import Link from '~/components/generic/Link';
+import { ApplicationConfig } from '~/../shared/types/application-config.types';
 
 import styles from './LandingAdCard.module.scss';
 

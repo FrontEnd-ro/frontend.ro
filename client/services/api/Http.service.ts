@@ -9,15 +9,15 @@ import SweetAlertService from '../sweet-alert/SweetAlert.service';
  * calling some APIs when Server Side Rendeing via Next.
  */
 class Http {
-  head(url: string, options = {}, preventErrorAlert = false) {
+  head(url: string, options: RequestInit = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, { ...options, method: 'HEAD' }, preventErrorAlert);
   }
 
-  get(url: string, options = {}, preventErrorAlert = false) {
+  get(url: string, options: RequestInit = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, { ...options, method: 'GET' }, preventErrorAlert);
   }
 
-  post(url: string, body = {}, options = {}, preventErrorAlert = false) {
+  post(url: string, body = {}, options: RequestInit = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, {
       ...options,
       method: 'POST',
@@ -25,7 +25,7 @@ class Http {
     }, preventErrorAlert);
   }
 
-  put(url: string, body = {}, options = {}, preventErrorAlert = false) {
+  put(url: string, body = {}, options: RequestInit = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, {
       ...options,
       method: 'PUT',
@@ -33,7 +33,7 @@ class Http {
     }, preventErrorAlert);
   }
 
-  patch(url: string, body = {}, options = {}, preventErrorAlert = false) {
+  patch(url: string, body = {}, options: RequestInit = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, {
       ...options,
       method: 'PATCH',
@@ -41,7 +41,7 @@ class Http {
     }, preventErrorAlert);
   }
 
-  delete(url: string, body = {}, options = {}, preventErrorAlert = false) {
+  delete(url: string, body = {}, options: RequestInit = {}, preventErrorAlert = false) {
     return this.httpGeneric(url, {
       ...options,
       method: 'DELETE',

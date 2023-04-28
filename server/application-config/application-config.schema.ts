@@ -12,7 +12,8 @@ const Ad = new mongoose.Schema<ApplicationConfig['ad']>({
   id: { type: String, required: true },
   text: { type: String, required: true },
   cta: { type: String, required: false },
-  ctaLink: { type: String, required: false }
+  ctaLink: { type: String, required: false },
+  active: { type: Boolean, required: true, default: true },
 });
 
 /**

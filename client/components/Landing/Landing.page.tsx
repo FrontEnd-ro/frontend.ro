@@ -50,7 +50,7 @@ function LandingPage({
       `}
       </style>
       <>
-        {applicationConfig.ad && <LandingAdCard ad={applicationConfig.ad} />}
+        {applicationConfig?.ad?.active === true && <LandingAdCard ad={applicationConfig.ad} />}
         <LandingHero
           isLoggedIn={isLoggedIn}
           htmlTutorialState={htmlTutorialState}

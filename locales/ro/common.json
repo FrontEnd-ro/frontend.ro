@@ -132,5 +132,61 @@
   "Diploma": {
     "description:no-exercises": "a completat <0> {{TUTORIAL}} </0>.",
     "description:exercises": "a completat <0> {{TUTORIAL}} </0> rezolvând cu succes toate cele {{COUNT}} exerciții."
+  },
+  "Resources": {
+    "title": "📚 Resurse pentru fiecare FrontEnd developer",
+    "seo_description": "Am pornit de la site-urile ce ne ajută zilnic în joburile nostre de FrontEnd developeri, le-am păstrat doar pe cele mai utile și am creat cu ele lista de aici.",
+    "description": "Sunt atât de multe resurse gratuite încât e greu să știi care sunt cele mai bune. <0></0> <1></1> Așa că am pornit de la site-urile ce ne ajută zilnic în joburile nostre de FrontEnd developeri, le-am păstrat doar pe cele mai utile și am creat cu ele lista de mai jos.",
+    "suggestions": "Așteptăm și sugestiile tale, așa că dă-ne un semn cu resursele care te ajută pe tine și le vom adăuga aici.",
+    "chapters": {
+      "esentials": {
+        "title": "Esențiale",
+        "description": "Noi le avem mereu deschise într-un tab. Tu?"
+      },
+      "images-videos": {
+        "title": "Imagini și Video-uri",
+        "description": "Vin cu o licență deschisă deci let poți folosi în orice proiect."
+      },
+      "vector": {
+        "title": "Ilustrații vectoriale",
+        "description": "Te ajută să faci site-ul mai prietenos și au o licență deschisă pentru a le folosi fără probleme."
+      },
+      "icons": {
+        "title": "Iconițe",
+        "description": "Te ajută să faci interfața mai intuitivă, mai ales pe mobil unde nu avem chiar așa de mult spațiu."
+      },
+      "css-spinners": {
+        "title": "CSS Spiners",
+        "description": "Inspirație pentru loaderele din proiectele tale."
+      },
+      "tutorials": {
+        "title": "Tutoriale interactive",
+        "description": "Sunt multe tutoriale pe net, dar acestea ne-au atras atenția căci fac învățarea mai interactivă."
+      },
+      "blogs": {
+        "title": "Blog-uri",
+        "description": "Pentru când vrei să te relaxezi citind despre ultimele noutăți."
+      },
+      "fonts": {
+        "title": "Fonts",
+        "description": "Adaugă mai multă personalitate site-ului tău schimbând fonturile."
+      },
+      "books": {
+        "title": "Cărți",
+        "description": "Merită citite pe larg căci conțin o mulțime de informații care sigur te vor ajuta."
+      },
+      "backgrounds-and-colors": {
+        "title": "Background-uri & Culori",
+        "description": "Dacă echipa nu are un designer care să vină cu sugestii, te poți inspira de aici :)"
+      },
+      "perf": {
+        "title": "Performanță",
+        "description": "Asigură-te că aplicație rămâne performantă și respectă bunele practici."
+      },
+      "extra": {
+        "title": "Extra",
+        "description": "Îți îmbunătățesc întreaga experiență ca și developer."
+      }
+    }
   }
 }

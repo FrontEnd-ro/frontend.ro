@@ -132,5 +132,61 @@
   "Diploma": {
     "description:no-exercises": "has successfully finished the <0> {{TUTORIAL}} </0>.",
     "description:exercises": "has successfully finished the <0>{{TUTORIAL}}</0> successfully solving all {{COUNT}} exercises."
+  },
+  "Resources": {
+    "title": "📚 Resources for every FrontEnd developer",
+    "seo_description": "We started from the sites that help us daily in our jobs as FrontEnd developers, we kept only the most useful ones and created the list below with them.",
+    "description": "There are so many free resources out there that it's hard to know which ones are the best. <0></0> <1></1> So we started from the sites that help us daily in our jobs as FrontEnd developers, we kept only the most useful ones and created the list below with them.",
+    "suggestions": "We also welcome your suggestions, so drop us a line with useful resources and we'll add them here.",
+    "chapters": {
+      "esentials": {
+        "title": "Essentials",
+        "description": "We always have them open in another tab. Do you?"
+      },
+      "images-videos": {
+        "title": "Images and Videos",
+        "description": "They have an open license so you can use them in any project."
+      },
+      "vector": {
+        "title": "Vector illustrations",
+        "description": "They help you make the site more user-friendly, plus they have an open license so use them without worries."
+      },
+      "icons": {
+        "title": "Icons",
+        "description": "Make the interface more intuitive, especially on mobile devices where we don't really have that much space."
+      },
+      "css-spinners": {
+        "title": "CSS Spiners",
+        "description": "Inspiration for loaders/spinners to use in your projects."
+      },
+      "tutorials": {
+        "title": "Interactive tutorials",
+        "description": "There are many tutorials out there, but these caught our attention because they make learning more interactive."
+      },
+      "blogs": {
+        "title": "Blogs",
+        "description": "For when you want to relax reading about the latest technologies."
+      },
+      "fonts": {
+        "title": "Fonts",
+        "description": "Add more personality to your website by changing the fonts."
+      },
+      "books": {
+        "title": "Books",
+        "description": "Worth reading extensively because they contain a lot of information that will surely help you."
+      },
+      "backgrounds-and-colors": {
+        "title": "Backgrounds & Colors",
+        "description": "If the team doesn't have a designer to come up with suggestions, you can get inspiration from here :)"
+      },
+      "perf": {
+        "title": "Performance",
+        "description": "Ensure that the application remains performant and follows to best practices."
+      },
+      "extra": {
+        "title": "Extra",
+        "description": "They improve your entire experience as a developer."
+      }
+    }
   }
 }

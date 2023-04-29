@@ -1,14 +1,17 @@
 
-const express = require('express');
-const fetch = require('node-fetch');
-const { PrivateMiddleware } = require('../Middlewares');
-const { ServerError } = require('../ServerUtils');
-const { default: UserModel } = require('../user/user.model');
-const { default: appConfig } = require('../config');
+import appConfig from '../config';
+import UserModel from '../user/user.model';
+import { ServerError } from '../ServerUtils';
+import { PrivateMiddleware } from '../Middlewares';
+import express, { Request, Response } from 'express';
+import { UserI } from '../../shared/types/user.types';
 
 const githubRouter = express.Router();
 
-githubRouter.get("/user", [PrivateMiddleware, async function getLoggedInUser(req, res) {
+githubRouter.get("/user", [PrivateMiddleware, async function getLoggedInUser(
+  req: Request<{} ,{} ,{ user: UserI }>,
+  res: Response
+) {
   const { user } = req.body;
 
   if (!user.github_access_token) {
@@ -36,7 +39,10 @@ githubRouter.get("/user", [PrivateMiddleware, async function getLoggedInUser(req
   });
 }]);
 
-githubRouter.get("/callback", [PrivateMiddleware, function gitHubAuth(req, res) {
+githubRouter.get("/callback", [PrivateMiddleware, function gitHubAuth(
+  req: Request<{} ,{}, { user: UserI }, { code: string; error: string; error_description: string; error_uri: string; }>,
+  res: Response
+) {
   const { user } = req.body;
   const { code, error, error_description, error_uri } = req.query;
 
@@ -59,7 +65,7 @@ githubRouter.get("/callback", [PrivateMiddleware, function gitHubAuth(req, res) 
     })
   })
     .then(resp => resp.json())
-    .then(async ({ access_token }) => {
+    .then(async ({ access_token }: { access_token: string; }) => {
       // TODO: what happens if any of those fails?
       const githubUserJson = await getGithubUser(access_token);
       const updatedUser = await UserModel.setGithubAccessToken(user._id, access_token);
@@ -68,7 +74,8 @@ githubRouter.get("/callback", [PrivateMiddleware, function gitHubAuth(req, res) 
 }]);
 
 // @returns User Object or null
-async function getGithubUser(access_token) {
+// TODO: should use octokit SDK
+async function getGithubUser(access_token: string) {
   try {
     const githubUserResp = await fetch(`https://api.github.com/user`, {
       method: "GET",
@@ -85,4 +92,4 @@ async function getGithubUser(access_token) {
   }
 }
 
-module.exports = githubRouter;
+export default githubRouter;

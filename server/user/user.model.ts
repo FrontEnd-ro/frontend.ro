@@ -13,7 +13,7 @@ import {
 import { PublicUserI } from '../../shared/types/user.types';
 import { UserI, WIPSanitizedUser } from '../../shared/types/user.types';
 
-type AuthJWT = {
+export type AuthJWT = {
   _id: string;
 }
 

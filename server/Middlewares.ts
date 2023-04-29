@@ -1,18 +1,19 @@
-const jwt = require('jsonwebtoken');
-const { default: UserModel } = require('./user/user.model');
-const { ServerError, parseBearerToken } = require('./ServerUtils');
-const { default: LessonExerciseModel } = require('./lesson-exercise/lesson-exercise.model');
-const { UserRole } = require('../shared/types/user.types');
-const { default: appConfig } = require('./config');
+import jwt from 'jsonwebtoken';
+import appConfig from './config/config';
+import { UserRole } from '../shared/types/user.types';
+import UserModel, { AuthJWT } from './user/user.model';
+import { NextFunction, Request, Response } from 'express';
+import { ServerError, parseBearerToken } from './ServerUtils';
+import LessonExerciseModel from './lesson-exercise/lesson-exercise.model';
 
 /****************** User Middleware */
 /** 
  * Everyone can access the API. 
  * If you have a token, it will be added into the req.body 
  */
-function PublicMiddleware(req, res, next) {
+function PublicMiddleware(req: Request, _, next: NextFunction) {
   // Accept token either via cookie or Bearer token sent via headers
-  const authToken = req.cookies.token ?? parseBearerToken(req);
+  const authToken: string | undefined = req.cookies.token ?? parseBearerToken(req);
 
   if (!authToken) {
     next();
@@ -23,7 +24,7 @@ function PublicMiddleware(req, res, next) {
       {
         algorithms: [appConfig.AUTH.algorithm]
       },
-      (err, payload) => {
+      (err, payload: AuthJWT) => {
         if (err) {
           next();
         } else {
@@ -40,9 +41,9 @@ function PublicMiddleware(req, res, next) {
 }
 
 /** Only authorized users can access this API */
-function PrivateMiddleware(req, res, next) {
+function PrivateMiddleware(req: Request, res: Response, next: NextFunction) {
   // Accept token either via cookie or Bearer token sent via headers
-  const authToken = req.cookies.token ?? parseBearerToken(req);
+  const authToken: string | undefined = req.cookies.token ?? parseBearerToken(req);
 
   if (!authToken) {
     new ServerError(401, 'Unauthorized!').send(res);
@@ -55,7 +56,7 @@ function PrivateMiddleware(req, res, next) {
     {
       algorithms: [appConfig.AUTH.algorithm]
     },
-    (err, payload) => {
+    (err, payload: AuthJWT) => {
       if (err) {
         new ServerError(401, 'Unauthorized!').send(res);
         return
@@ -76,17 +77,7 @@ function PrivateMiddleware(req, res, next) {
   );
 }
 
-function UserRoleMiddleware(role) {
-  if (!role in UserRole) {
-    const availableUserRoles = Object.values(UserRole).join(',');
-    console.error(`[UserRoleMiddleware] 'role' must be one of: ${availableUserRoles}.`);
-
-    return (_, res) => {
-      new ServerError(401, 'Nu ai rolul necesar pentru a accesa această resursă').send(res);
-      return
-    }
-  }
-
+function UserRoleMiddleware(role: UserRole) {
   return (req, res, next) => {
     PrivateMiddleware(req, res, () => {
       if (req.body.user.role === role) {
@@ -100,7 +91,7 @@ function UserRoleMiddleware(role) {
 }
 
 /****************** Exercise Middleware */
-async function SolvableExercise(req, res, next) {
+async function SolvableExercise(req: Request, res: Response, next: NextFunction) {
   const { exerciseId } = req.params;
 
   try {
@@ -121,7 +112,7 @@ async function SolvableExercise(req, res, next) {
   }
 }
 
-module.exports = {
+export {
   PublicMiddleware,
   PrivateMiddleware,
   UserRoleMiddleware,

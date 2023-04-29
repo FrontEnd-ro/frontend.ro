@@ -2,6 +2,7 @@ import { ServerError } from '../ServerUtils';
 import { UserRole } from '../../shared/types/user.types';
 import { APIErrorReasons } from '../../shared/SharedConstants';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
+import { PrivateMiddleware, SolvableExercise } from '../Middlewares';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import submissionVersionRouter from './submission-version/submission-version.router';
@@ -9,7 +10,6 @@ import submissionVersionRouter from './submission-version/submission-version.rou
 const express = require('express');
 import UserModel from '../user/user.model';
 const SubmissionModel = require('./submission.model');
-const { PrivateMiddleware, SolvableExercise } = require('../Middlewares');
 
 const submissionRouter = express.Router();
 

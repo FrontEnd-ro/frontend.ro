@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const UserModel = require('./user/user.model');
+const { default: UserModel } = require('./user/user.model');
 const { ServerError, parseBearerToken } = require('./ServerUtils');
 const { default: LessonExerciseModel } = require('./lesson-exercise/lesson-exercise.model');
 const { UserRole } = require('../shared/types/user.types');

@@ -45,7 +45,10 @@ class NotificationModel {
     // Make sure the payload only has props defined on the Schema
     validateAgainstSchemaProps(payload, NotificationSchema);
 
-    const user = await UserModel.findUserBy({ _id: payload.to });
+    const toId = typeof payload.to === 'string'
+      ? payload.to
+      : payload.to._id;
+    const user = await UserModel.findUserBy({ _id: toId });
     if (user === null) {
       throw new Error(`Utilizatorul cu id=${payload.to} nu există`);
     }
@@ -61,13 +64,19 @@ class NotificationModel {
       channels,
     });
 
-    const user = await UserModel.findUserBy({ _id: payload.to });
+    const toId = typeof payload.to === 'string'
+      ? payload.to
+      : payload.to._id;
+    const user = await UserModel.findUserBy({ _id: toId });
 
     // User that triggered the action that lead to this notification
     // Default to 'FrontEnd.ro' if this email is NOT a result of a user action.
     let sourceName = `FrontEnd.ro`;
     if (payload.from !== undefined) {
-      const sourceAdmin = await UserModel.findUserBy({ _id: payload.from });
+      const fromId = typeof payload.from === 'string'
+      ? payload.from
+      : payload.from._id;
+      const sourceAdmin = await UserModel.findUserBy({ _id: fromId });
       sourceName = sourceAdmin.name ?? sourceAdmin.username;
     }
 

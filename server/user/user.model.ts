@@ -1,20 +1,30 @@
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const { AUTH_EXPIRATION, ServerError, validateAgainstSchemaProps, validateObjectId, MAX_USERNAME_LENGTH } = require('../ServerUtils');
-const { default: appConfig } = require('../config');
-const { UsersSchema } = require('./user.schema');
+import bcrypt  from 'bcrypt';
+import jwt  from 'jsonwebtoken';
+import mongoose  from 'mongoose';
+import appConfig from '../config/config';
+import { User, UsersSchema }  from './user.schema';
+import {
+  AUTH_EXPIRATION,
+  ServerError,
+  validateAgainstSchemaProps,
+  validateObjectId,
+  MAX_USERNAME_LENGTH
+}  from '../ServerUtils';
+import { PublicUserI } from '../../shared/types/user.types';
+import { UserI, WIPSanitizedUser } from '../../shared/types/user.types';
 
-const User = mongoose.models.User || mongoose.model('User', UsersSchema);
+type AuthJWT = {
+  _id: string;
+}
 
 class UserModel {
   static search() {
     return User.find({});
   }
 
-  static async ping(token) {
+  static async ping(token: string): Promise<UserI> {
     return new Promise((resolve, reject) => {
-      jwt.verify(token, appConfig.AUTH.secret, async (err, decodedInfo) => {
+      jwt.verify(token, appConfig.AUTH.secret, async (err, decodedInfo: AuthJWT) => {
         if (err) {
           console.error('UserSharedModel.ping', err);
           reject(new ServerError(401, 'Not authenticated'));
@@ -22,19 +32,19 @@ class UserModel {
         }
   
         const { _id } = decodedInfo;
-  
-        const user = await findUserBy({ _id });
+        
+        const user = await User.findById(_id);
         if (!user) {
           reject(new ServerError(404, "User doesn't exist anymore!"));
           return;
         }
   
-        resolve(user);
+        resolve(user.toObject());
       });
     });
   }
 
-  static async verify(username, password) {
+  static async verify(username: string, password: string): Promise<boolean> {
     const user = await UserModel.findUserBy({ username });
 
     if (!user) {
@@ -50,7 +60,7 @@ class UserModel {
     }
   }
 
-  static create(payload) {
+  static create(payload: Omit<UserI, 'lastLogin'>): Promise<UserI> {
     validateAgainstSchemaProps(payload, UsersSchema);
 
     const user = new User(payload);
@@ -62,29 +72,44 @@ class UserModel {
           return;
         }
 
-        resolve(user);
+        resolve(user.toObject());
       });
     });
   }
 
-  static async findUserBy(filters) {
+  static async findUserBy(filters: mongoose.FilterQuery<UserI>): Promise<UserI | null> {
     const user = await User.findOne(filters);
-   
-     return user || null;
+
+    if (user === null) {
+      return null;
+    }
+    return user.toObject();
    }
 
   static async getUser({
     username,
     email,
-  }) {
+  }: {
+    username: string;
+    email?: undefined
+  } | {
+    email: string;
+    username?: undefined;
+  } | {
+    email: string;
+    username: string;
+  }): Promise<UserI | null> {
     const user = await User.findOne({
       $or: [{ username }, { email }],
     });
 
-    return user || null;
+    if (user === null) {
+      return null;
+    }
+    return user.toObject();
   }
 
-  static async update(_id, payload) {
+  static async update(_id: string, payload: Partial<UserI>): Promise<UserI> {
     validateObjectId(_id);
     const user = await User.findById(_id);
 
@@ -96,14 +121,14 @@ class UserModel {
     Object.assign(user, payload);
 
     await user.save();
-    return user;
+    return user.toObject();
   }
 
-  static async delete(_id) {
+  static async delete(_id: string): Promise<void> {
     await User.findOneAndDelete({ _id })
   }
 
-  static generateJwtForUser(_id) {
+  static generateJwtForUser(_id: string): string {
     return jwt.sign(
       { _id },
       appConfig.AUTH.secret,
@@ -114,7 +139,7 @@ class UserModel {
     );
   }
 
-  static sanitize(user) {
+  static sanitize(user: UserI): WIPSanitizedUser {
     // TODO: decide on an approach to use among all schema
     // https://github.com/FrontEnd-ro/frontend.ro/issues/438
     let sanitizedUser = { ...user };
@@ -128,18 +153,24 @@ class UserModel {
     return sanitizedUser;
   }
 
-  static sanitizeForPublic = (user) => {
+  static sanitizeForPublic = (user: UserI): PublicUserI => {
     const sanitizedUser = UserModel.sanitize(user);
-    const propertiesToKeep = ['name', 'description', 'avatar', 'username'];
-    const result = {};
-
-    propertiesToKeep.forEach((prop) => {
-      result[prop] = sanitizedUser[prop];
-    });
+    const result: PublicUserI = {
+      name: sanitizedUser.name,
+      avatar: sanitizedUser.avatar,
+      username: sanitizedUser.username,
+      description: sanitizedUser.description,
+    };
+    
     return result;
   }
 
-  static validateUsername(username) {
+  static validateUsername(username: string): {
+    result: false;
+    reason: string;
+  } | {
+    result: true;
+  } {
     const RESTRICTED_USERNAMES = [
       'lectii',
       'settings',
@@ -165,7 +196,7 @@ class UserModel {
     };
   }
 
-  static async setGithubAccessToken(_id, github_access_token) {
+  static async setGithubAccessToken(_id: string, github_access_token: string): Promise<UserI> {
     validateObjectId(_id);
     const user = await User.findById(_id);
 
@@ -176,8 +207,8 @@ class UserModel {
     user.github_access_token = github_access_token;
 
     await user.save();
-    return user;
+    return user.toObject();
   }
 }
 
-module.exports = UserModel;
+export default UserModel;

@@ -11,7 +11,7 @@ export interface ChallengeSubmissionI extends Omit<ChallengeI, 'tasks'> {
   challengeId: string;
 
   // The user that submitten this solution
-  user: ObjectId | PopulatedDoc<UserI>;
+  user: PopulatedDoc<UserI>;
 
   tasks: ChallengeSubmissionTaskI[];
 }

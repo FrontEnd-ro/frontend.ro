@@ -3,7 +3,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const { PrivateMiddleware } = require('../Middlewares');
 const { ServerError } = require('../ServerUtils');
-const UserModel = require('../user/user.model');
+const { default: UserModel } = require('../user/user.model');
 const { default: appConfig } = require('../config');
 
 const githubRouter = express.Router();

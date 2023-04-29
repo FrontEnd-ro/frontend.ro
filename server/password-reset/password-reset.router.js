@@ -1,7 +1,7 @@
 const express = require('express');
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 const { ServerError } = require('../ServerUtils');
-const UserModel = require('../user/user.model');
+const { default: UserModel } = require('../user/user.model');
 const PasswordResetModel = require('./password-reset.model');
 
 const passwordResetRouter = express.Router();

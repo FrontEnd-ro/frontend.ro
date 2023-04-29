@@ -6,7 +6,7 @@ import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import submissionVersionRouter from './submission-version/submission-version.router';
 
 const express = require('express');
-const UserModel = require('../user/user.model');
+import UserModel from '../user/user.model';
 const SubmissionModel = require('./submission.model');
 const { PrivateMiddleware, SolvableExercise } = require('../Middlewares');
 const { ServerError } = require('../ServerUtils');

@@ -44,6 +44,7 @@ const sanitize = (challengeSubmission: ChallengeSubmissionI) :  ChallengeSubmiss
   }
 
   if (typeof sanitizedChallengeSubmission.user !== 'string') {
+    // @ts-ignore
     sanitizedChallengeSubmission.user = UserModel.sanitize(sanitizedChallengeSubmission.user);
   }
 
@@ -69,7 +70,7 @@ const mapFromChallenge = (challenge: ChallengeI, user: UserI): ChallengeSubmissi
 
   return {
     ...challengeObject,
-    user: UserModel.sanitize(user),
+    user,
     tasks: challengeObject.tasks.map((task) => {
       // Do not return the task ID
       delete task._id;

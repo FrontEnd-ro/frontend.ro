@@ -1,22 +1,24 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
-const multer = require('multer');
+import multer from 'multer';
+import bcrypt from 'bcrypt';
+import express, { Request, Response } from 'express';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+
+import UserModel from './user.model';
+import appConfig from '../config/config';
+import SubscribeModel from '../subscribe.model';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
-const UserModel = require('./user.model');
-const SubscribeModel = require('../subscribe.model');
-const PasswordResetModel = require('../password-reset/password-reset.model');
-const { ServerError, setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } = require('../ServerUtils');
-const { PrivateMiddleware, PublicMiddleware } = require('../Middlewares');
-const { MAX_MEDIA_MB, MAX_MEDIA_BYTES } = require('../../shared/SharedConstants')
-const { default: appConfig } = require('../config');
+import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
+import PasswordResetModel from '../password-reset/password-reset.model';
+import { MAX_MEDIA_MB, MAX_MEDIA_BYTES } from '../../shared/SharedConstants';
+import { ServerError, setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '../ServerUtils';
+import { PublicUserI, UserI, UserRole, WIPSanitizedUser } from '../../shared/types/user.types';
 
 const userRouter = express.Router();
 
 const s3 = new S3Client({ region: appConfig.AWS.region });
 const upload = multer({ storage: multer.memoryStorage() });
 
-userRouter.get('/avatar/:username', async function getDefaultAvatar(req, res) {
+userRouter.get('/avatar/:username', async function getDefaultAvatar(req: Request, res: Response) {
   // Previously we were pointing directly to https://joeschmoe.io/ API.
   // However, since the heroku free plans were cancelled, this api failed
   // to work. Thus, we're chaning the endpoint of default avatar to our own,
@@ -46,7 +48,7 @@ userRouter.get('/avatar/:username', async function getDefaultAvatar(req, res) {
   res.redirect(302, `${appConfig.CDN.static}/schmoes/pngs/${schmoes[schmoeIndex]}.png`);
 });
 
-userRouter.get('/check-username/:username', async function checkUsername(req, res) {
+userRouter.get('/check-username/:username', async function checkUsername(req: Request, res: Response) {
   const { username } = req.params;
 
   const user = await UserModel.findUserBy({ username });
@@ -68,7 +70,7 @@ userRouter.get('/ping', [
 
 userRouter.get('/:username', [
   PublicMiddleware,
-  async function getPublicProfile(req, res) {
+  async function getPublicProfile(req: Request, res: Response<PublicUserI>) {
     const { username } = req.params;
     try {
       const user = await UserModel.getUser({ username });
@@ -86,10 +88,12 @@ userRouter.get('/:username', [
     }
 }]);
 
-userRouter.post('/login', async function login(req, res) {
+userRouter.post('/login', async function login(
+  req: Request<{}, {}, { emailOrUsername: string; password: string; }>,
+  res: Response<WIPSanitizedUser>
+) {
   let { emailOrUsername, password } = req.body;
   emailOrUsername = emailOrUsername.trim().toLowerCase();
-
 
   if (!emailOrUsername || !password) {
     new ServerError(400, 'Email-ul/username-ul și parola sunt obligatorii pentru login').send(res);
@@ -122,12 +126,15 @@ userRouter.post('/login', async function login(req, res) {
   res.json(UserModel.sanitize(user));
 })
 
-userRouter.post('/logout', (req, res) => {
+userRouter.post('/logout', (_, res: Response) => {
   res.clearCookie('token');
   res.status(200).send();
 });
 
-userRouter.post('/register', async function register(req, res) {
+userRouter.post('/register', async function register(
+  req: Request<{}, {}, { email: string; username: string; password: string; }>,
+  res: Response<WIPSanitizedUser>
+) {
   const { email, username, password } = req.body;
 
   if (!email || !username || !password) {
@@ -159,6 +166,8 @@ userRouter.post('/register', async function register(req, res) {
   const user = await UserModel.create({
     email,
     username,
+    tutorials: [],
+    role: UserRole.STUDENT,
     password: hashedPassword,
     avatar: `${appConfig.APP.endpoint}/auth/avatar/${username}`,
   });
@@ -183,7 +192,10 @@ userRouter.post('/register', async function register(req, res) {
 
 userRouter.post('/name', [
   PrivateMiddleware,
-  async function updateName(req, res) {
+  async function updateName(
+    req: Request<{}, {}, { name: string; password: string; user: UserI }>,
+    res: Response<WIPSanitizedUser>
+  ) {
     const name = req.body.name.toString().trim();
     const { password, user } = req.body;
 
@@ -208,7 +220,10 @@ userRouter.post('/name', [
 
 userRouter.post('/description', [
   PrivateMiddleware,
-  async function updateDescription(req, res) {
+  async function updateDescription(
+    req: Request<{}, {}, { description: string; password: string; user: UserI }>,
+    res: Response<WIPSanitizedUser>
+  ) {
     const description = req.body.description.toString().trim();
     const { password, user } = req.body;
 
@@ -233,15 +248,18 @@ userRouter.post('/description', [
 
 userRouter.post('/username', [
   PrivateMiddleware,
-  async function updateUsername(req, res) {
+  async function updateUsername(
+    req: Request<{}, {}, { username: string; password: string; user: UserI }>,
+    res: Response<WIPSanitizedUser>
+  ) {
     const username = req.body.username.toString().trim();
     const { password, user } = req.body;
 
 
-    const { result, reason } = UserModel.validateUsername(username);
+    const validationResult = UserModel.validateUsername(username);
 
-    if (!result) {
-      new ServerError(400, reason).send(res);
+    if (validationResult.result === false) {
+      new ServerError(400, validationResult.reason).send(res);
       return;
     }
 
@@ -259,7 +277,10 @@ userRouter.post('/username', [
 
 userRouter.post('/email', [
   PrivateMiddleware,
-  async function updateEmail(req, res) {
+  async function updateEmail(
+    req: Request<{}, {}, { email: string; password: string; user: UserI }>,
+    res: Response<WIPSanitizedUser>
+  ) {
     const email = req.body.email.toString().trim();
     const { password, user } = req.body;
 
@@ -273,10 +294,17 @@ userRouter.post('/email', [
       return
     }
 
+    const userWithThisEmail = await UserModel.getUser({ email });
+    if (userWithThisEmail !== null) {
+      new ServerError(400, '⛔ Noul email e deja folosit de alt user.').send(res);
+      return
+    }
+
     try {
       const updatedUser = await updateUserFields({ _id: user._id, username: user.username, password }, { email });
       res.json(UserModel.sanitize(updatedUser));
     } catch (err) {
+      console.log(`[updateEmail(${email})]`, err);
       err.send(res); // Err is of type ServerError
     }
   }
@@ -284,7 +312,10 @@ userRouter.post('/email', [
 
 userRouter.post('/password', [
   PrivateMiddleware,
-  async function updateEmail(req, res) {
+  async function updatePassword(
+    req: Request<{}, {}, { newPassword: string; password: string; user: UserI }>,
+    res: Response<WIPSanitizedUser>
+  ) {
     const newPassword = req.body.newPassword.toString().trim();
     const { password, user } = req.body;
 
@@ -306,7 +337,10 @@ userRouter.post('/password', [
   }
 ]);
 
-userRouter.post('/password/reset', async function resetPassword(req, res) {
+userRouter.post('/password/reset', async function resetPassword(
+  req: Request<{}, {}, { newPassword: string; emailOrUsername: string; code: string; }>,
+  res: Response<WIPSanitizedUser>
+) {
   try {
     const newPassword = req.body.newPassword.toString().trim();
     const { emailOrUsername, code } = req.body;
@@ -352,7 +386,10 @@ userRouter.post('/password/reset', async function resetPassword(req, res) {
   }
 });
 
-userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(req, res) {
+userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(
+  req: Request<{}, {}, { user: UserI }>,
+  res: Response<WIPSanitizedUser>
+) {
   const userId = req.body.user._id;
 
   upload.single('file')(req, null, async (err) => {
@@ -394,7 +431,10 @@ userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(req, res) 
   });
 })
 
-userRouter.post('/subscribe', async (req, res) => {
+userRouter.post('/subscribe', async (
+  req: Request<{}, {}, { name: string; email: string; }>,
+  res: Response<{ name: string; email: string; }>
+) => {
   const { name, email } = req.body;
 
   if (!name || !email) {
@@ -433,7 +473,10 @@ userRouter.post('/subscribe', async (req, res) => {
   });
 })
 
-userRouter.delete('/', [PrivateMiddleware], async function deleteAccount(req, res) {
+userRouter.delete('/', [PrivateMiddleware], async function deleteAccount(
+  req: Request<{}, {}, { password: string; user: UserI; }>,
+  res: Response
+) {
   const { user, password } = req.body;
 
   const areCredentialsOk = await UserModel.verify(user.username, password);
@@ -447,7 +490,10 @@ userRouter.delete('/', [PrivateMiddleware], async function deleteAccount(req, re
   res.status(200).send();
 });
 
-async function updateUserFields({ _id, username, password }, fields) {
+async function updateUserFields(
+  { _id, username, password }: { _id: string; username: string; password: string; },
+  fields: Partial<UserI>
+) {
   let areCredentialsOk = false;
 
   try {

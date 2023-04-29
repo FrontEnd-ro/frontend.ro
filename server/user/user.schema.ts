@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const { UserRole } = require('../../shared/types/user.types');
+import mongoose from 'mongoose';
+import { UserI, UserRole } from "../../shared/types/user.types";
 
-const UsersSchema = new mongoose.Schema({
+const UsersSchema = new mongoose.Schema<UserI>({
   avatar: { type: String, required: true },
   name: { type: String, required: false, default: '' },
   email: { type: String, required: true, unique: true },
@@ -9,7 +9,7 @@ const UsersSchema = new mongoose.Schema({
   description: { type: String, required: false, default: '' },
   password: { type: String, required: true },
   github_access_token: { type: String },
-  lastLogin: { type: Date, default: Date.now() },
+  lastLogin: { type: Date, default: new Date() },
   role: {
     type: String,
     enum: [
@@ -26,4 +26,6 @@ const UsersSchema = new mongoose.Schema({
   tutorials: [{ type: String }],
 });
 
-export { UsersSchema };
+const User : mongoose.Model<UserI> = mongoose.models.User || mongoose.model('User', UsersSchema);
+
+export { User, UsersSchema };

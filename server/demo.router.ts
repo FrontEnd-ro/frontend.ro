@@ -1,16 +1,15 @@
-const express = require('express');
-const fetch = require('node-fetch');
+import express, { Response } from 'express';
 
 const demoRouter = express.Router();
-
 
 const IMG_SRC = 'https://d3tycb976jpudc.cloudfront.net/demo-assets/eiffel-tower-during-night.jpg';
 const DELAY = 2000;
 
-demoRouter.get('/slow-image', async function getSlowImage(req, res) {
+demoRouter.get('/slow-image', async function getSlowImage(_, res: Response) {
   fetch(IMG_SRC)
-    .then((fetchRes) => fetchRes.buffer())
-    .then((buffer) => {
+    .then((fetchRes) => fetchRes.arrayBuffer())
+    .then((arrayBuffer) => {
+      const buffer = Buffer.from(arrayBuffer);
       setTimeout(() => {
         /** Artificially delay returning the response */
         res.setHeader('Content-type', 'image/jpeg');
@@ -25,4 +24,4 @@ demoRouter.get('/slow-image', async function getSlowImage(req, res) {
     });
 });
 
-module.exports = demoRouter;
+export default demoRouter;

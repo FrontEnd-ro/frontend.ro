@@ -38,7 +38,7 @@ export default function ContentShifting() {
               <h2> Turnul Eiffel</h2>
               <div style={{ display: 'flex' }}>
                 <img
-                  src="/api/demo/slow-image"
+                  src={`${process.env.ENDPOINT}/demo/slow-image`}
                   style={{ marginRight: '1em', maxHeight: '250px' }}
                   alt="Eiffel tower during night"
                 />

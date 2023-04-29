@@ -12,7 +12,7 @@ import appConfig from './config';
 /** API routers */
 import userRouter from './user/user.router';
 const submissionRouter = require('./submission/submission.router');
-const demoRouter = require('./demo.router');
+import demoRouter from './demo.router';
 import eventRouter from './event/event.router';
 const githubRouter = require('./github/github.router.js');
 import lessonRouter from './lesson/lesson.router';

@@ -1,12 +1,15 @@
-const express = require('express');
+import UserModel from '../user/user.model';
+import { ServerError } from '../ServerUtils';
+import express, { Request, Response } from 'express';
+import PasswordResetModel from './password-reset.model';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
-const { ServerError } = require('../ServerUtils');
-const { default: UserModel } = require('../user/user.model');
-const PasswordResetModel = require('./password-reset.model');
 
 const passwordResetRouter = express.Router();
 
-passwordResetRouter.post('/', async function generateResetCode(req, res) {
+passwordResetRouter.post('/', async function generateResetCode(
+  req: Request<{}, {}, { email: string; }>,
+  res: Response
+) {
   const { email } = req.body;
 
   if (!email) {
@@ -44,4 +47,4 @@ passwordResetRouter.post('/', async function generateResetCode(req, res) {
   }
 });
 
-module.exports = passwordResetRouter;
+export default passwordResetRouter;

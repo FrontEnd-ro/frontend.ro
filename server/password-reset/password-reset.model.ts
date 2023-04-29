@@ -1,16 +1,9 @@
-const mongoose = require('mongoose');
-const { default: appConfig } = require('../config');
-
-const PasswordResetSchema = new mongoose.Schema({
-  expiration: { type: Date, required: true },
-  email: { type: String, required: true },
-  code: { type: String, required: true }
-});
-
-const PasswordReset = mongoose.models.PasswordReset || mongoose.model('PasswordReset', PasswordResetSchema);
+import mongoose from 'mongoose';
+import appConfig from '../config/config';
+import { PasswordReset, PasswordResetI } from './password-reset.schema';
 
 class PasswordResetModel {
-  static async validate(email, code) {
+  static async validate(email: string, code: string): Promise<boolean> {
     const resetCode = await PasswordReset.findOne({
       email,
       code
@@ -23,7 +16,7 @@ class PasswordResetModel {
     return true;
   }
 
-  static create(email) {
+  static create(email: string): Promise<mongoose.Document<any, any, PasswordResetI> & PasswordResetI> {
     const MINUTE_IN_MILLISECONDS = 1000 * 60;
 
     const code = generateCode(
@@ -35,26 +28,26 @@ class PasswordResetModel {
       Date.now() + appConfig.PASS_RESET_CODE.expiration * MINUTE_IN_MILLISECONDS
     );
 
-    const resetCode = new PasswordReset({
+    const passwordReset = new PasswordReset({
       expiration,
       email,
       code,
     });
 
     return new Promise((resolve, reject) => {
-      resetCode.save((err) => {
+      passwordReset.save((err) => {
         if (err) {
           reject(err);
           return;
         }
 
-        resolve(resetCode);
+        resolve(passwordReset);
       });
     });
   }
 }
 
-function generateCode(length = 4, offset = 1234) {
+function generateCode(length = 4, offset = 1234): string {
   let code = '';
 
   for (let i = 0; i < length; i++) {
@@ -64,4 +57,4 @@ function generateCode(length = 4, offset = 1234) {
   return code;
 }
 
-module.exports = PasswordResetModel;
+export default PasswordResetModel;

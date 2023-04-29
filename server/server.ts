@@ -18,7 +18,7 @@ const githubRouter = require('./github/github.router.js');
 import lessonRouter from './lesson/lesson.router';
 const presentationRouter = require('./presentation/presentation.router');
 import applicationConfigRouter from './application-config/application-config.router';
-const passwordResetRouter = require('./password-reset/password-reset.router');
+import passwordResetRouter from './password-reset/password-reset.router';
 import notificationRouter from './notification/notification.router';
 import certificationRouter from './certification/certification.router';
 import tutorialRouter from './tutorial/tutorial.router';

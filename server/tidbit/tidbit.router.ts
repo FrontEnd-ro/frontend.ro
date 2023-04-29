@@ -1,7 +1,7 @@
 import get from 'lodash/get';
 import set from 'lodash/set';
 import express, { Request, Response } from "express";
-import { ServerError } from "../ServerUtils";
+import { ServerError } from "../utils/ServerError";
 import { PublicMiddleware } from "../Middlewares";
 import Tidbit, { sanitizeTidbit } from "./tidbit.model";
 
@@ -50,7 +50,7 @@ tidbitRouter.get("/:tidbitId", [
     const tidbit = await Tidbit.findOne({ tidbitId });
 
     if (tidbit === null) {
-      new ServerError(404, "Not found").send(res);
+      new ServerError(404, 'generic.404').send(res);
       return;
     }
 
@@ -69,7 +69,7 @@ tidbitRouter.get("/:currentTidbitId/sides", [
     );
 
     if (indexOf === -1) {
-      new ServerError(404, `Tidbit with id=${currentTidbitId} not found.`).send(res);
+      new ServerError(404, 'generic.404', { currentTidbitId }).send(res);
       return;
     }
 
@@ -86,7 +86,7 @@ tidbitRouter.post('/:tidbitId/views', async function increaseViews(req, res) {
   const tidbit = await Tidbit.findOne({ tidbitId });
 
   if (tidbit === null) {
-    new ServerError(404, "Not found").send(res);
+    new ServerError(404, 'generic.404').send(res);
     return;
   }
 
@@ -96,10 +96,7 @@ tidbitRouter.post('/:tidbitId/views', async function increaseViews(req, res) {
     await tidbit.save();
     res.status(200).send();
   } catch (err) {
-    new ServerError(
-      err.code || 500, 
-      err.message || 'Oops! A apărut o problemă. Încearcă din nou!'
-    ).send(res);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 

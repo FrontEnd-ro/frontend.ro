@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const mongoose = require('mongoose');
-const { ServerError, validateAgainstSchemaProps } = require('../ServerUtils');
+const { ServerError } = require('../utils/ServerError');
 
 const ChallengeParticipantSchema = new mongoose.Schema(
   {

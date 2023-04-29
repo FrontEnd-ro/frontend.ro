@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 import appConfig from '../config';
 import Challenge from './challenge.model';
-import { ServerError } from '../ServerUtils';
 import { PublicMiddleware } from '../Middlewares';
+import { ServerError } from '../utils/ServerError';
 import express, { Request, Response } from 'express';
 import { ChallengeI } from '../../shared/types/challenge.types';
 
@@ -15,7 +15,7 @@ challengeRouter.get('/:challengeId', [
     const challenge: ChallengeI = await Challenge.findOne({ challengeId });
 
     if (challenge === null) {
-      new ServerError(404, 'Not Found').send(res);
+      new ServerError(404, 'generic.404',  { challengeId }).send(res);
       return;
     }
 
@@ -30,7 +30,7 @@ challengeRouter.get('/:challengeId/types', [
     const challenge: ChallengeI = await Challenge.findOne({ challengeId });
 
     if (challenge === null) {
-      new ServerError(404, 'Not Found').send(res);
+      new ServerError(404, 'generic.404', { challengeId }).send(res);
       return;
     }
 
@@ -50,7 +50,7 @@ challengeRouter.get('/:challengeId/startingCode', [
     const challenge: ChallengeI = await Challenge.findOne({ challengeId });
 
     if (challenge === null) {
-      new ServerError(404, 'Not Found').send(res);
+      new ServerError(404, 'generic.404', { challengeId }).send(res);
       return;
     }
 

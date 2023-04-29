@@ -3,8 +3,9 @@ import appConfig from './config';
 import { UserRole } from '../shared/types/user.types';
 import UserModel, { AuthJWT } from './user/user.model';
 import { NextFunction, Request, Response } from 'express';
-import { ServerError, parseBearerToken } from './ServerUtils';
+import { parseBearerToken } from './ServerUtils';
 import LessonExerciseModel from './lesson-exercise/lesson-exercise.model';
+import { ServerError } from './utils/ServerError';
 
 /****************** User Middleware */
 /** 
@@ -46,7 +47,7 @@ function PrivateMiddleware(req: Request, res: Response, next: NextFunction) {
   const authToken: string | undefined = req.cookies.token ?? parseBearerToken(req);
 
   if (!authToken) {
-    new ServerError(401, 'Unauthorized!').send(res);
+    new ServerError(401, 'generic.401').send(res);
     return;
   }
 
@@ -58,14 +59,14 @@ function PrivateMiddleware(req: Request, res: Response, next: NextFunction) {
     },
     (err, payload: AuthJWT) => {
       if (err) {
-        new ServerError(401, 'Unauthorized!').send(res);
+        new ServerError(401, 'generic.401').send(res);
         return
       } else {
         UserModel.findUserBy({ _id: payload._id })
           .then(resp => {
             if (resp === null) {
               // JWT is valid, but encoded ID doesn't exist
-              new ServerError(401, 'Unauthorized!').send(res);
+              new ServerError(401, 'generic.401').send(res);
               return;
             }
             req.body.user = resp;
@@ -85,7 +86,7 @@ function UserRoleMiddleware(role: UserRole) {
         return;
       }
 
-      new ServerError(401, 'Nu ai rolul necesar pentru a accesa această resursă').send(res);
+      new ServerError(401, 'generic.wrong_role').send(res);
     })
   }
 }
@@ -97,7 +98,7 @@ async function SolvableExercise(req: Request, res: Response, next: NextFunction)
   try {
     const lessonExercise = await LessonExerciseModel.get(exerciseId);
     if(!lessonExercise) {
-      throw new ServerError(404, 'Exercițiul nu există!');
+      throw new ServerError(404, 'exercises.not_found');
     }
 
     next();

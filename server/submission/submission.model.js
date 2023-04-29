@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 import { SubmissionSchema } from './submission.schema';
-const { PAGE_SIZE, ServerError, validateAgainstSchemaProps, validateObjectId } = require('../ServerUtils');
+const { PAGE_SIZE, validateAgainstSchemaProps, validateObjectId } = require('../ServerUtils');
 import UserModel from '../user/user.model';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
+const { ServerError } = require('../utils/ServerError');
 
 /** Initialize the User Schema because we need it when referencing & populating the results */
 require('../user/user.model');
@@ -134,7 +135,7 @@ class SubmissionModel {
     const submission = await Submission.findById(_id);
 
     if (!submission) {
-      throw new ServerError(404, `Couldn't update non-existent submission with id=${_id}.`);
+      throw new ServerError(404, 'generic.404', { _id });
     }
 
     validateAgainstSchemaProps(payload, SubmissionSchema);
@@ -171,7 +172,7 @@ class SubmissionModel {
     const submission = await Submission.findById(_id);
 
     if (!submission) {
-      throw new ServerError(404, `Couldn't delete non-existent submission with id=${_id}.`);
+      throw new ServerError(404, 'generic.404', { _id });
     }
 
     return new Promise((resolve, reject) => {

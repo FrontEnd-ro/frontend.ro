@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { ServerError } from '../../ServerUtils';
+import { ServerError } from '../../utils/ServerError';
 import { PrivateMiddleware } from '../../Middlewares';
 import { SubmissionVersion } from './submission-version.model';
 import { UserRole } from '../../../shared/types/user.types';
@@ -23,12 +23,12 @@ submissionVersionRouter.get('/:submissionId', [
     const submission = await SubmissionModel.get(submissionId);
 
     if (submission === null) {
-      new ServerError(404, `Nu există nici o submisie cu ID=${submissionId}`).send(res);
+      new ServerError(404, 'generic.404', { submissionId }).send(res);
       return;
     }
 
     if (submission.user._id.toString() !== user._id.toString() && user.role !== UserRole.ADMIN) {
-      new ServerError(403, "Doar adminii sau owner-ul exercițiului poate să citească versiunile unei submisii.").send(res);
+      new ServerError(403, 'submission.forbidden_to_read_versions').send(res);
       return;
     }
 
@@ -37,7 +37,7 @@ submissionVersionRouter.get('/:submissionId', [
       res.json(versions);
     } catch (err) {
       console.error("[submissionVersionRouter.getAllVersionsForSubmission]", err);
-      new ServerError(500, 'Eroare la încărcarea versiunilor...').send(res);
+      new ServerError(500, 'generic.500').send(res);
     }
   }
 ]);

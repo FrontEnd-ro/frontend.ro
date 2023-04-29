@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import UserModel from '../user/user.model';
-import { ServerError } from '../ServerUtils';
+import { ServerError } from '../utils/ServerError';
 import { UserI } from '../../shared/types/user.types';
 import Tutorial, { sanitizeTutorial } from './tutorial.model';
 import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
@@ -34,7 +34,7 @@ tutorialRouter.get('/:tutorialId', [
       .populate('lessons');
 
     if (tutorial === null) {
-      new ServerError(404, `Nu există nici un tutorial cu id=${tutorialId}`).send(res);
+      new ServerError(404, 'generic.404', { tutorialId }).send(res);
       return;
     }
 
@@ -48,25 +48,24 @@ tutorialRouter.post('/:tutorialId/start', [
   async function startTutorial(req: Request, res: Response) {
     const { tutorialId } = req.params;
     const { user } = req.body;
+    const SPAN = `startTutorial(${tutorialId})`
 
     if (user.tutorials.includes(tutorialId)) {
-      new ServerError(422, `Ai început deja tutorialul cu ID=${tutorialId}`).send(res);
+      new ServerError(422, 'tutorial.already_started').send(res);
       return;
     }
 
     try {
       const tutorial = await Tutorial.findOne({ tutorialId });
       if (tutorial === null) {
-        new ServerError(404, `Nu există nici un tutorial cu ID=${tutorialId}`).send(res);
+        new ServerError(404, 'generic.404', { tutorialId }).send(res);
         return;
       }
 
       await UserModel.update(user._id, { tutorials: [...user.tutorials, tutorialId] });
     } catch (err) {
-      new ServerError(
-        err.code || 500,
-        err.message || `Error tying to start tutorial with ID=${tutorialId}`,
-      ).send(res);
+      console.error(SPAN, err);
+      new ServerError(500, 'generic.500').send(res);
     }
 
     res.status(200).send();
@@ -84,7 +83,7 @@ tutorialRouter.get('/:tutorialId/progress', [
       .populate('lessons');
 
     if (tutorial === null) {
-      new ServerError(404, `Nu există nici un tutorial cu tutorialId=${tutorialId}`).send(res);
+      new ServerError(404, 'generic.404', { tutorialId }).send(res);
       return;
     }
 
@@ -179,14 +178,12 @@ tutorialRouter.get("/:tutorialId/status", [
   async function getTutorialStatus(req: Request, res: Response<{ status: 'not_started' | 'started' | 'completed'}>) {
     const { tutorialId } = req.params;
     const { user }: { user: UserI } = req.body;
+    const SPAN = `getTutorialStatus(${tutorialId})`;
 
     try {
       const tutorial: TutorialI = await Tutorial.findOne({ tutorialId });
       if (tutorial === null) {
-        new ServerError(
-          404,
-          `Nu există nici un tutorial cu id=${tutorialId}`
-        ).send(res);
+        new ServerError(404, 'generic.404', { tutorialId }).send(res);
         return;
       }
   
@@ -207,10 +204,8 @@ tutorialRouter.get("/:tutorialId/status", [
   
       res.json({ status: "not_started" });
     } catch (err) {
-      new ServerError(
-        err.code || 500,
-        err.message || `Error tying to get status for tutorialId=${tutorialId}`,
-      ).send(res);
+      console.error(SPAN, err);
+      new ServerError(500, 'generic.500').send(res);
     }
   },
 ]);

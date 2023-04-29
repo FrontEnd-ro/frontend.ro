@@ -1,6 +1,6 @@
 import express from 'express';
 import UserModel from '../user/user.model';
-import { ServerError } from '../ServerUtils';
+import { ServerError } from '../utils/ServerError';
 import { UserRole } from '../../shared/types/user.types';
 import NotificationModel from '../notification/notification.model';
 import { SolvableExercise, UserRoleMiddleware } from '../Middlewares'
@@ -34,18 +34,20 @@ adminSubmissionRouter.get('/', [UserRoleMiddleware(UserRole.ADMIN)], async funct
   res.json(results.map(SubmissionModel.sanitize));
 });
 
-adminSubmissionRouter.get('/:submissionId', [UserRoleMiddleware(UserRole.ADMIN)], async function getSubmission(req, res) {
+adminSubmissionRouter.get('/:submissionId', [UserRoleMiddleware(UserRole.ADMIN)], async function getSubmissionAsAdmin(req, res) {
   const { submissionId } = req.params;
+  const SPAN = `getSubmissionAsAdmin(${submissionId})`;
 
   try {
     const submission = await SubmissionModel.get(submissionId);
     if (!submission) {
-      new ServerError(404, `No submission with id='${submissionId}' found`).send(res);
+      new ServerError(404, 'generic.404', { submissionId }).send(res);
     } else {
       res.json(SubmissionModel.sanitize(submission));
     }
   } catch (err) {
-    new ServerError(400, err.message).send(res);
+    console.error(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 
 });
@@ -53,27 +55,28 @@ adminSubmissionRouter.get('/:submissionId', [UserRoleMiddleware(UserRole.ADMIN)]
 adminSubmissionRouter.get('/:username/:exerciseId', [UserRoleMiddleware(UserRole.ADMIN), SolvableExercise], async function getUserSubmission(req, res) {
   const { username, exerciseId } = req.params;
   const { user } = req.body;
+  const SPAN = `getUserSubmission(${username}, ${exerciseId})`;
 
   try {
     // @ts-ignore
     const targetUser = await UserModel.getUser({ username });
 
     if (!targetUser) {
-      new ServerError(404, `User '${username}' doesn't exist.`).send(res);
+      new ServerError(404, 'generic.404', { username }).send(res);
       return;
     }
 
     const submission = await SubmissionModel.getUserSubmission(targetUser._id, exerciseId);
 
     if (!submission) {
-      new ServerError(404, `No submission for exercise='${exerciseId}' found`).send(res);
+      new ServerError(404, 'generic.404', { exerciseId }).send(res);
       return;
     } else {
       res.json(SubmissionModel.sanitize(submission));
     }
   } catch (err) {
-    console.log("[API][getSubmissionByExercise]", err);
-    new ServerError(err.code, err.message).send(res);
+    console.log(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 
@@ -81,15 +84,17 @@ adminSubmissionRouter.post('/:submissionId/approve', [UserRoleMiddleware(UserRol
   const { submissionId } = req.params;
   const { feedbacks, user: admin } = req.body;
 
+  const SPAN = `approveSubmission(${submissionId})`;
+
   try {
     const submission: WIPPopulatedSubmissionI = await SubmissionModel.get(submissionId);
 
     if (!submission) {
-      throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
+      throw new ServerError(404, 'generic.404');
     }
 
     if (submission.status !== SubmissionStatus.AWAITING_REVIEW) {
-      throw new ServerError(400, 'Poți aproba doar submisii ce așteaptă feedback-ul tău.');
+      throw new ServerError(400, 'admin-submission.can_only_approve_submitted_solutions');
     }
 
     await SubmissionModel.update(submissionId, {
@@ -139,24 +144,25 @@ adminSubmissionRouter.post('/:submissionId/approve', [UserRoleMiddleware(UserRol
 
     res.status(200).send();
   } catch (err) {
-    console.log("[API][approveSubmission]", err);
-    new ServerError(err.code, err.message).send(res);
+    console.log(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 
 adminSubmissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware(UserRole.ADMIN)], async function feedbackSubmission(req, res) {
   const { submissionId } = req.params;
   const { feedbacks, user: admin } = req.body;
+  const SPAN = `feedbackSubmission(${submissionId})`;
 
   try {
     const submission = await SubmissionModel.get(submissionId);
 
     if (!submission) {
-      throw new ServerError(404, 'Nu am găsit nici o submisie cu acest id');
+      throw new ServerError(404, 'generic.404', { submissionId });
     }
 
     if (submission.status !== SubmissionStatus.AWAITING_REVIEW) {
-      throw new ServerError(400, 'Poți da feedback doar las submisii ce așteaptă feedback-ul tău.');
+      throw new ServerError(400, 'admin-submission.can_only_give_feedback_submitted_solutions');
     }
 
     await SubmissionModel.update(submissionId, {
@@ -199,8 +205,8 @@ adminSubmissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware(UserRo
 
     res.status(200).send();
   } catch (err) {
-    console.log("[API][feedbackSubmission]", err);
-    new ServerError(err.code, err.message).send(res);
+    console.log(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 

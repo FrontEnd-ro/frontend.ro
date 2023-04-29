@@ -1,4 +1,4 @@
-import { ServerError } from '../ServerUtils';
+import { ServerError } from '../utils/ServerError';
 import { UserRole } from '../../shared/types/user.types';
 import { APIErrorReasons } from '../../shared/SharedConstants';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
@@ -26,18 +26,19 @@ submissionRouter.get('/', [PrivateMiddleware], async function getOwnSubmissions(
 submissionRouter.get('/exercise/:exerciseId', [PrivateMiddleware, SolvableExercise], async function getSubmissionByExercise(req, res) {
   const { exerciseId } = req.params;
   const { user } = req.body;
+  const SPAN = `getSubmissionByExercise(${exerciseId})`;
 
   try {
     const submission = await SubmissionModel.getByExerciseId(user._id, exerciseId);
     if (!submission) {
-      new ServerError(404, `No submission for exercise='${exerciseId}' found`).send(res);
+      new ServerError(404, 'generic.404', { exerciseId }).send(res);
       return;
     } else {
       res.json(SubmissionModel.sanitize(submission));
     }
   } catch (err) {
-    console.log("[API][getSubmissionByExercise]", err);
-    new ServerError(err.code, err.message).send(res);
+    console.log(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 
@@ -47,6 +48,7 @@ submissionRouter.get(
   async function getAllSubmissionsFromLesson(req, res) {
     const { lessonId } = req.params;
     const { user } = req.body;
+    const SPAN = `getAllSubmissionsFromLesson(${lessonId})`
 
     try {
       const exercises = await LessonExerciseModel.getAllFromLesson(lessonId);
@@ -56,8 +58,8 @@ submissionRouter.get(
 
       res.json(submissions);
     } catch (err) {
-      console.log("[API][getAllSubmissionsFromLesson]", err);
-      new ServerError(err.code, err.message).send(res);
+      console.log(SPAN, err);
+      new ServerError(500, 'generic.500').send(res);
     }
   }
 );
@@ -65,16 +67,17 @@ submissionRouter.get(
 submissionRouter.put('/:submissionId', [PrivateMiddleware], async function updateSubmission(req, res) {
   const { submissionId } = req.params;
   const { user, payload } = req.body;
+  const SPAN = `updateSubmission(${submissionId})`;
 
   try {
     const submission = await SubmissionModel.get(submissionId);
     if (submission.user._id.toString() !== user._id.toString()) {
-      new ServerError(401, 'Nu poți actualiza submisiile altcuiva').send(res);
+      new ServerError(401, 'generic.401').send(res);
       return;
     }
 
     if (submission.feedbacks.length > 0) {
-      new ServerError(403, 'Încă ai feedback-uri nerezolvate pentru acest exercițiu.').send(res);
+      new ServerError(403, 'submission.still_have_unresolved_feedback').send(res);
       return;
     }
 
@@ -87,8 +90,8 @@ submissionRouter.put('/:submissionId', [PrivateMiddleware], async function updat
       notifyAdminsNewSubmission(user.name || user.username);
     }
   } catch (err) {
-    console.error("[API][put.updateSubmission]", err);
-    new ServerError(err.code, err.message).send(res);
+    console.error(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 
 });
@@ -140,6 +143,7 @@ submissionRouter.post('/exercise/:exerciseId', [PrivateMiddleware, SolvableExerc
 submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async function markFeedbackAsDone(req, res) {
   const { feedbackId } = req.params;
   const { user } = req.body;
+  const SPAN = `markFeedbackAsDone(${feedbackId})`;
 
   try {
     const allUserSubmissions = await SubmissionModel.getAllUserSubmissions(user._id);
@@ -149,11 +153,11 @@ submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async func
 
     if (!match) {
       console.log(`[API][delete.markFeedbackAsDone] No feedback with id ${feedbackId} found`);
-      throw new ServerError(404, `Nu am gasit feedback-ul asta.`);
+      throw new ServerError(404, 'generic.404', { feedbackId });
     }
 
     if (match.status !== SubmissionStatus.IN_PROGRESS) {
-      throw new ServerError(400, 'Submisia așteaptă feedback. Până atunci nu o poți edita');
+      throw new ServerError(400, 'submission.readonly_submission');
     }
 
     const newFeedbacks = match.feedbacks.filter(f => f._id.toString() !== feedbackId);
@@ -163,8 +167,8 @@ submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async func
 
     res.status(200).send();
   } catch (err) {
-    console.error("[API][delete.markFeedbackAsDone]", err);
-    new ServerError(err.code, err.message).send(res);
+    console.error(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 })
 

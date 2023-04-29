@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { ServerError } from '../ServerUtils';
+import { ServerError } from '../utils/ServerError';
 import PresentationModel from './presentation.model';
 import { Presentation } from './presentation.schema';
 import { PresentationI } from '../../shared/types/presentation.types';
@@ -19,7 +19,7 @@ presentationRouter.get('/:presentationId', async function getPresentation(
   const presentation = await Presentation.findOne({ presentationId });
 
   if (!presentation) {
-    new ServerError(404, `Presentation with id=${presentationId} doesn't exist!`).send(res);
+    new ServerError(404, 'generic.404', { presentationId }).send(res);
     return;
   }
 
@@ -31,6 +31,7 @@ presentationRouter.post('/:presentationId/views', async function increaseViews(
   res: Response<PresentationI>
 ) {
   const { presentationId } = req.params;
+  const SPAN = `increaseViews(${presentationId})`;
 
   const presentation = await Presentation.findOne({ presentationId });
 
@@ -44,10 +45,8 @@ presentationRouter.post('/:presentationId/views', async function increaseViews(
     const updatedPresentation = await Presentation.findOne({ presentationId });
     res.json(updatedPresentation);
   } catch (err) {
-    new ServerError(
-      err.code || 500, 
-      err.message || 'Oops! A apărut o problemă. Încearcă din nou!'
-    );
+    console.log(SPAN, err);
+    new ServerError(500, 'generic.500');
   }
 });
 

@@ -2,7 +2,7 @@ const express = require('express');
 
 const ChallengeModel = require('./deprecated_challenge.model');
 import EmailService from '../Email.service';
-const { ServerError } = require('../ServerUtils');
+const { ServerError } = require('../utils/ServerError');
 const { PrivateMiddleware } = require('../Middlewares');
 
 const challengeRouter = express.Router();
@@ -19,7 +19,7 @@ challengeRouter.get('/:challengeId', [PrivateMiddleware, async function getProgr
       lastDoneTask,
     });
   } catch (err) {
-    new ServerError(err.code || 500, err.message || 'Ooops, something went wrong!').send(res);
+    new ServerError(500, err.message || 'Ooops, something went wrong!').send(res);
   }
 }]);
 
@@ -35,7 +35,7 @@ challengeRouter.post('/:challengeId/start', [PrivateMiddleware, async function s
       lastDoneTask
     });
   } catch (err) {
-    new ServerError(err.code || 500, err.message || 'Ooops, something went wrong!').send(res);
+    new ServerError(500, err.message || 'Ooops, something went wrong!').send(res);
   }
 }]);
 
@@ -53,7 +53,7 @@ challengeRouter.put('/:challengeId/lastDoneTask/:lastDoneTask', [PrivateMiddlewa
       lastDoneTask,
     });
   } catch (err) {
-    new ServerError(err.code || 500, err.message || 'Ooops, something went wrong!').send(res);
+    new ServerError(500, err.message || 'Ooops, something went wrong!').send(res);
   }
 }])
 

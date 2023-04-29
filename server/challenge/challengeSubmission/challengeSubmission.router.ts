@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import Challenge from '../challenge.model';
-import { ServerError } from '../../ServerUtils';
+import { ServerError } from '../../utils/ServerError';
 import { UserI } from '../../../shared/types/user.types';
 import { ChallengeI } from '../../../shared/types/challenge.types';
 import { PrivateMiddleware, PublicMiddleware } from '../../Middlewares';
@@ -31,7 +31,7 @@ challengeSubmissionRouter.get('/:challengeId', [
     const challenge = await Challenge.findOne({ challengeId });
 
     if (challenge === null) {
-      new ServerError(404, "No challenge found").send(res);
+      new ServerError(404, 'generic.404', { challengeId }).send(res);
       return;
     }
 
@@ -61,7 +61,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
     const { challengeId, taskId } = req.params;
 
     if (typeof code !== 'string') {
-      new ServerError(400, "Expected to receive a parameter named 'code' with type 'string'.").send(res);
+      new ServerError(400, 'challenges.missing_code').send(res);
       return;
     }
 
@@ -69,7 +69,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
     try {
       const challenge = await Challenge.findOne({ challengeId });
       if (challenge === null) {
-        new ServerError(404, `Challange with ID=${challengeId} not found!`).send(res);
+        new ServerError(404, 'generic.404', { challengeId }).send(res);
         return;
       }
 
@@ -79,7 +79,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
         .tasks
         .find((t) => t.taskId === taskId);
       if (!doFilesMatch(filesThatCanBeEdited, code)) {
-        new ServerError(400, 'You can only edit certain files for tihs task.').send(res);
+        new ServerError(400, 'challenges.edited_readonly_files').send(res);
         return;
       }
 
@@ -98,12 +98,12 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
       const task = challengeSubmission.tasks.find((t) => t.taskId === taskId);
   
       if (task === undefined) {
-        new ServerError(404, `Task with id=${taskId} was not found`).send(res);
+        new ServerError(404, 'generic.404', { taskId }).send(res);
         return;
       }
 
       if (task.status?.valid === true) {
-        new ServerError(403, 'Acest task e deja completat cu succes. Nu-l mai poți modifica.').send(res);
+        new ServerError(403, 'challenges.edited_finished_task').send(res);
         return;
       }
 
@@ -112,10 +112,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
 
       res.json(sanitizeChallengeSubmission(mergeChallengeSubmission(challengeSubmission, challenge)));
     } catch (err) {
-      new ServerError(
-        err.code || 500,
-        err.message || `Error tying to update code for challengeId=${challengeId} and taskId=${taskId}`,
-      ).send(res);
+      new ServerError(500, 'generic.500', { challengeId, taskId }).send(res);
     }
   }
 ]);
@@ -132,7 +129,7 @@ challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
     try {
       const challenge = await Challenge
         .findOne({ challengeId })
-        .orFail(new ServerError(404, `Challange with ID=${challengeId} not found!`));
+        .orFail(new ServerError(404, `generic.404`, { challengeId }));
       let challengeTask = challenge.tasks.find((t) => t.taskId === taskId);
 
       let challengeSubmission = await ChallengeSubmission.findOne({
@@ -147,17 +144,17 @@ challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
 
       let submissionTask = challengeSubmission.tasks.find((t) => t.taskId === taskId);
       if (submissionTask === undefined) {
-        new ServerError(404, `No task found for user=${user.username}, challengeId=${challengeId} and taskId=${taskId}`).send(res);
+        new ServerError(404, 'generic.404', { username: user.username, challengeId, taskId }).send(res);
         return;
       }
 
       if (submissionTask.status?.valid === true) {
-        new ServerError(400, `Task with id=${taskId} for user=${user.username} and challengeId=${challengeId} is already approved.`).send(res);
+        new ServerError(400, 'challenges.approve_finished_task').send(res);
         return;
       }
 
       if (!doFilesMatch(challengeTask.filesThatCanBeEdited, code)) {
-        new ServerError(400, 'You can only edit certain files for tihs task.').send(res);
+        new ServerError(400, 'challenges.edited_readonly_files').send(res);
         return;
       }
 

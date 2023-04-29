@@ -1,6 +1,5 @@
 import { Document } from 'mongoose';
 import express, { Request, Response } from 'express';
-import { ServerError } from '../ServerUtils';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
 import Tutorial from '../tutorial/tutorial.model';
 import { Certification, createCertification, sanitizeCertification } from './certification.model';
@@ -17,6 +16,7 @@ import { NotificationChannel, NotificationType, NotificationUrgency } from '../.
 import Challenge from '../challenge/challenge.model';
 import { TutorialI } from '../../shared/types/tutorial.types';
 import { ChallengeI } from '../../shared/types/challenge.types';
+import { ServerError } from '../utils/ServerError';
 
 const LessonModel = require('../lesson/lesson.model');
 const SubmissionModel = require('../submission/submission.model');
@@ -27,6 +27,7 @@ certificationRouter.get('/:certificationId', [
   PublicMiddleware,
   async function getCertification(req: Request, res: Response) {
     const { certificationId } = req.params;
+    const SPAN = `getCertification(${certificationId})`;
 
     try {
       const certification = await Certification.findById(certificationId)
@@ -39,16 +40,14 @@ certificationRouter.get('/:certificationId', [
         });
   
       if (certification === null) {
-        new ServerError(404, `Nu există nici o certificare cu ID=${certificationId}`).send(res);
+        new ServerError(404, 'generic.404', { certificationId }).send(res);
         return;
       }
   
       res.json(sanitizeCertification(certification));
     } catch (err) {
-      new ServerError(
-        err.code || 500,
-        err.message || `Error tying to fetch certification for certificationId=${certificationId}`,
-      ).send(res);
+      console.error(SPAN, err);
+      new ServerError(500, 'generic.500', { certificationId }).send(res);
     }
   }
 ]);
@@ -58,6 +57,7 @@ certificationRouter.get('/challenge/:challengeId', [
   async function getCertificationForChallenge(req: Request, res: Response) {
     const { user } = req.body;
     const { challengeId } = req.params;
+    const SPAN = `getCertificationForChallenge(${challengeId})`;
 
     try {
       const challenge = await Challenge.findOne({
@@ -65,7 +65,7 @@ certificationRouter.get('/challenge/:challengeId', [
       });
 
       if (challenge === null) {
-        new ServerError(404, `Nu exista nici un challenge cu challengeId=${challengeId}.`).send(res);
+        new ServerError(404, 'generic.404', { challengeId }).send(res);
         return;
       }
 
@@ -78,16 +78,14 @@ certificationRouter.get('/challenge/:challengeId', [
         .populate<{ challenge: ChallengeI }>('challenge');
   
       if (certification === null) {
-        new ServerError(404, `Nu există nici o certificare pentru challengeId=${challengeId}`).send(res);
+        new ServerError(404, 'generic.404', { challengeId }).send(res);
         return;
       }
   
       res.json(sanitizeCertification(certification));
     } catch (err) {
-      new ServerError(
-        err.code || 500,
-        err.message || `Error tying to fetch certification for challengeId=${challengeId}`,
-      ).send(res);
+      console.log(SPAN, err);
+      new ServerError(500, 'generic.500', { challengeId }).send(res);
     }
   }
 ]);

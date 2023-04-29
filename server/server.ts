@@ -14,7 +14,7 @@ import userRouter from './user/user.router';
 import submissionRouter from './submission/submission.router';
 import demoRouter from './demo.router';
 import eventRouter from './event/event.router';
-import githubRouter from './github/github.router.js';
+import githubRouter from './github/github.router';
 import lessonRouter from './lesson/lesson.router';
 import presentationRouter from './presentation/presentation.router';
 import applicationConfigRouter from './application-config/application-config.router';

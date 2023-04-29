@@ -1,5 +1,5 @@
 import express from 'express';
-import { ServerError } from '../ServerUtils';
+import { ServerError } from '../utils/ServerError';
 import { PrivateMiddleware } from '../Middlewares';
 import NotificationModel from './notification.model';
 import { Notification } from './notification.schema';
@@ -22,7 +22,7 @@ notificationRouter.get('/', [
       res.json(inAppNotifications);
     } catch (err) {
       console.error("[notificationRouter.getAllInAppNotifications]", err);
-      new ServerError(500, 'Eroare la încărcarea notificărilor...').send(res);
+      new ServerError(500, 'generic.500').send(res);
     }
   }
 ]);
@@ -36,12 +36,12 @@ notificationRouter.post('/:notificationId/read', [
     const notification = await NotificationModel.getById(notificationId);
 
     if (notification === null) {
-      new ServerError(404, `Nu există notificarea cu ID-ul ${notificationId}`).send(res);
+      new ServerError(404, 'generic.404').send(res);
       return;
     }
 
     if (notification.to.toString() !== user._id.toString()) {
-      new ServerError(403, `Notificarea cu ID-ul ${notificationId} nu-ți aparține, deci nu o poți marca ca și citită.`).send(res);
+      new ServerError(403, 'notifications.forbidden_mark_as_read').send(res);
       return;
     }
 

@@ -5,11 +5,11 @@ import appConfig from '../config';
 import { User, UsersSchema }  from './user.schema';
 import {
   AUTH_EXPIRATION,
-  ServerError,
   validateAgainstSchemaProps,
   validateObjectId,
   MAX_USERNAME_LENGTH
 }  from '../ServerUtils';
+import { ServerError, TranslationKey } from '../utils/ServerError';
 import { PublicUserI } from '../../shared/types/user.types';
 import { UserI, WIPSanitizedUser } from '../../shared/types/user.types';
 
@@ -27,7 +27,7 @@ class UserModel {
       jwt.verify(token, appConfig.AUTH.secret, async (err, decodedInfo: AuthJWT) => {
         if (err) {
           console.error('UserSharedModel.ping', err);
-          reject(new ServerError(401, 'Not authenticated'));
+          reject(new ServerError(401, 'generic.401'));
           return;
         }
   
@@ -35,7 +35,7 @@ class UserModel {
         
         const user = await User.findById(_id);
         if (!user) {
-          reject(new ServerError(404, "User doesn't exist anymore!"));
+          reject(new ServerError(404, 'generic.404'));
           return;
         }
   
@@ -114,7 +114,7 @@ class UserModel {
     const user = await User.findById(_id);
 
     if (!user) {
-      throw new ServerError(404, `Couldn't update non-existent exercise with id=${_id}.`);
+      throw new ServerError(404, 'generic.404');
     }
 
     validateAgainstSchemaProps(payload, UsersSchema);
@@ -167,7 +167,7 @@ class UserModel {
 
   static validateUsername(username: string): {
     result: false;
-    reason: string;
+    reason: TranslationKey;
   } | {
     result: true;
   } {
@@ -180,14 +180,14 @@ class UserModel {
     if (!username.length || username.length > MAX_USERNAME_LENGTH) {
       return {
         result: false,
-        reason: `Username-ul trebuie sa aiba intre 1 si ${MAX_USERNAME_LENGTH} caractere lungime`,
+        reason: `username.username_length_requirement`,
       };
     }
 
     if (RESTRICTED_USERNAMES.includes(username)) {
       return {
         result: false,
-        reason: 'Username-ul conincide cu una dintre paginile noastre.',
+        reason: 'username.username_restricted'
       };
     }
 
@@ -201,7 +201,7 @@ class UserModel {
     const user = await User.findById(_id);
 
     if (!user) {
-      throw new ServerError(404, `Couldn't set Github Access Token for non-existent user with id=${_id}.`);
+      throw new ServerError(404, 'generic.404');
     }
 
     user.github_access_token = github_access_token;

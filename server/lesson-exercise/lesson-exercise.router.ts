@@ -1,13 +1,13 @@
 import express, { Response } from 'express';
 const multer = require('multer');
 import appConfig from '../config';
-import { ServerError } from '../ServerUtils';
+import { ServerError } from '../utils/ServerError';
 import { UserRole } from '../../shared/types/user.types';
 import LessonExerciseModel from './lesson-exercise.model';
 import { PublicMiddleware, UserRoleMiddleware } from '../Middlewares';
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 import { SubmissionStatus } from '../../shared/types/submission.types';
-import { MAX_MEDIA_BYTES, MAX_MEDIA_MB } from '../../shared/SharedConstants';
+import { MAX_MEDIA_BYTES } from '../../shared/SharedConstants';
 
 const SubmissionModel = require('../submission/submission.model');
 
@@ -17,32 +17,37 @@ const s3 = new S3Client({ region: appConfig.AWS.region });
 const upload = multer({ storage: multer.memoryStorage() });
 
 lessonExerciseRouter.get('/', [PublicMiddleware], async function getAllLessonExercises(req, res) {
+  const SPAN = 'getAllLessonExercises()';
   try {
     const result = await LessonExerciseModel.getAll();
     res.json(result);
   } catch (err) {
-    new ServerError(err.code, err.message).send(res);
+    console.log(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 
 lessonExerciseRouter.get('/:exerciseId', [PublicMiddleware], async function getLessonExercise(req, res) {
   const { exerciseId } = req.params;
+  const SPAN = `getLessonExercise(${exerciseId})`;
 
   try {
     let result = await LessonExerciseModel.get(exerciseId);
     
     if (!result) {
-      throw (new ServerError(404, 'Acest exercițiu nu există'));
+      throw (new ServerError(404, 'generic.404', { exerciseId }));
     }
     res.json(result);
   } catch (err) {
-    new ServerError(err.code ?? 500, err.message ?? 'Failed to fetch lesson exercise').send(res);
+    console.log(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 
 lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function getAllExercisesForLesson(req, res) {
   const { lessonId } = req.params;
   const { user } = req.body;
+  const SPAN = `getAllExercisesForLesson()`;
 
   try {
     let exercises = await LessonExerciseModel.getAllFromLesson(lessonId);
@@ -64,7 +69,8 @@ lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function
 
     res.json(result);
   } catch (err) {
-    new ServerError(err.code, err.message).send(res);
+    console.error(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 
@@ -72,24 +78,27 @@ lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function
 lessonExerciseRouter.head('/lesson/:lessonId/count', [PublicMiddleware], async function getCountOfExercisesForLesson(req, res: Response) {
   const { lessonId } = req.params;
   const HEADER_NAME = 'X-Exercise-Count';
+  const SPAN = `getCountOfExercisesForLesson(${lessonId})`;
 
   try {
     let count = await LessonExerciseModel.getCount(lessonId);
     res.set(HEADER_NAME, count.toString());
     res.end();
   } catch (err) {
-    new ServerError(err.code, err.message).send(res);
+    console.error(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 
 lessonExerciseRouter.post('/', [UserRoleMiddleware(UserRole.ADMIN)], async function createExercise(req, res) {
+  const SPAN = `createExercise()`;
   try {
     const exercise = await LessonExerciseModel.create(req.body);
     const sanitizedExercise = LessonExerciseModel.sanitize(exercise);
     res.json(sanitizedExercise);
   } catch (err) {
-    console.log('[createExercise]', err);
-    new ServerError(500, err.message || 'Oops! Se pare că nu am putut crea exercițiul.').send(res);
+    console.log(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 })
 
@@ -99,7 +108,7 @@ lessonExerciseRouter.post('/media', [UserRoleMiddleware(UserRole.ADMIN)], functi
   upload.single('file')(req, null, async (err) => {
     if (err) {
       console.error('[uploadExerrciseMedia]', err);
-      new ServerError(400, 'Fișierul nu a putut fi încărcat. Încearcă din nou!').send(res);
+      new ServerError(400, 'lesson-exercise.file_failed_upload').send(res);
       return;
     }
 
@@ -108,7 +117,7 @@ lessonExerciseRouter.post('/media', [UserRoleMiddleware(UserRole.ADMIN)], functi
 
     if (req.file.size > MAX_MEDIA_BYTES) {
       console.error('[uploadExerrciseMedia]', err);
-      new ServerError(400, `Dimensiunea maximă a unui fișier este de ${MAX_MEDIA_MB}MB`).send(res);
+      new ServerError(400, 'lesson-exercise.file_too_big').send(res);
       return;
     }
 
@@ -129,7 +138,7 @@ lessonExerciseRouter.post('/media', [UserRoleMiddleware(UserRole.ADMIN)], functi
       });
     } catch (err) {
       console.log('[s3Upload]', err);
-      new ServerError(500, err.message || 'Oops! Se pare că nu am putut încărca fișierele. Încearcă din nou.').send(res);
+      new ServerError(500, 'generic.500').send(res);
     }
   });
 })
@@ -143,7 +152,7 @@ lessonExerciseRouter.put('/:exerciseId', [UserRoleMiddleware(UserRole.ADMIN)], a
     res.json(sanitizedExercise);
   } catch (err) {
     console.log('[updateExercise]', err);
-    new ServerError(500, err.message || 'Oops! Se pare că nu am actualiza exercițiul.').send(res);
+    new ServerError(500, 'generic.500').send(res);
   }
 })
 

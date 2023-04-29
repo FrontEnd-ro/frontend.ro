@@ -1,5 +1,5 @@
 import UserModel from '../user/user.model';
-import { ServerError } from '../ServerUtils';
+import { ServerError } from '../utils/ServerError';
 import express, { Request, Response } from 'express';
 import PasswordResetModel from './password-reset.model';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
@@ -11,16 +11,17 @@ passwordResetRouter.post('/', async function generateResetCode(
   res: Response
 ) {
   const { email } = req.body;
+  const SPAN = `generateResetCode(${email})`;
 
   if (!email) {
-    new ServerError(400, `Email-ul este obligatoriu pentru a genera un cod de resetare de parolă.`).send(res);
+    new ServerError(400, 'password-reset.missing_email').send(res);
     return
   }
 
   try {
     const user = await UserModel.getUser({ email });
     if (!user) {
-      new ServerError(404, `Nu există nici un utilizator cu email-ul: ${email}`).send(res);
+      new ServerError(404, 'generic.404', { email }).send(res);
       return
     }
 
@@ -36,14 +37,15 @@ passwordResetRouter.post('/', async function generateResetCode(
     });
 
     if (!emailResponse.success) {
-      new ServerError(400, emailResponse.Message).send(res);
+      console.error(SPAN, emailResponse);
+      new ServerError(500, 'generic.500').send(res);
       return;
     }
 
     res.status(200).send();
   } catch (err) {
-    console.error("[generateResetCode]", err);
-    new ServerError(500, err.message || 'Oops! Se pare că nu am putut să generăm codul pentru schimbarea parolei. Încearcă din nou.').send(res);
+    console.error(SPAN, err);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 

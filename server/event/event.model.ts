@@ -1,7 +1,8 @@
 import { Document } from "mongoose";
+import { ServerError } from "../utils/ServerError";
 import { AttendeeSchema, Event, EventI } from "./event.schema";
 import { EventAttendeeI } from "../../shared/types/event.types";
-import { ServerError, validateAgainstSchemaProps } from '../ServerUtils';
+import { validateAgainstSchemaProps } from '../ServerUtils';
 
 class EventModel {
   static getByLabel(label: string) {
@@ -11,7 +12,7 @@ class EventModel {
   static async addAttendee(label: string, attendee: EventAttendeeI): Promise<Document<any, any, EventI>> {
     const event = await EventModel.getByLabel(label);
     if (!event) {
-      throw new ServerError(400, `Nu există evenimentul cu label=${label}`);
+      throw new ServerError(404, 'generic.404', { label });
     }
 
     validateAgainstSchemaProps(attendee, AttendeeSchema);
@@ -33,7 +34,7 @@ class EventModel {
     const event = await EventModel.getByLabel(label);
 
     if (!event) {
-      throw new ServerError(400, `Nu există evenimentul cu label=${label}`);
+      throw new ServerError(404, 'generic.404', { label });
     }
 
     validateAgainstSchemaProps(attendee, AttendeeSchema);

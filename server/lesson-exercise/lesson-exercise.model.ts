@@ -1,9 +1,10 @@
 import UserModel from '../user/user.model';
 import mongoose, { Document } from 'mongoose';
+import { ServerError } from '../utils/ServerError';
 import { UserI } from '../../shared/types/user.types';
 import { LessonExercisesSchema, LessonExercise } from "./lesson-exercise.schema";
 import {  WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
-import { ServerError, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
+import { validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
 
 class LessonExerciseModel {
   static get(_id) {
@@ -59,7 +60,7 @@ class LessonExerciseModel {
     const exercise = await LessonExercise.findById(_id);
 
     if (!exercise) {
-      throw new ServerError(404, `Couldn't update non-existent exercise with id=${_id}.`);
+      throw new ServerError(404, 'generic.404', { _id });
     }
 
     validateAgainstSchemaProps(payload, LessonExercisesSchema);
@@ -74,7 +75,7 @@ class LessonExerciseModel {
     const exercise = await LessonExercise.findById(_id);
 
     if (!exercise) {
-      throw new ServerError(404, `Couldn't delete non-existent exercise with id=${_id}.`);
+      throw new ServerError(404, 'generic.404', { _id });
     }
 
     return new Promise((resolve, reject) => {

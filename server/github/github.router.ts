@@ -1,7 +1,7 @@
 
 import appConfig from '../config';
 import UserModel from '../user/user.model';
-import { ServerError } from '../ServerUtils';
+import { ServerError } from '../utils/ServerError';
 import { PrivateMiddleware } from '../Middlewares';
 import express, { Request, Response } from 'express';
 import { UserI } from '../../shared/types/user.types';
@@ -15,14 +15,14 @@ githubRouter.get("/user", [PrivateMiddleware, async function getLoggedInUser(
   const { user } = req.body;
 
   if (!user.github_access_token) {
-    new ServerError(404, `User with username=${user.username} isn't connected to GitHub`).send(res);
+    new ServerError(404, 'github.not_connected').send(res);
     return;
   }
 
   const githubUser = await getGithubUser(user.github_access_token);
   if (!githubUser) {
     // Token has expired or is broken
-    new ServerError(404, `User with username=${user.username} isn't connected to GitHub`).send(res);
+    new ServerError(404, 'github.not_connected').send(res);
     return;
   }
 

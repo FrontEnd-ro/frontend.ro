@@ -6,11 +6,12 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import UserModel from './user.model';
 import appConfig from '../config';
 import SubscribeModel from '../subscribe.model';
+import { ServerError } from '../utils/ServerError';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
 import PasswordResetModel from '../password-reset/password-reset.model';
 import { MAX_MEDIA_MB, MAX_MEDIA_BYTES } from '../../shared/SharedConstants';
-import { ServerError, setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '../ServerUtils';
+import { setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '../ServerUtils';
 import { PublicUserI, UserI, UserRole, WIPSanitizedUser } from '../../shared/types/user.types';
 
 const userRouter = express.Router();
@@ -56,7 +57,7 @@ userRouter.get('/check-username/:username', async function checkUsername(req: Re
   if (user) {
     res.status(200).end();
   } else {
-    new ServerError(404, `Username ${username} is not registered`).send(res);
+    new ServerError(404, 'generic.404', { username }).send(res);
   }
 })
 
@@ -75,7 +76,7 @@ userRouter.get('/:username', [
     try {
       const user = await UserModel.getUser({ username });
       if (user === null) {
-        throw new ServerError(404, `No user with username=${username} exists.`);
+        throw new ServerError(404, 'generic.404');
       }
 
       const publicUser = UserModel.sanitizeForPublic(user);
@@ -96,7 +97,7 @@ userRouter.post('/login', async function login(
   emailOrUsername = emailOrUsername.trim().toLowerCase();
 
   if (!emailOrUsername || !password) {
-    new ServerError(400, 'Email-ul/username-ul și parola sunt obligatorii pentru login').send(res);
+    new ServerError(400, 'user.login_email_username_required').send(res);
     return
   }
 
@@ -106,16 +107,13 @@ userRouter.post('/login', async function login(
   });
 
   if (!user) {
-    new ServerError(
-      400,
-      '⛔ Nu există nici un utilizator cu acest email/username!',
-    ).send(res);
+    new ServerError(400, 'user.login_failed_user_missing').send(res);
     return
   }
 
   const validPass = await bcrypt.compare(password, user.password);
   if (!validPass) {
-    new ServerError(400, '⛔ Parola e greșită!').send(res);
+    new ServerError(400, 'user.login_failed_password_wrong').send(res);
     return
   }
 
@@ -138,26 +136,23 @@ userRouter.post('/register', async function register(
   const { email, username, password } = req.body;
 
   if (!email || !username || !password) {
-    new ServerError(400, '⛔ Nu te poți înregistra fără email, username și parolă!').send(res);
+    new ServerError(400, 'user.register_required_fields').send(res);
     return
   }
 
   if (!/^.+@.+[.].+$/.test(email)) {
-    new ServerError(400, '⛔ Nu te poți înregistra fără un email valid!').send(res);
+    new ServerError(400, 'user.register_invalid_email').send(res);
     return
   }
 
   if (!/^[a-zA-Z0-9]+$/.test(username)) {
-    new ServerError(
-      400,
-      '⛔ Username-ul poate să conțină doar litere și cifre!',
-    ).send(res);
+    new ServerError(400, 'user.register_invalid_username').send(res);
     return
   }
 
   const existingUser = await UserModel.getUser({ email, username });
   if (existingUser) {
-    new ServerError(400, '⛔ Ai uitat că te-ai înregistrat cu acest email?').send(res);
+    new ServerError(400, 'user.register_email_exists').send(res);
     return;
   }
 
@@ -200,12 +195,12 @@ userRouter.post('/name', [
     const { password, user } = req.body;
 
     if (name.length === 0) {
-      new ServerError(400, 'Numele nu poate fi gol').send(res);
+      new ServerError(400, 'user.name_cannot_be_empty').send(res);
       return;
     }
 
     if (name.length > MAX_NAME_LENGTH) {
-      new ServerError(400, 'Ești cumva extraterestru? Atunci cum de ai un nume mai lung de 255 caractere').send(res);
+      new ServerError(400, 'user.name_too_big').send(res);
       return;
     }
 
@@ -228,12 +223,12 @@ userRouter.post('/description', [
     const { password, user } = req.body;
 
     if (description.length === 0) {
-      new ServerError(400, 'Descrierea nu poate fi goală').send(res);
+      new ServerError(400, 'user.description_cannot_be_empty').send(res);
       return;
     }
 
     if (description.length > MAX_DESCRIPTION_LENGTH) {
-      new ServerError(400, `Descrierea poate avea maxim ${MAX_DESCRIPTION_LENGTH} caractere.`).send(res);
+      new ServerError(400, 'user.description_too_big').send(res);
       return;
     }
 
@@ -285,18 +280,18 @@ userRouter.post('/email', [
     const { password, user } = req.body;
 
     if (email.length === 0) {
-      new ServerError(400, 'Email-ul nu poate fi gol').send(res);
+      new ServerError(400, 'user.email_cannot_be_empty').send(res);
       return;
     }
 
     if (!/^.+@.+[.].+$/.test(email)) {
-      new ServerError(400, '⛔ Noul email trebuie să fie valid!').send(res);
+      new ServerError(400, 'user.register_invalid_email').send(res);
       return
     }
 
     const userWithThisEmail = await UserModel.getUser({ email });
     if (userWithThisEmail !== null) {
-      new ServerError(400, '⛔ Noul email e deja folosit de alt user.').send(res);
+      new ServerError(400, 'user.change_email_in_use').send(res);
       return
     }
 
@@ -320,7 +315,7 @@ userRouter.post('/password', [
     const { password, user } = req.body;
 
     if (newPassword.length === 0) {
-      new ServerError(400, 'Noua parolă nu poate fi goală').send(res);
+      new ServerError(400, 'user.change_password_empty').send(res);
       return;
     }
 
@@ -346,7 +341,7 @@ userRouter.post('/password/reset', async function resetPassword(
     const { emailOrUsername, code } = req.body;
 
     if (newPassword.length === 0) {
-      new ServerError(400, 'Noua parolă nu poate fi goală').send(res);
+      new ServerError(400, 'user.change_password_empty').send(res);
       return;
     }
 
@@ -355,20 +350,14 @@ userRouter.post('/password/reset', async function resetPassword(
       username: emailOrUsername,
     });
     if (!user) {
-      new ServerError(
-        400,
-        '⛔ Nu există nici un utilizator cu acest email sau username!',
-      ).send(res);
+      new ServerError(400, 'user.password_reset_user_missing').send(res);
       return
     }
 
     const isValidResetCode = await PasswordResetModel.validate(user.email, code);
 
     if (!isValidResetCode) {
-      new ServerError(
-        400,
-        '⛔ Codul pentru resetarea parolei nu este valid sau a expirat.',
-      ).send(res);
+      new ServerError(400, 'user.invalid_reset_code').send(res);
       return
     }
 
@@ -382,7 +371,7 @@ userRouter.post('/password/reset', async function resetPassword(
     res.json(UserModel.sanitize(updatedUser));
   } catch (err) {
     console.error('[UserRouter.resetPassword]', err);
-    new ServerError(500, err.message || 'Oops! Se pare că nu am putut reseta parola. Încearcă din nou.').send(res);
+    new ServerError(500, 'generic.500').send(res);
   }
 });
 
@@ -395,7 +384,7 @@ userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(
   upload.single('file')(req, null, async (err) => {
     if (err) {
       console.error('[uploadExerrciseMedia]', err);
-      new ServerError(400, 'Fișierul nu a putut fi încărcat. Încearcă din nou!').send(res);
+      new ServerError(500, 'generic.500').send(res);
       return;
     }
 
@@ -404,7 +393,7 @@ userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(
 
     if (req.file.size > MAX_MEDIA_BYTES) {
       console.error('[uploadExerrciseMedia]', err);
-      new ServerError(400, `Dimensiunea maximă a unui fișier este de ${MAX_MEDIA_MB}MB`).send(res);
+      new ServerError(400, 'user.avatar_too_big').send(res);
       return;
     }
 
@@ -438,19 +427,19 @@ userRouter.post('/subscribe', async (
   const { name, email } = req.body;
 
   if (!name || !email) {
-    new ServerError(400, 'Email-ul și numele tău sunt obligatorii!').send(res);
+    new ServerError(400, 'subscribe.required_fields').send(res);
     return;
   }
 
   const alreadyRegistered = await UserModel.findUserBy({ email });
   if (alreadyRegistered) {
-    new ServerError(400, 'Ești deja înregistrat ca utilizator!').send(res);
+    new ServerError(400, 'subscribe.already_an_user').send(res);
     return;
   }
 
   const alreadySubscribed = await SubscribeModel.exists(email);
   if (alreadySubscribed) {
-    new ServerError(400, 'Hmm, încerci să te abonezi încă o data...🤔').send(res);
+    new ServerError(400, 'subscribe.already_subscribed').send(res);
     return;
   }
 
@@ -482,7 +471,7 @@ userRouter.delete('/', [PrivateMiddleware], async function deleteAccount(
   const areCredentialsOk = await UserModel.verify(user.username, password);
 
   if (!areCredentialsOk) {
-    new ServerError(403, 'Credențialele introduse nu se potrivesc cu contul tău').send(res);
+    new ServerError(403, 'user.wrong_credentials_for_profile_update').send(res);
     return;
   }
 
@@ -499,11 +488,11 @@ async function updateUserFields(
   try {
     areCredentialsOk = await UserModel.verify(username, password);
   } catch (err) {
-    throw new ServerError(500, "Oops! Încearcă din nou");
+    throw new ServerError(500, 'generic.500');
   }
 
   if (!areCredentialsOk) {
-    throw new ServerError(403, 'Credențialele introduse nu se potrivesc cu contul tău');
+    throw new ServerError(403, 'user.wrong_credentials_for_profile_update');
   }
 
   return UserModel.update(_id, fields);

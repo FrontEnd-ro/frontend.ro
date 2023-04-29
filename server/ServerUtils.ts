@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import appConfig from './config';
 import { Request, Response } from "express";
-import { extractDbErrorMessage } from './database';
+import { ServerError } from './utils/ServerError';
 
 const PAGE_SIZE = 25;
 
@@ -17,40 +17,6 @@ const COOKIE_CONFIG = {
   secure: appConfig.APP.env === 'production' ? true : false
 };
 
-class X extends Error {
-  constructor() {
-    super();
-  }
-}
-
-class ServerError extends Error {
-  code: number;
-
-  message: string;
-
-  constructor(code: number, err: unknown) {
-    super();
-
-    this.code = code || 500;
-
-    err = err || 'Oops! Asta nu trebuia să se întâmple 😬';
-
-    if (typeof err === 'object') {
-      this.message = extractDbErrorMessage(err);
-    } else {
-      this.message = err.toString();
-    }
-  }
-
-  send(res) {
-    res.status(this.code);
-    res.json({
-      code: this.code,
-      message: this.message,
-    });
-  }
-}
-
 function setTokenCookie(token: string, res: Response) {
   res.cookie('token', token, COOKIE_CONFIG);
 }
@@ -62,14 +28,14 @@ function validateAgainstSchemaProps(payload: Record<string, any>, Schema: mongoo
   // eslint-disable-next-line no-restricted-syntax
   for (const key of keys) {
     if (!(key in Schema.obj)) {
-      throw new ServerError(400, `Property '${key}' cannot be directly set.`);
+      throw new ServerError(400, 'database.invalid_schema', { key });
     }
   }
 }
 
 function validateObjectId(_id: string) {
   if (!mongoose.isValidObjectId(_id)) {
-    throw new ServerError(400, `Value '${_id}' is not a valid ObjectId identifier`);
+    throw new ServerError(400, 'database.invalid_id', { _id });
   }
 }
 
@@ -85,7 +51,7 @@ function parseBearerToken(req: Request) {
 }
 
 export {
-  ServerError,
+  // ServerError,
   PAGE_SIZE,
   AUTH_EXPIRATION,
   MAX_NAME_LENGTH,

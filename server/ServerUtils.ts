@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import appConfig from './config/config';
+import appConfig from './config';
 import { Request, Response } from "express";
 import { extractDbErrorMessage } from './database';
 

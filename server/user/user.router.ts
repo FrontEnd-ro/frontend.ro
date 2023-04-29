@@ -4,7 +4,7 @@ import express, { Request, Response } from 'express';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 import UserModel from './user.model';
-import appConfig from '../config/config';
+import appConfig from '../config';
 import SubscribeModel from '../subscribe.model';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';

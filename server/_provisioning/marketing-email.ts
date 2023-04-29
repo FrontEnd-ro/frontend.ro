@@ -3,7 +3,7 @@ import { connectToDb } from '../database';
 import UserModel from '../user/user.model';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import SubscriberModel from '../subscribe.model';
-import appConfig from '../config/config';
+import appConfig from '../config';
 
 connectToDb()
   .then(main)

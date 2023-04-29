@@ -1,7 +1,7 @@
 import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import { GITHUB_URL } from '~/services/Constants';
-import appConfig from '~/../server/config/config';
+import appConfig from '~/../server/config';
 import { MDXService } from '~/services/MDXService';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { faShare } from '@fortawesome/free-solid-svg-icons';

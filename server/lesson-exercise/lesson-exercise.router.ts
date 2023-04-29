@@ -1,6 +1,6 @@
 import express, { Response } from 'express';
 const multer = require('multer');
-import appConfig from '../config/config';
+import appConfig from '../config';
 import { ServerError } from '../ServerUtils';
 import { UserRole } from '../../shared/types/user.types';
 import LessonExerciseModel from './lesson-exercise.model';

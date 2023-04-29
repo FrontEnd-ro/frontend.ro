@@ -1,10 +1,11 @@
 import appConfig from './config';
+import { Algorithm } from 'jsonwebtoken';
 
 interface AppConfig {
   AUTH: {
     secret: string;
     rounds: number;
-    algorithm: string;
+    algorithm: Algorithm;
   },
   APP: {
     port: number;

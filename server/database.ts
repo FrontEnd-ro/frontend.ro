@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import appConfig from './config/config';
+import appConfig from './config';
 
 function connectToDb() {
   if (mongoose.connection && mongoose.connection.readyState === 1) {

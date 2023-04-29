@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import appConfig from '../config/config';
+import appConfig from '../config';
 import { PasswordReset, PasswordResetI } from './password-reset.schema';
 
 class PasswordResetModel {

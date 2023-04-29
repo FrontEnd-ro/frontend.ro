@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import appConfig from './config/config';
+import appConfig from './config';
 import { UserRole } from '../shared/types/user.types';
 import UserModel, { AuthJWT } from './user/user.model';
 import { NextFunction, Request, Response } from 'express';

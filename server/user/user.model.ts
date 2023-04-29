@@ -1,7 +1,7 @@
 import bcrypt  from 'bcrypt';
 import jwt  from 'jsonwebtoken';
 import mongoose  from 'mongoose';
-import appConfig from '../config/config';
+import appConfig from '../config';
 import { User, UsersSchema }  from './user.schema';
 import {
   AUTH_EXPIRATION,

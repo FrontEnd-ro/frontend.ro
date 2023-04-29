@@ -64,37 +64,32 @@ MyApp.getInitialProps = async ({ ctx }) => {
   };
 
   const isClientSide = !ctx.req;
-
   if (isClientSide) {
     pageProps.namespaces = await loadLocaleNamespaces(process.env.LANGUAGE);
     return { pageProps };
   }
 
-  const { token } = ctx.req?.cookies ?? {};
-  if (!token) {
-    const [applicationConfig, namespaces] = await Promise.all([
-      fetchApplicationConfigServerSide(),
-      loadLocaleNamespaces(process.env.LANGUAGE)
-    ]);
-    pageProps.namespaces = namespaces;
-    pageProps._applicationConfig = applicationConfig;
-
-    return { pageProps };
-  }
-
-  const [user, applicationConfig, namespaces] = await Promise.all([
-    UserService.ping({
-      headers: {
-        cookie: `token=${token}`,
-      },
-    }),
+  const [applicationConfig, namespaces] = await Promise.all([
     fetchApplicationConfigServerSide(),
     loadLocaleNamespaces(process.env.LANGUAGE)
   ]);
-
-  pageProps._serverUser = user;
   pageProps.namespaces = namespaces;
   pageProps._applicationConfig = applicationConfig;
+
+  const { token } = ctx.req?.cookies ?? {};
+  if (typeof token === 'string') {
+    try {
+      const user = await UserService.ping({
+        headers: {
+          cookie: `token=${token}`,
+        }
+      });
+      pageProps._serverUser = user;
+    } catch (err) {
+      console.log('[getInitialProps] Failed to fetch user', err);
+      // Do nothing. We will continue rendering the app in an non-authenticated state
+    }
+  }
 
   return { pageProps };
 };

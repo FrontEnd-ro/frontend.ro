@@ -10,7 +10,7 @@ require('dotenv').config();
 import appConfig from './config';
 
 /** API routers */
-const userRouter = require('./user/user.router');
+import userRouter from './user/user.router';
 const submissionRouter = require('./submission/submission.router');
 const demoRouter = require('./demo.router');
 import eventRouter from './event/event.router';

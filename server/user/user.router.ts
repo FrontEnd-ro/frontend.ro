@@ -509,4 +509,4 @@ async function updateUserFields(
   return UserModel.update(_id, fields);
 }
 
-module.exports = userRouter
+export default userRouter;

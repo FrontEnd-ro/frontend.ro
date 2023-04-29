@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const { default: appConfig } = require('./config');
+import mongoose from 'mongoose';
+import appConfig from './config/config';
 
 function connectToDb() {
   if (mongoose.connection && mongoose.connection.readyState === 1) {
@@ -13,8 +13,8 @@ function connectToDb() {
 }
 
 /** Extract the first human-readable error message from a Mongoose ValidationError */
-function extractDbErrorMessage(err) {
-  if (err.errors) {
+function extractDbErrorMessage(err: unknown): string {
+  if (typeof err === 'object' && 'errors' in err) {
     const keys = Object.keys(err.errors);
     const firstKeyWithErrorMessage = keys.find((key) => err.errors[key].message);
 
@@ -23,10 +23,14 @@ function extractDbErrorMessage(err) {
     }
   }
 
-  return err._message || 'Oops, something went wrong...';
+  if (typeof err === 'object' && '_message' in err && typeof err._message === 'string') {
+    return err._message;
+  }
+
+  return 'Oops, something went wrong...';
 }
 
-module.exports = {
+export {
   connectToDb,
   extractDbErrorMessage,
 }

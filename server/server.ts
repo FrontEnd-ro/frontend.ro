@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
-const { connectToDb } = require('./database');
+import { connectToDb } from './database';
 
 require('dotenv').config();
 import appConfig from './config';

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import appConfig from './config/config';
 import { Request, Response } from "express";
-const { extractDbErrorMessage } = require('./database');
+import { extractDbErrorMessage } from './database';
 
 const PAGE_SIZE = 25;
 

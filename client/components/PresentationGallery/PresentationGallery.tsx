@@ -1,7 +1,7 @@
 import React from 'react';
 import PageContainer from '~/components/PageContainer';
-import { PresentationI } from '../PresentationPreview';
 import PresentationLink from './PresentationLink/PresentationLink';
+import { PresentationI } from '~/../shared/types/presentation.types';
 
 function AllPresentationsPage({ presentations }: { presentations: PresentationI[] }) {
   const sortedPresentations = [...presentations].sort((a, b) => {

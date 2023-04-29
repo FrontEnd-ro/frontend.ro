@@ -16,7 +16,7 @@ const demoRouter = require('./demo.router');
 const eventRouter = require('./event/event.router');
 const githubRouter = require('./github/github.router.js');
 import lessonRouter from './lesson/lesson.router';
-const presentationRouter = require('./presentation/presentation.router');
+import presentationRouter from './presentation/presentation.router';
 import applicationConfigRouter from './application-config/application-config.router';
 import passwordResetRouter from './password-reset/password-reset.router';
 import notificationRouter from './notification/notification.router';

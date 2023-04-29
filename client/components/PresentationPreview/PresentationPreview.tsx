@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PresentationService from '~/services/api/Presentation.service';
 import styles from './PresentationPreview.module.scss';
-
-export interface PresentationI {
-  presentationId: string;
-  title: string;
-  thumb: string;
-  description: string;
-  created: number;
-  views: number;
-}
+import { PresentationI } from '~/../shared/types/presentation.types';
 
 function PresentationPreview({ info }: { info: PresentationI }) {
   const presentationLink = `${process.env.CLOUDFRONT_PUBLIC}/slides/${info.presentationId}/index.html`;

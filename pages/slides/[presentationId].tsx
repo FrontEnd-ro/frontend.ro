@@ -3,8 +3,9 @@ import NotFoundPage from '~/components/NotFound/NotFound';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
-import PresentationPreview, { PresentationI } from '~/components/PresentationPreview';
+import PresentationPreview from '~/components/PresentationPreview';
 import PresentationService from '~/services/api/Presentation.service';
+import { PresentationI } from '~/../shared/types/presentation.types';
 
 function PresentationPage({ presentation }: { presentation: PresentationI }) {
   if (!presentation) {

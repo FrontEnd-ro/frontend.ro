@@ -1,12 +1,14 @@
-const express = require('express');
-
-const EventModel = require('./event.model');
+import express, { Request, Response } from 'express';
+import EventModel from './event.model';
+import { ServerError } from '../ServerUtils';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
-const { ServerError } = require('../ServerUtils');
 
 const eventRouter = express.Router();
 
-eventRouter.get('/:label/seats', async function getAvailableSeats(req, res) {
+eventRouter.get('/:label/seats', async function getAvailableSeats(
+  req: Request<{ label: string; }>,
+  res: Response<{ label: string; total: number; free: number; }>
+) {
   const { label } = req.params;
 
   try {
@@ -28,7 +30,10 @@ eventRouter.get('/:label/seats', async function getAvailableSeats(req, res) {
   }
 });
 
-eventRouter.post('/:label/register', async function registerToEvent(req, res) {
+eventRouter.post('/:label/register', async function registerToEvent(
+  req: Request<{ label: string; }, {}, { name: string; email: string; tel: string; }>,
+  res: Response
+) {
   const { label } = req.params;
   const { name, email, tel } = req.body;
 
@@ -72,7 +77,10 @@ eventRouter.post('/:label/register', async function registerToEvent(req, res) {
   }
 });
 
-eventRouter.post('/:label/waitlist', async function addToWaitlist(req, res) {
+eventRouter.post('/:label/waitlist', async function addToWaitlist(
+  req: Request<{ label: string; }, {}, { name: string; email: string; tel: string; }>,
+  res: Response
+) {
   const { label } = req.params;
   const { name, email, tel } = req.body;
 
@@ -114,4 +122,4 @@ eventRouter.post('/:label/waitlist', async function addToWaitlist(req, res) {
   }
 });
 
-module.exports = eventRouter;
+export default eventRouter;

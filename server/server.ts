@@ -13,7 +13,7 @@ import appConfig from './config';
 const userRouter = require('./user/user.router');
 const submissionRouter = require('./submission/submission.router');
 const demoRouter = require('./demo.router');
-const eventRouter = require('./event/event.router');
+import eventRouter from './event/event.router';
 const githubRouter = require('./github/github.router.js');
 import lessonRouter from './lesson/lesson.router';
 import presentationRouter from './presentation/presentation.router';

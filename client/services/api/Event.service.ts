@@ -1,10 +1,5 @@
+import { EventAttendeeI } from '~/../shared/types/event.types';
 import HttpService from './Http.service';
-
-interface RegisterToEventPayload {
-  name: string;
-  tel: string;
-  email: string;
-}
 
 interface SeatsInfo {
   id: string;
@@ -20,11 +15,11 @@ class EventService {
     return jsonResp;
   }
 
-  static async register(id, payload: RegisterToEventPayload): Promise<void> {
+  static async register(id, payload: EventAttendeeI): Promise<void> {
     await HttpService.post(`${process.env.ENDPOINT}/events/${id}/register`, payload);
   }
 
-  static async addToWaitlist(id, payload: RegisterToEventPayload): Promise<void> {
+  static async addToWaitlist(id, payload: EventAttendeeI): Promise<void> {
     await HttpService.post(`${process.env.ENDPOINT}/events/${id}/waitlist`, payload);
   }
 }

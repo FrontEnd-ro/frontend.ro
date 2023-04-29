@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const { default: appConfig } = require('./config');
+import mongoose from 'mongoose';
+import appConfig from './config/config';
+import { Request, Response } from "express";
 const { extractDbErrorMessage } = require('./database');
 
 const PAGE_SIZE = 25;
@@ -16,13 +17,19 @@ const COOKIE_CONFIG = {
   secure: appConfig.APP.env === 'production' ? true : false
 };
 
+class X extends Error {
+  constructor() {
+    super();
+  }
+}
+
 class ServerError extends Error {
-  code;
+  code: number;
 
-  message;
+  message: string;
 
-  constructor(code, err, ...rest) {
-    super(...rest);
+  constructor(code: number, err: unknown) {
+    super();
 
     this.code = code || 500;
 
@@ -31,7 +38,7 @@ class ServerError extends Error {
     if (typeof err === 'object') {
       this.message = extractDbErrorMessage(err);
     } else {
-      this.message = err;
+      this.message = err.toString();
     }
   }
 
@@ -44,12 +51,12 @@ class ServerError extends Error {
   }
 }
 
-function setTokenCookie(token, res) {
+function setTokenCookie(token: string, res: Response) {
   res.cookie('token', token, COOKIE_CONFIG);
 }
 
 /** Verify that payload doesn't have extra props not present on the Schema */
-function validateAgainstSchemaProps(payload, Schema) {
+function validateAgainstSchemaProps(payload: Record<string, any>, Schema: mongoose.Schema) {
   const keys = Object.keys(payload);
 
   // eslint-disable-next-line no-restricted-syntax
@@ -60,13 +67,13 @@ function validateAgainstSchemaProps(payload, Schema) {
   }
 }
 
-function validateObjectId(_id) {
+function validateObjectId(_id: string) {
   if (!mongoose.isValidObjectId(_id)) {
     throw new ServerError(400, `Value '${_id}' is not a valid ObjectId identifier`);
   }
 }
 
-function parseBearerToken(req) {
+function parseBearerToken(req: Request) {
   const bearerHeader = req.headers['authorization'];
 
   if (bearerHeader) {
@@ -77,7 +84,7 @@ function parseBearerToken(req) {
   }
 }
 
-module.exports = {
+export {
   ServerError,
   PAGE_SIZE,
   AUTH_EXPIRATION,

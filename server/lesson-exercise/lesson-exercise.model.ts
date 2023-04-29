@@ -7,7 +7,7 @@ import { ServerError, validateAgainstSchemaProps, validateObjectId } from '../Se
 
 class LessonExerciseModel {
   static get(_id) {
-    validateObjectId();
+    validateObjectId(_id);
 
     return LessonExercise
       .findById(_id)

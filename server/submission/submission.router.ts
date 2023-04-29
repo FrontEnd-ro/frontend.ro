@@ -1,3 +1,4 @@
+import { ServerError } from '../ServerUtils';
 import { UserRole } from '../../shared/types/user.types';
 import { APIErrorReasons } from '../../shared/SharedConstants';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
@@ -9,7 +10,6 @@ const express = require('express');
 import UserModel from '../user/user.model';
 const SubmissionModel = require('./submission.model');
 const { PrivateMiddleware, SolvableExercise } = require('../Middlewares');
-const { ServerError } = require('../ServerUtils');
 
 const submissionRouter = express.Router();
 

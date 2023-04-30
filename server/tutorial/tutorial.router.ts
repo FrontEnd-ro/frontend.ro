@@ -5,14 +5,13 @@ import { UserI } from '../../shared/types/user.types';
 import Tutorial, { sanitizeTutorial } from './tutorial.model';
 import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
+import { LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
 import { Certification, sanitizeCertification } from '../certification/certification.model';
 import { TutorialI, TutorialProgressI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
 import { WIPPopulatedCertificationI } from '../../shared/types/certification.types';
 import { Document } from 'mongoose';
-
-const SubmissionModel = require('../submission/submission.model')
+import SubmissionModel from '../submission/submission.model';
 
 const tutorialRouter = express.Router();
 
@@ -125,7 +124,7 @@ tutorialRouter.get('/:tutorialId/progress', [
 
     progress.lessons.forEach((lesson) => {
       submissions
-        .filter((submission) => submission.exercise.lesson === lesson.lessonId)
+        .filter((submission) => (submission.exercise as unknown as LessonExerciseI).lesson === lesson.lessonId)
         .forEach((submission) => {
           if (submission.status === SubmissionStatus.DONE) {
             lesson.progress.done++;

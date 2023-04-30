@@ -14,9 +14,8 @@ import {
   NotificationType,
   NotificationUrgency,
 } from '../../../shared/types/notification.types';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const SubmissionModel = require('../../../server/submission/submission.model');
+import SubmissionModel from '../../../server/submission/submission.model';
+import { LessonExerciseI } from '../../../shared/types/exercise.types';
 
 exports.handler = run;
 
@@ -57,7 +56,7 @@ async function processUser(user: UserI, dryRun: boolean) {
   const SPAN = `[NotificationsCron.processUser user=${user.username}]`;
 
   const { tutorials } = user;
-  const submissions: WIPPopulatedSubmissionI[] = await SubmissionModel.getAllUserSubmissions(
+  const submissions = await SubmissionModel.getAllUserSubmissions(
     user._id,
   );
   console.log(`${SPAN} User has ${submissions.length} submissions.`);
@@ -75,7 +74,7 @@ async function processUser(user: UserI, dryRun: boolean) {
 
     const tutorialLessonIds = tutorial.lessons.map((lesson) => lesson.lessonId);
     const tutorialSubmissions = submissions.filter((submission) => {
-      return tutorialLessonIds.includes(submission.exercise.lesson);
+      return tutorialLessonIds.includes((submission.exercise as unknown as LessonExerciseI).lesson);
     });
     console.log(`${SPAN} User has ${tutorialSubmissions.length} submissions`);
 
@@ -97,6 +96,7 @@ async function processUser(user: UserI, dryRun: boolean) {
     }
     console.log(`${SPAN} User has ${inProgressTutorialSubmissions.length} IN_PROGRESS submissions`);
 
+    // @ts-ignore
     const oldestSubmission = getMostRecentSubmission(inProgressTutorialSubmissions);
     console.log(`${SPAN} Oldest submission is from ${oldestSubmission.updatedAt}`);
 

@@ -172,7 +172,7 @@ submissionRouter.delete('/feedback/:feedbackId', [PrivateMiddleware], async func
 })
 
 submissionRouter.delete('/:submissionId', [PrivateMiddleware], async function deleteSubmission(req, res) {
-  const { submissionId } = req.query;
+  const { submissionId } = req.params;
 
   await SubmissionModel.delete(submissionId);
   res.status(200).end();

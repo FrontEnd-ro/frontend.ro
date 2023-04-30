@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import appConfig from '../config';
 import Challenge from './challenge.model';
 import { PublicMiddleware } from '../Middlewares';

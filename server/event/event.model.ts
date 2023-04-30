@@ -18,16 +18,7 @@ class EventModel {
     validateAgainstSchemaProps(attendee, AttendeeSchema);
 
     event.attendees.push(attendee);
-
-    return new Promise((resolve, reject) => {
-      event.save((err, data) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve(data);
-      });
-    });
+    return event.save();
   }
 
   static async addToWaitlist(label: string, attendee: EventAttendeeI): Promise<Document<any, any, EventI>> {
@@ -40,16 +31,7 @@ class EventModel {
     validateAgainstSchemaProps(attendee, AttendeeSchema);
 
     event.waitlist.push(attendee);
-
-    return new Promise((resolve, reject) => {
-      event.save((err, data) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve(data);
-      });
-    });
+    return event.save();
   }
 }
 

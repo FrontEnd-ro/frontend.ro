@@ -60,21 +60,11 @@ class UserModel {
     }
   }
 
-  static create(payload: Omit<UserI, 'lastLogin'>): Promise<UserI> {
+  static async create(payload: Omit<UserI, 'lastLogin'>): Promise<UserI> {
     validateAgainstSchemaProps(payload, UsersSchema);
 
-    const user = new User(payload);
-
-    return new Promise((resolve, reject) => {
-      user.save((err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-
-        resolve(user.toObject());
-      });
-    });
+    const user = await new User(payload).save();
+    return user.toObject();
   }
 
   static async findUserBy(filters: mongoose.FilterQuery<UserI>): Promise<UserI | null> {

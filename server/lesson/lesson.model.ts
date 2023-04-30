@@ -30,22 +30,7 @@ class LessonModel {
     }
 
     lesson.views = views;
-
-    return new Promise((resolve, reject) => {
-      lesson.save((err) => {
-        if (err) {
-          console.error(`
-            [LessonModel.updateViews] got while saving lessonId=${lessonId}`,
-            err
-          );
-
-          reject(err);
-          return;
-        }
-
-        resolve();
-      });
-    });
+    await lesson.save();
   }
 }
 

@@ -28,22 +28,7 @@ class PasswordResetModel {
       Date.now() + appConfig.PASS_RESET_CODE.expiration * MINUTE_IN_MILLISECONDS
     );
 
-    const passwordReset = new PasswordReset({
-      expiration,
-      email,
-      code,
-    });
-
-    return new Promise((resolve, reject) => {
-      passwordReset.save((err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-
-        resolve(passwordReset);
-      });
-    });
+    return new PasswordReset({ expiration, email, code }).save();
   }
 }
 

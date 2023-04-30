@@ -41,18 +41,7 @@ class LessonExerciseModel {
 
   static create(payload) {
     validateAgainstSchemaProps(payload, LessonExercisesSchema);
-
-    const exercise = new LessonExercise(payload);
-
-    return new Promise((resolve, reject) => {
-      exercise.save((err, data) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve(data);
-      });
-    });
+    return new LessonExercise(payload).save();
   }
 
   static async update(_id, payload) {

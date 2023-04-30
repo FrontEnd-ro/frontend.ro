@@ -23,22 +23,7 @@ class PresentationModel {
     }
 
     presentation.views = views;
-
-    return new Promise<void>((resolve, reject) => {
-      presentation.save((err) => {
-        if (err) {
-          console.error(`
-            [PresentationModel.updateViews] got while saving presentationId=${presentationId}`,
-            err
-          );
-
-          reject(err);
-          return;
-        }
-
-        resolve();
-      });
-    });
+    await presentation.save();
   }
 }
 

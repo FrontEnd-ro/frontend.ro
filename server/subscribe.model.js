@@ -27,21 +27,9 @@ class SubscriberModel {
     return false;
   }
 
-  static subscribe({ name, email }) {
+  static async subscribe({ name, email }) {
     validateAgainstSchemaProps({ name, email }, SubscribersSchema);
-
-    const subscriber = new Subscriber({ name, email });
-
-    return new Promise((resolve, reject) => {
-      subscriber.save((err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-
-        resolve();
-      });
-    });
+    await new Subscriber({ name, email }).save();
   }
 }
 

@@ -119,15 +119,7 @@ class ChallengeModel {
 }
 
 function saveChallenge(challenge) {
-  return new Promise((resolve, reject) => {
-    challenge.save((err, data) => {
-      if (err) {
-        return reject(err);
-      }
-
-      resolve(data);
-    });
-  });
+  return challenge.save();
 }
 
 module.exports = ChallengeModel;

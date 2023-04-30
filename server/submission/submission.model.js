@@ -141,31 +141,12 @@ class SubmissionModel {
     validateAgainstSchemaProps(payload, SubmissionSchema);
     Object.assign(submission, payload);
 
-    return new Promise((resolve, reject) => {
-      submission.save((err, data) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve();
-      });
-    });
+    await submission.save();
   }
 
-  static async create(payload) {
+  static create(payload) {
     validateAgainstSchemaProps(payload, SubmissionSchema);
-
-    const submission = new Submission(payload);
-
-    return new Promise((resolve, reject) => {
-      submission.save((err, data) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve(data);
-      });
-    });
+    return new Submission(payload).save();
   }
 
   static async delete(_id) {

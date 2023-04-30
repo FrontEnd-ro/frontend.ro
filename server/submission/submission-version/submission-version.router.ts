@@ -1,10 +1,9 @@
+import SubmissionModel from '../submission.model';
 import express, { Request, Response } from 'express';
 import { ServerError } from '../../utils/ServerError';
 import { PrivateMiddleware } from '../../Middlewares';
 import { SubmissionVersion } from './submission-version.model';
 import { UserRole } from '../../../shared/types/user.types';
-
-const SubmissionModel = require('../submission.model');
 
 const submissionVersionRouter = express.Router();
 

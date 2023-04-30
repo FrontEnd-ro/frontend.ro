@@ -1,5 +1,6 @@
 import express from 'express';
 import UserModel from '../user/user.model';
+import SubmissionModel from './submission.model';
 import { ServerError } from '../utils/ServerError';
 import { UserRole } from '../../shared/types/user.types';
 import NotificationModel from '../notification/notification.model';
@@ -9,8 +10,6 @@ import { maybeCreateCertification } from '../certification/certification.router'
 import { SubmissionVersion } from './submission-version/submission-version.model';
 import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
 import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
-
-const SubmissionModel = require('./submission.model');
 
 const adminSubmissionRouter = express.Router();
 
@@ -87,7 +86,7 @@ adminSubmissionRouter.post('/:submissionId/approve', [UserRoleMiddleware(UserRol
   const SPAN = `approveSubmission(${submissionId})`;
 
   try {
-    const submission: WIPPopulatedSubmissionI = await SubmissionModel.get(submissionId);
+    const submission = await SubmissionModel.get(submissionId);
 
     if (!submission) {
       throw new ServerError(404, 'generic.404');

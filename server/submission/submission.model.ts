@@ -1,25 +1,19 @@
-const mongoose = require('mongoose');
-import { SubmissionSchema } from './submission.schema';
-const { PAGE_SIZE, validateAgainstSchemaProps, validateObjectId } = require('../ServerUtils');
+import mongoose from 'mongoose';
 import UserModel from '../user/user.model';
+import { ServerError } from '../utils/ServerError';
+import { UserI } from '../../shared/types/user.types';
+import { Submission, SubmissionSchema } from './submission.schema';
+import { LessonExerciseI } from '../../shared/types/exercise.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-const { ServerError } = require('../utils/ServerError');
-
-/** Initialize the User Schema because we need it when referencing & populating the results */
-require('../user/user.model');
-require('../lesson-exercise/lesson-exercise.model');
-
-SubmissionSchema.index({ user: 1, exercise: 1 }, { unique: true });
-
-const Submission = mongoose.models.Submission || mongoose.model('Submission', SubmissionSchema);
+import { PAGE_SIZE, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
 
 class SubmissionModel {
   static get(_id) {
     return Submission
       .findById(_id)
-      .populate({ path: 'user' })
-      .populate({ path: 'exercise' });
+      .populate<{ user: UserI }>({ path: 'user' })
+      .populate<{ exercise: LessonExerciseI }>({ path: 'exercise' });
   }
 
   static getByExerciseId(userId, exerciseId) {
@@ -30,8 +24,8 @@ class SubmissionModel {
         user: userId,
         exercise: exerciseId
       })
-      .populate({ path: 'user' })
-      .populate({ path: 'exercise' })
+      .populate<{ user: UserI }>({ path: 'user' })
+      .populate<{ exercise: LessonExerciseI }>({ path: 'exercise' })
       .populate({
         path: 'exercise',
         populate: {
@@ -49,8 +43,8 @@ class SubmissionModel {
         user: userId,
         exercise: exerciseId
       })
-      .populate({ path: 'user' })
-      .populate({ path: 'exercise' })
+      .populate<{ user: UserI }>({ path: 'user' })
+      .populate<{ exercise: LessonExerciseI }>({ path: 'exercise' })
       .populate({
         path: 'exercise',
         populate: {
@@ -64,6 +58,7 @@ class SubmissionModel {
 
     return Submission
       .find({ user: userId })
+      .populate<{ exercise: LessonExerciseI }>({ path: 'exercise' })
       .populate({
         path: 'exercise',
         populate: {
@@ -155,16 +150,8 @@ class SubmissionModel {
     if (!submission) {
       throw new ServerError(404, 'generic.404', { _id });
     }
-
-    return new Promise((resolve, reject) => {
-      submission.delete((err) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve();
-      });
-    });
+    const x = await submission.delete();
+    console.log(x);
   }
 
   static sanitize(submission) {
@@ -184,4 +171,4 @@ class SubmissionModel {
   }
 }
 
-module.exports = SubmissionModel;
+export default SubmissionModel;

@@ -4,12 +4,11 @@ import appConfig from '../config';
 import { ServerError } from '../utils/ServerError';
 import { UserRole } from '../../shared/types/user.types';
 import LessonExerciseModel from './lesson-exercise.model';
+import SubmissionModel from '../submission/submission.model';
 import { PublicMiddleware, UserRoleMiddleware } from '../Middlewares';
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import { MAX_MEDIA_BYTES } from '../../shared/SharedConstants';
-
-const SubmissionModel = require('../submission/submission.model');
 
 const lessonExerciseRouter = express.Router();
 

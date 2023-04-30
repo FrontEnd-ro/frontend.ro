@@ -1,3 +1,6 @@
+import express from 'express';
+import UserModel from '../user/user.model';
+import SubmissionModel from './submission.model';
 import { ServerError } from '../utils/ServerError';
 import { UserRole } from '../../shared/types/user.types';
 import { APIErrorReasons } from '../../shared/SharedConstants';
@@ -6,10 +9,6 @@ import { PrivateMiddleware, SolvableExercise } from '../Middlewares';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import submissionVersionRouter from './submission-version/submission-version.router';
-
-const express = require('express');
-import UserModel from '../user/user.model';
-const SubmissionModel = require('./submission.model');
 
 const submissionRouter = express.Router();
 

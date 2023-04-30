@@ -31,7 +31,7 @@ export interface SubmissionI {
 
   status: SubmissionStatus;
 
-  feedbacks: ObjectId[]
+  feedbacks: FeedbackI[]
 
   updatedAt: Date;
 

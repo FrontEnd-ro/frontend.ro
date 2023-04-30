@@ -27,4 +27,8 @@ const SubmissionSchema = new mongoose.Schema<SubmissionI>(
   },
 );
 
-export { SubmissionSchema, FeedbackSchema }
+SubmissionSchema.index({ user: 1, exercise: 1 }, { unique: true });
+
+const Submission: mongoose.Model<SubmissionI> = mongoose.models.Submission || mongoose.model('Submission', SubmissionSchema);
+
+export { Submission, SubmissionSchema, FeedbackSchema }

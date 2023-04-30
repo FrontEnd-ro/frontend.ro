@@ -5,7 +5,7 @@ import Tutorial from '../tutorial/tutorial.model';
 import { Certification, createCertification, sanitizeCertification } from './certification.model';
 import { LessonI } from '../../shared/types/lesson.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { ExerciseType, WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
+import { ExerciseType, LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
 import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
 import appConfig from '../config';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
@@ -17,9 +17,9 @@ import Challenge from '../challenge/challenge.model';
 import { TutorialI } from '../../shared/types/tutorial.types';
 import { ChallengeI } from '../../shared/types/challenge.types';
 import { ServerError } from '../utils/ServerError';
+import SubmissionModel from '../submission/submission.model';
 
 const LessonModel = require('../lesson/lesson.model');
-const SubmissionModel = require('../submission/submission.model');
 
 const certificationRouter = express.Router();
 
@@ -134,13 +134,13 @@ export async function maybeCreateCertification(
     return;
   }
 
-  const userSubmissions: WIPPopulatedSubmissionI[] =
-    await SubmissionModel.getAllUserSubmissions(userId);
+  const userSubmissions = await SubmissionModel.getAllUserSubmissions(userId);
 
   const didFinishAllExercises = tutorialExercises.every((lessonEx) => {
     return (
       userSubmissions.find((userSub) => {
         return (
+          // @ts-ignore
           userSub.exercise._id.toString() === lessonEx._id.toString() &&
           userSub.status === SubmissionStatus.DONE
         );

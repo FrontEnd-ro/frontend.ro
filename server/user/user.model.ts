@@ -143,13 +143,12 @@ class UserModel {
     return sanitizedUser;
   }
 
-  static sanitizeForPublic = (user: UserI): PublicUserI => {
-    const sanitizedUser = UserModel.sanitize(user);
+  static sanitizeForPublic = (user: Partial<UserI>): PublicUserI => {
     const result: PublicUserI = {
-      name: sanitizedUser.name,
-      avatar: sanitizedUser.avatar,
-      username: sanitizedUser.username,
-      description: sanitizedUser.description,
+      name: user.name,
+      avatar: user.avatar,
+      username: user.username,
+      description: user.description,
     };
     
     return result;

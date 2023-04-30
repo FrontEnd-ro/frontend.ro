@@ -4,12 +4,13 @@ import appConfig from '../config';
 import Tutorial from '../tutorial/tutorial.model';
 import { LessonI } from '../../shared/types/lesson.types';
 import { LambdaService } from '../services/Lambda.service';
-const UserModel = require('../user/user.model');
-const SubmissionModel = require('../submission/submission.model');
+import UserModel from '../user/user.model';
+import SubmissionModel from '../submission/submission.model';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
-import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
+import { SubmissionStatus } from '../../shared/types/submission.types';
 import { CertificationI, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
+import { LessonExerciseI } from '../../shared/types/exercise.types';
 
 const CertificationSchema = new mongoose.Schema<CertificationI>({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
@@ -31,6 +32,7 @@ function sanitizeCertification(certification: Document<any, any, WIPPopulatedCer
   const sanitizedCertfication: WIPPopulatedCertificationI = JSON.parse(JSON.stringify(certification.toObject()));
 
   if (typeof sanitizedCertfication.user !== 'string') {
+    // @ts-ignore
     sanitizedCertfication.user = UserModel.sanitizeForPublic(sanitizedCertfication.user);
   }
   sanitizedCertfication.lesson_exercises = sanitizedCertfication.lesson_exercises.map(lessonExercise => {
@@ -115,11 +117,13 @@ async function storeCertificationData(
   }
 
   const lessonIds = (tutorial.lessons as LessonI[]).map((lesson) => lesson.lessonId);
-  const userSubmissions: WIPPopulatedSubmissionI[] = await SubmissionModel.getAllUserSubmissions(userId);
+  const userSubmissions = await SubmissionModel.getAllUserSubmissions(userId);
   certification.lesson_exercises = userSubmissions
     .filter(submission => submission.status === SubmissionStatus.DONE)
-    .filter(submission => lessonIds.includes(submission.exercise.lesson))
-    .map(submission => submission.exercise._id.toString());
+    .filter(submission => {
+      return lessonIds.includes((submission.exercise as unknown as LessonExerciseI).lesson)
+    })
+    .map(submission => (submission.exercise as unknown as LessonExerciseI)._id.toString());
 
   if (dryRun === true) {
     console.info(`${SPAN} Skipping persistance.`);

@@ -1,6 +1,6 @@
-const next = require('next')
-const cors = require('cors');
-const express = require('express');
+import next from 'next';
+import cors from 'cors';
+import express from 'express';
 
 import appConfig from "./config";
 
@@ -22,6 +22,8 @@ app.use(express.static('client/public'));
 app.use('/_next', express.static('/../dist'));
 
 app.get('*', (req, res) => {
+  // @ts-ignore
+  // TODO: fix typing for req.url
   nextHandler(req, res, req.url);
 });
 

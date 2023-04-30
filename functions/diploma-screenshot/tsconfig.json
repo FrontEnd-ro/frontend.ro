@@ -3,6 +3,7 @@
     "outDir": ".",
     "target": "ESNext",
     "module": "CommonJS",
+    "esModuleInterop": true,
     "typeRoots": [
       "./node_modules/@types"
     ]

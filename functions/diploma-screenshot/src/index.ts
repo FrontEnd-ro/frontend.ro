@@ -8,7 +8,7 @@ import {
 } from 'puppeteer-core';
 import * as dotenv from 'dotenv';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import chromium = require('chrome-aws-lambda');
+import chromium from 'chrome-aws-lambda';
 
 interface ResizeOptions extends JSONObject {
   width?: number,

@@ -19,8 +19,6 @@ import { ChallengeI } from '../../shared/types/challenge.types';
 import { ServerError } from '../utils/ServerError';
 import SubmissionModel from '../submission/submission.model';
 
-const LessonModel = require('../lesson/lesson.model');
-
 const certificationRouter = express.Router();
 
 certificationRouter.get('/:certificationId', [

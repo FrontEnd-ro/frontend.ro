@@ -1,9 +1,9 @@
-const next = require('next')
-const cors = require('cors');
-const express = require('express');
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const cookieParser = require('cookie-parser');
+import next from 'next';
+import cors from 'cors';
+import express from 'express';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import { connectToDb } from './database';
 
 require('dotenv').config();
@@ -42,7 +42,7 @@ app.use(
 );
 
 app.use(compression());
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(express.json({ limit: '50mb' }));
 app.use(cookieParser());
 
 app.use('/_next', express.static('/../dist'));
@@ -76,6 +76,8 @@ connectToDb()
       const nextApp = next({ dev: false });
       const nextHandler = nextApp.getRequestHandler();
       app.get("*", (req, res) => {
+        // @ts-ignore
+        // TODO: fix typing for req.url
         nextHandler(req, res, req.url);
       });
       nextApp.prepare();

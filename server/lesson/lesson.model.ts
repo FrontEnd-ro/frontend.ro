@@ -1,7 +1,6 @@
-import pick from 'lodash/pick';
 import mongoose from 'mongoose';
 import { LessonSchema } from './lesson.schema';
-import { LessonI } from '../../shared/types/lesson.types';
+import { API_LessonI, LessonI } from '../../shared/types/lesson.types';
 
 const Lesson: mongoose.Model<LessonI> = mongoose.models.Lesson || mongoose.model('Lesson', LessonSchema);
 
@@ -34,9 +33,11 @@ class LessonModel {
   }
 }
 
-function sanitizeLesson(lesson: mongoose.Document<any, any, LessonI> & LessonI) {
-  const propsToKeep: (keyof LessonI)[] = ['lessonId', 'views'];
-  return pick(lesson.toJSON(), propsToKeep);
+function sanitizeLesson(lesson: mongoose.Document<any, any, LessonI> & LessonI): API_LessonI {
+  return {
+    lessonId: lesson.lessonId,
+    views: lesson.views
+  }
 }
 
 export default LessonModel;

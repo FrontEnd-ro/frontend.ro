@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faShare } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '~/services/Utils';
-import { PublicUserI } from '~/../shared/types/user.types';
+import { API_UserI } from '~/../shared/types/user.types';
 import OptionsDrawer from '~/components/OptionsDrawer/OptionsDrawer';
 import { Trans, useTranslation } from '~/services/typesafeNextTranslate';
 import { FacebookButton, LinkedInButton, CopyLinkButton } from '~/components/SocialMediaButtons';
@@ -11,7 +11,7 @@ import { FacebookButton, LinkedInButton, CopyLinkButton } from '~/components/Soc
 import styles from './Diploma.module.scss';
 
 interface Props {
-  student: PublicUserI;
+  student: API_UserI;
   tutorial?: {
     name: string;
     tutorialId: string;

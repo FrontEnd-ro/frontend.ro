@@ -6,10 +6,10 @@ import { UserState } from '~/redux/user/types';
 import SEOTags from '../SEOTags';
 import styles from './UserProfile.module.scss';
 import UserActivity from './UserActivity/UserActivity';
-import { PublicUserI } from '~/../shared/types/user.types';
+import { API_UserI } from '~/../shared/types/user.types';
 
 interface Props {
-  profileUser: PublicUserI;
+  profileUser: API_UserI;
 }
 function UserProfile({ profileUser }: Props) {
   const nameOrUsername = profileUser.name || profileUser.username;

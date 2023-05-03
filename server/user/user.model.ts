@@ -1,17 +1,18 @@
 import bcrypt  from 'bcrypt';
 import jwt  from 'jsonwebtoken';
-import mongoose  from 'mongoose';
+import mongoose, { Document }  from 'mongoose';
 import appConfig from '../config';
 import { User, UsersSchema }  from './user.schema';
 import {
   AUTH_EXPIRATION,
   validateAgainstSchemaProps,
   validateObjectId,
-  MAX_USERNAME_LENGTH
+  MAX_USERNAME_LENGTH,
+  SanitizeRole
 }  from '../ServerUtils';
 import { ServerError, TranslationKey } from '../utils/ServerError';
-import { PublicUserI } from '../../shared/types/user.types';
-import { UserI, WIPSanitizedUser } from '../../shared/types/user.types';
+import { API_UserI } from '../../shared/types/user.types';
+import { UserI } from '../../shared/types/user.types';
 
 export type AuthJWT = {
   _id: string;
@@ -60,11 +61,11 @@ class UserModel {
     }
   }
 
-  static async create(payload: Omit<UserI, 'lastLogin'>): Promise<UserI> {
+  static async create(payload: Omit<UserI, 'lastLogin'>) {
     validateAgainstSchemaProps(payload, UsersSchema);
 
     const user = await new User(payload).save();
-    return user.toObject();
+    return user;
   }
 
   static async findUserBy(filters: mongoose.FilterQuery<UserI>): Promise<UserI | null> {
@@ -88,7 +89,7 @@ class UserModel {
   } | {
     email: string;
     username: string;
-  }): Promise<UserI | null> {
+  }) {
     const user = await User.findOne({
       $or: [{ username }, { email }],
     });
@@ -96,10 +97,10 @@ class UserModel {
     if (user === null) {
       return null;
     }
-    return user.toObject();
+    return user;
   }
 
-  static async update(_id: string, payload: Partial<UserI>): Promise<UserI> {
+  static async update(_id: string, payload: Partial<UserI>) {
     validateObjectId(_id);
     const user = await User.findById(_id);
 
@@ -110,8 +111,8 @@ class UserModel {
     validateAgainstSchemaProps(payload, UsersSchema);
     Object.assign(user, payload);
 
-    await user.save();
-    return user.toObject();
+    const updatedUser = await user.save();
+    return updatedUser;
   }
 
   static async delete(_id: string): Promise<void> {
@@ -127,31 +128,6 @@ class UserModel {
         algorithm: appConfig.AUTH.algorithm,
       },
     );
-  }
-
-  static sanitize(user: UserI): WIPSanitizedUser {
-    // TODO: decide on an approach to use among all schema
-    // https://github.com/FrontEnd-ro/frontend.ro/issues/438
-    let sanitizedUser = { ...user };
-    if (user instanceof mongoose.Document) {
-      sanitizedUser = { ...user.toObject() };
-    }
-    const propsToDelete = ['_id', '__v', 'password', 'github_access_token'];
-  
-    propsToDelete.forEach((prop) => delete sanitizedUser[prop]);
-  
-    return sanitizedUser;
-  }
-
-  static sanitizeForPublic = (user: Partial<UserI>): PublicUserI => {
-    const result: PublicUserI = {
-      name: user.name,
-      avatar: user.avatar,
-      username: user.username,
-      description: user.description,
-    };
-    
-    return result;
   }
 
   static validateUsername(username: string): {
@@ -198,6 +174,32 @@ class UserModel {
     await user.save();
     return user.toObject();
   }
+
+  // Sanitizes the user based on who wants to look at this entity
+  static sanitize(user: mongoose.Document<any, any, UserI> & UserI, sanitizeRole: SanitizeRole): API_UserI {
+    switch (sanitizeRole) {
+      case SanitizeRole.SELF:
+      case SanitizeRole.ADMIN:
+        return {
+          avatar: user.avatar,
+          name: user.name,
+          username: user.username,
+          description: user.description,
+          email: user.email,
+          role: user.role,
+          tutorials: user.tutorials,
+        }
+      case SanitizeRole.PUBLIC:
+      case SanitizeRole.TEACHER:
+      default:
+        return {
+          avatar: user.avatar,
+          name: user.name,
+          username: user.username,
+          description: user.description,
+        }
+    }
+  } 
 }
 
 export default UserModel;

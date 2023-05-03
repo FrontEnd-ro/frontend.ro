@@ -6,7 +6,7 @@ import { Submission, SubmissionSchema } from './submission.schema';
 import { LessonExerciseI } from '../../shared/types/exercise.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { PAGE_SIZE, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
+import { PAGE_SIZE, SanitizeRole, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
 
 class SubmissionModel {
   static get(_id) {
@@ -160,7 +160,7 @@ class SubmissionModel {
       sanitizedSubmission = { ...submission.toObject() };
     }
 
-    sanitizedSubmission.user = UserModel.sanitize(sanitizedSubmission.user);
+  sanitizedSubmission.user = UserModel.sanitize(sanitizedSubmission.user, SanitizeRole.SELF);
     sanitizedSubmission.exercise = LessonExerciseModel.sanitize(sanitizedSubmission.exercise);
 
     const propsToDelete = ['__v'];

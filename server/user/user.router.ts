@@ -10,9 +10,9 @@ import { ServerError } from '../utils/ServerError';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
 import PasswordResetModel from '../password-reset/password-reset.model';
+import { API_UserI, UserI, UserRole } from '../../shared/types/user.types';
 import { MAX_MEDIA_MB, MAX_MEDIA_BYTES } from '../../shared/SharedConstants';
-import { setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '../ServerUtils';
-import { PublicUserI, UserI, UserRole, WIPSanitizedUser } from '../../shared/types/user.types';
+import { setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH, SanitizeRole } from '../ServerUtils';
 
 const userRouter = express.Router();
 
@@ -65,13 +65,13 @@ userRouter.get('/ping', [
   PrivateMiddleware,
   async function pingCurrentuser(req, res) {
     const { user } = req.body;
-    res.json(UserModel.sanitize(user));
+    res.json(UserModel.sanitize(user, SanitizeRole.SELF));
   }
 ]);
 
 userRouter.get('/:username', [
   PublicMiddleware,
-  async function getPublicProfile(req: Request, res: Response<PublicUserI>) {
+  async function getPublicProfile(req: Request, res: Response<API_UserI>) {
     const { username } = req.params;
     try {
       const user = await UserModel.getUser({ username });
@@ -79,7 +79,7 @@ userRouter.get('/:username', [
         throw new ServerError(404, 'generic.404');
       }
 
-      const publicUser = UserModel.sanitizeForPublic(user);
+      const publicUser = UserModel.sanitize(user, SanitizeRole.PUBLIC);
       res.json(publicUser);
     } catch (err) {
       new ServerError(
@@ -91,7 +91,7 @@ userRouter.get('/:username', [
 
 userRouter.post('/login', async function login(
   req: Request<{}, {}, { emailOrUsername: string; password: string; }>,
-  res: Response<WIPSanitizedUser>
+  res: Response<API_UserI>
 ) {
   let { emailOrUsername, password } = req.body;
   emailOrUsername = emailOrUsername.trim().toLowerCase();
@@ -121,7 +121,7 @@ userRouter.post('/login', async function login(
   const token = UserModel.generateJwtForUser(user._id);
   setTokenCookie(token, res);
 
-  res.json(UserModel.sanitize(user));
+  res.json(UserModel.sanitize(user, SanitizeRole.SELF));
 })
 
 userRouter.post('/logout', (_, res: Response) => {
@@ -131,7 +131,7 @@ userRouter.post('/logout', (_, res: Response) => {
 
 userRouter.post('/register', async function register(
   req: Request<{}, {}, { email: string; username: string; password: string; }>,
-  res: Response<WIPSanitizedUser>
+  res: Response<API_UserI>
 ) {
   const { email, username, password } = req.body;
 
@@ -182,14 +182,14 @@ userRouter.post('/register', async function register(
     }
   );
 
-  res.json(UserModel.sanitize(user));
+  res.json(UserModel.sanitize(user, SanitizeRole.SELF));
 })
 
 userRouter.post('/name', [
   PrivateMiddleware,
   async function updateName(
     req: Request<{}, {}, { name: string; password: string; user: UserI }>,
-    res: Response<WIPSanitizedUser>
+    res: Response<API_UserI>
   ) {
     const name = req.body.name.toString().trim();
     const { password, user } = req.body;
@@ -206,7 +206,7 @@ userRouter.post('/name', [
 
     try {
       const updatedUser = await updateUserFields({ _id: user._id, username: user.username, password }, { name });
-      res.json(UserModel.sanitize(updatedUser));
+      res.json(UserModel.sanitize(updatedUser, SanitizeRole.SELF));
     } catch (err) {
       err.send(res); // Err is of type ServerError
     }
@@ -217,7 +217,7 @@ userRouter.post('/description', [
   PrivateMiddleware,
   async function updateDescription(
     req: Request<{}, {}, { description: string; password: string; user: UserI }>,
-    res: Response<WIPSanitizedUser>
+    res: Response<API_UserI>
   ) {
     const description = req.body.description.toString().trim();
     const { password, user } = req.body;
@@ -234,7 +234,7 @@ userRouter.post('/description', [
 
     try {
       const updatedUser = await updateUserFields({ _id: user._id, username: user.username, password }, { description });
-      res.json(UserModel.sanitize(updatedUser));
+      res.json(UserModel.sanitize(updatedUser, SanitizeRole.SELF));
     } catch (err) {
       err.send(res); // Err is of type ServerError
     }
@@ -245,7 +245,7 @@ userRouter.post('/username', [
   PrivateMiddleware,
   async function updateUsername(
     req: Request<{}, {}, { username: string; password: string; user: UserI }>,
-    res: Response<WIPSanitizedUser>
+    res: Response<API_UserI>
   ) {
     const username = req.body.username.toString().trim();
     const { password, user } = req.body;
@@ -263,7 +263,7 @@ userRouter.post('/username', [
         username,
         avatar: `${appConfig.APP.endpoint}/auth/avatar/${username}`,
       });
-      res.json(UserModel.sanitize(updatedUser));
+      res.json(UserModel.sanitize(updatedUser,SanitizeRole.SELF));
     } catch (err) {
       err.send(res); // Err is of type ServerError
     }
@@ -274,7 +274,7 @@ userRouter.post('/email', [
   PrivateMiddleware,
   async function updateEmail(
     req: Request<{}, {}, { email: string; password: string; user: UserI }>,
-    res: Response<WIPSanitizedUser>
+    res: Response<API_UserI>
   ) {
     const email = req.body.email.toString().trim();
     const { password, user } = req.body;
@@ -297,7 +297,7 @@ userRouter.post('/email', [
 
     try {
       const updatedUser = await updateUserFields({ _id: user._id, username: user.username, password }, { email });
-      res.json(UserModel.sanitize(updatedUser));
+      res.json(UserModel.sanitize(updatedUser, SanitizeRole.SELF));
     } catch (err) {
       console.log(`[updateEmail(${email})]`, err);
       err.send(res); // Err is of type ServerError
@@ -309,7 +309,7 @@ userRouter.post('/password', [
   PrivateMiddleware,
   async function updatePassword(
     req: Request<{}, {}, { newPassword: string; password: string; user: UserI }>,
-    res: Response<WIPSanitizedUser>
+    res: Response<API_UserI>
   ) {
     const newPassword = req.body.newPassword.toString().trim();
     const { password, user } = req.body;
@@ -325,7 +325,7 @@ userRouter.post('/password', [
       const updatedUser = await updateUserFields({ _id: user._id, username: user.username, password }, {
         password: hashedPassword
       });
-      res.json(UserModel.sanitize(updatedUser));
+      res.json(UserModel.sanitize(updatedUser, SanitizeRole.SELF));
     } catch (err) {
       err.send(res); // Err is of type ServerError
     }
@@ -334,7 +334,7 @@ userRouter.post('/password', [
 
 userRouter.post('/password/reset', async function resetPassword(
   req: Request<{}, {}, { newPassword: string; emailOrUsername: string; code: string; }>,
-  res: Response<WIPSanitizedUser>
+  res: Response<API_UserI>
 ) {
   try {
     const newPassword = req.body.newPassword.toString().trim();
@@ -368,7 +368,7 @@ userRouter.post('/password/reset', async function resetPassword(
     const token = UserModel.generateJwtForUser(user._id);
     setTokenCookie(token, res);
 
-    res.json(UserModel.sanitize(updatedUser));
+    res.json(UserModel.sanitize(updatedUser, SanitizeRole.SELF));
   } catch (err) {
     console.error('[UserRouter.resetPassword]', err);
     new ServerError(500, 'generic.500').send(res);
@@ -377,7 +377,7 @@ userRouter.post('/password/reset', async function resetPassword(
 
 userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(
   req: Request<{}, {}, { user: UserI }>,
-  res: Response<WIPSanitizedUser>
+  res: Response<API_UserI>
 ) {
   const userId = req.body.user._id;
 
@@ -412,7 +412,7 @@ userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(
         avatar: `${appConfig.CDN.user_generated}/${Key}`
       });
 
-      res.json(UserModel.sanitize(newUser));
+      res.json(UserModel.sanitize(newUser, SanitizeRole.SELF));
     } catch (err) {
       console.log('[s3Upload]', err);
       new ServerError(500, err.message || 'Oops! Se pare că nu am putut încărca fișierele. Încearcă din nou.').send(res);

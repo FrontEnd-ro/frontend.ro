@@ -1,12 +1,12 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import Link from '~/components/generic/Link';
-import { PublicUserI } from '~/../shared/types/user.types';
+import { API_UserI } from '~/../shared/types/user.types';
 
 import styles from './UserBio.module.scss';
 
 interface Props {
-  user: PublicUserI;
+  user: API_UserI;
   className?: string;
 }
 

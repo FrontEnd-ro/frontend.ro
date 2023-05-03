@@ -3,6 +3,13 @@ import appConfig from './config';
 import { Request, Response } from "express";
 import { ServerError } from './utils/ServerError';
 
+enum SanitizeRole {
+  PUBLIC = 'public',
+  SELF = 'self',
+  TEACHER = 'teacher',
+  ADMIN = 'admin',
+}
+
 const PAGE_SIZE = 25;
 
 const AUTH_EXPIRATION = 30; // days
@@ -61,4 +68,5 @@ export {
   validateAgainstSchemaProps,
   validateObjectId,
   parseBearerToken,
+  SanitizeRole,
 }

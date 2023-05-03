@@ -148,6 +148,8 @@ lessonExerciseRouter.put('/:exerciseId', [UserRoleMiddleware(UserRole.ADMIN)], a
   
     const exercise = await LessonExerciseModel.update(exerciseId, req.body);
     const sanitizedExercise = LessonExerciseModel.sanitize(exercise);
+
+    console.log("PUT", sanitizedExercise.user, exercise.user);
     res.json(sanitizedExercise);
   } catch (err) {
     console.log('[updateExercise]', err);

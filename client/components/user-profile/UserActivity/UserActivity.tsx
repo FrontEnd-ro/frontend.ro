@@ -14,14 +14,14 @@ import { TutorialProgressI } from '~/../shared/types/tutorial.types';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialProgress from './TutorialProgress/TutorialProgress';
 import { aggregateTutorialProgress } from '~/services/Utils';
-import { PublicUserI, UserRole } from '~/../shared/types/user.types';
+import { API_UserI, UserRole } from '~/../shared/types/user.types';
 import Link from '~/components/generic/Link';
 import SubmissionService from '~/services/api/Submission.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import { WIPPopulatedLessonExerciseI } from '~/../shared/types/exercise.types';
 
 interface Props {
-  profileUser: PublicUserI;
+  profileUser: API_UserI;
 }
 
 function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connector> & Props) {

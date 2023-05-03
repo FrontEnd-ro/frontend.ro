@@ -31,23 +31,21 @@ export interface UserI {
   tutorials: string[];
 }
 
-// Trully public things about a user, that can be shown
-// to everyone.
-export interface PublicUserI {
+// We respond with this object on all user-related requests/fields.
+// NOTE: depending on the rights/permissions of the API caller,
+// we will return only a subset of those fields, or none at all.
+export interface API_UserI {
   avatar: string;
-  name?: string;
-  username: string;
-  description?: string;
-}
 
-// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
-export type WIPSanitizedUser = Pick<
-  UserI,
-  | 'avatar'
-  | 'name'
-  | 'email'
-  | 'username'
-  | 'description'
-  | 'role'
-  | 'tutorials'
->;
+  name?: string;
+
+  email?: string;
+
+  username: string;
+
+  description?: string;
+
+  role?: UserRole;
+
+  tutorials?: string[];
+}

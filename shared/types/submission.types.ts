@@ -1,5 +1,5 @@
 import { ObjectId } from "mongoose";
-import { UserI, WIPSanitizedUser } from "./user.types";
+import { UserI, API_UserI } from "./user.types";
 import { WIPPopulatedLessonExerciseI, WIPSanitizedLessonExercise } from "./exercise.types";
 
 export enum FeedbackType {
@@ -62,11 +62,11 @@ export interface WIPPopulatedSubmissionI {
 export type WIPSanitiedSubmission = Pick<WIPPopulatedSubmissionI, 'code' | 'status' | 'feedbacks'> & {
   _id: string;
 
-  user: WIPSanitizedUser;
+  user: API_UserI;
 
   exercise: WIPSanitizedLessonExercise;
 
-  assigneed: WIPSanitizedUser;
+  assigneed: API_UserI;
 }
 
 export interface SubmissionVersionI {

@@ -4,7 +4,7 @@ import { ServerError } from '../utils/ServerError';
 import { UserI } from '../../shared/types/user.types';
 import { LessonExercisesSchema, LessonExercise } from "./lesson-exercise.schema";
 import {  WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
-import { validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
+import { SanitizeRole, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
 
 class LessonExerciseModel {
   static get(_id) {
@@ -90,7 +90,7 @@ class LessonExerciseModel {
 
     propsToDelete.forEach((prop) => delete sanitizedExercise[prop]);
 
-    sanitizedExercise.user = UserModel.sanitizeForPublic(exercise.user);
+    sanitizedExercise.user = UserModel.sanitize(exercise.user, SanitizeRole.PUBLIC);
 
     return JSON.parse(JSON.stringify(sanitizedExercise));
   }

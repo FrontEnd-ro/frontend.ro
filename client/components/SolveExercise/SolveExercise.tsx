@@ -14,7 +14,8 @@ import { withAuthModal } from '~/services/Hooks';
 import PageContainer from '~/components/PageContainer';
 import StatusBanner from './StatusBanner/StatusBanner';
 import SubmissionService from '~/services/api/Submission.service';
-import { UserState, LessonExercise } from '~/redux/user/types';
+import { LessonExercise } from '~/redux/user/types';
+import { API_UserI } from '~/../shared/types/user.types';
 import {
   SubmissionStatus, SubmissionVersionI, WIPSanitiedSubmission, FeedbackI,
 } from '~/../shared/types/submission.types';
@@ -46,10 +47,10 @@ interface Props {
 
 interface Submission {
   _id?: string;
-  user: UserState['info'];
+  user: API_UserI;
   exercise: LessonExercise;
   code: string;
-  assignee: UserState['info'];
+  assignee: API_UserI;
   status: SubmissionStatus;
   feedbacks: FeedbackI[]
 }

@@ -4,8 +4,7 @@ import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
 import { noop } from '~/services/Utils';
 import I18nProvider from 'next-translate/I18nProvider'
-import { UserState } from '~/redux/user/types';
-import { UserRole } from '../shared/types/user.types';
+import { API_UserI, UserRole } from '../shared/types/user.types';
 import UserService from '~/services/api/User.service';
 import IdentifyLogRocket from '~/components/IdentifyLogRocket';
 import LoadNotifications from '~/components/LoadNotifications/LoadNotifications';
@@ -123,7 +122,7 @@ function useApplicationConfig(callback: (config: ApplicationConfig) => void) {
   }, []);
 }
 
-function useFathom(trackingCode: string, userInfo?: UserState['info']) {
+function useFathom(trackingCode: string, userInfo?: API_UserI) {
   // https://vercel.com/guides/deploying-nextjs-using-fathom-analytics-with-vercel
   const SPAN = `[useFathom, trackingCode=${trackingCode}, userInfo=${userInfo}]`;
   const router = useRouter();

@@ -15,7 +15,7 @@ import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 import { DeprecatedBasicEditor } from '../Editor/BasicEditor';
 import FolderStructure from '~/../shared/utils/FolderStructure';
-import { UserState } from '~/redux/user/types';
+import { API_UserI } from '~/../shared/types/user.types';
 import {
   MediaUploadResp,
   FileDictionary,
@@ -59,7 +59,7 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
     formData: {
       type: ExerciseType,
     },
-    userInfo: UserState['info'] = user.info,
+    userInfo: API_UserI = user.info,
   ) => {
     if (!validateRequiredData()) {
       return;

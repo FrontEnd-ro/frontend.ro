@@ -1,3 +1,4 @@
+import { API_UserI } from '~/../shared/types/user.types';
 import { LessonExercise } from '../user/types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 
@@ -10,16 +11,9 @@ interface SubmissionFeedback {
     file_key: string;
     position: number[];
 }
-interface User {
-  name?: string;
-  username: string;
-  email: string;
-  avatar: string;
-}
-
 export interface Submission {
   _id: string;
-  user: User;
+  user: API_UserI;
   exercise: LessonExercise;
   status: SubmissionStatus;
   submittedAt: number;

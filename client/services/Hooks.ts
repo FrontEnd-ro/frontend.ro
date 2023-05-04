@@ -1,7 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
 import * as MonacoTypes from 'monaco-editor';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { UserState } from '~/redux/user/types';
+import { API_UserI } from '~/../shared/types/user.types';
 import SweetAlertService from './sweet-alert/SweetAlert.service';
 import { noop } from './Utils';
 import MonacoService from './MonacoService';
@@ -78,7 +78,7 @@ function withAuthModal(isLoggedIn: boolean, cb: (...any) => any) {
           module.default,
           'Autentifică-te',
           {
-          onSuccess(userInfo: UserState['info']) {
+          onSuccess(userInfo: API_UserI) {
             SweetAlertService.closePopup();
             cb(...props, userInfo);
           },

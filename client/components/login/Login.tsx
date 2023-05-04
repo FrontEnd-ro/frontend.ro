@@ -18,7 +18,7 @@ import Button from '../Button';
 import HorizontalSeparator from '../HorizontalSeparator';
 import PasswordReset from './PasswordReset/PasswordReset';
 import { loadInfo } from '~/redux/user/user.actions';
-import { UserState } from '~/redux/user/types';
+import { API_UserI } from '~/../shared/types/user.types';
 import { getStore } from '~/redux/store';
 
 import styles from './Login.module.scss';
@@ -26,7 +26,7 @@ import styles from './Login.module.scss';
 interface MyProps {
   mode?: Mode;
   className?: string;
-  onSuccess?: (user?: UserState['info']) => void;
+  onSuccess?: (user?: API_UserI) => void;
 
   // In case we want to add optional Checkbox items
   // that need to be accepted by the user
@@ -122,7 +122,7 @@ class Login extends Component<PropsWithChildren<MyProps>, MyState> {
     this.setState({ loading: true });
 
     apiToCall(props)
-      .then((user: UserState['info']) => {
+      .then((user: API_UserI) => {
         getStore().dispatch(loadInfo(user));
 
         if (onSuccess) {
@@ -161,7 +161,7 @@ class Login extends Component<PropsWithChildren<MyProps>, MyState> {
       newPassword,
       emailOrUsername: emailToReset,
     })
-      .then((user: UserState['info']) => {
+      .then((user: API_UserI) => {
         getStore().dispatch(loadInfo(user));
 
         if (onSuccess) {

@@ -1,17 +1,9 @@
-import { UserRole } from '~/../shared/types/user.types';
+import { API_UserI, UserRole } from '~/../shared/types/user.types';
 import { ParsedNotificationI } from '~/../shared/types/notification.types';
 import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
 export interface UserState {
-  info: {
-    name?: string;
-    username: string;
-    email: string;
-    avatar: string;
-    role: UserRole,
-    description?: string;
-    tutorials: string[];
-  };
+  info: API_UserI;
   notifications: Notifications;
 }
 
@@ -29,5 +21,5 @@ export interface LessonExercise {
   solution: string;
   lesson: string;
   type: ExerciseType;
-  user: UserState['info'];
+  user: API_UserI;
 }

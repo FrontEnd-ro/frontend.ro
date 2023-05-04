@@ -1,13 +1,10 @@
 import * as LogrocketInstance from 'logrocket/dist/types';
-interface IdentityData {
-  name?: string;
-  username: string;
-  email: string;
-}
+import { API_UserI } from '~/../shared/types/user.types';
+
 class LogRocketService {
   private static instance: typeof LogrocketInstance | null = null;
 
-  private static identityData: IdentityData;
+  private static identityData: API_UserI;
 
   static init() {
     if (LogRocketService.instance) {
@@ -32,7 +29,7 @@ class LogRocketService {
       });
   }
 
-  static async identify(data: IdentityData) {
+  static async identify(data: API_UserI) {
     if (!LogRocketService.instance) {
       await LogRocketService.init();
     }

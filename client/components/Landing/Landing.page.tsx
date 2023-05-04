@@ -4,7 +4,7 @@ import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
 import LandingHero from './LandingHero/LandingHero';
-import { TidbitI } from '~/../shared/types/tidbit.types';
+import { API_TidbitI } from '~/../shared/types/tidbit.types';
 import LandingAdCard from './LandingAdCard/LandingAdCard';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 import LandingResources from './LandingResources/LandingResources';
@@ -21,7 +21,7 @@ function LandingPage({
   applicationConfig,
   htmlTutorialState,
 }: ConnectedProps<typeof connector> & {
-  tidbits: TidbitI[],
+  tidbits: API_TidbitI[],
   htmlTutorialState: 'not_started' | 'started' | 'completed';
 }) {
   const { t } = useTranslation('common');

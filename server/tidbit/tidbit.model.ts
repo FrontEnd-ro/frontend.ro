@@ -1,7 +1,36 @@
-import mongoose, { Document } from 'mongoose';
-import { TidbitI, TidbitItemI } from '../../shared/types/tidbit.types';
+import mongoose, { Document, Types } from 'mongoose';
+import { API_TidbitI } from '../../shared/types/tidbit.types';
 
+export interface TidbitI {
+  // Mongo generated
+  _id?: Types.ObjectId;
 
+  // Human readable (eg: "html-images")
+  tidbitId: string;
+
+  title: string;
+
+  textColor: string;
+
+  backgroundColor: string;
+
+  items: TidbitItemI[];
+
+  description?: string;
+
+  createdDate?: Date;
+
+  views: number;
+}
+
+export interface TidbitItemI {
+  // Mongo generated
+  _id?: Types.ObjectId;
+
+  imageSrc: string;
+  language?: string;
+  codeSnippets?: string[];
+}
 
 const TidbitItemSchema = new mongoose.Schema<TidbitItemI>({
   imageSrc: { type: String, required: true },
@@ -24,16 +53,20 @@ const Tidbit: mongoose.Model<TidbitI, {}, {}> = mongoose.models.Tidbit
   || mongoose.model<TidbitI>('Tidbit', TidbitSchema);
 
 
-function sanitizeTidbit(tidbit: Document<any, any, TidbitI> & TidbitI): TidbitI {
-  const tidbitCopy = tidbit.toObject();
-  delete tidbitCopy._id;
-
-  tidbitCopy.items.forEach((item) => {
-    delete item._id;
-  });
-  delete tidbitCopy.views;
-
-  return tidbitCopy;
+function sanitizeTidbit(tidbit: Document<any, any, TidbitI> & TidbitI): API_TidbitI {
+  return {
+    tidbitId: tidbit.tidbitId,
+    title: tidbit.title,
+    textColor: tidbit.textColor,
+    backgroundColor: tidbit.backgroundColor,
+    createdDate: tidbit.createdDate,
+    items: tidbit.items.map((item) => ({
+      imageSrc: item.imageSrc,
+      language: item.language,
+      codeSnippets: item.codeSnippets,
+    })),
+  }
+  
 }
 
 export default Tidbit;

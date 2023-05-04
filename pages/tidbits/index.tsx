@@ -3,11 +3,11 @@ import { TidbitGallery } from '~/tidbits';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
-import { TidbitI } from '~/../shared/types/tidbit.types';
+import { API_TidbitI } from '~/../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 
-const TidbitGalleryPage = ({ tidbits }: {tidbits: TidbitI[]}) => {
+const TidbitGalleryPage = ({ tidbits }: {tidbits: API_TidbitI[]}) => {
   const { t, lang } = useTranslation('common');
   return (
     <>
@@ -27,7 +27,7 @@ const TidbitGalleryPage = ({ tidbits }: {tidbits: TidbitI[]}) => {
 // We don't want this to be a `getStaticProps` because we don't
 // trigger a rebuild when this DB collection changes.
 export async function getServerSideProps() {
-  const tidbits: TidbitI[] = await TidbitService.getAll(['title', 'backgroundColor', 'tidbitId', 'items[0].imageSrc']);
+  const tidbits: API_TidbitI[] = await TidbitService.getAll(['title', 'backgroundColor', 'tidbitId', 'items[0].imageSrc']);
 
   return {
     props: {

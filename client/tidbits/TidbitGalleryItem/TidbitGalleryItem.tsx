@@ -1,12 +1,12 @@
 import React from 'react';
 import Link from '~/components/generic/Link';
 import BaseTidbitItem from '../BaseTidbitItem';
-import { TidbitI } from '~/../shared/types/tidbit.types';
+import { API_TidbitI } from '~/../shared/types/tidbit.types';
 
 import styles from './TidbitGalleryItem.module.scss';
 
 interface Props {
-  tidbit: Pick<TidbitI, 'tidbitId' | 'backgroundColor' | 'items' | 'title'>;
+  tidbit: Pick<API_TidbitI, 'tidbitId' | 'backgroundColor' | 'items' | 'title'>;
   itemIndex: number;
   active?: boolean;
   borderColor?: string;

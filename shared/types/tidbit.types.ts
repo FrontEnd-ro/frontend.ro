@@ -1,9 +1,5 @@
-import { Types } from 'mongoose';
-
-export interface TidbitI {
-  // Mongo generated
-  _id?: Types.ObjectId;
-
+// Response of the Tidbit APIs
+export interface API_TidbitI {
   // Human readable (eg: "html-images")
   tidbitId: string;
 
@@ -13,19 +9,14 @@ export interface TidbitI {
 
   backgroundColor: string;
 
-  items: TidbitItemI[];
+  items: API_TidbitItemI[];
 
   description?: string;
 
   createdDate?: Date;
-
-  views: number;
 }
 
-export interface TidbitItemI {
-  // Mongo generated
-  _id?: Types.ObjectId;
-
+export interface API_TidbitItemI {
   imageSrc: string;
   language?: string;
   codeSnippets?: string[];

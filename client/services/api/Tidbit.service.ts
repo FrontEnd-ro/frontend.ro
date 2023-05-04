@@ -1,5 +1,5 @@
 import HttpService from './Http.service';
-import { TidbitI } from '~/../shared/types/tidbit.types';
+import { API_TidbitI } from '~/../shared/types/tidbit.types';
 
 class TidbitService {
   static getAll(fields: string[] = []) {
@@ -18,8 +18,8 @@ class TidbitService {
   }
 
   static getPreviousAndNextTidbit(currentTidbitId: string): Promise<{
-    previous: TidbitI;
-    next: TidbitI;
+    previous: API_TidbitI;
+    next: API_TidbitI;
   }> {
     return HttpService.get(
       `${process.env.ENDPOINT}/tidbits/${currentTidbitId}/sides`,

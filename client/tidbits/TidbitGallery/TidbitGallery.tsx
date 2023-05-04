@@ -1,12 +1,12 @@
 import React from 'react';
 import PageContainer from '~/components/PageContainer';
-import { TidbitI } from '~/../shared/types/tidbit.types';
+import { API_TidbitI } from '~/../shared/types/tidbit.types';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 import TidbitGalleryItem from '../TidbitGalleryItem/TidbitGalleryItem';
 
 import styles from './TidbitGallery.module.scss';
 
-const TidbitGallery = ({ tidbits }: {tidbits: Pick<TidbitI, 'tidbitId' | 'backgroundColor' | 'items' | 'title'>[]}) => {
+const TidbitGallery = ({ tidbits }: {tidbits: Pick<API_TidbitI, 'tidbitId' | 'backgroundColor' | 'items' | 'title'>[]}) => {
   const { t } = useTranslation('common');
   return (
     <PageContainer className={styles.TidbitGallery}>

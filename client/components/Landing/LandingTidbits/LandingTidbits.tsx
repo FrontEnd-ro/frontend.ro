@@ -7,7 +7,7 @@ import Button from '~/components/Button';
 import Link from '~/components/generic/Link';
 import SVGArrow from '../../SVGArrow/SVGArrow';
 import StackedImages from '~/components/StackedImages';
-import { TidbitI } from '~/../shared/types/tidbit.types';
+import { API_TidbitI } from '~/../shared/types/tidbit.types';
 import { Trans } from '~/services/typesafeNextTranslate';
 
 import styles from './LandingTidbits.module.scss';
@@ -15,7 +15,7 @@ import styles from './LandingTidbits.module.scss';
 // We're specifically picking the fields we need for this component,
 // as a "documentation" for the Query Param that needs to be sent
 // to the Tidbits API.
-const LandingTidbits = ({ tidbits }: { tidbits: Pick<TidbitI, 'title' | 'items' | 'textColor' | 'backgroundColor' | 'tidbitId'>[] }) => {
+const LandingTidbits = ({ tidbits }: { tidbits: Pick<API_TidbitI, 'title' | 'items' | 'textColor' | 'backgroundColor' | 'tidbitId'>[] }) => {
   const { ref, inView } = useInView({
     threshold: 0.4,
     triggerOnce: false,

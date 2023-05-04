@@ -1,10 +1,10 @@
 import React from 'react';
 import NotFoundPage from '~/components/NotFound/NotFound';
-import { TidbitI } from '../../../shared/types/tidbit.types';
+import { API_TidbitI } from '../../../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
 
 interface Props {
-  tidbit: TidbitI;
+  tidbit: API_TidbitI;
 }
 
 const TidbitPage = ({ tidbit }: Props) => {

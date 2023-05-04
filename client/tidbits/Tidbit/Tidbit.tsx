@@ -6,7 +6,7 @@ import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-r
 import Link from '~/components/generic/Link';
 import { useKeyDown } from '~/services/Hooks';
 import BaseTidbitItem from '../BaseTidbitItem';
-import { TidbitI } from '~/../shared/types/tidbit.types';
+import { API_TidbitI } from '~/../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 import Highlight, { Language } from '~/components/Highlight/Highlight';
@@ -16,14 +16,14 @@ import styles from './Tidbit.module.scss';
 
 interface Props {
   index: number;
-  tidbit: TidbitI;
+  tidbit: API_TidbitI;
 }
 
 const Tidbit = ({ tidbit, index }: Props) => {
   const router = useRouter();
   const { t } = useTranslation('common');
-  const [nextTidbit, setNextTidbit] = useState<TidbitI>(null);
-  const [previousTidbit, setPreviousTidbit] = useState<TidbitI>(null);
+  const [nextTidbit, setNextTidbit] = useState<API_TidbitI>(null);
+  const [previousTidbit, setPreviousTidbit] = useState<API_TidbitI>(null);
 
   const currentItem = tidbit.items[index];
 
@@ -146,7 +146,7 @@ const Tidbit = ({ tidbit, index }: Props) => {
   );
 };
 
-const PrevTidbitLink = ({ previousTidbit }: { previousTidbit: TidbitI }) => (
+const PrevTidbitLink = ({ previousTidbit }: { previousTidbit: API_TidbitI }) => (
   <Link
     prefetch={false}
     href={`/tidbits/${previousTidbit.tidbitId}/${previousTidbit.items.length}`}
@@ -168,7 +168,7 @@ const PrevTidbitLink = ({ previousTidbit }: { previousTidbit: TidbitI }) => (
   </Link>
 );
 
-const NextTidbitLink = ({ nextTidbit }: { nextTidbit: TidbitI }) => (
+const NextTidbitLink = ({ nextTidbit }: { nextTidbit: API_TidbitI }) => (
   <Link
     prefetch={false}
     href={`/tidbits/${nextTidbit.tidbitId}/1`}

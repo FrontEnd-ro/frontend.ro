@@ -4,11 +4,11 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/NotFound/NotFound';
-import { TidbitI } from '../../../shared/types/tidbit.types';
+import { API_TidbitI } from '../../../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
 
 interface Props {
-  tidbit: TidbitI;
+  tidbit: API_TidbitI;
   tidbitIndex: number;
 }
 
@@ -48,7 +48,7 @@ export async function getServerSideProps({ res, params }) {
   // Tidbit index starts from 1
   const { tidbitId, tidbitIndex } = params;
 
-  let tidbit: TidbitI | null = null;
+  let tidbit: API_TidbitI | null = null;
   try {
     tidbit = await TidbitService.getById(tidbitId);
     if (tidbitIndex - 1 < 0 || tidbitIndex - 1 >= tidbit.items.length) {

@@ -172,7 +172,7 @@ class UserModel {
   }
 
   // Sanitizes the user based on who wants to look at this entity
-  static sanitize(user: mongoose.Document<any, any, UserI> & UserI, sanitizeRole: SanitizeRole): API_UserI {
+  static sanitize(user: UserI, sanitizeRole: SanitizeRole): API_UserI {
     switch (sanitizeRole) {
       case SanitizeRole.SELF:
       case SanitizeRole.ADMIN:

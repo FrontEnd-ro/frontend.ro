@@ -1,11 +1,13 @@
 import mongoose, { Types } from 'mongoose';
+import { SanitizeRole } from '../../ServerUtils';
 import { UserI } from '../../../shared/types/user.types';
-import { ChallengeI, ChallengeTaskI } from '../../../shared/types/challenge.types';
+import { ChallengeI } from '../../../shared/types/challenge.types';
 import FolderStructure from '../../../shared/utils/FolderStructure';
 import UserModel from '../../user/user.model';
+import { API_ChallengeSubmissionI } from '../../../shared/types/challengeSubmissions.types';
 
 // This collection has a unique composed key <UserId, ChallengeId>.
-export interface ChallengeSubmissionI extends Omit<ChallengeI, 'tasks'> {
+export interface ChallengeSubmissionI {
   _id?: Types.ObjectId;
 
   // Unique, human-readable ID.
@@ -40,7 +42,9 @@ export interface VerificationStatus {
   };
 }
 
-export interface ChallengeSubmissionTaskI extends ChallengeTaskI {
+export interface ChallengeSubmissionTaskI {
+  _id: Types.ObjectId;
+
   // Unique, human-readable ID.
   // This is used when routing in the UI.
   taskId: string;
@@ -91,28 +95,6 @@ const ChallengeSubmissionSchema = new mongoose.Schema<ChallengeSubmissionI>({
 
 const ChallengeSubmission: mongoose.Model<ChallengeSubmissionI, {}, {}> = mongoose.models.ChallengeSubmission || mongoose.model('ChallengeSubmission', ChallengeSubmissionSchema);
 
-const sanitize = (challengeSubmission: ChallengeSubmissionI) :  ChallengeSubmissionI => {
-  let sanitizedChallengeSubmission = { ...challengeSubmission };
-  if (challengeSubmission instanceof mongoose.Document) {
-    sanitizedChallengeSubmission = { ...challengeSubmission.toObject() };
-  }
-
-  if (typeof sanitizedChallengeSubmission.user !== 'string') {
-    // @ts-ignore
-    sanitizedChallengeSubmission.user = UserModel.sanitize(sanitizedChallengeSubmission.user);
-  }
-
-  const propsToDelete = ['_id'];
-  propsToDelete.forEach((prop) => delete sanitizedChallengeSubmission[prop]);
-
-  sanitizedChallengeSubmission.tasks.forEach(task => {
-    delete task._id;
-    delete task.status?._id;
-  });
-
-  return sanitizedChallengeSubmission;
-}
-
 // This function is used to create an initial ChallengeSubmission object
 // starting from the Challenge definition.
 const mapFromChallenge = (challenge: ChallengeI, user: UserI): ChallengeSubmissionI => {
@@ -149,7 +131,10 @@ const mapFromChallenge = (challenge: ChallengeI, user: UserI): ChallengeSubmissi
 // just the ones we save in the DB. Keep in mind, in the DB we only save
 // the user code, so to get the full context we need to merge this with the Challenge
 // definition.
-const mergeChallengeSubmission = (challengeSubmission: ChallengeSubmissionI, challenge: ChallengeI) : ChallengeSubmissionI => {
+const mergeChallengeSubmission = (
+  challengeSubmission: Omit<ChallengeSubmissionI, 'user'> & { user: UserI },
+  challenge: ChallengeI
+) : API_ChallengeSubmissionI => {
   if (challengeSubmission instanceof mongoose.Document) {
     challengeSubmission = challengeSubmission.toObject();
   }
@@ -159,8 +144,12 @@ const mergeChallengeSubmission = (challengeSubmission: ChallengeSubmissionI, cha
   }
 
   return {
-    ...challenge,
-    user: challengeSubmission.user,
+    challengeId: challenge.challengeId,
+    title: challenge.title,
+    introExplainer: challenge.introExplainer !== undefined
+       ? { title: challenge.introExplainer.title, markdown: challenge.introExplainer.markdown }
+       : undefined,
+    user: UserModel.sanitize(challengeSubmission.user, SanitizeRole.SELF),
     tasks: challenge.tasks.map((task) => {
       const submissionTask = challengeSubmission.tasks.find(t => t.taskId === task.taskId);
 
@@ -170,7 +159,9 @@ const mergeChallengeSubmission = (challengeSubmission: ChallengeSubmissionI, cha
         explainer: task.explainer,
         filesThatCanBeEdited: task.filesThatCanBeEdited,
         startingCode: task.startingCode,
-        status: submissionTask.status,
+        status: submissionTask.status !== undefined
+          ? { valid: submissionTask.status.valid, error: submissionTask.status.error }
+          : undefined,
         codeForFilesThatCanBeEdited: submissionTask.codeForFilesThatCanBeEdited,
         solution: task.solution,
         startingFile: task.startingFile,
@@ -179,4 +170,4 @@ const mergeChallengeSubmission = (challengeSubmission: ChallengeSubmissionI, cha
   }
 }
 
-export { ChallengeSubmission, sanitize, mapFromChallenge, mergeChallengeSubmission };
+export { ChallengeSubmission, mapFromChallenge, mergeChallengeSubmission };

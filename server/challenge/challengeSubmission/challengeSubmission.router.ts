@@ -7,7 +7,6 @@ import { PrivateMiddleware, PublicMiddleware } from '../../Middlewares';
 import {
   ChallengeSubmission,
   mapFromChallenge,
-  sanitize as sanitizeChallengeSubmission,
   mergeChallengeSubmission
 } from './challengeSubmission.model';
 import FolderStructure from '../../../shared/utils/FolderStructure';
@@ -42,13 +41,14 @@ challengeSubmissionRouter.get('/:challengeId', [
       return;
     }
 
-    const challengeSubmission = await ChallengeSubmission.findOne({ challengeId, user: user._id.toString() });
+    const challengeSubmission = await ChallengeSubmission
+      .findOne({ challengeId, user: user._id.toString() })
+      .populate<{ user: UserI }>('user');
     if (challengeSubmission === null) {
       console.log(`${SPAN} No submission for this user. Returning an empty one on the fly.`);
       res.json(mapFromChallenge(challenge, user));
     } else {
-      challengeSubmission.user = user;
-      res.json(sanitizeChallengeSubmission(mergeChallengeSubmission(challengeSubmission, challenge)));
+      res.json(mergeChallengeSubmission(challengeSubmission, challenge));
     }
   }
 ]);
@@ -85,7 +85,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
       let challengeSubmission = await ChallengeSubmission.findOne({
         challengeId,
         user: user._id.toString()
-      });
+      }).populate<{ user: UserI }>('user');
 
       if (challengeSubmission === null) {
         console.log(`${SPAN} No submission for this user. We'll create one now.`);
@@ -109,7 +109,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
       task.codeForFilesThatCanBeEdited = code;
       await challengeSubmission.save();
 
-      res.json(sanitizeChallengeSubmission(mergeChallengeSubmission(challengeSubmission, challenge)));
+      res.json(mergeChallengeSubmission(challengeSubmission, challenge));
     } catch (err) {
       new ServerError(500, 'generic.500', { challengeId, taskId }).send(res);
     }
@@ -134,7 +134,7 @@ challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
       let challengeSubmission = await ChallengeSubmission.findOne({
         challengeId,
         user: user._id.toString()
-      });
+      }).populate<{ user: UserI }>('user');
 
       if (challengeSubmission === null) {
         console.log(`${SPAN} No submission for this user. We'll create one now.`);
@@ -165,7 +165,7 @@ challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
 
       await challengeSubmission.save();
 
-      res.json(sanitizeChallengeSubmission(mergeChallengeSubmission(challengeSubmission, challenge)));
+      res.json(mergeChallengeSubmission(challengeSubmission, challenge));
 
       try {
         maybeCreateCertification(challengeId, user._id.toString());
@@ -186,9 +186,9 @@ async function createNewSubmission(challenge: ChallengeI, user: UserI) {
   challengeSubmission.user = user?._id;
 
   const challengeSubmissionDoc = await new ChallengeSubmission(challengeSubmission);
-  await challengeSubmissionDoc.save();
+  const savedChallengeSubmission = await challengeSubmissionDoc.save();
 
-  return challengeSubmissionDoc;
+  return savedChallengeSubmission.populate<{user: UserI}>('user')
 }
 
 export default challengeSubmissionRouter;

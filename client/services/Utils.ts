@@ -1,5 +1,5 @@
 import SweetAlertService from './sweet-alert/SweetAlert.service';
-import { API_TutorialI, API_TutorialProgressI, TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { API_TutorialI, API_TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 export { uuid, alphabeticSortComparator } from '~/../shared/utils/utils.shared';
 

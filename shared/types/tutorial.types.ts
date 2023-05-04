@@ -43,36 +43,6 @@ export interface API_TutorialI {
   lessons: LessonI[]
 }
 
-export interface TutorialProgressI {
-  // Unique, human-readable ID.
-  // This is used when Routing in the UI.
-  tutorialId: string;
-
-  // Displayed in the UI
-  name: string;
-
-  lessons: {
-    // Lesson ID
-    _id?: Types.ObjectId;
-
-    lessonId: string;
-
-    // A student can start solving a lesson only if
-    // he/she sent solutions to all the previous exercises.
-    locked: boolean;
-
-    // By splitting into these 3 metrics, we can compute
-    // completion percentages, which we'll show in the UI.
-    progress: {
-      done: number;
-      inProgress: number;
-      total: number;
-    }
-  }[];
-
-  certification: Types.ObjectId | null;
-}
-
 export interface API_TutorialProgressI {
   tutorialId: string;
   name: string;

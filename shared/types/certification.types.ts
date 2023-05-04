@@ -1,7 +1,5 @@
 import { ObjectId, Types } from 'mongoose';
-import { ChallengeI } from './challenge.types';
 import { API_LessonExerciseI } from './lesson-exercise.types';
-import { API_TutorialI } from './tutorial.types';
 import { API_UserI } from './user.types';
 
 export interface CertificationI {
@@ -35,8 +33,14 @@ export interface CertificationI {
 
 export interface API_CertificationI {
   _id?: string;
-  tutorial: API_TutorialI;
-  challenge: ChallengeI;
+  tutorial?: {
+    name: string;
+    tutorialId: string;
+  };
+  challenge?: {
+    title: string;
+    challengeId: string;
+  };
   user: API_UserI;
   timestamp: number;
   lesson_exercises: API_LessonExerciseI[];

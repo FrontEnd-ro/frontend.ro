@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import HttpService from './Http.service';
 import FolderStructure from '../../../shared/utils/FolderStructure';
-import { ChallengeI, TypeDefinition } from '~/../shared/types/challenge.types';
+import { API_ChallengeI, TypeDefinition } from '~/../shared/types/challenge.types';
 
 // Sent to the iframe that contains the running Challenge/Exercise
 // if we're verifying a Challenge that has live-preview.
@@ -61,8 +61,8 @@ export interface VerificationStatus {
   };
 }
 class ChallengeService {
-  static async get(challengeId: string): Promise<ChallengeI> {
-    const challenge: ChallengeI = await HttpService
+  static async get(challengeId: string): Promise<API_ChallengeI> {
+    const challenge: API_ChallengeI = await HttpService
       .get(`${process.env.ENDPOINT}/challenges/${challengeId}`)
       .then((resp) => resp.json());
 

@@ -3,30 +3,36 @@ import Challenge from './challenge.model';
 import { PublicMiddleware } from '../Middlewares';
 import { ServerError } from '../utils/ServerError';
 import express, { Request, Response } from 'express';
-import { ChallengeI } from '../../shared/types/challenge.types';
+import {
+  API_ChallengeI,
+  API_ChallengeTaskI,
+  ChallengeI,
+  ChallengeTaskI,
+  TypeDefinition
+} from '../../shared/types/challenge.types';
 
 const challengeRouter = express.Router();
 
 challengeRouter.get('/:challengeId', [
   PublicMiddleware,
-  async function getChallenge(req: Request, res: Response) {
+  async function getChallenge(req: Request<{ challengeId: string; }>, res: Response<API_ChallengeI>) {
     const { challengeId } = req.params;
-    const challenge: ChallengeI = await Challenge.findOne({ challengeId });
+    const challenge = await Challenge.findOne({ challengeId });
 
     if (challenge === null) {
       new ServerError(404, 'generic.404',  { challengeId }).send(res);
       return;
     }
 
-    res.json(challenge);
+    res.json(sanitizeChallenge(challenge));
   }
 ]);
 
 challengeRouter.get('/:challengeId/types', [
   PublicMiddleware,
-  async function getChallengeTypes(req: Request, res: Response) {
+  async function getChallengeTypes(req: Request<{ challengeId: string; }>, res: Response<TypeDefinition>) {
     const { challengeId } = req.params;
-    const challenge: ChallengeI = await Challenge.findOne({ challengeId });
+    const challenge = await Challenge.findOne({ challengeId });
 
     if (challenge === null) {
       new ServerError(404, 'generic.404', { challengeId }).send(res);
@@ -44,9 +50,12 @@ challengeRouter.get('/:challengeId/types', [
 
 challengeRouter.get('/:challengeId/startingCode', [
   PublicMiddleware,
-  async function getStartingCodeForFirstTask(req: Request, res: Response) {
+  async function getStartingCodeForFirstTask(
+    req: Request<{ challengeId: string; }>,
+    res: Response<{ challengeId: string; startingCode: string; }>
+  ) {
     const { challengeId } = req.params;
-    const challenge: ChallengeI = await Challenge.findOne({ challengeId });
+    const challenge = await Challenge.findOne({ challengeId });
 
     if (challenge === null) {
       new ServerError(404, 'generic.404', { challengeId }).send(res);
@@ -59,5 +68,26 @@ challengeRouter.get('/:challengeId/startingCode', [
     });
   }
 ]);
+
+function sanitizeChallenge(challenge: ChallengeI): API_ChallengeI {
+  return {
+    challengeId: challenge.challengeId,
+    title: challenge.title,
+    tasks: challenge.tasks.map(sanitizeChallengeTask),
+    introExplainer: challenge.introExplainer
+  }
+}
+
+function sanitizeChallengeTask(challengeTask: ChallengeTaskI): API_ChallengeTaskI {
+  return {
+    taskId: challengeTask.taskId,
+    explainer: challengeTask.explainer,
+    filesThatCanBeEdited: challengeTask.filesThatCanBeEdited,
+    title: challengeTask.title,
+    solution: challengeTask.solution,
+    startingCode: challengeTask.startingCode,
+    startingFile: challengeTask.startingFile
+  };
+}
 
 export default challengeRouter;

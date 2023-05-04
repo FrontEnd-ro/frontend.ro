@@ -1,7 +1,7 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import { JonDoeUser } from '~/services/Constants';
-import { ChallengeI } from '~/../shared/types/challenge.types';
+import { API_ChallengeI } from '~/../shared/types/challenge.types';
 import Diploma from '~/components/certification/Diploma/Diploma';
 import { API_CertificationI } from '~/../shared/types/certification.types';
 
@@ -14,7 +14,7 @@ const CertificationPanel = ({
   certification,
   className = '',
 }: ConnectedProps<typeof connector> & {
-  challenge: ChallengeI;
+  challenge: API_ChallengeI;
   certification?: API_CertificationI;
   className?: string;
 }) => {

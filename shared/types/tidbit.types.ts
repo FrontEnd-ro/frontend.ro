@@ -1,8 +1,8 @@
-import { ObjectId } from 'mongoose';
+import { Types } from 'mongoose';
 
 export interface TidbitI {
   // Mongo generated
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   // Human readable (eg: "html-images")
   tidbitId: string;
@@ -24,7 +24,7 @@ export interface TidbitI {
 
 export interface TidbitItemI {
   // Mongo generated
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   imageSrc: string;
   language?: string;

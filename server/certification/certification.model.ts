@@ -1,4 +1,4 @@
-import mongoose, { Document, ObjectId } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
 
 import appConfig from '../config';
 import { SanitizeRole } from '../ServerUtils';
@@ -56,7 +56,7 @@ function sanitizeCertification(certification: Document<any, any, WIPPopulatedCer
  */
 async function createCertification(
   userId: string,
-  tutorial_id: ObjectId,
+  tutorial_id: Types.ObjectId,
   dryRun = false
 ): Promise<mongoose.Document<any, any, CertificationI> & CertificationI> {
   const SPAN = `[createCertification, userId=${userId}, tutorial_id=${tutorial_id}, dryRun=${dryRun}]`;

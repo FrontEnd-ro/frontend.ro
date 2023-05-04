@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
 import { LessonI } from "./lesson.types";
 import { WIPPopulatedCertificationI } from "./certification.types";
 
@@ -9,7 +9,7 @@ import { WIPPopulatedCertificationI } from "./certification.types";
  * will receive a Certification.
  */
 export interface TutorialI {
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   // Unique, human-readable ID.
   // This is used when Routing in the UI.
@@ -25,7 +25,7 @@ export interface TutorialI {
 }
 
 export interface WIPPopulatedTutorialI {
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   // Unique, human-readable ID.
   // This is used when Routing in the UI.
@@ -47,7 +47,7 @@ export interface TutorialProgressI {
 
   lessons: {
     // Lesson ID
-    _id?: ObjectId;
+    _id?: Types.ObjectId;
 
     lessonId: string;
 

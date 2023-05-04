@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
 import { UserI, API_UserI } from "./user.types";
 import { WIPPopulatedLessonExerciseI, WIPSanitizedLessonExercise } from "./exercise.types";
 
@@ -19,15 +19,15 @@ export interface FeedbackI {
 }
 
 export interface SubmissionI {
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   code: string;
 
-  user: ObjectId;
+  user: Types.ObjectId;
 
-  assignee: ObjectId;
+  assignee: Types.ObjectId;
 
-  exercise: ObjectId;
+  exercise: Types.ObjectId;
 
   status: SubmissionStatus;
 
@@ -39,7 +39,7 @@ export interface SubmissionI {
 }
 
 export interface WIPPopulatedSubmissionI {
-  _id: ObjectId;
+  _id: Types.ObjectId;
 
   code: string;
 

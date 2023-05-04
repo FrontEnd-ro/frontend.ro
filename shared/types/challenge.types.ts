@@ -1,7 +1,7 @@
-import { ObjectId } from 'mongoose';
+import { Types } from 'mongoose';
 
 export interface ChallengeI {
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   // Unique, human-readable ID.
   // This is used when Routing in the UI.
@@ -22,7 +22,7 @@ export interface ChallengeI {
 }
 
 export interface ChallengeTaskI {
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   // Unique, human-readable ID.
   // This is used when routing in the UI.

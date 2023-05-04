@@ -1,10 +1,10 @@
-import { ObjectId, PopulatedDoc } from 'mongoose';
+import { Types, PopulatedDoc } from 'mongoose';
 import { UserI } from './user.types';
 import { ChallengeI, ChallengeTaskI } from './challenge.types';
 
 // This collection has a unique composed key <UserId, ChallengeId>.
 export interface ChallengeSubmissionI extends Omit<ChallengeI, 'tasks'> {
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   // Unique, human-readable ID.
   // This is used when Routing in the UI.
@@ -35,7 +35,7 @@ export interface ChallengeSubmissionTaskI extends ChallengeTaskI {
 }
 
 export interface VerificationStatus {
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   valid: boolean;
   // In case verification failed, we're populating

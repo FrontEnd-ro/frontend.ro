@@ -1,4 +1,4 @@
-import { PopulatedDoc, Document, ObjectId } from 'mongoose';
+import { PopulatedDoc, ObjectId, Types } from 'mongoose';
 import { ChallengeI } from './challenge.types';
 import { LessonExerciseI, WIPPopulatedLessonExerciseI } from './exercise.types';
 import { TutorialI } from './tutorial.types';
@@ -7,7 +7,7 @@ import { API_UserI, UserI } from './user.types';
 export interface CertificationI {
   // Optional because when we create certifications
   // we don't know what ID will MongoDB use
-  _id?: string;
+  _id?: Types.ObjectId;
 
   tutorial: ObjectId;
 

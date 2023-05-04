@@ -1,7 +1,7 @@
-import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
 
 export interface LessonI {
-  _id?: ObjectId;
+  _id?: Types.ObjectId;
 
   lessonId: string;
 

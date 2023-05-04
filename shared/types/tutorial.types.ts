@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { LessonI } from "./lesson.types";
-import { API_CertificationI, WIPPopulatedCertificationI } from "./certification.types";
+import { API_CertificationI } from "./certification.types";
 
 /**
  * The Tutorial entity is at the center of our platform.
@@ -70,7 +70,7 @@ export interface TutorialProgressI {
     }
   }[];
 
-  certification: WIPPopulatedCertificationI | null;
+  certification: Types.ObjectId | null;
 }
 
 export interface API_TutorialProgressI {

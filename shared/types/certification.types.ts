@@ -1,7 +1,7 @@
 import { ObjectId, Types } from 'mongoose';
 import { ChallengeI } from './challenge.types';
-import { API_LessonExerciseI, WIPPopulatedLessonExerciseI } from './lesson-exercise.types';
-import { API_TutorialI, TutorialI } from './tutorial.types';
+import { API_LessonExerciseI } from './lesson-exercise.types';
+import { API_TutorialI } from './tutorial.types';
 import { API_UserI } from './user.types';
 
 export interface CertificationI {
@@ -26,30 +26,6 @@ export interface CertificationI {
   // UUIDs of Lesson Exercises
   // eslint-disable-next-line camelcase
   lesson_exercises: Types.ObjectId[];
-
-  // eslint-disable-next-line camelcase
-  og_image?: string;
-
-  pdf?: string;
-}
-
-// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
-export interface WIPPopulatedCertificationI {
-  // TODO: what is the correct way of defining IDs?
-  // https://github.com/FrontEnd-ro/frontend.ro/issues/442
-  _id?: string;
-
-  tutorial: TutorialI;
-
-  challenge: ChallengeI;
-
-  user: API_UserI;
-
-  // Nanos
-  timestamp: number;
-
-  // eslint-disable-next-line camelcase
-  lesson_exercises: WIPPopulatedLessonExerciseI[];
 
   // eslint-disable-next-line camelcase
   og_image?: string;

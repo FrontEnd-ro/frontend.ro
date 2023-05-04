@@ -7,10 +7,8 @@ import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { Certification, sanitizeCertification } from '../certification/certification.model';
-import { TutorialI, TutorialProgressI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
-import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
-import { WIPPopulatedCertificationI } from '../../shared/types/certification.types';
-import { Document } from 'mongoose';
+import { API_TutorialProgressI, TutorialI, TutorialProgressI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
+import { SubmissionStatus } from '../../shared/types/submission.types';
 import SubmissionModel from '../submission/submission.model';
 
 const tutorialRouter = express.Router();
@@ -86,7 +84,7 @@ tutorialRouter.get('/:tutorialId/progress', [
       return;
     }
 
-    const progress: TutorialProgressI = {
+    const progress: API_TutorialProgressI = {
       tutorialId: tutorial.tutorialId,
       name: tutorial.name,
       lessons: tutorial.lessons.map((lesson) => ({

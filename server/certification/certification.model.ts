@@ -10,7 +10,7 @@ import SubmissionModel from '../submission/submission.model';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
-import { CertificationI, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
+import { API_CertificationI, CertificationI } from '../../shared/types/certification.types';
 import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
 
 const CertificationSchema = new mongoose.Schema<CertificationI>({
@@ -28,9 +28,9 @@ const CertificationSchema = new mongoose.Schema<CertificationI>({
 const Certification: mongoose.Model<CertificationI, {}, {}> = mongoose.models.Certification
   || mongoose.model<CertificationI>('Certification', CertificationSchema);
 
-function sanitizeCertification(certification: Document<any, any, WIPPopulatedCertificationI>) {
+function sanitizeCertification(certification: Document<any, any, CertificationI>): API_CertificationI {
   // https://github.com/Automattic/mongoose/issues/2790
-  const sanitizedCertfication: WIPPopulatedCertificationI = JSON.parse(JSON.stringify(certification.toObject()));
+  const sanitizedCertfication = JSON.parse(JSON.stringify(certification.toObject()));
 
   if (typeof sanitizedCertfication.user !== 'string') {
     // @ts-ignore

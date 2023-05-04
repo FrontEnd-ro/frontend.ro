@@ -2,12 +2,12 @@ import React from 'react';
 import List from '~/components/List';
 import { ProgressBar } from '~/components/progress';
 import { aggregateTutorialProgress } from '~/services/Utils';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { API_TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 import styles from './TutorialProgress.module.scss';
 
 interface Props {
-  tutorialProgress: TutorialProgressI;
+  tutorialProgress: API_TutorialProgressI;
   title?: string;
   className?: string;
 }

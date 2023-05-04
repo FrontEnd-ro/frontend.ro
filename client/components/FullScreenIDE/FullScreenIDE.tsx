@@ -18,7 +18,7 @@ import { useKeyDown, useResizeObserver } from '~/services/Hooks';
 import Sandpack from '../Sandpack/Sandpack';
 import EditorExplorer from '../Editor/EditorExplorer/EditorExplorer';
 import CertificationPanel from './CertificationPanel/CertificationPanel';
-import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
+import { API_CertificationI } from '~/../shared/types/certification.types';
 import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.service';
 import FolderStructure, { toSandPackFiles, useFolderStructure } from '~/../shared/utils/FolderStructure';
 import { useTypeDefinitions, withAutomaticVerification } from '~/services/api/Challenge.service';
@@ -56,7 +56,7 @@ const _FullScreenIDE = ({
   challengeSubmission: ChallengeSubmissionI;
   onChallengeSubmit: (task: ChallengeSubmissionI) => void;
   fileNamesToIgnoreFromExplorer?: string[];
-  certification?: WIPPopulatedCertificationI;
+  certification?: API_CertificationI;
 }) => {
   const EXPLORER_WIDTH = { min: 100, initial: '15vw' };
   const EDITOR_WIDTH = { min: 100, initial: '50vw' };

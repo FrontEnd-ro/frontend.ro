@@ -2,10 +2,10 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import ProgressLink from '~/components/ProgressLink';
 import {
+  API_SubmissionI,
   FeedbackType,
   SubmissionStatus,
   SubmissionVersionI,
-  WIPSanitiedSubmission,
 } from '~/../shared/types/submission.types';
 import Link from '~/components/generic/Link';
 import ExerciseVersionHistory from '../../ExerciseVersionHistory';
@@ -13,7 +13,7 @@ import ExerciseVersionHistory from '../../ExerciseVersionHistory';
 import styles from './AsideNav.module.scss';
 
 interface Props {
-  submissions: Pick<WIPSanitiedSubmission, 'status' | 'exercise' | 'feedbacks'>[];
+  submissions: Pick<API_SubmissionI, 'status' | 'exercise' | 'feedbacks'>[];
   versions: SubmissionVersionI[];
   currentExerciseId?: string;
   lessonHref?: string;

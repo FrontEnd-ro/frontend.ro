@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { UserI, API_UserI } from "./user.types";
-import { WIPPopulatedLessonExerciseI, WIPSanitizedLessonExercise } from "./lesson-exercise.types";
+import { API_LessonExerciseI, WIPPopulatedLessonExerciseI, WIPSanitizedLessonExercise } from "./lesson-exercise.types";
 
 export enum FeedbackType {
   PRAISE = 'praise',
@@ -67,6 +67,16 @@ export type WIPSanitiedSubmission = Pick<WIPPopulatedSubmissionI, 'code' | 'stat
   exercise: WIPSanitizedLessonExercise;
 
   assigneed: API_UserI;
+}
+
+export type API_SubmissionI = {
+  _id: string;
+  code: string;
+  user: API_UserI;
+  exercise: API_LessonExerciseI;
+  assignee: API_UserI;
+  status: SubmissionStatus;
+  feedbacks: FeedbackI[];
 }
 
 export interface SubmissionVersionI {

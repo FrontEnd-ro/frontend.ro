@@ -1,8 +1,8 @@
-import { PopulatedDoc, ObjectId, Types } from 'mongoose';
+import { ObjectId, Types } from 'mongoose';
 import { ChallengeI } from './challenge.types';
-import { LessonExerciseI, WIPPopulatedLessonExerciseI } from './lesson-exercise.types';
-import { TutorialI } from './tutorial.types';
-import { API_UserI, UserI } from './user.types';
+import { API_LessonExerciseI, WIPPopulatedLessonExerciseI } from './lesson-exercise.types';
+import { API_TutorialI, TutorialI } from './tutorial.types';
+import { API_UserI } from './user.types';
 
 export interface CertificationI {
   // Optional because when we create certifications
@@ -18,14 +18,14 @@ export interface CertificationI {
   challenge: ObjectId;
 
   // UUID of the user that got the certification
-  user: PopulatedDoc<UserI>;
+  user: Types.ObjectId;
 
   // Nanos
   timestamp: number;
 
   // UUIDs of Lesson Exercises
   // eslint-disable-next-line camelcase
-  lesson_exercises: PopulatedDoc<LessonExerciseI>[];
+  lesson_exercises: Types.ObjectId[];
 
   // eslint-disable-next-line camelcase
   og_image?: string;
@@ -54,5 +54,16 @@ export interface WIPPopulatedCertificationI {
   // eslint-disable-next-line camelcase
   og_image?: string;
 
+  pdf?: string;
+}
+
+export interface API_CertificationI {
+  _id?: string;
+  tutorial: API_TutorialI;
+  challenge: ChallengeI;
+  user: API_UserI;
+  timestamp: number;
+  lesson_exercises: API_LessonExerciseI[];
+  og_image?: string;
   pdf?: string;
 }

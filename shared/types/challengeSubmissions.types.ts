@@ -1,5 +1,4 @@
-import { Types, PopulatedDoc } from 'mongoose';
-import { UserI } from './user.types';
+import { Types } from 'mongoose';
 import { ChallengeI, ChallengeTaskI } from './challenge.types';
 
 // This collection has a unique composed key <UserId, ChallengeId>.
@@ -11,7 +10,7 @@ export interface ChallengeSubmissionI extends Omit<ChallengeI, 'tasks'> {
   challengeId: string;
 
   // The user that submitten this solution
-  user: PopulatedDoc<UserI>;
+  user: Types.ObjectId;
 
   tasks: ChallengeSubmissionTaskI[];
 }

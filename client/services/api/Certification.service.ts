@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import HttpService from './Http.service';
-import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
+import { API_CertificationI } from '~/../shared/types/certification.types';
 
 class CertificationService {
   static async getById(
     challengeId: string,
-  ): Promise<WIPPopulatedCertificationI> {
-    const challenge: WIPPopulatedCertificationI = await HttpService.get(
+  ): Promise<API_CertificationI> {
+    const challenge: API_CertificationI = await HttpService.get(
       `${process.env.ENDPOINT}/certifications/${challengeId}`,
     ).then((resp) => resp.json());
 
@@ -15,8 +15,8 @@ class CertificationService {
 
   static async getByChallenge(
     challengeId: string,
-  ): Promise<WIPPopulatedCertificationI> {
-    const challenge: WIPPopulatedCertificationI = await HttpService.get(
+  ): Promise<API_CertificationI> {
+    const challenge: API_CertificationI = await HttpService.get(
       `${process.env.ENDPOINT}/certifications/challenge/${challengeId}`,
     ).then((resp) => resp.json());
 
@@ -32,7 +32,7 @@ export const useCertification = ({
   isLoggedIn: boolean;
 }) => {
   const SPAN = `[useCertification, challengeId=${challengeId}]`;
-  const [certification, setCertification] = useState<WIPPopulatedCertificationI>(undefined);
+  const [certification, setCertification] = useState<API_CertificationI>(undefined);
 
   const fetchCertificationByChallenge = async () => {
     try {

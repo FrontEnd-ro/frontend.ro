@@ -1,11 +1,11 @@
 import { Submission } from '../exercise-submissions/types';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { API_TutorialProgressI } from '~/../shared/types/tutorial.types';
 import { SUBMISSION_ACTION_TYPES, TUTORIAL_ACTION_TYPES } from './progress.actions';
 
 type TutorialId = string;
 
 export interface ProgressState {
-  tutorials: Record<TutorialId, TutorialProgressI>;
+  tutorials: Record<TutorialId, API_TutorialProgressI>;
   submissions: Record<TutorialId, Submission[]>;
 }
 
@@ -19,7 +19,7 @@ export const progressReducer = (state = initialState, action: { type: string; pa
 : ProgressState => {
   switch (action.type) {
     case TUTORIAL_ACTION_TYPES.LOAD: {
-      const { payload }: { payload: TutorialProgressI } = action;
+      const { payload }: { payload: API_TutorialProgressI } = action;
       return {
         ...state,
         tutorials: {

@@ -1,5 +1,5 @@
 import SweetAlertService from './sweet-alert/SweetAlert.service';
-import { TutorialProgressI, WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
+import { API_TutorialI, API_TutorialProgressI, TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 export { uuid, alphabeticSortComparator } from '~/../shared/utils/utils.shared';
 
@@ -151,7 +151,7 @@ export const copyToClipboard = (text: string) => {
     });
 };
 
-export const aggregateTutorialProgress = (tutorialProgress: TutorialProgressI): {
+export const aggregateTutorialProgress = (tutorialProgress: API_TutorialProgressI): {
   done: number;
   inProgress: number;
   total: number;
@@ -172,8 +172,8 @@ export const aggregateTutorialProgress = (tutorialProgress: TutorialProgressI): 
 };
 
 export const getEmptyTutorialProgress = (
-  tutorialInfo: WIPPopulatedTutorialI,
-): TutorialProgressI => {
+  tutorialInfo: API_TutorialI,
+): API_TutorialProgressI => {
   return {
     tutorialId: tutorialInfo.tutorialId,
     name: tutorialInfo.name,

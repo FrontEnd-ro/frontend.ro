@@ -2,7 +2,7 @@ import React from 'react';
 import ResponsiveFlex from '~/components/ResponsiveFlex';
 import ExercisePreview from '~/components/ExercisePreview';
 import { Submission } from '~/redux/exercise-submissions/types';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { API_TutorialProgressI } from '~/../shared/types/tutorial.types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 import TutorialProgress from '~/components/user-profile/UserActivity/TutorialProgress/TutorialProgress';
 
@@ -10,7 +10,7 @@ import styles from './TutorialDashboard.module.scss';
 
 interface Props {
   submissions: Submission[];
-  tutorialProgress: TutorialProgressI;
+  tutorialProgress: API_TutorialProgressI;
 }
 
 const TutorialDashboard = ({ tutorialProgress, submissions }: Props) => {

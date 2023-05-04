@@ -1,4 +1,4 @@
-import { PopulatedDoc } from 'mongoose';
+import { Types } from 'mongoose';
 import { API_UserI, UserI } from './user.types';
 
 export enum ExerciseType {
@@ -10,10 +10,10 @@ export enum ExerciseType {
 export interface LessonExerciseI {
     // TODO: is this the correct way of defining IDs?
   // https://github.com/FrontEnd-ro/frontend.ro/issues/442
-  _id: string;
+  _id: Types.ObjectId;
 
   // UUID of the user that created it
-  user: PopulatedDoc<UserI>;
+  user: Types.ObjectId;
 
   type: ExerciseType;
 
@@ -37,11 +37,22 @@ export interface LessonExerciseI {
 }
 
 // FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
-export interface WIPPopulatedLessonExerciseI extends LessonExerciseI {
+export type WIPPopulatedLessonExerciseI = Omit<LessonExerciseI, 'user'> & {
   user: UserI;
 }
 
 // FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
 export type WIPSanitizedLessonExercise = Omit<LessonExerciseI, 'user'> & {
   user: API_UserI;
+}
+
+export type API_LessonExerciseI = {
+  _id: string;
+  user: API_UserI;
+  type: ExerciseType;
+  body: string;
+  example?: string;
+  solution: string;
+  suggestion?: string;
+  lesson: string;
 }

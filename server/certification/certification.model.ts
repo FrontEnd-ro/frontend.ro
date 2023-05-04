@@ -124,7 +124,7 @@ async function storeCertificationData(
     .filter(submission => {
       return lessonIds.includes((submission.exercise as unknown as LessonExerciseI).lesson)
     })
-    .map(submission => (submission.exercise as unknown as LessonExerciseI)._id.toString());
+    .map(submission => (submission.exercise as unknown as LessonExerciseI)._id);
 
   if (dryRun === true) {
     console.info(`${SPAN} Skipping persistance.`);

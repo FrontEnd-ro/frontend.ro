@@ -6,11 +6,10 @@ import ExercisePreview from '~/components/ExercisePreview';
 import PageContainer from '~/components/PageContainer';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { RootState } from '~/redux/root.reducer';
-import { UserState } from '~/redux/user/types';
 import NoActivity from '../NoActivity/NoActivity';
-import { SubmissionStatus } from '~/../shared/types/submission.types';
+import { API_SubmissionI, SubmissionStatus } from '~/../shared/types/submission.types';
 import styles from './UserActivity.module.scss';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { API_TutorialProgressI } from '~/../shared/types/tutorial.types';
 import TutorialService from '~/services/api/Tutorial.service';
 import TutorialProgress from './TutorialProgress/TutorialProgress';
 import { aggregateTutorialProgress } from '~/services/Utils';
@@ -18,7 +17,7 @@ import { API_UserI, UserRole } from '~/../shared/types/user.types';
 import Link from '~/components/generic/Link';
 import SubmissionService from '~/services/api/Submission.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
-import { WIPPopulatedLessonExerciseI } from '~/../shared/types/lesson-exercise.types';
+import { API_LessonExerciseI, WIPPopulatedLessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
 interface Props {
   profileUser: API_UserI;
@@ -27,8 +26,8 @@ interface Props {
 function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connector> & Props) {
   const isOwnProfile = currentUser.info && currentUser.info.username === profileUser.username;
   const [didError, setDidError] = useState(false);
-  const [submissions, setSubmissions] = useState<Submission[]>(undefined);
-  const [tutorialsProgress, setTutorialsProgress] = useState<TutorialProgressI[]>(undefined);
+  const [submissions, setSubmissions] = useState<API_SubmissionI[]>(undefined);
+  const [tutorialsProgress, setTutorialsProgress] = useState<API_TutorialProgressI[]>(undefined);
 
   const fetchTutorialsProgress = async () => {
     try {
@@ -124,7 +123,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
         Exerciții rezolvate
       </h2>
       <div className={styles['exercises-wrapper']}>
-        {submissions.map((submission: Submission) => (
+        {submissions.map((submission: API_SubmissionI) => (
           <ExercisePreview
             key={submission._id}
             exercise={submission.exercise}
@@ -154,7 +153,7 @@ function UserActivity({ profileUser, currentUser }: ConnectedProps<typeof connec
 }
 
 const AllExercises = () => {
-  const [createdExercises, setCreatedExercises] = useState<WIPPopulatedLessonExerciseI[]>([]);
+  const [createdExercises, setCreatedExercises] = useState<API_LessonExerciseI[]>([]);
 
   useEffect(() => {
     LessonExerciseService

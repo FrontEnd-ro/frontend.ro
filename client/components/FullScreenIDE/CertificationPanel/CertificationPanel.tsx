@@ -3,7 +3,7 @@ import { RootState } from '~/redux/root.reducer';
 import { JonDoeUser } from '~/services/Constants';
 import { ChallengeI } from '~/../shared/types/challenge.types';
 import Diploma from '~/components/certification/Diploma/Diploma';
-import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
+import { API_CertificationI } from '~/../shared/types/certification.types';
 
 import styles from './CertificationPanel.module.scss';
 
@@ -15,7 +15,7 @@ const CertificationPanel = ({
   className = '',
 }: ConnectedProps<typeof connector> & {
   challenge: ChallengeI;
-  certification?: WIPPopulatedCertificationI;
+  certification?: API_CertificationI;
   className?: string;
 }) => {
   const didFinishTutorial = certification !== undefined;

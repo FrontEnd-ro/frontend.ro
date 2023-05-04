@@ -3,12 +3,12 @@ import List from '~/components/List';
 import Diploma from '../Diploma/Diploma';
 import Link from '~/components/generic/Link';
 import ExercisePreview from '~/components/ExercisePreview';
-import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
+import { API_CertificationI } from '~/../shared/types/certification.types';
 
 import styles from './Certification.module.scss';
 
 interface Props {
-  certification: WIPPopulatedCertificationI;
+  certification: API_CertificationI;
   className?: string;
 }
 

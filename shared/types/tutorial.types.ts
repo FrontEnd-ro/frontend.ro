@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { LessonI } from "./lesson.types";
-import { WIPPopulatedCertificationI } from "./certification.types";
+import { API_CertificationI, WIPPopulatedCertificationI } from "./certification.types";
 
 /**
  * The Tutorial entity is at the center of our platform.
@@ -37,6 +37,12 @@ export interface WIPPopulatedTutorialI {
   lessons: LessonI[]
 }
 
+export interface API_TutorialI {
+  tutorialId: string;
+  name: string;
+  lessons: LessonI[]
+}
+
 export interface TutorialProgressI {
   // Unique, human-readable ID.
   // This is used when Routing in the UI.
@@ -65,4 +71,21 @@ export interface TutorialProgressI {
   }[];
 
   certification: WIPPopulatedCertificationI | null;
+}
+
+export interface API_TutorialProgressI {
+  tutorialId: string;
+  name: string;
+
+  lessons: {
+    lessonId: string;
+    locked: boolean;
+    progress: {
+      done: number;
+      inProgress: number;
+      total: number;
+    }
+  }[];
+
+  certification: API_CertificationI | null;
 }

@@ -1,5 +1,5 @@
 import { Submission } from '../exercise-submissions/types';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { API_TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 const TUTORIAL_LOAD = 'progress/tutorial/LOAD';
 const SUBMISSIONS_LOAD = 'progress/submissions/LOAD';
@@ -12,7 +12,7 @@ export const SUBMISSION_ACTION_TYPES = {
   LOAD: SUBMISSIONS_LOAD,
 };
 
-export const loadTutorial = (tutorial: TutorialProgressI) => ({
+export const loadTutorial = (tutorial: API_TutorialProgressI) => ({
   type: TUTORIAL_LOAD,
   payload: tutorial,
 });

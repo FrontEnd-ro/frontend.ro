@@ -2,12 +2,12 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/redux/root.reducer';
 import TutorialPage from '~/tutorials/TutorialPage';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
-import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
+import { API_TutorialI } from '~/../shared/types/tutorial.types';
 import Certification from '~/components/certification/Certification/Certification';
 import HtmlFakeDiploma from '~/tutorials/html/components/HtmlFakeDiploma/HtmlFakeDiploma';
 
 type Props = {
-  tutorialInfo: WIPPopulatedTutorialI
+  tutorialInfo: API_TutorialI
 } & ConnectedProps<typeof connector>;
 
 const TutorialCertification = ({ tutorialInfo, tutorialProgress }: Props) => {

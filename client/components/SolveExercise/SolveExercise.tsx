@@ -14,10 +14,10 @@ import { withAuthModal } from '~/services/Hooks';
 import PageContainer from '~/components/PageContainer';
 import StatusBanner from './StatusBanner/StatusBanner';
 import SubmissionService from '~/services/api/Submission.service';
-import { LessonExercise } from '~/redux/user/types';
+import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 import { API_UserI } from '~/../shared/types/user.types';
 import {
-  SubmissionStatus, SubmissionVersionI, WIPSanitiedSubmission, FeedbackI,
+  SubmissionStatus, SubmissionVersionI, FeedbackI, API_SubmissionI,
 } from '~/../shared/types/submission.types';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -48,7 +48,7 @@ interface Props {
 interface Submission {
   _id?: string;
   user: API_UserI;
-  exercise: LessonExercise;
+  exercise: API_LessonExerciseI;
   code: string;
   assignee: API_UserI;
   status: SubmissionStatus;
@@ -77,7 +77,7 @@ function SolveExercise({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [autoSaved, setAutoSaved] = useState<AutoSave>(AutoSave.NONE);
   const [submissionList, setSubmissionList] = useState<
-    Pick<WIPSanitiedSubmission, '_id' | 'status' | 'exercise' | 'feedbacks'>[]
+    Pick<API_SubmissionI, '_id' | 'status' | 'exercise' | 'feedbacks'>[]
   >([]);
 
   const activeVersionIndex = versions.findIndex((v) => v._id === RoutingUtils.getQueryString(router, 'version'));

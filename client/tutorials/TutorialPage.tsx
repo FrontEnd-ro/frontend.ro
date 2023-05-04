@@ -10,14 +10,14 @@ import SubmissionService from '~/services/api/Submission.service';
 import { getEmptyTutorialProgress } from '~/services/Utils';
 import TutorialNav from '~/tutorials/TutorialNav/TutorialNav';
 import { loadSubmissions } from '~/redux/progress/progress.actions';
-import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
+import { API_TutorialI } from '~/../shared/types/tutorial.types';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 
 type Props = {
   // Whether this is the root page on a tutorial
   isRootPage: boolean;
 
-  tutorialInfo: WIPPopulatedTutorialI
+  tutorialInfo: API_TutorialI
   children?: ReactNode;
 } & ConnectedProps<typeof connector>;
 

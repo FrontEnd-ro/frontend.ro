@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { PopulatedDoc } from 'mongoose';
+import { Types } from 'mongoose';
 import { UserI } from './user.types';
 
 /** *************************** Notifications */
@@ -26,7 +26,7 @@ export interface NotificationI {
   _id?: string;
 
   // UUID of the user that receives this notification
-  to: PopulatedDoc<UserI>;
+  to: Types.ObjectId;
 
   type: NotificationType;
 
@@ -67,7 +67,7 @@ export interface NotificationI {
 
   // The UUID of a user or undefined if it's an
   // automatically generated one (by the app).
-  from?: PopulatedDoc<UserI>;
+  from?: Types.ObjectId;
 
   // How do we reach the user? In app notifications? Email? Something else?
   channels?: NotificationChannel[];

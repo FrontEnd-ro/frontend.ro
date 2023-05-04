@@ -113,7 +113,7 @@ export async function maybeCreateCertification(
     return;
   }
 
-  const user: UserI = await UserModel.findUserBy({ _id: userId});
+  const user = await UserModel.findUserBy({ _id: userId});
   if (user === null) {
     console.info(`${SPAN} User not found.`);
     return;
@@ -185,7 +185,7 @@ export async function maybeCreateCertification(
   } else {
     try {
       await NotificationModel.notify({
-        to: user,
+        to: user._id,
         title: `Felicitări Ai completat cu succes ${tutorial.name}`,
         short_message: `Ți-am generat cu succes certificarea pentru ${tutorial.name}. Congrats!`,
         long_message: `Sunt Alex de la FrontEnd.ro și-ți scriu pentru a te felicita că ai completat cu succes ${tutorial.name}`,

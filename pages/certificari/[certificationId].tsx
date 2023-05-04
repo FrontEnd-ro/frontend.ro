@@ -1,5 +1,5 @@
 import NotFoundPage from '~/components/NotFound/NotFound';
-import { WIPPopulatedCertificationI } from '~/../shared/types/certification.types';
+import { API_CertificationI } from '~/../shared/types/certification.types';
 import CertificationComponent from '~/components/certification/Certification/Certification';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
@@ -7,7 +7,7 @@ import SEOTags from '~/components/SEOTags';
 import CertificationService from '~/services/api/Certification.service';
 
 export default function CertificationPage(
-  { certification }: { certification: WIPPopulatedCertificationI },
+  { certification }: { certification: API_CertificationI },
 ) {
   if (certification === null) {
     return <NotFoundPage />

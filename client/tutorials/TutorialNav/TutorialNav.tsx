@@ -4,14 +4,14 @@ import React, { useEffect, useRef } from 'react';
 import Link from '~/components/generic/Link';
 import { getLessonById } from '~/curriculum/Curriculum';
 import ProgressLink from '~/components/ProgressLink';
-import { TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { API_TutorialProgressI } from '~/../shared/types/tutorial.types';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 
 import styles from './TutorialNav.module.scss';
 
 interface TutorialNavProps {
   tutorialId: string;
-  tutorialProgress: TutorialProgressI;
+  tutorialProgress: API_TutorialProgressI;
   showDashboardLink?: boolean;
 }
 const TutorialNav = ({
@@ -67,7 +67,7 @@ const TutorialNav = ({
 const CertificationLink = ({
   tutorialId,
   tutorialProgress,
-}: { tutorialId: string; tutorialProgress: TutorialProgressI }) => {
+}: { tutorialId: string; tutorialProgress: API_TutorialProgressI }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDone = tutorialProgress.certification !== null;
 

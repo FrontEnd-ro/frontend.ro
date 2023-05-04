@@ -112,7 +112,7 @@ adminSubmissionRouter.post('/:submissionId/approve', [UserRoleMiddleware(UserRol
     });
 
     const notification: NotificationI = {
-      to: submission.user,
+      to: submission.user._id,
       // We want this to be unique across all exercise notifications,
       // so they get correctly "bundled" into the same GMail thread.
       title: `Exercițiu ${submission.exercise.type.toUpperCase()} | FrontEnd.ro (#${submission.exercise._id.toString().slice(-4)})`,
@@ -180,7 +180,7 @@ adminSubmissionRouter.post('/:submissionId/feedback', [UserRoleMiddleware(UserRo
     });
 
     const notification: NotificationI = {
-      to: submission.user,
+      to: submission.user._id,
       // We want this to be unique across all exercise notifications,
       // so they get correctly "bundled" into the same GMail thread.
       title: `Exercițiu ${submission.exercise.type.toUpperCase()} | FrontEnd.ro (#${submission.exercise._id.toString().slice(-4)})`,

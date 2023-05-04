@@ -86,7 +86,7 @@ challengeSubmissionRouter.put('/:challengeId/task/:taskId', [
       let challengeSubmission = await ChallengeSubmission.findOne({
         challengeId,
         user: user._id.toString()
-      }).populate<{ user: UserI }>('user');
+      });
 
       if (challengeSubmission === null) {
         console.log(`${SPAN} No submission for this user. We'll create one now.`);
@@ -135,7 +135,7 @@ challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
       let challengeSubmission = await ChallengeSubmission.findOne({
         challengeId,
         user: user._id.toString()
-      }).populate<{ user: UserI }>('user');
+      });
 
       if (challengeSubmission === null) {
         console.log(`${SPAN} No submission for this user. We'll create one now.`);
@@ -186,8 +186,7 @@ async function createNewSubmission(challenge: ChallengeI, user: UserI) {
   const challengeSubmission = mapFromChallenge(challenge, user);
   challengeSubmission.user = user?._id;
 
-  const challengeSubmissionDoc = await new ChallengeSubmission(challengeSubmission)
-    .populate<{ user: UserI }>('user');
+  const challengeSubmissionDoc = await new ChallengeSubmission(challengeSubmission);
   await challengeSubmissionDoc.save();
 
   return challengeSubmissionDoc;

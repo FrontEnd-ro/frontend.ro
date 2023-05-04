@@ -10,12 +10,15 @@ import styles from './AccountTooltip.module.scss';
 import { useOutsideClick } from '~/services/Hooks';
 import { logoutUser } from '~/redux/user/user.actions';
 import List from '~/components/List';
+import { useTranslation } from '~/services/typesafeNextTranslate';
+import { UserRole } from '~/../shared/types/user.types';
 
 interface Props {
   theme?: 'light' | 'dark';
 }
 
 function AccountTooltip({ theme = 'light', user, dispatch }: Props & ConnectedProps<typeof connector>) {
+  const { t } = useTranslation('common');
   const ref = useRef(null);
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -55,6 +58,13 @@ function AccountTooltip({ theme = 'light', user, dispatch }: Props & ConnectedPr
               Setările contului
             </Link>
           </li>
+          {user.info.role === UserRole.ADMIN && (
+            <li>
+              <Link prefetch={false} className="no-underline" href="/exercitii-rezolvate">
+                {t('AccountTooltip.solved_exercises')}
+              </Link>
+            </li>
+          )}
           <li>
             <a href="#" onClick={logout} className="no-underline">
               Sign out

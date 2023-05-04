@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import Challenge from '../challenge.model';
+import Challenge from '../challenge.schema';
 import { ServerError } from '../../utils/ServerError';
 import { UserI } from '../../../shared/types/user.types';
 import { ChallengeI } from '../../../shared/types/challenge.types';

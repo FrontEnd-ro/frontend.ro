@@ -1,5 +1,5 @@
 import appConfig from '../config';
-import Challenge from './challenge.model';
+import Challenge from './challenge.schema';
 import { PublicMiddleware } from '../Middlewares';
 import { ServerError } from '../utils/ServerError';
 import express, { Request, Response } from 'express';

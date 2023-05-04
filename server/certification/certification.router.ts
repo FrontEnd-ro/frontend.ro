@@ -13,7 +13,7 @@ import UserModel from '../user/user.model';
 import { UserI } from '../../shared/types/user.types';
 import NotificationModel from '../notification/notification.model';
 import { NotificationChannel, NotificationType, NotificationUrgency } from '../../shared/types/notification.types';
-import Challenge from '../challenge/challenge.model';
+import Challenge from '../challenge/challenge.schema';
 import { TutorialI } from '../../shared/types/tutorial.types';
 import { ChallengeI } from '../../shared/types/challenge.types';
 import { ServerError } from '../utils/ServerError';

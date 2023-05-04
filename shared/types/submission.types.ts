@@ -58,17 +58,6 @@ export interface WIPPopulatedSubmissionI {
   createdAt: Date;
 }
 
-// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
-export type WIPSanitiedSubmission = Pick<WIPPopulatedSubmissionI, 'code' | 'status' | 'feedbacks'> & {
-  _id: string;
-
-  user: API_UserI;
-
-  exercise: WIPSanitizedLessonExercise;
-
-  assigneed: API_UserI;
-}
-
 export type API_SubmissionI = {
   _id: string;
   code: string;

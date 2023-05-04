@@ -1,5 +1,5 @@
 import HttpService from './Http.service';
-import { SubmissionStatus, WIPSanitiedSubmission } from '~/../shared/types/submission.types';
+import { SubmissionStatus, API_SubmissionI } from '~/../shared/types/submission.types';
 
 class SubmissionService {
   static getOwnSubmissions() {
@@ -13,7 +13,7 @@ class SubmissionService {
       .then((resp) => resp.json());
   }
 
-  static getAllSubmissionsFromLesson(lessonId: string): Promise<(WIPSanitiedSubmission | null)[]> {
+  static getAllSubmissionsFromLesson(lessonId: string): Promise<(API_SubmissionI | null)[]> {
     return HttpService
       .get(`${process.env.ENDPOINT}/submissions/lesson/${lessonId}`)
       .then((resp) => resp.json());

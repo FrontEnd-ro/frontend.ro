@@ -1,6 +1,6 @@
 import bcrypt  from 'bcrypt';
 import jwt  from 'jsonwebtoken';
-import mongoose, { Document }  from 'mongoose';
+import mongoose, { Document, Types }  from 'mongoose';
 import appConfig from '../config';
 import { User, UsersSchema }  from './user.schema';
 import {
@@ -68,14 +68,10 @@ class UserModel {
     return user;
   }
 
-  static async findUserBy(filters: mongoose.FilterQuery<UserI>): Promise<UserI | null> {
+  static async findUserBy(filters: mongoose.FilterQuery<UserI>) {
     const user = await User.findOne(filters);
-
-    if (user === null) {
-      return null;
-    }
-    return user.toObject();
-   }
+    return user;
+  }
 
   static async getUser({
     username,
@@ -100,8 +96,8 @@ class UserModel {
     return user;
   }
 
-  static async update(_id: string, payload: Partial<UserI>) {
-    validateObjectId(_id);
+  static async update(_id: Types.ObjectId, payload: Partial<UserI>) {
+    validateObjectId(_id.toString());
     const user = await User.findById(_id);
 
     if (!user) {
@@ -115,11 +111,11 @@ class UserModel {
     return updatedUser;
   }
 
-  static async delete(_id: string): Promise<void> {
+  static async delete(_id: Types.ObjectId): Promise<void> {
     await User.findOneAndDelete({ _id })
   }
 
-  static generateJwtForUser(_id: string): string {
+  static generateJwtForUser(_id: Types.ObjectId): string {
     return jwt.sign(
       { _id },
       appConfig.AUTH.secret,
@@ -161,8 +157,8 @@ class UserModel {
     };
   }
 
-  static async setGithubAccessToken(_id: string, github_access_token: string): Promise<UserI> {
-    validateObjectId(_id);
+  static async setGithubAccessToken(_id: Types.ObjectId, github_access_token: string): Promise<UserI> {
+    validateObjectId(_id.toString());
     const user = await User.findById(_id);
 
     if (!user) {

@@ -1,4 +1,5 @@
-// eslint-disable-next-line import/prefer-default-export
+import { Types } from "mongoose";
+
 export enum UserRole {
   ADMIN = 'admin',
   TEACHER = 'teacher',
@@ -6,7 +7,7 @@ export enum UserRole {
 }
 
 export interface UserI {
-  _id?: string;
+  _id?: Types.ObjectId;
 
   avatar: string;
 

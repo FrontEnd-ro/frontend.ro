@@ -1,5 +1,6 @@
 import multer from 'multer';
 import bcrypt from 'bcrypt';
+import { Types } from 'mongoose';
 import express, { Request, Response } from 'express';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
@@ -480,7 +481,7 @@ userRouter.delete('/', [PrivateMiddleware], async function deleteAccount(
 });
 
 async function updateUserFields(
-  { _id, username, password }: { _id: string; username: string; password: string; },
+  { _id, username, password }: { _id: Types.ObjectId; username: string; password: string; },
   fields: Partial<UserI>
 ) {
   let areCredentialsOk = false;

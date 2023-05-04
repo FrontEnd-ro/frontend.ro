@@ -184,7 +184,7 @@ challengeSubmissionRouter.post('/:challengeId/task/:taskId/status', [
 
 async function createNewSubmission(challenge: ChallengeI, user: UserI) {
   const challengeSubmission = mapFromChallenge(challenge, user);
-  challengeSubmission.user = user?._id.toString();
+  challengeSubmission.user = user?._id;
 
   const challengeSubmissionDoc = await new ChallengeSubmission(challengeSubmission)
     .populate<{ user: UserI }>('user');

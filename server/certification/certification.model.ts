@@ -11,7 +11,7 @@ import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import { CertificationI, WIPPopulatedCertificationI } from '../../shared/types/certification.types';
-import { LessonExerciseI } from '../../shared/types/exercise.types';
+import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
 
 const CertificationSchema = new mongoose.Schema<CertificationI>({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },

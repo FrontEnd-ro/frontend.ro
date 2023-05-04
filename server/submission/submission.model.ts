@@ -3,7 +3,7 @@ import UserModel from '../user/user.model';
 import { ServerError } from '../utils/ServerError';
 import { UserI } from '../../shared/types/user.types';
 import { Submission, SubmissionSchema } from './submission.schema';
-import { LessonExerciseI } from '../../shared/types/exercise.types';
+import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { PAGE_SIZE, SanitizeRole, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';

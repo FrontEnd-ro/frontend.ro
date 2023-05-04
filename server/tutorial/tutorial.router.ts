@@ -5,7 +5,7 @@ import { UserI } from '../../shared/types/user.types';
 import Tutorial, { sanitizeTutorial } from './tutorial.model';
 import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
+import { LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { Certification, sanitizeCertification } from '../certification/certification.model';
 import { TutorialI, TutorialProgressI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';

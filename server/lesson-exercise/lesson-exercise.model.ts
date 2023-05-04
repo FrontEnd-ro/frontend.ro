@@ -3,7 +3,7 @@ import mongoose, { Document } from 'mongoose';
 import { ServerError } from '../utils/ServerError';
 import { UserI } from '../../shared/types/user.types';
 import { LessonExercisesSchema, LessonExercise } from "./lesson-exercise.schema";
-import {  WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
+import {  WIPPopulatedLessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { SanitizeRole, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
 
 class LessonExerciseModel {

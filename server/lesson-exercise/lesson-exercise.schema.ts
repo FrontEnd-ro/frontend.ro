@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { LessonExerciseI } from '../../shared/types/exercise.types';
+import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
 
 const LessonExercisesSchema = new mongoose.Schema<LessonExerciseI>({
   // Who created this exercise?

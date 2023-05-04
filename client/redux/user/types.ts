@@ -1,6 +1,6 @@
 import { UserRole } from '~/../shared/types/user.types';
 import { ParsedNotificationI } from '~/../shared/types/notification.types';
-import { ExerciseType } from '~/../shared/types/exercise.types';
+import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
 export interface UserState {
   info: {

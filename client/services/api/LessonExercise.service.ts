@@ -1,5 +1,5 @@
 import HttpService from './Http.service';
-import { LessonExerciseI } from '~/../shared/types/exercise.types';
+import { LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
 interface NewExercisePayload {
   body: string;

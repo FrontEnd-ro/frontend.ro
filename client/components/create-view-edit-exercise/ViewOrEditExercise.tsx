@@ -24,7 +24,7 @@ import editCover from './coding.svg';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import Button from '~/components/Button';
-import { ExerciseType } from '~/../shared/types/exercise.types';
+import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
 function ViewOrEditExercise({
   exercise,

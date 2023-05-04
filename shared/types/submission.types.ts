@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { UserI, API_UserI } from "./user.types";
-import { WIPPopulatedLessonExerciseI, WIPSanitizedLessonExercise } from "./exercise.types";
+import { WIPPopulatedLessonExerciseI, WIPSanitizedLessonExercise } from "./lesson-exercise.types";
 
 export enum FeedbackType {
   PRAISE = 'praise',

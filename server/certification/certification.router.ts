@@ -5,7 +5,7 @@ import Tutorial from '../tutorial/tutorial.model';
 import { Certification, createCertification, sanitizeCertification } from './certification.model';
 import { LessonI } from '../../shared/types/lesson.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { ExerciseType, LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/exercise.types';
+import { ExerciseType, LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
 import appConfig from '../config';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';

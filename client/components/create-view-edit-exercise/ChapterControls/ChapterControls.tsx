@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExerciseType } from '~/../shared/types/exercise.types';
+import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
 import { Checkbox } from '~/components/Form';
 
 import styles from './ChapterControls.module.scss';

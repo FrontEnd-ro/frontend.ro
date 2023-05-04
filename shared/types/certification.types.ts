@@ -1,6 +1,6 @@
 import { PopulatedDoc, ObjectId, Types } from 'mongoose';
 import { ChallengeI } from './challenge.types';
-import { LessonExerciseI, WIPPopulatedLessonExerciseI } from './exercise.types';
+import { LessonExerciseI, WIPPopulatedLessonExerciseI } from './lesson-exercise.types';
 import { TutorialI } from './tutorial.types';
 import { API_UserI, UserI } from './user.types';
 

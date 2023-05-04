@@ -23,7 +23,7 @@ import {
   uploadMedia,
 } from '.';
 import { withAuthModal } from '~/services/Hooks';
-import { ExerciseType } from '~/../shared/types/exercise.types';
+import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
 function NewExercise({ user }: ConnectedProps<typeof connector>) {
   const router = useRouter();

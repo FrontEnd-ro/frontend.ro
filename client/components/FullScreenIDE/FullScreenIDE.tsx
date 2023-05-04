@@ -23,7 +23,7 @@ import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.servi
 import FolderStructure, { toSandPackFiles, useFolderStructure } from '~/../shared/utils/FolderStructure';
 import { useTypeDefinitions, withAutomaticVerification } from '~/services/api/Challenge.service';
 import ResizableExplorerContainer from '../Editor/ResizableExplorerContainer/ResizableExplorerContainer';
-import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
+import { API_ChallengeSubmissionI, API_ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
 
 import styles from './FullScreenIDE.module.scss';
 
@@ -53,8 +53,8 @@ const _FullScreenIDE = ({
   certification,
   fileNamesToIgnoreFromExplorer = [],
 }: ConnectedProps<typeof connector> & {
-  challengeSubmission: ChallengeSubmissionI;
-  onChallengeSubmit: (task: ChallengeSubmissionI) => void;
+  challengeSubmission: API_ChallengeSubmissionI;
+  onChallengeSubmit: (task: API_ChallengeSubmissionI) => void;
   fileNamesToIgnoreFromExplorer?: string[];
   certification?: API_CertificationI;
 }) => {
@@ -277,7 +277,7 @@ const _FullScreenIDE = ({
     verifySolutionClientSide(challengeSubmission.challengeId, currentTaskId, iframe);
   };
 
-  const resetState = (newChallengeSubmission: ChallengeSubmissionI) => {
+  const resetState = (newChallengeSubmission: API_ChallengeSubmissionI) => {
     setActivePanel(Panel.INFO);
     setApiStatus({
       error: '',
@@ -474,7 +474,7 @@ const _FullScreenIDE = ({
   );
 };
 
-function getCurrentTaskId(challengeSubmission: ChallengeSubmissionI) {
+function getCurrentTaskId(challengeSubmission: API_ChallengeSubmissionI) {
   // First task that is either:
   // > not started
   // > started but the solution is not valid
@@ -489,7 +489,7 @@ function getCurrentTaskId(challengeSubmission: ChallengeSubmissionI) {
 }
 
 function getFolderStructureToSave(
-  task: ChallengeSubmissionTaskI,
+  task: API_ChallengeSubmissionTaskI,
   folderStructure: FolderStructure,
 ): FolderStructure {
   const SPAN = `[getFolderStructureToSave, task=${task.taskId}]`;

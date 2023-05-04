@@ -7,14 +7,14 @@ import NotFoundPage from '~/components/NotFound/NotFound';
 import { CHRISTMAS_ADVENT_ID } from '~/services/Constants';
 import { useCertification } from '~/services/api/Certification.service';
 import { FullScreenIDE } from '~/components/FullScreenIDE/FullScreenIDE';
-import { ChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
+import { API_ChallengeSubmissionI } from '~/../shared/types/challengeSubmissions.types';
 import ChallengeSubmissionService from '~/services/api/ChallengeSubmission.service';
 
 const ChristmasAdvent2022 = ({
   challengeSubmissionServer,
   isLoggedIn,
 }: ConnectedProps<typeof connector> & {
-  challengeSubmissionServer: ChallengeSubmissionI;
+  challengeSubmissionServer: API_ChallengeSubmissionI;
 }) => {
   const [challengeSubmission, setChallengeSubmission] = useState(challengeSubmissionServer);
 
@@ -26,7 +26,7 @@ const ChristmasAdvent2022 = ({
     isLoggedIn,
   });
 
-  const onChallengeSubmit = (challenge: ChallengeSubmissionI) => {
+  const onChallengeSubmit = (challenge: API_ChallengeSubmissionI) => {
     setChallengeSubmission(challenge);
   };
 

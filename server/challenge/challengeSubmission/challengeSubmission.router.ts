@@ -12,7 +12,6 @@ import {
 } from './challengeSubmission.model';
 import FolderStructure from '../../../shared/utils/FolderStructure';
 import UserModel from '../../user/user.model';
-import { ChallengeSubmissionI } from '../../../shared/types/challengeSubmissions.types';
 import { Certification } from '../../certification/certification.model';
 
 const challengeSubmissionRouter = express.Router();

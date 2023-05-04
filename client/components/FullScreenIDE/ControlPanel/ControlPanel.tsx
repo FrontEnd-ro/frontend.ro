@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import Alert from '~/components/generic/Alert/Alert';
 import ControlPanelNav from './ControlPanelNav/ControlPanelNav';
-import { ChallengeSubmissionI, ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
+import { API_ChallengeSubmissionI, API_ChallengeSubmissionTaskI } from '~/../shared/types/challengeSubmissions.types';
 
 import styles from './ControlPanel.module.scss';
 import Markdown from '~/components/Markdown';
 
 interface Props {
-  challenge: ChallengeSubmissionI;
+  challenge: API_ChallengeSubmissionI;
   // "current" in the sense that this is the task you must solve now.
   currentTaskId: string;
   className?: string;
@@ -17,7 +17,7 @@ const ControlPanel = ({ challenge, currentTaskId, className = '' }: Props) => {
   // We allow a user to view a task explainer without actually changing
   // the entire editor context to that specific task.
   const [viewingTaskId, setViewingTaskId] = useState(currentTaskId);
-  const tasks: ChallengeSubmissionTaskI[] = challenge.introExplainer !== undefined
+  const tasks: API_ChallengeSubmissionTaskI[] = challenge.introExplainer !== undefined
     ? [
       // Creating a "fake task" on the fly, from the
       // introExplainer property on the challenge.

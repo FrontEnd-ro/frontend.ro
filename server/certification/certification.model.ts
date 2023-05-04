@@ -1,6 +1,7 @@
 import mongoose, { Document, ObjectId } from 'mongoose';
 
 import appConfig from '../config';
+import { SanitizeRole } from '../ServerUtils';
 import Tutorial from '../tutorial/tutorial.model';
 import { LessonI } from '../../shared/types/lesson.types';
 import { LambdaService } from '../services/Lambda.service';
@@ -33,7 +34,7 @@ function sanitizeCertification(certification: Document<any, any, WIPPopulatedCer
 
   if (typeof sanitizedCertfication.user !== 'string') {
     // @ts-ignore
-    sanitizedCertfication.user = UserModel.sanitizeForPublic(sanitizedCertfication.user);
+    sanitizedCertfication.user = UserModel.sanitize(sanitizedCertfication.user, SanitizeRole.PUBLIC);
   }
   sanitizedCertfication.lesson_exercises = sanitizedCertfication.lesson_exercises.map(lessonExercise => {
     return LessonExerciseModel.sanitize(lessonExercise)

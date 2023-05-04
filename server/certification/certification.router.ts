@@ -68,8 +68,8 @@ certificationRouter.get('/challenge/:challengeId', [
       }
 
       const certification = await Certification.findOne({
-        challengeId: challenge._id,
-        user: user._id.toString(),
+        challenge: challenge._id,
+        user: user._id,
       })
         .populate('user')
         .populate('lesson_exercises')

@@ -8,7 +8,7 @@ import { SolvableExercise, UserRoleMiddleware } from '../Middlewares'
 import { findTutorialIdByLessonId } from '../tutorial/tutorial.model';
 import { maybeCreateCertification } from '../certification/certification.router';
 import { SubmissionVersion } from './submission-version/submission-version.model';
-import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../shared/types/submission.types';
+import { SubmissionStatus } from '../../shared/types/submission.types';
 import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
 
 const adminSubmissionRouter = express.Router();

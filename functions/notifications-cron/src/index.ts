@@ -7,7 +7,7 @@ import { LessonI } from '../../../shared/types/lesson.types';
 import Tutorial from '../../../server/tutorial/tutorial.model';
 import { TutorialI } from '../../../shared/types/tutorial.types';
 import NotificationModel from '../../../server/notification/notification.model';
-import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../../shared/types/submission.types';
+import { SubmissionStatus, SubmissionI } from '../../../shared/types/submission.types';
 import {
   NotificationI,
   NotificationChannel,
@@ -117,7 +117,7 @@ async function processUser(user: UserI, dryRun: boolean) {
   }));
 }
 
-function getMostRecentSubmission(submissions: WIPPopulatedSubmissionI[]) {
+function getMostRecentSubmission(submissions: SubmissionI[]) {
   let mostRecentSubmission = submissions[0];
 
   submissions.forEach((submission) => {
@@ -135,7 +135,7 @@ function getMostRecentSubmission(submissions: WIPPopulatedSubmissionI[]) {
 function getNotificationPayload(
   user: UserI,
   tutorial: Omit<TutorialI, 'lessons'>,
-  oldestSubmission: WIPPopulatedSubmissionI,
+  oldestSubmission: SubmissionI,
   inactivityInterval: number,
   // If we think this user abandoned the tutorial, we send a different message
   type?: 'inactivity' | 'abandoned',

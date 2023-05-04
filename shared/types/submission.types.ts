@@ -38,26 +38,6 @@ export interface SubmissionI {
   createdAt: Date;
 }
 
-export interface WIPPopulatedSubmissionI {
-  _id: Types.ObjectId;
-
-  code: string;
-
-  user: UserI;
-
-  exercise: WIPPopulatedLessonExerciseI;
-
-  assignee: UserI;
-  
-  status: SubmissionStatus;
-
-  feedbacks: FeedbackI[];
-
-  updatedAt: Date;
-
-  createdAt: Date;
-}
-
 export type API_SubmissionI = {
   _id: string;
   code: string;

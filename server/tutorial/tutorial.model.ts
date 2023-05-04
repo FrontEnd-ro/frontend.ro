@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { LessonI } from '../../shared/types/lesson.types';
-import { TutorialI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
+import { API_TutorialI, TutorialI } from '../../shared/types/tutorial.types';
 
 import "../lesson/lesson.model";
 
@@ -17,9 +17,9 @@ const Tutorial: mongoose.Model<TutorialI, {}, {}> = mongoose.models.Tutorial
 async function findTutorialIdByLessonId(
   lessonId: string
 ): Promise<string | null> {
-  const allTutorials: WIPPopulatedTutorialI[] = await Tutorial
+  const allTutorials = await Tutorial
     .find()
-    .populate("lessons");
+    .populate<{ lessons: LessonI[] }>("lessons");
 
   const match = allTutorials.find((tutorial) =>
     tutorial.lessons.find((lesson) => lesson.lessonId === lessonId)
@@ -27,8 +27,8 @@ async function findTutorialIdByLessonId(
   return match?._id?.toString() ?? null;
 }
 
-function sanitizeTutorial(tutorial: WIPPopulatedTutorialI) {
-  const result: WIPPopulatedTutorialI = {
+function sanitizeTutorial(tutorial: Omit<TutorialI, 'lessons'> & { lessons: LessonI[] }): API_TutorialI {
+  return {
     tutorialId: tutorial.tutorialId,
     name: tutorial.name,
     // Omit 'views'
@@ -36,8 +36,6 @@ function sanitizeTutorial(tutorial: WIPPopulatedTutorialI) {
       lessonId: lesson.lessonId,
     }))
   }
-
-  return result;
 }
 
 export default Tutorial;

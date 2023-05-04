@@ -6,13 +6,13 @@ import TutorialPage from '~/tutorials/TutorialPage';
 import { HTML_TUTORIAL_ID } from '~/services/Constants';
 import { startedTutorial } from '~/redux/user/user.actions';
 import TutorialService from '~/services/api/Tutorial.service';
-import { WIPPopulatedTutorialI } from '~/../shared/types/tutorial.types';
+import { API_TutorialI } from '~/../shared/types/tutorial.types';
 import TutorialDashboard from '~/tutorials/TutorialDashboard/TutorialDashboard';
 import TutorialDescription from '~/tutorials/TutorialDescription/TutorialDescription';
 
 type Props = {
   // If `null` then the tutorial is missing, so we want to render a 404 Page
-  tutorialInfo: WIPPopulatedTutorialI | null;
+  tutorialInfo: API_TutorialI | null;
 } & ConnectedProps<typeof connector>;
 
 const TutorialIndex = ({

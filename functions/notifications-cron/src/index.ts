@@ -5,7 +5,7 @@ import UserModel from '../../../server/user/user.model';
 import { UserI } from '../../../shared/types/user.types';
 import { LessonI } from '../../../shared/types/lesson.types';
 import Tutorial from '../../../server/tutorial/tutorial.model';
-import { WIPPopulatedTutorialI } from '../../../shared/types/tutorial.types';
+import { TutorialI } from '../../../shared/types/tutorial.types';
 import NotificationModel from '../../../server/notification/notification.model';
 import { SubmissionStatus, WIPPopulatedSubmissionI } from '../../../shared/types/submission.types';
 import {
@@ -64,7 +64,7 @@ async function processUser(user: UserI, dryRun: boolean) {
   await Promise.all(tutorials.map(async (tutorialId) => {
     const SPAN = `[NotificationsCron.processUserTutorial user=${user.username}, tutorial=${tutorialId}]`;
 
-    let tutorial: WIPPopulatedTutorialI;
+    let tutorial: Omit<TutorialI, 'lessons'> & { lessons: LessonI[] };
     try {
       tutorial = await Tutorial.findOne({ tutorialId }).populate<{lessons: LessonI[]}>('lessons');
     } catch (err) {
@@ -134,7 +134,7 @@ function getMostRecentSubmission(submissions: WIPPopulatedSubmissionI[]) {
 
 function getNotificationPayload(
   user: UserI,
-  tutorial: WIPPopulatedTutorialI,
+  tutorial: Omit<TutorialI, 'lessons'>,
   oldestSubmission: WIPPopulatedSubmissionI,
   inactivityInterval: number,
   // If we think this user abandoned the tutorial, we send a different message

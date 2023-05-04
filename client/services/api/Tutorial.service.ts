@@ -1,8 +1,8 @@
 import HttpService from './Http.service';
-import { WIPPopulatedTutorialI, API_TutorialI, API_TutorialProgressI } from '~/../shared/types/tutorial.types';
+import { API_TutorialI, API_TutorialProgressI } from '~/../shared/types/tutorial.types';
 
 class TutorialService {
-  static getAll(): Promise<WIPPopulatedTutorialI[]> {
+  static getAll(): Promise<API_TutorialI[]> {
     return HttpService
       .get(`${process.env.ENDPOINT}/tutorials`)
       .then((resp) => resp.json());

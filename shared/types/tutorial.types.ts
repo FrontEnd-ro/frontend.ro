@@ -23,20 +23,6 @@ export interface TutorialI {
   // the tutorial.
   lessons: string[];
 }
-
-export interface WIPPopulatedTutorialI {
-  _id?: Types.ObjectId;
-
-  // Unique, human-readable ID.
-  // This is used when Routing in the UI.
-  tutorialId: string;
-
-  // Displayed in the UI
-  name: string;
-
-  lessons: LessonI[]
-}
-
 export interface API_TutorialI {
   tutorialId: string;
   name: string;

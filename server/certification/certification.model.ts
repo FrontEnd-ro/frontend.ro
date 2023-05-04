@@ -8,7 +8,7 @@ import { LambdaService } from '../services/Lambda.service';
 import UserModel from '../user/user.model';
 import SubmissionModel from '../submission/submission.model';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
+import { TutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import { API_CertificationI, CertificationI } from '../../shared/types/certification.types';
 import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
@@ -97,7 +97,7 @@ async function createCertification(
  * @returns Persisted Certification
  */
 async function storeCertificationData(
-  tutorial: WIPPopulatedTutorialI,
+  tutorial: Omit<TutorialI, 'lessons'> & { lessons: LessonI[] },
   userId: string,
   dryRun = false
 ) {
@@ -117,7 +117,7 @@ async function storeCertificationData(
     });
   }
 
-  const lessonIds = (tutorial.lessons as LessonI[]).map((lesson) => lesson.lessonId);
+  const lessonIds = tutorial.lessons.map((lesson) => lesson.lessonId);
   const userSubmissions = await SubmissionModel.getAllUserSubmissions(userId);
   certification.lesson_exercises = userSubmissions
     .filter(submission => submission.status === SubmissionStatus.DONE)

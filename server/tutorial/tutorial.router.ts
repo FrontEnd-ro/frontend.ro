@@ -2,12 +2,13 @@ import express, { Request, Response } from 'express';
 import UserModel from '../user/user.model';
 import { ServerError } from '../utils/ServerError';
 import { UserI } from '../../shared/types/user.types';
+import { LessonI } from '../../shared/types/lesson.types';
 import Tutorial, { sanitizeTutorial } from './tutorial.model';
 import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { Certification, sanitizeCertification } from '../certification/certification.model';
-import { API_TutorialProgressI, TutorialI, WIPPopulatedTutorialI } from '../../shared/types/tutorial.types';
+import { API_TutorialProgressI, TutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import SubmissionModel from '../submission/submission.model';
 
@@ -16,7 +17,7 @@ const tutorialRouter = express.Router();
 tutorialRouter.get('/', [
   PublicMiddleware,
   async function getAllTutorials(req: Request, res: Response) {
-    const tutorials: WIPPopulatedTutorialI[] = await Tutorial.find({}).populate('lessons');
+    const tutorials = await Tutorial.find({}).populate<{ lessons: LessonI[] }>('lessons');
 
     res.json(tutorials.map(sanitizeTutorial));
   }
@@ -27,8 +28,8 @@ tutorialRouter.get('/:tutorialId', [
   async function getTutorial(req: Request, res: Response) {
     const { tutorialId } = req.params;
 
-    const tutorial: WIPPopulatedTutorialI = await Tutorial.findOne({ tutorialId })
-      .populate('lessons');
+    const tutorial = await Tutorial.findOne({ tutorialId })
+      .populate<{ lessons: LessonI[] }>('lessons');
 
     if (tutorial === null) {
       new ServerError(404, 'generic.404', { tutorialId }).send(res);
@@ -75,9 +76,9 @@ tutorialRouter.get('/:tutorialId/progress', [
     const { tutorialId } = req.params;
     const { user }: { user: UserI } = req.body;
 
-    const tutorial: WIPPopulatedTutorialI = await Tutorial
+    const tutorial = await Tutorial
       .findOne({ tutorialId })
-      .populate('lessons');
+      .populate<{ lessons: LessonI[] }>('lessons');
 
     if (tutorial === null) {
       new ServerError(404, 'generic.404', { tutorialId }).send(res);

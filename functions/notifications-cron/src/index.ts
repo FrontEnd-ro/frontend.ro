@@ -15,7 +15,7 @@ import {
   NotificationUrgency,
 } from '../../../shared/types/notification.types';
 import SubmissionModel from '../../../server/submission/submission.model';
-import { LessonExerciseI } from '../../../shared/types/exercise.types';
+import { LessonExerciseI } from '../../../shared/types/lesson-exercise.types';
 
 exports.handler = run;
 
@@ -153,7 +153,7 @@ function getNotificationPayload(
      abandonat, poți să-l continui apăsând pe linkul de mai jos.`;
 
   return {
-    to: user,
+    to: user._id,
     timestamp: Date.now(),
     type: NotificationType.INFO,
     title: `Nu uita de ${tutorial.name}`,
@@ -175,7 +175,7 @@ function getNotificationPayload(
 async function maybeNotify(notification: NotificationI, dryRun: boolean): Promise<any> {
   const SPAN = `[NotificationsCron.maybeNotify, dryRun=${dryRun}]`;
   const latestSimilarNotification = await NotificationModel.findOneByTagsAndUser(
-    (notification.to as UserI)._id.toString(), notification.tags,
+    notification.to.toString(), notification.tags,
   );
 
   if (latestSimilarNotification !== null) {
@@ -192,9 +192,6 @@ async function maybeNotify(notification: NotificationI, dryRun: boolean): Promis
       console.error(`${SPAN} failed to notify.`, resp.responses);
     }
   } else {
-    console.log(`${SPAN} On a dry run, so not sending notification.`, {
-      ...notification,
-      to: (notification.to as UserI)._id.toString(),
-    });
+    console.log(`${SPAN} On a dry run, so not sending notification.`, notification);
   }
 }

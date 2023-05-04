@@ -150,8 +150,7 @@ class SubmissionModel {
     if (!submission) {
       throw new ServerError(404, 'generic.404', { _id });
     }
-    const x = await submission.delete();
-    console.log(x);
+    await submission.deleteOne();
   }
 
   static sanitize(submission) {

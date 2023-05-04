@@ -67,16 +67,7 @@ class LessonExerciseModel {
       throw new ServerError(404, 'generic.404', { _id });
     }
 
-    return new Promise((resolve, reject) => {
-      exercise.delete((err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-
-        resolve();
-      });
-    });
+    await exercise.deleteOne();
   }
 
   static sanitize(exercise) {

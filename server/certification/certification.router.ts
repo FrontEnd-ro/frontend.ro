@@ -5,7 +5,7 @@ import Tutorial from '../tutorial/tutorial.model';
 import { Certification, createCertification, sanitizeCertification } from './certification.model';
 import { LessonI } from '../../shared/types/lesson.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { ExerciseType, LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/lesson-exercise.types';
+import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import appConfig from '../config';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
@@ -32,7 +32,7 @@ certificationRouter.get('/:certificationId', [
         .populate('user')
         .populate<{ tutorial: TutorialI }>('tutorial')
         .populate<{ challenge: ChallengeI }>('challenge')
-        .populate<{ lesson_exercises: WIPPopulatedLessonExerciseI[] }>({
+        .populate<{ lesson_exercises: LessonExerciseI[] }>({
           path: 'lesson_exercises',
           populate: { path: 'user' },
         });
@@ -119,7 +119,7 @@ export async function maybeCreateCertification(
     return;
   }
 
-  const tutorialExercises: Document<any, any, WIPPopulatedLessonExerciseI>[] = (
+  const tutorialExercises = (
     await Promise.all(
       (tutorial.lessons as LessonI[]).map((lesson) =>
         LessonExerciseModel.getAllFromLesson(lesson.lessonId)

@@ -36,11 +36,6 @@ export interface LessonExerciseI {
   lesson: string;
 }
 
-// FIXME: https://github.com/FrontEnd-ro/frontend.ro/issues/443
-export type WIPPopulatedLessonExerciseI = Omit<LessonExerciseI, 'user'> & {
-  user: UserI;
-}
-
 export type API_LessonExerciseI = {
   _id: string;
   user: API_UserI;

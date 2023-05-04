@@ -6,7 +6,7 @@ import { LessonI } from '../../shared/types/lesson.types';
 import Tutorial, { sanitizeTutorial } from './tutorial.model';
 import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { LessonExerciseI, WIPPopulatedLessonExerciseI } from '../../shared/types/lesson-exercise.types';
+import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { Certification, sanitizeCertification } from '../certification/certification.model';
 import { API_TutorialProgressI, TutorialI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
@@ -110,7 +110,7 @@ tutorialRouter.get('/:tutorialId/progress', [
       })
         .populate("user")
         .populate<{
-          lesson_exercises: WIPPopulatedLessonExerciseI[];
+          lesson_exercises: LessonExerciseI[];
         }>({
           path: "lesson_exercises",
           populate: { path: "user" },

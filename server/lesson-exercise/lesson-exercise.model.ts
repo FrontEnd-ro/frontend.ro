@@ -3,7 +3,6 @@ import mongoose, { Document } from 'mongoose';
 import { ServerError } from '../utils/ServerError';
 import { UserI } from '../../shared/types/user.types';
 import { LessonExercisesSchema, LessonExercise } from "./lesson-exercise.schema";
-import {  WIPPopulatedLessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { SanitizeRole, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
 
 class LessonExerciseModel {
@@ -31,7 +30,7 @@ class LessonExerciseModel {
     return lessons;
   }
 
-  static async getAllFromLesson(lessonId): Promise<Document<any, any, WIPPopulatedLessonExerciseI>[]> {
+  static async getAllFromLesson(lessonId) {
     const lessons = await LessonExercise
       .find({ lesson: lessonId })
       .populate<{ user: UserI }>('user');

@@ -17,7 +17,7 @@ import { API_UserI, UserRole } from '~/../shared/types/user.types';
 import Link from '~/components/generic/Link';
 import SubmissionService from '~/services/api/Submission.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
-import { API_LessonExerciseI, WIPPopulatedLessonExerciseI } from '~/../shared/types/lesson-exercise.types';
+import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
 interface Props {
   profileUser: API_UserI;

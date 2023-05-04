@@ -108,7 +108,7 @@ tutorialRouter.get('/:tutorialId/progress', [
         tutorial: tutorial._id,
         user: user._id,
       })
-        .populate("user")
+        .populate<{ user: UserI }>("user")
         .populate<{
           lesson_exercises: LessonExerciseI[];
         }>({

@@ -1,14 +1,16 @@
-import mongoose, { Document, Types } from 'mongoose';
+import mongoose, { Schema, Types } from 'mongoose';
 
 import appConfig from '../config';
 import { SanitizeRole } from '../ServerUtils';
 import Tutorial from '../tutorial/tutorial.model';
+import { UserI } from '../../shared/types/user.types';
 import { LessonI } from '../../shared/types/lesson.types';
 import { LambdaService } from '../services/Lambda.service';
 import UserModel from '../user/user.model';
 import SubmissionModel from '../submission/submission.model';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
 import { TutorialI } from '../../shared/types/tutorial.types';
+import { ChallengeI } from '../../shared/types/challenge.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import { API_CertificationI, CertificationI } from '../../shared/types/certification.types';
 import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
@@ -28,19 +30,33 @@ const CertificationSchema = new mongoose.Schema<CertificationI>({
 const Certification: mongoose.Model<CertificationI, {}, {}> = mongoose.models.Certification
   || mongoose.model<CertificationI>('Certification', CertificationSchema);
 
-function sanitizeCertification(certification: Document<any, any, CertificationI>): API_CertificationI {
-  // https://github.com/Automattic/mongoose/issues/2790
-  const sanitizedCertfication = JSON.parse(JSON.stringify(certification.toObject()));
-
-  if (typeof sanitizedCertfication.user !== 'string') {
-    // @ts-ignore
-    sanitizedCertfication.user = UserModel.sanitize(sanitizedCertfication.user, SanitizeRole.PUBLIC);
+function sanitizeCertification(
+  certification: Omit<CertificationI, 'user' | 'lesson_exercises' | 'challenge' | 'tutorial'> & {
+    user: UserI;
+    lesson_exercises: LessonExerciseI[];
+    challenge?: Schema.Types.ObjectId | ChallengeI;
+    tutorial?: Schema.Types.ObjectId | TutorialI;
   }
-  sanitizedCertfication.lesson_exercises = sanitizedCertfication.lesson_exercises.map(lessonExercise => {
-    return LessonExerciseModel.sanitize(lessonExercise)
-  });
-
-  return sanitizedCertfication;
+): API_CertificationI {
+  return {
+    pdf: certification.pdf,
+    og_image: certification.og_image,
+    user: UserModel.sanitize(certification.user, SanitizeRole.PUBLIC),
+    timestamp: certification.timestamp,
+    lesson_exercises: certification.lesson_exercises.map(LessonExerciseModel.sanitize),
+    challenge: (certification.challenge === undefined || certification.challenge instanceof mongoose.Schema.Types.ObjectId)
+      ? undefined
+      : {
+        title: certification.challenge.title,
+        challengeId: certification.challenge.challengeId
+      },
+    tutorial: (certification.tutorial === undefined || certification.tutorial instanceof mongoose.Schema.Types.ObjectId)
+      ? undefined
+      : {
+        name: certification.tutorial.name,
+        tutorialId: certification.tutorial.tutorialId
+      },
+  }
 }
 
 /**

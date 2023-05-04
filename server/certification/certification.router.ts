@@ -29,7 +29,7 @@ certificationRouter.get('/:certificationId', [
 
     try {
       const certification = await Certification.findById(certificationId)
-        .populate('user')
+        .populate<{ user: UserI }>('user')
         .populate<{ tutorial: TutorialI }>('tutorial')
         .populate<{ challenge: ChallengeI }>('challenge')
         .populate<{ lesson_exercises: LessonExerciseI[] }>({
@@ -71,8 +71,8 @@ certificationRouter.get('/challenge/:challengeId', [
         challenge: challenge._id,
         user: user._id,
       })
-        .populate('user')
-        .populate('lesson_exercises')
+        .populate<{ user: UserI }>('user')
+        .populate<{ lesson_exercises: LessonExerciseI[] }>('lesson_exercises')
         .populate<{ challenge: ChallengeI }>('challenge');
   
       if (certification === null) {

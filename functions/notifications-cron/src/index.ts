@@ -2,10 +2,7 @@ import { differenceInBusinessDays as getDifferenceInBusinessDays } from 'date-fn
 
 import { connectToDb } from '../../../server/database';
 import UserModel from '../../../server/user/user.model';
-import { UserI } from '../../../shared/types/user.types';
-import { LessonI } from '../../../shared/types/lesson.types';
-import Tutorial from '../../../server/tutorial/tutorial.model';
-import { TutorialI } from '../../../shared/types/tutorial.types';
+import Tutorial, { TutorialI } from '../../../server/tutorial/tutorial.model';
 import NotificationModel from '../../../server/notification/notification.model';
 import { SubmissionStatus, SubmissionI } from '../../../shared/types/submission.types';
 import {
@@ -15,7 +12,9 @@ import {
   NotificationUrgency,
 } from '../../../shared/types/notification.types';
 import SubmissionModel from '../../../server/submission/submission.model';
-import { LessonExerciseI } from '../../../shared/types/lesson-exercise.types';
+import { UserI } from '../../../server/user/user.schema';
+import { LessonI } from '../../../server/lesson/lesson.schema';
+import { LessonExerciseI } from '../../../server/lesson-exercise/lesson-exercise.schema';
 
 exports.handler = run;
 

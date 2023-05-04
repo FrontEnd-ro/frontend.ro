@@ -1,13 +1,11 @@
 import appConfig from '../config';
-import Challenge from './challenge.schema';
+import Challenge, { ChallengeI, ChallengeTaskI } from './challenge.schema';
 import { PublicMiddleware } from '../Middlewares';
 import { ServerError } from '../utils/ServerError';
 import express, { Request, Response } from 'express';
 import {
   API_ChallengeI,
   API_ChallengeTaskI,
-  ChallengeI,
-  ChallengeTaskI,
   TypeDefinition
 } from '../../shared/types/challenge.types';
 

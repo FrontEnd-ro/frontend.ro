@@ -1,23 +1,21 @@
 import { Document } from 'mongoose';
 import express, { Request, Response } from 'express';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
-import Tutorial from '../tutorial/tutorial.model';
+import Tutorial, { TutorialI } from '../tutorial/tutorial.model';
 import { Certification, createCertification, sanitizeCertification } from './certification.model';
-import { LessonI } from '../../shared/types/lesson.types';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
+import { LessonExerciseI } from '../lesson-exercise/lesson-exercise.schema';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import appConfig from '../config';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import UserModel from '../user/user.model';
-import { UserI } from '../../shared/types/user.types';
 import NotificationModel from '../notification/notification.model';
 import { NotificationChannel, NotificationType, NotificationUrgency } from '../../shared/types/notification.types';
-import Challenge from '../challenge/challenge.schema';
-import { TutorialI } from '../../shared/types/tutorial.types';
-import { ChallengeI } from '../../shared/types/challenge.types';
+import Challenge, { ChallengeI } from '../challenge/challenge.schema';
 import { ServerError } from '../utils/ServerError';
 import SubmissionModel from '../submission/submission.model';
+import { UserI } from '../user/user.schema';
+import { LessonI } from '../lesson/lesson.schema';
 
 const certificationRouter = express.Router();
 

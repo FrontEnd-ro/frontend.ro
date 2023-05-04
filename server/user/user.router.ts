@@ -6,12 +6,13 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 import UserModel from './user.model';
 import appConfig from '../config';
+import { UserI } from './user.schema';
 import SubscribeModel from '../subscribe.model';
 import { ServerError } from '../utils/ServerError';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
 import PasswordResetModel from '../password-reset/password-reset.model';
-import { API_UserI, UserI, UserRole } from '../../shared/types/user.types';
+import { API_UserI, UserRole } from '../../shared/types/user.types';
 import { MAX_MEDIA_MB, MAX_MEDIA_BYTES } from '../../shared/SharedConstants';
 import { setTokenCookie, MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH, SanitizeRole } from '../ServerUtils';
 

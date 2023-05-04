@@ -1,5 +1,12 @@
-import mongoose from 'mongoose';
-import { LessonI } from '../../shared/types/lesson.types';
+import mongoose, { Types } from 'mongoose';
+
+export interface LessonI {
+  _id?: Types.ObjectId;
+
+  lessonId: string;
+
+  views?: number;
+}
 
 const LessonSchema: mongoose.Schema<LessonI> = new mongoose.Schema({
   lessonId: { type: String, required: true, unique: true },

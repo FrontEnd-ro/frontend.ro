@@ -1,16 +1,16 @@
 import express, { Request, Response } from 'express';
 import UserModel from '../user/user.model';
 import { ServerError } from '../utils/ServerError';
-import { UserI } from '../../shared/types/user.types';
-import { LessonI } from '../../shared/types/lesson.types';
-import Tutorial, { sanitizeTutorial } from './tutorial.model';
+import Tutorial, { TutorialI, sanitizeTutorial } from './tutorial.model';
 import { PublicMiddleware, PrivateMiddleware } from '../Middlewares';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
 import { Certification, sanitizeCertification } from '../certification/certification.model';
-import { API_TutorialProgressI, TutorialI } from '../../shared/types/tutorial.types';
+import { API_TutorialProgressI } from '../../shared/types/tutorial.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
 import SubmissionModel from '../submission/submission.model';
+import { UserI } from '../user/user.schema';
+import { LessonExerciseI } from '../lesson-exercise/lesson-exercise.schema';
+import { LessonI } from '../lesson/lesson.schema';
 
 const tutorialRouter = express.Router();
 

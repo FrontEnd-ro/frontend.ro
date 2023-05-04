@@ -1,7 +1,7 @@
 import UserModel from '../user/user.model';
 import mongoose, { Document } from 'mongoose';
 import { ServerError } from '../utils/ServerError';
-import { UserI } from '../../shared/types/user.types';
+import { UserI } from '../user/user.schema';
 import { LessonExercisesSchema, LessonExercise } from "./lesson-exercise.schema";
 import { SanitizeRole, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
 

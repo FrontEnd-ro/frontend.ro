@@ -2,7 +2,7 @@ import bcrypt  from 'bcrypt';
 import jwt  from 'jsonwebtoken';
 import mongoose, { Document, Types }  from 'mongoose';
 import appConfig from '../config';
-import { User, UsersSchema }  from './user.schema';
+import { User, UserI, UsersSchema }  from './user.schema';
 import {
   AUTH_EXPIRATION,
   validateAgainstSchemaProps,
@@ -12,7 +12,6 @@ import {
 }  from '../ServerUtils';
 import { ServerError, TranslationKey } from '../utils/ServerError';
 import { API_UserI } from '../../shared/types/user.types';
-import { UserI } from '../../shared/types/user.types';
 
 export type AuthJWT = {
   _id: string;

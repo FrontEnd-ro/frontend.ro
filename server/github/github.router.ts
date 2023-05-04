@@ -1,10 +1,10 @@
 
 import appConfig from '../config';
+import { UserI } from '../user/user.schema';
 import UserModel from '../user/user.model';
 import { ServerError } from '../utils/ServerError';
 import { PrivateMiddleware } from '../Middlewares';
 import express, { Request, Response } from 'express';
-import { UserI } from '../../shared/types/user.types';
 
 const githubRouter = express.Router();
 

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { LessonSchema } from './lesson.schema';
-import { API_LessonI, LessonI } from '../../shared/types/lesson.types';
+import { LessonSchema, LessonI } from './lesson.schema';
+import { API_LessonI } from '../../shared/types/lesson.types';
 
 const Lesson: mongoose.Model<LessonI> = mongoose.models.Lesson || mongoose.model('Lesson', LessonSchema);
 

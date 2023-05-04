@@ -1,5 +1,31 @@
-import mongoose from 'mongoose';
-import { UserI, UserRole } from "../../shared/types/user.types";
+import mongoose, { Types } from 'mongoose';
+import { UserRole } from "../../shared/types/user.types";
+
+export interface UserI {
+  _id?: Types.ObjectId;
+
+  avatar: string;
+
+  name?: string;
+
+  email: string;
+
+  username: string;
+
+  description?: string;
+
+  password: string;
+
+  lastLogin: Date;
+
+  // Deprecated
+  // eslint-disable-next-line camelcase
+  github_access_token?: string;
+
+  role: UserRole;
+
+  tutorials: string[];
+}
 
 const UsersSchema = new mongoose.Schema<UserI>({
   avatar: { type: String, required: true },

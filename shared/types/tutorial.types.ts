@@ -1,32 +1,10 @@
-import { Types } from "mongoose";
-import { LessonI } from "./lesson.types";
 import { API_CertificationI } from "./certification.types";
+import { API_LessonI } from "./lesson.types";
 
-/**
- * The Tutorial entity is at the center of our platform.
- * Each tutorial has a collection of lessons, each with one
- * or more exercises. When finishing all exercises, the student
- * will receive a Certification.
- */
-export interface TutorialI {
-  _id?: Types.ObjectId;
-
-  // Unique, human-readable ID.
-  // This is used when Routing in the UI.
-  tutorialId: string;
-
-  // Displayed in the UI
-  name: string;
-
-  // Collection of lesson IDs. The exercises are derived from
-  // the lessons, thus they are not first class properties on
-  // the tutorial.
-  lessons: string[];
-}
 export interface API_TutorialI {
   tutorialId: string;
   name: string;
-  lessons: LessonI[]
+  lessons: API_LessonI[]
 }
 
 export interface API_TutorialProgressI {

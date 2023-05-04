@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import { Types } from 'mongoose';
-import { UserI } from './user.types';
 
 /** *************************** Notifications */
 export enum NotificationType {

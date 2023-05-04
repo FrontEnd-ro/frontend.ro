@@ -1,10 +1,10 @@
 import mongoose, { Types } from 'mongoose';
+import { UserI } from '../../user/user.schema';
 import { SanitizeRole } from '../../ServerUtils';
-import { UserI } from '../../../shared/types/user.types';
-import { ChallengeI } from '../../../shared/types/challenge.types';
 import FolderStructure from '../../../shared/utils/FolderStructure';
 import UserModel from '../../user/user.model';
 import { API_ChallengeSubmissionI } from '../../../shared/types/challengeSubmissions.types';
+import { ChallengeI } from '../challenge.schema';
 
 // This collection has a unique composed key <UserId, ChallengeId>.
 export interface ChallengeSubmissionI {

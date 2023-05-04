@@ -1,19 +1,47 @@
-import mongoose, { Schema, Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 import appConfig from '../config';
+import { UserI } from '../user/user.schema';
 import { SanitizeRole } from '../ServerUtils';
-import Tutorial from '../tutorial/tutorial.model';
-import { UserI } from '../../shared/types/user.types';
-import { LessonI } from '../../shared/types/lesson.types';
+import Tutorial, { TutorialI } from '../tutorial/tutorial.model';
 import { LambdaService } from '../services/Lambda.service';
 import UserModel from '../user/user.model';
 import SubmissionModel from '../submission/submission.model';
 import LessonExerciseModel from '../lesson-exercise/lesson-exercise.model';
-import { TutorialI } from '../../shared/types/tutorial.types';
-import { ChallengeI } from '../../shared/types/challenge.types';
 import { SubmissionStatus } from '../../shared/types/submission.types';
-import { API_CertificationI, CertificationI } from '../../shared/types/certification.types';
-import { LessonExerciseI } from '../../shared/types/lesson-exercise.types';
+import { API_CertificationI } from '../../shared/types/certification.types';
+import { ChallengeI } from '../challenge/challenge.schema';
+import { LessonExerciseI } from '../lesson-exercise/lesson-exercise.schema';
+import { LessonI } from '../lesson/lesson.schema';
+
+export interface CertificationI {
+  // Optional because when we create certifications
+  // we don't know what ID will MongoDB use
+  _id?: Types.ObjectId;
+
+  tutorial: Types.ObjectId;
+
+  // FIXME
+  // We should merge the concepts of Tutorial and Challenge. They are very similar.
+  // When we do this, remove this code. We added it because we had no time left to
+  // properly implement this before Christmas Advent.
+  challenge: Types.ObjectId;
+
+  // UUID of the user that got the certification
+  user: Types.ObjectId;
+
+  // Nanos
+  timestamp: number;
+
+  // UUIDs of Lesson Exercises
+  // eslint-disable-next-line camelcase
+  lesson_exercises: Types.ObjectId[];
+
+  // eslint-disable-next-line camelcase
+  og_image?: string;
+
+  pdf?: string;
+}
 
 const CertificationSchema = new mongoose.Schema<CertificationI>({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
@@ -34,8 +62,8 @@ function sanitizeCertification(
   certification: Omit<CertificationI, 'user' | 'lesson_exercises' | 'challenge' | 'tutorial'> & {
     user: UserI;
     lesson_exercises: LessonExerciseI[];
-    challenge?: Schema.Types.ObjectId | ChallengeI;
-    tutorial?: Schema.Types.ObjectId | TutorialI;
+    challenge?: Types.ObjectId | ChallengeI;
+    tutorial?: Types.ObjectId | TutorialI;
   }
 ): API_CertificationI {
   return {
@@ -44,13 +72,13 @@ function sanitizeCertification(
     user: UserModel.sanitize(certification.user, SanitizeRole.PUBLIC),
     timestamp: certification.timestamp,
     lesson_exercises: certification.lesson_exercises.map(LessonExerciseModel.sanitize),
-    challenge: (certification.challenge === undefined || certification.challenge instanceof mongoose.Schema.Types.ObjectId)
+    challenge: (certification.challenge === undefined || certification.challenge instanceof mongoose.Types.ObjectId)
       ? undefined
       : {
         title: certification.challenge.title,
         challengeId: certification.challenge.challengeId
       },
-    tutorial: (certification.tutorial === undefined || certification.tutorial instanceof mongoose.Schema.Types.ObjectId)
+    tutorial: (certification.tutorial === undefined || certification.tutorial instanceof mongoose.Types.ObjectId)
       ? undefined
       : {
         name: certification.tutorial.name,

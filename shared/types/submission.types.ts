@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { UserI, API_UserI } from "./user.types";
+import { API_UserI } from "./user.types";
 import { API_LessonExerciseI } from "./lesson-exercise.types";
 
 export enum FeedbackType {

@@ -1,8 +1,8 @@
 require('dotenv').config();
 import { connectToDb } from '../database';
 import LessonModel from '../lesson/lesson.model';
+import { LessonI } from '../lesson/lesson.schema';
 import Tutorial from '../tutorial/tutorial.model';
-import { LessonI } from '../../shared/types/lesson.types';
 
 connectToDb()
   .then(main)

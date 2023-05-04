@@ -1,5 +1,5 @@
 import HttpService from './Http.service';
-import { LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
+import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
 interface NewExercisePayload {
   body: string;
@@ -50,7 +50,7 @@ class LessonExerciseService {
       .then((resp) => resp.json());
   }
 
-  static createExercise(payload: Omit<LessonExerciseI, '_id' | 'user'>): Promise<any> {
+  static createExercise(payload: Omit<API_LessonExerciseI, '_id' | 'user'>): Promise<any> {
     return HttpService
       .post(`${process.env.ENDPOINT}/lesson-exercises`, payload)
       .then((resp) => resp.json());

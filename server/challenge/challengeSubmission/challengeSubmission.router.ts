@@ -1,14 +1,13 @@
 import express, { Request, Response } from 'express';
-import Challenge from '../challenge.schema';
+import Challenge, { ChallengeI } from '../challenge.schema';
 import { ServerError } from '../../utils/ServerError';
-import { UserI } from '../../../shared/types/user.types';
-import { ChallengeI } from '../../../shared/types/challenge.types';
 import { PrivateMiddleware, PublicMiddleware } from '../../Middlewares';
 import {
   ChallengeSubmission,
   mapFromChallenge,
   mergeChallengeSubmission
 } from './challengeSubmission.model';
+import { UserI } from '../../user/user.schema';
 import FolderStructure from '../../../shared/utils/FolderStructure';
 import UserModel from '../../user/user.model';
 import { Certification } from '../../certification/certification.model';

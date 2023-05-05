@@ -1,4 +1,3 @@
-import { Types } from "mongoose";
 import { API_UserI } from "./user.types";
 import { API_LessonExerciseI } from "./lesson-exercise.types";
 
@@ -8,36 +7,6 @@ export enum FeedbackType {
   IMPROVEMENT = 'improvement',
 }
 
-export interface FeedbackI {
-  _id?: string;
-
-  type: FeedbackType,
-  body: string;
-  // eslint-disable-next-line camelcase
-  file_key: string;
-  position: number[];
-}
-
-export interface SubmissionI {
-  _id?: Types.ObjectId;
-
-  code: string;
-
-  user: Types.ObjectId;
-
-  assignee: Types.ObjectId;
-
-  exercise: Types.ObjectId;
-
-  status: SubmissionStatus;
-
-  feedbacks: FeedbackI[]
-
-  updatedAt: Date;
-
-  createdAt: Date;
-}
-
 export type API_SubmissionI = {
   _id: string;
   code: string;
@@ -45,18 +14,25 @@ export type API_SubmissionI = {
   exercise: API_LessonExerciseI;
   assignee: API_UserI;
   status: SubmissionStatus;
-  feedbacks: FeedbackI[];
+  feedbacks: API_FeedbackI[];
 }
 
-export interface SubmissionVersionI {
-  // TODO: is this the correct way of defining IDs?
-  // https://github.com/FrontEnd-ro/frontend.ro/issues/442
+export interface API_SubmissionVersionI {
   _id: string;
-  feedbacks: FeedbackI[];
+  feedbacks: API_FeedbackI[];
   code: string;
   approved: boolean;
   submission: string;
   createdAt: string;
+}
+
+export interface API_FeedbackI {
+  // When adding feedback the ID gets populated server side
+  _id?: string;
+  type: FeedbackType,
+  body: string;
+  file_key: string;
+  position: number[];
 }
 
 export enum SubmissionStatus {

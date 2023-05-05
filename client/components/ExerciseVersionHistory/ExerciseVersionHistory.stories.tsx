@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ExerciseVersion as ExerciseVersionComponent } from './ExerciseVersionHistory';
-import { FeedbackType, SubmissionVersionI } from '~/../shared/types/submission.types';
+import { FeedbackType, API_SubmissionVersionI } from '~/../shared/types/submission.types';
 
 export default {
   title: 'Exercise/Version',
@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof ExerciseVersionComponent> = (args) => (
 
 );
 
-const approvedVersion: SubmissionVersionI = {
+const approvedVersion: API_SubmissionVersionI = {
   _id: '_id',
   approved: true,
   feedbacks: [],
@@ -22,7 +22,7 @@ const approvedVersion: SubmissionVersionI = {
   submission: 'submission_id',
 };
 
-const rejectedVersion: SubmissionVersionI = {
+const rejectedVersion: API_SubmissionVersionI = {
   _id: '_id',
   approved: false,
   feedbacks: [{

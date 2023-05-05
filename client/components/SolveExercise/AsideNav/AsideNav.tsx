@@ -5,7 +5,7 @@ import {
   API_SubmissionI,
   FeedbackType,
   SubmissionStatus,
-  SubmissionVersionI,
+  API_SubmissionVersionI,
 } from '~/../shared/types/submission.types';
 import Link from '~/components/generic/Link';
 import ExerciseVersionHistory from '../../ExerciseVersionHistory';
@@ -14,7 +14,7 @@ import styles from './AsideNav.module.scss';
 
 interface Props {
   submissions: Pick<API_SubmissionI, 'status' | 'exercise' | 'feedbacks'>[];
-  versions: SubmissionVersionI[];
+  versions: API_SubmissionVersionI[];
   currentExerciseId?: string;
   lessonHref?: string;
 }
@@ -23,7 +23,7 @@ const AsideNav = ({
   currentExerciseId, submissions, versions, lessonHref,
 }: Props) => {
   const router = useRouter();
-  const versionHrefBuilder = (v: SubmissionVersionI) => ({
+  const versionHrefBuilder = (v: API_SubmissionVersionI) => ({
     query: {
       ...router.query,
       version: v._id,

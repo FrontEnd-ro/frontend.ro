@@ -9,13 +9,13 @@ import IDE from '../Editor/IDE/IDE';
 import { timeAgo } from '~/services/Utils';
 import FolderStructure from '~/../shared/utils/FolderStructure';
 import DiffEditorLazy from '../Editor/DiffEditor/DiffEditor.lazy';
-import { SubmissionVersionI } from '~/../shared/types/submission.types';
+import { API_SubmissionVersionI } from '~/../shared/types/submission.types';
 
 import styles from './SubmissionPreview.module.scss';
 
 interface Props {
   onClose: () => void;
-  submission: SubmissionVersionI;
+  submission: API_SubmissionVersionI;
   className?: string
   previousSubmissionCode?: string;
 }

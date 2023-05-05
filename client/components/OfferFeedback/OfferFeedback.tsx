@@ -12,7 +12,7 @@ import { timeAgo } from '~/services/Utils';
 import Markdown from '../Markdown';
 import Link from '~/components/generic/Link';
 import CompleteEditorLazy from '../Editor/CompleteEditor/CompleteEditor.lazy';
-import { FeedbackType, SubmissionVersionI, SubmissionStatus } from '~/../shared/types/submission.types';
+import { FeedbackType, API_SubmissionVersionI, SubmissionStatus } from '~/../shared/types/submission.types';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import { removeSubmission } from '~/redux/exercise-submissions/exercise-submissions.actions';
 
@@ -47,7 +47,7 @@ function OfferFeedback({
   const [isSendingFeedback, setIsSendingFeedback] = useState(false);
   const [submission, setSubmission] = useState<Submission>(null);
   const [feedbacks, setFeedbacks] = useState([]);
-  const [versions, setVersions] = useState<SubmissionVersionI[]>([]);
+  const [versions, setVersions] = useState<API_SubmissionVersionI[]>([]);
 
   const isCorrect = feedbacks.find((f) => f.type === FeedbackType.IMPROVEMENT) === undefined;
   const authorNameOrUsername = submission

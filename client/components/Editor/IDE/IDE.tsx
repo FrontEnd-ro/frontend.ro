@@ -4,7 +4,7 @@ import ReactHeight from '~/services/HOCs';
 import { BasicEditor } from '../BasicEditor';
 import { BasicEditorProps } from '../BasicEditor/BasicEditor';
 import EditorExplorer from '../EditorExplorer/EditorExplorer';
-import { FeedbackI } from '~/../shared/types/submission.types';
+import { API_FeedbackI } from '~/../shared/types/submission.types';
 import FeedbackZone from '~/components/FeedbackZone/FeedbackZone';
 import { TypeDefinition } from '~/../shared/types/challenge.types';
 import FolderStructure, { useFolderStructure } from '~/../shared/utils/FolderStructure';
@@ -21,7 +21,7 @@ interface Props {
   typeDefinitions?: TypeDefinition[];
   filesThatCanBeEdited?: string[];
   theme?: Theme;
-  feedbacks?: FeedbackI[];
+  feedbacks?: API_FeedbackI[];
   onFeedbackDone?: (feedbackId: string) => Promise<void>;
   onFolderStructureChange?: (folderStructure: FolderStructure) => void;
   readOnlyTooltipMessage?: string;

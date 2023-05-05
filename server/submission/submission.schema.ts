@@ -1,5 +1,35 @@
-import mongoose from 'mongoose';
-import { SubmissionI, SubmissionStatus } from '../../shared/types/submission.types';
+import mongoose, { Types } from 'mongoose';
+import { FeedbackType, SubmissionStatus } from '../../shared/types/submission.types';
+
+export interface FeedbackI {
+  _id?: Types.ObjectId;
+
+  type: FeedbackType,
+  body: string;
+  // eslint-disable-next-line camelcase
+  file_key: string;
+  position: number[];
+}
+
+export interface SubmissionI {
+  _id?: Types.ObjectId;
+
+  code: string;
+
+  user: Types.ObjectId;
+
+  assignee: Types.ObjectId;
+
+  exercise: Types.ObjectId;
+
+  status: SubmissionStatus;
+
+  feedbacks: FeedbackI[]
+
+  updatedAt: Date;
+
+  createdAt: Date;
+}
 
 const FeedbackSchema = new mongoose.Schema(
   {

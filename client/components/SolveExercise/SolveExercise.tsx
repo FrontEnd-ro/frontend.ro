@@ -17,7 +17,7 @@ import SubmissionService from '~/services/api/Submission.service';
 import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 import { API_UserI } from '~/../shared/types/user.types';
 import {
-  SubmissionStatus, SubmissionVersionI, FeedbackI, API_SubmissionI,
+  SubmissionStatus, API_SubmissionVersionI, API_FeedbackI, API_SubmissionI,
 } from '~/../shared/types/submission.types';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
@@ -52,7 +52,7 @@ interface Submission {
   code: string;
   assignee: API_UserI;
   status: SubmissionStatus;
-  feedbacks: FeedbackI[]
+  feedbacks: API_FeedbackI[]
 }
 
 enum AutoSave {
@@ -72,7 +72,7 @@ function SolveExercise({
   const router = useRouter();
   const { lang } = useTranslation('common');
   const [submission, setSubmission] = useState<Submission>(null);
-  const [versions, setVersions] = useState<SubmissionVersionI[]>([]);
+  const [versions, setVersions] = useState<API_SubmissionVersionI[]>([]);
   const [fetchError, setFetchError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [autoSaved, setAutoSaved] = useState<AutoSave>(AutoSave.NONE);

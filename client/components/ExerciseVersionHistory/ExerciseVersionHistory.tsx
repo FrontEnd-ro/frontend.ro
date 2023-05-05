@@ -9,13 +9,13 @@ import Link from '~/components/generic/Link';
 import List from '../List';
 import { timeAgo } from '~/services/Utils';
 import RoutingUtils from '~/services/utils/Routing.utils';
-import { SubmissionVersionI } from '~/../shared/types/submission.types';
+import { API_SubmissionVersionI } from '~/../shared/types/submission.types';
 
 import styles from './ExerciseVersionHistory.module.scss';
 
 interface ExerciseVersionHistoryProps {
-  versions: SubmissionVersionI[];
-  hrefBuilder: (v: SubmissionVersionI) => UrlObject;
+  versions: API_SubmissionVersionI[];
+  hrefBuilder: (v: API_SubmissionVersionI) => UrlObject;
 }
 
 const ExerciseVersionHistory = ({ versions, hrefBuilder }: ExerciseVersionHistoryProps) => {
@@ -51,7 +51,7 @@ const ExerciseVersionHistory = ({ versions, hrefBuilder }: ExerciseVersionHistor
 interface ExerciseVersionProps {
   index: number;
   href: string | UrlObject;
-  version: SubmissionVersionI;
+  version: API_SubmissionVersionI;
   isActive: boolean;
   className?: string;
 }

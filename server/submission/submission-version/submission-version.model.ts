@@ -13,9 +13,17 @@
  * Thus, we decided to go with variant 2: a separate collection.
  * 
  */
-import mongoose from 'mongoose';
-import { FeedbackSchema } from '../submission.schema';
-import { SubmissionVersionI } from '../../../shared/types/submission.types';
+import mongoose, { Types } from 'mongoose';
+import { FeedbackI, FeedbackSchema } from '../submission.schema';
+
+export interface SubmissionVersionI {
+  _id?: Types.ObjectId;
+  feedbacks: FeedbackI[];
+  code: string;
+  approved: boolean;
+  submission: string;
+  createdAt: string;
+}
 
 const SubmissionVersionSchema = new mongoose.Schema(
   {

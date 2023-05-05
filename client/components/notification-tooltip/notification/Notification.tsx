@@ -2,12 +2,12 @@ import React from 'react';
 import { format } from 'date-fns';
 import Link from '~/components/generic/Link';
 import { timeAgo } from '../../../services/Utils';
-import { ParsedNotificationI } from '~/../shared/types/notification.types';
+import { API_NotificationI } from '~/../shared/types/notification.types';
 
 import styles from './Notification.module.scss';
 
 interface Props {
-  notification: ParsedNotificationI,
+  notification: API_NotificationI,
 }
 
 const Notification = ({

@@ -1,5 +1,5 @@
 import { API_UserI, UserRole } from '~/../shared/types/user.types';
-import { ParsedNotificationI } from '~/../shared/types/notification.types';
+import { API_NotificationI } from '~/../shared/types/notification.types';
 import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
 export interface UserState {
@@ -8,7 +8,7 @@ export interface UserState {
 }
 
 export interface Notifications {
-  list: ParsedNotificationI[];
+  list: API_NotificationI[];
   unreadCount: number;
   page: number;
   end: boolean;

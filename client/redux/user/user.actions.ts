@@ -1,4 +1,4 @@
-import { ParsedNotificationI } from '../../../shared/types/notification.types';
+import { API_NotificationI } from '../../../shared/types/notification.types';
 
 const LOAD_INFO = 'user/LOAD_INFO';
 const STARTED_TUTORIAL = 'user/STARTED_TUTORIAL';
@@ -35,7 +35,7 @@ export const loadInfo = (info: any) => ({
 
 /** Notifications */
 export const addNotification = (
-  notification: ParsedNotificationI | ParsedNotificationI[], index = 0,
+  notification: API_NotificationI | API_NotificationI[], index = 0,
 ) => ({
   type: ADD_NOTIFICATIONS,
   payload: {
@@ -44,14 +44,14 @@ export const addNotification = (
   },
 });
 
-export const loadNotificationsSuccess = (newNotifications: ParsedNotificationI[]) => ({
+export const loadNotificationsSuccess = (newNotifications: API_NotificationI[]) => ({
   type: LOAD_NOTIFICATIONS,
   payload: {
     newNotifications,
   },
 });
 
-export const replaceNotificationsSuccess = (notifications: ParsedNotificationI[]) => ({
+export const replaceNotificationsSuccess = (notifications: API_NotificationI[]) => ({
   type: REPLACE_NOTIFICATIONS,
   payload: {
     notifications,

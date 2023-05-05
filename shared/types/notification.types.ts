@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { Types } from 'mongoose';
+import { API_UserI } from './user.types';
 
 /** *************************** Notifications */
 export enum NotificationType {
@@ -77,14 +78,21 @@ export interface NotificationI {
   tags?: Map<string, string>
 }
 
-// On the FrontEnd side we parse the above notification
-// and insert aditinal info about the sender.
-export type ParsedNotificationI = Omit<NotificationI, 'to' | 'from'> & {
-  from?: {
-    username: string;
-    name?: string;
-    avatar: string;
-  }
+export type API_NotificationI = {
+  _id?: string;
+  to: API_UserI;
+  type: NotificationType;
+  title: string;
+  short_message: string;
+  long_message: string;
+  timestamp: number;
+  urgency: NotificationUrgency;
+  read?: boolean;
+  href?: string;
+  href_text?: string;
+  from?: API_UserI;
+  channels?: NotificationChannel[];
+  tags?: Map<string, string>
 }
 
 type NotificationTemplateModelBase = {

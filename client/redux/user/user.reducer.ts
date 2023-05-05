@@ -1,4 +1,4 @@
-import { ParsedNotificationI } from '~/../shared/types/notification.types';
+import { API_NotificationI } from '~/../shared/types/notification.types';
 import { UserState } from './types';
 import { USER_INFO, USER_NOTIFICATIONS } from './user.actions';
 
@@ -40,7 +40,7 @@ export const userReducer = (state = initialState, action: { type: string; payloa
         index,
         notifications,
       }: {
-        index: number, notifications: ParsedNotificationI | ParsedNotificationI[]
+        index: number, notifications: API_NotificationI | API_NotificationI[]
       } = action.payload;
 
       if (!Array.isArray(notifications)) {
@@ -82,7 +82,7 @@ export const userReducer = (state = initialState, action: { type: string; payloa
     }
 
     case USER_NOTIFICATIONS.REPLACE: {
-      const { notifications }: {notifications: ParsedNotificationI[]} = action.payload;
+      const { notifications }: {notifications: API_NotificationI[]} = action.payload;
 
       return {
         ...state,
@@ -152,7 +152,7 @@ export const userReducer = (state = initialState, action: { type: string; payloa
 };
 export default userReducer;
 
-function getUnreadCount(notifications: ParsedNotificationI[]) {
+function getUnreadCount(notifications: API_NotificationI[]) {
   return notifications.reduce((acc, cur) => {
     if (!cur.read) {
       return acc + 1;

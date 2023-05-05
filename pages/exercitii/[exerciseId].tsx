@@ -2,11 +2,11 @@ import NotFoundPage from '../404';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
-import { LessonExercise } from '~/redux/user/types';
 import { ViewOrEditExercise } from '~/components/create-view-edit-exercise';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
+import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
-function EditExercisePage({ exercise }: { exercise?: LessonExercise }) {
+function EditExercisePage({ exercise }: { exercise?: API_LessonExerciseI }) {
   const authorNameOrUsername = exercise?.user?.name || exercise?.user?.username;
   const exerciseChapter = exercise?.type;
 

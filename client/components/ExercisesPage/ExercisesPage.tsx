@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Link from '~/components/generic/Link';
 import { Submission } from '~/redux/exercise-submissions/types';
-import { LessonExercise } from '~/redux/user/types';
 import { getLessons } from '~/curriculum/Curriculum';
 import SubmissionService from '~/services/api/Submission.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
@@ -12,13 +11,14 @@ import Spinner from '../Spinner';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 import { RootState } from '~/redux/root.reducer';
 import { useTranslation } from '~/services/typesafeNextTranslate';
+import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
 import styles from './ExercisesPage.module.scss';
 
 function ExercisesPage({ user }: ConnectedProps<typeof connector>) {
   const { lang } = useTranslation('common');
   const [submissions, setSubmissions] = useState<Submission[]>(undefined);
-  const [lessonExercises, setLessonExercises] = useState<LessonExercise[]>(undefined);
+  const [lessonExercises, setLessonExercises] = useState<API_LessonExerciseI[]>(undefined);
 
   const isLoggedIn = !!user.info;
 

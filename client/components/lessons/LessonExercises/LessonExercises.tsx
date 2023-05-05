@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Link from '~/components/generic/Link';
 import { ConnectedProps, connect } from 'react-redux';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
-import { LessonExercise } from '~/redux/user/types';
 import ExercisePreview from '~/components/ExercisePreview';
 import { RootState } from '~/redux/root.reducer';
 import { Submission } from '~/redux/exercise-submissions/types';
 import { SubmissionStatus } from '~/../shared/types/submission.types';
 import SubmissionService from '~/services/api/Submission.service';
 import { SkeletonRect } from '~/components/SkeletonScreens';
+import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
 import styles from './LessonExercises.module.scss';
 
@@ -21,7 +21,7 @@ function LessonExercises({ user, lessonId, tutorialId }: Props & ConnectedProps<
   const isLoggedIn = !!user.info;
 
   const [submissions, setSubmissions] = useState<Submission[]>(undefined);
-  const [exercises, setExercises] = useState<LessonExercise[]>(undefined);
+  const [exercises, setExercises] = useState<API_LessonExerciseI[]>(undefined);
   const isFetching = !Array.isArray(exercises) || !Array.isArray(submissions);
 
   useEffect(() => {

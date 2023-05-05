@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import { RootState } from '~/redux/root.reducer';
-import { LessonExercise } from '~/redux/user/types';
 import FolderStructure from '~/../shared/utils/FolderStructure';
 import {
   FileDictionary,
@@ -24,12 +23,12 @@ import editCover from './coding.svg';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import Button from '~/components/Button';
-import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
+import { API_LessonExerciseI, ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
 function ViewOrEditExercise({
   exercise,
   userInfo,
-}: ConnectedProps<typeof connector> & { exercise: LessonExercise }) {
+}: ConnectedProps<typeof connector> & { exercise: API_LessonExerciseI }) {
   const isOwnExercise = userInfo && (userInfo.username === exercise.user.username);
   const nameOrUsername = exercise.user.name || exercise.user.username;
 

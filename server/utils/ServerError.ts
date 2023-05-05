@@ -93,6 +93,7 @@ const MESSAGES = {
       "username_restricted": "This username is restricted, so you cannot use it."
     },
     "subscribe": {
+      "bad_format": "Name and email must be strings.",
       "required_fields": "Your email and name are required!",
       "already_an_user": "You're already an so that means you're also subscribed to all our news.",
       "already_subscribed": "Hmm, are you trying to subscribe to our newsletter again...🤔"
@@ -174,6 +175,7 @@ const MESSAGES = {
       "username_restricted": "Acest username e restricționat, deci nu-l poți folosi."
     },
     "subscribe": {
+      "bad_format": "Email-ul și numele trebuie să fie stringuri.",
       "required_fields": "Email-ul și numele tău sunt obligatorii!",
       "already_an_user": "Ești deja înregistrat ca utilizator!",
       "already_subscribed": "Hmm, încerci să te abonezi încă o data...🤔"

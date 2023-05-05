@@ -27,6 +27,7 @@ import challengeRouter from './challenge/challenge.router';
 import challengeSubmissionRouter from './challenge/challengeSubmission/challengeSubmission.router';
 import { adminSubmissionRouter } from './submission/admin-submission.router';
 import lessonExerciseRouter from './lesson-exercise/lesson-exercise.router';
+import subscriberRouter from './subscribe/subscribe.router';
 
 const port = appConfig.APP.port || appConfig.APP.default_port;
 const app = express();
@@ -65,6 +66,7 @@ app.use('/api/notifications', notificationRouter);
 app.use('/api/certifications', certificationRouter);
 app.use('/api/tutorials', tutorialRouter);
 app.use('/api/tidbits', tidbitRouter);
+app.use('/api/subscribe', subscriberRouter);
 
 connectToDb()
   .catch(err => {

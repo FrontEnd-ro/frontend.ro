@@ -7,7 +7,6 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import UserModel from './user.model';
 import appConfig from '../config';
 import { UserI } from './user.schema';
-import SubscribeModel from '../subscribe.model';
 import { ServerError } from '../utils/ServerError';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import { PrivateMiddleware, PublicMiddleware } from '../Middlewares';
@@ -419,48 +418,6 @@ userRouter.post('/avatar', [PrivateMiddleware], function uploadAvatar(
       console.log('[s3Upload]', err);
       new ServerError(500, err.message || 'Oops! Se pare că nu am putut încărca fișierele. Încearcă din nou.').send(res);
     }
-  });
-})
-
-userRouter.post('/subscribe', async (
-  req: Request<{}, {}, { name: string; email: string; }>,
-  res: Response<{ name: string; email: string; }>
-) => {
-  const { name, email } = req.body;
-
-  if (!name || !email) {
-    new ServerError(400, 'subscribe.required_fields').send(res);
-    return;
-  }
-
-  const alreadyRegistered = await UserModel.findUserBy({ email });
-  if (alreadyRegistered) {
-    new ServerError(400, 'subscribe.already_an_user').send(res);
-    return;
-  }
-
-  const alreadySubscribed = await SubscribeModel.exists(email);
-  if (alreadySubscribed) {
-    new ServerError(400, 'subscribe.already_subscribed').send(res);
-    return;
-  }
-
-  await SubscribeModel.subscribe({ name, email });
-
-  // No "await" here since the email is not
-  // critical for the continuation of the flow.
-  EmailService.sendTemplateWithAlias(
-    email,
-    EMAIL_TEMPLATE.REGISTER,
-    {
-      name,
-      sender_name: 'Păvă'
-    }
-  );
-
-  res.json({
-    name,
-    email,
   });
 })
 

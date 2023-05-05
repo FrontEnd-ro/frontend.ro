@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UserService from '~/services/api/User.service';
+import SubscribeService from '~/services/api/Subscribe.service';
 import Button from '~/components/Button';
 import styles from './SubscribeForm.module.scss';
 import { Trans, useTranslation } from '~/services/typesafeNextTranslate';
@@ -36,7 +36,7 @@ function SubscribeForm({ className = '' }: { className?: string }) {
     };
 
     /** Subscribing in a different database until we set ours up */
-    UserService.subscribe(body)
+    SubscribeService.subscribe(body)
       .then(() => {
         setDidSubscribe(true);
       })

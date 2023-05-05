@@ -2,8 +2,8 @@ require('dotenv').config();
 import { connectToDb } from '../database';
 import UserModel from '../user/user.model';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
-import SubscriberModel from '../subscribe.model';
 import appConfig from '../config';
+import { Subscriber } from '../subscribe/subscribe.schema';
 
 connectToDb()
   .then(main)
@@ -23,7 +23,7 @@ async function main() {
 
   try {
     const users = await UserModel.search();
-    const subscribers = await SubscriberModel.listAll();
+    const subscribers = await Subscriber.find({});
 
     console.log(`${SPAN} Got ${users.length} users and ${subscribers.length} subscribers.`);
 

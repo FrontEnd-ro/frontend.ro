@@ -6,7 +6,6 @@ import Tutorial, { TutorialI } from '../../../server/tutorial/tutorial.model';
 import NotificationModel from '../../../server/notification/notification.model';
 import { SubmissionStatus, SubmissionI } from '../../../shared/types/submission.types';
 import {
-  NotificationI,
   NotificationChannel,
   NotificationType,
   NotificationUrgency,
@@ -15,6 +14,7 @@ import SubmissionModel from '../../../server/submission/submission.model';
 import { UserI } from '../../../server/user/user.schema';
 import { LessonI } from '../../../server/lesson/lesson.schema';
 import { LessonExerciseI } from '../../../server/lesson-exercise/lesson-exercise.schema';
+import { NotificationI } from '../../../server/notification/notification.schema';
 
 exports.handler = run;
 

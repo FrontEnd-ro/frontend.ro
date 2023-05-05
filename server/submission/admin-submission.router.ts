@@ -9,7 +9,8 @@ import { findTutorialIdByLessonId } from '../tutorial/tutorial.model';
 import { maybeCreateCertification } from '../certification/certification.router';
 import { SubmissionVersion } from './submission-version/submission-version.model';
 import { SubmissionStatus } from '../../shared/types/submission.types';
-import { NotificationChannel, NotificationI, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
+import { NotificationChannel, NotificationType, NotificationUrgency } from "../../shared/types/notification.types";
+import { NotificationI } from '../notification/notification.schema';
 
 const adminSubmissionRouter = express.Router();
 

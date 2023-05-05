@@ -9,8 +9,8 @@ import appConfig from '../config';
 import UserModel from '../user/user.model';
 import EmailService, { EMAIL_TEMPLATE } from '../Email.service';
 import { validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
-import { Notification, NotificationSchema } from './notification.schema';
-import { NotificationChannel, NotificationTemplateModel, NotificationI } from '../../shared/types/notification.types';
+import { Notification, NotificationI, NotificationSchema, NotificationTemplateModel } from './notification.schema';
+import { NotificationChannel } from '../../shared/types/notification.types';
 
 class NotificationModel {
   static getById(notificationId: string) {

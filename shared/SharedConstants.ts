@@ -13,7 +13,7 @@ const APIErrorReasons = {
 
 // Use NodeJS style exports because this file is consumed
 // both from the server & client
-module.exports = {
+export {
   MAX_MEDIA_MB,
   MAX_MEDIA_BYTES,
   APIErrorReasons,

@@ -23,7 +23,7 @@ import {
 import { withAuthModal } from '~/services/Hooks';
 import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
-function NewExercise({ user }: ConnectedProps<typeof connector>) {
+function CreateExercise({ user }: ConnectedProps<typeof connector>) {
   const router = useRouter();
 
   const markdownWrapper = useRef(null);
@@ -230,4 +230,4 @@ function mapStateToProps(state: RootState) {
 
 const connector = connect(mapStateToProps);
 
-export default connector(NewExercise);
+export default connector(CreateExercise);

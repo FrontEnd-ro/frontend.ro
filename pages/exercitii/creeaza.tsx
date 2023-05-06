@@ -8,9 +8,9 @@ import { useLoggedInOnly } from '~/services/Hooks';
 import { ConnectedProps, connect } from 'react-redux';
 import { UserRole } from '~/../shared/types/user.types';
 import NotFoundPage from '~/components/NotFound/NotFound';
-import { NewExercise } from '~/components/create-edit-exercise';
+import { CreateExercise } from '~/components/create-edit-exercise';
 
-function NewExercisePage({ isLoggedIn, userInfo }: ConnectedProps<typeof connector>) {
+function CreateExercisePage({ isLoggedIn, userInfo }: ConnectedProps<typeof connector>) {
   const router = useRouter();
   useLoggedInOnly(isLoggedIn, router.asPath);
 
@@ -32,7 +32,7 @@ function NewExercisePage({ isLoggedIn, userInfo }: ConnectedProps<typeof connect
       />
       <>
         <Header withNavMenu />
-        <NewExercise />
+        <CreateExercise />
         <Footer />
       </>
     </>
@@ -48,4 +48,4 @@ function mapStateToProps(state: RootState) {
 
 const connector = connect(mapStateToProps);
 
-export default connector(NewExercisePage);
+export default connector(CreateExercisePage);

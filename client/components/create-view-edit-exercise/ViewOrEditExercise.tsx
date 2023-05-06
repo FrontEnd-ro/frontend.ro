@@ -24,12 +24,13 @@ import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import Button from '~/components/Button';
 import { API_LessonExerciseI, ExerciseType } from '~/../shared/types/lesson-exercise.types';
+import { UserRole } from '~/../shared/types/user.types';
 
 function ViewOrEditExercise({
   exercise,
   userInfo,
 }: ConnectedProps<typeof connector> & { exercise: API_LessonExerciseI }) {
-  const isOwnExercise = userInfo && (userInfo.username === exercise.user.username);
+  const isAdmin = userInfo?.role === UserRole.ADMIN;
   const nameOrUsername = exercise.user.name || exercise.user.username;
 
   const [body, setBody] = useState(exercise.body);
@@ -198,7 +199,7 @@ function ViewOrEditExercise({
   return (
     <div>
       <section className={`${styles.cta} relative`}>
-        {isOwnExercise ? (
+        {isAdmin ? (
           <div>
             <h1> Modifică exercițiul </h1>
             <h2>
@@ -235,7 +236,7 @@ function ViewOrEditExercise({
         )}
         {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{
-          __html: isOwnExercise ? editCover : viewCover,
+          __html: isAdmin ? editCover : viewCover,
         }}
         />
       </section>
@@ -244,7 +245,7 @@ function ViewOrEditExercise({
           <div ref={markdownWrapper}>
             <MarkdownTextarea
               title="Descrie exercițiul"
-              disabled={!isOwnExercise}
+              disabled={!isAdmin}
               markdown={body}
               initialTab="PREVIEW"
               onInput={onMarkdownInput}
@@ -266,12 +267,12 @@ function ViewOrEditExercise({
               <h3> Cod de început</h3>
               <DeprecatedBasicEditor
                 ref={exampleRef}
-                readOnly={!isOwnExercise}
+                readOnly={!isAdmin}
                 folderStructure={exerciseBody}
               />
             </>
           )}
-          {(!exerciseBody && isOwnExercise && !showExampleEditor) && (
+          {(!exerciseBody && isAdmin && !showExampleEditor) && (
             <Button
               variant="light"
               onClick={() => setShowExampleEditor(true)}
@@ -279,12 +280,12 @@ function ViewOrEditExercise({
               Adaugă cod de început
             </Button>
           )}
-          {(!exerciseBody && isOwnExercise && showExampleEditor) && (
+          {(!exerciseBody && isAdmin && showExampleEditor) && (
             <>
               <h3> Cod de început</h3>
               <DeprecatedBasicEditor
                 ref={exampleRef}
-                readOnly={!isOwnExercise}
+                readOnly={!isAdmin}
                 folderStructure={exerciseBody}
               />
             </>
@@ -295,7 +296,7 @@ function ViewOrEditExercise({
           <h3> Soluție</h3>
           <DeprecatedBasicEditor
             ref={solutionRef}
-            readOnly={!isOwnExercise}
+            readOnly={!isAdmin}
             folderStructure={exerciseSolution}
           />
           {solutionError && (
@@ -305,7 +306,7 @@ function ViewOrEditExercise({
           )}
         </section>
 
-        {isOwnExercise && (
+        {isAdmin && (
           <>
             <ChapterControls form="createForm" />
             <footer className="d-flex align-items-center justify-content-between">

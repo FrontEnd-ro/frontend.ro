@@ -7,7 +7,7 @@ import MarkdownTextarea from '../MarkdownTextarea';
 import { RootState } from '~/redux/root.reducer';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
-import styles from './NewExercise.module.scss';
+import styles from './create-edit-exercise.module.scss';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';

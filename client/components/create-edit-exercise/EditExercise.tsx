@@ -15,7 +15,7 @@ import MarkdownTextarea from '../MarkdownTextarea';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 
-import styles from './NewExercise.module.scss';
+import styles from './create-edit-exercise.module.scss';
 
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';

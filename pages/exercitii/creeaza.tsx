@@ -1,10 +1,27 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
+import { RootState } from '~/redux/root.reducer';
+import { useLoggedInOnly } from '~/services/Hooks';
+import { ConnectedProps, connect } from 'react-redux';
+import { UserRole } from '~/../shared/types/user.types';
+import NotFoundPage from '~/components/NotFound/NotFound';
 import { NewExercise } from '~/components/create-view-edit-exercise';
 
-export default function NewExercisePage() {
+function NewExercisePage({ isLoggedIn, userInfo }: ConnectedProps<typeof connector>) {
+  const router = useRouter();
+  useLoggedInOnly(isLoggedIn, router.asPath);
+
+  if (!isLoggedIn) {
+    return null;
+  }
+
+  if (userInfo?.role !== UserRole.ADMIN) {
+    return <NotFoundPage />
+  }
+
   return (
     <>
       <SEOTags
@@ -21,3 +38,14 @@ export default function NewExercisePage() {
     </>
   );
 }
+
+function mapStateToProps(state: RootState) {
+  return {
+    isLoggedIn: !!state.user.info,
+    userInfo: state.user.info,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
+export default connector(NewExercisePage);

@@ -78,20 +78,6 @@
     border-top: 1px solid color(silver);
   }
 
-  .avatar {
-    border-radius: 50%;
-    height: 100%;
-    margin-right: 0.5em;
-    vertical-align: middle;
-    display: inline-block;
-    float: none;
-
-    img {
-      height: 2em;
-      border-radius: 50%;
-    }
-  }
-
   &.is--done footer,
   &.is--waiting footer,
   &.has--issues footer {

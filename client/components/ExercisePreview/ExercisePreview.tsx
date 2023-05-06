@@ -56,18 +56,9 @@ function ExercisePreview({
         variant="transparent"
       />
       <footer className="d-flex align-items-center justify-content-between flex-wrap">
-        <>
-          {viewMode === 'STUDENT' && infoMessage && (
-            <span>
-              {infoMessage}
-            </span>
-          )}
-          {(viewMode === 'TEACHER' || !infoMessage) && (
-            <Link className={styles.avatar} href={`/${exercise.user.username}`}>
-              <img src={exercise.user.avatar} alt="Author avatar" />
-            </Link>
-          )}
-        </>
+        <span>
+          {viewMode === 'STUDENT' && infoMessage && infoMessage}
+        </span>
         <Link
           href={href}
           className="d-flex"

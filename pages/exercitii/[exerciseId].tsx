@@ -2,15 +2,22 @@ import NotFoundPage from '../404';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
+import { RootState } from '~/redux/root.reducer';
+import { ConnectedProps, connect } from 'react-redux';
+import { UserRole } from '~/../shared/types/user.types';
 import { ViewOrEditExercise } from '~/components/create-view-edit-exercise';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
-function EditExercisePage({ exercise }: { exercise?: API_LessonExerciseI }) {
+function EditExercisePage({ exercise, userInfo }: ConnectedProps<typeof connector> & { exercise?: API_LessonExerciseI }) {
   const authorNameOrUsername = exercise?.user?.name || exercise?.user?.username;
   const exerciseChapter = exercise?.type;
 
-  return exercise ? (
+  if (userInfo?.role !== UserRole.ADMIN || !exercise) {
+    return <NotFoundPage />
+  }
+
+  return (
     <>
       <SEOTags
         title={`Exercițiu ${exerciseChapter.toUpperCase()} | FrontEnd.ro`}
@@ -25,11 +32,19 @@ function EditExercisePage({ exercise }: { exercise?: API_LessonExerciseI }) {
         <Footer />
       </>
     </>
-
-  ) : <NotFoundPage />;
+  );
 }
 
-export default EditExercisePage;
+
+function mapStateToProps(state: RootState) {
+  return {
+    userInfo: state.user.info,
+  };
+}
+
+const connector = connect(mapStateToProps);
+
+export default connector(EditExercisePage);
 
 export async function getServerSideProps({ req, res, params }) {
   const { token } = req.cookies;

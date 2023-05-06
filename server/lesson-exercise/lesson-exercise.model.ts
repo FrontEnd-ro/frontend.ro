@@ -1,22 +1,24 @@
+import { Types } from 'mongoose';
 import UserModel from '../user/user.model';
-import mongoose, { Document } from 'mongoose';
 import { ServerError } from '../utils/ServerError';
 import { UserI } from '../user/user.schema';
-import { LessonExercisesSchema, LessonExercise } from "./lesson-exercise.schema";
+import { LessonI } from '../lesson/lesson.schema';
+import { LessonExercisesSchema, LessonExercise, LessonExerciseI } from "./lesson-exercise.schema";
 import { SanitizeRole, validateAgainstSchemaProps, validateObjectId } from '../ServerUtils';
+import { API_LessonExerciseI } from '../../shared/types/lesson-exercise.types';
 
 class LessonExerciseModel {
-  static get(_id) {
+  static get(_id: string) {
     validateObjectId(_id);
 
     return LessonExercise
       .findById(_id)
-      .populate('user');
+      .populate<{ user: UserI }>('user');
   }
 
   static async getCount(lessonId: string) {
     const count = await LessonExercise
-      .find({ lesson: lessonId })
+      .find<{ lesson: LessonI }>({ lesson: lessonId })
       .count();
 
     return count;
@@ -30,7 +32,7 @@ class LessonExerciseModel {
     return lessons;
   }
 
-  static async getAllFromLesson(lessonId) {
+  static async getAllFromLesson(lessonId: string) {
     const lessons = await LessonExercise
       .find({ lesson: lessonId })
       .populate<{ user: UserI }>('user');
@@ -38,12 +40,15 @@ class LessonExerciseModel {
     return lessons;
   }
 
-  static create(payload) {
+  static async create(payload: LessonExerciseI) {
     validateAgainstSchemaProps(payload, LessonExercisesSchema);
-    return new LessonExercise(payload).save();
+    const createdExercise = await new LessonExercise(payload).save();
+    const createdExerciseWithUser = await createdExercise.populate<{ user: UserI }>('user');
+
+    return createdExerciseWithUser;
   }
 
-  static async update(_id, payload) {
+  static async update(_id: string, payload: LessonExerciseI) {
     validateObjectId(_id);
     const exercise = await LessonExercise.findById(_id);
 
@@ -57,7 +62,7 @@ class LessonExerciseModel {
     return exercise.save();
   }
 
-  static async delete(_id): Promise<void> {
+  static async delete(_id: string): Promise<void> {
     validateObjectId(_id);
 
     const exercise = await LessonExercise.findById(_id);
@@ -69,20 +74,19 @@ class LessonExerciseModel {
     await exercise.deleteOne();
   }
 
-  static sanitize(exercise) {
-    // TODO: decide on an approach to use among all schema
-    // https://github.com/FrontEnd-ro/frontend.ro/issues/438
-    let sanitizedExercise = { ...exercise };
-    if (exercise instanceof mongoose.Document) {
-      sanitizedExercise = { ...exercise.toObject() };
+  static sanitize(exercise: Omit<LessonExerciseI, 'user'> & { user: Types.ObjectId | UserI }) : API_LessonExerciseI {
+    return {
+      _id: exercise._id.toString(),
+      body: exercise.body,
+      lesson: exercise.lesson,
+      solution: exercise.solution,
+      type: exercise.type,
+      user: exercise.user instanceof Types.ObjectId
+        ? undefined
+        : UserModel.sanitize(exercise.user, SanitizeRole.PUBLIC),
+      example: exercise.example,
+      suggestion: exercise.suggestion
     }
-    const propsToDelete = ['__v', 'updatedAt', 'createdAt'];
-
-    propsToDelete.forEach((prop) => delete sanitizedExercise[prop]);
-
-    sanitizedExercise.user = UserModel.sanitize(exercise.user, SanitizeRole.PUBLIC);
-
-    return JSON.parse(JSON.stringify(sanitizedExercise));
   }
 }
 

@@ -431,14 +431,6 @@ function SolveExercise({
           {' '}
           {submission.exercise.type.toUpperCase()}
         </h1>
-        <p className="m-0">
-          Creat de
-          {' '}
-          <Link href={`/${submission.exercise.user.username}`}>
-            {submission.exercise.user.name || submission.exercise.user.username}
-          </Link>
-
-        </p>
         <Markdown markdownString={submission.exercise.body} className={styles.bodyMarkdown} />
         <section>
           <h2> Rezolvă exercițiul </h2>

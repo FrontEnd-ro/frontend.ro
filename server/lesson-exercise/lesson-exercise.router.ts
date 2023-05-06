@@ -19,7 +19,8 @@ lessonExerciseRouter.get('/', [PublicMiddleware], async function getAllLessonExe
   const SPAN = 'getAllLessonExercises()';
   try {
     const result = await LessonExerciseModel.getAll();
-    res.json(result);
+    const sanitizedExercises = result.map(LessonExerciseModel.sanitize);
+    res.json(sanitizedExercises);
   } catch (err) {
     console.log(SPAN, err);
     new ServerError(500, 'generic.500').send(res);
@@ -36,7 +37,7 @@ lessonExerciseRouter.get('/:exerciseId', [PublicMiddleware], async function getL
     if (!result) {
       throw (new ServerError(404, 'generic.404', { exerciseId }));
     }
-    res.json(result);
+    res.json(LessonExerciseModel.sanitize(result));
   } catch (err) {
     console.log(SPAN, err);
     new ServerError(500, 'generic.500').send(res);
@@ -60,7 +61,7 @@ lessonExerciseRouter.get('/lesson/:lessonId', [PublicMiddleware], async function
       const submissionMatch = submissions.find(sub => sub.exercise._id.toString() === ex._id.toString());
 
       return {
-        ...ex.toObject(),
+        ...LessonExerciseModel.sanitize(ex),
         feedbackCount: submissionMatch?.feedbacks?.length ?? 0,
         isApproved: submissionMatch ? submissionMatch.status === SubmissionStatus.DONE : false
       }

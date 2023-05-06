@@ -40,38 +40,6 @@ $mobile-threshold: 950px;
   }
 }
 
-.cta {
-  @extend %containerConfig;
-  display: flex;
-  max-width: 1400px;
-
-  h1 {
-    margin-top: 1.5em;
-    font-size: calc(1.25em + 2vw);
-  }
-
-  h2 {
-    max-width: 75%;
-    font-size: calc(0.75em + 1vw);
-    font-weight: normal;
-  }
-
-  @media screen and (max-width: $mobile-threshold) {
-    flex-flow: column;
-
-    h2 {
-      max-width: 100%;
-    }
-
-    svg {
-      position: absolute;
-      right: -45%;
-      top: 90%;
-      height: 15em;
-    }
-  }
-}
-
 .example-wrapper {
   margin: 3em 0;
 

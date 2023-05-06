@@ -2,13 +2,11 @@ import React, { useRef, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import Form from '../Form';
-import Login from '../login';
 import Button from '~/components/Button';
 import MarkdownTextarea from '../MarkdownTextarea';
 import { RootState } from '~/redux/root.reducer';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 
-import svgCover from './dev-focus.svg';
 import styles from './NewExercise.module.scss';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import ChapterControls from './ChapterControls/ChapterControls';
@@ -37,7 +35,6 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
   const [solutionError, setSolutionError] = useState(false);
   const [showExampleEditor, setShowExampleEditor] = useState(false);
   const [showSolutionEditor, setShowSolutionEditor] = useState(false);
-  const [isPrivate, setIsPrivate] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [lesson, setLesson] = useState(null);
 
@@ -148,98 +145,80 @@ function NewExercise({ user }: ConnectedProps<typeof connector>) {
   };
 
   return (
-    <div>
-      <section className={`${styles.cta} relative`}>
+    <main className={styles['new-exercise']}>
+      <h1 className="mb-8"> Creează un nou exercițiu </h1>
+      <Form withStyles={false} onSubmit={withAuthModal(!!user.info, createExercise)} className="relative" id="createForm">
+        <div ref={markdownWrapper} className="relative">
+          <MarkdownTextarea
+            title="Descrie exercițiul"
+            markdown={body}
+            onUpload={(files, cursorPosition) => uploadFiles(
+              files, cursorPosition, body, updateMarkdownWithUploadedFiles,
+            )}
+            onInput={onMarkdownInput}
+          />
+          {bodyError && <p className={`${styles['error-message']} text-right text-bold absolute`}> Nu poți crea un exercițiu fără descriere 👆</p>}
+        </div>
+      </Form>
+      <div className={styles['example-wrapper']}>
+        {
+          showExampleEditor
+            ? (
+              <>
+                <h3> Cod de început </h3>
+                <DeprecatedBasicEditor ref={exampleRef} />
+              </>
+            )
+            : (
+              <Button
+                variant="light"
+                onClick={() => setShowExampleEditor(true)}
+              >
+                Adaugă cod de început
+              </Button>
+            )
+        }
+      </div>
+      <div className={`${styles['example-wrapper']} relative`}>
+        {
+          showSolutionEditor
+            ? (
+              <>
+                <h3> Soluție</h3>
+                <DeprecatedBasicEditor ref={solutionRef} />
+                {solutionError && (
+                  <p className={`${styles['error-message']} absolute text-right text-bold`}>
+                    Nu poți crea un exercițiu fără soluție 👆
+                  </p>
+                )}
+              </>
+            )
+            : (
+              <Button
+                variant="light"
+                className={`btn ${solutionError ? 'btn--danger' : 'btn--light'}`}
+                onClick={() => setShowSolutionEditor(true)}
+              >
+                Adaugă soluția exercițiului
+              </Button>
+            )
+        }
+      </div>
+      <ChapterControls form="createForm" />
+      <footer className="d-flex align-items-center justify-content-between">
+        <LessonSelect onChange={(value) => setLesson(value)} />
         <div>
-          <h1> Creează un nou exercițiu</h1>
-          <h2>
-            Îl poți folosi în propriile traininguri sau,
-            {' '}
-            <strong className="text-blue">dacă vrei să contribui la acest proiect</strong>
-            ,
-            sugerează acest exercițiu pentru una dintre lecțiile noastre.
-          </h2>
+          <Button
+            variant="blue"
+            form="createForm"
+            type="submit"
+            loading={isCreating}
+          >
+            Creează
+          </Button>
         </div>
-        {/* eslint-disable-next-line react/no-danger */}
-        <div dangerouslySetInnerHTML={{
-          __html: svgCover,
-        }}
-        />
-      </section>
-      <main className={styles['new-exercise']}>
-        <Form withStyles={false} onSubmit={withAuthModal(!!user.info, createExercise)} className="relative" id="createForm">
-          <div ref={markdownWrapper} className="relative">
-            <MarkdownTextarea
-              title="Descrie exercițiul"
-              markdown={body}
-              onUpload={(files, cursorPosition) => uploadFiles(
-                files, cursorPosition, body, updateMarkdownWithUploadedFiles,
-              )}
-              onInput={onMarkdownInput}
-            />
-            {bodyError && <p className={`${styles['error-message']} text-right text-bold absolute`}> Nu poți crea un exercițiu fără descriere 👆</p>}
-          </div>
-        </Form>
-        <div className={styles['example-wrapper']}>
-          {
-            showExampleEditor
-              ? (
-                <>
-                  <h3> Cod de început </h3>
-                  <DeprecatedBasicEditor ref={exampleRef} />
-                </>
-              )
-              : (
-                <Button
-                  variant="light"
-                  onClick={() => setShowExampleEditor(true)}
-                >
-                  Adaugă cod de început
-                </Button>
-              )
-          }
-        </div>
-        <div className={`${styles['example-wrapper']} relative`}>
-          {
-            showSolutionEditor
-              ? (
-                <>
-                  <h3> Soluție</h3>
-                  <DeprecatedBasicEditor ref={solutionRef} />
-                  {solutionError && (
-                    <p className={`${styles['error-message']} absolute text-right text-bold`}>
-                      Nu poți crea un exercițiu fără soluție 👆
-                    </p>
-                  )}
-                </>
-              )
-              : (
-                <Button
-                  variant="light"
-                  className={`btn ${solutionError ? 'btn--danger' : 'btn--light'}`}
-                  onClick={() => setShowSolutionEditor(true)}
-                >
-                  Adaugă soluția exercițiului
-                </Button>
-              )
-          }
-        </div>
-        <ChapterControls form="createForm" />
-        <footer className="d-flex align-items-center justify-content-between">
-          <LessonSelect onChange={(value) => setLesson(value)} />
-          <div>
-            <Button
-              variant="blue"
-              form="createForm"
-              type="submit"
-              loading={isCreating}
-            >
-              Creează
-            </Button>
-          </div>
-        </footer>
-      </main>
-    </div>
+      </footer>
+    </main>
   );
 }
 

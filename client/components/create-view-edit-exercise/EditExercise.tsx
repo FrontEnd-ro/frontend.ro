@@ -17,7 +17,6 @@ import LessonSelect from './LessonSelect/LessonSelect';
 
 import styles from './NewExercise.module.scss';
 
-import editCover from './coding.svg';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import Button from '~/components/Button';
@@ -38,7 +37,6 @@ function EditExercise({
   const [isDeleting, setIsDeleting] = useState(false);
 
   const [showExampleEditor, setShowExampleEditor] = useState(false);
-  const [showSolutionEditor, setShowSolutionEditor] = useState(false);
 
   const markdownWrapper = useRef(null);
   const [exampleRef, solutionRef] = [useRef(null), useRef(null)];
@@ -191,113 +189,98 @@ function EditExercise({
     : null;
 
   return (
-    <div>
-      <section className={`${styles.cta} relative`}>
-        <div>
-          <h1> Modifică exercițiul </h1>
-          <h2>
-            Dacă acest exercițiu este folosit într-una dintre lecții,
-            modificările tale vor avea efect abia după aprobarea unui admin.
-          </h2>
-        </div>
-        {/* eslint-disable-next-line react/no-danger */}
-        <div dangerouslySetInnerHTML={{
-          __html: editCover,
-        }}
-        />
-      </section>
-      <main className={styles['new-exercise']}>
-        <Form withStyles={false} onSubmit={updateExercise} className="relative" id="createForm">
-          <div ref={markdownWrapper}>
-            <MarkdownTextarea
-              title="Descrie exercițiul"
-              markdown={body}
-              initialTab="PREVIEW"
-              onInput={onMarkdownInput}
-              onUpload={(files, cursorPosition) => uploadFiles(
-                files, cursorPosition, body, updateMarkdownWithUploadedFiles,
-              )}
-            />
-            {bodyError && (
-            <p className={`${styles['error-message']} text-right text-bold absolute`}>
-              Fiecare exercițiu trebuie să aibă o descriere 👆
-            </p>
+    <main className={styles['new-exercise']}>
+      <h1 className="mb-8"> Modifică exercițiul </h1>
+      <Form withStyles={false} onSubmit={updateExercise} className="relative" id="createForm">
+        <div ref={markdownWrapper}>
+          <MarkdownTextarea
+            title="Descrie exercițiul"
+            markdown={body}
+            initialTab="PREVIEW"
+            onInput={onMarkdownInput}
+            onUpload={(files, cursorPosition) => uploadFiles(
+              files, cursorPosition, body, updateMarkdownWithUploadedFiles,
             )}
-          </div>
-        </Form>
-
-        <section className={styles['example-wrapper']}>
-          {exerciseBody && (
-            <>
-              <h3> Cod de început</h3>
-              <DeprecatedBasicEditor
-                ref={exampleRef}
-                folderStructure={exerciseBody}
-              />
-            </>
-          )}
-          {(!exerciseBody && !showExampleEditor) && (
-            <Button
-              variant="light"
-              onClick={() => setShowExampleEditor(true)}
-            >
-              Adaugă cod de început
-            </Button>
-          )}
-          {(!exerciseBody && showExampleEditor) && (
-            <>
-              <h3> Cod de început</h3>
-              <DeprecatedBasicEditor
-                ref={exampleRef}
-                folderStructure={exerciseBody}
-              />
-            </>
-          )}
-        </section>
-
-        <section className={`${styles['example-wrapper']} relative`}>
-          <h3> Soluție</h3>
-          <DeprecatedBasicEditor
-            ref={solutionRef}
-            folderStructure={exerciseSolution}
           />
-          {solutionError && (
-          <p className={`${styles['error-message']} absolute text-right text-bold`}>
-            Fiecare exercițiu trebuie să aibă o soluție 👆
+          {bodyError && (
+          <p className={`${styles['error-message']} text-right text-bold absolute`}>
+            Fiecare exercițiu trebuie să aibă o descriere 👆
           </p>
           )}
-        </section>
+        </div>
+      </Form>
 
-        <>
-          <ChapterControls form="createForm" />
-          <footer className="d-flex align-items-center justify-content-between">
-            <LessonSelect
-              selectedId={exercise.lesson}
-              onChange={(value) => setLesson(value)}
+      <section className={styles['example-wrapper']}>
+        {exerciseBody && (
+          <>
+            <h3> Cod de început</h3>
+            <DeprecatedBasicEditor
+              ref={exampleRef}
+              folderStructure={exerciseBody}
             />
-            <div>
-              <Button
-                variant="danger"
-                onClick={deleteExercise}
-                loading={isDeleting}
-                className="mr-2"
-              >
-                Șterge
-              </Button>
+          </>
+        )}
+        {(!exerciseBody && !showExampleEditor) && (
+          <Button
+            variant="light"
+            onClick={() => setShowExampleEditor(true)}
+          >
+            Adaugă cod de început
+          </Button>
+        )}
+        {(!exerciseBody && showExampleEditor) && (
+          <>
+            <h3> Cod de început</h3>
+            <DeprecatedBasicEditor
+              ref={exampleRef}
+              folderStructure={exerciseBody}
+            />
+          </>
+        )}
+      </section>
 
-              <Button
-                variant="blue"
-                form="createForm"
-                type="submit"
-                loading={isEditing || isDeleting}
-              >
-                Modifică
-              </Button>
-            </div>
-          </footer>
-        </>
-      </main>
-    </div>
+      <section className={`${styles['example-wrapper']} relative`}>
+        <h3> Soluție</h3>
+        <DeprecatedBasicEditor
+          ref={solutionRef}
+          folderStructure={exerciseSolution}
+        />
+        {solutionError && (
+        <p className={`${styles['error-message']} absolute text-right text-bold`}>
+          Fiecare exercițiu trebuie să aibă o soluție 👆
+        </p>
+        )}
+      </section>
+
+      <>
+        <ChapterControls form="createForm" />
+        <footer className="d-flex align-items-center justify-content-between">
+          <LessonSelect
+            selectedId={exercise.lesson}
+            onChange={(value) => setLesson(value)}
+          />
+          <div>
+            <Button
+              variant="danger"
+              onClick={deleteExercise}
+              loading={isDeleting}
+              className="mr-2"
+            >
+              Șterge
+            </Button>
+
+            <Button
+              variant="blue"
+              form="createForm"
+              type="submit"
+              loading={isEditing || isDeleting}
+            >
+              Modifică
+            </Button>
+          </div>
+        </footer>
+      </>
+    </main>
   );
 }
 

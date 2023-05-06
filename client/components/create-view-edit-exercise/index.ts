@@ -5,7 +5,7 @@ import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 
 export { default as NewExercise } from './NewExercise';
-export { default as ViewOrEditExercise } from './ViewOrEditExercise';
+export { default as EditExercise } from './EditExercise';
 
 export interface FileDictionary {
   [id: string]: {

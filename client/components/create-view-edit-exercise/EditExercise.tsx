@@ -11,28 +11,22 @@ import {
 } from '.';
 import { DeprecatedBasicEditor } from '../Editor/BasicEditor';
 import Form from '../Form';
-import Link from '~/components/generic/Link';
 import MarkdownTextarea from '../MarkdownTextarea';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 
 import styles from './NewExercise.module.scss';
 
-import viewCover from './the-search.svg';
 import editCover from './coding.svg';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import Button from '~/components/Button';
 import { API_LessonExerciseI, ExerciseType } from '~/../shared/types/lesson-exercise.types';
-import { UserRole } from '~/../shared/types/user.types';
 
-function ViewOrEditExercise({
+function EditExercise({
   exercise,
   userInfo,
 }: ConnectedProps<typeof connector> & { exercise: API_LessonExerciseI }) {
-  const isAdmin = userInfo?.role === UserRole.ADMIN;
-  const nameOrUsername = exercise.user.name || exercise.user.username;
-
   const [body, setBody] = useState(exercise.body);
   const [lesson, setLesson] = useState<string | null>(exercise.lesson);
   const [bodyError, setBodyError] = useState(null);
@@ -199,44 +193,16 @@ function ViewOrEditExercise({
   return (
     <div>
       <section className={`${styles.cta} relative`}>
-        {isAdmin ? (
-          <div>
-            <h1> Modifică exercițiul </h1>
-            <h2>
-              Dacă acest exercițiu este folosit într-una dintre lecții,
-              modificările tale vor avea efect abia după aprobarea unui admin.
-            </h2>
-          </div>
-        ) : (
-          <div>
-            <h1>
-              Exercițiu
-              {' '}
-              <Link prefetch={false} color="blue" href="/lecții" className="uppercase">
-                {exercise.type}
-              </Link>
-
-            </h1>
-            <h2>
-              {' '}
-              <Link prefetch={false} color="blue" className="text-bold" href={`/${exercise.user.username}`}>
-                {nameOrUsername}
-              </Link>
-              {' '}
-              a scris un exercițiu despre
-              {' '}
-              <strong className="uppercase">
-                {exercise.type}
-              </strong>
-              . Îl poți folosi în trainingurile
-              tale atâta timp cât oferi atribuire
-              autorului.
-            </h2>
-          </div>
-        )}
+        <div>
+          <h1> Modifică exercițiul </h1>
+          <h2>
+            Dacă acest exercițiu este folosit într-una dintre lecții,
+            modificările tale vor avea efect abia după aprobarea unui admin.
+          </h2>
+        </div>
         {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{
-          __html: isAdmin ? editCover : viewCover,
+          __html: editCover,
         }}
         />
       </section>
@@ -245,7 +211,6 @@ function ViewOrEditExercise({
           <div ref={markdownWrapper}>
             <MarkdownTextarea
               title="Descrie exercițiul"
-              disabled={!isAdmin}
               markdown={body}
               initialTab="PREVIEW"
               onInput={onMarkdownInput}
@@ -267,12 +232,11 @@ function ViewOrEditExercise({
               <h3> Cod de început</h3>
               <DeprecatedBasicEditor
                 ref={exampleRef}
-                readOnly={!isAdmin}
                 folderStructure={exerciseBody}
               />
             </>
           )}
-          {(!exerciseBody && isAdmin && !showExampleEditor) && (
+          {(!exerciseBody && !showExampleEditor) && (
             <Button
               variant="light"
               onClick={() => setShowExampleEditor(true)}
@@ -280,12 +244,11 @@ function ViewOrEditExercise({
               Adaugă cod de început
             </Button>
           )}
-          {(!exerciseBody && isAdmin && showExampleEditor) && (
+          {(!exerciseBody && showExampleEditor) && (
             <>
               <h3> Cod de început</h3>
               <DeprecatedBasicEditor
                 ref={exampleRef}
-                readOnly={!isAdmin}
                 folderStructure={exerciseBody}
               />
             </>
@@ -296,7 +259,6 @@ function ViewOrEditExercise({
           <h3> Soluție</h3>
           <DeprecatedBasicEditor
             ref={solutionRef}
-            readOnly={!isAdmin}
             folderStructure={exerciseSolution}
           />
           {solutionError && (
@@ -306,36 +268,34 @@ function ViewOrEditExercise({
           )}
         </section>
 
-        {isAdmin && (
-          <>
-            <ChapterControls form="createForm" />
-            <footer className="d-flex align-items-center justify-content-between">
-              <LessonSelect
-                selectedId={exercise.lesson}
-                onChange={(value) => setLesson(value)}
-              />
-              <div>
-                <Button
-                  variant="danger"
-                  onClick={deleteExercise}
-                  loading={isDeleting}
-                  className="mr-2"
-                >
-                  Șterge
-                </Button>
+        <>
+          <ChapterControls form="createForm" />
+          <footer className="d-flex align-items-center justify-content-between">
+            <LessonSelect
+              selectedId={exercise.lesson}
+              onChange={(value) => setLesson(value)}
+            />
+            <div>
+              <Button
+                variant="danger"
+                onClick={deleteExercise}
+                loading={isDeleting}
+                className="mr-2"
+              >
+                Șterge
+              </Button>
 
-                <Button
-                  variant="blue"
-                  form="createForm"
-                  type="submit"
-                  loading={isEditing || isDeleting}
-                >
-                  Modifică
-                </Button>
-              </div>
-            </footer>
-          </>
-        )}
+              <Button
+                variant="blue"
+                form="createForm"
+                type="submit"
+                loading={isEditing || isDeleting}
+              >
+                Modifică
+              </Button>
+            </div>
+          </footer>
+        </>
       </main>
     </div>
   );
@@ -349,4 +309,4 @@ function mapStateToProps(state: RootState) {
 
 const connector = connect(mapStateToProps);
 
-export default connector(ViewOrEditExercise);
+export default connector(EditExercise);

@@ -5,7 +5,7 @@ import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
 import { ConnectedProps, connect } from 'react-redux';
 import { UserRole } from '~/../shared/types/user.types';
-import { EditExercise } from '~/components/create-view-edit-exercise';
+import { EditExercise } from '~/components/create-edit-exercise';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 

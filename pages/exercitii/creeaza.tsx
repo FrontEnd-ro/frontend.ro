@@ -8,7 +8,7 @@ import { useLoggedInOnly } from '~/services/Hooks';
 import { ConnectedProps, connect } from 'react-redux';
 import { UserRole } from '~/../shared/types/user.types';
 import NotFoundPage from '~/components/NotFound/NotFound';
-import { NewExercise } from '~/components/create-view-edit-exercise';
+import { NewExercise } from '~/components/create-edit-exercise';
 
 function NewExercisePage({ isLoggedIn, userInfo }: ConnectedProps<typeof connector>) {
   const router = useRouter();

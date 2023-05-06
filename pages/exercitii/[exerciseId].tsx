@@ -1,7 +1,7 @@
+import Head from 'next/head';
 import NotFoundPage from '../404';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
-import SEOTags from '~/components/SEOTags';
 import { RootState } from '~/redux/root.reducer';
 import { ConnectedProps, connect } from 'react-redux';
 import { UserRole } from '~/../shared/types/user.types';
@@ -10,22 +10,15 @@ import LessonExerciseService from '~/services/api/LessonExercise.service';
 import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
 function EditExercisePage({ exercise, userInfo }: ConnectedProps<typeof connector> & { exercise?: API_LessonExerciseI }) {
-  const authorNameOrUsername = exercise?.user?.name || exercise?.user?.username;
-  const exerciseChapter = exercise?.type;
-
   if (userInfo?.role !== UserRole.ADMIN || !exercise) {
     return <NotFoundPage />
   }
 
   return (
     <>
-      <SEOTags
-        title={`Exercițiu ${exerciseChapter.toUpperCase()} | FrontEnd.ro`}
-        description={`${authorNameOrUsername} a scris un exercițiu pentru ${exerciseChapter.toUpperCase()}.`}
-        bigShareImage={false}
-        shareImage={exercise.user.avatar}
-        url={`https://FrontEnd.ro/exercitii/${exercise._id}`}
-      />
+      <Head>
+        <title>Editează exercițiul | FrontEnd.ro</title>
+      </Head>
       <>
         <Header />
         <EditExercise exercise={exercise} />

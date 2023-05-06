@@ -8,7 +8,7 @@ export enum ExerciseType {
 
 export type API_LessonExerciseI = {
   _id: string;
-  user: API_UserI;
+  user?: API_UserI;
   type: ExerciseType;
   body: string;
   example?: string;

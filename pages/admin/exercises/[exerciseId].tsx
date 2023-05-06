@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import NotFoundPage from '../404';
+import NotFoundPage from '../../404';
 import { useRouter } from 'next/router';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';

@@ -174,14 +174,14 @@ const AllExercises = () => {
           <ExercisePreview
             key={ex._id}
             exercise={ex}
-            href={`exercitii/${ex._id}`}
+            href={`/admin/exercises/${ex._id}`}
             viewMode="TEACHER"
             feedbackCount={0}
             isApproved={false}
             readOnly={false}
           />
         ))}
-        <Link prefetch={false} href="/exercitii/creeaza" className="d-flex align-items-center justify-content-center no-underline text-center">
+        <Link prefetch={false} href="/admin/exercises/create" className="d-flex align-items-center justify-content-center no-underline text-center">
           <FontAwesomeIcon icon={faPlus} width="32" height="32" />
           <span> Creează un nou exercițiu </span>
         </Link>

@@ -68,7 +68,7 @@ function ExSubmission({ submission } : Props) {
           prefetch={false}
           variant="contained"
           color={mainLinkConfig.color}
-          href={`/feedback/${submission.user.username}/${submission.exercise._id}`}
+          href={`/admin/feedback/${submission.user.username}/${submission.exercise._id}`}
         >
           {mainLinkConfig.label}
         </Link>

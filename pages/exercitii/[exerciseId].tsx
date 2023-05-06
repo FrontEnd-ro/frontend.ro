@@ -1,15 +1,24 @@
 import Head from 'next/head';
 import NotFoundPage from '../404';
+import { useRouter } from 'next/router';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import { RootState } from '~/redux/root.reducer';
+import { useLoggedInOnly } from '~/services/Hooks';
 import { ConnectedProps, connect } from 'react-redux';
 import { UserRole } from '~/../shared/types/user.types';
 import { EditExercise } from '~/components/create-edit-exercise';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
 
-function EditExercisePage({ exercise, userInfo }: ConnectedProps<typeof connector> & { exercise?: API_LessonExerciseI }) {
+function EditExercisePage({ exercise, userInfo, isLoggedIn }: ConnectedProps<typeof connector> & { exercise?: API_LessonExerciseI }) {
+  const router = useRouter();
+  useLoggedInOnly(isLoggedIn, router.asPath);
+
+  if (!isLoggedIn) {
+    return null;
+  }
+
   if (userInfo?.role !== UserRole.ADMIN || !exercise) {
     return <NotFoundPage />
   }
@@ -31,6 +40,7 @@ function EditExercisePage({ exercise, userInfo }: ConnectedProps<typeof connecto
 
 function mapStateToProps(state: RootState) {
   return {
+    isLoggedIn: !!state.user.info,
     userInfo: state.user.info,
   };
 }

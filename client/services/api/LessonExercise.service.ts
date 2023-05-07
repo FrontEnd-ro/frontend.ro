@@ -50,13 +50,13 @@ class LessonExerciseService {
       .then((resp) => resp.json());
   }
 
-  static createExercise(payload: Omit<API_LessonExerciseI, '_id' | 'user'>): Promise<any> {
+  static createExercise(payload: Omit<API_LessonExerciseI, '_id' | 'user'>): Promise<API_LessonExerciseI> {
     return HttpService
       .post(`${process.env.ENDPOINT}/lesson-exercises`, payload)
       .then((resp) => resp.json());
   }
 
-  static updateExercise(id: string, payload: NewExercisePayload): Promise<any> {
+  static updateExercise(id: string, payload: NewExercisePayload): Promise<API_LessonExerciseI> {
     return HttpService
       .put(`${process.env.ENDPOINT}/lesson-exercises/${id}`, payload)
       .then((resp) => resp.json());

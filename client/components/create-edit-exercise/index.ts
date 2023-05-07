@@ -4,8 +4,7 @@ import { MAX_MEDIA_BYTES, MAX_MEDIA_MB } from '~/../shared/SharedConstants';
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 
-export { default as CreateExercise } from './CreateExercise';
-export { default as EditExercise } from './EditExercise';
+export { default as CreateEditExercise } from './CreateEditExercise';
 
 export interface FileDictionary {
   [id: string]: {

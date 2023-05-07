@@ -8,7 +8,7 @@ import { useLoggedInOnly } from '~/services/Hooks';
 import { ConnectedProps, connect } from 'react-redux';
 import { UserRole } from '~/../shared/types/user.types';
 import NotFoundPage from '~/components/NotFound/NotFound';
-import { CreateExercise } from '~/components/create-edit-exercise';
+import { CreateEditExercise } from '~/components/create-edit-exercise';
 
 function CreateExercisePage({ isLoggedIn, userInfo }: ConnectedProps<typeof connector>) {
   const router = useRouter();
@@ -29,7 +29,7 @@ function CreateExercisePage({ isLoggedIn, userInfo }: ConnectedProps<typeof conn
       </Head>
       <>
         <Header withNavMenu />
-        <CreateExercise />
+        <CreateEditExercise />
         <Footer />
       </>
     </>

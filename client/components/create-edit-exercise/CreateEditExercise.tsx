@@ -16,19 +16,20 @@ import MarkdownTextarea from '../MarkdownTextarea';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
 
-import styles from './create-edit-exercise.module.scss';
+import styles from './CreateEditExercise.module.scss';
 
 import SweetAlertService from '~/services/sweet-alert/SweetAlert.service';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 import Button from '~/components/Button';
 import { API_LessonExerciseI, ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
-function EditExercise({
+function CreateEditExercise({
   exercise,
   userInfo,
-}: ConnectedProps<typeof connector> & { exercise: API_LessonExerciseI }) {
-  const [body, setBody] = useState(exercise.body);
-  const [lesson, setLesson] = useState<string | null>(exercise.lesson);
+}: ConnectedProps<typeof connector> & { exercise?: API_LessonExerciseI }) {
+  const mode: 'create' | 'edit' = exercise === undefined ? 'create' : 'edit';
+  const [body, setBody] = useState(exercise?.body ?? '');
+  const [lesson, setLesson] = useState<string | null>(exercise?.lesson ?? null);
   const [bodyError, setBodyError] = useState<boolean>(false);
   const [solutionError, setSolutionError] = useState<boolean>(false);
 
@@ -56,7 +57,7 @@ function EditExercise({
     });
   };
 
-  const updateExercise = async (
+  const createOrUpdateExercise = async (
     formData: {
       type: ExerciseType,
     },
@@ -86,23 +87,41 @@ function EditExercise({
     }
 
     try {
-      await LessonExerciseService.updateExercise(
-        exercise._id,
-        {
+      if (mode === 'create') {
+        const createdExercise = await LessonExerciseService.createExercise({
           lesson,
           body: newBody,
           type: formData.type,
           example: exampleRef.current ? exampleRef.current.getFolderStructure() : null,
           solution: solutionRef.current ? solutionRef.current.getFolderStructure() : null,
-        },
-      );
+        });
 
-      SweetAlertService.toast({
-        type: 'success',
-        text: 'Exercițiul a fost modificat cu succes!',
-      });
+        SweetAlertService.toast({
+          type: 'success',
+          text: 'Exercițiul a fost creat cu succes!',
+        });
+        router.push(`/admin/exercises/${createdExercise._id}`);
+      } else {
+        if (exercise === undefined) {
+          throw new Error('If you want to edit an exercise, it should be defined!');
+        }
 
-      router.push(`/${userInfo.username}`);
+        await LessonExerciseService.updateExercise(
+          exercise._id,
+          {
+            lesson,
+            body: newBody,
+            type: formData.type,
+            example: exampleRef.current ? exampleRef.current.getFolderStructure() : null,
+            solution: solutionRef.current ? solutionRef.current.getFolderStructure() : null,
+          },
+        );
+
+        SweetAlertService.toast({
+          type: 'success',
+          text: 'Exercițiul a fost modificat cu succes!',
+        });
+      }
     } catch (err) {
       SweetAlertService.toast({
         text: err?.message || 'Oops! Nu am putut crea exercițiul',
@@ -116,6 +135,11 @@ function EditExercise({
   };
 
   const deleteExercise = async () => {
+    if (!exercise?._id) {
+      alert("Trying to delete exercise but it has no ID");
+      return;
+    }
+
     const result = await SweetAlertService.confirm({
       title: 'Șterge exercițiul',
       text: 'Ești sigur? Această decizie e permanentă.',
@@ -189,20 +213,22 @@ function EditExercise({
     return newBody;
   };
 
-  const exerciseBody = exercise.example ? new FolderStructure(JSON.parse(exercise.example)) : null;
-  const exerciseSolution = exercise.solution
+  const exerciseBody = exercise?.example ? new FolderStructure(JSON.parse(exercise.example)) : null;
+  const exerciseSolution = exercise?.solution
     ? new FolderStructure(JSON.parse(exercise.solution))
     : null;
 
   return (
     <main className={styles['new-exercise']}>
-      <h1 className="mb-8"> Modifică exercițiul </h1>
-      <Form withStyles={false} onSubmit={updateExercise} className="relative" id="createForm">
+      <h1 className="mb-8">
+        {mode === 'edit' ? 'Modifică exercițiul' : 'Creează un nou exercițiu'}
+      </h1>
+      <Form withStyles={false} onSubmit={createOrUpdateExercise} className="relative" id="createForm">
         <div ref={markdownWrapper}>
           <MarkdownTextarea
             title="Descrie exercițiul"
             markdown={body}
-            initialTab="PREVIEW"
+            initialTab={mode === 'create' ? 'EDIT' : 'PREVIEW'}
             onInput={onMarkdownInput}
             onUpload={(files, cursorPosition) => uploadFiles(
               files, cursorPosition, body, updateMarkdownWithUploadedFiles,
@@ -262,18 +288,20 @@ function EditExercise({
         <ChapterControls form="createForm" />
         <footer className="d-flex align-items-center justify-content-between">
           <LessonSelect
-            selectedId={exercise.lesson}
+            selectedId={exercise?.lesson}
             onChange={(value) => setLesson(value)}
           />
           <div>
-            <Button
-              variant="danger"
-              onClick={deleteExercise}
-              loading={isDeleting}
-              className="mr-2"
-            >
-              Șterge
-            </Button>
+            {mode === 'edit' && (
+              <Button
+                variant="danger"
+                onClick={deleteExercise}
+                loading={isDeleting}
+                className="mr-2"
+              >
+                Șterge
+              </Button>
+            )}
 
             <Button
               variant="blue"
@@ -281,7 +309,7 @@ function EditExercise({
               type="submit"
               loading={isEditing || isDeleting}
             >
-              Modifică
+              {mode  === 'edit' ? 'Modifică'  : 'Creează'}
             </Button>
           </div>
         </footer>
@@ -298,4 +326,4 @@ function mapStateToProps(state: RootState) {
 
 const connector = connect(mapStateToProps);
 
-export default connector(EditExercise);
+export default connector(CreateEditExercise);

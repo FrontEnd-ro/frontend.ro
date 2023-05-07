@@ -11,6 +11,7 @@ import {
 } from '.';
 import { DeprecatedBasicEditor } from '../Editor/BasicEditor';
 import Form from '../Form';
+import MonacoBase from '../Editor/Monaco.base';
 import MarkdownTextarea from '../MarkdownTextarea';
 import ChapterControls from './ChapterControls/ChapterControls';
 import LessonSelect from './LessonSelect/LessonSelect';
@@ -28,8 +29,8 @@ function EditExercise({
 }: ConnectedProps<typeof connector> & { exercise: API_LessonExerciseI }) {
   const [body, setBody] = useState(exercise.body);
   const [lesson, setLesson] = useState<string | null>(exercise.lesson);
-  const [bodyError, setBodyError] = useState(null);
-  const [solutionError, setSolutionError] = useState(null);
+  const [bodyError, setBodyError] = useState<boolean>(false);
+  const [solutionError, setSolutionError] = useState<boolean>(false);
 
   const filesToUpload = useRef<FileDictionary>({});
 
@@ -38,8 +39,8 @@ function EditExercise({
 
   const [showExampleEditor, setShowExampleEditor] = useState(false);
 
-  const markdownWrapper = useRef(null);
-  const [exampleRef, solutionRef] = [useRef(null), useRef(null)];
+  const markdownWrapper = useRef<HTMLDivElement | null>(null);
+  const [exampleRef, solutionRef] = [useRef<MonacoBase | null>(null), useRef<MonacoBase | null>(null)];
 
   const router = useRouter();
 
@@ -59,7 +60,12 @@ function EditExercise({
     formData: {
       type: ExerciseType,
     },
-  ) => {
+  )  => {
+    if (lesson === null) {
+      alert("Lesson is required");
+      return;
+    }
+
     if (!validateRequiredData()) {
       return false;
     }
@@ -145,7 +151,7 @@ function EditExercise({
 
     if (!body) {
       setBodyError(true);
-      markdownWrapper.current.scrollIntoView();
+      markdownWrapper?.current?.scrollIntoView();
       isValid = false;
     }
 

@@ -23,7 +23,7 @@ export type Task = {
   title: ReactElement;
   verify: ({
     username, repo, owner, meta,
-  }: { username?: string, repo?: string, owner?: string, meta?: VerifyResp['meta'] })
+  }: { username: string, repo: string, owner: string, meta?: VerifyResp['meta'] })
     => Promise<VerifyResp>;
 }
 
@@ -148,7 +148,7 @@ const tasks: Task[] = [
       repo,
       filenameRegexpList: [new RegExp('exercitii[.]html')],
       commitRegExp: new RegExp('\\[Task-[0-9]+\\] (.)+'),
-      startSha: meta.commit.sha,
+      startSha: meta?.commit?.sha,
       index: 0,
       branchName: 'challenges',
     }),
@@ -169,7 +169,7 @@ const tasks: Task[] = [
       repo,
       filenameRegexpList: [new RegExp('exercitii[.]html')],
       commitRegExp: new RegExp('\\[Task-[0-9]+\\] (.)+'),
-      startSha: meta.commit.sha,
+      startSha: meta?.commit?.sha,
       index: 0,
       branchName: 'challenges',
     }),
@@ -199,7 +199,7 @@ const tasks: Task[] = [
       repo,
       filenameRegexpList: [new RegExp('exercitii[.]html')],
       commitRegExp: new RegExp('\\[Task-[0-9]+\\] (.)+'),
-      startSha: meta.commit.sha,
+      startSha: meta?.commit?.sha,
       index: 0,
       branchName: 'challenges',
     }),
@@ -219,7 +219,7 @@ const tasks: Task[] = [
       repo,
       filenameRegexpList: [new RegExp('exercitii[.]html')],
       commitRegExp: new RegExp('\\[Task-[0-9]+\\] (.)+'),
-      startSha: meta.commit.sha,
+      startSha: meta?.commit?.sha,
       index: 0,
       branchName: 'challenges',
     }),
@@ -257,7 +257,7 @@ const tasks: Task[] = [
       repo,
       filenameRegexpList: [new RegExp('exercitii[.]html')],
       commitRegExp: new RegExp('Revert "\\[Task-[0-9]+\\] .+"'),
-      startSha: meta.commit.sha,
+      startSha: meta?.commit?.sha,
       index: 0,
       branchName: 'challenges-v2',
     }),
@@ -344,17 +344,17 @@ async function githubAccountVerify() {
   }
 }
 
-async function forkRepoVerify({ username, repo, owner }) {
+async function forkRepoVerify({ username, repo, owner }: { username: string; repo: string; owner: string; }): Promise<VerifyResp> {
   const isDone = await GitHubService.hasForkedRepo(username, repo, owner);
   return {
     isDone,
     errMessage: isDone
-      ? null
+      ? undefined
       : 'Și noi ne dorim să treci mai departe dar dacă nu-l fork-uiești nu prea se poate...',
   };
 }
 
-async function createBranchFromHeadVerify({ username, repo }, targetBranch, fromBranch) {
+async function createBranchFromHeadVerify({ username, repo }: { username: string; repo: string; }, targetBranch, fromBranch): Promise<VerifyResp> {
   const hasBranch = await GitHubService.hasBranch(username, repo, targetBranch);
   if (!hasBranch) {
     return {
@@ -366,11 +366,11 @@ async function createBranchFromHeadVerify({ username, repo }, targetBranch, from
   const toHeadCommit = await GitHubService.getHeadCommit(username, repo, targetBranch);
   const fromHeadCommit = await GitHubService.getHeadCommit(username, repo, fromBranch);
 
-  const isDone = toHeadCommit.sha === fromHeadCommit.sha;
+  const isDone = toHeadCommit !== null && fromHeadCommit !== null && toHeadCommit.sha === fromHeadCommit.sha;
 
   return {
     isDone,
-    errMessage: isDone ? null : `Branch-ul există dar nu pare a fi creat din ${fromBranch}`,
+    errMessage: isDone ? undefined : `Branch-ul există dar nu pare a fi creat din ${fromBranch}`,
     meta: {
       commit: fromHeadCommit,
     },
@@ -408,7 +408,7 @@ async function commitCodeVerify({
   const filesList = await GitHubService.getCommitFiles(username, repo, firstCommitSha);
 
   const filesMatch = filesList.length === filenameRegexpList.length && filesList.every((file) => {
-    return filenameRegexpList.some((regExp) => !!regExp.exec(file.filename));
+    return file.filename !== undefined && filenameRegexpList.some((regExp) => !!regExp.exec(file.filename as string));
   });
 
   if (!filesMatch) {
@@ -429,7 +429,7 @@ async function commitCodeVerify({
 
   return {
     isDone: true,
-    errMessage: null,
+    errMessage: undefined,
     meta: {
       commit,
     },
@@ -482,7 +482,10 @@ async function createPRVerify(
     };
   }
 
-  if (!matchPull.requested_reviewers.some((reviewer) => reviewers.includes(reviewer.login))) {
+  if (
+    !Array.isArray(matchPull.requested_reviewers) ||
+    !matchPull.requested_reviewers.some((reviewer) => reviewer !== null && reviewers.includes(reviewer.login))
+  ) {
     return {
       isDone: false,
       errMessage: 'Nu uita să adaugi pe unul din traineri ca și review-er',

@@ -52,10 +52,16 @@ class MonacoEditor extends MonacoBase {
   }
 
   initEditor = () => {
+    const SPAN = '[CompleteEditor.initEditor]';
     const { readOnly, askTooltip } = this.props;
     const { folderStructure, selectedFileKey } = this.state;
 
     if (!folderStructure.files.length && !folderStructure.folders.length) {
+      return;
+    }
+
+    if (this.editorRef.current === null) {
+      console.error(`${SPAN} editorRootRef.current should not be null`);
       return;
     }
 

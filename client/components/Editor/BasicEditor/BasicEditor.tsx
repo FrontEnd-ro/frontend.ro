@@ -16,7 +16,7 @@ export interface BasicEditorProps {
   onChange?: (code: string) => void,
   // If this HTML element resizes, then we will
   // trigger a layout change (resize) for the editor
-  resizeTarget?: HTMLElement;
+  resizeTarget?: HTMLElement | null;
   theme?: Theme;
 
   // Type definitions for the files or libraries
@@ -55,7 +55,7 @@ const _BasicEditor = ({
 }: BasicEditorProps) => {
   // This is where we will mount the Monaco Editor
   const editorRootRef = useRef<HTMLDivElement | null>(null);
-  const editor = useRef<editor.IStandaloneCodeEditor>(null);
+  const editor = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [didLoadEditor, setDidLoadEditor] = useState(false);
 
   const setTypes = () => {
@@ -70,6 +70,12 @@ const _BasicEditor = ({
   };
 
   const init = async () => {
+    const SPAN = '[BasicEditor.init]';
+    if (editorRootRef.current === null) {
+      console.error(`${SPAN} editorRootRef.current should not be null`);
+      return;
+    }
+
     await MonacoService.defineTheme(theme);
     editor.current = MonacoService.create(editorRootRef.current, {
       readOnly,
@@ -109,19 +115,21 @@ const _BasicEditor = ({
       // the typings are not 100% complete.
       (messageContribution as any).showMessage(
         readOnlyTooltipMessage,
-        editor.current.getPosition(),
+        editor.current?.getPosition(),
       );
     });
     return () => disposable.dispose();
   }, [readOnlyTooltipMessage, didLoadEditor]);
 
   useEffect(() => {
-    if (!didLoadEditor || onChange === undefined) {
+    if (!didLoadEditor || onChange === undefined || editor.current === null) {
       return noop;
     }
 
     const modelListenerRef = editor.current.onDidChangeModelContent(() => {
-      onChange(editor.current.getValue());
+      if (editor.current !== null) {
+        onChange(editor.current.getValue());
+      }
     });
     return () => modelListenerRef.dispose();
   }, [onChange, didLoadEditor]);
@@ -135,6 +143,10 @@ const _BasicEditor = ({
   useViewZones(editor.current, viewZones);
 
   const updateContent = () => {
+    if (editor.current === null || file === undefined) {
+      return;
+    }
+
     const extension = extractExtension(file.name);
     let language = MonacoService.getModelLanguage(extension);
 
@@ -162,7 +174,7 @@ const _BasicEditor = ({
     }
   };
 
-  useResizeObserver(resizeTarget, () => editor.current.layout());
+  useResizeObserver(resizeTarget, () => editor.current?.layout());
 
   return (
     <div className={`${className} ${styles['editor-wrapper']}`}>

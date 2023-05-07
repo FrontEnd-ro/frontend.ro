@@ -21,14 +21,15 @@ import {
   uploadMedia,
 } from '.';
 import { withAuthModal } from '~/services/Hooks';
+import MonacoBase from '../Editor/Monaco.base';
 import { ExerciseType } from '~/../shared/types/lesson-exercise.types';
 
 function CreateExercise({ user }: ConnectedProps<typeof connector>) {
   const router = useRouter();
 
-  const markdownWrapper = useRef(null);
-  const exampleRef = useRef(null);
-  const solutionRef = useRef(null);
+  const markdownWrapper = useRef<HTMLDivElement | null>(null);
+  const exampleRef = useRef<MonacoBase | null>(null);
+  const solutionRef = useRef<MonacoBase | null>(null);
 
   const [body, setBody] = useState('');
   const [bodyError, setBodyError] = useState(false);
@@ -36,7 +37,7 @@ function CreateExercise({ user }: ConnectedProps<typeof connector>) {
   const [showExampleEditor, setShowExampleEditor] = useState(false);
   const [showSolutionEditor, setShowSolutionEditor] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
-  const [lesson, setLesson] = useState(null);
+  const [lesson, setLesson] = useState<string | null>(null);
 
   const filesToUpload = useRef<FileDictionary>({});
 
@@ -58,6 +59,11 @@ function CreateExercise({ user }: ConnectedProps<typeof connector>) {
     },
     userInfo: API_UserI = user.info,
   ) => {
+    if (lesson === null) {
+      alert("Lesson is required!");
+      return;
+    }
+
     if (!validateRequiredData()) {
       return;
     }
@@ -106,7 +112,7 @@ function CreateExercise({ user }: ConnectedProps<typeof connector>) {
 
     if (!body) {
       setBodyError(true);
-      markdownWrapper.current.scrollIntoView();
+      markdownWrapper?.current?.scrollIntoView();
       isValid = false;
     }
 

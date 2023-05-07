@@ -30,4 +30,6 @@ const BasicEditorLazy = React.forwardRef(({ folderStructure, ...rest }: any, for
   );
 });
 
+BasicEditorLazy.displayName = "BasicEditorLazy";
+
 export default BasicEditorLazy;

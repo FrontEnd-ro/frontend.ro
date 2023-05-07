@@ -27,7 +27,7 @@ interface Props {
 }
 
 class ViewTooltip extends React.Component<Props, State> {
-  private timeoutId: NodeJS.Timeout;
+  private timeoutId: NodeJS.Timeout | undefined = undefined;
 
   constructor(props) {
     super(props);
@@ -35,7 +35,6 @@ class ViewTooltip extends React.Component<Props, State> {
       loading: false,
       forceShow: false,
     };
-    this.timeoutId = null;
   }
 
   componentDidUpdate() {

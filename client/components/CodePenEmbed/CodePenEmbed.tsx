@@ -33,7 +33,7 @@ const HTMLEmbed = ({
   className = '',
 }: Props) => {
   const url = `https://codepen.io/${user}/pen/${slug}`;
-  const [loaded, setLoaded] = useState<boolean>(undefined);
+  const [loaded, setLoaded] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     const embedScript = 'https://cpwebassets.codepen.io/assets/embed/ei.js';

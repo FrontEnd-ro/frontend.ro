@@ -4,21 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type Variant = 'light' | 'blue' | 'success' | 'danger' | 'transparent' |
   'yellow' | 'grey' | 'link' | 'gradient' | 'default';
-interface Props {
+
+type Props = {
   loading?: boolean;
-  variant?: Variant;
   // We define here the form property because
   // even if it's a valid attribute on buttons, React or TS complain about it.
   form?: string;
-  withIcon?: boolean;
   icon?: IconProp;
   outline?: boolean;
   bouncy?: boolean;
-  gradient?: {
-    angle: number,
-    colors: string[],
-  };
-}
+} & ({
+  variant: "gradient";
+  gradient: {
+    angle: number;
+    colors: string[];
+  }
+} | {
+  variant?: Omit<Variant, 'gradient'>;
+  gradient?: undefined;
+});
+
 export type Ref = HTMLButtonElement;
 const Button = React.forwardRef<
   Ref,
@@ -32,7 +37,6 @@ const Button = React.forwardRef<
       className,
       disabled,
       variant = 'transparent',
-      withIcon = false,
       outline = false,
       bouncy = false,
       gradient,
@@ -51,7 +55,7 @@ const Button = React.forwardRef<
     if (loading) {
       updatedClassName += ' btn--loading';
     }
-    if (withIcon) {
+    if (icon !== undefined) {
       updatedClassName += ' btn--with-icon';
     }
     if (outline) {
@@ -64,7 +68,7 @@ const Button = React.forwardRef<
     const inlineCssStyles = {
       ...style
     }
-    if (variant == 'gradient') {
+    if (variant == 'gradient' && gradient !== undefined) {
       inlineCssStyles.backgroundImage = `linear-gradient(${gradient.angle ?? 90}deg, ${gradient.colors.map((color, index, arr) => `${color} ${index * 100 / arr.length}%`).join(',')})`;
     }
 
@@ -82,7 +86,7 @@ const Button = React.forwardRef<
         style={inlineCssStyles}
         {...props}
       >
-        {withIcon && (
+        {icon !== undefined && (
           <FontAwesomeIcon icon={icon} height="24" className="mr-2" />
         )}
         {children}
@@ -90,4 +94,7 @@ const Button = React.forwardRef<
     );
   },
 );
+
+Button.displayName = 'Button';
+
 export default Button;

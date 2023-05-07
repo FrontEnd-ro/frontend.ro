@@ -4,7 +4,7 @@ import Link from '~/components/generic/Link';
 import styles from './TableOfContents.module.scss';
 
 interface State {
-  activeChapterId: string;
+  activeChapterId: null | string;
 }
 
 interface Props {
@@ -178,7 +178,7 @@ function ChapterListItem({
   return (
     <li className={`
       ${!isSubchapter ? styles['is--main-chapter'] : ''}
-      ${item.subchapters?.length > 0 ? styles['with--subchapters'] : ''}
+      ${item.subchapters?.length ?? 0 > 0 ? styles['with--subchapters'] : ''}
     `}
     >
       <Link

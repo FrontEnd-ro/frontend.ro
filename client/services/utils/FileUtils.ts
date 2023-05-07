@@ -1,13 +1,13 @@
 import { uuid } from '../Utils';
 import FolderStructure from '../../../shared/utils/FolderStructure';
 
-export function extractExtension(fileName: string) {
+export function extractExtension(fileName: string): string {
   const parts = fileName.split('.');
   if (parts.length === 1) {
     return '';
   }
 
-  return parts.pop();
+  return parts.pop() ?? '';
 }
 
 export function filterFiles(

@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof CollapserComponent> = (args) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <CollapserComponent isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)} {...args}>
+    <CollapserComponent {...args} isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)}>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco

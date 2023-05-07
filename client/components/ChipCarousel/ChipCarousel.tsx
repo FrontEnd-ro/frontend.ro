@@ -12,7 +12,7 @@ interface Props {
 
 const ChipCarousel = ({ rows, repeatCount = 3, className = "" }: Props) => {
   const repeatedRows = rows.map((row) => {
-    let result = [];
+    let result: string[] = [];
     for (let i = 0; i < repeatCount; i++) {
       result = [...result, ...row];
     }

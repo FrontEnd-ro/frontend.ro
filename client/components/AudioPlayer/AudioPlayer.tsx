@@ -13,13 +13,19 @@ interface Props {
 }
 
 export default function AudioPlayer({ title, src, className } : Props) {
-  const ref = useRef<HTMLAudioElement>(null);
+  const ref = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const onPlay = () => { setIsPlaying(true); };
   const onPause = () => { setIsPlaying(false); };
 
   const togglePlay = () => {
+    const SPAN = '[AudioPlayer.togglePlay]';
+    if (ref.current === null) {
+      console.error(`${SPAN} Expected ref.current to not be null.`);
+      return;
+    }
+
     const { paused } = ref.current;
 
     if (paused) {
@@ -30,17 +36,30 @@ export default function AudioPlayer({ title, src, className } : Props) {
   };
 
   const stop = () => {
+    const SPAN = '[AudioPlayer.stop]';
+    if (ref.current === null) {
+      console.error(`${SPAN} Expected ref.current to not be null.`);
+      return;
+    }
+
     ref.current.pause();
     ref.current.currentTime = 0;
   };
 
   useEffect(() => {
-    ref.current.addEventListener('play', onPlay);
-    ref.current.addEventListener('pause', onPause);
+    const SPAN = '[AudioPlayer.useEffect]';
+    const audioEl = ref.current;
+    if (audioEl === null) {
+      console.error(`${SPAN} Expected ref.current to not be null.`);
+      return;
+    }
+
+    audioEl.addEventListener('play', onPlay);
+    audioEl.addEventListener('pause', onPause);
 
     return () => {
-      ref.current.removeEventListener('play', onPlay);
-      ref.current.removeEventListener('pause', onPause);
+      audioEl.removeEventListener('play', onPlay);
+      audioEl.removeEventListener('pause', onPause);
     };
   }, []);
 

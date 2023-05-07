@@ -132,7 +132,7 @@ class GitHubService {
           repo,
           ref: sha,
         });
-      return commit.data.files;
+      return commit.data.files ?? [];
     } catch (err) {
       // TODO: maybe throw and show error in UI!
       console.error(

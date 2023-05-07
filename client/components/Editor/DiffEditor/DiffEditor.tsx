@@ -49,6 +49,7 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
   }
 
   initEditor = () => {
+    const SPAN = '[DiffEditor.initEditor]';
     // FIXME
     // This should look at the prop. By looking at the state,
     // when receiving new props we can't re-render this component nicely.
@@ -57,6 +58,11 @@ class DiffMonacoEditor extends MonacoBase<Props, State> {
     const { modifiedFolderStructure, selectedFileKey } = this.state;
 
     if (!modifiedFolderStructure.files.length && !modifiedFolderStructure.folders.length) {
+      return;
+    }
+
+    if (this.editorRef.current === null) {
+      console.error(`${SPAN} Expected this.editorRef.current to not be null`);
       return;
     }
 

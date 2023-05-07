@@ -19,7 +19,7 @@ interface Props {
 }
 
 class AskTooltip extends React.Component<Props, State> {
-  private timeoutId: NodeJS.Timeout;
+  private timeoutId: NodeJS.Timeout | undefined = undefined;
 
   private formRef: React.RefObject<HTMLFormElement>;
 
@@ -34,7 +34,6 @@ class AskTooltip extends React.Component<Props, State> {
       showMarkdown: false,
     };
 
-    this.timeoutId = null;
     this.formRef = React.createRef();
     this.textareaRef = React.createRef();
   }
@@ -42,8 +41,8 @@ class AskTooltip extends React.Component<Props, State> {
   componentDidMount() {
     const { visible } = this.props;
 
-    if (visible && this.textareaRef.current) {
-      setTimeout(() => this.textareaRef.current.focus(), 0);
+    if (visible) {
+      setTimeout(() => this.textareaRef?.current?.focus(), 0);
     }
   }
 
@@ -51,7 +50,7 @@ class AskTooltip extends React.Component<Props, State> {
     const { visible } = this.props;
 
     if (visible && !prevProps.visible) {
-      setTimeout(() => this.textareaRef.current.focus(), 0);
+      setTimeout(() => this.textareaRef?.current?.focus(), 0);
     }
   }
 
@@ -93,7 +92,7 @@ class AskTooltip extends React.Component<Props, State> {
       const submitEvent = document.createEvent('Event');
       submitEvent.initEvent('submit', true, true);
 
-      this.formRef.current.dispatchEvent(submitEvent);
+      this.formRef?.current?.dispatchEvent(submitEvent);
     }
   }
 
@@ -115,7 +114,7 @@ class AskTooltip extends React.Component<Props, State> {
 
     if (showMarkdown) {
       setTimeout(() => {
-        this.textareaRef.current.focus();
+        this.textareaRef?.current?.focus();
       }, 100);
     }
   }

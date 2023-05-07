@@ -146,4 +146,6 @@ const Form = React.forwardRef(({
 //   );
 // }
 
+Form.displayName = 'Form';
+
 export default Form;

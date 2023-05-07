@@ -21,6 +21,7 @@ class DeprecatedBasicMonacoEditor extends MonacoBase {
   }
 
   initEditor = () => {
+    const SPAN = 'DeprecatedBasicMonacoEditor.initEditor';
     const { readOnly } = this.props;
 
     // FIXME
@@ -31,6 +32,11 @@ class DeprecatedBasicMonacoEditor extends MonacoBase {
     const { folderStructure, selectedFileKey } = this.state;
 
     if (!folderStructure.files.length && !folderStructure.folders.length) {
+      return;
+    }
+
+    if (this.editorRef.current === null) {
+      console.error(`${SPAN} editorRef.current should not be null`);
       return;
     }
 

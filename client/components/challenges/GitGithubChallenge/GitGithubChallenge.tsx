@@ -27,16 +27,21 @@ const REPO = 'git-github-practice-exercises';
 
 function GitGithubChallenge({ user }: ConnectedProps<typeof connector>) {
   const router = useRouter();
-  const [lastDoneTask, setLastDoneTask] = useState(null);
-  const [errorForTask, setErrorForTask] = useState<{id: string, message: string}>(null);
-  const [githubUsername, setGithubUsername] = useState(null);
-  const [taskIdBeingVerified, setTaskIdBeingVerified] = useState(null);
+  const [lastDoneTask, setLastDoneTask] = useState<string | null>(null);
+  const [errorForTask, setErrorForTask] = useState<{id: string, message: string} | null>(null);
+  const [githubUsername, setGithubUsername] = useState<string | null>(null);
+  const [taskIdBeingVerified, setTaskIdBeingVerified] = useState<string | null>(null);
 
   const indexOfLastDoneTask = tasks.findIndex((task) => task.id === lastDoneTask);
 
   const metaRef = useRef({});
 
   const verifyTask = async (task: Task) => {
+    if (githubUsername === null || lastDoneTask === null) {
+      console.error('Expected to have both githubUsername and lastDoneTask different than null', { githubUsername, lastDoneTask });
+      return;
+    }
+
     setTaskIdBeingVerified(task.id);
     setErrorForTask(null);
 
@@ -60,7 +65,7 @@ function GitGithubChallenge({ user }: ConnectedProps<typeof connector>) {
         setLastDoneTask(tasks[tasks.indexOf(task) - 1]?.id);
         setErrorForTask({
           id: task.id,
-          message: errMessage,
+          message: errMessage ?? 'Generic error',
         });
       }
     } catch (err) {

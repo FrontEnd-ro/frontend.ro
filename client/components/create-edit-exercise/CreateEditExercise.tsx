@@ -243,16 +243,7 @@ function CreateEditExercise({
       </Form>
 
       <section className={styles['example-wrapper']}>
-        {exerciseBody && (
-          <>
-            <h3> Cod de început</h3>
-            <DeprecatedBasicEditor
-              ref={exampleRef}
-              folderStructure={exerciseBody}
-            />
-          </>
-        )}
-        {(!exerciseBody && !showExampleEditor) && (
+        {(exerciseBody === null && !showExampleEditor) && (
           <Button
             variant="light"
             onClick={() => setShowExampleEditor(true)}
@@ -260,7 +251,7 @@ function CreateEditExercise({
             Adaugă cod de început
           </Button>
         )}
-        {(!exerciseBody && showExampleEditor) && (
+        {(exerciseBody !== null || showExampleEditor) && (
           <>
             <h3> Cod de început</h3>
             <DeprecatedBasicEditor

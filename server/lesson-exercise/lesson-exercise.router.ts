@@ -35,7 +35,8 @@ lessonExerciseRouter.get('/:exerciseId', [PublicMiddleware], async function getL
     let result = await LessonExerciseModel.get(exerciseId);
     
     if (!result) {
-      throw (new ServerError(404, 'generic.404', { exerciseId }));
+      new ServerError(404, 'generic.404', { exerciseId }).send(res);
+      return;
     }
     res.json(LessonExerciseModel.sanitize(result));
   } catch (err) {

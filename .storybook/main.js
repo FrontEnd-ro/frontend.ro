@@ -9,7 +9,10 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/preset-scss"
   ],
-
+  env: (config) => ({
+    ...config,
+    CLOUDFRONT_PUBLIC: 'https://d3tycb976jpudc.cloudfront.net',
+  }),
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.

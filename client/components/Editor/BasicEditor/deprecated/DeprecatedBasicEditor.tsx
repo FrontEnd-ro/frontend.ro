@@ -16,7 +16,9 @@ class DeprecatedBasicMonacoEditor extends MonacoBase {
     super(props);
 
     this.state = {
-      folderStructure: new FolderStructure(props.folderStructure),
+      // HACK. We'll leave it like this for now, since the plan is to entirely delete
+      // this component!
+      folderStructure: FolderStructure.clone(new FolderStructure(props.folderStructure))
     };
   }
 

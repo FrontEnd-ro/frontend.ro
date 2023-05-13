@@ -1,6 +1,7 @@
 {
   "APP": {
     "env": "production",
+    "allowed_origins": ["https://frontend.ro"],
     "app_url": "https://frontend.ro",
     "endpoint": "https://frontend.ro/api"
   },

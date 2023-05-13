@@ -1,6 +1,7 @@
 {
   "APP": {
     "env": "development",
+    "allowed_origins": ["https://dev.frontend.ro"],
     "app_url": "https://dev.frontend.ro",
     "endpoint": "https://dev.frontend.ro/api"
   },

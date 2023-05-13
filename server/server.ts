@@ -35,10 +35,15 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: appConfig.APP.env === 'production'
-    ? appConfig.APP.app_url
-    // TODO: this should be dynamically set via the config
-    : 'http://localhost:3000'
+    origin(origin, callback) {
+      // If origin is undefined, it means that the request comes from the same server
+      // or from some tool like Postman. Thus, we want to allow these situations.
+      if (origin === undefined || appConfig.APP.allowed_origins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
   })
 );
 

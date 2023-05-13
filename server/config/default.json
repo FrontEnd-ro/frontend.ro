@@ -6,6 +6,7 @@
   "APP": {
     "language": "ro",
     "default_port": 3300,
+    "allowed_origins": ["http://localhost:3000", "http://localhost:3300"],
     "app_url": "http://localhost:3300",
     "endpoint": "http://localhost:3300/api"
   },

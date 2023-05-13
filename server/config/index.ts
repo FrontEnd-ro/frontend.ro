@@ -11,6 +11,7 @@ interface AppConfig {
     port: number;
     language: "ro" | "en";
     endpoint: string;
+    allowed_origins: string[];
     app_url: string;
     default_port: number;
     env: 'development' | 'production';

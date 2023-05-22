@@ -42,12 +42,7 @@ export const CONFIG = {
 
  Indiferent de scopul pentru care construiești un formular, vei folosi elementul <strong className="strong formatted">{'<form>'} </strong> pentru a grupa câmpurile pe care utilizatorii le pot completa. Spre exemplu, așa arată un scurt formular de autentificare: 
  
- <CodePenEmbed
-          user="iampava"
-          slug="mdmENZO"
-          theme="dark"
-          defaultTab="html"
-  />
+  <Sandpack {...SCOPE.examples['G8stNLOCA3']} />
 
 {<LessonTip> Poate ai observat că în exemplul de mai sus avem mai multe elemente <FormattedText as="span"> {'<label>'} </FormattedText> iar la final un buton cu <FormattedText as="span">type="submit"</FormattedText>. Deși nu sunt obligatorii, sunt
 <strong> bune practici</strong> despre care vorbim <a href="#bune-practici"> mai jos în articol. </a> </LessonTip>}
@@ -64,12 +59,7 @@ Este cel mai popular element folosit în formulare iar prin atributul <Formatted
 
 Mai jos avem o colecție de input-uri, fiecare cu altă valoare pentru atributul <strong>type</strong>, ce ne permit să completăm cu text, parole, date calendaristice, să încărcăm fișiere sau să alegem culori:
 
-<CodePenEmbed
-          user="iampava"
-          slug="ZEKOgPm"
-          theme="dark"
-          defaultTab="html"
-/>
+<Sandpack {...SCOPE.examples['LKrsseYGYg']} />
 
 {<LessonTip> Pentru a vedea toate valorile posibile pentru atributul <span className="text-bold">type</span>, accesează <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types" target="_blank" rel="noreferrer"> documentația de pe MDN</a>. </LessonTip>}
 
@@ -100,12 +90,7 @@ Alte atribute pe care le vei folosi zi de zi pentru elementul <FormattedText as=
 
 Mai sus le-am enumerat, dar hai să le și vedem în acțiune:
 
-<CodePenEmbed
-          user="iampava"
-          slug="yLbagmM"
-          theme="dark"
-          defaultTab="html"
-  />
+<Sandpack {...SCOPE.examples['am5mPMGCKo']} />
 
 <section>
     <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[0].id}>
@@ -113,12 +98,8 @@ Mai sus le-am enumerat, dar hai să le și vedem în acțiune:
     </LessonHeading>
 
 Un input ceva mai special decât celelalte este <FormattedText as="span"> {'<input type="radio">'} </FormattedText>. Îl vom folosi pentru a alege o singură opțiune din mai multe posibilități predefinite:
-          <CodePenEmbed
-            user="iampava"
-            slug="XWRjMxy"
-            theme="dark"
-            defaultTab="html"
-          />
+
+<Sandpack {...SCOPE.examples['eUKMBAmfBl']} />
           
 Cheia funcționalității de mai sus este atributul <FormattedText as="span">name=""</FormattedText> care are aceeași valoare pentru inputurile ce le vrem grupate. Mai mult, atributul <FormattedText as="span"> checked </FormattedText> îl putem folosi pentru a avea o anumită opțiune preselectată.
 
@@ -131,32 +112,8 @@ Cheia funcționalității de mai sus este atributul <FormattedText as="span">nam
 </LessonHeading>
 
 Este similar cu <FormattedText as="span">{'<input type="text" />'}</FormattedText> doar că permite completarea cu text pe mai multe linii:
-  {/* ------- CODEPEN BUG: FIXME in the future ------- */}
-        {/*
-            Embedding the Pen via our `<CodePenEmbed>` compoent
-            doesn't work as expected if `editable=true`.
-            In this case the Result shows, but the code is not there (empty).
 
-            <CodePenEmbed
-              user="iampava"
-              slug="qBmarzW"
-              theme="dark"
-              defaultTab="html"
-            />
-
-            If however `editable=false`, it works (see blow).
-            We suspect this may be a bug with CodePen itself.
-
-            Contacted them via the `Support` form.
-            Awaiting response
-          */}
-<CodePenEmbed
-          user="iampava"
-          slug="qBmarzW"
-          theme="dark"
-          defaultTab="html"
-          editable={false}
-  />
+<Sandpack {...SCOPE.examples['fkeSdRMw29']} />
 
 {<LessonTip> Toate atributele menționate la input-uri (în afară de <FormattedText as="span">type=""</FormattedText>) sunt valabile și pentru <FormattedText as="span">{'<textarea>'}</FormattedText> </LessonTip>}
 </section>
@@ -167,12 +124,7 @@ Este similar cu <FormattedText as="span">{'<input type="text" />'}</FormattedTex
 
 Cu ajutorul elementului <FormattedText as="span"> {'<select>'} </FormattedText> îi oferim utilizatorului un "dropdown menu" cu o listă de opțiuni din care poate alege. Gândește-te spre exemplu la un formular de înregistrare în care trebuie să alegi țara de origine:
 
-<CodePenEmbed
-          user="iampava"
-          slug="ZEKpKYV"
-          theme="dark"
-          defaultTab="html"
-  />
+<Sandpack {...SCOPE.examples['QovE3Y09gJ']} />
 
 Opțiunile le specificăm prin elementul <FormattedText as="span">{'<option>'}</FormattedText> care trebuie să primească atributul <FormattedText as="span">value=""</FormattedText> iar opțional și atributul <FormattedText as="span">selected</FormattedText> pentru a preselecta opțiunea.
 
@@ -221,13 +173,9 @@ Este recomandat să adaugăm un label fiecărui <FormattedText as="span">{'<inpu
 
       Încearcă și tu în demo-ul de mai jos unde primele 2 radio-uri nu au label, deci trebuie să dai click exact pe ele, spre deosebire de următoarele pe care le poți selecta apăsând și pe text:
 
-        <CodePenEmbed
-          user="iampava"
-          slug="VwbKWXB"
-          theme="dark"
-          defaultTab="html"
-          className="mt-4"
-        />
+        <div className="mt-4">
+          <Sandpack" {...SCOPE.examples['x3gIfbpgyx']} />
+        </div>
       </li>
     </List>}
 
@@ -240,13 +188,8 @@ Este recomandat să adaugăm un label fiecărui <FormattedText as="span">{'<inpu
       O altă bună practică este ca fiecare formular să conțină la final un <FormattedText as="span">{'<button type="submit">'}</FormattedText>.
           
       Pe lângă faptul că dând click pe el vom trimite formularul, vom putea să-l trimitem și apăsând <FormattedText as="span">↪ ENTER</FormattedText> în oricare input. O interacțiune pe care sigur o folosești zi de zi, dar care ar fi mai greu de implementat fără acest element.
-          <CodePenEmbed
-            user="iampava"
-            slug="poPEwQE"
-            theme="dark"
-            defaultTab="html"
-          />
 
+      <Sandpack {...SCOPE.examples['sYko7ZaE5P']} />
 </section>
 
 </section>

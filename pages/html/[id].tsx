@@ -2,6 +2,7 @@ import Lesson from '~/components/lessons';
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { MDXService } from '~/services/MDXService';
+import { getExamples } from '~/curriculum/examples';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
@@ -49,6 +50,7 @@ export async function getServerSideProps({ res, params }) {
     }
   }
   const MDX_SCOPE = {
+    examples: getExamples(lessonInfo.id),
     icons: { faThumbsUp, faExclamationCircle, faQuestion, faQuestionCircle, faThumbsDown, faShoppingCart },
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
   }

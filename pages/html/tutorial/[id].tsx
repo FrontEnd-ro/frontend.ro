@@ -1,6 +1,7 @@
 import Link from '~/components/generic/Link';
 import SEOTags from '~/components/SEOTags';
 import { MDXService } from '~/services/MDXService';
+import { getExamples } from '~/curriculum/examples';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { withSmoothScroll } from '~/services/Hooks';
 import { faThumbsUp,faQuestionCircle, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
@@ -125,6 +126,7 @@ export async function getServerSideProps({ res, params }) {
     }
   }
   const MDX_SCOPE = {
+    examples: getExamples(lessonInfo.id),
     icons: { faThumbsUp, faExclamationCircle, faQuestion, faQuestionCircle, faThumbsDown, faShoppingCart },
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
   }

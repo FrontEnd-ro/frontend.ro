@@ -42,12 +42,7 @@ export const CONFIG = {
 
   Regardless of what purpose you're building the form for, you'll use the <strong className="strong formatted">{'<form>'} </strong> element to group the fields that users can fill in. For example, a short login form looks like this:
 
-  <CodePenEmbed
-    user="iampava"
-    slug="mdmENZO"
-    theme="dark"
-    defaultTab="html"
-  />
+  <Sandpack {...SCOPE.examples['G8stNLOCA3']} />
 
   {<LessonTip> You may have noticed that in the above example we have several <FormattedText as="span"> {'<label>'} </FormattedText> elements and at the end a button with <FormattedText as="span">type="submit"</FormattedText>. Although they are not mandatory, they are <strong> good practices</strong> that we'll talk about <a href={`#${CONFIG.chapters[4].id}`}> a bit later in the article </a>.</LessonTip>}
 </section>
@@ -60,12 +55,7 @@ export const CONFIG = {
 
   Below we have a collection of inputs, each with a different value for the <strong>type</strong> attribute, which allow us to fill in text, passwords, calendar dates, even upload files, or choose colors:
 
-  <CodePenEmbed
-    user="iampava"
-    slug="ZEKOgPm"
-    theme="dark"
-    defaultTab="html"
-  />
+  <Sandpack {...SCOPE.examples['LKrsseYGYg']} />
 
   {<LessonTip> If you want to find all the possible values for the <span className="text-bold">type</span> attribute, have a look at <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types" target="_blank" rel="noreferrer">the documentation on MDN</a>. </LessonTip>}
 
@@ -97,12 +87,7 @@ export const CONFIG = {
 
   We listed them above, but let's see them in action:
 
-  <CodePenEmbed
-    user="iampava"
-    slug="yLbagmM"
-    theme="dark"
-    defaultTab="html"
-  />
+  <Sandpack {...SCOPE.examples['am5mPMGCKo']} />
 
   <section>
     <LessonHeading as="h3" id={CONFIG.chapters[1].subchapters[0].id}>
@@ -111,12 +96,7 @@ export const CONFIG = {
 
     A slightly more special input than the others is <FormattedText as="span"> {'<input type="radio">'} </FormattedText>. We will use it to choose a single option from several predefined possibilities:
 
-    <CodePenEmbed
-      user="iampava"
-      slug="XWRjMxy"
-      theme="dark"
-      defaultTab="html"
-    />
+    <Sandpack {...SCOPE.examples['eUKMBAmfBl']} />
 
     The key to the above functionality is the <FormattedText as="span">name=""</FormattedText> attribute which has the same value for the inputs we want grouped. Moreover, we can use the <FormattedText as="span"> checked </FormattedText> attribute to have a certain option preselected.
   </section>
@@ -128,32 +108,7 @@ export const CONFIG = {
 
   It is similar to <FormattedText as="span">{'<input type="text" />'}</FormattedText> except that it allows writing longer text, that spreads on multiple lines:
 
-  {/* ------- CODEPEN BUG: FIXME in the future ------- */}
-  {/*
-      Embedding the Pen via our `<CodePenEmbed>` compoent
-      doesn't work as expected if `editable=true`.
-      In this case the Result shows, but the code is not there (empty).
-
-      <CodePenEmbed
-        user="iampava"
-        slug="qBmarzW"
-        theme="dark"
-        defaultTab="html"
-      />
-
-      If however `editable=false`, it works (see blow).
-      We suspect this may be a bug with CodePen itself.
-
-      Contacted them via the `Support` form.
-      Awaiting response
-    */}
-  <CodePenEmbed
-    user="iampava"
-    slug="qBmarzW"
-    theme="dark"
-    defaultTab="html"
-    editable={false}
-    />
+  <Sandpack {...SCOPE.examples['fkeSdRMw29']} />
 
   {<LessonTip> All attributes mentioned above, regarding inputs (except <FormattedText as="span">type=""</FormattedText>) are available for <FormattedText as="span">{'<textarea>'}</FormattedText> as well. </LessonTip>}
 </section>
@@ -164,12 +119,7 @@ export const CONFIG = {
 
   With the <FormattedText as="span"> {'<select>'} </FormattedText> element we give the user a "dropdown menu" with a list of options to choose from. A good example of this is a registration form where you can choose your country of birth:
 
-  <CodePenEmbed
-    user="iampava"
-    slug="ZEKpKYV"
-    theme="dark"
-    defaultTab="html"
-  />
+  <Sandpack {...SCOPE.examples['QovE3Y09gJ']} />
 
   We insert the options via the <FormattedText as="span">{'<option>'}</FormattedText> element which must receive the attribute <FormattedText as="span">value=""</FormattedText> and optionally the attribute <FormattedText as="span">selected</FormattedText> to preselect the option.
 
@@ -218,13 +168,9 @@ export const CONFIG = {
 
     <li className="mt-4"> if we click on the label it will focus/select the input, which is an extremely useful thing <strong> especially for mobile devices</strong>. Try it yourself in the demo below where the first 2 radios have no label, so you have to click exactly on them, unlike the following which you can select by clicking on the text as well:
 
-    <CodePenEmbed
-      user="iampava"
-      slug="VwbKWXB"
-      theme="dark"
-      defaultTab="html"
-      className="mt-4"
-    />
+      <div className="mt-4">
+        <Sandpack" {...SCOPE.examples['x3gIfbpgyx']} />
+      </div>
     </li>
     </List>}
 
@@ -238,11 +184,6 @@ export const CONFIG = {
           
       In addition to the fact that by clicking on it we will send the form, we will also be able to send it by pressing <FormattedText as="span">↪ ENTER</FormattedText> in any input. An interaction that you surely use every day, but which would be more difficult to implement without this element.
 
-      <CodePenEmbed
-        user="iampava"
-        slug="poPEwQE"
-        theme="dark"
-        defaultTab="html"
-      />
+      <Sandpack {...SCOPE.examples['sYko7ZaE5P']} />
   </section>
 </section>

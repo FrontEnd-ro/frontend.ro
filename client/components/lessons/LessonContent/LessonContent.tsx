@@ -5,7 +5,7 @@ import { Contributor } from '~/services/contributors';
 import styles from './LessonContent.module.scss';
 import List from '~/components/List/List';
 import Highlight from '~/components/Highlight/Highlight';
-import CodePenEmbed from '~/components/CodePenEmbed/CodePenEmbed';
+import { Sandpack } from '@codesandbox/sandpack-react';
 import FormattedText from '~/components/FormattedText/FormattedText';
 import {
   LessonCover,
@@ -41,7 +41,7 @@ const LessonContent = ({ title, contributors, mdxContent = '', children }: Props
     Link,
     Highlight,
     LessonCover,
-    CodePenEmbed,
+    Sandpack,
     LessonFigure,
     LessonHeading,
     FormattedText,

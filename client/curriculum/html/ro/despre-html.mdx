@@ -91,25 +91,17 @@ export const CONFIG = {
 
   În interiorul acestei perechi putem avea alte elemente sau conținut de tip text, precum în exemplul de mai jos:
 
-  <CodePenEmbed
-    user="iampava"
-    slug="GRmxmMj"
-    theme="dark"
-    defaultTab="html"
-    className="my-5"
-  />
+  <div className="my-5">
+    <Sandpack {...SCOPE.examples['wVlnHV6Gh7']} />
+  </div>
 
   Concret, elementul <FormattedText as="strong">{'<section>'}</FormattedText> are drept conținut alte două elemente (<FormattedText as="strong">{'<h1>'}</FormattedText> și <FormattedText as="strong"> {'<p>'} </FormattedText>), în timp ce aceste două elemente au în interior doar conținut de tip text.
 
   Există și elemente care nu au nevoie de conținut (de exemplu, elementul <FormattedText as="strong">input</FormattedText> sau <FormattedText as="strong"> img </FormattedText>). Acestea se numesc <strong>self-closing tags</strong>, iar modul de scriere este putin diferit, și anume <FormattedText as="strong">{'<element />'}</FormattedText>. În exemplul de mai jos putem vedea modul de folosire al unor taguri self-closing:
 
-  <CodePenEmbed
-    user="iampava"
-    slug="jOmzmYZ"
-    theme="dark"
-    defaultTab="html"
-    className="my-5"
-  />
+  <div className="my-5">
+    <Sandpack {...SCOPE.examples['xiY1XuQLjh']} />
+  </div>
 
   Probabil te intrebi ce înseamnă <strong>type="text"</strong> și <strong>placeholder="Nume"</strong>. Ele se numesc <em className="text-bold">atribute</em>. Hai să vedem care este scopul acestora.
 </section>

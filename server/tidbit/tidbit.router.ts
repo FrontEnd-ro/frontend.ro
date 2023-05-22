@@ -4,12 +4,13 @@ import express, { Request, Response } from "express";
 import { ServerError } from "../utils/ServerError";
 import { PublicMiddleware } from "../Middlewares";
 import Tidbit, { sanitizeTidbit } from "./tidbit.model";
+import { API_TidbitI } from '../../shared/types/tidbit.types';
 
 const tidbitRouter = express.Router();
 
 tidbitRouter.get("/", [
   PublicMiddleware,
-  async function getAllTidbits(req: Request, res: Response) {
+  async function getAllTidbits(req: Request, res: Response<Partial<API_TidbitI>[]>) {
     const queryParams = req.query;
     const tidbits = await Tidbit.find().sort('-createdDate');
     const sanitizedTidbits = tidbits.map(sanitizeTidbit);
@@ -23,7 +24,7 @@ tidbitRouter.get("/", [
         ? queryParams.field.map(f => f.toString())
         : [queryParams.field.toString()];
 
-      const tidbitsWithFields = sanitizedTidbits.map((tidbit) => {
+      const tidbitsWithFields: Partial<API_TidbitI>[] = sanitizedTidbits.map((tidbit) => {
         let newTidbit = {};
         stringFields.forEach((field: string) => {
           const fieldValue = get(tidbit, field);
@@ -45,7 +46,7 @@ tidbitRouter.get("/", [
 
 tidbitRouter.get("/:tidbitId", [
   PublicMiddleware,
-  async function getTidbit(req: Request, res: Response) {
+  async function getTidbit(req: Request<{ tidbitId: string; }>, res: Response<API_TidbitI>) {
     const { tidbitId } = req.params;
     const tidbit = await Tidbit.findOne({ tidbitId });
 
@@ -60,7 +61,10 @@ tidbitRouter.get("/:tidbitId", [
 
 tidbitRouter.get("/:currentTidbitId/sides", [
   PublicMiddleware,
-  async function getPreviousAndNextTidbit(req: Request, res: Response) {
+  async function getPreviousAndNextTidbit(
+    req: Request<{ currentTidbitId: string; }>,
+    res: Response<{ previous: API_TidbitI | null | null, next: API_TidbitI | null }>
+  ) {
     const { currentTidbitId } = req.params;
 
     const tidbits = await Tidbit.find().sort("-createdDate");
@@ -80,7 +84,10 @@ tidbitRouter.get("/:currentTidbitId/sides", [
   },
 ]);
 
-tidbitRouter.post('/:tidbitId/views', async function increaseViews(req, res) {
+tidbitRouter.post('/:tidbitId/views', async function increaseViews(
+  req: Request<{ tidbitId: string; }>,
+  res: Response
+) {
   const { tidbitId } = req.params;
 
   const tidbit = await Tidbit.findOne({ tidbitId });

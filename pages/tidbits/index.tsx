@@ -7,7 +7,7 @@ import { API_TidbitI } from '~/../shared/types/tidbit.types';
 import TidbitService from '~/services/api/Tidbit.service';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 
-const TidbitGalleryPage = ({ tidbits }: {tidbits: API_TidbitI[]}) => {
+const TidbitGalleryPage = ({ tidbits }: { tidbits: API_TidbitI[] }) => {
   const { t, lang } = useTranslation('common');
   return (
     <>
@@ -27,7 +27,8 @@ const TidbitGalleryPage = ({ tidbits }: {tidbits: API_TidbitI[]}) => {
 // We don't want this to be a `getStaticProps` because we don't
 // trigger a rebuild when this DB collection changes.
 export async function getServerSideProps() {
-  const tidbits: API_TidbitI[] = await TidbitService.getAll(['title', 'backgroundColor', 'tidbitId', 'items[0].imageSrc']);
+  const tidbits = await TidbitService.getAll(['title', 'backgroundColor', 'tidbitId', 'items[0].imageSrc']) as Pick<
+    API_TidbitI, 'tidbitId' | 'backgroundColor' | 'items' | 'title'>[];
 
   return {
     props: {

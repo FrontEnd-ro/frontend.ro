@@ -1,9 +1,10 @@
+import { LESSON_IDS } from "../Curriculum";
 import { CurriculumExamples } from "./examples";
 import { examples as examples_formulare } from "./examples_formulare";
 import { examples as examples_containere } from "./examples_containere";
 import { examples as examples_despre_html } from "./examples_despre_html";
 
-export function getExamples(id: string): CurriculumExamples {
+export function getExamples(id: typeof LESSON_IDS[number]): CurriculumExamples {
   switch (id) {
     case 'formulare': {
       return examples_formulare;

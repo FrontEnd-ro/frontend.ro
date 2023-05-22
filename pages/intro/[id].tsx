@@ -3,6 +3,7 @@ import SEOTags from '~/components/SEOTags';
 import { GITHUB_URL } from '~/services/Constants';
 import appConfig from '~/../server/config';
 import { MDXService } from '~/services/MDXService';
+import { getExamples } from '~/curriculum/examples';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from '~/services/typesafeNextTranslate';
@@ -52,6 +53,7 @@ export async function getServerSideProps({ res, params }) {
   const MDX_SCOPE = {
     GITHUB_URL,
     icons: { faShare },
+    examples: getExamples(lessonInfo.id),
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
     urlToShare: `${appConfig.APP.app_url}/intro/${id}`
   }

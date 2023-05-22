@@ -3,6 +3,7 @@ import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import { MDXService } from '~/services/MDXService';
+import { getExamples } from '~/curriculum/examples';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 import LessonExerciseService from '~/services/api/LessonExercise.service';
 
@@ -47,6 +48,7 @@ export async function getServerSideProps({ res, params }) {
     }
   }
   const MDX_SCOPE = {
+    examples: getExamples(lessonInfo.id),
     CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
   }
   const compiledMDX = await MDXService.compile(mdxResp.content, MDX_SCOPE);

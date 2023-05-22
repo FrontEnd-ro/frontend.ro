@@ -19,13 +19,45 @@ export type MDXLessonConfig = {
   chapters: LessonChapter[];
 }
 
+export const LESSON_IDS = [
+  'despre-noi',
+  'vreau-sa-ajut',
+  'ce-este-frontend-ul',
+  'vs-code',
+  'despre-html',
+  'structura-pagina-html',
+  'validare',
+  'texte',
+  'linkuri-si-butoane',
+  'liste',
+  'containere',
+  'imagini',
+  'audio-video',
+  'despre-css',
+  'formulare',
+  'moduri-stilizare',
+  'box-model',
+  'taguri-clase-si-id-uri',
+  'animatii',
+  'despre-javascript',
+  'tranzitii',
+  'media-queries',
+  'cum-sa-gandim-ca-un-programator',
+  'obiecte-si-array-uri',
+  'variabile-si-tipuri-primitive',
+  'devtools',
+  'functii',
+  'graceful-degradation',
+  'biblioteci-si-framework-uri'
+] as const;
+
 // Unlike the config above, we expect to use this one
 // in other places except the lesson one. For example, we might
 // want to show a list of related lessons. This requires us
 // to be able to read all lessons and apply some basic filtering.
 // That's why we keep this information in this JSON, and not in MDX.
 export type LessonConfig = {
-  id: string;
+  id: typeof LESSON_IDS[number];
   written: boolean;
   title: string;
   description: string;

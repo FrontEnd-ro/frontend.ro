@@ -5,11 +5,11 @@ import { API_LessonI } from '../../shared/types/lesson.types';
 const Lesson: mongoose.Model<LessonI> = mongoose.models.Lesson || mongoose.model('Lesson', LessonSchema);
 
 class LessonModel {
-  static get(lessonId) {
+  static get(lessonId: string) {
     return Lesson.findOne({ lessonId });
   }
 
-  static async updateViews(lessonId, views): Promise<void> {
+  static async updateViews(lessonId: string, views: number): Promise<void> {
     let lesson: mongoose.Document<any, any, LessonI> & LessonI = null;
 
     try {

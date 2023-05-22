@@ -1,10 +1,11 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import LessonModel, { sanitizeLesson } from './lesson.model';
 import { ServerError } from '../utils/ServerError';
+import { API_LessonI } from '../../shared/types/lesson.types';
 
 const lessonRouter = express.Router();
 
-lessonRouter.get('/:lessonId', async function getLesson(req, res) {
+lessonRouter.get('/:lessonId', async function getLesson(req: Request<{ lessonId: string; }>, res: Response<API_LessonI>) {
   const { lessonId } = req.params;
   const lesson = await LessonModel.get(lessonId);
 
@@ -16,7 +17,7 @@ lessonRouter.get('/:lessonId', async function getLesson(req, res) {
   res.json(sanitizeLesson(lesson));
 });
 
-lessonRouter.post('/:lessonId/views', async function increaseViews(req, res) {
+lessonRouter.post('/:lessonId/views', async function increaseViews(req: Request<{ lessonId: string; }>, res: Response<API_LessonI>) {
   const { lessonId } = req.params;
   const SPAN = `increaseViews(${lessonId})`;
 

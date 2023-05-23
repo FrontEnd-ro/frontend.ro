@@ -57,6 +57,9 @@ class Http {
   ) {
     const headersInit: HeadersInit = {
       'content-type': 'application/json',
+      // We might need to serve different content based on language
+      // For example the Tidbits
+      'accept-language': process.env.LANGUAGE,
     };
     let cookies: Record<string, string> = {};
 

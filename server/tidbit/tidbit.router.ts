@@ -12,7 +12,8 @@ tidbitRouter.get("/", [
   PublicMiddleware,
   async function getAllTidbits(req: Request, res: Response<Partial<API_TidbitI>[]>) {
     const queryParams = req.query;
-    const tidbits = await Tidbit.find().sort('-createdDate');
+    const acceptLanguage = req.headers['accept-language'] ?? 'en';
+    const tidbits = await Tidbit.find({ language: acceptLanguage }).sort('-createdDate');
     const sanitizedTidbits = tidbits.map(sanitizeTidbit);
 
     if (queryParams.hasOwnProperty('field')) {
@@ -48,7 +49,8 @@ tidbitRouter.get("/:tidbitId", [
   PublicMiddleware,
   async function getTidbit(req: Request<{ tidbitId: string; }>, res: Response<API_TidbitI>) {
     const { tidbitId } = req.params;
-    const tidbit = await Tidbit.findOne({ tidbitId });
+    const acceptLanguage = req.headers['accept-language'] ?? 'en';
+    const tidbit = await Tidbit.findOne({ tidbitId, language: acceptLanguage });
 
     if (tidbit === null) {
       new ServerError(404, 'generic.404').send(res);
@@ -66,8 +68,9 @@ tidbitRouter.get("/:currentTidbitId/sides", [
     res: Response<{ previous: API_TidbitI | null | null, next: API_TidbitI | null }>
   ) {
     const { currentTidbitId } = req.params;
+    const acceptLanguage = req.headers['accept-language'] ?? 'en';
 
-    const tidbits = await Tidbit.find().sort("-createdDate");
+    const tidbits = await Tidbit.find({ language: acceptLanguage }).sort("-createdDate");
     const indexOf = tidbits.findIndex(
       (tidbit) => tidbit.tidbitId === currentTidbitId
     );
@@ -89,8 +92,9 @@ tidbitRouter.post('/:tidbitId/views', async function increaseViews(
   res: Response
 ) {
   const { tidbitId } = req.params;
+  const acceptLanguage = req.headers['accept-language'] ?? 'en';
 
-  const tidbit = await Tidbit.findOne({ tidbitId });
+  const tidbit = await Tidbit.findOne({ tidbitId, language: acceptLanguage });
 
   if (tidbit === null) {
     new ServerError(404, 'generic.404').send(res);

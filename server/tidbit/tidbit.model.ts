@@ -21,6 +21,8 @@ export interface TidbitI {
   createdDate?: Date;
 
   views: number;
+
+  language: 'en' | 'ro';
 }
 
 export interface TidbitItemI {
@@ -39,7 +41,7 @@ const TidbitItemSchema = new mongoose.Schema<TidbitItemI>({
 });
 
 const TidbitSchema = new mongoose.Schema<TidbitI>({
-  tidbitId: { type: String, required: true, unique: true },
+  tidbitId: { type: String, required: true },
   title: { type: String, required: true },
   textColor: { type: String, required: true },
   backgroundColor: { type: String, required: true },
@@ -47,7 +49,10 @@ const TidbitSchema = new mongoose.Schema<TidbitI>({
   description: { type: String },
   createdDate: { type: Date, default: new Date() },
   views: { type: Number, default: 0 },
+  language: { type: String, required: true },
 });
+
+TidbitSchema.index({ tidbitId: 1, language: 1 }, { unique: true });
 
 const Tidbit: mongoose.Model<TidbitI, {}, {}> = mongoose.models.Tidbit
   || mongoose.model<TidbitI>('Tidbit', TidbitSchema);
@@ -60,6 +65,7 @@ function sanitizeTidbit(tidbit: Document<any, any, TidbitI> & TidbitI): API_Tidb
     textColor: tidbit.textColor,
     backgroundColor: tidbit.backgroundColor,
     createdDate: tidbit.createdDate,
+    language: tidbit.language,
     items: tidbit.items.map((item) => ({
       imageSrc: item.imageSrc,
       language: item.language,

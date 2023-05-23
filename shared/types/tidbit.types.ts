@@ -14,6 +14,8 @@ export interface API_TidbitI {
   description?: string;
 
   createdDate?: Date;
+
+  language: 'en' | 'ro';
 }
 
 export interface API_TidbitItemI {

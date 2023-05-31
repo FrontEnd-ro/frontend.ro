@@ -1,7 +1,7 @@
 {
   "APP": {
     "env": "development",
-    "allowed_origins": ["https://dev.frontend.ro"],
+    "allowed_origins": ["https://dev.frontend.ro", "https://frontendcademy.vercel.app"],
     "app_url": "https://dev.frontend.ro",
     "endpoint": "https://dev.frontend.ro/api"
   },

@@ -120,7 +120,7 @@ userRouter.post('/login', async function login(
 
   // Create and set JTW as cookie
   const token = UserModel.generateJwtForUser(user._id);
-  setTokenCookie(token, res);
+  setTokenCookie(token, res, req.headers.origin);
 
   res.json(UserModel.sanitize(user, SanitizeRole.SELF));
 })
@@ -170,7 +170,7 @@ userRouter.post('/register', async function register(
 
   // Create and set JTW as cookie
   const token = UserModel.generateJwtForUser(user._id);
-  setTokenCookie(token, res);
+  setTokenCookie(token, res, req.headers.origin);
 
   // No "await" here since the email is not
   // critical for the continuation of the flow.
@@ -367,7 +367,7 @@ userRouter.post('/password/reset', async function resetPassword(
 
     // Create and set JTW as cookie
     const token = UserModel.generateJwtForUser(user._id);
-    setTokenCookie(token, res);
+    setTokenCookie(token, res, req.headers.origin);
 
     res.json(UserModel.sanitize(updatedUser, SanitizeRole.SELF));
   } catch (err) {

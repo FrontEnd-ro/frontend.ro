@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import appConfig from './config';
-import { Request, Response } from "express";
+import { CookieOptions, Request, Response } from "express";
 import { ServerError } from './utils/ServerError';
 
 enum SanitizeRole {
@@ -18,14 +18,21 @@ const MAX_DESCRIPTION_LENGTH = 255;
 const MAX_USERNAME_LENGTH = 100;
 
 const HOUR_IN_MILLISECONDS = 1000 * 60 * 60;
-const COOKIE_CONFIG = {
+const COOKIE_CONFIG: CookieOptions = {
   maxAge: (HOUR_IN_MILLISECONDS * 24) * AUTH_EXPIRATION,
   // In production only allow this cookie with HTTPS Only 👇
-  secure: appConfig.APP.env === 'production' ? true : false
+  secure: appConfig.APP.env === 'production' ? true : false,
 };
 
-function setTokenCookie(token: string, res: Response) {
-  res.cookie('token', token, COOKIE_CONFIG);
+function setTokenCookie(token: string, res: Response, origin?: string) {
+  if (appConfig.APP.allowed_origins.includes(origin)) {
+    res.cookie('token', token, {
+      ...COOKIE_CONFIG,
+      domain: new URL(origin).hostname,
+    });
+  } else {
+    res.cookie('token', token, COOKIE_CONFIG);
+  }
 }
 
 /** Verify that payload doesn't have extra props not present on the Schema */

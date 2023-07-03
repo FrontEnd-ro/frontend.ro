@@ -342,6 +342,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
   ],
   [ResourceCategory.EXTRA]: [
     {
+      title: 'Annotations.dev',
+      url: 'https://annotations.dev/',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/annotations-dev_500w.jpeg`,
+    },
+    {
       title: 'GitHub web editor',
       url: 'https://github.dev',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/github-dev_500w.png`,

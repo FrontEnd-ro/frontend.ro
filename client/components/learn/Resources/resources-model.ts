@@ -170,6 +170,11 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
   ],
   [ResourceCategory.TUTORIALS]: [
     {
+      title: '100 JS Functions',
+      url: 'https://www.100JSFunctions.com',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/100jsfunctions_1200w_square.png`,
+    },
+    {
       title: 'CSS Dinner',
       url: 'https://flukeout.github.io/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/css-dinner_500w.jpg`,

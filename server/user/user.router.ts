@@ -125,8 +125,11 @@ userRouter.post('/login', async function login(
   res.json(UserModel.sanitize(user, SanitizeRole.SELF));
 })
 
-userRouter.post('/logout', (_, res: Response) => {
-  res.clearCookie('token');
+userRouter.post('/logout', (req: Request, res: Response) => {
+  res.clearCookie('token', {
+    sameSite: "strict",
+    domain: new URL(req.headers.origin).hostname
+  });
   res.status(200).send();
 });
 

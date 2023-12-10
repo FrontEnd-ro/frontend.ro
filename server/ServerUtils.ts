@@ -22,6 +22,7 @@ const COOKIE_CONFIG: CookieOptions = {
   maxAge: (HOUR_IN_MILLISECONDS * 24) * AUTH_EXPIRATION,
   // In production only allow this cookie with HTTPS Only 👇
   secure: appConfig.APP.env === 'production' ? true : false,
+  sameSite: "strict"
 };
 
 function setTokenCookie(token: string, res: Response, origin?: string) {

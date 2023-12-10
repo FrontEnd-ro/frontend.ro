@@ -1,8 +1,8 @@
 {
   "APP": {
     "env": "production",
-    "allowed_origins": ["https://frontendro-production.up.railway.app"],
-    "app_url": "https://frontendro-production.up.railway.app",
+    "allowed_origins": ["https://frontend.ro", "https://frontendro-production.up.railway.app"],
+    "app_url": "https://frontend.ro.",
     "endpoint": "https://frontendro-production.up.railway.app/api"
   },
   "CDN": {

@@ -366,5 +366,10 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
       url: 'https://regex101.com/',
       cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/regex101_500w.png`,
     },
+    {
+      title: 'Invață HTML, CSS și JS în Română ',
+      url: 'https://www.youtube.com/playlist?list=PLfTqvIG4roBq8YHdt3k6xX89xXkhSY95b',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/viorel_curs_frontend.jpg`,
+    },
   ],
 };

@@ -171,8 +171,13 @@ export const RESOURCES: Record<ResourceCategory, ResourceDescription[]> = {
   [ResourceCategory.TUTORIALS]: [
     {
       title: '100 JS Functions',
-      url: 'https://www.100JSFunctions.com',
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/100jsfunctions_1200w_square.png`,
+      url: 'https://www.100JSFunctions.com?ref=frontend.ro',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/100jsfunctions_1200w_square.jpeg`,
+    },
+    {
+      title: '100 React Components',
+      url: 'https://www.100ReactComponents.com?ref=frontend.ro',
+      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/resources/100reactcomponents_1200w_square.jpeg`,
     },
     {
       title: 'CSS Dinner',

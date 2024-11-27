@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "engines": {
-    "node": ">=18"
+      "node": ">=20 <21"
   },
   "author": {
     "name": "Alexandru Pavaloi",

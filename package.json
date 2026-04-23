@@ -115,7 +115,7 @@
     "sass": "^1.32.8",
     "sweetalert2": "^10.3.5",
     "sweetalert2-react-content": "^3.2.2",
-    "uuid": "^8.3.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",

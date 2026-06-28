@@ -1,34 +1,11 @@
 import React from 'react';
-import NotFoundPage from './404';
-import { API_UserI } from '../shared/types/user.types';
-import UserProfile from '~/components/user-profile/UserProfile';
+import ArchivedNotice from '~/components/ArchivedNotice';
 
-export default function Username({ publicProfile }: {
-  publicProfile: API_UserI | null
-}) {
-  if (publicProfile === null) {
-    return <NotFoundPage />;
-  }
-
-  return <UserProfile profileUser={publicProfile} />
-}
-
-export async function getServerSideProps({ res, params }) {
-  const resp = await fetch(`${process.env.ENDPOINT}/auth/${params.username}`);
-
-  if (!resp.ok) {
-    res.statusCode = resp.status;
-    return {
-      props: {
-        publicProfile: null,
-      },
-    };
-  }
-
-  const publicProfile = await resp.json();
-  return {
-    props: {
-      publicProfile
-    }
-  }
+export default function Username() {
+  return (
+    <ArchivedNotice
+      seoTitle="Profil | FrontEnd.ro"
+      message="Profilurile publice nu mai sunt disponibile. FrontEnd.ro este acum o arhivă păstrată în mod read-only, fără conturi sau funcționalități interactive. Poți totuși să explorezi lecțiile și conținutul rămas."
+    />
+  );
 }

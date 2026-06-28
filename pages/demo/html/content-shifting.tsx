@@ -5,6 +5,7 @@ import Footer from '~/components/Footer';
 import Demo, { DemoPreview } from '~/components/demo';
 import { LessonTip } from '~/components/lessons';
 import Highlight from '~/components/Highlight/Highlight';
+import { env } from '~/services/env';
 
 export default function ContentShifting() {
   const title = 'Content shifting';
@@ -38,7 +39,7 @@ export default function ContentShifting() {
               <h2> Turnul Eiffel</h2>
               <div style={{ display: 'flex' }}>
                 <img
-                  src={`${process.env.ENDPOINT}/demo/slow-image`}
+                  src={`${env.ENDPOINT}/demo/slow-image`}
                   style={{ marginRight: '1em', maxHeight: '250px' }}
                   alt="Eiffel tower during night"
                 />

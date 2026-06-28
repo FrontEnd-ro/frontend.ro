@@ -4,7 +4,7 @@ import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import PresentationPreview from '~/components/PresentationPreview';
-import PresentationService from '~/services/api/Presentation.service';
+import { getPresentationById } from '../../lib/content';
 import { PresentationI } from '~/../shared/types/presentation.types';
 
 function PresentationPage({ presentation }: { presentation: PresentationI }) {
@@ -29,7 +29,7 @@ function PresentationPage({ presentation }: { presentation: PresentationI }) {
 
 export async function getServerSideProps({ res, params }) {
   try {
-    const presentation = await PresentationService.get(params.presentationId);
+    const presentation = await getPresentationById(params.presentationId);
     return {
       props: {
         presentation,

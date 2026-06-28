@@ -6,41 +6,21 @@ import NotFoundPage from '~/components/NotFound/NotFound';
 import { withSmoothScroll } from '~/services/Hooks';
 import { faThumbsUp,faQuestionCircle, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationCircle,faQuestion, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { LessonHeading, LessonResources } from '~/components/lessons';
+import { LessonResources } from '~/components/lessons';
 import PageContainer from '~/components/PageContainer';
 import { useTranslation } from '~/services/typesafeNextTranslate';
-import LessonExerciseService from '~/services/api/LessonExercise.service';
-import { getLessonById, LessonConfig, MDXLessonConfig } from '~/curriculum/Curriculum';
+import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import LessonContent from '~/components/lessons/LessonContent/LessonContent';
-import LessonExercises from '~/components/lessons/LessonExercises/LessonExercises';
 import PageWithAsideMenu from '~/components/layout/PageWithAsideMenu/PageWithAsideMenu';
 import TableOfContents, { Chapter, parseChapters } from '~/components/TableOfContents';
+import { env } from '~/services/env';
 
 // Naming this component `Temp` because eventually
 // will move this to the /html folder. So right now
 // it's just a Temporary solution while we're finishing
 // development on the Tutorial functionality.
-const HtmlLessonTemp = ({ lessonInfo, exerciseCount = 0, mdxContent = '' }: { lessonInfo: LessonConfig | null, exerciseCount?: number, mdxContent?: string }) => {
+const HtmlLessonTemp = ({ lessonInfo, mdxContent = '' }: { lessonInfo: LessonConfig | null, exerciseCount?: number, mdxContent?: string }) => {
   const { t } = useTranslation('common');
-  const getChapters = (chapters: MDXLessonConfig['chapters']): Chapter[] => {
-    if (!exerciseCount) {
-      return parseChapters(chapters);
-    }
-
-    return [
-      {
-        title: 'Lectie',
-        id: 'lectie',
-        href: '#lectie',
-        subchapters: parseChapters(chapters),
-      },
-      {
-        title: 'Exerciții',
-        id: 'exercitii',
-        href: '#exercitii',
-      },
-    ];
-  };
 
   withSmoothScroll();
 
@@ -49,7 +29,7 @@ const HtmlLessonTemp = ({ lessonInfo, exerciseCount = 0, mdxContent = '' }: { le
   }
 
   const { Content, CONFIG } = MDXService.getComponent(mdxContent);
-  const chapters = getChapters(CONFIG.chapters);
+  const chapters: Chapter[] = parseChapters(CONFIG.chapters);
 
   return (
     <>
@@ -88,14 +68,6 @@ const HtmlLessonTemp = ({ lessonInfo, exerciseCount = 0, mdxContent = '' }: { le
             {lessonInfo.resources !== undefined && (
               <LessonResources className="my-5" links={lessonInfo.resources} />
             )}
-            {exerciseCount > 0 && (
-              <div>
-                <LessonHeading as="h3" id="exercitii">
-                  Exerciții
-                </LessonHeading>
-                <LessonExercises tutorialId="html" lessonId={lessonInfo.id} />
-              </div>
-            )}
           </LessonContent>
           {/*
             TEMPORARILY DISABLING THIS COMPONENT
@@ -113,11 +85,8 @@ const HtmlLessonTemp = ({ lessonInfo, exerciseCount = 0, mdxContent = '' }: { le
 // directly to lesson pages leads to the website thinking you're logged out.
 export async function getServerSideProps({ res, params }) {
   const { id } = params;
-  const lessonInfo = getLessonById(id, process.env.LANGUAGE as 'en' | 'ro');
-  const [mdxResp, exerciseCount] = await Promise.all([
-    MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, process.env.LANGUAGE),
-    LessonExerciseService.getCountOfExercisesForLesson(id)
-  ]);
+  const lessonInfo = getLessonById(id, env.LANGUAGE);
+  const mdxResp = await MDXService.serverFetchMDX(lessonInfo?.id, lessonInfo?.type, env.LANGUAGE);
 
   if (lessonInfo === null || !mdxResp.ok) {
     res.statusCode = 404;
@@ -128,14 +97,13 @@ export async function getServerSideProps({ res, params }) {
   const MDX_SCOPE = {
     examples: getExamples(lessonInfo.id),
     icons: { faThumbsUp, faExclamationCircle, faQuestion, faQuestionCircle, faThumbsDown, faShoppingCart },
-    CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC,
+    CLOUDFRONT_PUBLIC: env.CLOUDFRONT_PUBLIC,
   }
   const compiledMDX = await MDXService.compile(mdxResp.content, MDX_SCOPE);
 
   return {
     props: {
       lessonInfo,
-      exerciseCount,
       mdxContent: compiledMDX,
     },
   };

@@ -5,6 +5,7 @@ import monacoPackageJson from 'monaco-editor/package.json';
 import { includeScript } from './Utils';
 import { Theme } from '../components/Editor/themes';
 import { FeedbackType } from '~/../shared/types/submission.types';
+import { env } from '~/services/env';
 
 // Proxy Pattern for interacting with the 'monaco-editor' library.
 // NOTE: we also have logic regarding loading the library.
@@ -57,14 +58,14 @@ class MonacoService {
     this.loadInProgress = true;
     try {
       await includeScript(
-        `${process.env.CLOUDFRONT_PUBLIC}/lib/monaco-editor/${monacoPackageJson.version}/vs/loader.js`,
+        `${env.CLOUDFRONT_PUBLIC}/lib/monaco-editor/${monacoPackageJson.version}/vs/loader.js`,
       );
 
       // https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-amd.md
       const { require }: any = window;
       require.config({
         paths: {
-          vs: `${process.env.CLOUDFRONT_PUBLIC}/lib/monaco-editor/${monacoPackageJson.version}/vs`,
+          vs: `${env.CLOUDFRONT_PUBLIC}/lib/monaco-editor/${monacoPackageJson.version}/vs`,
         },
       });
 

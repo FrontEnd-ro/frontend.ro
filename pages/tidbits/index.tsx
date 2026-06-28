@@ -4,17 +4,18 @@ import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import { API_TidbitI } from '~/../shared/types/tidbit.types';
-import TidbitService from '~/services/api/Tidbit.service';
+import { getTidbits } from '../../lib/content';
 import { useTranslation } from '~/services/typesafeNextTranslate';
+import { env } from '~/services/env';
 
 const TidbitGalleryPage = ({ tidbits }: { tidbits: API_TidbitI[] }) => {
   const { t, lang } = useTranslation('common');
   return (
     <>
       <SEOTags
-        url={`${process.env.APP_URL}/tidbits`}
+        url={`${env.APP_URL}/tidbits`}
         title={`Tidbits | ${t('FrontEndro')}`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/tidbits_1200w.jpeg`}
+        shareImage={`${env.CLOUDFRONT_PUBLIC}/public/seo/tidbits_1200w.jpeg`}
         description={t('Tidbits.seo_description')}
       />
       <Header withNavMenu />
@@ -27,7 +28,7 @@ const TidbitGalleryPage = ({ tidbits }: { tidbits: API_TidbitI[] }) => {
 // We don't want this to be a `getStaticProps` because we don't
 // trigger a rebuild when this DB collection changes.
 export async function getServerSideProps() {
-  const tidbits = await TidbitService.getAll(['title', 'backgroundColor', 'tidbitId', 'items[0].imageSrc']) as Pick<
+  const tidbits = await getTidbits(['title', 'backgroundColor', 'tidbitId', 'items[0].imageSrc']) as Pick<
     API_TidbitI, 'tidbitId' | 'backgroundColor' | 'items' | 'title'>[];
 
   return {

@@ -3,15 +3,16 @@ import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import SEOTags from '~/components/SEOTags';
 import PresentationGallery from '~/components/PresentationGallery';
-import PresentationService from '~/services/api/Presentation.service';
+import { getPresentations } from '../../lib/content';
 import { PresentationI } from '~/../shared/types/presentation.types';
+import { env } from '~/services/env';
 
 function Slides({ presentations }: {presentations: PresentationI[]}) {
   return (
     <>
       <SEOTags
         title="Slide-uri | FrontEnd.ro"
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/events-page.jpg`}
+        shareImage={`${env.CLOUDFRONT_PUBLIC}/seo/events-page.jpg`}
         description="Slide-urile folosite la evenimentele comunității FrontEnd.ro"
         url="https://FrontEnd.ro/slides"
       />
@@ -24,7 +25,7 @@ function Slides({ presentations }: {presentations: PresentationI[]}) {
 
 export async function getServerSideProps() {
   try {
-    const presentations = await PresentationService.getAll()
+    const presentations = await getPresentations()
 
     return {
       props: {

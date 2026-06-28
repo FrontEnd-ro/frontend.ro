@@ -20,11 +20,18 @@ export default function Footer() {
             GitHub
           </a>
         </p>
+      </section>
+
+      <section>
+        <h5> Alte proiecte </h5>
         <p>
-          {t('Footer.See components in')}
-          {' '}
-          <a href="https://storybook.frontend.ro" target="_blank" rel="noreferrer">
-            Storybook
+          <a href="https://100jsfunctions.com" target="_blank" rel="noreferrer">
+            100JSFunctions.com
+          </a>
+        </p>
+        <p>
+          <a href="https://100reactcomponents.com" target="_blank" rel="noreferrer">
+            100ReactComponents.com
           </a>
         </p>
       </section>

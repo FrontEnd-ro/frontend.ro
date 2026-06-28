@@ -1,10 +1,10 @@
-import React, { HTMLAttributes, PropsWithChildren, ReactHTML } from "react";
+import React, { HTMLAttributes, PropsWithChildren } from "react";
 import styles from './GradientText.module.scss';
 
 interface Props {
   fromColor: string;
   toColor: string;
-  as?: keyof ReactHTML;
+  as?: keyof JSX.IntrinsicElements;
   angle?: number;
 }
 

@@ -6,6 +6,7 @@ import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import Highlight from '~/components/Highlight/Highlight';
 import FormattedText from '~/components/FormattedText';
+import { env } from '~/services/env';
 
 export default function Video() {
   const title = 'Elementul <video>';
@@ -31,18 +32,18 @@ export default function Video() {
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video muted autoPlay controls width="480" height="270">
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}
+                src={`${env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}
                 type="video/mp4"
               />
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.avi`}
+                src={`${env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.avi`}
                 type="video/avi"
               />
               <p>
                 Browser-ul tău nu suportă fișiere video.
                 Folosește
                 {' '}
-                <a href={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}>acest link</a>
+                <a href={`${env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4`}>acest link</a>
                 pentru a-l putea vizualiza.
               </p>
             </video>
@@ -53,18 +54,18 @@ export default function Video() {
             code={`
 <video muted autoplay controls width="480" height="270">
   <source
-    src="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4"
+    src="${env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4"
     type="video/mp4"
   />
 
   <source
-    src="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.avi"
+    src="${env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.avi"
     type="video/x-matroska"
   />
 
   <p>
     Browser-ul tău nu suportă fișiere video. Folosește
-    <a href="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4">
+    <a href="${env.CLOUDFRONT_PUBLIC}/demo-assets/audio-video/big-buck-bunny-video.mp4">
       acest link
     </a>
     pentru a-l putea vizualiza.

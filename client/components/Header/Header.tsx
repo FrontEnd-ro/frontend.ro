@@ -5,7 +5,6 @@ import { faBars, faLink } from '@fortawesome/free-solid-svg-icons';
 
 import { connect, ConnectedProps } from 'react-redux';
 
-import AccountTooltip from './AccountTooltip/AccountTooltip';
 import Button from '~/components/Button';
 import { RootState } from '~/redux/root.reducer';
 
@@ -13,8 +12,8 @@ import styles from './Header.module.scss';
 import AsideMenu from '../layout/AsideMenu/AsideMenu';
 import NavLinks from '../NavLinks/NavLinks';
 import { ThemeVariant } from '~/services/Constants';
-import NotificationTooltip from '../notification-tooltip/NotificationTooltip';
 import { useTranslation } from '~/services/typesafeNextTranslate';
+import { env } from '~/services/env';
 
 interface Props {
   href?: string;
@@ -29,7 +28,6 @@ function Header({
   href = '/',
   demoPage,
   onMenuClick,
-  isLoggedIn,
   navItems,
   withNavMenu = false,
   theme = 'light',
@@ -55,15 +53,15 @@ function Header({
           <Link prefetch={false} className={styles.logo} href={href}>
             <picture>
               <source
-                srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo-square--S.jpg`}
+                srcSet={`${env.CLOUDFRONT_PUBLIC}/public/logo-square--S.jpg`}
                 media="(max-width: 600px)"
               />
               <source
-                srcSet={`${process.env.CLOUDFRONT_PUBLIC}/public/logo.png`}
+                srcSet={`${env.CLOUDFRONT_PUBLIC}/public/logo.png`}
                 media="(min-width: 600px)"
               />
               <img
-                src={`${process.env.CLOUDFRONT_PUBLIC}/public/logo.png`}
+                src={`${env.CLOUDFRONT_PUBLIC}/public/logo.png`}
                 alt="FrontEnd.ro logo"
               />
             </picture>
@@ -75,15 +73,6 @@ function Header({
           )}
         </div>
         <div className="d-flex align-items-center h-100 py-1 gap-x-4">
-          {isLoggedIn ? (
-            <>
-              <AccountTooltip theme={theme} />
-              <NotificationTooltip
-                theme={theme}
-                tooltipClassName={styles.NotificationTooltip}
-              />
-            </>
-          ) : null}
           {withNavMenu && (
             <Button
               variant="transparent"
@@ -124,7 +113,6 @@ function Header({
 
 function mapStateToProps(state: RootState) {
   return {
-    isLoggedIn: !!state.user.info,
     navItems: state.applicationConfig.navItems,
   };
 }

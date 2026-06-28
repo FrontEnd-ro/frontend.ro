@@ -8,10 +8,8 @@ import { API_TidbitI } from '~/../shared/types/tidbit.types';
 import LandingAdCard from './LandingAdCard/LandingAdCard';
 import { useTranslation } from '~/services/typesafeNextTranslate';
 import LandingResources from './LandingResources/LandingResources';
-import LandingSubscribe from './LandingSubscribe/LandingSubscribe';
 import LandingHTML from '~/components/Landing/LandingHtml/LandingHtml';
 import LandingTidbits from '~/components/Landing/LandingTidbits/LandingTidbits';
-import LandingChristmasAdvent from './LandingChristmasAdvent/LandingChristmasAdvent';
 
 import styles from './Landing.module.scss';
 
@@ -56,10 +54,8 @@ function LandingPage({
           htmlTutorialState={htmlTutorialState}
         />
         <LandingHTML className={styles.LandingHTML} />
-        <LandingChristmasAdvent className={styles.LandingChristmasAdvent} />
         <LandingTidbits tidbits={tidbits} />
         <LandingResources className={styles.LandingResources} />
-        <LandingSubscribe className={styles.LandingSubscribe} />
         <Footer />
       </>
     </>

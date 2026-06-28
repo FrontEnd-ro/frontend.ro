@@ -1,0 +1,35 @@
+@import '../../styles/variables';
+
+.page {
+  font-size: 1rem;
+  padding: 8em 0;
+
+  h1 {
+    margin-top: 0;
+    font-size: calc(28px + 2vw);
+  }
+
+  .message {
+    margin: 1.5em auto 0;
+    max-width: 40em;
+    font-weight: normal;
+    font-size: calc(14px + 0.5vw);
+    line-height: 1.8em;
+  }
+
+  .actions {
+    margin-top: 2.5em;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cta {
+    display: inline-block;
+    font-size: 18px;
+    padding: 0.5em 1em;
+    text-decoration: none;
+  }
+}

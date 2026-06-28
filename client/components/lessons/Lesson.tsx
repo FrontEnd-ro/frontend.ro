@@ -1,6 +1,5 @@
 import React, {
   PropsWithChildren,
-  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -12,11 +11,8 @@ import styles from './Lesson.module.scss';
 import { MDXService } from '~/services/MDXService';
 import { withSmoothScroll } from '~/services/Hooks';
 import { GITHUB_URL } from '~/services/Constants';
-import LessonExercises from './LessonExercises/LessonExercises';
 import { Chapter, parseChapters } from '../TableOfContents';
-import LessonService from '~/services/api/Lesson.service';
 import LessonContent from './LessonContent/LessonContent';
-import LessonHeading from './LessonHeading/LessonHeading';
 import { getLessonById, LessonConfig } from '~/curriculum/Curriculum';
 import LessonNavigation from './LessonNavigation/LessonNavigation';
 import { useTranslation } from '~/services/typesafeNextTranslate';
@@ -24,7 +20,6 @@ import { useTranslation } from '~/services/typesafeNextTranslate';
 export default function Lesson({
   lessonInfo,
   children,
-  exerciseCount = 0,
   mdxContent = '',
 }: PropsWithChildren<{ lessonInfo: LessonConfig; exerciseCount?: number; mdxContent?: string; }>) {
   const { lang } = useTranslation('common');
@@ -38,20 +33,7 @@ export default function Lesson({
   };
 
   const { Content, CONFIG } = MDXService.getComponent(mdxContent);
-  const chaptersWithHref: Chapter[] = exerciseCount > 0
-    ? [
-      ...parseChapters(CONFIG.chapters ?? []),
-      { title: 'Exerciții', id: 'exercitii', href: '#exercitii' },
-    ]
-    : parseChapters(CONFIG.chapters ?? []);
-
-  useEffect(() => {
-    LessonService
-      .increaseViews(lessonInfo.id)
-      .catch((err) => {
-        console.error('[Lesson.tsx] got while trying to update view count', err);
-      });
-  }, []);
+  const chaptersWithHref: Chapter[] = parseChapters(CONFIG.chapters ?? []);
 
   return (
     <div className={styles.lesson}>
@@ -83,14 +65,6 @@ export default function Lesson({
               </a>
             </p>
           </div>
-          {exerciseCount > 0 && (
-            <div className={styles.exercises}>
-              <LessonHeading as="h3" id="exercitii">
-                Exerciții
-              </LessonHeading>
-              <LessonExercises lessonId={lessonInfo.id} />
-            </div>
-          )}
           <LessonNavigation className="mt-16" lessonId={lessonInfo.id} />
         </div>
       </main>

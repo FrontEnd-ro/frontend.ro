@@ -1,22 +1,35 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
-// Importing the non TypeScript version, as it's not supported here
-const appConfig = require('./server/config/config');
-
+// Read-only archive on Vercel: configuration is just environment variables.
+// Vercel injects them at build + runtime, and Next.js auto-loads `.env.local`
+// for local dev — so we no longer need `node-config`. The defaults below are
+// the production values for frontend.ro, so the app builds and runs out of the
+// box without any env setup. (DB_CONNECT is read server-side in `lib/db.ts` and
+// is intentionally NOT exposed here.)
 const nextConfig = {
   distDir: 'dist',
   env: {
-    APP_ENV: appConfig.APP.env,
-    APP_URL: appConfig.APP.app_url,
-    ENDPOINT:  appConfig.APP.endpoint,
-    CLOUDFRONT_PUBLIC: appConfig.CDN.static,
-    GITHUB_CLIENT_ID: appConfig.GITHUB.id,
-    RESET_CODE_LENGTH: appConfig.PASS_RESET_CODE.length,
-    LANGUAGE: appConfig.APP.language,
+    APP_ENV: process.env.APP_ENV || 'production',
+    APP_URL: process.env.APP_URL || 'https://frontend.ro',
+    ENDPOINT: process.env.ENDPOINT || '/api',
+    CLOUDFRONT_PUBLIC: process.env.CLOUDFRONT_PUBLIC || 'https://d3tycb976jpudc.cloudfront.net',
+    LANGUAGE: process.env.LANGUAGE || 'ro',
   },
   images: {
-    domains: ['d3tycb976jpudc.cloudfront.net'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'd3tycb976jpudc.cloudfront.net',
+      },
+    ],
+  },
+  sassOptions: {
+    // The legacy SCSS uses `@import` / `map-get` / `lighten`, which Dart Sass
+    // now flags as deprecated. We're archiving this project, not migrating to
+    // Sass 3, so silence the noise instead of rewriting every stylesheet.
+    silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'legacy-js-api'],
+    quietDeps: true,
   },
   webpack: (config) => {
     config.module.rules.push(

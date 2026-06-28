@@ -7,6 +7,7 @@ import {
   StatsCardLayout6,
 } from '~/components/PlatformStats';
 import Link from '~/components/generic/Link';
+import { env } from '~/services/env';
 
 function EventsStats() {
   return (
@@ -29,14 +30,14 @@ function EventsStats() {
         background="image"
         className={styles.card2}
         description="traineri pasionați"
-        src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/zoom-call-with-coffee.jpg`}
+        src={`${env.CLOUDFRONT_PUBLIC}/public/stats/zoom-call-with-coffee.jpg`}
       />
       <Link prefetch={false} className={styles.card3} href="/lectii">
         <StatsCardLayout3
           text1="În total"
           text2="11 ore predate online"
           colorText="#1b1b15"
-          src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/hourglass.jpg`}
+          src={`${env.CLOUDFRONT_PUBLIC}/public/stats/hourglass.jpg`}
         />
       </Link>
       <Link prefetch={false} className={styles.card4} href="/slides">
@@ -55,7 +56,7 @@ function EventsStats() {
         position="bottom"
         className={styles.card5}
         description="Participanți la traininguri"
-        src={`${process.env.CLOUDFRONT_PUBLIC}/seo/default-schmoes-seo.jpg`}
+        src={`${env.CLOUDFRONT_PUBLIC}/seo/default-schmoes-seo.jpg`}
       />
     </div>
   );

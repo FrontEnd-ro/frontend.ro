@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import PresentationService from '~/services/api/Presentation.service';
+import React, { useState } from 'react';
 import styles from './PresentationPreview.module.scss';
 import { PresentationI } from '~/../shared/types/presentation.types';
+import { env } from '~/services/env';
 
 function PresentationPreview({ info }: { info: PresentationI }) {
-  const presentationLink = `${process.env.CLOUDFRONT_PUBLIC}/slides/${info.presentationId}/index.html`;
+  const presentationLink = `${env.CLOUDFRONT_PUBLIC}/slides/${info.presentationId}/index.html`;
   const [views, setViews] = useState(0);
-
-  useEffect(() => {
-    PresentationService
-      .increaseViews(info.presentationId)
-      .then((resp) => setViews(resp.views))
-      .catch((err) => {
-        console.error('[Lesson.tsx] got while trying to update view count', err);
-      });
-  }, []);
 
   return (
     <main className={styles['presentation-preview']}>

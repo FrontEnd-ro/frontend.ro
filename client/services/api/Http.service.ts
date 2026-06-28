@@ -1,5 +1,5 @@
-import cookie from 'cookie';
 import SweetAlertService from '../sweet-alert/SweetAlert.service';
+import { env } from '~/services/env';
 
 
 /**
@@ -59,18 +59,8 @@ class Http {
       'content-type': 'application/json',
       // We might need to serve different content based on language
       // For example the Tidbits
-      'accept-language': process.env.LANGUAGE,
+      'accept-language': env.LANGUAGE,
     };
-    let cookies: Record<string, string> = {};
-
-    if (globalThis.document) {
-      cookies = cookie.parse(document.cookie);
-
-      // https://github.com/FrontEnd-ro/frontend.ro/issues/505
-      if (cookies.token) {
-        headersInit.Authorization = `Bearer ${cookies.token}`;
-      }
-    }
 
     if (options.body && !(options.body instanceof FormData)) {
       // eslint-disable-next-line no-param-reassign

@@ -1,7 +1,7 @@
 import React from 'react';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { API_TidbitI } from '../../../shared/types/tidbit.types';
-import TidbitService from '~/services/api/Tidbit.service';
+import { getTidbitById } from '../../../lib/content';
 
 interface Props {
   tidbit: API_TidbitI;
@@ -21,7 +21,7 @@ const TidbitPage = ({ tidbit }: Props) => {
 // trigger a rebuild when this DB collection changes.
 export async function getServerSideProps({ res, params }) {
   try {
-    const tidbit = await TidbitService.getById(params.tidbitId);
+    const tidbit = await getTidbitById(params.tidbitId);
     return {
       props: {
         tidbit: null,

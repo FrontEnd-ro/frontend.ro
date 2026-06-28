@@ -1,11 +1,12 @@
 import Document, {
   Html, Head, Main, NextScript,
 } from 'next/document';
+import { env } from '~/services/env';
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang={process.env.LANGUAGE}>
+      <Html lang={env.LANGUAGE}>
         <Head />
         <body>
           <Main />

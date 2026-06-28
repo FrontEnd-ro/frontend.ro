@@ -1,8 +1,6 @@
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import * as MonacoTypes from 'monaco-editor';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { API_UserI } from '~/../shared/types/user.types';
-import SweetAlertService from './sweet-alert/SweetAlert.service';
 import { noop } from './Utils';
 import MonacoService from './MonacoService';
 
@@ -44,49 +42,6 @@ function withSmoothScroll(ref?: React.MutableRefObject<HTMLElement>) {
       }
     };
   }, []);
-}
-
-function useLoggedInOnly(isLoggedIn: boolean, path: string) {
-  const router = useRouter();
-
-  if (!isLoggedIn && path) {
-    if (typeof window !== 'undefined') {
-      router.replace(`/auth?next=${encodeURIComponent(path)}`);
-    }
-  }
-}
-
-function navigateIfAuthenticated(router: NextRouter, isLoggedIn: boolean, nextHref: string) {
-  if (isLoggedIn && nextHref) {
-    if (typeof window !== 'undefined') {
-      router.replace(nextHref);
-    }
-  }
-}
-
-/**
- * If the user is not logged in when this method is called,
- * let's show the Login/Register modal and authenticate/register.
- */
-function withAuthModal(isLoggedIn: boolean, cb: (...any) => any) {
-  return (...props) => {
-    if (isLoggedIn) {
-      cb(...props);
-    } else {
-      import('~/components/login/Login').then((module) => {
-        SweetAlertService.content(
-          module.default,
-          'Autentifică-te',
-          {
-          onSuccess(userInfo: API_UserI) {
-            SweetAlertService.closePopup();
-            cb(...props, userInfo);
-          },
-          },
-        );
-      });
-    }
-  };
 }
 
 function useKeyDown(code: string, handler: (e: KeyboardEvent) => void, dependencies: any[] = []) {
@@ -183,9 +138,6 @@ function useViewZones(
 export {
   useOutsideClick,
   withSmoothScroll,
-  useLoggedInOnly,
-  navigateIfAuthenticated,
-  withAuthModal,
   useKeyDown,
   useCurrentUrl,
   useResizeObserver,

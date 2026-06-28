@@ -4,6 +4,7 @@ import Header from '~/components/Header';
 import Resources from '~/components/learn/Resources';
 import SEOTags from '~/components/SEOTags';
 import { useTranslation } from '~/services/typesafeNextTranslate';
+import { env } from '~/services/env';
 
 function ResourcesPage() {
   const { t, lang } = useTranslation('common');
@@ -11,7 +12,7 @@ function ResourcesPage() {
     <>
       <SEOTags
         title={`${t('Resources.title')} | FrontEnd.ro`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/resources.jpg`}
+        shareImage={`${env.CLOUDFRONT_PUBLIC}/public/seo/resources.jpg`}
         description={t('Resources.seo_description')}
         url={ lang === 'ro' ? "https://FrontEnd.ro/resurse" : "https://FrontendCademy.com/resurse"}
       />

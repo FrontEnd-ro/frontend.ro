@@ -1,5 +1,6 @@
 import HttpService from './Http.service';
 import { API_LessonExerciseI } from '~/../shared/types/lesson-exercise.types';
+import { env } from '~/services/env';
 
 interface NewExercisePayload {
   body: string;
@@ -13,24 +14,24 @@ interface NewExercisePayload {
 class LessonExerciseService {
   static getAllLessonExercises() {
     return HttpService
-      .get(`${process.env.ENDPOINT}/lesson-exercises`)
+      .get(`${env.ENDPOINT}/lesson-exercises`)
       .then((resp) => resp.json());
   }
 
   static getLessonExercise(exerciseId: string, options?: RequestInit) {
     return HttpService
-      .get(`${process.env.ENDPOINT}/lesson-exercises/${exerciseId}`, options)
+      .get(`${env.ENDPOINT}/lesson-exercises/${exerciseId}`, options)
       .then((resp) => resp.json());
   }
 
   static getAllExercisesForLessons(lessonId: string) {
     return HttpService
-      .get(`${process.env.ENDPOINT}/lesson-exercises/lesson/${lessonId}`)
+      .get(`${env.ENDPOINT}/lesson-exercises/lesson/${lessonId}`)
       .then((resp) => resp.json());
   }
 
   static async getCountOfExercisesForLesson(lessonId: string) {
-    const resp = await HttpService.head(`${process.env.ENDPOINT}/lesson-exercises/lesson/${lessonId}/count`);
+    const resp = await HttpService.head(`${env.ENDPOINT}/lesson-exercises/lesson/${lessonId}/count`);
     const header = resp.headers.get('X-Exercise-Count');
 
     const count = Number(header);
@@ -46,24 +47,24 @@ class LessonExerciseService {
     formData.append('file', file);
 
     return HttpService
-      .post(`${process.env.ENDPOINT}/lesson-exercises/media`, formData)
+      .post(`${env.ENDPOINT}/lesson-exercises/media`, formData)
       .then((resp) => resp.json());
   }
 
   static createExercise(payload: Omit<API_LessonExerciseI, '_id' | 'user'>): Promise<API_LessonExerciseI> {
     return HttpService
-      .post(`${process.env.ENDPOINT}/lesson-exercises`, payload)
+      .post(`${env.ENDPOINT}/lesson-exercises`, payload)
       .then((resp) => resp.json());
   }
 
   static updateExercise(id: string, payload: NewExercisePayload): Promise<API_LessonExerciseI> {
     return HttpService
-      .put(`${process.env.ENDPOINT}/lesson-exercises/${id}`, payload)
+      .put(`${env.ENDPOINT}/lesson-exercises/${id}`, payload)
       .then((resp) => resp.json());
   }
 
   static delete(id: string) {
-    return HttpService.delete(`${process.env.ENDPOINT}/lesson-exercises/${id}`);
+    return HttpService.delete(`${env.ENDPOINT}/lesson-exercises/${id}`);
   }
 }
 export default LessonExerciseService;

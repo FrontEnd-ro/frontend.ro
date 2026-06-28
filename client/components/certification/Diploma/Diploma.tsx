@@ -9,6 +9,7 @@ import { Trans, useTranslation } from '~/services/typesafeNextTranslate';
 import { FacebookButton, LinkedInButton, CopyLinkButton } from '~/components/SocialMediaButtons';
 
 import styles from './Diploma.module.scss';
+import { env } from '~/services/env';
 
 interface Props {
   student: API_UserI;
@@ -152,7 +153,7 @@ const Signature = ({ className = '' }: { className?: string }) => {
         height="100"
         alt="Founder Signature"
         className="border-bottom-1px"
-        src={`${process.env.CLOUDFRONT_PUBLIC}/public/images/diploma-signature.png`}
+        src={`${env.CLOUDFRONT_PUBLIC}/public/images/diploma-signature.png`}
       />
       <p className="m-0">
         Alexandru Păvăloi,

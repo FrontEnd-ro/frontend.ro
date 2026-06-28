@@ -5,7 +5,7 @@ import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import NotFoundPage from '~/components/NotFound/NotFound';
 import { API_TidbitI } from '../../../shared/types/tidbit.types';
-import TidbitService from '~/services/api/Tidbit.service';
+import { getTidbitById } from '../../../lib/content';
 
 interface Props {
   tidbit: API_TidbitI;
@@ -50,7 +50,7 @@ export async function getServerSideProps({ res, params }) {
 
   let tidbit: API_TidbitI | null = null;
   try {
-    tidbit = await TidbitService.getById(tidbitId);
+    tidbit = await getTidbitById(tidbitId);
     if (tidbitIndex - 1 < 0 || tidbitIndex - 1 >= tidbit.items.length) {
       res.statusCode = 404;
     }

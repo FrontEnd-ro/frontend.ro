@@ -1,10 +1,12 @@
+import { env } from '~/services/env';
+
 /**
  * Defines file icons: https://github.com/PKief/vscode-material-icon-theme/tree/master/icons
  */
 
 function getIconUrl(fileName) {
   const icon = getIcon(fileName);
-  return `${process.env.CLOUDFRONT_PUBLIC}/file-icons/${icon}.svg`;
+  return `${env.CLOUDFRONT_PUBLIC}/file-icons/${icon}.svg`;
 }
 
 function getIcon(fileName) {

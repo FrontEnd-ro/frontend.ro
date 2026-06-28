@@ -1,49 +1,11 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { connect, ConnectedProps } from 'react-redux';
-import Header from '~/components/Header';
-import Footer from '~/components/Footer';
-import AuthRedirect from '~/components/AuthRedirect/AuthRedirect';
-import { RootState } from '~/redux/root.reducer';
-import { navigateIfAuthenticated } from '~/services/Hooks';
-import SEOTags from '~/components/SEOTags';
+import React from 'react';
+import ArchivedNotice from '~/components/ArchivedNotice';
 
-function Authpage({ isLoggedIn }: ConnectedProps<typeof connector>) {
-  const router = useRouter();
-
-  useEffect(() => {
-    let nextHref = '/';
-    if (router.query.next) {
-      nextHref = Array.isArray(router.query.next) ? router.query.next[0] : router.query.next;
-    }
-    navigateIfAuthenticated(router, isLoggedIn, nextHref);
-  }, []);
-
+export default function AuthPage() {
   return (
-    <>
-      <SEOTags
-        title="Autentifică-te pentru a merge mai departe | FrontEnd.ro"
-        shareImage="https://frontend.ro/learn-seo-image.jpg"
-        description="Autentifică-te pentru a merge mai departe"
-        url="https://FrontEnd.ro/auth"
-      />
-      {!isLoggedIn && (
-        <>
-          <Header withNavMenu />
-          <AuthRedirect />
-          <Footer />
-        </>
-      )}
-    </>
+    <ArchivedNotice
+      seoTitle="Autentificare | FrontEnd.ro"
+      message="Autentificarea nu mai este disponibilă. FrontEnd.ro este acum o arhivă păstrată în mod read-only, fără conturi sau funcționalități interactive. Poți totuși să explorezi lecțiile și conținutul rămas."
+    />
   );
 }
-
-function mapStateToProps(state: RootState) {
-  return {
-    isLoggedIn: !!state.user.info,
-  };
-}
-
-const connector = connect(mapStateToProps);
-
-export default connector(Authpage);

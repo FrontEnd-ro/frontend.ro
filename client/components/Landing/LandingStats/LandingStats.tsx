@@ -10,6 +10,7 @@ import {
 import { getLessons } from '~/curriculum/Curriculum';
 import { GITHUB_ORG_URL, GITHUB_URL } from '~/services/Constants';
 import { useTranslation } from '~/services/typesafeNextTranslate';
+import { env } from '~/services/env';
 
 import styles from './LandingStats.module.scss';
 
@@ -27,7 +28,7 @@ function LandingStats() {
             footer="pornită din Iași"
             colorText="#fff"
             background="image"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/palace-of-culture.jpg`}
+            src={`${env.CLOUDFRONT_PUBLIC}/public/stats/palace-of-culture.jpg`}
           />
         </a>
         <a className={styles.card2} href={`${GITHUB_URL}/graphs/contributors`} target="_blank" rel="noreferrer">
@@ -35,7 +36,7 @@ function LandingStats() {
             counter={11}
             colorText="#2980b9"
             description="Contribuitori cu inimă mare"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/seo/default-schmoes-seo.jpg`}
+            src={`${env.CLOUDFRONT_PUBLIC}/seo/default-schmoes-seo.jpg`}
           />
         </a>
         <a className={styles.card3} href={GITHUB_ORG_URL} target="_blank" rel="noreferrer">
@@ -44,7 +45,7 @@ function LandingStats() {
             colorText="#A4375B"
             header="Open-Source"
             description="Repo-uri"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/countries.svg`}
+            src={`${env.CLOUDFRONT_PUBLIC}/public/stats/countries.svg`}
           />
         </a>
         <Link prefetch={false} href="/lectii" className={styles.card4}>
@@ -52,7 +53,7 @@ function LandingStats() {
             text1="Am scris"
             text2={`${lessonsWritten.length} lecții`}
             colorText="#1b1b15"
-            src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/vintage-typewriter.jpg`}
+            src={`${env.CLOUDFRONT_PUBLIC}/public/stats/vintage-typewriter.jpg`}
           />
         </Link>
         <Link prefetch={false} href="/evenimente" className={styles.card5}>
@@ -73,7 +74,7 @@ function LandingStats() {
           background="image"
           className={styles.card6}
           description="traineri pasionați"
-          src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/pencils.jpg`}
+          src={`${env.CLOUDFRONT_PUBLIC}/public/stats/pencils.jpg`}
         />
         <Link prefetch={false} href="/slides" className={styles.card7}>
           <StatsCardLayout4
@@ -90,7 +91,7 @@ function LandingStats() {
           colorText="#fff"
           className={styles.card8}
           description="Participanți la traininguri"
-          src={`${process.env.CLOUDFRONT_PUBLIC}/public/stats/coworking.jpg`}
+          src={`${env.CLOUDFRONT_PUBLIC}/public/stats/coworking.jpg`}
         />
       </div>
     </section>

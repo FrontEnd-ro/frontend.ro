@@ -6,6 +6,7 @@ import Footer from '~/components/Footer';
 import SEOTags from '~/components/SEOTags';
 import Highlight from '~/components/Highlight/Highlight';
 import FormattedText from '~/components/FormattedText';
+import { env } from '~/services/env';
 
 export default function Audio() {
   const title = 'Elementul <audio>';
@@ -31,12 +32,12 @@ export default function Audio() {
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <audio style={{ border: '1px solid #000' }} controls>
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}
+                src={`${env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}
                 type="audio/mp4"
               />
 
               <source
-                src={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.mp3`}
+                src={`${env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.mp3`}
                 type="audio/mpeg"
               />
 
@@ -44,7 +45,7 @@ export default function Audio() {
                 Browser-ul tău nu suportă fișiere audio.
                 Folosește
                 {' '}
-                <a href={`${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}>acest link</a>
+                <a href={`${env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a`}>acest link</a>
                 pentru a-l putea vizualiza.
               </p>
             </audio>
@@ -55,18 +56,18 @@ export default function Audio() {
             code={`
 <audio controls>
   <source
-    src="${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a"
+    src="${env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a"
     type="audio/mpeg"
   />
 
   <source
-    src="${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.mp3"
+    src="${env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.mp3"
     type="audio/mpeg"
   />
 
   <p>
     Browser-ul tău nu suportă fișiere audio. Folosește
-    <a href="${process.env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a">
+    <a href="${env.CLOUDFRONT_PUBLIC}/public/audio/audio-element-demo.m4a">
       acest link
     </a>
     pentru a-l putea vizualiza.

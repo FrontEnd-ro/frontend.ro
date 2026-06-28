@@ -6,6 +6,7 @@ import Link from '~/components/generic/Link';
 import PageContainer from '~/components/PageContainer';
 import List from '~/components/List';
 import { LessonQuote } from '~/components/lessons';
+import { env } from '~/services/env';
 
 const Changelog1 = () => {
   return (
@@ -13,7 +14,7 @@ const Changelog1 = () => {
       <SEOTags
         title="Changelog #1: De ce am început FrontEnd.ro și modulul de HTML | FrontEnd.ro"
         url="https://FrontEnd.ro/blog/de-ce-am-inceput-proiectul-si-modulul-de-html"
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/public/seo/changelog-1_1200w.jpg`}
+        shareImage={`${env.CLOUDFRONT_PUBLIC}/public/seo/changelog-1_1200w.jpg`}
         description="Pe scurt, proiectul a început anul trecut în 2020 cand am vazut că domeniul FrontEnd.ro era de vânzare și l-am cumpărat. Dar motivul pentru care am făcut asta este unul mai vechi, deci hai să vă dau și puțin context."
       />
       <Header href="/blog" withNavMenu />
@@ -34,8 +35,8 @@ const Changelog1 = () => {
         <video
           controls
           className="w-100"
-          src={`${process.env.CLOUDFRONT_PUBLIC}/videos/changelog-1.mp4`}
-          poster={`${process.env.CLOUDFRONT_PUBLIC}/public/images/blog/changelog1__1920w.jpg`}
+          src={`${env.CLOUDFRONT_PUBLIC}/videos/changelog-1.mp4`}
+          poster={`${env.CLOUDFRONT_PUBLIC}/public/images/blog/changelog1__1920w.jpg`}
         />
         <p>
           Hey salut 👋,

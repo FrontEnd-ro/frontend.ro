@@ -1,50 +1,11 @@
-import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '~/redux/root.reducer';
-import TutorialPage from '~/tutorials/TutorialPage';
-import { HTML_TUTORIAL_ID } from '~/services/Constants';
-import { API_TutorialI } from '~/../shared/types/tutorial.types';
-import Certification from '~/components/certification/Certification/Certification';
-import HtmlFakeDiploma from '~/tutorials/html/components/HtmlFakeDiploma/HtmlFakeDiploma';
+import React from 'react';
+import ArchivedNotice from '~/components/ArchivedNotice';
 
-type Props = {
-  tutorialInfo: API_TutorialI
-} & ConnectedProps<typeof connector>;
-
-const TutorialCertification = ({ tutorialInfo, tutorialProgress }: Props) => {
+export default function TutorialCertification() {
   return (
-    <TutorialPage tutorialInfo={tutorialInfo} isRootPage={false}>
-      {tutorialProgress && tutorialProgress?.certification !== null
-        ? <Certification className="mt-12" certification={tutorialProgress.certification} />
-        : (
-          <>
-            <h2 className="mt-8">
-              Certificare pentru
-              {' '}
-              {tutorialInfo.name}
-            </h2>
-            <p className="mb-8 text-xl">
-              Rezolvă toate exercițiile din acest tutorial și obține o certificare
-              ca cea de jos
-            </p>
-            <HtmlFakeDiploma />
-          </>
-        )}
-    </TutorialPage>
+    <ArchivedNotice
+      seoTitle="Certificare | FrontEnd.ro"
+      message="Certificările nu mai sunt disponibile. FrontEnd.ro este acum o arhivă păstrată în mod read-only, fără conturi sau funcționalități interactive. Poți totuși să explorezi lecțiile și conținutul rămas."
+    />
   );
-};
-
-function mapStateToProps(state: RootState) {
-  return {
-    // FIXME|TODO remove hardcoding
-    tutorialProgress: state.progress.tutorials[HTML_TUTORIAL_ID],
-  };
 }
-
-const connector = connect(mapStateToProps);
-
-export default connector(TutorialCertification);
-
-// TODO|FIXME is this the correct way to re-use a
-// `getServerSideProps` function? Are there any
-// other Good Practices out there?
-export { getServerSideProps } from './index';

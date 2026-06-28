@@ -6,6 +6,7 @@ import Footer from '~/components/Footer';
 import { ExerciseFile, ExerciseFolder } from '~/../shared/utils/FolderStructure';
 import { DeprecatedBasicEditor } from '~/components/Editor/BasicEditor';
 import SEOTags from '~/components/SEOTags';
+import { env } from '~/services/env';
 
 export default function ExternalMethod() {
   const title = 'CSS Extern';
@@ -26,7 +27,7 @@ export default function ExternalMethod() {
               <p>My dog is named Rafa and he is the best dog in the world.</p>
               <img
                 alt="Golden retriever and ball"
-                src={`${process.env.CLOUDFRONT_PUBLIC}/demo-assets/golden-retriever-and-ball.jpg`}
+                src={`${env.CLOUDFRONT_PUBLIC}/demo-assets/golden-retriever-and-ball.jpg`}
               />
             </div>
           </DemoPreview>
@@ -89,7 +90,7 @@ p {
 <body>
     <h1>Rafa is the best dog</h1>
     <p>My dog is named Rafa and he is the best dog in the world.</p>
-    <img src="${process.env.CLOUDFRONT_PUBLIC}/demo-assets/golden-retriever-and-ball.jpg" alt="Golden retriever and ball" />
+    <img src="${env.CLOUDFRONT_PUBLIC}/demo-assets/golden-retriever-and-ball.jpg" alt="Golden retriever and ball" />
 </body>
 </html>
 `,

@@ -11,6 +11,7 @@ import {
   SebastianLatkolic,
   DanielHutanu,
 } from '../services/contributors';
+import { env } from '~/services/env';
 
 // This is data exported from the MDX that is not required
 // outside the lesson. Thus, we keep it in the MDX, together
@@ -133,8 +134,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         'Scurtă introducere în programul pe care-l vom folosi să scriem cod, și nu numai.',
       type: 'intro',
       contributors: [Diana],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`,
       resources: [
         {
           text: 'Documentația completă a VisualStudio Code',
@@ -150,8 +151,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         'Short introduction for the application you\'ll be using to write code, and much more.',
       type: 'intro',
       contributors: [Diana],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/seo/vs-code-light.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/vs-code.jpg`,
       resources: [
         {
           text: 'Full documentation for VisualStudio Code',
@@ -170,8 +171,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         'Învață principiile de bază ale acestui limbaj și scrie primele linii de cod.',
       type: 'html',
       contributors: [CatalinPopusoi],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`,
       resources: [
         {
           text: 'Lista completă de elemente HTML de pe MDN',
@@ -190,8 +191,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       description: 'Learn the basic principles of this language and write your first lines of code of this language and write your first lines of code.',
       type: 'html',
       contributors: [CatalinPopusoi],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/about-html/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/about-html_1200w.jpg`,
       resources: [
         {
           text: 'Full list of HTML elements on MDN',
@@ -212,8 +213,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       description: 'Orice website, fie că este un site de prezentare sau un complex editor video, conține aceeași structura de bază cu mai multe elemente descriptive și nu numai.',
       type: 'html',
       contributors: [IulianRedinciuc, Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`,
       resources: [
         {
           text: "What's in head?",
@@ -232,8 +233,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       description: 'Any website, whether it is a presentation site or a complex video editor, contains the same basic HTML structure.',
       type: 'html',
       contributors: [IulianRedinciuc, Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-structure/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/html-structure_1200w.jpg`,
       resources: [
         {
           text: "What's in head?",
@@ -255,8 +256,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         'Deși putem "scăpa" fără să scriem HTML valid, acest lucru nu e deloc încurajat. Hai să vedem de ce, și cum ne putem asigura că scriem cod corect.',
       type: 'html',
       contributors: [Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_1200w.jpg`,
     },
     en: {
       id: 'validare',
@@ -266,8 +267,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         "Although we can build working apps with invalid HTML, we should never do this. Let's see why, and how to make sure we're writing valid code.",
       type: 'html',
       contributors: [Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/html-validation/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/html-validation_1200w.jpg`,
     }
   },
   {
@@ -279,8 +280,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         'Avem la dispoziție mai multe elemente când vine vorba de texte, iar aici învățăm când și cum să le folosim.',
       type: 'html',
       contributors: [Diana],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`,
     },
     en: {
       id: 'texte',
@@ -290,8 +291,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         'We have several elements we can use when it comes to texts, and here we learn when and how to use them.',
       type: 'html',
       contributors: [Diana],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/texts/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/texts_1200w.jpg`,
     }
   },
   {
@@ -303,8 +304,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
         'Învață să folosești link-uri și butoane în HTML și diferența dintre acestea.',
       type: 'html',
       contributors: [Diana],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_1200w.jpg`,
       resources: [
         {
           text: 'Documentația completă a link-urilor pe MDN',
@@ -331,8 +332,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       description: 'Learn to use links and buttons in HTML and the difference between them.',
       type: 'html',
       contributors: [Diana],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/links-and-buttons/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/links-and-buttons_1200w.jpg`,
       resources: [
         {
           text: 'Full documentation of anchors on MDN',
@@ -360,8 +361,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       title: 'Liste',
       description: 'Hai să vorbim despre cele 3 tipuri de liste și când să-l folosești pe fiecare.',
       contributors: [Diana],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/lists_1200w.jpg`,
       type: 'html',
       resources: [
         {
@@ -384,8 +385,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       title: 'Lists',
       description: 'Let\'s talk about the 3 types of lists and when to use each one.',
       contributors: [Diana],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/lists_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/lists/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/lists_1200w.jpg`,
       type: 'html',
       resources: [
         {
@@ -411,8 +412,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       description:
         'Am parcurs câteva elemente de bază, dar nu am vorbit despre cum le organizăm pentru a crea layout-uri mai complexe. Aici intervin elementele de tip “container”.',
       contributors: [Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`,
       type: 'html',
     },
     en: {
@@ -422,8 +423,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       description:
         'We\'ve covered some basic elements, but haven\'t talked about how we organize them to create more complex layouts. This is where elemenents with "container" role come into play.',
       contributors: [Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/containers/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/containers_1200w.jpg`,
       type: 'html',
     }
   },
@@ -435,8 +436,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       description:
         'Învață să adaugi și să optimizezi imagini în paginile Web.',
       contributors: [Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`,
       type: 'html',
       resources: [{
         text: 'Documentația completă a elementului <img> pe MDN',
@@ -456,8 +457,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       title: 'Images',
       description: 'Learn how to add and optimize images in your web pages.',
       contributors: [Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/images/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/html-images_1200w.jpg`,
       type: 'html',
       resources: [{
         text: 'Full documentation of the <img> element on MDN',
@@ -478,8 +479,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       written: true,
       title: 'Video și Audio',
       description: 'Imaginile aduc mai multă viață site-urilor noastre, dar putem merge un pas mai departe folosind elemente video și audio.',
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/video-audio/lesson-gallery__cover__1200w.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/video-audio/lesson-gallery__cover__1200w.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_1200w.jpg`,
       contributors: [SebastianLatkolic, Pava],
       type: 'html',
       resources: [
@@ -502,8 +503,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       written: true,
       title: 'Video and Audio',
       description: 'Images bring life to our websites, but we can move a step forward using video and audio elements',
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/video-audio/lesson-gallery__cover__1200w.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/video-audio/lesson-gallery__cover__1200w.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/video-audio_1200w.jpg`,
       contributors: [SebastianLatkolic, Pava],
       type: 'html',
       resources: [
@@ -529,8 +530,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       title: 'Formulare',
       description: 'Cu ce elemente putem construi formulare moderne, și care sunt cele mai bune practici legate de acestea?',
       contributors: [RobertParasca, Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/forms_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/forms_1200w.jpg`,
       type: 'html',
     },
     en: {
@@ -539,8 +540,8 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       title: 'Forms',
       description: 'What elements can we use to build modern forms, and what are the best practices regarding them?',
       contributors: [RobertParasca, Pava],
-      cover: `${process.env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/public/seo/forms_1200w.jpg`,
+      cover: `${env.CLOUDFRONT_PUBLIC}/public/images/lessons/forms/lesson-gallery__cover.png`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/public/seo/forms_1200w.jpg`,
       type: 'html',
     }
   },
@@ -593,7 +594,7 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       written: true,
       title: 'Box model',
       cover: '/images/lessons/box-model/cover.svg',
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`,
       description:
         'Deși unele site-uri sunt cu adevărat WOW, fiecare element e de fapt un dreptunghi cu câteva proprietăți mai speciale numit Box Model. Aici învățăm despre el.',
       type: 'css',
@@ -611,7 +612,7 @@ const LESSONS: { en?: LessonConfig; ro?: LessonConfig;}[] = [
       written: true,
       title: 'Box model',
       cover: '/images/lessons/box-model/cover.svg',
-      ogImage: `${process.env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`,
+      ogImage: `${env.CLOUDFRONT_PUBLIC}/seo/box-model.jpg`,
       description:
         'Although some sites are really WOW, each element is actually a rectangle with some more special properties called a Box Model. Here we learn about him.',
       type: 'css',

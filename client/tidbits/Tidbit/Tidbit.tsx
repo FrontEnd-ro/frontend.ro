@@ -30,16 +30,6 @@ const Tidbit = ({ tidbit, index }: Props) => {
   const isFirstItem = index === 0;
   const isLastItem = index === tidbit.items.length - 1;
 
-  const increaseViewCount = async () => {
-    try {
-      await TidbitService.increaseTidbitView(tidbit.tidbitId);
-    } catch (err) {
-      // We want to silently fail this function because
-      // it's not mission critical.
-      console.warn(`Couldn't increase view count for tidbit ${tidbit.tidbitId}. Is the server down?`, err);
-    }
-  };
-
   useEffect(() => {
     TidbitService.getPreviousAndNextTidbit(tidbit.tidbitId)
       .then((response) => {
@@ -49,8 +39,6 @@ const Tidbit = ({ tidbit, index }: Props) => {
       .catch((err) => {
         console.error('[TidbitPage.useEffect] got while fetching next tidbit', err);
       });
-
-    increaseViewCount();
   }, [tidbit.tidbitId]);
 
   useKeyDown('ArrowRight', () => {

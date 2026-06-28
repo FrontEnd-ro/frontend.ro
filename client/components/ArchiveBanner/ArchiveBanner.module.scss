@@ -1,0 +1,25 @@
+.banner {
+  width: 100%;
+  background: #fff3cd;
+  color: #533f03;
+  border-bottom: 1px solid #ffe69c;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.5;
+
+  .message {
+    max-width: 80ch;
+    margin: 0 auto;
+  }
+
+  a {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

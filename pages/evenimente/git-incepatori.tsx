@@ -11,9 +11,9 @@ import {
 
 import SEOTags from '~/components/SEOTags';
 import { LessonTip } from '~/components/lessons';
-import { SubscribeFormWithText } from '~/components/SubscribeForm';
 import { EventDate } from '~/components/event/RegisterEventCard';
 import List from '~/components/List';
+import { env } from '~/services/env';
 
 function EventDetailsPage() {
   const title = 'Introducere practică în Git & GitHub pentru toți';
@@ -25,12 +25,11 @@ function EventDetailsPage() {
     ],
   }];
 
-  const isPastEvent = eventDates.every((eventDate) => eventDate.parts[0].timestamp < Date.now());
   return (
     <>
       <SEOTags
         title={`${title} | FrontEnd.ro`}
-        shareImage={`${process.env.CLOUDFRONT_PUBLIC}/seo/git-incepatori-2.jpg`}
+        shareImage={`${env.CLOUDFRONT_PUBLIC}/seo/git-incepatori-2.jpg`}
         description={description}
         url="https://FrontEnd.ro/evenimente/git-incepatori"
       />
@@ -42,7 +41,7 @@ function EventDetailsPage() {
         location="Online via Zoom"
         contributors={[Pava2, CatalinPopusoi, GeorgeMarianMorosac, Diana]}
         title="Introducere practică în Git & GitHub pentru începători"
-        cover={`${process.env.CLOUDFRONT_PUBLIC}/events/git__cover.svg`}
+        cover={`${env.CLOUDFRONT_PUBLIC}/events/git__cover.svg`}
         eventDates={eventDates}
       >
         <p>
@@ -110,18 +109,6 @@ function EventDetailsPage() {
           pentru că vrem să avem timp pentru fiecare
           dintre voi, deci înscrie-te "cât e cald"!
         </p>
-        {isPastEvent && (
-        <SubscribeFormWithText>
-          <h2>
-            Deocamdată nu avem alt training de Git programat
-          </h2>
-          <p className="text-xl">
-            Însă ne dorim să mai organizăm. Deci, dacă vrei să fii primul care află
-            despre ele, abonează-te aici 👉
-
-          </p>
-        </SubscribeFormWithText>
-        )}
       </EventDetails>
       <Footer />
     </>

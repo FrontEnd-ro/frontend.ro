@@ -2,12 +2,8 @@ import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
-import { noop } from '~/services/Utils';
 import I18nProvider from 'next-translate/I18nProvider'
-import { API_UserI, UserRole } from '../shared/types/user.types';
-import UserService from '~/services/api/User.service';
-import IdentifyLogRocket from '~/components/IdentifyLogRocket';
-import LoadNotifications from '~/components/LoadNotifications/LoadNotifications';
+import ArchiveBanner from '~/components/ArchiveBanner';
 import { loadConfig } from '~/redux/application-config.reducer';
 import { createStoreWithPreloadedData } from '~/redux/store';
 import { defaultUserState } from '~/redux/user/user.reducer';
@@ -15,24 +11,27 @@ import { ApplicationConfig } from '../shared/types/application-config.types';
 import ApplicationConfigService from '~/services/api/ApplicationConfig.service';
 
 import '~/styles/index.scss';
+import { env } from '~/services/env';
 
+// Read-only archive: there is no authentication anymore, so the app always
+// renders in a logged-out state. The navigation config (and optional landing
+// ad) is still read from MongoDB so the header stays accurate.
 export default function MyApp({ Component, pageProps }: any) {
   const store = createStoreWithPreloadedData({
     user: {
       ...defaultUserState,
-      info: pageProps._serverUser,
+      info: null,
     },
     applicationConfig: pageProps._applicationConfig,
   });
 
-  useFathom('MVWDOLLT', pageProps._serverUser);
+  useFathom('MVWDOLLT');
   useApplicationConfig((config) => store.dispatch(loadConfig(config)));
 
   return (
     <Provider store={store}>
-      <I18nProvider lang={process.env.LANGUAGE} namespaces={pageProps.namespaces}>
-        <IdentifyLogRocket />
-        <LoadNotifications />
+      <I18nProvider lang={env.LANGUAGE} namespaces={pageProps.namespaces}>
+        <ArchiveBanner />
         <Component {...pageProps} />
       </I18nProvider>
     </Provider>
@@ -40,101 +39,67 @@ export default function MyApp({ Component, pageProps }: any) {
 }
 
 /**
- * Fetch user on all pages and add it to store.
- * This way we already have the user when rendering most pages thus the overall
- * render experience should be faster.
-
- * ⚠⚠⚠ WARNING ⚠⚠⚠
- * This function gets called on both SERVER and CLIENT.
- * Unfortunately `getServerSideProps` is not supported
- * for the `App` component so we're stuck with this one.
+ * Loads the navigation config + locale namespaces for every page.
  *
- * On the client however, we don't want to call the DB methods,
- * so we found a little "hack" by checking the `req` parameter.
+ * ⚠ This runs on BOTH server and client. The MongoDB read only happens
+ * server-side (guarded by `ctx.req`); on the client the nav is refreshed via
+ * the read-only `/api/application-config` endpoint in `useApplicationConfig`.
  */
-
 MyApp.getInitialProps = async ({ ctx }) => {
   const pageProps = {
-    _serverUser: null,
     _applicationConfig: {
       navItems: [],
-    },
+    } as ApplicationConfig,
     namespaces: {}
   };
 
   const isClientSide = !ctx.req;
   if (isClientSide) {
-    pageProps.namespaces = await loadLocaleNamespaces(process.env.LANGUAGE);
+    pageProps.namespaces = await loadLocaleNamespaces(env.LANGUAGE);
     return { pageProps };
   }
 
   const [applicationConfig, namespaces] = await Promise.all([
     fetchApplicationConfigServerSide(),
-    loadLocaleNamespaces(process.env.LANGUAGE)
+    loadLocaleNamespaces(env.LANGUAGE)
   ]);
   pageProps.namespaces = namespaces;
   pageProps._applicationConfig = applicationConfig;
-
-  const { token } = ctx.req?.cookies ?? {};
-  if (typeof token === 'string') {
-    try {
-      const user = await UserService.ping({
-        headers: {
-          cookie: `token=${token}`,
-        }
-      });
-      pageProps._serverUser = user;
-    } catch (err) {
-      console.log('[getInitialProps] Failed to fetch user', err);
-      // Do nothing. We will continue rendering the app in an non-authenticated state
-    }
-  }
 
   return { pageProps };
 };
 
 async function fetchApplicationConfigServerSide(): Promise<ApplicationConfig> {
   const SPAN = '[fetchApplicationConfigServerSide]';
-
-  const emptyConfig = { navItems: [] };
   try {
-    const applicationConfig = await ApplicationConfigService.get();
-    return applicationConfig;
+    // Dynamic import (server-only): `lib/content` pulls in Mongoose, which must
+    // NOT be bundled into the client. `_app`'s getInitialProps runs on both
+    // server and client, so importing it at module top-level would crash the
+    // browser ("mongoose.models is undefined"). This call only ever runs in the
+    // server-side branch of getInitialProps, so the chunk never loads client-side.
+    const { getApplicationConfig } = await import('../lib/content');
+    return await getApplicationConfig();
   } catch (err) {
-    console.error(`${SPAN} Failed to fetch ApplicationConfig server side`, err);
+    console.error(`${SPAN} Failed to read ApplicationConfig`, err);
+    return { ad: undefined, navItems: [] };
   }
-
-  return emptyConfig;
 }
 
 function useApplicationConfig(callback: (config: ApplicationConfig) => void) {
-  const fetchApplicationConfig = () => {
+  useEffect(() => {
     ApplicationConfigService.get()
       .then(callback)
       .catch((err) => {
         console.error('[useApplicationConfig]', err);
       });
-  };
-
-  useEffect(() => {
-    fetchApplicationConfig();
-    setInterval(fetchApplicationConfig, 30 * 60 * 1000); // 30 mins
   }, []);
 }
 
-function useFathom(trackingCode: string, userInfo?: API_UserI) {
+function useFathom(trackingCode: string) {
   // https://vercel.com/guides/deploying-nextjs-using-fathom-analytics-with-vercel
-  const SPAN = `[useFathom, trackingCode=${trackingCode}, userInfo=${userInfo}]`;
   const router = useRouter();
 
   useEffect(() => {
-    const isAdminRole = userInfo?.role === UserRole.ADMIN;
-
-    if (isAdminRole) {
-      console.info(`${SPAN} Don't initialize Fathom for admin users.`);
-      return noop;
-    }
-
     Fathom.load(trackingCode, {
       includedDomains: [
         'frontend.ro',
@@ -150,7 +115,7 @@ function useFathom(trackingCode: string, userInfo?: API_UserI) {
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
     };
-  }, [trackingCode, userInfo?.role]);
+  }, [trackingCode]);
 }
 
 async function loadLocaleNamespaces(lang: string): Promise<{

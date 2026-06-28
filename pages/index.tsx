@@ -1,13 +1,12 @@
 import LandingPage from '~/components/Landing';
-import TidbitService from '~/services/api/Tidbit.service';
-import TutorialService from '~/services/api/Tutorial.service';
+import { getTidbits } from '../lib/content';
 
 export default LandingPage;
 
-// We don't want this to be a `getStaticProps` because we don't
-// trigger a rebuild when this DB collection changes.
-export async function getServerSideProps(ctx) {
-  const { token } = ctx.req?.cookies ?? {};
+// Read-only archive: tidbits are read straight from MongoDB at request time.
+// The HTML tutorial progress was per-user; with auth removed it is always
+// shown in its "not started" state.
+export async function getServerSideProps() {
   const SPAN = '[pages/index.tsx, getServerSideProps]';
 
   const pageProps = {
@@ -18,19 +17,9 @@ export async function getServerSideProps(ctx) {
   };
 
   try {
-    const [tidbits, htmlTutorialState] = await Promise.all([
-      TidbitService.getAll(['title', 'textColor', 'backgroundColor', 'tidbitId', 'items[1].imageSrc']),
-      !token
-        ? Promise.resolve({ status: 'not_started' })
-        : TutorialService.getTutorialStatus('html', {
-          headers: {
-            cookie: `token=${token}`,
-          }
-        })
+    pageProps.props.tidbits = await getTidbits([
+      'title', 'textColor', 'backgroundColor', 'tidbitId', 'items[1].imageSrc',
     ]);
-
-    pageProps.props.tidbits = tidbits;
-    pageProps.props.htmlTutorialState = htmlTutorialState.status;
   } catch (err) {
     console.error(`${SPAN}`, err);
   }

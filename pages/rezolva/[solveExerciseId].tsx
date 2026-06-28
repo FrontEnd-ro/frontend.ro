@@ -1,25 +1,11 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import SEOTags from '~/components/SEOTags';
-import SolveExercise from '~/components/SolveExercise';
+import ArchivedNotice from '~/components/ArchivedNotice';
 
-function SolveExercisePage() {
-  const router = useRouter();
-  const { solveExerciseId } = router.query;
-
+export default function SolveExercisePage() {
   return (
-    <>
-      <SEOTags
-        title="Rezolvă exercițiul | FrontEnd.ro"
-        shareImage="https://frontend.ro/learn-seo-image.jpg"
-        description="Rezolvă și trimite exercițiul pentru a primi feedback pe el"
-        url={`https://FrontEnd.ro/rezolva/${solveExerciseId}`}
-      />
-      <SolveExercise
-        exerciseId={Array.isArray(solveExerciseId) ? solveExerciseId[0] : solveExerciseId}
-      />
-    </>
+    <ArchivedNotice
+      seoTitle="Rezolvă exercițiul | FrontEnd.ro"
+      message="Rezolvarea și trimiterea exercițiilor nu mai sunt disponibile. FrontEnd.ro este acum o arhivă păstrată în mod read-only, fără funcționalități interactive. Poți totuși să explorezi lecțiile și conținutul rămas."
+    />
   );
 }
-
-export default SolveExercisePage;

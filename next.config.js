@@ -8,7 +8,6 @@ const path = require('path');
 // box without any env setup. (DB_CONNECT is read server-side in `lib/db.ts` and
 // is intentionally NOT exposed here.)
 const nextConfig = {
-  distDir: 'dist',
   env: {
     APP_ENV: process.env.APP_ENV || 'production',
     APP_URL: process.env.APP_URL || 'https://frontend.ro',
